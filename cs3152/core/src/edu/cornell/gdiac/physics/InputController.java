@@ -27,9 +27,9 @@ import edu.cornell.gdiac.util.*;
  */
 public class InputController {
 	// Sensitivity for moving crosshair with gameplay
-	private static final float GP_ACCELERATE = 1.0f;
-	private static final float GP_MAX_SPEED  = 10.0f;
-	private static final float GP_THRESHOLD  = 0.01f;
+//	private static final float GP_ACCELERATE = 1.0f;
+//	private static final float GP_MAX_SPEED  = 10.0f;
+//	private static final float GP_THRESHOLD  = 0.01f;
 
 	/** The singleton instance of the input controller */
 	private static InputController theController = null;
@@ -50,6 +50,25 @@ public class InputController {
 	/** Whether the reset button was pressed. */
 	private boolean resetPressed;
 	private boolean resetPrevious;
+	/** Whether the W button was pressed. */
+	private boolean wPressed;
+	private boolean wPrevious;
+	/** Whether the A button was pressed. */
+	private boolean aPressed;
+	private boolean aPrevious;
+	/** Whether the S button was pressed. */
+	private boolean sPressed;
+	private boolean sPrevious;
+	/** Whether the D button was pressed. */
+	private boolean dPressed;
+	private boolean dPrevious;
+	/** Whether the shift key was pressed. */
+	private boolean shiftPressed;
+	private boolean shiftPrevious;
+	/** Whether the space bar was pressed. */
+	private boolean spacePressed;
+	private boolean spacePrevious;
+
 	/** Whether the button to advanced worlds was pressed. */
 	private boolean nextPressed;
 	private boolean nextPrevious;
@@ -106,58 +125,99 @@ public class InputController {
 	public float getVertical() {
 		return vertical;
 	}
+
+	/** Returns true if the W button is currently pressed.
+	 *
+	 * This is necessary for determining movement, since holding down the W button will result in continuous
+	 * movement in that direction.
+	 * @return if the W button is currently pressed.
+	 *
+	 */
+	public boolean isWPressed() {
+		return wPressed;
+	}
+
+	/** Returns true if the W button was pressed.
+	 *
+	 * This refers to a single press, as opposed to a prolonged press. This is to differentiate walking
+	 * in a direction from simply turning in that direction.
+	 *
+	 * @return true if the W button was pressed.
+	 *
+	 */
+	public boolean didW() {
+		return wPressed && !wPrevious;
+	}
 	
-	/**
-	 * Returns the current position of the crosshairs on the screen.
+	/** Returns true if the A button is currently pressed.
 	 *
-	 * This value does not return the actual reference to the crosshairs position.
-	 * That way this method can be called multiple times without any fair that 
-	 * the position has been corrupted.  However, it does return the same object
-	 * each time.  So if you modify the object, the object will be reset in a
-	 * subsequent call to this getter.
+	 * This is necessary for determining movement, since holding down the A button will result in continuous
+	 * movement in that direction.
+	 * @return if the A button is currently pressed.
 	 *
-	 * @return the current position of the crosshairs on the screen.
 	 */
-	public Vector2 getCrossHair() {
-		return crosscache.set(crosshair);
+	public boolean isAPressed() {
+		return aPressed;
 	}
 
-	/**
-	 * Returns true if the primary action button was pressed.
+	/** Returns true if the A button was pressed.
 	 *
-	 * This is a one-press button. It only returns true at the moment it was
-	 * pressed, and returns false at any frame afterwards.
+	 * This refers to a single press, as opposed to a prolonged press. This is to differentiate walking
+	 * in a direction from simply turning in that direction.
 	 *
-	 * @return true if the primary action button was pressed.
+	 * @return true if the W button was pressed.
+	 *
 	 */
-	public boolean didPrimary() {
-		return primePressed && !primePrevious;
+	public boolean didA() {
+		return aPressed && !aPrevious;
 	}
 
-	/**
-	 * Returns true if the secondary action button was pressed.
+	/** Returns true if the S button is currently pressed.
 	 *
-	 * This is a one-press button. It only returns true at the moment it was
-	 * pressed, and returns false at any frame afterwards.
+	 * This is necessary for determining movement, since holding down the S button will result in continuous
+	 * movement in that direction.
+	 * @return if the S button is currently pressed.
 	 *
-	 * @return true if the secondary action button was pressed.
 	 */
-	public boolean didSecondary() {
-		return secondPressed && !secondPrevious;
+	public boolean isSPressed() {
+		return sPressed;
 	}
 
-	/**
-	 * Returns true if the tertiary action button was pressed.
+
+	/** Returns true if the S button was pressed.
 	 *
-	 * This is a sustained button. It will returns true as long as the player
-	 * holds it down.
+	 * This refers to a single press, as opposed to a prolonged press. This is to differentiate walking
+	 * in a direction from simply turning in that direction.
 	 *
-	 * @return true if the secondary action button was pressed.
+	 * @return true if the S button was pressed.
+	 *
 	 */
-	public boolean didTertiary() {
-		return tertiaryPressed;
+	public boolean didS() {
+		return wPressed && !wPrevious;
 	}
 
+	/** Returns true if the D button is currently pressed.
+	 *
+	 * This is necessary for determining movement, since holding down the D button will result in continuous
+	 * movement in that direction.
+	 * @return if the D button is currently pressed.
+	 *
+	 */
+	public boolean isDPressed() {
+		return dPressed;
+	}
+
+	/** Returns true if the W button was pressed.
+	 *
+	 * This refers to a single press, as opposed to a prolonged press. This is to differentiate walking
+	 * in a direction from simply turning in that direction.
+	 *
+	 * @return true if the W button was pressed.
+	 *
+	 */
+	public boolean didD() {
+		return dPressed && !dPrevious;
+	}
 	/**
 	 * Returns true if the reset button was pressed.
 	 *
@@ -168,33 +228,6 @@ public class InputController {
 	}
 
 	/**
-	 * Returns true if the player wants to go to the next level.
-	 *
-	 * @return true if the player wants to go to the next level.
-	 */
-	public boolean didAdvance() {
-		return nextPressed && !nextPrevious;
-	}
-	
-	/**
-	 * Returns true if the player wants to go to the previous level.
-	 *
-	 * @return true if the player wants to go to the previous level.
-	 */
-	public boolean didRetreat() {
-		return prevPressed && !prevPrevious;
-	}
-	
-	/**
-	 * Returns true if the player wants to go toggle the debug mode.
-	 *
-	 * @return true if the player wants to go toggle the debug mode.
-	 */
-	public boolean didDebug() {
-		return debugPressed && !debugPrevious;
-	}
-	
-	/**
 	 * Returns true if the exit button was pressed.
 	 *
 	 * @return true if the exit button was pressed.
@@ -202,7 +235,28 @@ public class InputController {
 	public boolean didExit() {
 		return exitPressed && !exitPrevious;
 	}
-	
+
+	/**
+	 * Returns true if the shift key was pressed.
+	 *
+	 * @return true if the shift key was pressed.
+	 */
+	public boolean didShift() {
+		return shiftPressed && !shiftPrevious;
+	}
+
+
+	/**
+	 * Returns true if the space bar was pressed.
+	 *
+	 * @return true if the space bar was pressed.
+	 */
+	public boolean didSpace() {
+		return spacePressed && !spacePrevious;
+	}
+
+
+
 	/**
 	 * Creates a new input controller
 	 * 
@@ -216,6 +270,79 @@ public class InputController {
 		crosscache = new Vector2();
 	}
 
+	/**
+	 * Returns the current position of the crosshairs on the screen.
+	 *
+	 * This value does not return the actual reference to the crosshairs position.
+	 * That way this method can be called multiple times without any fair that
+	 * the position has been corrupted.  However, it does return the same object
+	 * each time.  So if you modify the object, the object will be reset in a
+	 * subsequent call to this getter.
+	 *
+	 * @return the current position of the crosshairs on the screen.
+	 */
+	public Vector2 getCrossHair() {
+		return crosscache.set(crosshair);
+	}
+
+/**
+ * Returns true if the primary action button was pressed.
+ *
+ * This is a one-press button. It only returns true at the moment it was
+ * pressed, and returns false at any frame afterwards.
+ *
+ * @return true if the primary action button was pressed.
+ */
+	public boolean didPrimary() {
+		return primePressed && !primePrevious;
+	}
+
+/**
+ * Returns true if the secondary action button was pressed.
+ *
+ * This is a one-press button. It only returns true at the moment it was
+ * pressed, and returns false at any frame afterwards.
+ *
+ * @return true if the secondary action button was pressed.
+ */
+	public boolean didSecondary() {
+		return secondPressed && !secondPrevious;
+	}
+
+/**
+ * Returns true if the tertiary action button was pressed.
+ *
+ * This is a sustained button. It will returns true as long as the player
+ * holds it down.
+ *
+ * @return true if the secondary action button was pressed.
+ */
+	public boolean didTertiary() {
+		return tertiaryPressed;
+	}
+
+
+	public boolean didAdvance() {
+		return nextPressed && !nextPrevious;
+	}
+
+/**
+ * Returns true if the player wants to go to the previous level.
+ *
+ * @return true if the player wants to go to the previous level.
+ */
+	public boolean didRetreat() {
+		return prevPressed && !prevPrevious;
+	}
+
+/**
+ * Returns true if the player wants to go toggle the debug mode.
+ *
+ * @return true if the player wants to go toggle the debug mode.
+ */
+	public boolean didDebug() {
+		return debugPressed && !debugPrevious;
+	}
 	/**
 	 * Reads the input for the player and converts the result into game logic.
 	 *
@@ -236,6 +363,12 @@ public class InputController {
 		exitPrevious = exitPressed;
 		nextPrevious = nextPressed;
 		prevPrevious = prevPressed;
+		wPrevious = wPressed;
+		aPrevious = aPressed;
+		sPrevious = sPressed;
+		dPrevious = dPressed;
+		spacePrevious = spacePressed;
+		shiftPrevious = shiftPressed;
 		
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
@@ -267,21 +400,21 @@ public class InputController {
 		// Increase animation frame, but only if trying to move
 		horizontal = xbox.getLeftX();
 		vertical   = xbox.getLeftY();
-		secondPressed = xbox.getRightTrigger() > 0.6f;
+//		secondPressed = xbox.getRightTrigger() > 0.6f;
 		
 		// Move the crosshairs with the right stick.
-		tertiaryPressed = xbox.getA();
-		crosscache.set(xbox.getLeftX(), xbox.getLeftY());
-		if (crosscache.len2() > GP_THRESHOLD) {
-			momentum += GP_ACCELERATE;
-			momentum = Math.min(momentum, GP_MAX_SPEED);
-			crosscache.scl(momentum);
-			crosscache.scl(1/scale.x,1/scale.y);
-			crosshair.add(crosscache);
-		} else {
-			momentum = 0;
-		}
-		clampPosition(bounds);
+//		tertiaryPressed = xbox.getA();
+//		crosscache.set(xbox.getLeftX(), xbox.getLeftY());
+//		if (crosscache.len2() > GP_THRESHOLD) {
+//			momentum += GP_ACCELERATE;
+//			momentum = Math.min(momentum, GP_MAX_SPEED);
+//			crosscache.scl(momentum);
+//			crosscache.scl(1/scale.x,1/scale.y);
+//			crosshair.add(crosscache);
+//		} else {
+//			momentum = 0;
+//		}
+//		clampPosition(bounds);
 	}
 
 	/**
@@ -296,36 +429,43 @@ public class InputController {
 	private void readKeyboard(Rectangle bounds, Vector2 scale, boolean secondary) {
 		// Give priority to gamepad results
 		resetPressed = (secondary && resetPressed) || (Gdx.input.isKeyPressed(Input.Keys.R));
-		debugPressed = (secondary && debugPressed) || (Gdx.input.isKeyPressed(Input.Keys.D));
+		debugPressed = (secondary && debugPressed) || (Gdx.input.isKeyPressed(Input.Keys.B));
 		primePressed = (secondary && primePressed) || (Gdx.input.isKeyPressed(Input.Keys.UP));
-		secondPressed = (secondary && secondPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
+		secondPressed = (secondary && secondPressed) || (Gdx.input.isKeyPressed(Input.Keys.ENTER));
 		prevPressed = (secondary && prevPressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
-		
+		wPressed = (secondary && wPressed) || (Gdx.input.isKeyPressed(Input.Keys.W));
+		aPressed = (secondary && aPressed) || (Gdx.input.isKeyPressed(Input.Keys.A));
+		sPressed = (secondary && sPressed) || (Gdx.input.isKeyPressed(Input.Keys.S));
+		dPressed = (secondary && dPressed) || (Gdx.input.isKeyPressed(Input.Keys.D));
+		spacePressed = (secondary && spacePressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
+		shiftPressed = (secondary && shiftPressed) || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) ||
+		(Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT));
+
 		// Directional controls
 		horizontal = (secondary ? horizontal : 0.0f);
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 			horizontal += 1.0f;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
 			horizontal -= 1.0f;
 		}
 		
 		vertical = (secondary ? vertical : 0.0f);
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 			vertical += 1.0f;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
 			vertical -= 1.0f;
 		}
 		
 		// Mouse results
-        tertiaryPressed = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
-		crosshair.set(Gdx.input.getX(), Gdx.input.getY());
-		crosshair.scl(1/scale.x,-1/scale.y);
-		crosshair.y += bounds.height;
-		clampPosition(bounds);
+//        tertiaryPressed = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
+//		crosshair.set(Gdx.input.getX(), Gdx.input.getY());
+//		crosshair.scl(1/scale.x,-1/scale.y);
+//		crosshair.y += bounds.height;
+//		clampPosition(bounds);
 	}
 	
 	/**
@@ -334,8 +474,13 @@ public class InputController {
 	 * While this is not usually a problem with mouse control, this is critical 
 	 * for the gamepad controls.
 	 */
-	private void clampPosition(Rectangle bounds) {
-		crosshair.x = Math.max(bounds.x, Math.min(bounds.x+bounds.width, crosshair.x));
-		crosshair.y = Math.max(bounds.y, Math.min(bounds.y+bounds.height, crosshair.y));
-	}
+//	private void clampPosition(Rectangle bounds) {
+//		crosshair.x = Math.max(bounds.x, Math.min(bounds.x+bounds.width, crosshair.x));
+//		crosshair.y = Math.max(bounds.y, Math.min(bounds.y+bounds.height, crosshair.y));
+//	}
 }
+
+
+
+
+
