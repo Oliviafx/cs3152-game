@@ -60,19 +60,31 @@ public abstract class WorldController implements Screen {
 	/** Track asset loading from all instances and subclasses */
 	protected AssetState worldAssetState = AssetState.EMPTY;
 	/** Track all loaded assets (for unloading purposes) */
-	protected Array<String> assets;	
+	protected Array<String> assets;
 	
-	// Pathnames to shared assets
+	// Pathnames to assets
+	/** The texture file for the Annette avatar (no animation) */
+	private static final String ANNETTE_FILE = "";
+	/** The texture file for the box */
+	private static final String BOX_FILE = "";
 	/** File to texture for walls and platforms */
 	private static String EARTH_FILE = "shared/earthtile.png";
+	/** The texture file for the barriers */
+	private static final String BARRIER_FILE = "platform/barrier.png";
 	/** File to texture for the win door */
 	private static String GOAL_FILE = "shared/goaldoor.png";
 	/** Retro font for displaying messages */
 	private static String FONT_FILE = "shared/RetroGame.ttf";
 	private static int FONT_SIZE = 64;
 
+	/** Texture asset for Annette avatar */
+	private TextureRegion annetteTexture;
+	/** Texture asset for box */
+	private TextureRegion boxTexture;
 	/** The texture for walls and platforms */
 	protected TextureRegion earthTile;
+	/** Texture asset for the barriers */
+	private TextureRegion barrierTexture;
 	/** The texture for the exit condition */
 	protected TextureRegion goalTile;
 	/** The font for giving messages to the player */
@@ -92,11 +104,17 @@ public abstract class WorldController implements Screen {
 		if (worldAssetState != AssetState.EMPTY) {
 			return;
 		}
-		
+
 		worldAssetState = AssetState.LOADING;
-		// Load the shared tiles.
+		// Load the tiles.
+		manager.load(ANNETTE_FILE,Texture.class);
+		assets.add(ANNETTE_FILE);
+		manager.load(BOX_FILE,Texture.class);
+		assets.add(BOX_FILE);
 		manager.load(EARTH_FILE,Texture.class);
 		assets.add(EARTH_FILE);
+		manager.load(BARRIER_FILE,Texture.class);
+		assets.add(BARRIER_FILE);
 		manager.load(GOAL_FILE,Texture.class);
 		assets.add(GOAL_FILE);
 		
@@ -106,6 +124,8 @@ public abstract class WorldController implements Screen {
 		size2Params.fontParameters.size = FONT_SIZE;
 		manager.load(FONT_FILE, BitmapFont.class, size2Params);
 		assets.add(FONT_FILE);
+
+//		super.preLoadContent(manager);
 	}
 
 	/**
@@ -124,7 +144,10 @@ public abstract class WorldController implements Screen {
 		}
 		
 		// Allocate the tiles
+		annetteTexture = createTexture(manager,ANNETTE_FILE,true);
+		boxTexture = createTexture(manager,BOX_FILE,true);
 		earthTile = createTexture(manager,EARTH_FILE,true);
+		barrierTexture = createTexture(manager,BARRIER_FILE,true);
 		goalTile  = createTexture(manager,GOAL_FILE,true);
 		
 		// Allocate the font
@@ -199,7 +222,53 @@ public abstract class WorldController implements Screen {
     		}
     	}
 	}
-	
+
+
+	// Physics constants for initialization
+	/** The density for most physics objects */
+	private static final float  BASIC_DENSITY = 0.0f;
+	/** Friction of most platforms */
+	private static final float  BASIC_FRICTION = 0.4f;
+	/** The restitution for all physics objects */
+	private static final float  BASIC_RESTITUTION = 0.1f;
+
+	// Since these appear only once, we do not care about the magic numbers.
+	// In an actual game, this information would go in a data file.
+	// Wall vertices
+	private static final float[][] WALLS = {
+			{16.0f, 18.0f, 16.0f, 17.0f,  1.0f, 17.0f,
+					1.0f,  0.0f,  0.0f,  0.0f,  0.0f, 18.0f},
+			{32.0f, 18.0f, 32.0f,  0.0f, 31.0f,  0.0f,
+					31.0f, 17.0f, 16.0f, 17.0f, 16.0f, 18.0f}
+	};
+
+	/** The outlines of all of the platforms */
+	private static final float[][] PLATFORMS = {
+			{ 1.0f, 3.0f, 6.0f, 3.0f, 6.0f, 2.5f, 1.0f, 2.5f},
+			{ 6.0f, 4.0f, 9.0f, 4.0f, 9.0f, 2.5f, 6.0f, 2.5f},
+			{23.0f, 4.0f,31.0f, 4.0f,31.0f, 2.5f,23.0f, 2.5f},
+			{26.0f, 5.5f,28.0f, 5.5f,28.0f, 5.0f,26.0f, 5.0f},
+			{29.0f, 7.0f,31.0f, 7.0f,31.0f, 6.5f,29.0f, 6.5f},
+			{24.0f, 8.5f,27.0f, 8.5f,27.0f, 8.0f,24.0f, 8.0f},
+			{29.0f,10.0f,31.0f,10.0f,31.0f, 9.5f,29.0f, 9.5f},
+			{23.0f,11.5f,27.0f,11.5f,27.0f,11.0f,23.0f,11.0f},
+			{19.0f,12.5f,23.0f,12.5f,23.0f,12.0f,19.0f,12.0f},
+			{ 1.0f,12.5f, 7.0f,12.5f, 7.0f,12.0f, 1.0f,12.0f}
+	};
+
+	/** Location of goal tile */
+	private static Vector2 GOAL_POS = new Vector2(4.0f,14.0f);
+	/** The initial position of Annette */
+	private static Vector2 ANNETTE_POS = new Vector2(2.5f, 5.0f);
+	// Physics objects for the game
+	/** Reference to the character avatar */
+	private AnnetteModel annette;
+	/** Reference to the goalDoor (for collision detection) */
+	private BoxObstacle goalDoor;
+
+	/** Mark set to handle more sophisticated collision callbacks */
+	protected ObjectSet<Fixture> sensorFixtures;
+
 	/** Exit code for quitting the game */
 	public static final int EXIT_QUIT = 0;
 	/** Exit code for advancing to next level */
@@ -207,7 +276,7 @@ public abstract class WorldController implements Screen {
 	/** Exit code for jumping back to previous level */
 	public static final int EXIT_PREV = 2;
     /** How many frames after winning/losing do we continue? */
-	public static final int EXIT_COUNT = 120;
+	public static final int EXIT_COUNT = 100;
 
 	/** The amount of time for a physics engine step. */
 	public static final float WORLD_STEP = 1/60.0f;
@@ -222,7 +291,7 @@ public abstract class WorldController implements Screen {
 	protected static final float DEFAULT_HEIGHT = 18.0f;
 	/** The default value of gravity (going down) */
 	protected static final float DEFAULT_GRAVITY = -4.9f;
-	
+
 	/** Reference to the game canvas */
 	protected GameCanvas canvas;
 	/** All the objects in the world. */
@@ -355,6 +424,27 @@ public abstract class WorldController implements Screen {
 		this.scale.x = canvas.getWidth()/bounds.getWidth();
 		this.scale.y = canvas.getHeight()/bounds.getHeight();
 	}
+
+	/**
+	 * Returns the goal in this level
+	 *
+	 * @return goal position associated with this level
+	 */
+	public Vector2 getGoal() {
+		return GOAL_POS;
+	}
+
+	/**
+	 * Sets the canvas associated with this controller
+	 *
+	 * The canvas is shared across all controllers.  Setting this value will compute
+	 * the drawing scale from the canvas size.
+	 *
+	 * @param GOAL_POS the canvas associated with this controller
+	 */
+	public void setGoal(Vector2 GOAL_POS) {
+		this.goal = GOAL_POS;
+	}
 	
 	/**
 	 * Creates a new game world with the default values.
@@ -364,7 +454,7 @@ public abstract class WorldController implements Screen {
 	 * world, not the screen.
 	 */
 	protected WorldController() {
-		this(new Rectangle(0,0,DEFAULT_WIDTH,DEFAULT_HEIGHT), 
+		this(new Rectangle(0,0,DEFAULT_WIDTH,DEFAULT_HEIGHT),
 			 new Vector2(0,DEFAULT_GRAVITY));
 	}
 
@@ -403,6 +493,7 @@ public abstract class WorldController implements Screen {
 		debug  = false;
 		active = false;
 		countdown = -1;
+		sensorFixtures = new ObjectSet<Fixture>();
 	}
 	
 	/**
@@ -421,6 +512,7 @@ public abstract class WorldController implements Screen {
 		scale  = null;
 		world  = null;
 		canvas = null;
+		goal = null;
 	}
 
 	/**
@@ -462,13 +554,91 @@ public abstract class WorldController implements Screen {
 		boolean vert  = (bounds.y <= obj.getY() && obj.getY() <= bounds.y+bounds.height);
 		return horiz && vert;
 	}
-	
+
 	/**
 	 * Resets the status of the game so that we can play again.
 	 *
 	 * This method disposes of the world and creates a new one.
 	 */
-	public abstract void reset();
+	public void reset() {
+		Vector2 gravity = new Vector2(world.getGravity() );
+
+		for(Obstacle obj : objects) {
+			obj.deactivatePhysics(world);
+		}
+		objects.clear();
+		addQueue.clear();
+		world.dispose();
+
+		world = new World(gravity,false);
+		world.setContactListener(this);
+		setComplete(false);
+		setFailure(false);
+		populateLevel();
+	}
+
+	/**
+	 * Lays out the game geography.
+	 */
+	private void populateLevel() {
+		// Add level goal
+		float dwidth  = goalTile.getRegionWidth()/scale.x;
+		float dheight = goalTile.getRegionHeight()/scale.y;
+		goalDoor = new BoxObstacle(GOAL_POS.x,GOAL_POS.y,dwidth,dheight);
+		goalDoor.setBodyType(BodyDef.BodyType.StaticBody);
+		goalDoor.setDensity(0.0f);
+		goalDoor.setFriction(0.0f);
+		goalDoor.setRestitution(0.0f);
+		goalDoor.setSensor(true);
+		goalDoor.setDrawScale(scale);
+		goalDoor.setTexture(goalTile);
+		goalDoor.setName("goal");
+		addObject(goalDoor);
+
+		String wname = "wall";
+		for (int ii = 0; ii < WALLS.length; ii++) {
+			PolygonObstacle obj;
+			obj = new PolygonObstacle(WALLS[ii], 0, 0);
+			obj.setBodyType(BodyDef.BodyType.StaticBody);
+			obj.setDensity(BASIC_DENSITY);
+			obj.setFriction(BASIC_FRICTION);
+			obj.setRestitution(BASIC_RESTITUTION);
+			obj.setDrawScale(scale);
+			obj.setTexture(earthTile);
+			obj.setName(wname+ii);
+			addObject(obj);
+		}
+
+		String pname = "barriers";
+		for (int ii = 0; ii < BARRIERS.length; ii++) {
+			PolygonObstacle obj;
+			obj = new PolygonObstacle(BARRIERS[ii], 0, 0);
+			obj.setBodyType(BodyDef.BodyType.StaticBody);
+			obj.setDensity(BASIC_DENSITY);
+			obj.setFriction(BASIC_FRICTION);
+			obj.setRestitution(BASIC_RESTITUTION);
+			obj.setDrawScale(scale);
+			obj.setTexture(earthTile);
+			obj.setName(pname+ii);
+			addObject(obj);
+		}
+
+		// Create dude
+		dwidth  = annetteTexture.getRegionWidth()/scale.x;
+		dheight = annetteTexture.getRegionHeight()/scale.y;
+		annette = new AnnetteModel(ANNETTE_POS.x, ANNETTE_POS.y, dwidth, dheight);
+		annette.setDrawScale(scale);
+		annette.setTexture(annetteTexture);
+		addObject(annette);
+
+		// Create barriers
+		dwidth  = barrierTexture.getRegionWidth()/scale.x;
+		dheight = barrierTexture.getRegionHeight()/scale.y;
+		Barrier barrierObj = new Barrier(BARRIER_POS.x,BARRIER_POS.y,dwidth,dheight);
+		barrierObj.setDrawScale(scale);
+		barrierObj.setTexture(barrierTexture);
+		addObject(barrierObj);
+	}
 	
 	/**
 	 * Returns whether to process the update loop
@@ -531,7 +701,114 @@ public abstract class WorldController implements Screen {
 	 *
 	 * @param delta Number of seconds since last animation frame
 	 */
-	public abstract void update(float dt);
+	public void update(float dt) {
+		// Process actions in object model
+		annette.setMovement(InputController.getInstance().getHorizontal() *annette.getForce());
+		annette.setBoxing(InputController.getInstance().didSecondary());
+
+		// Add a box if pushed
+		if (annette.isBoxing()) {
+			createBox();
+		}
+
+		annette.applyForce();
+	}
+
+	/**
+	 * Add a new bullet to the world and send it in the right direction.
+	 */
+	private void createBox() {
+		//float offset = (annette.isFacingRight() ? BOX_OFFSET : -BOX_OFFSET);
+		//make it with cardinal directions
+		float radius = boxTexture.getRegionWidth()/(2.0f*scale.x);
+		Box box = new BoxObstacle(annette.getX()+offset, annette.getY(), radius);
+
+		box.setName("bullet");
+		box.setDensity(HEAVY_DENSITY);
+		box.setDrawScale(scale);
+		box.setTexture(bulletTexture);
+		box.setBox(true);
+//		box.setGravityScale(0);
+	}
+
+	/**
+	 * Callback method for the start of a collision
+	 *
+	 * This method is called when we first get a collision between two objects.  We use
+	 * this method to test if it is the "right" kind of collision.  In particular, we
+	 * use it to test if we made it to the win door.
+	 *
+	 * @param contact The two bodies that collided
+	 */
+	public void beginContact(Contact contact) {
+		Fixture fix1 = contact.getFixtureA();
+		Fixture fix2 = contact.getFixtureB();
+
+		Body body1 = fix1.getBody();
+		Body body2 = fix2.getBody();
+
+		Object fd1 = fix1.getUserData();
+		Object fd2 = fix2.getUserData();
+
+		try {
+			Obstacle bd1 = (Obstacle)body1.getUserData();
+			Obstacle bd2 = (Obstacle)body2.getUserData();
+
+			// Test bullet collision with world
+			if (bd1.getName().equals("bullet") && bd2 != annette) {
+				removeBullet(bd1);
+			}
+
+			if (bd2.getName().equals("bullet") && bd1 != annette) {
+				removeBullet(bd2);
+			}
+
+			// See if we have landed on the ground.
+			if ((annette.getSensorName().equals(fd2) && annette != bd1) ||
+					(annette.getSensorName().equals(fd1) && annette != bd2)) {
+				annette.setGrounded(true);
+				sensorFixtures.add(annette == bd1 ? fix2 : fix1); // Could have more than one ground
+			}
+
+			// Check for win condition
+			if ((bd1 == annette   && bd2 == goalDoor) ||
+					(bd1 == goalDoor && bd2 == annette)) {
+				setComplete(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Callback method for the start of a collision
+	 *
+	 * This method is called when two objects cease to touch.  The main use of this method
+	 * is to determine when the characer is NOT on the ground.  This is how we prevent
+	 * double jumping.
+	 */
+	public void endContact(Contact contact) {
+		Fixture fix1 = contact.getFixtureA();
+		Fixture fix2 = contact.getFixtureB();
+
+		Body body1 = fix1.getBody();
+		Body body2 = fix2.getBody();
+
+		Object fd1 = fix1.getUserData();
+		Object fd2 = fix2.getUserData();
+
+		Object bd1 = body1.getUserData();
+		Object bd2 = body2.getUserData();
+
+		if ((annette.getSensorName().equals(fd2) && annette != bd1) ||
+				(annette.getSensorName().equals(fd1) && annette != bd2)) {
+			sensorFixtures.remove(annette == bd1 ? fix2 : fix1);
+			if (sensorFixtures.size == 0) {
+				annette.setGrounded(false);
+			}
+		}
+	}
 	
 	/**
 	 * Processes physics
