@@ -257,7 +257,7 @@ public abstract class WorldController implements Screen {
 	};
 
 	/** Location of goal tile */
-	private static Vector2 GOAL_POS = new Vector2(4.0f,14.0f);
+	private Vector2 GOAL_POS;
 	/** The initial position of Annette */
 	private static Vector2 ANNETTE_POS = new Vector2(2.5f, 5.0f);
 	// Physics objects for the game
@@ -435,15 +435,13 @@ public abstract class WorldController implements Screen {
 	}
 
 	/**
-	 * Sets the canvas associated with this controller
+	 * Sets the goal associated with this controller
 	 *
-	 * The canvas is shared across all controllers.  Setting this value will compute
-	 * the drawing scale from the canvas size.
-	 *
-	 * @param GOAL_POS the canvas associated with this controller
+	 * @param x x position of goal
+	 * @param y y position of goal
 	 */
-	public void setGoal(Vector2 GOAL_POS) {
-		this.goal = GOAL_POS;
+	public void setGoal(float x, float y) {
+		GOAL_POS = new Vector2(x, y);
 	}
 	
 	/**
@@ -512,7 +510,7 @@ public abstract class WorldController implements Screen {
 		scale  = null;
 		world  = null;
 		canvas = null;
-		goal = null;
+		//goal = null;
 	}
 
 	/**
@@ -754,21 +752,21 @@ public abstract class WorldController implements Screen {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
-			// Test bullet collision with world
-			if (bd1.getName().equals("bullet") && bd2 != annette) {
-				removeBullet(bd1);
-			}
-
-			if (bd2.getName().equals("bullet") && bd1 != annette) {
-				removeBullet(bd2);
-			}
-
-			// See if we have landed on the ground.
-			if ((annette.getSensorName().equals(fd2) && annette != bd1) ||
-					(annette.getSensorName().equals(fd1) && annette != bd2)) {
-				annette.setGrounded(true);
-				sensorFixtures.add(annette == bd1 ? fix2 : fix1); // Could have more than one ground
-			}
+//			// Test bullet collision with world
+//			if (bd1.getName().equals("bullet") && bd2 != annette) {
+//				removeBullet(bd1);
+//			}
+//
+//			if (bd2.getName().equals("bullet") && bd1 != annette) {
+//				removeBullet(bd2);
+//			}
+//
+//			// See if we have landed on the ground.
+//			if ((annette.getSensorName().equals(fd2) && annette != bd1) ||
+//					(annette.getSensorName().equals(fd1) && annette != bd2)) {
+//				annette.setGrounded(true);
+//				sensorFixtures.add(annette == bd1 ? fix2 : fix1); // Could have more than one ground
+//			}
 
 			// Check for win condition
 			if ((bd1 == annette   && bd2 == goalDoor) ||
