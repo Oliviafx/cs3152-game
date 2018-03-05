@@ -62,6 +62,10 @@ public class InputController {
 	/** Whether the D button was pressed. */
 	private boolean dPressed;
 	private boolean dPrevious;
+	/** Whether the E button was pressed. */
+	private boolean ePressed;
+	private boolean ePrevious;
+
 	/** Whether the shift key was pressed. */
 	private boolean shiftPressed;
 	private boolean shiftPrevious;
@@ -148,7 +152,7 @@ public class InputController {
 	public boolean didW() {
 		return wPressed && !wPrevious;
 	}
-	
+
 	/** Returns true if the A button is currently pressed.
 	 *
 	 * This is necessary for determining movement, since holding down the A button will result in continuous
@@ -207,16 +211,27 @@ public class InputController {
 		return dPressed;
 	}
 
-	/** Returns true if the W button was pressed.
+	/** Returns true if the D button was pressed.
 	 *
 	 * This refers to a single press, as opposed to a prolonged press. This is to differentiate walking
 	 * in a direction from simply turning in that direction.
 	 *
-	 * @return true if the W button was pressed.
+	 * @return true if the D button was pressed.
 	 *
 	 */
 	public boolean didD() {
 		return dPressed && !dPrevious;
+	}
+
+	/** Returns true if the E button was pressed.
+	 *
+	 * This refers to a single press, as opposed to a prolonged press.
+	 *
+	 * @return true if the E button was pressed.
+	 *
+	 */
+	public boolean didE() {
+		return ePressed && !ePrevious;
 	}
 	/**
 	 * Returns true if the reset button was pressed.
@@ -369,6 +384,7 @@ public class InputController {
 		dPrevious = dPressed;
 		spacePrevious = spacePressed;
 		shiftPrevious = shiftPressed;
+		ePrevious = ePressed;
 		
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
@@ -439,6 +455,7 @@ public class InputController {
 		aPressed = (secondary && aPressed) || (Gdx.input.isKeyPressed(Input.Keys.A));
 		sPressed = (secondary && sPressed) || (Gdx.input.isKeyPressed(Input.Keys.S));
 		dPressed = (secondary && dPressed) || (Gdx.input.isKeyPressed(Input.Keys.D));
+		ePressed = (secondary && ePressed) || (Gdx.input.isKeyPressed(Input.Keys.E));
 		spacePressed = (secondary && spacePressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
 		shiftPressed = (secondary && shiftPressed) || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) ||
 		(Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT));
