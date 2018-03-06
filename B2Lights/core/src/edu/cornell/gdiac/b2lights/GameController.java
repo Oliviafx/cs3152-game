@@ -330,6 +330,7 @@ public class GameController implements Screen, ContactListener {
 		// Process actions in object model
 		DudeModel annette = level.getAnnette();
 		DudeModel creature = level.getCreature();
+		BoxModel box = level.getBox();
 		InputController input = InputController.getInstance();
 //
 //		if (input.didForward()) {
@@ -361,6 +362,8 @@ public class GameController implements Screen, ContactListener {
 		cAngleCache.scl(creature.getForce());
 		creature.setMovement(cAngleCache.x,cAngleCache.y);
 		creature.applyForce();
+
+				box.applyForce();
 
 		// Turn the physics engine crank.
 		checkFail();
@@ -513,7 +516,7 @@ public class GameController implements Screen, ContactListener {
 				(bd1 == door   && bd2 == annette)) {
 				setComplete(true);
 			}
-			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 ==annette )) {
+			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 ==annette)) {
 				setFailure(true);
 			}
 

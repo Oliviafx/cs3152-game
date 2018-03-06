@@ -64,6 +64,12 @@ public class LevelModel {
 	private DudeModel creature;
 	/** Reference to the goalDoor (for collision detection) */
 	private ExitModel goalDoor;
+	/** Reference to the box */
+	private BoxModel box;
+
+	// Other game objects
+	/** The initial box position */
+//	private static Vector2 BOX_POS = new Vector2(24, 4);
 
 	/** Reference to a creature */
 	private CreatureModel creature_test;
@@ -161,6 +167,15 @@ public class LevelModel {
 	 */
 	public DudeModel getCreature() {
 		return creature;
+	}
+
+	/**
+	 * Returns a reference to the box
+	 *
+	 * @return a reference to the box
+	 */
+	public BoxModel getBox() {
+		return box;
 	}
 
 	/**
@@ -326,6 +341,20 @@ public class LevelModel {
 		//creature_test.setDrawScale(scale);
 		//activate(creature_test);
 
+		// Create box
+
+		box = new BoxModel(1,1);
+		JsonValue boxdata = levelFormat.get("box");
+		box.initialize(boxdata);
+		box.setDrawScale(scale);
+		activate(box);
+		box.setActive(true);
+
+
+	}
+
+	private void activateBox() {
+		box.setDrawScale(scale);
 	}
 	
 	/**
@@ -539,6 +568,14 @@ public class LevelModel {
 		boolean vert  = (bounds.y <= obj.getY() && obj.getY() <= bounds.y+bounds.height);
 		return horiz && vert;
 	}
+
+	public boolean summonBox() {
+		InputController input = InputController.getInstance();
+		if (input.didSpace()) {
+			return true;
+		}
+		return false;
+	}
 	
 	/**
 	 * Updates all of the models in the level.
@@ -550,12 +587,17 @@ public class LevelModel {
 	 */
 	public boolean update(float dt) {
 		if (fixedStep(dt)) {
+//			if (summonBox()) {
+//				box.setActive(true);
+//				box.setDrawScale(scale);
+//			}
 			if (rayhandler != null) {
 				rayhandler.update();
 			}
 			annette.update(dt);
 			creature.update(dt);
 			goalDoor.update(dt);
+			box.update(dt);
 			return true;
 		}
 		return false;
