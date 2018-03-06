@@ -46,7 +46,7 @@ public class RocketModel extends BoxObstacle {
 	/** The friction of this rocket */
 	private static final float DEFAULT_FRICTION = 0.1f;
 	/** The restitution of this rocket */
-	private static final float DEFAULT_RESTITUTION = 0.4f;
+	private static final float DEFAULT_RESTITUTION = 0.0f;
 	/** The thrust factor to convert player input into thrust */
 	private static final float DEFAULT_THRUST = 30.0f;
 	/** The number of frames for the afterburner */

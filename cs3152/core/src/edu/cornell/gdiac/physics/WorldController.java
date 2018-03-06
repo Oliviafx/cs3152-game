@@ -33,7 +33,7 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * Base class for a world-specific controller.
  *
  *
- * A world has its own objects, assets, and input controller.  Thus this is 
+ * A world has its own objects, assets, and input controller.  Thus this is
  * really a mini-GameEngine in its own right.  The only thing that it does
  * not do is create a GameCanvas; that is shared with the main application.
  *
@@ -222,7 +222,8 @@ public abstract class WorldController implements Screen {
 	protected static final float DEFAULT_HEIGHT = 18.0f;
 	/** The default value of gravity (going down) */
 	protected static final float DEFAULT_GRAVITY = -4.9f;
-	
+//    protected static final float DEFAULT_GRAVITY = 0.0f;
+
 	/** Reference to the game canvas */
 	protected GameCanvas canvas;
 	/** All the objects in the world. */

@@ -1,4 +1,4 @@
-package edu.cornell.gdiac.physics.box;
+package edu.cornell.gdiac.physics.rocket;
 
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.graphics.*;
@@ -152,8 +152,12 @@ public class BoxModel extends BoxObstacle {
         // To prevent the body from rotating
         setFixedRotation(true);
 
+        // Initially box fixture is false
+        setActive(false);
+
         return true;
     }
+
 
     /**
      * Applies the force to the body of this box
@@ -251,8 +255,8 @@ public class BoxModel extends BoxObstacle {
         super.draw(canvas); // Box
 
         /** (3/5/2018) might need to change the code below; copied from RocketModel */
-        float offsety = mainBox.getRegionHeight()-origin.y;
-        canvas.draw(mainBox,Color.WHITE,origin.x,offsety,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+//        float offsety = mainBox.getRegionHeight()-origin.y;
+//        canvas.draw(mainBox,Color.WHITE,origin.x,offsety,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
     }
 
 }

@@ -16,6 +16,8 @@ import com.badlogic.gdx.audio.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
+import com.badlogic.gdx.utils.Array;
 
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.*;
@@ -190,6 +192,11 @@ public class RocketController extends WorldController implements ContactListener
 	private BoxObstacle goalDoor;
 	/** Reference to the rocket/player avatar */
 	private RocketModel rocket;
+	/** Reference to the box */
+	private BoxModel box;
+
+	// For sticky collisions
+//	private Array<StickyInfo> collisionsSticky = new Array<StickyInfo>();
 
 	/**
 	 * Creates and initialize a new instance of the rocket lander game
@@ -275,20 +282,35 @@ public class RocketController extends WorldController implements ContactListener
 		addObject(obj);
 
 		// Create the pile of boxes
-		for (int ii = 0; ii < BOXES.length; ii += 2) {
-			int id = RandomController.rollInt(0,crateTextures.length-1);
-			TextureRegion texture = crateTextures[id];
-			dwidth  = texture.getRegionWidth()/scale.x;
-			dheight = texture.getRegionHeight()/scale.y;
-			BoxObstacle box = new BoxObstacle(BOXES[ii], BOXES[ii+1], dwidth, dheight);
-			box.setDensity(CRATE_DENSITY);
-			box.setFriction(CRATE_FRICTION);
-			box.setRestitution(BASIC_RESTITUTION);
-			box.setName("crate"+id);
-			box.setDrawScale(scale);
-			box.setTexture(texture);
-			addObject(box);
-		}
+//		for (int ii = 0; ii < BOXES.length; ii += 2) {
+//			int id = RandomController.rollInt(0,crateTextures.length-1);
+//			TextureRegion texture = crateTextures[id];
+//			dwidth  = texture.getRegionWidth()/scale.x;
+//			dheight = texture.getRegionHeight()/scale.y;
+//			BoxObstacle box = new BoxObstacle(BOXES[ii], BOXES[ii+1], dwidth, dheight);
+//			box.setDensity(CRATE_DENSITY);
+//			box.setFriction(CRATE_FRICTION);
+//			box.setRestitution(BASIC_RESTITUTION);
+//			box.setName("crate"+id);
+//			box.setDrawScale(scale);
+//			box.setTexture(texture);
+//			addObject(box);
+//		}
+
+		// Create the box
+		TextureRegion texture = crateTextures[0];
+		dwidth = texture.getRegionWidth()/scale.x;
+		dheight = texture.getRegionHeight()/scale.y;
+		box = new BoxModel(BOXES[0], ROCK_POS.y, dwidth, dheight);
+		box.setDrawScale(scale);
+		addObject(box);
+//		box.setActive(false);
+//		if (box.isActive()) {
+//			box.setTexture(texture);
+//			box.setDensity(1.0f);
+//			box.setFriction(0.0f);
+//			box.setRestitution(0.0f);
+//		}
 
 		// Create the rocket avatar
 		dwidth  = rocketTexture.getRegionWidth()/scale.x;
@@ -305,6 +327,14 @@ public class RocketController extends WorldController implements ContactListener
 	    rocket.setBurnerSound(RocketModel.Burner.LEFT,  LEFT_FIRE_SOUND);
 	    rocket.setBurnerSound(RocketModel.Burner.RIGHT,  RGHT_FIRE_SOUND);
 		addObject(rocket);
+	}
+
+	public boolean summonBox() {
+		InputController input = InputController.getInstance();
+		if (input.didSpace()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -328,15 +358,32 @@ public class RocketController extends WorldController implements ContactListener
 		rocket.setFY(rocket.getThrust()*input.getVertical());
 		rocket.applyForce();
 		
-		//#endregion
-		
-	    // Animate the three burners
+		//#endregiona
+
+		if (summonBox()) {
+			box.setActive(true);
+			activateBox(box);
+		}
+
 	    updateBurner(RocketModel.Burner.MAIN, rocket.getFY() > 1);
 	    updateBurner(RocketModel.Burner.LEFT, rocket.getFX() > 1);
 	    updateBurner(RocketModel.Burner.RIGHT, rocket.getFX() < -1);
 
 	    // If we use sound, we must remember this.
 	    SoundController.getInstance().update();
+
+//		while(collisionsSticky.size>0){
+//			StickyInfo si = collisionsSticky.removeIndex(0);
+//			WeldJointDef wd = new WeldJointDef();
+//
+//			Vector2 worldCoordsAnchorPoint = si.bodyA.getWorldPoint( new Vector2(0.4f,0) );
+//
+//			wd.initialize(si.bodyA, si.bodyB, worldCoordsAnchorPoint);
+//			world.createJoint( wd );
+//		}
+//
+//		collisionsSticky.clear();
+
 	}
 	
 	/**
@@ -363,6 +410,14 @@ public class RocketController extends WorldController implements ContactListener
 	        }
 	    }
 	}
+
+	private void activateBox(BoxModel box) {
+		TextureRegion texture = crateTextures[0];
+		box.setTexture(texture);
+		box.setDensity(1.0f);
+		box.setFriction(0.0f);
+		box.setRestitution(0.0f);
+	}
 	
 	/// CONTACT LISTENER METHODS
 	/**
@@ -382,6 +437,13 @@ public class RocketController extends WorldController implements ContactListener
 			(body1.getUserData() == goalDoor && body2.getUserData() == rocket)) {
 			setComplete(true);
 		}
+
+		// rocket will be Annette for now
+//		if( (body1.getUserData() == rocket   && body2.getUserData() == box) ||
+//				(body1.getUserData() == box && body2.getUserData() == rocket)) {
+//			collisionsSticky.add(new StickyInfo(body1, body2));
+//		}
+
 	}
 	
 	/**
@@ -389,12 +451,18 @@ public class RocketController extends WorldController implements ContactListener
 	 *
 	 * This method is called when two objects cease to touch.  We do not use it.
 	 */ 
-	public void endContact(Contact contact) {}
+	public void endContact(Contact contact) {
+		Body body1 = contact.getFixtureA().getBody();
+		Body body2 = contact.getFixtureB().getBody();
+
+		// rocket will be Annette for now
+	}
 	
 	private Vector2 cache = new Vector2();
 	
 	/** Unused ContactListener method */
-	public void postSolve(Contact contact, ContactImpulse impulse) {}
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+	}
 
 	/**
 	 * Handles any modifications necessary before collision resolution
