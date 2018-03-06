@@ -2,11 +2,17 @@
     "textures": {
     	"earth": {
     		"file":		"textures/tile.png",
-    		"wrap":		true,
+    		"wrap":		true
     	},
     	"annette": {
-    		"file": 	"textures/annette.png",
+    		"file": 	"textures/AnnetteSide.png",
     		"wrap":  	false,
+			"strip":	{
+				"size":		9,
+				"rows":		9,
+				"cols":		1,
+				"first":	0
+			}
     	},
 		"dude": {
 			"file": 	"textures/creature.png",
