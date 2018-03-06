@@ -1,0 +1,26 @@
+{
+    "textures": {
+    	"earth": {
+    		"file":		"textures/tile.png",
+    		"wrap":		true,
+    	},
+    	"annette": {
+    		"file": 	"textures/annette.png",
+    		"wrap":  	false,
+    	},
+		"dude": {
+			"file": 	"textures/creature.png",
+			"wrap":  	false,
+		},
+        "goal": { 
+         	"file":		"textures/well.png",
+         	"wrap":		false,
+         }
+  	},
+  	"fonts": {
+  		"display": {
+  			"file": 	"fonts/RetroGame.ttf",
+  			"size": 	64
+  		},
+  	},
+}
