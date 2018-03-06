@@ -16,7 +16,7 @@
 			"pos":			[  0,   0],
 			"distance":		  10,
 			"angle":	 	  20,
-			"facing":
+			"facing":		  90,
 			"rays":			 512,
 			"soft":			false,
       		"excludeBits":	"0010"
