@@ -71,8 +71,7 @@ public class GameController implements Screen, ContactListener {
 	 * this time.  However, we still want the assets themselves to be static.  So
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
-	 * 
-	 * @param manager Reference to global asset manager.
+	 *
 	 */	
 	public void preLoadContent() {
 		if (assetState != AssetState.EMPTY) {
@@ -94,8 +93,7 @@ public class GameController implements Screen, ContactListener {
 	 * this time.  However, we still want the assets themselves to be static.  So
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
-	 * 
-	 * @param manager Reference to global asset manager.
+	 *
 	 */
 	public void loadContent() {
 		if (assetState != AssetState.LOADING) {
@@ -113,8 +111,7 @@ public class GameController implements Screen, ContactListener {
 	 * 
 	 * This method erases the static variables.  It also deletes the associated textures 
 	 * from the asset manager. If no assets are loaded, this method does nothing.
-	 * 
-	 * @param manager Reference to global asset manager.
+	 *
 	 */
 	public void unloadContent() {
 		JsonAssetManager.getInstance().unloadDirectory();
@@ -212,7 +209,7 @@ public class GameController implements Screen, ContactListener {
 	 *
 	 * The canvas is shared across all controllers
 	 *
-	 * @param the canvas associated with this controller
+	 * @return canvas associated with this controller
 	 */
 	public ObstacleCanvas getCanvas() {
 		return canvas;
@@ -224,7 +221,7 @@ public class GameController implements Screen, ContactListener {
 	 * The canvas is shared across all controllers.  Setting this value will compute
 	 * the drawing scale from the canvas size.
 	 *
-	 * @param value the canvas associated with this controller
+	 * @param canvas the canvas associated with this controller
 	 */
 	public void setCanvas(ObstacleCanvas canvas) {
 		this.canvas = canvas;
@@ -283,7 +280,7 @@ public class GameController implements Screen, ContactListener {
 	 * to switch to a new game mode.  If not, the update proceeds
 	 * normally.
 	 *
-	 * @param delta Number of seconds since last animation frame
+	 * @param dt Number of seconds since last animation frame
 	 * 
 	 * @return whether to process the update loop
 	 */
@@ -317,7 +314,8 @@ public class GameController implements Screen, ContactListener {
 		return true;
 	}
 	
-	private Vector2 angleCache = new Vector2();
+	private Vector2 aAngleCache = new Vector2();
+	private Vector2 cAngleCache = new Vector2();
 	/**
 	 * The core gameplay loop of this world.
 	 *
@@ -326,30 +324,43 @@ public class GameController implements Screen, ContactListener {
 	 * This method is called after input is read, but before collisions are resolved.
 	 * The very last thing that it should do is apply forces to the appropriate objects.
 	 *
-	 * @param delta Number of seconds since last animation frame
+	 * @param dt Number of seconds since last animation frame
 	 */
 	public void update(float dt) {
 		// Process actions in object model
-		DudeModel avatar = level.getAvatar();
+		DudeModel annette = level.getAnnette();
+		DudeModel creature = level.getCreature();
 		InputController input = InputController.getInstance();
-		
-		if (input.didForward()) {
-			level.activateNextLight();
-		} else if (input.didBack()){
-			level.activatePrevLight();
-		}
-		
+//
+//		if (input.didForward()) {
+//			level.activateNextLight();
+//		} else if (input.didBack()){
+//			level.activatePrevLight();
+//		}
+//
 		// Rotate the avatar to face the direction of movement
-		angleCache.set(input.getHorizontal(),input.getVertical());
-		if (angleCache.len2() > 0.0f) {
-			float angle = angleCache.angle();
+		aAngleCache.set(input.getaHoriz(),input.getaVert());
+		if (aAngleCache.len2() > 0.0f) {
+			float angle = aAngleCache.angle();
 			// Convert to radians with up as 0
 			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			avatar.setAngle(angle);
+			annette.setAngle(angle);
 		}
-		angleCache.scl(avatar.getForce());
-		avatar.setMovement(angleCache.x,angleCache.y);
-		avatar.applyForce();
+		aAngleCache.scl(annette.getForce());
+		annette.setMovement(aAngleCache.x,aAngleCache.y);
+		annette.applyForce();
+
+		//creature
+		cAngleCache.set(input.getcHoriz(),input.getcVert());
+		if (cAngleCache.len2() > 0.0f) {
+			float angle = cAngleCache.angle();
+			// Convert to radians with up as 0
+			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+			creature.setAngle(angle);
+		}
+		cAngleCache.scl(creature.getForce());
+		creature.setMovement(cAngleCache.x,cAngleCache.y);
+		creature.applyForce();
 
 		// Turn the physics engine crank.
 		checkFail();
@@ -364,7 +375,7 @@ public class GameController implements Screen, ContactListener {
 	 *
 	 * The method draws all objects in the order that they were added.
 	 *
-	 * @param canvas The drawing context
+	 * @param delta
 	 */
 	public void draw(float delta) {
 		canvas.clear();
@@ -460,12 +471,12 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	public void checkFail(){
-		ExitModel door   = level.getExit();
+		DudeModel annette   = level.getAnnette();
 
 		//Check for losing condition
 
 		//System.out.println ("x = " + door.getX() + ", y = " + door.getY());
-		if (level.getConeLight().contains(door.getX(), door.getY())) {
+		if (level.getConeLight().contains(annette.getX(), annette.getY())) {
 			setFailure(true);
 		}
 	}
@@ -493,13 +504,17 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
-			DudeModel avatar = level.getAvatar();
+			DudeModel annette = level.getAnnette();
+			DudeModel creature = level.getCreature();
 			ExitModel door   = level.getExit();
 			
 			// Check for win condition
-			if ((bd1 == avatar && bd2 == door  ) ||
-				(bd1 == door   && bd2 == avatar)) {
+			if ((bd1 == annette && bd2 == door  ) ||
+				(bd1 == door   && bd2 == annette)) {
 				setComplete(true);
+			}
+			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 ==annette )) {
+				setFailure(true);
 			}
 
 		} catch (Exception e) {

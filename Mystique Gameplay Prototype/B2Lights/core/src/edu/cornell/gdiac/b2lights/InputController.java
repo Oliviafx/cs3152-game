@@ -44,47 +44,73 @@ public class InputController {
 	/** Whether the reset button was pressed. */
 	private boolean resetPressed;
 	private boolean resetPrevious;
-	/** Whether the button to advanced worlds was pressed. */
-	private boolean nextPressed;
-	private boolean nextPrevious;
-	/** Whether the button to step back worlds was pressed. */
-	private boolean prevPressed;
-	private boolean prevPrevious;
+//	/** Whether the button to advanced worlds was pressed. */
+//	private boolean nextPressed;
+//	private boolean nextPrevious;
+//	/** Whether the button to step back worlds was pressed. */
+//	private boolean prevPressed;
+//	private boolean prevPrevious;
 	/** Whether the debug toggle was pressed. */
 	private boolean debugPressed;
 	private boolean debugPrevious;
 	/** Whether the exit button was pressed. */
 	private boolean exitPressed;
 	private boolean exitPrevious;
-	
-	/** How much did we move horizontally? */
-	private float horizontal;
-	/** How much did we move vertically? */
-	private float vertical;
+
+
+	/** How much did Annette move horizontally? */
+	private float aHoriz;
+	/** How much did Annette move vertically? */
+	private float aVert;
+
+	/** How much did creature move horizontally? */
+	private float cHoriz;
+	/** How much did creature move vertically? */
+	private float cVert;
 	
 	/** An X-Box controller (if it is connected) */
 	XBox360Controller xbox;
 	
 	/**
-	 * Returns the amount of sideways movement. 
+	 * Returns the amount of Annette sideways movement.
 	 *
 	 * -1 = left, 1 = right, 0 = still
 	 *
 	 * @return the amount of sideways movement. 
 	 */
-	public float getHorizontal() {
-		return horizontal;
+	public float getaHoriz() {
+		return aHoriz;
 	}
 	
 	/**
-	 * Returns the amount of vertical movement. 
+	 * Returns the amount of Annette vertical movement.
 	 *
 	 * -1 = down, 1 = up, 0 = still
 	 *
 	 * @return the amount of vertical movement. 
 	 */
-	public float getVertical() {
-		return vertical;
+	public float getaVert() {
+		return aVert;
+	}
+
+	/**
+	 * Returns the amount of creature sideways movement.
+	 *
+	 * -1 = left, 1 = right, 0 = still
+	 *
+	 * @return the amount of sideways movement.
+	 */
+	public float getcHoriz() { return cHoriz; }
+
+	/**
+	 * Returns the amount of vertical movement.
+	 *
+	 * -1 = down, 1 = up, 0 = still
+	 *
+	 * @return the amount of vertical movement.
+	 */
+	public float getcVert() {
+		return cVert;
 	}
 
 	/**
@@ -92,27 +118,29 @@ public class InputController {
 	 *
 	 * @return true if the reset button was pressed.
 	 */
+
+
 	public boolean didReset() {
 		return resetPressed && !resetPrevious;
 	}
 
-	/**
-	 * Returns true if the player wants to go to the next level.
-	 *
-	 * @return true if the player wants to go to the next level.
-	 */
-	public boolean didForward() {
-		return nextPressed && !nextPrevious;
-	}
-	
-	/**
-	 * Returns true if the player wants to go to the previous level.
-	 *
-	 * @return true if the player wants to go to the previous level.
-	 */
-	public boolean didBack() {
-		return prevPressed && !prevPrevious;
-	}
+//	/**
+//	 * Returns true if the player wants to go to the next level.
+//	 *
+//	 * @return true if the player wants to go to the next level.
+//	 */
+//	public boolean didForward() {
+//		return nextPressed && !nextPrevious;
+//	}
+//
+//	/**
+//	 * Returns true if the player wants to go to the previous level.
+//	 *
+//	 * @return true if the player wants to go to the previous level.
+//	 */
+//	public boolean didBack() {
+//		return prevPressed && !prevPrevious;
+//	}
 	
 	/**
 	 * Returns true if the player wants to go toggle the debug mode.
@@ -152,8 +180,8 @@ public class InputController {
 		resetPrevious  = resetPressed;
 		debugPrevious  = debugPressed;
 		exitPrevious = exitPressed;
-		nextPrevious = nextPressed;
-		prevPrevious = prevPressed;
+//		nextPrevious = nextPressed;
+//		prevPrevious = prevPressed;
 
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
@@ -171,19 +199,17 @@ public class InputController {
 	 * the drawing scale to convert screen coordinates to world coordinates.  The
 	 * bounds are for the crosshair.  They cannot go outside of this zone.
 	 *
-	 * @param bounds The input bounds for the crosshair.  
-	 * @param scale  The drawing scale
 	 */
 	private void readGamepad() {
 		resetPressed = xbox.getStart();
 		exitPressed  = xbox.getBack();
-		nextPressed  = xbox.getRB();
-		prevPressed  = xbox.getLB();
+//		nextPressed  = xbox.getRB();
+//		prevPressed  = xbox.getLB();
 		debugPressed  = xbox.getY();
 
 		// Increase animation frame, but only if trying to move
-		horizontal = xbox.getLeftX();
-		vertical   = xbox.getLeftY();
+		aHoriz = xbox.getLeftX();
+		aVert   = xbox.getLeftY();
 	}
 
 	/**
@@ -198,26 +224,43 @@ public class InputController {
 	private void readKeyboard(boolean secondary) {
 		// Give priority to gamepad results
 		resetPressed = (secondary && resetPressed) || (Gdx.input.isKeyPressed(Input.Keys.R));
-		debugPressed = (secondary && debugPressed) || (Gdx.input.isKeyPressed(Input.Keys.D));
-		prevPressed = (secondary && prevPressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
-		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
+		debugPressed = (secondary && debugPressed) || (Gdx.input.isKeyPressed(Input.Keys.O));
+//		prevPressed = (secondary && prevPressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
+		//nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		
-		// Directional controls
-		horizontal = (secondary ? horizontal : 0.0f);
+		// Annette Directional controls
+		aHoriz = (secondary ? aHoriz : 0.0f);
+		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+			aHoriz += 1.0f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+			aHoriz -= 1.0f;
+		}
+
+		aVert = (secondary ? aVert : 0.0f);
+		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+			aVert += 1.0f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+			aVert -= 1.0f;
+		}
+
+		// Creature Directional controls
+		cHoriz = (secondary ? cHoriz : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			horizontal += 1.0f;
+			cHoriz += 1.0f;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			horizontal -= 1.0f;
+			cHoriz -= 1.0f;
 		}
-		
-		vertical = (secondary ? vertical : 0.0f);
+
+		cVert = (secondary ? cVert : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			vertical += 1.0f;
+			cVert += 1.0f;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			vertical -= 1.0f;
+			cVert -= 1.0f;
 		}
 	}
 }

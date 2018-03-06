@@ -4,12 +4,16 @@
     		"file":		"textures/tile.png",
     		"wrap":		true,
     	},
-    	"dude": {      
-    		"file": 	"textures/creature.png",
+    	"annette": {
+    		"file": 	"textures/annette.png",
     		"wrap":  	false,
     	},
+		"dude": {
+			"file": 	"textures/creature.png",
+			"wrap":  	false,
+		},
         "goal": { 
-         	"file":		"textures/annette.png",
+         	"file":		"textures/well.png",
          	"wrap":		false,
          }
   	},

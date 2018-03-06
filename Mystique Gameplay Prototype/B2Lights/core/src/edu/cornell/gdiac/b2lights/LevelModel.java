@@ -58,8 +58,10 @@ public class LevelModel {
 	public static final int WORLD_POSIT = 2;
 
 	// Physics objects for the game
-	/** Reference to the character avatar */
-	private DudeModel avatar;
+	/** Reference to the Annette avatar */
+	private DudeModel annette;
+	/** Reference to the creature avatar */
+	private DudeModel creature;
 	/** Reference to the goalDoor (for collision detection) */
 	private ExitModel goalDoor;
 
@@ -148,8 +150,17 @@ public class LevelModel {
 	 *
 	 * @return a reference to the player avatar
 	 */
-	public DudeModel getAvatar() {
-		return avatar;
+	public DudeModel getAnnette() {
+		return annette;
+	}
+
+	/**
+	 * Returns a reference to the creature
+	 *
+	 * @return a reference to the creature
+	 */
+	public DudeModel getCreature() {
+		return creature;
 	}
 
 	/**
@@ -294,13 +305,21 @@ public class LevelModel {
 	        walls = walls.next();
 	    }
 
+		// Create Annette
+		annette = new DudeModel();
+		JsonValue annettedata = levelFormat.get("annette");
+		annette.initialize(annettedata);
+		annette.setDrawScale(scale);
+		activate(annette);
+		//attachLights(creature);
+
 		// Create the dude and attach light sources
-	    avatar = new DudeModel();
-	    JsonValue avdata = levelFormat.get("avatar");
-	    avatar.initialize(avdata);
-	    avatar.setDrawScale(scale);
-		activate(avatar);
-		attachLights(avatar);
+	    creature = new DudeModel();
+	    JsonValue avdata = levelFormat.get("creature");
+	    creature.initialize(avdata);
+		creature.setDrawScale(scale);
+		activate(creature);
+		attachLights(creature);
 
 		// Create creatures
 		//creature_test = new CreatureModel();
@@ -534,7 +553,8 @@ public class LevelModel {
 			if (rayhandler != null) {
 				rayhandler.update();
 			}
-			avatar.update(dt);
+			annette.update(dt);
+			creature.update(dt);
 			goalDoor.update(dt);
 			return true;
 		}
