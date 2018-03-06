@@ -419,6 +419,30 @@ public class BoxModel extends BoxObstacle {
 //        body.applyForceToCenter(force, true);
 //    }
 
+    /**
+     * Applies the force to the body of this dude
+     *
+     * This method should be called after the force attribute is set.
+     */
+    public void applyForce() {
+        if (!isActive()) {
+            return;
+        }
+
+        // Only walk or spin if we allow it
+        setLinearVelocity(Vector2.Zero);
+        setAngularVelocity(0.0f);
+
+        // Apply force for movement
+        if (getMovement().len2() > 0f) {
+            forceCache.set(getMovement());
+            body.applyForce(forceCache,getPosition(),true);
+            animate = true;
+        } else {
+            animate = false;
+        }
+    }
+
     // Animation methods (DO NOT CHANGE)
     /**
      * Returns the animation node for this box
