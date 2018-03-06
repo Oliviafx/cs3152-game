@@ -18,6 +18,10 @@
 			"file": 	"textures/creature.png",
 			"wrap":  	false,
 		},
+		"box": {
+			"file":		"textures/tile2.png",
+			"wrap":		false,
+		},
         "goal": { 
          	"file":		"textures/well.png",
          	"wrap":		false,

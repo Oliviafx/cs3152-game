@@ -258,7 +258,7 @@ public class DudeModel extends WheelObstacle {
 			filmstrip = null;
 		}
 		setTexture(texture);
-	}
+}
 
 	/**
 	 * Applies the force to the body of this dude
