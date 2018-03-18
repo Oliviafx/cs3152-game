@@ -340,8 +340,9 @@ public class LevelModel {
 		box = new BoxModel(1, 1);
 		JsonValue boxdata = levelFormat.get("box");
 
-		if (annette.isSummoning()) {
+		if (annette.isSummoning() && !box.getDoesExist()) {
 			box.initialize(boxdata, annette.getPosition(), 0, 0);
+//			box.initialize(1, 1, 1, 450, 10, 10, 0, "0001", "0000", "box", annette.getPosition(), 0, 0);
 			box.setDrawScale(scale);
 			activate(box);
 			box.setActive(true);
@@ -466,10 +467,6 @@ public class LevelModel {
 			activeLight = -1;
 		}
 	}
-
-//	public void attachVision (CreatureModel creature, LightSource light){
-
-//	}
 	
 	/**
 	 * Activates the next light in the light list.
@@ -544,6 +541,8 @@ public class LevelModel {
 		assert inBounds(obj) : "Object is not in bounds";
 		objects.add(obj);
 		obj.activatePhysics(world);
+//		obj.setActive(false);
+//		obj.setDoesExist(false);
 	}
 
 	/**
@@ -552,9 +551,8 @@ public class LevelModel {
 	 * @param obj The object to remove
 	 */
 	protected void destroy(Obstacle obj) {
-		assert inBounds(obj) : "Object is not in bounds";
-		objects.remove(obj);
-//		obj.activatePhysics(world);
+		obj.deactivatePhysics(world);
+//		obj.dispose();
 	}
 	
 	/**

@@ -385,18 +385,25 @@ public class GameController implements Screen, ContactListener {
 				yoff = -BOX_VOFFSET;
 			}
 			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
+//			box.initialize(1, 1, 1, 450, 10, 10, 0, "0001", "0000", "box", annette.getPosition(), 0, 0);
 			level.activate(box);
 			box.setActive(true);
 			box.setDoesExist(true);
+			box.setDeactivated(false);
 		}
 		box.applyForce();
-//		System.out.println("annette " + annette.getPosition().x);
-//		System.out.println("box " + box.getPosition().x);
 
-		if (Math.abs(box.getPosition().x - annette.getPosition().x) > BoxModel.OUTER_RADIUS){
-			box.setActive(false);
-			box.setDoesExist(false);
+		if (box.getDoesExist() && Math.abs(box.getPosition().x - annette.getPosition().x) > BoxModel.OUTER_RADIUS){
+//			box.deactivatePhysics(level.getWorld());
+			box.setDeactivated(true);
 			level.destroy(box);
+//			box.dispose();
+		}
+
+		if (box.getDeactivated()){
+			//retexture?
+//			box.draw(canvas);
+			box.setDebugColor(Color.GREEN);
 		}
 
 		// Turn the physics engine crank.
@@ -511,8 +518,6 @@ public class GameController implements Screen, ContactListener {
 		AnnetteModel annette   = level.getAnnette();
 
 		//Check for losing condition
-
-		//System.out.println ("x = " + door.getX() + ", y = " + door.getY());
 		if (level.getConeLight().contains(annette.getX(), annette.getY())) {
 			setFailure(true);
 		}
