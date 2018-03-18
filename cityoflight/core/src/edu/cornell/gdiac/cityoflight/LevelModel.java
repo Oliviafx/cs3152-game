@@ -341,15 +341,21 @@ public class LevelModel {
 		//creature_test.setDrawScale(scale);
 		//activate(creature_test);
 
+
 		// Create box
-
-		box = new BoxModel(1,1);
+		box = new BoxModel(1, 1);
 		JsonValue boxdata = levelFormat.get("box");
-		box.initialize(boxdata);
-		box.setDrawScale(scale);
-		activate(box);
-		box.setActive(true);
+//		box.initialize(boxdata);
+//		box.setDrawScale(scale);
 
+		if (annette.isSummoning()) {
+//			box = new BoxModel(1, 1);
+//			JsonValue boxdata = levelFormat.get("box");
+			box.initialize(boxdata, annette.getPosition());
+			box.setDrawScale(scale);
+			activate(box);
+			box.setActive(true);
+		}
 
 	}
 
@@ -597,7 +603,11 @@ public class LevelModel {
 			annette.update(dt);
 			creature.update(dt);
 			goalDoor.update(dt);
-			box.update(dt);
+
+			if (box.getDoesExist()) {
+				box.update(dt);
+			}
+
 			return true;
 		}
 		return false;
