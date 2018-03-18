@@ -47,6 +47,7 @@ public class BoxModel extends BoxObstacle {
     /** Random value set as of now */
     private static final float DEFAULT_THRUST = 15.0f;
 
+    public static final float REACTIVATE   = 1.5f;
     public static final float INNER_RADIUS = 3.0f;
     public static final float OUTER_RADIUS = 5.0f;
 
@@ -365,7 +366,7 @@ public class BoxModel extends BoxObstacle {
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
-        setFilterData(filter);
+        super.setFilterData(filter);
 
         // Reflection is best way to convert name to color
         Color debugColor;
@@ -416,6 +417,18 @@ public class BoxModel extends BoxObstacle {
         return true;
     }
 
+    /**
+     * Immediately removes the object from the physics world
+     */
+    protected void reactivate() {
+//		obj.deactivatePhysics(world);
+        short collideBits = LevelModel.bitStringToShort("0001");
+        short excludeBits = LevelModel.bitStringToComplement("0000");
+        Filter filter = new Filter();
+        filter.categoryBits = collideBits;
+        filter.maskBits = excludeBits;
+        setFilterData(filter);
+    }
 
     /**
      * Applies the force to the body of this box
@@ -546,5 +559,4 @@ public class BoxModel extends BoxObstacle {
             canvas.draw(texture,Color.GRAY,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
         }
     }
-
 }

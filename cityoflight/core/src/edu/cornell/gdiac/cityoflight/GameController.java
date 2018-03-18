@@ -336,6 +336,9 @@ public class GameController implements Screen, ContactListener {
 		BoxModel box = level.getBox();
 		InputController input = InputController.getInstance();
 
+		float xoff = 0;
+		float yoff = 0;
+
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 		if (aAngleCache.len2() > 0.0f) {
@@ -365,8 +368,7 @@ public class GameController implements Screen, ContactListener {
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
-			float xoff = 0;
-			float yoff = 0;
+
 			//initial position?
 			if (annette.getDirection() == AnnetteModel.Direction.RIGHT){
 				xoff = BOX_HOFFSET;
@@ -385,7 +387,6 @@ public class GameController implements Screen, ContactListener {
 				yoff = -BOX_VOFFSET;
 			}
 			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
-//			box.initialize(1, 1, 1, 450, 10, 10, 0, "0001", "0000", "box", annette.getPosition(), 0, 0);
 			level.activate(box);
 			box.setActive(true);
 			box.setDoesExist(true);
@@ -393,16 +394,30 @@ public class GameController implements Screen, ContactListener {
 		}
 		box.applyForce();
 
-		if (box.getDoesExist() && Math.abs(box.getPosition().x - annette.getPosition().x) > BoxModel.OUTER_RADIUS){
-//			box.deactivatePhysics(level.getWorld());
+		float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
+
+		// if box should deactivate
+		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			level.destroy(box);
-//			box.dispose();
+			box.setActive(false);
 		}
 
+		// reactivating
+		if (box.getDoesExist() && box.getDeactivated() && Math.abs(box.getPosition().x - annette.getPosition().x) < box.REACTIVATE){
+			box.setDeactivated(false);
+			box.reactivate();
+			box.setActive(true);
+//			level.activate(box);
+//			box.activatePhysics(level.getWorld());
+		}
+
+		// debug color green
 		if (box.getDeactivated()){
 			box.setDebugColor(Color.GREEN);
-//			box.drawDeactivated(canvas);
+		}
+		else {
+			box.setDebugColor(Color.YELLOW);
 		}
 
 		// Turn the physics engine crank.
@@ -546,6 +561,7 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
 			AnnetteModel annette = level.getAnnette();
+//			BoxModel box = level.getBox();
 			DudeModel creature = level.getCreature();
 			ExitModel door   = level.getExit();
 			
@@ -554,7 +570,7 @@ public class GameController implements Screen, ContactListener {
 				(bd1 == door   && bd2 == annette)) {
 				setComplete(true);
 			}
-			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 ==annette)) {
+			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 == annette)) {
 				setFailure(true);
 			}
 
