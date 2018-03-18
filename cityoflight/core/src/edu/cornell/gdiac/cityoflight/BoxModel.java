@@ -42,17 +42,13 @@ import java.lang.reflect.Field;
 
 public class BoxModel extends BoxObstacle {
 
-    // Default physics values
-    /** The density of this box */
-    private static final float DEFAULT_DENSITY = 1.0f;
-    /** The friction of this box */
-    private static final float DEFAULT_FRICTION = 0.0f;
-    /** The restitution of this box */
-    private static final float DEFAULT_RESTITUTION = 0.0f;
     /** The thrust factor to convert player input into thrust */
     /** (3/5/18) Not sure if this is needed */
     /** Random value set as of now */
     private static final float DEFAULT_THRUST = 15.0f;
+
+    public static final float INNER_RADIUS = 5.0f;
+    public static final float OUTER_RADIUS = 8.0f;
 
     /** The force to apply to this box */
 //    private Vector2 force;
@@ -82,13 +78,10 @@ public class BoxModel extends BoxObstacle {
     /** Whether or not to animate the current frame */
     private boolean animate = false;
 
-    /** How many frames until we can walk again */
-    private int walkCool;
-    /** The standard number of frames to wait until we can walk again */
-    private int walkLimit;
-
     /** If the box has been summoned */
     private boolean doesExist;
+    /** If the box is deactivating */
+    private boolean deactivating;
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
@@ -213,24 +206,6 @@ public class BoxModel extends BoxObstacle {
     }
 
     /**
-     * Returns the cooldown limit between walk animations
-     *
-     * @return the cooldown limit between walk animations
-     */
-    public int getWalkLimit() {
-        return walkLimit;
-    }
-
-    /**
-     * Sets the cooldown limit between walk animations
-     *
-     * @param value	the cooldown limit between walk animations
-     */
-    public void setWalkLimit(int value) {
-        walkLimit = value;
-    }
-
-    /**
      * Returns whether the box has been summoned and is active
      *
      * @return true if the box is active
@@ -246,6 +221,24 @@ public class BoxModel extends BoxObstacle {
      */
     public void setDoesExist(boolean value) {
         doesExist = value;
+    }
+
+    /**
+     * Returns whether the box is deactivating
+     *
+     * @return true if the box is deactivating
+     */
+    public boolean getDeactivating() {
+        return deactivating;
+    }
+
+    /**
+     * Sets whether the box is active or not
+     *
+     * @param value true if the box is active
+     */
+    public void setDeactivating(boolean value) {
+        deactivating = value;
     }
 
 /////////////////////////////////
@@ -361,7 +354,7 @@ public class BoxModel extends BoxObstacle {
         else if (json.get("bodytype").asString().equals("dynamic")) {
             setBodyType(BodyDef.BodyType.DynamicBody);
         }
-        else {
+        else { // kinematic
             setBodyType(BodyDef.BodyType.KinematicBody);
         }
 //        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
@@ -404,16 +397,19 @@ public class BoxModel extends BoxObstacle {
         }
         setTexture(texture);
 
+//        setBoxSound(json.get("sound").asString());
+
 //        SoundController.getInstance().play(PEW_FILE, PEW_FILE, false, EFFECT_VOLUME);
     }
 
-//    /**
-//     * Remove box from the world.
-//     *
-//     */
+    /**
+     * Remove box from the world.
+     *
+     */
 //    public void removeBox() {
-//        box.markRemoved(true);
+//        setDeactivating(true);
 //        SoundController.getInstance().play(POP_FILE,POP_FILE,false,EFFECT_VOLUME);
+
 //    }
 
     /**

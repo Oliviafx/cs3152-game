@@ -318,6 +318,7 @@ public class GameController implements Screen, ContactListener {
 	
 	private Vector2 aAngleCache = new Vector2();
 	private Vector2 cAngleCache = new Vector2();
+	private Vector2 bAngleCache = new Vector2();
 	/**
 	 * The core gameplay loop of this world.
 	 *
@@ -346,6 +347,7 @@ public class GameController implements Screen, ContactListener {
 		aAngleCache.scl(annette.getForce());
 		annette.setMovement(aAngleCache.x,aAngleCache.y);
 		annette.setDirection(input.getDirection());
+		annette.setSummoning(InputController.getInstance().didSpace());
 		annette.applyForce();
 
 		//creature
@@ -360,14 +362,11 @@ public class GameController implements Screen, ContactListener {
 		creature.setMovement(cAngleCache.x,cAngleCache.y);
 		creature.applyForce();
 
-		annette.setSummoning(InputController.getInstance().didSpace());
-
-		box = new BoxModel(1, 1);
 		JsonValue boxdata = levelFormat.get("box");
-
-		if (annette.isSummoning()) {
+		if (annette.isSummoning() && !box.getDoesExist()) {
 			float xoff = 0;
 			float yoff = 0;
+			//initial position?
 			if (annette.getDirection() == AnnetteModel.Direction.RIGHT){
 				xoff = BOX_HOFFSET;
 				yoff = 0;
@@ -384,15 +383,21 @@ public class GameController implements Screen, ContactListener {
 				xoff = 0;
 				yoff = -BOX_VOFFSET;
 			}
-
 			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
 			box.setDrawScale(level.scale);
 			level.activate(box);
 			box.setActive(true);
 			box.setDoesExist(true);
 		}
-
 		box.applyForce();
+//		System.out.println("annette " + annette.getPosition().x);
+//		System.out.println("box " + box.getPosition().x);
+
+		if (Math.abs(box.getPosition().x - annette.getPosition().x) > BoxModel.OUTER_RADIUS){
+			box.setActive(false);
+			box.setDoesExist(false);
+			level.deactivate(box);
+		}
 
 		// Turn the physics engine crank.
 		checkFail();
