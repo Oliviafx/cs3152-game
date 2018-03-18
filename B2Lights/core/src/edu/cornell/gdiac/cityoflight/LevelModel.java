@@ -26,7 +26,7 @@
  * Author: Walker M. White
  * Initial version, 3/12/2016
  */
-package edu.cornell.gdiac.b2lights;
+package edu.cornell.gdiac.cityoflight;
 
 import box2dLight.*;
 
@@ -59,7 +59,7 @@ public class LevelModel {
 
 	// Physics objects for the game
 	/** Reference to the Annette avatar */
-	private DudeModel annette;
+	private AnnetteModel annette;
 	/** Reference to the creature avatar */
 	private DudeModel creature;
 	/** Reference to the goalDoor (for collision detection) */
@@ -156,7 +156,7 @@ public class LevelModel {
 	 *
 	 * @return a reference to the player avatar
 	 */
-	public DudeModel getAnnette() {
+	public AnnetteModel getAnnette() {
 		return annette;
 	}
 
@@ -321,7 +321,7 @@ public class LevelModel {
 	    }
 
 		// Create Annette
-		annette = new DudeModel();
+		annette = new AnnetteModel();
 		JsonValue annettedata = levelFormat.get("annette");
 		annette.initialize(annettedata);
 		annette.setDrawScale(scale);

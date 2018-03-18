@@ -13,11 +13,9 @@
  * Based on original PhysicsDemo Lab by Don Holden, 2007
  * B2Lights version, 3/12/2016
  */
-package edu.cornell.gdiac.b2lights;
+package edu.cornell.gdiac.cityoflight;
 
-import box2dLight.*;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -328,7 +326,7 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void update(float dt) {
 		// Process actions in object model
-		DudeModel annette = level.getAnnette();
+		AnnetteModel annette = level.getAnnette();
 		DudeModel creature = level.getCreature();
 		BoxModel box = level.getBox();
 		InputController input = InputController.getInstance();
@@ -474,7 +472,7 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	public void checkFail(){
-		DudeModel annette   = level.getAnnette();
+		AnnetteModel annette   = level.getAnnette();
 
 		//Check for losing condition
 
@@ -507,7 +505,7 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
-			DudeModel annette = level.getAnnette();
+			AnnetteModel annette = level.getAnnette();
 			DudeModel creature = level.getCreature();
 			ExitModel door   = level.getExit();
 			

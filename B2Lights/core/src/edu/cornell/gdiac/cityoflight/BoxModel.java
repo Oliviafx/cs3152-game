@@ -26,7 +26,7 @@
  * Author: Walker M. White
  * Initial version, 3/12/2016
  */
-package edu.cornell.gdiac.b2lights;
+package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.*;
