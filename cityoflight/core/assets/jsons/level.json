@@ -62,7 +62,7 @@
     "box": {
 		"width":      	1,
 		"height":      	1,
-		"bodytype":     "kinematic",
+		"bodytype":     "dynamic",
         "density":        1.0,
         "friction":       0.0,
         "restitution":    0.0,
@@ -75,6 +75,7 @@
         "texture":      "box",
         "debugcolor":   "white",
         "debugopacity": 192,
+		"sound":		"box_noise",
     }, 
     "exit": {
         "pos":          [ 1.5, 10.35],

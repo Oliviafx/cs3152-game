@@ -33,4 +33,9 @@
   			"size": 	64
   		},
   	},
+	"sounds": {
+		"box_noise": {
+			"file":		"sounds/box.wav"
+		}
+	}
 }

@@ -328,7 +328,7 @@ public class LevelModel {
 		activate(annette);
 		//attachLights(creature);
 
-		// Create the dude and attach light sources
+		// Create the creature and attach light sources
 	    creature = new DudeModel();
 	    JsonValue avdata = levelFormat.get("creature");
 	    creature.initialize(avdata);
@@ -336,34 +336,17 @@ public class LevelModel {
 		activate(creature);
 		attachLights(creature);
 
-		// Create creatures
-		//creature_test = new CreatureModel();
-		//creature_test.setDrawScale(scale);
-		//activate(creature_test);
-
-
 		// Create box
 		box = new BoxModel(1, 1);
 		JsonValue boxdata = levelFormat.get("box");
-//		box.initialize(boxdata);
-//		box.setDrawScale(scale);
-//		activate(box);
-//		box.setActive(true);
 
 		if (annette.isSummoning()) {
-
-//			box = new BoxModel(1, 1);
-//			JsonValue boxdata = levelFormat.get("box");
 			box.initialize(boxdata, annette.getPosition(), 0, 0);
 			box.setDrawScale(scale);
 			activate(box);
 			box.setActive(true);
 		}
 
-	}
-
-	private void activateBox() {
-		box.setDrawScale(scale);
 	}
 	
 	/**
@@ -555,12 +538,23 @@ public class LevelModel {
 	/**
 	 * Immediately adds the object to the physics world
 	 *
-	 * param obj The object to add
+	 * @param obj The object to add
 	 */
 	protected void activate(Obstacle obj) {
 		assert inBounds(obj) : "Object is not in bounds";
 		objects.add(obj);
 		obj.activatePhysics(world);
+	}
+
+	/**
+	 * Immediately removes the object from the physics world
+	 *
+	 * @param obj The object to remove
+	 */
+	protected void deactivate(Obstacle obj) {
+		assert inBounds(obj) : "Object is not in bounds";
+		objects.remove(obj);
+//		obj.activatePhysics(world);
 	}
 	
 	/**
