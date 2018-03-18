@@ -75,7 +75,6 @@
         "texture":      "box",
         "debugcolor":   "yellow",
         "debugopacity": 192,
-		"deactivecolor": "gray",
 		"sound":		"box_noise",
     }, 
     "exit": {
