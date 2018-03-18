@@ -73,6 +73,9 @@ public class InputController {
 	
 	/** An X-Box controller (if it is connected) */
 	XBox360Controller xbox;
+
+	/** Annette's direction */
+	private AnnetteModel.Direction direction;
 	
 	/**
 	 * Returns the amount of Annette sideways movement.
@@ -182,6 +185,8 @@ public class InputController {
 		xbox = new XBox360Controller(0);
 	}
 
+	public AnnetteModel.Direction getDirection() { return direction; }
+
 	/**
 	 * Reads the input for the player and converts the result into game logic.
 	 */
@@ -241,22 +246,26 @@ public class InputController {
 		//nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		spacePressed = (secondary && spacePressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
-		
+
 		// Annette Directional controls
 		aHoriz = (secondary ? aHoriz : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 			aHoriz += 1.0f;
+			direction = AnnetteModel.Direction.RIGHT;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
 			aHoriz -= 1.0f;
+			direction = AnnetteModel.Direction.LEFT;
 		}
 
 		aVert = (secondary ? aVert : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 			aVert += 1.0f;
+			direction = AnnetteModel.Direction.UP;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
 			aVert -= 1.0f;
+			direction = AnnetteModel.Direction.DOWN;
 		}
 
 //		// Creature Directional controls

@@ -347,11 +347,14 @@ public class LevelModel {
 		JsonValue boxdata = levelFormat.get("box");
 //		box.initialize(boxdata);
 //		box.setDrawScale(scale);
+//		activate(box);
+//		box.setActive(true);
 
 		if (annette.isSummoning()) {
+
 //			box = new BoxModel(1, 1);
 //			JsonValue boxdata = levelFormat.get("box");
-			box.initialize(boxdata, annette.getPosition());
+			box.initialize(boxdata, annette.getPosition(), 0, 0);
 			box.setDrawScale(scale);
 			activate(box);
 			box.setActive(true);
@@ -574,14 +577,6 @@ public class LevelModel {
 		boolean vert  = (bounds.y <= obj.getY() && obj.getY() <= bounds.y+bounds.height);
 		return horiz && vert;
 	}
-
-	public boolean summonBox() {
-		InputController input = InputController.getInstance();
-		if (input.didSpace()) {
-			return true;
-		}
-		return false;
-	}
 	
 	/**
 	 * Updates all of the models in the level.
@@ -593,20 +588,13 @@ public class LevelModel {
 	 */
 	public boolean update(float dt) {
 		if (fixedStep(dt)) {
-//			if (summonBox()) {
-//				box.setActive(true);
-//				box.setDrawScale(scale);
-//			}
 			if (rayhandler != null) {
 				rayhandler.update();
 			}
 			annette.update(dt);
 			creature.update(dt);
 			goalDoor.update(dt);
-
-			if (box.getDoesExist()) {
-				box.update(dt);
-			}
+			box.update(dt);
 
 			return true;
 		}

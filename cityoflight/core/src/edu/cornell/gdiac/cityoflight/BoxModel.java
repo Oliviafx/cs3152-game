@@ -345,21 +345,26 @@ public class BoxModel extends BoxObstacle {
 
     }
 
-    public void initialize(JsonValue json, Vector2 annettepos) {
+    public void initialize(JsonValue json, Vector2 annettepos, float xoff, float yoff) {
         setName(json.name());
-        float[] pos  = json.get("pos").asFloatArray();
-//        float width = json.get("width").asFloat();
-//        float height = json.get("height").asFloat();
-//        setPosition(pos[0],pos[1]);
-//        setWidth(width);
-//        setHeight(height);
-        float radius = json.get("radius").asFloat();
-        setPosition(annettepos.x,annettepos.y);
-//        setRadius(radius);
+        float width = json.get("width").asFloat();
+        float height = json.get("height").asFloat();
+        setWidth(width);
+        setHeight(height);
+        setPosition(annettepos.x + xoff,annettepos.y + yoff);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        if (json.get("bodytype").asString().equals("static")) {
+            setBodyType(BodyDef.BodyType.StaticBody);
+        }
+        else if (json.get("bodytype").asString().equals("dynamic")) {
+            setBodyType(BodyDef.BodyType.DynamicBody);
+        }
+        else {
+            setBodyType(BodyDef.BodyType.KinematicBody);
+        }
+//        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
         setDensity(json.get("density").asFloat());
         setFriction(json.get("friction").asFloat());
         setRestitution(json.get("restitution").asFloat());
@@ -367,7 +372,6 @@ public class BoxModel extends BoxObstacle {
         setDamping(json.get("damping").asFloat());
         setMaxSpeed(json.get("maxspeed").asFloat());
         setStartFrame(json.get("startframe").asInt());
-        setWalkLimit(json.get("walklimit").asInt());
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
@@ -458,7 +462,7 @@ public class BoxModel extends BoxObstacle {
 //    }
 
     /**
-     * Applies the force to the body of this dude
+     * Applies the force to the body of Annette
      *
      * This method should be called after the force attribute is set.
      */

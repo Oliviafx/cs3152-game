@@ -61,6 +61,10 @@ public class GameController implements Screen, ContactListener {
 	
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
+
+	/** Offset for box when summoning */
+	private static final float  BOX_HOFFSET = 1.0f;
+	private static final float  BOX_VOFFSET = 1.0f;
 	
 	/**
 	 * Preloads the assets for this controller.
@@ -331,14 +335,6 @@ public class GameController implements Screen, ContactListener {
 		BoxModel box = level.getBox();
 		InputController input = InputController.getInstance();
 
-
-//
-//		if (input.didForward()) {
-//			level.activateNextLight();
-//		} else if (input.didBack()){
-//			level.activatePrevLight();
-//		}
-//
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 		if (aAngleCache.len2() > 0.0f) {
@@ -349,6 +345,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		aAngleCache.scl(annette.getForce());
 		annette.setMovement(aAngleCache.x,aAngleCache.y);
+		annette.setDirection(input.getDirection());
 		annette.applyForce();
 
 		//creature
@@ -368,20 +365,34 @@ public class GameController implements Screen, ContactListener {
 		box = new BoxModel(1, 1);
 		JsonValue boxdata = levelFormat.get("box");
 
-
-		//need to initialize box with offset from annette based on her position
-
 		if (annette.isSummoning()) {
-//			box = new BoxModel(1, 1);
-//			JsonValue boxdata = levelFormat.get("box");
-			box.initialize(boxdata, annette.getPosition());
+			float xoff = 0;
+			float yoff = 0;
+			if (annette.getDirection() == AnnetteModel.Direction.RIGHT){
+				xoff = BOX_HOFFSET;
+				yoff = 0;
+			}
+			else if (annette.getDirection() == AnnetteModel.Direction.LEFT){
+				xoff = -BOX_HOFFSET;
+				yoff = 0;
+			}
+			else if (annette.getDirection() == AnnetteModel.Direction.UP){
+				xoff = 0;
+				yoff = BOX_VOFFSET;
+			}
+			else if (annette.getDirection() == AnnetteModel.Direction.DOWN){ // down
+				xoff = 0;
+				yoff = -BOX_VOFFSET;
+			}
+
+			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
 			box.setDrawScale(level.scale);
 			level.activate(box);
 			box.setActive(true);
 			box.setDoesExist(true);
 		}
-		box.applyForce();
 
+		box.applyForce();
 
 		// Turn the physics engine crank.
 		checkFail();
