@@ -56,6 +56,22 @@ public class AnnetteModel extends BoxObstacle {
     /** The current animation frame of the avatar */
     private int startFrame;
 
+    /** The current direction Annette is facing. */
+    private Direction direction;
+    /** The current horizontal movement of the character */
+    private float   hormovement;
+    /** Which direction is the character facing */
+    private boolean faceRight;
+    private boolean faceLeft;
+    private boolean faceUp;
+    private boolean faceDown;
+    /**
+     * Enumeration to identify which direction Annette is facing.
+     */
+    public enum Direction {
+        UP, LEFT, RIGHT, DOWN
+    };
+
     /** Cache for internal force calculations */
     private Vector2 forceCache = new Vector2();
 
@@ -206,6 +222,66 @@ public class AnnetteModel extends BoxObstacle {
      * @param value whether the Annette is actively summoning.
      */
     public void setSummoning(boolean value) { isSummoning = value; }
+
+
+    public Direction getDirection() {
+//        if (direction == Direction.RIGHT) {
+//            System.out.println("right");
+//
+//        }
+//        if (direction == Direction.LEFT) {
+//            System.out.println("left");
+//
+//        }
+//        if (direction == Direction.UP) {
+//            System.out.println("up");
+//
+//        }
+//        if (direction == Direction.DOWN) {
+//            System.out.println("down");
+//
+//        }
+        return direction;
+    }
+
+    public void setDirection(Direction value) {
+        direction = value;
+    }
+
+    /** Taken from Lab 4.
+     * Sets left/right movement of this character.
+     *
+     * This is the result of input times dude force.
+     *
+     * @param value left/right movement of this character.
+     */
+    public void setMovement(Direction value) {
+        if (value != null) {
+            switch (direction) {
+                case RIGHT:
+                    setMovement(new Vector2(force, 0));
+                    break;
+                case LEFT:
+                    setMovement(new Vector2(-force, 0));
+                    break;
+                case UP:
+                    setMovement(new Vector2(0, force));
+                    break;
+                case DOWN:
+                    setMovement(new Vector2(0, -force));
+            }
+        }
+    }
+
+    //        hormovement = value;
+//        // Change facing if appropriate
+//        if (hormovement < 0) {
+//            faceRight = false;
+//        } else if (hormovement > 0) {
+//            faceRight = true;
+//        }
+//    }
+
 
     /**
      * Creates Annette with degenerate settings
