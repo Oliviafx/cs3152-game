@@ -551,7 +551,7 @@ public class LevelModel {
 	 *
 	 * @param obj The object to remove
 	 */
-	protected void deactivate(Obstacle obj) {
+	protected void destroy(Obstacle obj) {
 		assert inBounds(obj) : "Object is not in bounds";
 		objects.remove(obj);
 //		obj.activatePhysics(world);

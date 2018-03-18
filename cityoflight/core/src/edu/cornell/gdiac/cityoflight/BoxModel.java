@@ -396,21 +396,8 @@ public class BoxModel extends BoxObstacle {
             filmstrip = null;
         }
         setTexture(texture);
-
-//        setBoxSound(json.get("sound").asString());
-
-//        SoundController.getInstance().play(PEW_FILE, PEW_FILE, false, EFFECT_VOLUME);
     }
 
-    /**
-     * Remove box from the world.
-     *
-     */
-//    public void removeBox() {
-//        setDeactivating(true);
-//        SoundController.getInstance().play(POP_FILE,POP_FILE,false,EFFECT_VOLUME);
-
-//    }
 
     /**
      * Creates the physics Body(s) for this object, adding them to the world.
