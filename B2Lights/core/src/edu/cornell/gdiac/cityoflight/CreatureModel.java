@@ -1,12 +1,9 @@
-package edu.cornell.gdiac.b2lights;
+package edu.cornell.gdiac.cityoflight;
 
-import com.badlogic.gdx.math.*;
-import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 
-import java.lang.reflect.*;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.obstacle.*;
 
