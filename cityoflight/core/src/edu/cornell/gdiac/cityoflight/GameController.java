@@ -48,7 +48,7 @@ public class GameController implements Screen, ContactListener {
 		/** Assets are complete */
 		COMPLETE
 	}
-	
+
 	/** The reader to process JSON files */
 	private JsonReader jsonReader;
 	/** The JSON asset directory */
@@ -347,6 +347,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		aAngleCache.scl(annette.getForce());
 		annette.setMovement(aAngleCache.x,aAngleCache.y);
+		annette.setDirection(input.getDirection());
 		annette.applyForce();
 
 		//creature
