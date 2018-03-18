@@ -13,7 +13,170 @@ import edu.cornell.gdiac.physics.obstacle.*;
 public class CreatureModel extends WheelObstacle {
 
     /** FilmStrip pointer to the texture region */
+
+    // Physics constants
+    /** The factor to multiply by the input */
+    private float force;
+    /** The amount to slow the character down */
+    private float damping;
+    /** The maximum character speed */
+    private float maxspeed;
+
+    /** The current horizontal movement of the character */
+    private Vector2 movement = new Vector2();
+    /** Whether or not to animate the current frame */
+    private boolean animate = false;
+
+    /** How many frames until we can walk again */
+    private int walkCool;
+    /** The standard number of frames to wait until we can walk again */
+    private int walkLimit;
+
+    /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
+    /** The current animation frame of the avatar */
+    private int startFrame;
+
+    /** Cache for internal force calculations */
+    private Vector2 forceCache = new Vector2();
+
+    /**
+     * Returns the directional movement of this character.
+     *
+     * This is the result of input times dude force.
+     *
+     * @return the directional movement of this character.
+     */
+    public Vector2 getMovement() {
+        return movement;
+    }
+
+    /**
+     * Sets the directional movement of this character.
+     *
+     * This is the result of input times dude force.
+     *
+     * @param value the directional movement of this character.
+     */
+    public void setMovement(Vector2 value) {
+        setMovement(value.x,value.y);
+    }
+
+    /**
+     * Sets the directional movement of this character.
+     *
+     * This is the result of input times dude force.
+     *
+     * @param dx the horizontal movement of this character.
+     * @param dy the horizontal movement of this character.
+     */
+    public void setMovement(float dx, float dy) {
+        movement.set(dx,dy);
+    }
+
+    /**
+     * Returns how much force to apply to get the dude moving
+     *
+     * Multiply this by the input to get the movement value.
+     *
+     * @return how much force to apply to get the dude moving
+     */
+    public float getForce() {
+        return force;
+    }
+
+    /**
+     * Sets how much force to apply to get the dude moving
+     *
+     * Multiply this by the input to get the movement value.
+     *
+     * @param value	how much force to apply to get the dude moving
+     */
+    public void setForce(float value) {
+        force = value;
+    }
+
+    /**
+     * Returns how hard the brakes are applied to get a dude to stop moving
+     *
+     * @return how hard the brakes are applied to get a dude to stop moving
+     */
+    public float getDamping() {
+        return damping;
+    }
+
+    /**
+     * Sets how hard the brakes are applied to get a dude to stop moving
+     *
+     * @param value	how hard the brakes are applied to get a dude to stop moving
+     */
+    public void setDamping(float value) {
+        damping = value;
+    }
+
+    /**
+     * Returns the upper limit on dude left-right movement.
+     *
+     * This does NOT apply to vertical movement.
+     *
+     * @return the upper limit on dude left-right movement.
+     */
+    public float getMaxSpeed() {
+        return maxspeed;
+    }
+
+    /**
+     * Sets the upper limit on dude left-right movement.
+     *
+     * This does NOT apply to vertical movement.
+     *
+     * @param value	the upper limit on dude left-right movement.
+     */
+    public void setMaxSpeed(float value) {
+        maxspeed = value;
+    }
+
+    /**
+     * Returns the current animation frame of this dude.
+     *
+     * @return the current animation frame of this dude.
+     */
+    public float getStartFrame() {
+        return startFrame;
+    }
+
+    /**
+     * Sets the animation frame of this dude.
+     *
+     * @param value	animation frame of this dude.
+     */
+    public void setStartFrame(int value) {
+        startFrame = value;
+    }
+
+    /**
+     * Returns the cooldown limit between walk animations
+     *
+     * @return the cooldown limit between walk animations
+     */
+    public int getWalkLimit() {
+        return walkLimit;
+    }
+
+    /**
+     * Sets the cooldown limit between walk animations
+     *
+     * @param value	the cooldown limit between walk animations
+     */
+    public void setWalkLimit(int value) {
+        walkLimit = value;
+    }
+
+    /**
+     * Creates a new creature with degenerate settings
+     *
+     * The main purpose of this constructor is to set the initial capsule orientation.
+     */
 
     public CreatureModel (){
         super(0,0,1.0f);
