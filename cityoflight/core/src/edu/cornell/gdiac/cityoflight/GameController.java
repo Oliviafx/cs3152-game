@@ -401,9 +401,8 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		if (box.getDeactivated()){
-			//retexture?
-//			box.draw(canvas);
 			box.setDebugColor(Color.GREEN);
+//			box.drawDeactivated(canvas);
 		}
 
 		// Turn the physics engine crank.

@@ -633,8 +633,11 @@ public class LevelModel {
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
+
+		if (box.getDeactivated()){
+			box.drawDeactivated(canvas);
+		}
 		canvas.end();
-		
 		// Now draw the shadows
 		if (rayhandler != null && activeLight != -1) {
 			rayhandler.render();

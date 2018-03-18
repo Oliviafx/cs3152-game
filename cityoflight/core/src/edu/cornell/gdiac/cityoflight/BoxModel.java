@@ -541,4 +541,10 @@ public class BoxModel extends BoxObstacle {
 //        canvas.draw(mainBox,Color.WHITE,origin.x,offsety,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
     }
 
+    public void drawDeactivated(ObstacleCanvas canvas) {
+        if (texture != null) {
+            canvas.draw(texture,Color.GRAY,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+        }
+    }
+
 }
