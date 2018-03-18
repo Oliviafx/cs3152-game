@@ -13,7 +13,7 @@
  * Author: Walker M. White
  * Version: 3/2/2016
  */
-package edu.cornell.gdiac.b2lights;
+package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
 import edu.cornell.gdiac.util.*;

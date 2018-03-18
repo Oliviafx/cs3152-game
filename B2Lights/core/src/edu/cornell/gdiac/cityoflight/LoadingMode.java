@@ -23,7 +23,7 @@
  * Based on original PhysicsDemo Lab by Don Holden, 2007
  * LibGDX version, 2/6/2015
  */
-package edu.cornell.gdiac.b2lights;
+package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.math.*;
