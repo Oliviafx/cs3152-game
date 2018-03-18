@@ -318,7 +318,7 @@ public class GameController implements Screen, ContactListener {
 	
 	private Vector2 aAngleCache = new Vector2();
 	private Vector2 cAngleCache = new Vector2();
-	private Vector2 bAngleCache = new Vector2();
+
 	/**
 	 * The core gameplay loop of this world.
 	 *
@@ -363,6 +363,7 @@ public class GameController implements Screen, ContactListener {
 		creature.applyForce();
 
 		JsonValue boxdata = levelFormat.get("box");
+		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
 			float xoff = 0;
 			float yoff = 0;
@@ -384,7 +385,6 @@ public class GameController implements Screen, ContactListener {
 				yoff = -BOX_VOFFSET;
 			}
 			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
-			box.setDrawScale(level.scale);
 			level.activate(box);
 			box.setActive(true);
 			box.setDoesExist(true);
@@ -396,7 +396,7 @@ public class GameController implements Screen, ContactListener {
 		if (Math.abs(box.getPosition().x - annette.getPosition().x) > BoxModel.OUTER_RADIUS){
 			box.setActive(false);
 			box.setDoesExist(false);
-			level.deactivate(box);
+			level.destroy(box);
 		}
 
 		// Turn the physics engine crank.
