@@ -87,6 +87,9 @@ public class BoxModel extends BoxObstacle {
     /** The standard number of frames to wait until we can walk again */
     private int walkLimit;
 
+    /** If the box has been summoned */
+    private boolean doesExist;
+
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
     /** The current animation frame of the avatar */
@@ -226,6 +229,25 @@ public class BoxModel extends BoxObstacle {
     public void setWalkLimit(int value) {
         walkLimit = value;
     }
+
+    /**
+     * Returns whether the box has been summoned and is active
+     *
+     * @return true if the box is active
+     */
+    public boolean getDoesExist() {
+        return doesExist;
+    }
+
+    /**
+     * Sets whether the box is active or not
+     *
+     * @param value true if the box is active
+     */
+    public void setDoesExist(boolean value) {
+        doesExist = value;
+    }
+
 /////////////////////////////////
     /**
      * Returns the force applied to this box.
@@ -323,11 +345,16 @@ public class BoxModel extends BoxObstacle {
 
     }
 
-    public void initialize(JsonValue json) {
+    public void initialize(JsonValue json, Vector2 annettepos) {
         setName(json.name());
         float[] pos  = json.get("pos").asFloatArray();
+//        float width = json.get("width").asFloat();
+//        float height = json.get("height").asFloat();
+//        setPosition(pos[0],pos[1]);
+//        setWidth(width);
+//        setHeight(height);
         float radius = json.get("radius").asFloat();
-        setPosition(pos[0],pos[1]);
+        setPosition(annettepos.x,annettepos.y);
 //        setRadius(radius);
 
         // Technically, we should do error checking here.
@@ -372,7 +399,18 @@ public class BoxModel extends BoxObstacle {
             filmstrip = null;
         }
         setTexture(texture);
+
+//        SoundController.getInstance().play(PEW_FILE, PEW_FILE, false, EFFECT_VOLUME);
     }
+
+//    /**
+//     * Remove box from the world.
+//     *
+//     */
+//    public void removeBox() {
+//        box.markRemoved(true);
+//        SoundController.getInstance().play(POP_FILE,POP_FILE,false,EFFECT_VOLUME);
+//    }
 
     /**
      * Creates the physics Body(s) for this object, adding them to the world.

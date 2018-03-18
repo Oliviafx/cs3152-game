@@ -46,6 +46,11 @@ public class AnnetteModel extends BoxObstacle {
     /** The standard number of frames to wait until we can walk again */
     private int walkLimit;
 
+    /** Whether we are actively summoning */
+    private boolean isSummoning;
+    /** How long until we can summon a box again */
+    private int summoningCooldown;
+
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
     /** The current animation frame of the avatar */
@@ -186,6 +191,21 @@ public class AnnetteModel extends BoxObstacle {
         walkLimit = value;
     }
 
+    /**
+     * Checks if Annette is summoning a box
+     *
+     * @return true if Annette is actively summoning a box
+     */
+    public boolean isSummoning() {
+        return isSummoning && summoningCooldown <= 0;
+    }
+
+    /**
+     * Sets whether Annette is summoning a box.
+     *
+     * @param value whether the Annette is actively summoning.
+     */
+    public void setSummoning(boolean value) { isSummoning = value; }
 
     /**
      * Creates Annette with degenerate settings
@@ -288,7 +308,7 @@ public class AnnetteModel extends BoxObstacle {
      *
      * We use this method to reset cooldowns.
      *
-     * @param delta Number of seconds since last animation frame
+     * @param dt Number of seconds since last animation frame
      */
     public void update(float dt) {
         // Animate if necessary

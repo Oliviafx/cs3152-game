@@ -259,21 +259,21 @@ public class InputController {
 			aVert -= 1.0f;
 		}
 
-		// Creature Directional controls
-		cHoriz = (secondary ? cHoriz : 0.0f);
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			cHoriz += 1.0f;
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			cHoriz -= 1.0f;
-		}
-
-		cVert = (secondary ? cVert : 0.0f);
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			cVert += 1.0f;
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			cVert -= 1.0f;
-		}
+//		// Creature Directional controls
+//		cHoriz = (secondary ? cHoriz : 0.0f);
+//		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+//			cHoriz += 1.0f;
+//		}
+//		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+//			cHoriz -= 1.0f;
+//		}
+//
+//		cVert = (secondary ? cVert : 0.0f);
+//		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+//			cVert += 1.0f;
+//		}
+//		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+//			cVert -= 1.0f;
+//		}
 	}
 }

@@ -330,6 +330,8 @@ public class GameController implements Screen, ContactListener {
 		DudeModel creature = level.getCreature();
 		BoxModel box = level.getBox();
 		InputController input = InputController.getInstance();
+
+
 //
 //		if (input.didForward()) {
 //			level.activateNextLight();
@@ -361,7 +363,25 @@ public class GameController implements Screen, ContactListener {
 		creature.setMovement(cAngleCache.x,cAngleCache.y);
 		creature.applyForce();
 
-				box.applyForce();
+		annette.setSummoning(InputController.getInstance().didSpace());
+
+		box = new BoxModel(1, 1);
+		JsonValue boxdata = levelFormat.get("box");
+
+
+		//need to initialize box with offset from annette based on her position
+
+		if (annette.isSummoning()) {
+//			box = new BoxModel(1, 1);
+//			JsonValue boxdata = levelFormat.get("box");
+			box.initialize(boxdata, annette.getPosition());
+			box.setDrawScale(level.scale);
+			level.activate(box);
+			box.setActive(true);
+			box.setDoesExist(true);
+		}
+		box.applyForce();
+
 
 		// Turn the physics engine crank.
 		checkFail();

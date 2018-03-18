@@ -60,7 +60,6 @@
 		"debugopacity":	192,
 	},
     "box": {
-        "pos":          [ 6.0, 5.0],
         "radius":       0.5,
         "bodytype":     "dynamic",
         "density":        1.0,
