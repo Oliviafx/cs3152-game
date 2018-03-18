@@ -342,7 +342,6 @@ public class LevelModel {
 
 		if (annette.isSummoning() && !box.getDoesExist()) {
 			box.initialize(boxdata, annette.getPosition(), 0, 0);
-//			box.initialize(1, 1, 1, 450, 10, 10, 0, "0001", "0000", "box", annette.getPosition(), 0, 0);
 			box.setDrawScale(scale);
 			activate(box);
 			box.setActive(true);
@@ -554,7 +553,7 @@ public class LevelModel {
 		obj.deactivatePhysics(world);
 //		obj.dispose();
 	}
-	
+
 	/**
 	 * Returns true if the object is in bounds.
 	 *
