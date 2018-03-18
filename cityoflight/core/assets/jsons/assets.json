@@ -22,6 +22,10 @@
 			"file":		"textures/tile2.png",
 			"wrap":		false,
 		},
+		"box_d": {
+			"file":		"textures/box_d.png",
+			"wrap":		false,
+		},
         "goal": { 
          	"file":		"textures/well.png",
          	"wrap":		false,

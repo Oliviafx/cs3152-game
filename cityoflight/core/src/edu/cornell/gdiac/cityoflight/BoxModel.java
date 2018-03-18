@@ -47,8 +47,8 @@ public class BoxModel extends BoxObstacle {
     /** Random value set as of now */
     private static final float DEFAULT_THRUST = 15.0f;
 
-    public static final float INNER_RADIUS = 5.0f;
-    public static final float OUTER_RADIUS = 8.0f;
+    public static final float INNER_RADIUS = 3.0f;
+    public static final float OUTER_RADIUS = 5.0f;
 
     /** The force to apply to this box */
 //    private Vector2 force;
@@ -80,8 +80,8 @@ public class BoxModel extends BoxObstacle {
 
     /** If the box has been summoned */
     private boolean doesExist;
-    /** If the box is deactivating */
-    private boolean deactivating;
+    /** If the box is deactivated */
+    private boolean deactivated;
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
@@ -228,8 +228,8 @@ public class BoxModel extends BoxObstacle {
      *
      * @return true if the box is deactivating
      */
-    public boolean getDeactivating() {
-        return deactivating;
+    public boolean getDeactivated() {
+        return deactivated;
     }
 
     /**
@@ -237,8 +237,8 @@ public class BoxModel extends BoxObstacle {
      *
      * @param value true if the box is active
      */
-    public void setDeactivating(boolean value) {
-        deactivating = value;
+    public void setDeactivated(boolean value) {
+        deactivated = value;
     }
 
 /////////////////////////////////
@@ -329,14 +329,8 @@ public class BoxModel extends BoxObstacle {
      */
     public BoxModel(float width, float height) {
         super(width,height);
-//        force = new Vector2();
-//        setDensity(DEFAULT_DENSITY);
-//        setDensity(DEFAULT_DENSITY);
-//        setFriction(DEFAULT_FRICTION);
-//        setRestitution(DEFAULT_RESTITUTION);
-//        setName("box");
-
     }
+
 
     public void initialize(JsonValue json, Vector2 annettepos, float xoff, float yoff) {
         setName(json.name());
@@ -357,7 +351,6 @@ public class BoxModel extends BoxObstacle {
         else { // kinematic
             setBodyType(BodyDef.BodyType.KinematicBody);
         }
-//        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
         setDensity(json.get("density").asFloat());
         setFriction(json.get("friction").asFloat());
         setRestitution(json.get("restitution").asFloat());
