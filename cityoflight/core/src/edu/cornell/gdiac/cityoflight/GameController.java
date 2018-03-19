@@ -348,12 +348,12 @@ public class GameController implements Screen, ContactListener {
 
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
-		if (aAngleCache.len2() > 0.0f) {
-			float angle = aAngleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			annette.setAngle(angle);
-		}
+//		if (aAngleCache.len2() > 0.0f) {
+//			float angle = aAngleCache.angle();
+//			// Convert to radians with up as 0
+//			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//			annette.setAngle(angle);
+//		}
 		aAngleCache.scl(annette.getForce());
 		annette.setMovement(aAngleCache.x,aAngleCache.y);
 		annette.setDirection(input.getDirection());

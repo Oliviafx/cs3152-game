@@ -58,6 +58,8 @@
       	"startframe":       0,
       	"walklimit":		4,
         "texture":     	"annette",
+		"texture2": "annetteDown",
+		"texture3": "annetteUp",
        	"debugcolor":  	"white",
        	"debugopacity":	192,
 	},
