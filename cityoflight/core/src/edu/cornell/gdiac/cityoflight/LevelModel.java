@@ -39,6 +39,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.lights.*;
 import edu.cornell.gdiac.physics.obstacle.*;
+import java.util.*;
 
 /**
  * Represents a single level in our game
@@ -66,6 +67,14 @@ public class LevelModel {
 	private ExitModel goalDoor;
 	/** Reference to the box */
 	private BoxModel box;
+	/** Reference to the distraction bird */
+	private DistractionModel distraction;
+
+	/** The interior models */
+	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
+	/** The exterior models */
+	private ArrayList<Obstacle> barriers = new ArrayList<Obstacle>();
+	/** Reference to the interior models */
 
 	/** Whether or not the level is in debug mode (showing off physics) */
 	private boolean debug;
@@ -171,6 +180,14 @@ public class LevelModel {
 		return box;
 	}
 
+
+	public DistractionModel getDistraction() {
+		return distraction;
+	}
+
+	public ArrayList<Obstacle> getMazes() { return mazes; }
+	public ArrayList<Obstacle> getBarriers() { return barriers; }
+
 	/**
 	 * Returns a reference to the exit door
 	 * 
@@ -267,81 +284,111 @@ public class LevelModel {
 	 * @param levelFormat	the JSON tree defining the level
 	 */
 	public void populate(JsonValue levelFormat) {
-		float[] pSize = levelFormat.get("physicsSize").asFloatArray();
-		int[] gSize = levelFormat.get("graphicSize").asIntArray();
-		
-		world = new World(Vector2.Zero,false);
-		bounds = new Rectangle(0,0,pSize[0],pSize[1]);
-		scale.x = gSize[0]/pSize[0];
-		scale.y = gSize[1]/pSize[1];
-		
-		// Compute the FPS
-		int[] fps = levelFormat.get("fpsRange").asIntArray();
-		maxFPS = fps[1]; minFPS = fps[0];
-		timeStep = 1.0f/maxFPS;
-		maxSteps = 1.0f + maxFPS/minFPS;
-		maxTimePerFrame = timeStep*maxSteps;
-		
-		// Create the lighting if appropriate
-		if (levelFormat.has("lighting")) {
-			initLighting(levelFormat.get("lighting"));
-		}
+        float[] pSize = levelFormat.get("physicsSize").asFloatArray();
+        int[] gSize = levelFormat.get("graphicSize").asIntArray();
+
+        world = new World(Vector2.Zero, false);
+        bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
+        scale.x = gSize[0] / pSize[0];
+        scale.y = gSize[1] / pSize[1];
+
+        // Compute the FPS
+        int[] fps = levelFormat.get("fpsRange").asIntArray();
+        maxFPS = fps[1];
+        minFPS = fps[0];
+        timeStep = 1.0f / maxFPS;
+        maxSteps = 1.0f + maxFPS / minFPS;
+        maxTimePerFrame = timeStep * maxSteps;
+
+        // Create the lighting if appropriate
+        if (levelFormat.has("lighting")) {
+            initLighting(levelFormat.get("lighting"));
+        }
 //		createPointLights(levelFormat.get("pointlights"));
 //		createConeLights(levelFormat.get("conelights"));
-		
-		// Add level goal
-		goalDoor = new ExitModel();
-		goalDoor.initialize(levelFormat.get("exit"));
-		goalDoor.setDrawScale(scale);
-		activate(goalDoor);
 
-	    JsonValue bounds = levelFormat.getChild("exterior");
-	    while (bounds != null) {
-	    	ExteriorModel obj = new ExteriorModel();
-	    	obj.initialize(bounds);
-	    	obj.setDrawScale(scale);
-	        activate(obj);
-	        bounds = bounds.next();
-	    }
-	    
-	    JsonValue walls = levelFormat.getChild("interior");
-	    while (walls != null) {
-	    	InteriorModel obj = new InteriorModel();
-	    	obj.initialize(walls);
-	    	obj.setDrawScale(scale);
-	        activate(obj);
-	        walls = walls.next();
-	    }
+        // Add level goal
+        goalDoor = new ExitModel();
+        goalDoor.initialize(levelFormat.get("exit"));
+        goalDoor.setDrawScale(scale);
+        activate(goalDoor);
 
-		// Create Annette
-		annette = new AnnetteModel();
-		JsonValue annettedata = levelFormat.get("annette");
-		annette.initialize(annettedata);
-		annette.setDrawScale(scale);
-		activate(annette);
-		//attachLights(creature);
+        JsonValue bounds = levelFormat.getChild("exterior");
+        while (bounds != null) {
+            ExteriorModel obj = new ExteriorModel();
+            obj.initialize(bounds);
+            obj.setDrawScale(scale);
+            activate(obj);
+            barriers.add(obj);
+            bounds = bounds.next();
+        }
 
-		// Create cone lights to be line of sights of creatures.
-		createLineofSight(levelFormat.get("vision"));
-		// Create the creatures and attach light sources
-		createCreature(levelFormat.get("creatures"),"bob",0);
-		createCreature(levelFormat.get("creatures"),"fred",1);
-		createCreature(levelFormat.get("creatures"), "john",2);
+        JsonValue walls = levelFormat.getChild("interior");
+        while (walls != null) {
+            InteriorModel obj = new InteriorModel();
+            obj.initialize(walls);
+            obj.setDrawScale(scale);
+            activate(obj);
+            mazes.add(obj);
+            walls = walls.next();
+        }
+
+        // Create Annette
+        annette = new AnnetteModel();
+        JsonValue annettedata = levelFormat.get("annette");
+        annette.initialize(annettedata);
+        annette.setDrawScale(scale);
+        activate(annette);
+        //attachLights(creature);
+
+        // Create cone lights to be line of sights of creatures.
+        createLineofSight(levelFormat.get("vision"));
+        // Create the creatures and attach light sources
+        createCreature(levelFormat.get("creatures"), "bob", 0);
+        createCreature(levelFormat.get("creatures"), "fred", 1);
+        createCreature(levelFormat.get("creatures"), "john", 2);
 
 
-		// Create box
-		box = new BoxModel(1, 1);
-		JsonValue boxdata = levelFormat.get("box");
-		if (annette.isSummoning() && !box.getDoesExist()) {
-			box.initialize(boxdata, annette.getPosition(), 0, 0);
-			box.setDrawScale(scale);
-			activate(box);
-			box.setActive(true);
-		}
+        // Create box
+        box = new BoxModel(1, 1);
+        JsonValue boxdata = levelFormat.get("box");
+        if (annette.isSummoning() && !box.getDoesExist()) {
+            box.initialize(boxdata, annette.getPosition(), 0, 0);
+            box.setDrawScale(scale);
+            activate(box);
+            box.setActive(true);
+        }
 
-	}
-	
-	/**
+
+        if (distraction != null) {
+            distraction.setAlive(false);
+        }
+    }
+
+    public boolean isDistraction() {
+        if (distraction != null) {
+//			System.out.println(distraction.getAlive());
+            return distraction.getAlive();
+        }
+        else {
+//			System.out.println("distraction null");
+            return false;
+        }
+    }
+
+    public void createDistraction(JsonValue levelFormat) {
+//		System.out.println(annette.getDirection() == null);
+        distraction = new DistractionModel(annette.getX(), annette.getY(), false, annette.getDirection());
+        JsonValue distractiondata = levelFormat.get("distraction");
+//		distraction.initialize(distractiondata, 0, 0);
+        distraction.setDrawScale(scale);
+        activate(distraction);
+        distraction.setActive(true);
+//		distraction.activatePhysics(world);
+    }
+
+
+    /**
 	 * Creates the ambient lighting for the level
 	 *
 	 * This is the amount of lighting that the level has without any light sources.
@@ -489,6 +536,11 @@ public class LevelModel {
 			world.dispose();
 			world = null;
 		}
+
+		if (distraction != null) {
+			distraction.setAlive(false);
+//			distraction = null;
+		}
 	}
 
 	/**
@@ -536,7 +588,11 @@ public class LevelModel {
 			}
 			goalDoor.update(dt);
 			box.update(dt);
-
+            if (distraction!=null) {
+//				System.out.println(distraction.getX());
+//				System.out.println(distraction.getY());
+                distraction.update(dt);
+            }
 			return true;
 		}
 		return false;

@@ -48,7 +48,7 @@ public class GameController implements Screen, ContactListener {
 		/** Assets are complete */
 		COMPLETE
 	}
-	
+
 	/** The reader to process JSON files */
 	private JsonReader jsonReader;
 	/** The JSON asset directory */
@@ -65,7 +65,7 @@ public class GameController implements Screen, ContactListener {
 	/** Offset for box when summoning */
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
-	
+
 	/**
 	 * Preloads the assets for this controller.
 	 *
@@ -318,6 +318,7 @@ public class GameController implements Screen, ContactListener {
 	
 	private Vector2 aAngleCache = new Vector2();
 	private Vector2 cAngleCache = new Vector2();
+	private Vector2 dAngleCache = new Vector2();
 
 	/**
 	 * The core gameplay loop of this world.
@@ -336,6 +337,10 @@ public class GameController implements Screen, ContactListener {
 		CreatureModel fred = level.getCreature(1);
 		CreatureModel john = level.getCreature(2);
 		BoxModel box = level.getBox();
+		DistractionModel distraction = level.getDistraction();
+//		if (level.isDistraction()) {
+//			distraction.setPosition(annette.getPosition());
+//		}
 		InputController input = InputController.getInstance();
 
 		float xoff = 0;
@@ -353,7 +358,30 @@ public class GameController implements Screen, ContactListener {
 		annette.setMovement(aAngleCache.x,aAngleCache.y);
 		annette.setDirection(input.getDirection());
 		annette.setSummoning(InputController.getInstance().didSpace());
+//		System.out.println("Input direction null");
+//		System.out.println(input.getDirection()==null);
+		annette.setBird(input.didX());
 		annette.applyForce();
+
+		//Check if distraction was called
+		if (annette.getBird()&&!level.isDistraction() ) {
+//			System.out.println("here");
+			level.createDistraction(levelFormat);
+			level.getDistraction().setAlive(true);
+			dAngleCache.set(input.getaHoriz(),input.getaVert());
+			//			dAngleCache.set(1,1);
+			if (dAngleCache.len2() > 0.0f) {
+				float angle = aAngleCache.angle();
+				// Convert to radians with up as 0
+				angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//				annette.setAngle(angle);
+			}
+			if (distraction != null) {
+				dAngleCache.scl(distraction.getForce());
+				distraction.setMovement(dAngleCache.x,dAngleCache.y);
+			}
+		}
+//		level.getDistraction().setAlive(input.didX()&&!level.getDistraction().getAlive());
 
 		//creature
 		cAngleCache.set(0.0f,3.0f);
@@ -455,7 +483,7 @@ public class GameController implements Screen, ContactListener {
 		canvas.clear();
 		
 		level.draw(canvas);
-				
+//		level.getDistraction().draw(canvas);
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
@@ -582,7 +610,14 @@ public class GameController implements Screen, ContactListener {
 			CreatureModel fred = level.getCreature(1);
 			CreatureModel john = level.getCreature(2);
 			ExitModel door   = level.getExit();
-			
+			DistractionModel distraction = level.getDistraction();
+			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
+			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
+			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
+			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
+			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
+			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
+			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
 			// Check for win condition
 			if ((bd1 == annette && bd2 == door  ) ||
 				(bd1 == door   && bd2 == annette)) {
@@ -594,6 +629,28 @@ public class GameController implements Screen, ContactListener {
 					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
 				setFailure(true);
 			}
+			// Check if bird hits box
+			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
+				annette.setBird(false);
+				distraction.setAlive(false);
+//				distraction.deactivatePhysics(level.getWorld());
+//				distraction.setDeactivated(false);
+			}
+			if ((bd1 == distraction && (bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4 || bd2==maze5) ||
+					bd2 == distraction && (bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4 || bd1 == maze5))) {
+				System.out.println("here");
+				annette.setBird(false);
+				distraction.setAlive(false);
+
+			}
+			if ((bd1 == distraction && (bd2==wall1 || bd2==wall2)) || //(bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4) ||
+					(bd2 == distraction && (bd1==wall1 || bd2==wall2))) {//level.getMazes().contains(bd2))) {//(bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4))) {
+				System.out.println("here");
+				annette.setBird(false);
+				distraction.setAlive(false);
+			}
+
+
 
 			// check reactivation
 

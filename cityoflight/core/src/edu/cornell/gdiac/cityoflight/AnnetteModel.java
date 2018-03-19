@@ -56,6 +56,9 @@ public class AnnetteModel extends BoxObstacle {
 
     /** The current direction Annette is facing. */
     private Direction direction;
+
+    /** If Annette is calling a bird */
+    private boolean isbird;
     /** The current horizontal movement of the character */
     private float   hormovement;
     /** Which direction is the character facing */
@@ -68,7 +71,7 @@ public class AnnetteModel extends BoxObstacle {
      */
     public enum Direction {
         UP, LEFT, RIGHT, DOWN
-    };
+    }
 
     /** Cache for internal force calculations */
     private Vector2 forceCache = new Vector2();
@@ -221,28 +224,21 @@ public class AnnetteModel extends BoxObstacle {
 
 
     public Direction getDirection() {
-//        if (direction == Direction.RIGHT) {
-//            System.out.println("right");
-//
-//        }
-//        if (direction == Direction.LEFT) {
-//            System.out.println("left");
-//
-//        }
-//        if (direction == Direction.UP) {
-//            System.out.println("up");
-//
-//        }
-//        if (direction == Direction.DOWN) {
-//            System.out.println("down");
-//
-//        }
-        return direction;
+//        System.out.println("annette direction null");
+//        System.out.println(direction == null);
+        return this.direction;
     }
 
-//    public void setDirection(Direction value) {
-//        direction = value;
-//    }
+    public void setDirection(Direction value) {
+        this.direction = value;
+    }
+
+
+    public void setBird(boolean value) {
+        this.isbird = value;
+    }
+
+    public boolean getBird() {return this.isbird;}
 
     /** Taken from Lab 4.
      * Sets left/right movement of this character.
@@ -269,66 +265,6 @@ public class AnnetteModel extends BoxObstacle {
 //        }
 //    }
 
-    //        hormovement = value;
-//        // Change facing if appropriate
-//        if (hormovement < 0) {
-//            faceRight = false;
-//        } else if (hormovement > 0) {
-//            faceRight = true;
-//        }
-//    }
-
-
-
-//    public Direction getDirection() {
-//        if (direction == Direction.RIGHT) {
-//            System.out.println("right");
-//
-//        }
-//        if (direction == Direction.LEFT) {
-//            System.out.println("left");
-//
-//        }
-//        if (direction == Direction.UP) {
-//            System.out.println("up");
-//
-//        }
-//        if (direction == Direction.DOWN) {
-//            System.out.println("down");
-//
-//        }
-//        return direction;
-//    }
-
-    public void setDirection(Direction value) {
-        direction = value;
-    }
-
-    /** Taken from Lab 4.
-     * Sets left/right movement of this character.
-     *
-     * This is the result of input times dude force.
-     *
-     * @param value left/right movement of this character.
-     */
-    public void setMovement(Direction value) {
-        if (value != null) {
-            switch (direction) {
-                case RIGHT:
-                    setMovement(new Vector2(force, 0));
-                    break;
-                case LEFT:
-                    setMovement(new Vector2(-force, 0));
-                    break;
-                case UP:
-                    setMovement(new Vector2(0, force));
-                    break;
-                case DOWN:
-                    setMovement(new Vector2(0, -force));
-            }
-        }
-    }
-
         //        hormovement = value;
 //        // Change facing if appropriate
 //        if (hormovement < 0) {
@@ -347,7 +283,8 @@ public class AnnetteModel extends BoxObstacle {
     public AnnetteModel() {
         super(0,0,1.0f, 1.0f);
         setFixedRotation(false);
-        direction = Direction.RIGHT;
+        this.direction = Direction.RIGHT;
+        this.isbird = false;
     }
 
     /**
