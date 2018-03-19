@@ -369,22 +369,21 @@ public class GameController implements Screen, ContactListener {
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
 
-			//initial position?
-			if (annette.getDirection() == AnnetteModel.Direction.RIGHT){
-				xoff = BOX_HOFFSET;
-				yoff = 0;
-			}
-			else if (annette.getDirection() == AnnetteModel.Direction.LEFT){
-				xoff = -BOX_HOFFSET;
-				yoff = 0;
-			}
-			else if (annette.getDirection() == AnnetteModel.Direction.UP){
-				xoff = 0;
-				yoff = BOX_VOFFSET;
-			}
-			else if (annette.getDirection() == AnnetteModel.Direction.DOWN){ // down
-				xoff = 0;
-				yoff = -BOX_VOFFSET;
+			// get direction annette is facing
+			switch (annette.getDirection()) {
+				case RIGHT: xoff = BOX_HOFFSET;
+					break;
+				case LEFT:	xoff = -BOX_HOFFSET;
+					break;
+				case UP:	yoff = BOX_VOFFSET;
+					break;
+				case DOWN:	yoff = -BOX_VOFFSET;
+					break;
+				default: {
+					xoff = 0;
+					yoff = 0;
+					break;
+				}
 			}
 			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
 			level.activate(box);
@@ -397,42 +396,21 @@ public class GameController implements Screen, ContactListener {
 
 		float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
 
-//		// if box should deactivate ORIGINAL CODE
-//		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
-//			box.setDeactivated(true);
-//			box.deactivatePhysics(level.getWorld());
-//		}
-
+		// box is deactivatING
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.INNER_RADIUS){
-//			box.setDeactivated(true);
-//			box.deactivate();
 			box.setDeactivating(true);
 		}
 
+		// box is deactivatED
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
 		}
 
-//		// reactivating ORIGINAL CODE
-//		if (box.getDoesExist() && box.getDeactivated() && Math.abs(dist) < box.REACTIVATE){
-//			box.setDeactivated(false);
-//			box.activatePhysics(level.getWorld());
-//			box.setActive(true);
-//		}
-
-//		if (box.getDoesExist() && box.getDeactivated() && Math.abs(dist) < box.REACTIVATE){
-//			box.setDeactivated(false);
-//			box.reactivate();
-//		}
-
-		// debug color green
-		if (box.getDeactivated()){
-			box.setDebugColor(Color.GREEN);
-		}
-		else {
-			box.setDebugColor(Color.YELLOW);
-		}
+		// set debug colors
+		if (box.getDeactivated()) box.setDebugColor(Color.RED);
+		else if (box.getDeactivating()) box.setDebugColor(Color.YELLOW);
+		else box.setDebugColor(Color.GREEN);
 
 		// Turn the physics engine crank.
 		checkFail();

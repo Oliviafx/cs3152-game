@@ -48,10 +48,8 @@ public class ExitModel extends WheelObstacle {
 	public void initialize(JsonValue json) {
 		setName(json.name());
 		float[] pos  = json.get("pos").asFloatArray();
-//		float[] size = json.get("size").asFloatArray();
 		float radius = json.get("radius").asFloat();
 		setPosition(pos[0],pos[1]);
-//		setDimension(size[0],size[1]);
 		setRadius(radius);
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
