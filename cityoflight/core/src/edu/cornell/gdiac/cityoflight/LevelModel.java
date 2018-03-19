@@ -60,8 +60,8 @@ public class LevelModel {
 	// Physics objects for the game
 	/** Reference to the Annette avatar */
 	private AnnetteModel annette;
-	/** Reference to the creature avatar */
-	private DudeModel creature;
+	/** Reference to the creatures */
+	private Array<CreatureModel> creatures = new Array<CreatureModel>();
 	/** Reference to the goalDoor (for collision detection) */
 	private ExitModel goalDoor;
 	/** Reference to the box */
@@ -165,8 +165,8 @@ public class LevelModel {
 	 *
 	 * @return a reference to the creature
 	 */
-	public DudeModel getCreature() {
-		return creature;
+	public CreatureModel getCreature(int index) {
+		return creatures.get(index);
 	}
 
 	/**
@@ -328,18 +328,16 @@ public class LevelModel {
 		activate(annette);
 		//attachLights(creature);
 
-		// Create the dude and attach light sources
-	    creature = new DudeModel();
-	    JsonValue avdata = levelFormat.get("creature");
-	    creature.initialize(avdata);
-		creature.setDrawScale(scale);
-		activate(creature);
-		attachLights(creature);
+		// Create the creature and attach light sources
+		createCreature(levelFormat.get("creatures"),"bob",0);
+		createCreature(levelFormat.get("creatures"),"fred",1);
 
-		// Create creatures
-		//creature_test = new CreatureModel();
-		//creature_test.setDrawScale(scale);
-		//activate(creature_test);
+		//creature = new CreatureModel();
+	    //JsonValue avdata = levelFormat.get("creature");
+	    //creature.initialize(avdata);
+		//creature.setDrawScale(scale);
+		//activate(creature);
+		//attachVision(creature, lights.get(1));
 
 		// Create box
 
@@ -447,73 +445,43 @@ public class LevelModel {
 			Filter f = new Filter();
 			f.maskBits = bitStringToComplement(light.getString("excludeBits"));
 			cone.setContactFilter(f);
-			cone.setActive(false); // TURN ON LATER
+			//cone.setActive(false); // TURN ON LATER
 			lights.add(cone);
 	        light = light.next();
 	    }
 	}
-	
+
 	/**
-	 * Attaches all lights to the avatar.
-	 * 
+	 *
+	 * @param creaturejson
+	 * @param name
+	 * @param index the index for the creature and the light which the creature is attached to
+	 */
+	public void createCreature(JsonValue creaturejson, String name, int index){
+		CreatureModel creature = new CreatureModel();
+		JsonValue creaturedata = creaturejson.child();
+		if (creaturedata == null) {System.out.println ("no json found");}
+		creature.initialize(creaturedata);
+		creature.setDrawScale(scale);
+		creatures.add(creature);
+		activate(creature);
+		attachVision(creature, lights.get(index));
+	}
+
+	/**
+	 * Attaches a cone of vision to a creature.
+	 *
 	 * Lights are offset form the center of the avatar according to the initial position.
 	 * By default, a light ignores the body.  This means that putting the light inside
 	 * of these bodies fixtures will not block the light.  However, if a light source is
 	 * offset outside of the bodies fixtures, then they will cast a shadow.
 	 *
-	 * The activeLight is set to be the first element of lights, assuming it is not empty.
 	 */
-	public void attachLights(DudeModel avatar) {
-		for(LightSource light : lights) {
-			light.attachToBody(avatar.getBody(), light.getX(), light.getY(), light.getDirection());
-		}
-		if (lights.size > 0) {
-			activeLight = 0;
-			lights.get(0).setActive(true);
-		} else {
-			activeLight = -1;
-		}
+	public void attachVision (CreatureModel creature, LightSource light){
+		light.attachToBody(creature.getBody(), light.getX(), light.getY(), light.getDirection());
 	}
 
-//	public void attachVision (CreatureModel creature, LightSource light){
 
-//	}
-	
-	/**
-	 * Activates the next light in the light list.
-	 *
-	 * If activeLight is at the end of the list, it sets the value to -1, disabling
-	 * all shadows.  If activeLight is -1, it activates the first light in the list.
-	 */
-	public void activateNextLight() {
-		if (activeLight != -1) {
-			lights.get(activeLight).setActive(false);
-		}
-		activeLight++;
-		if (activeLight >= lights.size) {
-			activeLight = -1;
-		} else {
-			lights.get(activeLight).setActive(true);
-		}
-	}
-
-	/**
-	 * Activates the previous light in the light list.
-	 *
-	 * If activeLight is at the start of the list, it sets the value to -1, disabling
-	 * all shadows.  If activeLight is -1, it activates the last light in the list.
-	 */
-	public void activatePrevLight() {
-		if (activeLight != -1) {
-			lights.get(activeLight).setActive(false);
-		}
-		activeLight--;
-		if (activeLight < -1) {
-			activeLight = lights.size-1;
-		} else if (activeLight > -1) {
-			lights.get(activeLight).setActive(true);
-		}		
-	}
 
 	/**
 	 * Disposes of all resources for this model.
@@ -595,7 +563,9 @@ public class LevelModel {
 				rayhandler.update();
 			}
 			annette.update(dt);
-			creature.update(dt);
+			for (CreatureModel creature : creatures){
+				creature.update(dt);
+			}
 			goalDoor.update(dt);
 			box.update(dt);
 			return true;
