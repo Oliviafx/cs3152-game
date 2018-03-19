@@ -46,10 +46,32 @@ public class AnnetteModel extends BoxObstacle {
     /** The standard number of frames to wait until we can walk again */
     private int walkLimit;
 
+    /** Whether we are actively summoning */
+    private boolean isSummoning;
+
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
     /** The current animation frame of the avatar */
     private int startFrame;
+
+    /** The current direction Annette is facing. */
+    private Direction direction;
+
+    /** If Annette is calling a bird */
+    private boolean isbird;
+    /** The current horizontal movement of the character */
+    private float   hormovement;
+    /** Which direction is the character facing */
+    private boolean faceRight;
+    private boolean faceLeft;
+    private boolean faceUp;
+    private boolean faceDown;
+    /**
+     * Enumeration to identify which direction Annette is facing.
+     */
+    public enum Direction {
+        UP, LEFT, RIGHT, DOWN
+    }
 
     /** Cache for internal force calculations */
     private Vector2 forceCache = new Vector2();
@@ -186,6 +208,72 @@ public class AnnetteModel extends BoxObstacle {
         walkLimit = value;
     }
 
+    /**
+     * Checks if Annette is summoning a box
+     *
+     * @return true if Annette is actively summoning a box
+     */
+    public boolean isSummoning() { return isSummoning; }
+
+    /**
+     * Sets whether Annette is summoning a box.
+     *
+     * @param value whether the Annette is actively summoning.
+     */
+    public void setSummoning(boolean value) { isSummoning = value; }
+
+
+    public Direction getDirection() {
+//        System.out.println("annette direction null");
+//        System.out.println(direction == null);
+        return this.direction;
+    }
+
+    public void setDirection(Direction value) {
+        this.direction = value;
+    }
+
+
+    public void setBird(boolean value) {
+        this.isbird = value;
+    }
+
+    public boolean getBird() {return this.isbird;}
+
+    /** Taken from Lab 4.
+     * Sets left/right movement of this character.
+     *
+     * This is the result of input times dude force.
+     *
+     * @param value left/right movement of this character.
+     */
+//    public void setMovement(Direction value) {
+//        if (value != null) {
+//            switch (direction) {
+//                case RIGHT:
+//                    setMovement(new Vector2(force, 0));
+//                    break;
+//                case LEFT:
+//                    setMovement(new Vector2(-force, 0));
+//                    break;
+//                case UP:
+//                    setMovement(new Vector2(0, force));
+//                    break;
+//                case DOWN:
+//                    setMovement(new Vector2(0, -force));
+//            }
+//        }
+//    }
+
+        //        hormovement = value;
+//        // Change facing if appropriate
+//        if (hormovement < 0) {
+//            faceRight = false;
+//        } else if (hormovement > 0) {
+//            faceRight = true;
+//        }
+//    }
+
 
     /**
      * Creates Annette with degenerate settings
@@ -195,6 +283,8 @@ public class AnnetteModel extends BoxObstacle {
     public AnnetteModel() {
         super(0,0,1.0f, 1.0f);
         setFixedRotation(false);
+        this.direction = Direction.RIGHT;
+        this.isbird = false;
     }
 
     /**
@@ -288,7 +378,7 @@ public class AnnetteModel extends BoxObstacle {
      *
      * We use this method to reset cooldowns.
      *
-     * @param delta Number of seconds since last animation frame
+     * @param dt Number of seconds since last animation frame
      */
     public void update(float dt) {
         // Animate if necessary

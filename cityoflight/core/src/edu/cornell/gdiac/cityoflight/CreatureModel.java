@@ -192,7 +192,11 @@ public class CreatureModel extends WheelObstacle {
 
 
     /**
+<<<<<<< HEAD
      * Creates a new dude with degenerate settings
+=======
+     * Creates a new creature with degenerate settings
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
      *
      * The main purpose of this constructor is to set the initial capsule orientation.
      */
@@ -202,12 +206,21 @@ public class CreatureModel extends WheelObstacle {
     }
 
     /**
+<<<<<<< HEAD
      * Initializes the dude via the given JSON value
      *
      * The JSON value has been parsed and is part of a bigger level file.  However,
      * this JSON value is limited to the dude subtree
      *
      * @param json	the JSON subtree defining the dude
+=======
+     * Initializes the creature via the given JSON value
+     *
+     * The JSON value has been parsed and is part of a bigger level file.  However,
+     * this JSON value is limited to the creature subtree.
+     *
+     * @param json	the JSON subtree defining the creature
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
      */
     public void initialize(JsonValue json) {
         setName(json.name());
@@ -261,7 +274,11 @@ public class CreatureModel extends WheelObstacle {
     }
 
     /**
+<<<<<<< HEAD
      * Applies the force to the body of this dude
+=======
+     * Applies the force to the body of this creature
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
      *
      * This method should be called after the force attribute is set.
      */

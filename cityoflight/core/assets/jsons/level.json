@@ -9,9 +9,15 @@
 		"blur":			3
 	},
 	"pointlights": {
+<<<<<<< HEAD
 	}, 
 	"conelights": {
 		"lights1": {
+=======
+	},
+	"vision": {
+		"bobVision": {
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 			"color":		[1.0, 1.0, 0.0, 1.0],
 			"pos":			[  0,   0],
 			"distance":		  10,
@@ -19,9 +25,15 @@
 			"facing":		  90,
 			"rays":			 512,
 			"soft":			false,
+<<<<<<< HEAD
       		"excludeBits":	"0010"
 		},
 		"lights2": {
+=======
+			"excludeBits":	"0010"
+		},
+		"fredVision": {
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 			"color":		[1.0, 0.0, 1.0, 1.0],
 			"pos":			[  0,   0],
 			"distance":		  18,
@@ -29,15 +41,29 @@
 			"facing":		  90,
 			"rays":			 512,
 			"soft":			false,
+<<<<<<< HEAD
       		"excludeBits":	"0010"
+=======
+			"excludeBits":	"0010"
+		},
+		"johnVision": {
+			"color":		[0.0, 0.0, 1.0, 1.0],
+			"pos":			[  0,   0],
+			"distance":		  3,
+			"angle":	 	  90,
+			"facing":		  90,
+			"rays":			 512,
+			"soft":			false,
+			"excludeBits":	"0010"
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 		}
-	}, 
-    "annette": {
+	},
+	"annette": {
         "pos":        	[ 6.0, 1.5],
         "width":      	0.5,
 		"height":      	1.0,
         "bodytype":    	"dynamic",
-        "density":        1.0,
+        "density":        2.5,
         "friction":       0.0,
         "restitution":    0.0,
       	"force": 		 450.0,
@@ -53,6 +79,7 @@
 	},
 	"creatures": {
 		"bob":{
+<<<<<<< HEAD
 			"pos":        	[ 6.0, 7.0],
 			"radius":      	0.5,
 			"bodytype":    	"dynamic",
@@ -61,6 +88,16 @@
 			"restitution":    0.0,
 			"force": 		 450.0,
 			"damping": 		 10.0,
+=======
+			"pos":        	[ 2.0, 7.0],
+			"radius":      	0.5,
+			"bodytype":    	"dynamic",
+			"density":        100.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"force": 		  450.0,
+			"damping": 		  10.0,
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 			"maxspeed": 	  10.0,
 			"collideBits":	"0001",
 			"excludeBits":	"0000",
@@ -71,6 +108,7 @@
 			"debugopacity":	192,
 		},
 		"fred":{
+<<<<<<< HEAD
 			"pos":        	[ 7.0, 7.0],
 			"radius":      	0.5,
 			"bodytype":    	"dynamic",
@@ -79,6 +117,34 @@
 			"restitution":    0.0,
 			"force": 		 450.0,
 			"damping": 		 10.0,
+=======
+			"pos":        	[ 19.0, 5.0],
+			"radius":      	0.5,
+			"bodytype":    	"dynamic",
+			"density":        100.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"force": 		  450.0,
+			"damping": 		  10.0,
+			"maxspeed": 	  10.0,
+			"collideBits":	"0001",
+			"excludeBits":	"0000",
+			"startframe":       0,
+			"walklimit":		4,
+			"texture":     	"dude",
+			"debugcolor":  	"white",
+			"debugopacity":	192,
+		},
+		"john":{
+			"pos":        	[ 9.0, 17.0],
+			"radius":      	0.5,
+			"bodytype":    	"dynamic",
+			"density":        100.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"force": 		  450.0,
+			"damping": 		  10.0,
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 			"maxspeed": 	  10.0,
 			"collideBits":	"0001",
 			"excludeBits":	"0000",
@@ -90,9 +156,9 @@
 		}
 	},
     "box": {
-        "pos":          [ 6.0, 5.0],
-        "radius":       0.5,
-        "bodytype":     "dynamic",
+		"width":      	1,
+		"height":      	1,
+		"bodytype":     "dynamic",
         "density":        1.0,
         "friction":       0.0,
         "restitution":    0.0,
@@ -102,14 +168,32 @@
         "collideBits":  "0001",
         "excludeBits":  "0000",
         "startframe":       0,
-        "walklimit":        4,
         "texture":      "box",
-        "debugcolor":   "white",
+        "debugcolor":   "yellow",
         "debugopacity": 192,
-    }, 
+        "sound":		"box_noise",
+    },
+   "distraction": {
+    "pos":          [ 6.0, 2.0],
+    "radius":       0.5,
+    "bodytype":     "dynamic",
+    "density":        1.0,
+    "friction":       0.0,
+    "restitution":    0.0,
+    "force":         450.0,
+    "damping":       10.0,
+    "maxspeed":       10.0,
+    "collideBits":  "0001",
+    "excludeBits":  "0000",
+    "startframe":       0,
+    "walklimit":        4,
+    "texture":      "bird",
+    "debugcolor":   "white",
+    "debugopacity": 192,
+  },
     "exit": {
         "pos":          [ 1.5, 10.35],
-        "size":         [ 1.25, 1.25],
+		"radius":		  0.5,
         "bodytype":    	"static",
         "density":  	  0.0,
         "friction":       0.0,
@@ -159,20 +243,6 @@
         },
     },
   	"interior": {
-  		"maze1": {
-        	"pos":        	[ 8f, 6f],
-        	"size":       	[ 10.0f, 3f],
-        	"pad":       	[ 0.1f, 0.1f],
-        	"bodytype":     "static",
-            "density":        0.0,
-            "friction":       0.4,
-            "restitution":    0.1,
-    	  	"collideBits":	"1000",
-	      	"excludeBits":	"0000",
-        	"texture":      "earth",
-            "debugcolor":   "yellow",
-            "debugopacity":  200
-		},
 		"maze2": {
         	"pos":        	[ 1.5f, 1.5f],
         	"size":       	[ 1f, 1f],

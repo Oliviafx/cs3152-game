@@ -39,6 +39,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.lights.*;
 import edu.cornell.gdiac.physics.obstacle.*;
+import java.util.*;
 
 /**
  * Represents a single level in our game
@@ -66,13 +67,14 @@ public class LevelModel {
 	private ExitModel goalDoor;
 	/** Reference to the box */
 	private BoxModel box;
+	/** Reference to the distraction bird */
+	private DistractionModel distraction;
 
-	// Other game objects
-	/** The initial box position */
-//	private static Vector2 BOX_POS = new Vector2(24, 4);
-
-	/** Reference to a creature */
-//	private CreatureModel creature_test;
+	/** The interior models */
+	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
+	/** The exterior models */
+	private ArrayList<Obstacle> barriers = new ArrayList<Obstacle>();
+	/** Reference to the interior models */
 
 	/** Whether or not the level is in debug mode (showing off physics) */
 	private boolean debug;
@@ -94,8 +96,6 @@ public class LevelModel {
 	protected RayHandler rayhandler;
 	/** All of the active lights that we loaded from the JSON file */
 	private Array<LightSource> lights = new Array<LightSource>();
-	/** The current light source being used.  If -1, there are no shadows */
-	private int activeLight;
 	
 	// TO FIX THE TIMESTEP
 	/** The maximum frames per second setting for this level */
@@ -149,8 +149,6 @@ public class LevelModel {
 		return rayhandler;
 	}
 
-	public LightSource getConeLight() {return lights.get(activeLight);}
-	
 	/**
 	 * Returns a reference to the player avatar
 	 *
@@ -170,6 +168,14 @@ public class LevelModel {
 	}
 
 	/**
+	 * Returns a reference to a light
+	 *
+	 * @return a reference to a light
+	 */
+	public LightSource getVision(int index) {return lights.get(index);}
+
+
+	/**
 	 * Returns a reference to the box
 	 *
 	 * @return a reference to the box
@@ -177,6 +183,14 @@ public class LevelModel {
 	public BoxModel getBox() {
 		return box;
 	}
+
+
+	public DistractionModel getDistraction() {
+		return distraction;
+	}
+
+	public ArrayList<Obstacle> getMazes() { return mazes; }
+	public ArrayList<Obstacle> getBarriers() { return barriers; }
 
 	/**
 	 * Returns a reference to the exit door
@@ -274,6 +288,7 @@ public class LevelModel {
 	 * @param levelFormat	the JSON tree defining the level
 	 */
 	public void populate(JsonValue levelFormat) {
+<<<<<<< HEAD
 		float[] pSize = levelFormat.get("physicsSize").asFloatArray();
 		int[] gSize = levelFormat.get("graphicSize").asIntArray();
 		
@@ -356,6 +371,113 @@ public class LevelModel {
 	}
 	
 	/**
+=======
+        float[] pSize = levelFormat.get("physicsSize").asFloatArray();
+        int[] gSize = levelFormat.get("graphicSize").asIntArray();
+
+        world = new World(Vector2.Zero, false);
+        bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
+        scale.x = gSize[0] / pSize[0];
+        scale.y = gSize[1] / pSize[1];
+
+        // Compute the FPS
+        int[] fps = levelFormat.get("fpsRange").asIntArray();
+        maxFPS = fps[1];
+        minFPS = fps[0];
+        timeStep = 1.0f / maxFPS;
+        maxSteps = 1.0f + maxFPS / minFPS;
+        maxTimePerFrame = timeStep * maxSteps;
+
+        // Create the lighting if appropriate
+        if (levelFormat.has("lighting")) {
+            initLighting(levelFormat.get("lighting"));
+        }
+//		createPointLights(levelFormat.get("pointlights"));
+//		createConeLights(levelFormat.get("conelights"));
+
+        // Add level goal
+        goalDoor = new ExitModel();
+        goalDoor.initialize(levelFormat.get("exit"));
+        goalDoor.setDrawScale(scale);
+        activate(goalDoor);
+
+        JsonValue bounds = levelFormat.getChild("exterior");
+        while (bounds != null) {
+            ExteriorModel obj = new ExteriorModel();
+            obj.initialize(bounds);
+            obj.setDrawScale(scale);
+            activate(obj);
+            barriers.add(obj);
+            bounds = bounds.next();
+        }
+
+        JsonValue walls = levelFormat.getChild("interior");
+        while (walls != null) {
+            InteriorModel obj = new InteriorModel();
+            obj.initialize(walls);
+            obj.setDrawScale(scale);
+            activate(obj);
+            mazes.add(obj);
+            walls = walls.next();
+        }
+
+        // Create Annette
+        annette = new AnnetteModel();
+        JsonValue annettedata = levelFormat.get("annette");
+        annette.initialize(annettedata);
+        annette.setDrawScale(scale);
+        activate(annette);
+        //attachLights(creature);
+
+        // Create cone lights to be line of sights of creatures.
+        createLineofSight(levelFormat.get("vision"));
+        // Create the creatures and attach light sources
+        createCreature(levelFormat.get("creatures"), "bob", 0);
+        createCreature(levelFormat.get("creatures"), "fred", 1);
+        createCreature(levelFormat.get("creatures"), "john", 2);
+
+
+        // Create box
+        box = new BoxModel(1, 1);
+        JsonValue boxdata = levelFormat.get("box");
+        if (annette.isSummoning() && !box.getDoesExist()) {
+            box.initialize(boxdata, annette.getPosition(), 0, 0);
+            box.setDrawScale(scale);
+            activate(box);
+            box.setActive(true);
+        }
+
+
+        if (distraction != null) {
+            distraction.setAlive(false);
+        }
+    }
+
+    public boolean isDistraction() {
+        if (distraction != null) {
+//			System.out.println(distraction.getAlive());
+            return distraction.getAlive();
+        }
+        else {
+//			System.out.println("distraction null");
+            return false;
+        }
+    }
+
+    public void createDistraction(JsonValue levelFormat) {
+//		System.out.println(annette.getDirection() == null);
+        distraction = new DistractionModel(annette.getX(), annette.getY(), false, annette.getDirection());
+        JsonValue distractiondata = levelFormat.get("distraction");
+//		distraction.initialize(distractiondata, 0, 0);
+        distraction.setDrawScale(scale);
+        activate(distraction);
+        distraction.setActive(true);
+//		distraction.activatePhysics(world);
+    }
+
+
+    /**
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 	 * Creates the ambient lighting for the level
 	 *
 	 * This is the amount of lighting that the level has without any light sources.
@@ -416,39 +538,40 @@ public class LevelModel {
 	}
 
 	/**
-	 * Creates the cone lights for the level
+	 * Creates the line of sights (cone lights) for the level
 	 *
-	 * Cone lights show light in a cone with a direction.  We treat them differently from 
-	 * point lights because they have different defining attributes.  However, all lights
-	 * are added to the lights array.  This allows us to cycle through both the point 
-	 * lights and the cone lights with activateNextLight().
+	 * Cone lights show light in a cone with a direction.  We treat them differently from
+	 * point lights because they have different defining attributes.
 	 *
-	 * All lights are deactivated initially.  We only want one active light at a time.
-	 *
-	 * @param  json	the JSON tree defining the list of point lights
+	 * @param  json	the JSON tree defining the list of cone lights
 	 */
-	private void createConeLights(JsonValue json) {
+	private void createLineofSight(JsonValue json) {
 		JsonValue light = json.child();
-	    while (light != null) {
-	    	float[] color = light.get("color").asFloatArray();
-	    	float[] pos = light.get("pos").asFloatArray();
-	    	float dist  = light.getFloat("distance");
-	    	float face  = light.getFloat("facing");
-	    	float angle = light.getFloat("angle");
-	    	int rays = light.getInt("rays");
-	    	
+		while (light != null) {
+			float[] color = light.get("color").asFloatArray();
+			float[] pos = light.get("pos").asFloatArray();
+			float dist  = light.getFloat("distance");
+			float face  = light.getFloat("facing");
+			float angle = light.getFloat("angle");
+			int rays = light.getInt("rays");
+
 			ConeSource cone = new ConeSource(rayhandler, rays, Color.WHITE, dist, pos[0], pos[1], face, angle);
 			cone.setColor(color[0],color[1],color[2],color[3]);
 			cone.setSoft(light.getBoolean("soft"));
-			
+
 			// Create a filter to exclude see through items
 			Filter f = new Filter();
 			f.maskBits = bitStringToComplement(light.getString("excludeBits"));
 			cone.setContactFilter(f);
 			//cone.setActive(false); // TURN ON LATER
 			lights.add(cone);
+<<<<<<< HEAD
 	        light = light.next();
 	    }
+=======
+			light = light.next();
+		}
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 	}
 
 	/**
@@ -460,7 +583,11 @@ public class LevelModel {
 	public void createCreature(JsonValue creaturejson, String name, int index){
 		CreatureModel creature = new CreatureModel();
 		JsonValue creaturedata = creaturejson.child();
+<<<<<<< HEAD
 		if (creaturedata == null) {System.out.println ("no json found");}
+=======
+		//if (creaturedata == null) {System.out.println ("no json found");}
+>>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 		creature.initialize(creaturedata);
 		creature.setDrawScale(scale);
 		creatures.add(creature);
@@ -509,19 +636,24 @@ public class LevelModel {
 			world.dispose();
 			world = null;
 		}
+
+		if (distraction != null) {
+			distraction.setAlive(false);
+//			distraction = null;
+		}
 	}
 
 	/**
 	 * Immediately adds the object to the physics world
 	 *
-	 * param obj The object to add
+	 * @param obj The object to add
 	 */
 	protected void activate(Obstacle obj) {
 		assert inBounds(obj) : "Object is not in bounds";
 		objects.add(obj);
 		obj.activatePhysics(world);
 	}
-	
+
 	/**
 	 * Returns true if the object is in bounds.
 	 *
@@ -536,14 +668,6 @@ public class LevelModel {
 		boolean vert  = (bounds.y <= obj.getY() && obj.getY() <= bounds.y+bounds.height);
 		return horiz && vert;
 	}
-
-	public boolean summonBox() {
-		InputController input = InputController.getInstance();
-		if (input.didSpace()) {
-			return true;
-		}
-		return false;
-	}
 	
 	/**
 	 * Updates all of the models in the level.
@@ -555,10 +679,6 @@ public class LevelModel {
 	 */
 	public boolean update(float dt) {
 		if (fixedStep(dt)) {
-//			if (summonBox()) {
-//				box.setActive(true);
-//				box.setDrawScale(scale);
-//			}
 			if (rayhandler != null) {
 				rayhandler.update();
 			}
@@ -568,6 +688,11 @@ public class LevelModel {
 			}
 			goalDoor.update(dt);
 			box.update(dt);
+            if (distraction!=null) {
+//				System.out.println(distraction.getX());
+//				System.out.println(distraction.getY());
+                distraction.update(dt);
+            }
 			return true;
 		}
 		return false;
@@ -613,10 +738,12 @@ public class LevelModel {
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
+		if (box.getDeactivated()) box.drawState(canvas, Color.BLACK);
+		else if (box.getDeactivating())	box.drawState(canvas, Color.GRAY);
 		canvas.end();
-		
+
 		// Now draw the shadows
-		if (rayhandler != null && activeLight != -1) {
+		if (rayhandler != null) {
 			rayhandler.render();
 		}
 		
