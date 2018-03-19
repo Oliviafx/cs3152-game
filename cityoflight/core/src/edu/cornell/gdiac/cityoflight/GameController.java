@@ -367,7 +367,7 @@ public class GameController implements Screen, ContactListener {
 		bob.setMovement(cAngleCache.x,cAngleCache.y);
 		bob.applyForce();
 
-		cAngleCache.set(1.0f,0.0f);
+		cAngleCache.set(3.0f,0.0f);
 		if (cAngleCache.len2() > 0.0f) {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
@@ -378,7 +378,7 @@ public class GameController implements Screen, ContactListener {
 		fred.setMovement(cAngleCache.x,cAngleCache.y);
 		fred.applyForce();
 
-		cAngleCache.set(0.2f,-0.8f);
+		cAngleCache.set(0.3f,-1.8f);
 		if (cAngleCache.len2() > 0.0f) {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
