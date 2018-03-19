@@ -332,7 +332,9 @@ public class GameController implements Screen, ContactListener {
 	public void update(float dt) {
 		// Process actions in object model
 		AnnetteModel annette = level.getAnnette();
-		DudeModel creature = level.getCreature();
+		CreatureModel bob = level.getCreature(0);
+		CreatureModel fred = level.getCreature(1);
+		CreatureModel john = level.getCreature(2);
 		BoxModel box = level.getBox();
 		InputController input = InputController.getInstance();
 
@@ -354,16 +356,38 @@ public class GameController implements Screen, ContactListener {
 		annette.applyForce();
 
 		//creature
-		cAngleCache.set(input.getcHoriz(),input.getcVert());
+		cAngleCache.set(0.0f,3.0f);
 		if (cAngleCache.len2() > 0.0f) {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
 			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			creature.setAngle(angle);
+			bob.setAngle(angle);
 		}
-		cAngleCache.scl(creature.getForce());
-		creature.setMovement(cAngleCache.x,cAngleCache.y);
-		creature.applyForce();
+		cAngleCache.scl(bob.getForce());
+		bob.setMovement(cAngleCache.x,cAngleCache.y);
+		bob.applyForce();
+
+		cAngleCache.set(1.0f,0.0f);
+		if (cAngleCache.len2() > 0.0f) {
+			float angle = cAngleCache.angle();
+			// Convert to radians with up as 0
+			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+			fred.setAngle(angle);
+		}
+		cAngleCache.scl(fred.getForce());
+		fred.setMovement(cAngleCache.x,cAngleCache.y);
+		fred.applyForce();
+
+		cAngleCache.set(0.2f,-0.8f);
+		if (cAngleCache.len2() > 0.0f) {
+			float angle = cAngleCache.angle();
+			// Convert to radians with up as 0
+			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+			john.setAngle(angle);
+		}
+		cAngleCache.scl(john.getForce());
+		john.setMovement(cAngleCache.x,cAngleCache.y);
+		john.applyForce();
 
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
@@ -554,7 +578,9 @@ public class GameController implements Screen, ContactListener {
 
 			AnnetteModel annette = level.getAnnette();
 			BoxModel box = level.getBox();
-			DudeModel creature = level.getCreature();
+			CreatureModel bob = level.getCreature(0);
+			CreatureModel fred = level.getCreature(1);
+			CreatureModel john = level.getCreature(2);
 			ExitModel door   = level.getExit();
 			
 			// Check for win condition
@@ -562,7 +588,10 @@ public class GameController implements Screen, ContactListener {
 				(bd1 == door   && bd2 == annette)) {
 				setComplete(true);
 			}
-			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 == annette)) {
+			// Check for losing condition
+			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
+					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
+					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
 				setFailure(true);
 			}
 

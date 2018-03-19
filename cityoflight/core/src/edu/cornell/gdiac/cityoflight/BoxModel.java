@@ -449,7 +449,6 @@ public class BoxModel extends BoxObstacle {
      * Immediately resets collision bits of box to "active"
      */
     protected void reactivate() {
-////		obj.deactivatePhysics(world);
         short collideBits = LevelModel.bitStringToShort("0001");
         short excludeBits = LevelModel.bitStringToComplement("0000");
         Filter filter = new Filter();
