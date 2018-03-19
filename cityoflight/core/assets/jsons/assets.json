@@ -1,45 +1,65 @@
 {
     "textures": {
-    	"earth": {
-    		"file":		"textures/tile.png",
-    		"wrap":		true
-    	},
-    	"annette": {
-    		"file": 	"textures/AnnetteSide.png",
-    		"wrap":  	false,
-			"strip":	{
-				"size":		9,
-				"rows":		1,
-				"cols":		9,
-				"first":	0
+		"earth": {
+			"file": "textures/tile.png",
+			"wrap": true
+		},
+		"annette": {
+			"file": "textures/sideAnnette.png",
+			"wrap": false,
+			"strip": {
+				"size": 9,
+				"rows": 1,
+				"cols": 9,
+				"first": 0
 			}
-    	},
-		"dude": {
-			"file": 	"textures/creature.png",
-			"wrap":  	false,
 		},
-		"box": {
-			"file":		"textures/box_d.png",
-			"wrap":		false,
+		"annetteDown": {
+			"file": "textures/frontAnnette.png",
+			"wrap": false,
+			"strip": {
+				"size": 12,
+				"rows": 1,
+				"cols": 12,
+				"first": 0
+			}
 		},
-        "goal": { 
-         	"file":		"textures/well.png",
-         	"wrap":		false,
-         },
-		"bird": {
-			"file":		"textures/bird.png",
-			"wrap":		false,
+			"annetteUp": {
+				"file": "textures/backAnnette.png",
+				"wrap": false,
+				"strip": {
+					"size": 12,
+					"rows": 1,
+					"cols": 12,
+					"first": 0
+				}
+			},
+				"dude": {
+					"file": "textures/creature.png",
+					"wrap": false
+				},
+				"box": {
+					"file": "textures/box_d.png",
+					"wrap": false
+				},
+				"goal": {
+					"file": "textures/well.png",
+					"wrap": false
+				},
+				"bird": {
+					"file": "textures/bird.png",
+					"wrap": false
+				}
+			},
+			"fonts": {
+				"display": {
+					"file": "fonts/RetroGame.ttf",
+					"size": 64
+				}
+			},
+			"sounds": {
+				"box_noise": {
+					"file": "sounds/box.wav"
+				}
+			}
 		}
-  	},
-  	"fonts": {
-  		"display": {
-  			"file": 	"fonts/RetroGame.ttf",
-  			"size": 	64
-  		},
-  	},
-	"sounds": {
-		"box_noise": {
-			"file":		"sounds/box.wav"
-		}
-	}
-}

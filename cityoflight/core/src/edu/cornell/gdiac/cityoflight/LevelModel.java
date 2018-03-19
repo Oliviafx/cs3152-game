@@ -340,6 +340,10 @@ public class LevelModel {
         // Create Annette
         annette = new AnnetteModel();
         JsonValue annettedata = levelFormat.get("annette");
+		JsonValue downdata = levelFormat.get("annetteDown");
+		JsonValue updata = levelFormat.get("annetteUp");
+
+
         annette.initialize(annettedata);
         annette.setDrawScale(scale);
         activate(annette);
