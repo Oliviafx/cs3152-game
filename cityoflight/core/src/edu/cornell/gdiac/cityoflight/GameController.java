@@ -327,7 +327,8 @@ public class GameController implements Screen, ContactListener {
 	public void update(float dt) {
 		// Process actions in object model
 		AnnetteModel annette = level.getAnnette();
-		DudeModel creature = level.getCreature();
+		CreatureModel creature0 = level.getCreature(0);
+		CreatureModel creature1 = level.getCreature(1);
 		BoxModel box = level.getBox();
 		InputController input = InputController.getInstance();
 //
@@ -355,11 +356,16 @@ public class GameController implements Screen, ContactListener {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
 			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			creature.setAngle(angle);
+			creature0.setAngle(angle);
+			creature1.setAngle(angle);
 		}
-		cAngleCache.scl(creature.getForce());
-		creature.setMovement(cAngleCache.x,cAngleCache.y);
-		creature.applyForce();
+		cAngleCache.scl(creature0.getForce());
+		creature0.setMovement(cAngleCache.x,cAngleCache.y);
+		creature0.applyForce();
+
+		cAngleCache.scl(creature1.getForce());
+		creature1.setMovement(cAngleCache.x,cAngleCache.y);
+		creature1.applyForce();
 
 				box.applyForce();
 
@@ -506,7 +512,8 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
 			AnnetteModel annette = level.getAnnette();
-			DudeModel creature = level.getCreature();
+			CreatureModel creature0 = level.getCreature(0);
+			CreatureModel creature1 = level.getCreature(1);
 			ExitModel door   = level.getExit();
 			
 			// Check for win condition
@@ -514,7 +521,11 @@ public class GameController implements Screen, ContactListener {
 				(bd1 == door   && bd2 == annette)) {
 				setComplete(true);
 			}
-			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 ==annette)) {
+			if ((bd1 == annette && bd2 == creature0) || (bd1 == creature0 && bd2 ==annette)) {
+				setFailure(true);
+			}
+
+			if ((bd1 == annette && bd2 == creature1) || (bd1 == creature1 && bd2 ==annette)) {
 				setFailure(true);
 			}
 
