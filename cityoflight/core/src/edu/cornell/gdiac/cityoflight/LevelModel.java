@@ -352,10 +352,9 @@ public class LevelModel {
         // Create cone lights to be line of sights of creatures.
         createLineofSight(levelFormat.get("vision"));
         // Create the creatures and attach light sources
-        createCreature(levelFormat.get("creatures"), "bob", 0);
-        createCreature(levelFormat.get("creatures"), "fred", 1);
-        createCreature(levelFormat.get("creatures"), "john", 2);
-
+        createCreature(levelFormat.get("creatures"), "snail", 0);
+        createCreature(levelFormat.get("creatures"), "tarasque", 1);
+        createCreature(levelFormat.get("creatures"), "blanche", 2);
 
         // Create box
         box = new BoxModel(1, 1);
@@ -366,7 +365,6 @@ public class LevelModel {
             activate(box);
             box.setActive(true);
         }
-
 
         if (distraction != null) {
             distraction.setAlive(false);
@@ -496,13 +494,17 @@ public class LevelModel {
 	 */
 	public void createCreature(JsonValue creaturejson, String name, int index){
 		CreatureModel creature = new CreatureModel();
-		JsonValue creaturedata = creaturejson.child();
-		//if (creaturedata == null) {System.out.println ("no json found");}
-		creature.initialize(creaturedata);
-		creature.setDrawScale(scale);
-		creatures.add(creature);
-		activate(creature);
-		attachVision(creature, lights.get(index));
+		JsonValue creaturedata = creaturejson.get(name);
+//		while (creaturedata != null) {
+			//if (creaturedata == null) {System.out.println ("no json found");}
+			creature.initialize(creaturedata);
+			creature.setDrawScale(scale);
+			creatures.add(creature);
+			activate(creature);
+			attachVision(creature, lights.get(index));
+//			creaturedata = creaturedata.next();
+//		}
+
 	}
 
 	/**
