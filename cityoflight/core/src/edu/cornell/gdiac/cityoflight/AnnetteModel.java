@@ -48,8 +48,6 @@ public class AnnetteModel extends BoxObstacle {
 
     /** Whether we are actively summoning */
     private boolean isSummoning;
-    /** How long until we can summon a box again */
-    private int summoningCooldown;
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
@@ -212,9 +210,7 @@ public class AnnetteModel extends BoxObstacle {
      *
      * @return true if Annette is actively summoning a box
      */
-    public boolean isSummoning() {
-        return isSummoning && summoningCooldown <= 0;
-    }
+    public boolean isSummoning() { return isSummoning; }
 
     /**
      * Sets whether Annette is summoning a box.

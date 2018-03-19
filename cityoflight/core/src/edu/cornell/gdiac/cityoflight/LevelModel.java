@@ -339,7 +339,6 @@ public class LevelModel {
 		// Create box
 		box = new BoxModel(1, 1);
 		JsonValue boxdata = levelFormat.get("box");
-
 		if (annette.isSummoning() && !box.getDoesExist()) {
 			box.initialize(boxdata, annette.getPosition(), 0, 0);
 			box.setDrawScale(scale);
@@ -540,18 +539,6 @@ public class LevelModel {
 		assert inBounds(obj) : "Object is not in bounds";
 		objects.add(obj);
 		obj.activatePhysics(world);
-//		obj.setActive(false);
-//		obj.setDoesExist(false);
-	}
-
-	/**
-	 * Immediately removes the object from the physics world
-	 *
-	 * @param obj The object to remove
-	 */
-	protected void destroy(Obstacle obj) {
-		obj.deactivatePhysics(world);
-//		obj.dispose();
 	}
 
 	/**
@@ -632,14 +619,10 @@ public class LevelModel {
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
-
-		if (box.getDeactivated()){
-			box.drawDeactivated(canvas, Color.BLACK);
-		}
-		else if (box.getDeactivating()){
-			box.drawDeactivated(canvas, Color.GRAY);
-		}
+		if (box.getDeactivated()) box.drawState(canvas, Color.BLACK);
+		else if (box.getDeactivating())	box.drawState(canvas, Color.GRAY);
 		canvas.end();
+
 		// Now draw the shadows
 		if (rayhandler != null && activeLight != -1) {
 			rayhandler.render();
