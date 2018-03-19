@@ -3,9 +3,9 @@
  *
  * This combines the WorldController with the mini-game specific PlatformController
  * in the last lab.  With that said, some of the work is now offloaded to the new
- * LevelModel class, which allows us to serialize and deserialize a level. 
- * 
- * This is a refactored version of WorldController from Lab 4.  It separate the 
+ * LevelModel class, which allows us to serialize and deserialize a level.
+ *
+ * This is a refactored version of WorldController from Lab 4.  It separate the
  * level out into a new class called LevelModel.  This model is, in turn, read
  * from a JSON file.
  *
@@ -37,8 +37,8 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * singleton asset manager to manage the various assets.
  */
 public class GameController implements Screen, ContactListener {
-	/** 
-	 * Tracks the asset state.  Otherwise subclasses will try to load assets 
+	/**
+	 * Tracks the asset state.  Otherwise subclasses will try to load assets
 	 */
 	protected enum AssetState {
 		/** No assets loaded */
@@ -55,10 +55,10 @@ public class GameController implements Screen, ContactListener {
 	private JsonValue  assetDirectory;
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
-	
+
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
-	
+
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
 
@@ -74,12 +74,12 @@ public class GameController implements Screen, ContactListener {
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
 	 *
-	 */	
+	 */
 	public void preLoadContent() {
 		if (assetState != AssetState.EMPTY) {
 			return;
 		}
-		
+
 		assetState = AssetState.LOADING;
 
 		jsonReader = new JsonReader();
@@ -101,17 +101,17 @@ public class GameController implements Screen, ContactListener {
 		if (assetState != AssetState.LOADING) {
 			return;
 		}
-		
+
 		JsonAssetManager.getInstance().allocateDirectory();
 		displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
 		assetState = AssetState.COMPLETE;
 	}
-	
 
-	/** 
+
+	/**
 	 * Unloads the assets for this game.
-	 * 
-	 * This method erases the static variables.  It also deletes the associated textures 
+	 *
+	 * This method erases the static variables.  It also deletes the associated textures
 	 * from the asset manager. If no assets are loaded, this method does nothing.
 	 *
 	 */
@@ -120,7 +120,7 @@ public class GameController implements Screen, ContactListener {
 		JsonAssetManager.clearInstance();
 	}
 
-	
+
 	/** Exit code for quitting the game */
 	public static final int EXIT_QUIT = 0;
     /** How many frames after winning/losing do we continue? */
@@ -133,7 +133,7 @@ public class GameController implements Screen, ContactListener {
 
 	/** Reference to the game level */
 	protected LevelModel level;
-		
+
 	/** Whether or not this is an active controller */
 	private boolean active;
 	/** Whether we have completed this level */
@@ -196,7 +196,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		failed = value;
 	}
-	
+
 	/**
 	 * Returns true if this is the active screen
 	 *
@@ -216,7 +216,7 @@ public class GameController implements Screen, ContactListener {
 	public ObstacleCanvas getCanvas() {
 		return canvas;
 	}
-	
+
 	/**
 	 * Sets the canvas associated with this controller
 	 *
@@ -228,9 +228,9 @@ public class GameController implements Screen, ContactListener {
 	public void setCanvas(ObstacleCanvas canvas) {
 		this.canvas = canvas;
 	}
-	
+
 	/**
-	 * Creates a new game world 
+	 * Creates a new game world
 	 *
 	 * The physics bounds and drawing scale are now stored in the LevelModel and
 	 * defined by the appropriate JSON file.
@@ -246,7 +246,7 @@ public class GameController implements Screen, ContactListener {
 		setComplete(false);
 		setFailure(false);
 	}
-	
+
 	/**
 	 * Dispose of all (non-static) resources allocated to this mode.
 	 */
@@ -255,26 +255,26 @@ public class GameController implements Screen, ContactListener {
 		level  = null;
 		canvas = null;
 	}
-	
+
 	/**
 	 * Resets the status of the game so that we can play again.
 	 *
-	 * This method disposes of the level and creates a new one. It will 
+	 * This method disposes of the level and creates a new one. It will
 	 * reread from the JSON file, allowing us to make changes on the fly.
 	 */
 	public void reset() {
 		level.dispose();
-		
+
 		setComplete(false);
 		setFailure(false);
 		countdown = -1;
-		
+
 		// Reload the json each time
 		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
-	
+
 	/**
 	 * Returns whether to process the update loop
 	 *
@@ -283,7 +283,7 @@ public class GameController implements Screen, ContactListener {
 	 * normally.
 	 *
 	 * @param dt Number of seconds since last animation frame
-	 * 
+	 *
 	 * @return whether to process the update loop
 	 */
 	public boolean preUpdate(float dt) {
@@ -297,12 +297,12 @@ public class GameController implements Screen, ContactListener {
 		if (input.didDebug()) {
 			level.setDebug(!level.getDebug());
 		}
-		
+
 		// Handle resets
 		if (input.didReset()) {
 			reset();
 		}
-		
+
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
 			listener.exitScreen(this, EXIT_QUIT);
@@ -312,10 +312,10 @@ public class GameController implements Screen, ContactListener {
 		} else if (countdown == 0) {
 			reset();
 		}
-		
+
 		return true;
 	}
-	
+
 	private Vector2 aAngleCache = new Vector2();
 	private Vector2 cAngleCache = new Vector2();
 	private Vector2 dAngleCache = new Vector2();
@@ -333,14 +333,9 @@ public class GameController implements Screen, ContactListener {
 	public void update(float dt) {
 		// Process actions in object model
 		AnnetteModel annette = level.getAnnette();
-<<<<<<< HEAD
-		CreatureModel creature0 = level.getCreature(0);
-		CreatureModel creature1 = level.getCreature(1);
-=======
 		CreatureModel bob = level.getCreature(0);
 		CreatureModel fred = level.getCreature(1);
 		CreatureModel john = level.getCreature(2);
->>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 		BoxModel box = level.getBox();
 		DistractionModel distraction = level.getDistraction();
 //		if (level.isDistraction()) {
@@ -394,24 +389,11 @@ public class GameController implements Screen, ContactListener {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
 			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-<<<<<<< HEAD
-			creature0.setAngle(angle);
-			creature1.setAngle(angle);
-		}
-		cAngleCache.scl(creature0.getForce());
-		creature0.setMovement(cAngleCache.x,cAngleCache.y);
-		creature0.applyForce();
-
-		cAngleCache.scl(creature1.getForce());
-		creature1.setMovement(cAngleCache.x,cAngleCache.y);
-		creature1.applyForce();
-=======
 			bob.setAngle(angle);
 		}
 		cAngleCache.scl(bob.getForce());
 		bob.setMovement(cAngleCache.x,cAngleCache.y);
 		bob.applyForce();
->>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 
 		cAngleCache.set(1.0f,0.0f);
 		if (cAngleCache.len2() > 0.0f) {
@@ -486,7 +468,7 @@ public class GameController implements Screen, ContactListener {
 		checkFail();
 		level.update(dt);
 	}
-	
+
 	/**
 	 * Draw the physics objects to the canvas
 	 *
@@ -499,7 +481,7 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void draw(float delta) {
 		canvas.clear();
-		
+
 		level.draw(canvas);
 //		level.getDistraction().draw(canvas);
 		// Final message
@@ -515,11 +497,11 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 	}
-	
+
 	/**
-	 * Called when the Screen is resized. 
+	 * Called when the Screen is resized.
 	 *
-	 * This can happen at any point during a non-paused state but will never happen 
+	 * This can happen at any point during a non-paused state but will never happen
 	 * before a call to show().
 	 *
 	 * @param width  The new width in pixels
@@ -548,8 +530,8 @@ public class GameController implements Screen, ContactListener {
 
 	/**
 	 * Called when the Screen is paused.
-	 * 
-	 * This is usually when it's not active or visible on screen. An Application is 
+	 *
+	 * This is usually when it's not active or visible on screen. An Application is
 	 * also paused before it is destroyed.
 	 */
 	public void pause() {
@@ -564,7 +546,7 @@ public class GameController implements Screen, ContactListener {
 	public void resume() {
 		// TODO Auto-generated method stub
 	}
-	
+
 	/**
 	 * Called when this screen becomes the current screen for a Game.
 	 */
@@ -604,7 +586,7 @@ public class GameController implements Screen, ContactListener {
 	/**
 	 * Callback method for the start of a collision
 	 *
-	 * This method is called when we first get a collision between two objects.  We use 
+	 * This method is called when we first get a collision between two objects.  We use
 	 * this method to test if it is the "right" kind of collision.  In particular, we
 	 * use it to test if we made it to the win door.
 	 *
@@ -619,21 +601,16 @@ public class GameController implements Screen, ContactListener {
 
 		Object fd1 = fix1.getUserData();
 		Object fd2 = fix2.getUserData();
-		
+
 		try {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
 			AnnetteModel annette = level.getAnnette();
-<<<<<<< HEAD
-			CreatureModel creature0 = level.getCreature(0);
-			CreatureModel creature1 = level.getCreature(1);
-=======
 			BoxModel box = level.getBox();
 			CreatureModel bob = level.getCreature(0);
 			CreatureModel fred = level.getCreature(1);
 			CreatureModel john = level.getCreature(2);
->>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
 			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
@@ -648,18 +625,10 @@ public class GameController implements Screen, ContactListener {
 				(bd1 == door   && bd2 == annette)) {
 				setComplete(true);
 			}
-<<<<<<< HEAD
-			if ((bd1 == annette && bd2 == creature0) || (bd1 == creature0 && bd2 ==annette)) {
-				setFailure(true);
-			}
-
-			if ((bd1 == annette && bd2 == creature1) || (bd1 == creature1 && bd2 ==annette)) {
-=======
 			// Check for losing condition
 			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
 					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
 					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
->>>>>>> 6f02d228f4c91de6639e4da28733dac9b7fd2f89
 				setFailure(true);
 			}
 			// Check if bird hits box
