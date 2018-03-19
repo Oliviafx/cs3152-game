@@ -544,6 +544,13 @@ public class LevelModel {
 			obj.dispose();
 		}
 		objects.clear();
+
+		for(CreatureModel c : creatures) {
+			c.deactivatePhysics(world);
+			c.dispose();
+		}
+		creatures.clear();
+
 		if (world != null) {
 			world.dispose();
 			world = null;
