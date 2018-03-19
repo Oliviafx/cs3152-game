@@ -438,7 +438,7 @@ public class BoxModel extends BoxObstacle {
      */
     protected void deactivate() {
         short collideBits = LevelModel.bitStringToShort("0010");
-        short excludeBits = LevelModel.bitStringToComplement("0000");
+        short excludeBits = LevelModel.bitStringToComplement("0001");
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
