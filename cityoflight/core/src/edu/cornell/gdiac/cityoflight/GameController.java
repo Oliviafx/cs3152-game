@@ -548,7 +548,9 @@ public class GameController implements Screen, ContactListener {
 		AnnetteModel annette   = level.getAnnette();
 
 		//Check for losing condition
-		if (level.getConeLight().contains(annette.getX(), annette.getY())) {
+		if (level.getLight(0).contains(annette.getX(), annette.getY())||
+				level.getLight(1).contains(annette.getX(), annette.getY())||
+				level.getLight(2).contains(annette.getX(), annette.getY())) {
 			setFailure(true);
 		}
 	}
