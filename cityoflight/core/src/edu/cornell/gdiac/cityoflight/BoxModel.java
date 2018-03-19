@@ -239,7 +239,14 @@ public class BoxModel extends BoxObstacle {
      * @param value true if the box is active
      */
     public void setDeactivated(boolean value) {
+
         deactivated = value;
+        if (deactivated) {
+            super.releaseFixtures();
+        }
+        else {
+            super.createFixtures();
+        }
     }
 
 /////////////////////////////////
@@ -421,13 +428,14 @@ public class BoxModel extends BoxObstacle {
      * Immediately removes the object from the physics world
      */
     protected void reactivate() {
-//		obj.deactivatePhysics(world);
+////		obj.deactivatePhysics(world);
         short collideBits = LevelModel.bitStringToShort("0001");
         short excludeBits = LevelModel.bitStringToComplement("0000");
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
         setFilterData(filter);
+
     }
 
     /**
