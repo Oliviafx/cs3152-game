@@ -96,8 +96,6 @@ public class LevelModel {
 	protected RayHandler rayhandler;
 	/** All of the active lights that we loaded from the JSON file */
 	private Array<LightSource> lights = new Array<LightSource>();
-	/** The current light source being used.  If -1, there are no shadows */
-	private int activeLight;
 	
 	// TO FIX THE TIMESTEP
 	/** The maximum frames per second setting for this level */
@@ -151,8 +149,6 @@ public class LevelModel {
 		return rayhandler;
 	}
 
-	public LightSource getConeLight() {return lights.get(activeLight);}
-	
 	/**
 	 * Returns a reference to the player avatar
 	 *
@@ -170,6 +166,14 @@ public class LevelModel {
 	public CreatureModel getCreature(int index) {
 		return creatures.get(index);
 	}
+
+	/**
+	 * Returns a reference to a light
+	 *
+	 * @return a reference to a light
+	 */
+	public LightSource getVision(int index) {return lights.get(index);}
+
 
 	/**
 	 * Returns a reference to the box
@@ -643,7 +647,7 @@ public class LevelModel {
 		canvas.end();
 
 		// Now draw the shadows
-		if (rayhandler != null && activeLight != -1) {
+		if (rayhandler != null) {
 			rayhandler.render();
 		}
 		
