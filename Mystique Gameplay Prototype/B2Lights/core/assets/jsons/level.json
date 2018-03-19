@@ -10,12 +10,41 @@
 	},
 	"pointlights": {
 	}, 
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/assets/jsons/level.json
 	"conelights": {
 		"xray": {
 			"color":		[1.0, 1.0, 0.0, 1.0],
 			"pos":			[  0,   0],
 			"distance":		  10,
 			"angle":	 	  30,
+=======
+	"vision": {
+		"bobVision": {
+			"color":		[1.0, 1.0, 0.0, 1.0],
+			"pos":			[  0,   0],
+			"distance":		  10,
+			"angle":	 	  20,
+			"facing":		  90,
+			"rays":			 512,
+			"soft":			false,
+      		"excludeBits":	"0010"
+		},
+		"fredVision": {
+			"color":		[1.0, 0.0, 1.0, 1.0],
+			"pos":			[  0,   0],
+			"distance":		  18,
+			"angle":	 	  10,
+>>>>>>> Stashed changes:cityoflight/core/assets/jsons/level.json
+			"facing":		  90,
+			"rays":			 512,
+			"soft":			false,
+      		"excludeBits":	"0010"
+		},
+		"johnVision": {
+			"color":		[0.0, 0.0, 1.0, 1.0],
+			"pos":			[  0,   0],
+			"distance":		  3,
+			"angle":	 	  90,
 			"facing":		  90,
 			"rays":			 512,
 			"soft":			false,
@@ -40,6 +69,7 @@
        	"debugcolor":  	"white",
        	"debugopacity":	192,
 	},
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/assets/jsons/level.json
 	"creature": {
 		"pos":        	[ 6.0, 7.0],
 		"radius":      	0.5,
@@ -57,6 +87,63 @@
 		"texture":     	"dude",
 		"debugcolor":  	"white",
 		"debugopacity":	192,
+=======
+	"creatures": {
+		"bob":{
+			"pos":        	[ 2.0, 7.0],
+			"radius":      	0.5,
+			"bodytype":    	"dynamic",
+			"density":        100.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"force": 		  450.0,
+			"damping": 		  10.0,
+			"maxspeed": 	  10.0,
+			"collideBits":	"0001",
+			"excludeBits":	"0000",
+			"startframe":       0,
+			"walklimit":		4,
+			"texture":     	"dude",
+			"debugcolor":  	"white",
+			"debugopacity":	192,
+		},
+		"fred":{
+			"pos":        	[ 19.0, 5.0],
+			"radius":      	0.5,
+			"bodytype":    	"dynamic",
+			"density":        100.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"force": 		  450.0,
+			"damping": 		  10.0,
+			"maxspeed": 	  10.0,
+			"collideBits":	"0001",
+			"excludeBits":	"0000",
+			"startframe":       0,
+			"walklimit":		4,
+			"texture":     	"dude",
+			"debugcolor":  	"white",
+			"debugopacity":	192,
+		},
+		"john":{
+			"pos":        	[ 9.0, 17.0],
+			"radius":      	0.5,
+			"bodytype":    	"dynamic",
+			"density":        100.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"force": 		  450.0,
+			"damping": 		  10.0,
+			"maxspeed": 	  10.0,
+			"collideBits":	"0001",
+			"excludeBits":	"0000",
+			"startframe":       0,
+			"walklimit":		4,
+			"texture":     	"dude",
+			"debugcolor":  	"white",
+			"debugopacity":	192,
+		}
+>>>>>>> Stashed changes:cityoflight/core/assets/jsons/level.json
 	},
     "box": {
         "pos":          [ 6.0, 5.0],
@@ -128,20 +215,6 @@
         },
     },
   	"interior": {
-  		"maze1": {
-        	"pos":        	[ 8f, 6f],
-        	"size":       	[ 10.0f, 3f],
-        	"pad":       	[ 0.1f, 0.1f],
-        	"bodytype":     "static",
-            "density":        0.0,
-            "friction":       0.4,
-            "restitution":    0.1,
-    	  	"collideBits":	"1000",
-	      	"excludeBits":	"0000",
-        	"texture":      "earth",
-            "debugcolor":   "yellow",
-            "debugopacity":  200
-		},
 		"maze2": {
         	"pos":        	[ 1.5f, 1.5f],
         	"size":       	[ 1f, 1f],

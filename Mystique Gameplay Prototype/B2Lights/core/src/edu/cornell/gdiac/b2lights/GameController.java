@@ -316,6 +316,7 @@ public class GameController implements Screen, ContactListener {
 	
 	private Vector2 aAngleCache = new Vector2();
 	private Vector2 cAngleCache = new Vector2();
+
 	/**
 	 * The core gameplay loop of this world.
 	 *
@@ -328,16 +329,18 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void update(float dt) {
 		// Process actions in object model
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/GameController.java
 		DudeModel annette = level.getAnnette();
 		DudeModel creature = level.getCreature();
+=======
+		AnnetteModel annette = level.getAnnette();
+		CreatureModel bob = level.getCreature(0);
+		CreatureModel fred = level.getCreature(1);
+		CreatureModel john = level.getCreature(2);
+		BoxModel box = level.getBox();
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/GameController.java
 		InputController input = InputController.getInstance();
-//
-//		if (input.didForward()) {
-//			level.activateNextLight();
-//		} else if (input.didBack()){
-//			level.activatePrevLight();
-//		}
-//
+
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 		if (aAngleCache.len2() > 0.0f) {
@@ -351,16 +354,48 @@ public class GameController implements Screen, ContactListener {
 		annette.applyForce();
 
 		//creature
-		cAngleCache.set(input.getcHoriz(),input.getcVert());
+		cAngleCache.set(0.0f,3.0f);
 		if (cAngleCache.len2() > 0.0f) {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
 			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/GameController.java
 			creature.setAngle(angle);
 		}
 		cAngleCache.scl(creature.getForce());
 		creature.setMovement(cAngleCache.x,cAngleCache.y);
 		creature.applyForce();
+=======
+			bob.setAngle(angle);
+		}
+		cAngleCache.scl(bob.getForce());
+		bob.setMovement(cAngleCache.x,cAngleCache.y);
+		bob.applyForce();
+
+		cAngleCache.set(1.0f,0.0f);
+		if (cAngleCache.len2() > 0.0f) {
+			float angle = cAngleCache.angle();
+			// Convert to radians with up as 0
+			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+			fred.setAngle(angle);
+		}
+		cAngleCache.scl(fred.getForce());
+		fred.setMovement(cAngleCache.x,cAngleCache.y);
+		fred.applyForce();
+
+		cAngleCache.set(0.2f,-0.8f);
+		if (cAngleCache.len2() > 0.0f) {
+			float angle = cAngleCache.angle();
+			// Convert to radians with up as 0
+			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+			john.setAngle(angle);
+		}
+		cAngleCache.scl(john.getForce());
+		john.setMovement(cAngleCache.x,cAngleCache.y);
+		john.applyForce();
+
+		box.applyForce();
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/GameController.java
 
 		// Turn the physics engine crank.
 		checkFail();
@@ -504,16 +539,31 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/GameController.java
 			DudeModel annette = level.getAnnette();
 			DudeModel creature = level.getCreature();
+=======
+			AnnetteModel annette = level.getAnnette();
+			CreatureModel bob = level.getCreature(0);
+			CreatureModel fred = level.getCreature(1);
+			CreatureModel john = level.getCreature(2);
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/GameController.java
 			ExitModel door   = level.getExit();
 			
 			// Check for win condition
-			if ((bd1 == annette && bd2 == door  ) ||
+			if ((bd1 == annette && bd2 == door) ||
 				(bd1 == door   && bd2 == annette)) {
 				setComplete(true);
 			}
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/GameController.java
 			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 ==annette )) {
+=======
+
+			// Check for losing condition
+			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
+					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
+					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/GameController.java
 				setFailure(true);
 			}
 

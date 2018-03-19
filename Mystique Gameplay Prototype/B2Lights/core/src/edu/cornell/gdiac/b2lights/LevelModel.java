@@ -71,9 +71,12 @@ public class LevelModel {
 	/** The initial box position */
 //	private static Vector2 BOX_POS = new Vector2(24, 4);
 
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/LevelModel.java
 	/** Reference to a creature */
 	private CreatureModel creature_test;
 
+=======
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/LevelModel.java
 	/** Whether or not the level is in debug mode (showing off physics) */
 	private boolean debug;
 	
@@ -150,7 +153,7 @@ public class LevelModel {
 	}
 
 	public LightSource getConeLight() {return lights.get(activeLight);}
-	
+
 	/**
 	 * Returns a reference to the player avatar
 	 *
@@ -255,7 +258,7 @@ public class LevelModel {
 	public LevelModel() {
 		world  = null;
 		bounds = new Rectangle(0,0,1,1);
-		scale = new Vector2(1,1);
+		scale  = new Vector2(1,1);
 		debug  = false;
 	}
 	
@@ -284,9 +287,8 @@ public class LevelModel {
 		if (levelFormat.has("lighting")) {
 			initLighting(levelFormat.get("lighting"));
 		}
-		createPointLights(levelFormat.get("pointlights"));
-		createConeLights(levelFormat.get("conelights"));
-		
+		//createPointLights(levelFormat.get("pointlights"));
+
 		// Add level goal
 		goalDoor = new ExitModel();
 		goalDoor.initialize(levelFormat.get("exit"));
@@ -319,6 +321,7 @@ public class LevelModel {
 		activate(annette);
 		//attachLights(creature);
 
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/LevelModel.java
 		// Create the dude and attach light sources
 	    creature = new DudeModel();
 	    JsonValue avdata = levelFormat.get("creature");
@@ -331,16 +334,22 @@ public class LevelModel {
 		//creature_test = new CreatureModel();
 		//creature_test.setDrawScale(scale);
 		//activate(creature_test);
+=======
+		// Create cone lights to be line of sights of creatures.
+		createLineofSight(levelFormat.get("vision"));
+		// Create the creatures and attach light sources
+		createCreature(levelFormat.get("creatures"),"bob",0);
+		createCreature(levelFormat.get("creatures"),"fred",1);
+		createCreature(levelFormat.get("creatures"), "john",2);
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/LevelModel.java
 
 		// Create box
-
 		box = new BoxModel(1,1);
 		JsonValue boxdata = levelFormat.get("box");
 		box.initialize(boxdata);
 		box.setDrawScale(scale);
 		activate(box);
 		box.setActive(true);
-
 
 	}
 
@@ -409,18 +418,14 @@ public class LevelModel {
 	}
 
 	/**
-	 * Creates the cone lights for the level
+	 * Creates the line of sights (cone lights) for the level
 	 *
 	 * Cone lights show light in a cone with a direction.  We treat them differently from 
-	 * point lights because they have different defining attributes.  However, all lights
-	 * are added to the lights array.  This allows us to cycle through both the point 
-	 * lights and the cone lights with activateNextLight().
+	 * point lights because they have different defining attributes.
 	 *
-	 * All lights are deactivated initially.  We only want one active light at a time.
-	 *
-	 * @param  json	the JSON tree defining the list of point lights
+	 * @param  json	the JSON tree defining the list of cone lights
 	 */
-	private void createConeLights(JsonValue json) {
+	private void createLineofSight(JsonValue json) {
 		JsonValue light = json.child();
 	    while (light != null) {
 	    	float[] color = light.get("color").asFloatArray();
@@ -443,7 +448,28 @@ public class LevelModel {
 	        light = light.next();
 	    }
 	}
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/LevelModel.java
 	
+=======
+
+	/**
+	 *
+	 * @param creaturejson
+	 * @param name
+	 * @param index the index for the creature and the light which the creature is attached to
+	 */
+	public void createCreature(JsonValue creaturejson, String name, int index){
+		CreatureModel creature = new CreatureModel();
+		JsonValue creaturedata = creaturejson.child();
+		//if (creaturedata == null) {System.out.println ("no json found");}
+		creature.initialize(creaturedata);
+		creature.setDrawScale(scale);
+		creatures.add(creature);
+		activate(creature);
+		attachVision(creature, lights.get(index));
+	}
+
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/LevelModel.java
 	/**
 	 * Attaches all lights to the avatar.
 	 * 
@@ -468,6 +494,7 @@ public class LevelModel {
 
 	public void attachVision (CreatureModel creature, LightSource light){
 
+<<<<<<< Updated upstream:Mystique Gameplay Prototype/B2Lights/core/src/edu/cornell/gdiac/b2lights/LevelModel.java
 	}
 	
 	/**
@@ -506,6 +533,8 @@ public class LevelModel {
 		}		
 	}
 
+=======
+>>>>>>> Stashed changes:cityoflight/core/src/edu/cornell/gdiac/cityoflight/LevelModel.java
 	/**
 	 * Disposes of all resources for this model.
 	 *
