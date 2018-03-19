@@ -615,7 +615,7 @@ public class GameController implements Screen, ContactListener {
 			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
 			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
 			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
-			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
+//			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
 			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
 			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
 			// Check for win condition
@@ -636,8 +636,8 @@ public class GameController implements Screen, ContactListener {
 //				distraction.deactivatePhysics(level.getWorld());
 //				distraction.setDeactivated(false);
 			}
-			if ((bd1 == distraction && (bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4 || bd2==maze5) ||
-					bd2 == distraction && (bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4 || bd1 == maze5))) {
+			if ((bd1 == distraction && (bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4 ))|| //bd2==maze5) ||
+					bd2 == distraction && (bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4 )) { //bd1 == maze5))) {
 				System.out.println("here");
 				annette.setBird(false);
 				distraction.setAlive(false);
