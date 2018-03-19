@@ -27,7 +27,7 @@ import edu.cornell.gdiac.util.XBox360Controller;
 public class InputController {
 	/** The singleton instance of the input controller */
 	private static InputController theController = null;
-	
+
 	/** 
 	 * Return the singleton instance of the input controller
 	 *
@@ -60,6 +60,11 @@ public class InputController {
 	private boolean spacePressed;
 	private boolean spacePrevious;
 
+<<<<<<< HEAD
+=======
+	private boolean xPressed;
+	private boolean xPrevious;
+>>>>>>> master
 
 	/** How much did Annette move horizontally? */
 	private float aHoriz;
@@ -75,7 +80,11 @@ public class InputController {
 	XBox360Controller xbox;
 
 	/** Annette's direction */
+<<<<<<< HEAD
 	private AnnetteModel.Direction direction;
+=======
+	private AnnetteModel.Direction direction = AnnetteModel.Direction.RIGHT;
+>>>>>>> master
 	
 	/**
 	 * Returns the amount of Annette sideways movement.
@@ -138,6 +147,10 @@ public class InputController {
 		return resetPressed && !resetPrevious;
 	}
 
+<<<<<<< HEAD
+=======
+	public boolean didX() { return xPressed && !xPrevious; }
+>>>>>>> master
 //	/**
 //	 * Returns true if the player wants to go to the next level.
 //	 *
@@ -185,8 +198,12 @@ public class InputController {
 		xbox = new XBox360Controller(0);
 	}
 
+<<<<<<< HEAD
 	public AnnetteModel.Direction getDirection() { return direction; }
 
+=======
+	public AnnetteModel.Direction getDirection() { return this.direction; }
+>>>>>>> master
 	/**
 	 * Reads the input for the player and converts the result into game logic.
 	 */
@@ -199,7 +216,11 @@ public class InputController {
 //		nextPrevious = nextPressed;
 //		prevPrevious = prevPressed;
 		spacePrevious = spacePressed;
+<<<<<<< HEAD
 
+=======
+		xPrevious = xPressed;
+>>>>>>> master
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
 			readGamepad();
@@ -246,21 +267,34 @@ public class InputController {
 		//nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		spacePressed = (secondary && spacePressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
+<<<<<<< HEAD
 
+=======
+		xPressed = (secondary && xPressed) || (Gdx.input.isKeyPressed(Input.Keys.X));
+>>>>>>> master
 		// Annette Directional controls
 		aHoriz = (secondary ? aHoriz : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			aHoriz += 1.0f;
+<<<<<<< HEAD
 			direction = AnnetteModel.Direction.RIGHT;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			aHoriz -= 1.0f;
 			direction = AnnetteModel.Direction.LEFT;
+=======
+			this.direction = AnnetteModel.Direction.RIGHT;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			aHoriz -= 1.0f;
+			this.direction = AnnetteModel.Direction.LEFT;
+>>>>>>> master
 		}
 
 		aVert = (secondary ? aVert : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			aVert += 1.0f;
+<<<<<<< HEAD
 			direction = AnnetteModel.Direction.UP;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -284,5 +318,30 @@ public class InputController {
 //		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 //			cVert -= 1.0f;
 //		}
+=======
+			this.direction = AnnetteModel.Direction.UP;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			aVert -= 1.0f;
+			this.direction = AnnetteModel.Direction.DOWN;
+		}
+
+		// Creature Directional controls
+		cHoriz = (secondary ? cHoriz : 0.0f);
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			cHoriz += 1.0f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			cHoriz -= 1.0f;
+		}
+
+		cVert = (secondary ? cVert : 0.0f);
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			cVert += 1.0f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			cVert -= 1.0f;
+		}
+>>>>>>> master
 	}
 }
