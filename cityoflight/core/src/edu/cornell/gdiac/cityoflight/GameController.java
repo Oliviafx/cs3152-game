@@ -399,17 +399,15 @@ public class GameController implements Screen, ContactListener {
 		// if box should deactivate
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
-			level.destroy(box);
-			box.setActive(false);
+			box.deactivatePhysics(level.getWorld());
 		}
 
 		// reactivating
-		if (box.getDoesExist() && box.getDeactivated() && Math.abs(box.getPosition().x - annette.getPosition().x) < box.REACTIVATE){
+		if (box.getDoesExist() && box.getDeactivated() && Math.abs(dist) < box.REACTIVATE){
 			box.setDeactivated(false);
-			box.reactivate();
+			box.activatePhysics(level.getWorld());
 			box.setActive(true);
-//			level.activate(box);
-//			box.activatePhysics(level.getWorld());
+
 		}
 
 		// debug color green
