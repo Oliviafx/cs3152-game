@@ -25,7 +25,11 @@
         "goal": { 
          	"file":		"textures/well.png",
          	"wrap":		false,
-         }
+         },
+		"bird": {
+			"file":		"textures/bird.png",
+			"wrap":		false,
+		}
   	},
   	"fonts": {
   		"display": {
