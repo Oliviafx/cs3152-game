@@ -46,6 +46,9 @@ public class AnnetteModel extends BoxObstacle {
     /** The standard number of frames to wait until we can walk again */
     private int walkLimit;
 
+    /** Whether we are actively summoning */
+    private boolean isSummoning;
+
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
     /** The current animation frame of the avatar */
@@ -202,27 +205,100 @@ public class AnnetteModel extends BoxObstacle {
         walkLimit = value;
     }
 
+    /**
+     * Checks if Annette is summoning a box
+     *
+     * @return true if Annette is actively summoning a box
+     */
+    public boolean isSummoning() { return isSummoning; }
+
+    /**
+     * Sets whether Annette is summoning a box.
+     *
+     * @param value whether the Annette is actively summoning.
+     */
+    public void setSummoning(boolean value) { isSummoning = value; }
 
 
     public Direction getDirection() {
-        if (direction == Direction.RIGHT) {
-            System.out.println("right");
-
-        }
-        if (direction == Direction.LEFT) {
-            System.out.println("left");
-
-        }
-        if (direction == Direction.UP) {
-            System.out.println("up");
-
-        }
-        if (direction == Direction.DOWN) {
-            System.out.println("down");
-
-        }
+//        if (direction == Direction.RIGHT) {
+//            System.out.println("right");
+//
+//        }
+//        if (direction == Direction.LEFT) {
+//            System.out.println("left");
+//
+//        }
+//        if (direction == Direction.UP) {
+//            System.out.println("up");
+//
+//        }
+//        if (direction == Direction.DOWN) {
+//            System.out.println("down");
+//
+//        }
         return direction;
     }
+
+//    public void setDirection(Direction value) {
+//        direction = value;
+//    }
+
+    /** Taken from Lab 4.
+     * Sets left/right movement of this character.
+     *
+     * This is the result of input times dude force.
+     *
+     * @param value left/right movement of this character.
+     */
+//    public void setMovement(Direction value) {
+//        if (value != null) {
+//            switch (direction) {
+//                case RIGHT:
+//                    setMovement(new Vector2(force, 0));
+//                    break;
+//                case LEFT:
+//                    setMovement(new Vector2(-force, 0));
+//                    break;
+//                case UP:
+//                    setMovement(new Vector2(0, force));
+//                    break;
+//                case DOWN:
+//                    setMovement(new Vector2(0, -force));
+//            }
+//        }
+//    }
+
+    //        hormovement = value;
+//        // Change facing if appropriate
+//        if (hormovement < 0) {
+//            faceRight = false;
+//        } else if (hormovement > 0) {
+//            faceRight = true;
+//        }
+//    }
+
+
+
+//    public Direction getDirection() {
+//        if (direction == Direction.RIGHT) {
+//            System.out.println("right");
+//
+//        }
+//        if (direction == Direction.LEFT) {
+//            System.out.println("left");
+//
+//        }
+//        if (direction == Direction.UP) {
+//            System.out.println("up");
+//
+//        }
+//        if (direction == Direction.DOWN) {
+//            System.out.println("down");
+//
+//        }
+//        return direction;
+//    }
 
     public void setDirection(Direction value) {
         direction = value;

@@ -42,20 +42,13 @@ import java.lang.reflect.Field;
 
 public class BoxModel extends BoxObstacle {
 
-    // Default physics values
-    /** The density of this box */
-    private static final float DEFAULT_DENSITY = 1.0f;
-    /** The friction of this box */
-    private static final float DEFAULT_FRICTION = 0.0f;
-    /** The restitution of this box */
-    private static final float DEFAULT_RESTITUTION = 0.0f;
     /** The thrust factor to convert player input into thrust */
     /** (3/5/18) Not sure if this is needed */
     /** Random value set as of now */
     private static final float DEFAULT_THRUST = 15.0f;
 
-    /** The force to apply to this box */
-//    private Vector2 force;
+    public static final float INNER_RADIUS = 2.7f;
+    public static final float OUTER_RADIUS = 5.0f;
 
     /** The texture filmstrip for the box */
     FilmStrip mainBox;
@@ -68,7 +61,6 @@ public class BoxModel extends BoxObstacle {
     /** Not sure if this is needed as of right now 3/5/2018 */
     public Affine2 affineCache = new Affine2();
 
-//////////////////////////////////
     // Physics constants
     /** The factor to multiply by the input */
     private float force;
@@ -82,10 +74,12 @@ public class BoxModel extends BoxObstacle {
     /** Whether or not to animate the current frame */
     private boolean animate = false;
 
-    /** How many frames until we can walk again */
-    private int walkCool;
-    /** The standard number of frames to wait until we can walk again */
-    private int walkLimit;
+    /** If the box has been summoned */
+    private boolean doesExist;
+    /** If the box is deactivated */
+    private boolean deactivated;
+    /** If the box is deactivating */
+    private boolean deactivating;
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
@@ -210,23 +204,61 @@ public class BoxModel extends BoxObstacle {
     }
 
     /**
-     * Returns the cooldown limit between walk animations
+     * Returns whether the box has been summoned and is active
      *
-     * @return the cooldown limit between walk animations
+     * @return true if the box is active
      */
-    public int getWalkLimit() {
-        return walkLimit;
+    public boolean getDoesExist() {
+        return doesExist;
     }
 
     /**
-     * Sets the cooldown limit between walk animations
+     * Sets whether the box is active or not
      *
-     * @param value	the cooldown limit between walk animations
+     * @param value true if the box is active
      */
-    public void setWalkLimit(int value) {
-        walkLimit = value;
+    public void setDoesExist(boolean value) {
+        doesExist = value;
     }
-/////////////////////////////////
+
+    /**
+     * Returns whether the box is deactivating
+     *
+     * @return true if the box is deactivating
+     */
+    public boolean getDeactivated() {
+        return deactivated;
+    }
+
+    /**
+     * Sets whether the box is active or not
+     *
+     * @param value true if the box is active
+     */
+    public void setDeactivated(boolean value) {
+
+        deactivated = value;
+    }
+
+    /**
+     * Returns whether the box is deactivating
+     *
+     * @return true if the box is deactivating
+     */
+    public boolean getDeactivating() {
+        return deactivating;
+    }
+
+    /**
+     * Sets whether the box is active or not
+     *
+     * @param value true if the box is active
+     */
+    public void setDeactivating(boolean value) {
+
+        deactivating = value;
+    }
+
     /**
      * Returns the force applied to this box.
      *
@@ -314,25 +346,28 @@ public class BoxModel extends BoxObstacle {
      */
     public BoxModel(float width, float height) {
         super(width,height);
-//        force = new Vector2();
-//        setDensity(DEFAULT_DENSITY);
-//        setDensity(DEFAULT_DENSITY);
-//        setFriction(DEFAULT_FRICTION);
-//        setRestitution(DEFAULT_RESTITUTION);
-//        setName("box");
-
     }
 
-    public void initialize(JsonValue json) {
+
+    public void initialize(JsonValue json, Vector2 annettepos, float xoff, float yoff) {
         setName(json.name());
-        float[] pos  = json.get("pos").asFloatArray();
-        float radius = json.get("radius").asFloat();
-        setPosition(pos[0],pos[1]);
-//        setRadius(radius);
+        float width = json.get("width").asFloat();
+        float height = json.get("height").asFloat();
+        setWidth(width);
+        setHeight(height);
+        setPosition(annettepos.x + xoff,annettepos.y + yoff);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        if (json.get("bodytype").asString().equals("static")) {
+            setBodyType(BodyDef.BodyType.StaticBody);
+        }
+        else if (json.get("bodytype").asString().equals("dynamic")) {
+            setBodyType(BodyDef.BodyType.DynamicBody);
+        }
+        else { // kinematic
+            setBodyType(BodyDef.BodyType.KinematicBody);
+        }
         setDensity(json.get("density").asFloat());
         setFriction(json.get("friction").asFloat());
         setRestitution(json.get("restitution").asFloat());
@@ -340,7 +375,6 @@ public class BoxModel extends BoxObstacle {
         setDamping(json.get("damping").asFloat());
         setMaxSpeed(json.get("maxspeed").asFloat());
         setStartFrame(json.get("startframe").asInt());
-        setWalkLimit(json.get("walklimit").asInt());
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
@@ -348,7 +382,7 @@ public class BoxModel extends BoxObstacle {
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
-        setFilterData(filter);
+        super.setFilterData(filter);
 
         // Reflection is best way to convert name to color
         Color debugColor;
@@ -374,6 +408,7 @@ public class BoxModel extends BoxObstacle {
         setTexture(texture);
     }
 
+
     /**
      * Creates the physics Body(s) for this object, adding them to the world.
      *
@@ -398,29 +433,33 @@ public class BoxModel extends BoxObstacle {
         return true;
     }
 
-
     /**
-     * Applies the force to the body of this box
-     *
-     * This method should be called after the force attribute is set.
-     *
-     * (3/5/2018) Might need to modify
+     * Immediately changes collision of box to "inactive"
      */
-//    public void applyForce() {
-//        if (!isActive()) {
-//            return;
-//        }
-//
-//        // Orient the force with rotation.
-//        affineCache.setToRotationRad(getAngle());
-//        affineCache.applyTo(force);
-//
-//        // Apply force to the box BODY, not the box
-//        body.applyForceToCenter(force, true);
-//    }
+    protected void deactivate() {
+        short collideBits = LevelModel.bitStringToShort("0010");
+        short excludeBits = LevelModel.bitStringToComplement("0001");
+        Filter filter = new Filter();
+        filter.categoryBits = collideBits;
+        filter.maskBits = excludeBits;
+        setFilterData(filter);
+    }
 
     /**
-     * Applies the force to the body of this dude
+     * Immediately resets collision bits of box to "active"
+     */
+    protected void reactivate() {
+        short collideBits = LevelModel.bitStringToShort("0001");
+        short excludeBits = LevelModel.bitStringToComplement("0000");
+        Filter filter = new Filter();
+        filter.categoryBits = collideBits;
+        filter.maskBits = excludeBits;
+        setFilterData(filter);
+
+    }
+
+    /**
+     * Applies the force to the body of the box
      *
      * This method should be called after the force attribute is set.
      */
@@ -523,4 +562,9 @@ public class BoxModel extends BoxObstacle {
 //        canvas.draw(mainBox,Color.WHITE,origin.x,offsety,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
     }
 
+    public void drawState(ObstacleCanvas canvas, Color color) {
+        if (texture != null) {
+            canvas.draw(texture, color,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+        }
+    }
 }

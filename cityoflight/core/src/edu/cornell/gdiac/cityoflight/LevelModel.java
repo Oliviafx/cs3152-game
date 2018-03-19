@@ -60,19 +60,12 @@ public class LevelModel {
 	// Physics objects for the game
 	/** Reference to the Annette avatar */
 	private AnnetteModel annette;
-	/** Reference to the creature avatar */
-	private DudeModel creature;
+	/** Reference to the creatures */
+	private Array<CreatureModel> creatures = new Array<CreatureModel>();
 	/** Reference to the goalDoor (for collision detection) */
 	private ExitModel goalDoor;
 	/** Reference to the box */
 	private BoxModel box;
-
-	// Other game objects
-	/** The initial box position */
-//	private static Vector2 BOX_POS = new Vector2(24, 4);
-
-	/** Reference to a creature */
-//	private CreatureModel creature_test;
 
 	/** Whether or not the level is in debug mode (showing off physics) */
 	private boolean debug;
@@ -165,8 +158,8 @@ public class LevelModel {
 	 *
 	 * @return a reference to the creature
 	 */
-	public DudeModel getCreature() {
-		return creature;
+	public CreatureModel getCreature(int index) {
+		return creatures.get(index);
 	}
 
 	/**
@@ -293,8 +286,8 @@ public class LevelModel {
 		if (levelFormat.has("lighting")) {
 			initLighting(levelFormat.get("lighting"));
 		}
-		createPointLights(levelFormat.get("pointlights"));
-		createConeLights(levelFormat.get("conelights"));
+//		createPointLights(levelFormat.get("pointlights"));
+//		createConeLights(levelFormat.get("conelights"));
 		
 		// Add level goal
 		goalDoor = new ExitModel();
@@ -328,33 +321,24 @@ public class LevelModel {
 		activate(annette);
 		//attachLights(creature);
 
-		// Create the dude and attach light sources
-	    creature = new DudeModel();
-	    JsonValue avdata = levelFormat.get("creature");
-	    creature.initialize(avdata);
-		creature.setDrawScale(scale);
-		activate(creature);
-		attachLights(creature);
+		// Create cone lights to be line of sights of creatures.
+		createLineofSight(levelFormat.get("vision"));
+		// Create the creatures and attach light sources
+		createCreature(levelFormat.get("creatures"),"bob",0);
+		createCreature(levelFormat.get("creatures"),"fred",1);
+		createCreature(levelFormat.get("creatures"), "john",2);
 
-		// Create creatures
-		//creature_test = new CreatureModel();
-		//creature_test.setDrawScale(scale);
-		//activate(creature_test);
 
 		// Create box
-
-		box = new BoxModel(1,1);
+		box = new BoxModel(1, 1);
 		JsonValue boxdata = levelFormat.get("box");
-		box.initialize(boxdata);
-		box.setDrawScale(scale);
-		activate(box);
-		box.setActive(true);
+		if (annette.isSummoning() && !box.getDoesExist()) {
+			box.initialize(boxdata, annette.getPosition(), 0, 0);
+			box.setDrawScale(scale);
+			activate(box);
+			box.setActive(true);
+		}
 
-
-	}
-
-	private void activateBox() {
-		box.setDrawScale(scale);
 	}
 	
 	/**
@@ -418,101 +402,65 @@ public class LevelModel {
 	}
 
 	/**
-	 * Creates the cone lights for the level
+	 * Creates the line of sights (cone lights) for the level
 	 *
-	 * Cone lights show light in a cone with a direction.  We treat them differently from 
-	 * point lights because they have different defining attributes.  However, all lights
-	 * are added to the lights array.  This allows us to cycle through both the point 
-	 * lights and the cone lights with activateNextLight().
+	 * Cone lights show light in a cone with a direction.  We treat them differently from
+	 * point lights because they have different defining attributes.
 	 *
-	 * All lights are deactivated initially.  We only want one active light at a time.
-	 *
-	 * @param  json	the JSON tree defining the list of point lights
+	 * @param  json	the JSON tree defining the list of cone lights
 	 */
-	private void createConeLights(JsonValue json) {
+	private void createLineofSight(JsonValue json) {
 		JsonValue light = json.child();
-	    while (light != null) {
-	    	float[] color = light.get("color").asFloatArray();
-	    	float[] pos = light.get("pos").asFloatArray();
-	    	float dist  = light.getFloat("distance");
-	    	float face  = light.getFloat("facing");
-	    	float angle = light.getFloat("angle");
-	    	int rays = light.getInt("rays");
-	    	
+		while (light != null) {
+			float[] color = light.get("color").asFloatArray();
+			float[] pos = light.get("pos").asFloatArray();
+			float dist  = light.getFloat("distance");
+			float face  = light.getFloat("facing");
+			float angle = light.getFloat("angle");
+			int rays = light.getInt("rays");
+
 			ConeSource cone = new ConeSource(rayhandler, rays, Color.WHITE, dist, pos[0], pos[1], face, angle);
 			cone.setColor(color[0],color[1],color[2],color[3]);
 			cone.setSoft(light.getBoolean("soft"));
-			
+
 			// Create a filter to exclude see through items
 			Filter f = new Filter();
 			f.maskBits = bitStringToComplement(light.getString("excludeBits"));
 			cone.setContactFilter(f);
-			cone.setActive(false); // TURN ON LATER
+			//cone.setActive(false); // TURN ON LATER
 			lights.add(cone);
-	        light = light.next();
-	    }
+			light = light.next();
+		}
 	}
-	
+
 	/**
-	 * Attaches all lights to the avatar.
-	 * 
+	 *
+	 * @param creaturejson
+	 * @param name
+	 * @param index the index for the creature and the light which the creature is attached to
+	 */
+	public void createCreature(JsonValue creaturejson, String name, int index){
+		CreatureModel creature = new CreatureModel();
+		JsonValue creaturedata = creaturejson.child();
+		//if (creaturedata == null) {System.out.println ("no json found");}
+		creature.initialize(creaturedata);
+		creature.setDrawScale(scale);
+		creatures.add(creature);
+		activate(creature);
+		attachVision(creature, lights.get(index));
+	}
+
+	/**
+	 * Attaches a cone of vision to a creature.
+	 *
 	 * Lights are offset form the center of the avatar according to the initial position.
 	 * By default, a light ignores the body.  This means that putting the light inside
 	 * of these bodies fixtures will not block the light.  However, if a light source is
 	 * offset outside of the bodies fixtures, then they will cast a shadow.
 	 *
-	 * The activeLight is set to be the first element of lights, assuming it is not empty.
 	 */
-	public void attachLights(DudeModel avatar) {
-		for(LightSource light : lights) {
-			light.attachToBody(avatar.getBody(), light.getX(), light.getY(), light.getDirection());
-		}
-		if (lights.size > 0) {
-			activeLight = 0;
-			lights.get(0).setActive(true);
-		} else {
-			activeLight = -1;
-		}
-	}
-
-//	public void attachVision (CreatureModel creature, LightSource light){
-
-//	}
-	
-	/**
-	 * Activates the next light in the light list.
-	 *
-	 * If activeLight is at the end of the list, it sets the value to -1, disabling
-	 * all shadows.  If activeLight is -1, it activates the first light in the list.
-	 */
-	public void activateNextLight() {
-		if (activeLight != -1) {
-			lights.get(activeLight).setActive(false);
-		}
-		activeLight++;
-		if (activeLight >= lights.size) {
-			activeLight = -1;
-		} else {
-			lights.get(activeLight).setActive(true);
-		}
-	}
-
-	/**
-	 * Activates the previous light in the light list.
-	 *
-	 * If activeLight is at the start of the list, it sets the value to -1, disabling
-	 * all shadows.  If activeLight is -1, it activates the last light in the list.
-	 */
-	public void activatePrevLight() {
-		if (activeLight != -1) {
-			lights.get(activeLight).setActive(false);
-		}
-		activeLight--;
-		if (activeLight < -1) {
-			activeLight = lights.size-1;
-		} else if (activeLight > -1) {
-			lights.get(activeLight).setActive(true);
-		}		
+	public void attachVision (CreatureModel creature, LightSource light){
+		light.attachToBody(creature.getBody(), light.getX(), light.getY(), light.getDirection());
 	}
 
 	/**
@@ -546,14 +494,14 @@ public class LevelModel {
 	/**
 	 * Immediately adds the object to the physics world
 	 *
-	 * param obj The object to add
+	 * @param obj The object to add
 	 */
 	protected void activate(Obstacle obj) {
 		assert inBounds(obj) : "Object is not in bounds";
 		objects.add(obj);
 		obj.activatePhysics(world);
 	}
-	
+
 	/**
 	 * Returns true if the object is in bounds.
 	 *
@@ -568,14 +516,6 @@ public class LevelModel {
 		boolean vert  = (bounds.y <= obj.getY() && obj.getY() <= bounds.y+bounds.height);
 		return horiz && vert;
 	}
-
-	public boolean summonBox() {
-		InputController input = InputController.getInstance();
-		if (input.didSpace()) {
-			return true;
-		}
-		return false;
-	}
 	
 	/**
 	 * Updates all of the models in the level.
@@ -587,17 +527,16 @@ public class LevelModel {
 	 */
 	public boolean update(float dt) {
 		if (fixedStep(dt)) {
-//			if (summonBox()) {
-//				box.setActive(true);
-//				box.setDrawScale(scale);
-//			}
 			if (rayhandler != null) {
 				rayhandler.update();
 			}
 			annette.update(dt);
-			creature.update(dt);
+			for (CreatureModel creature : creatures){
+				creature.update(dt);
+			}
 			goalDoor.update(dt);
 			box.update(dt);
+
 			return true;
 		}
 		return false;
@@ -643,8 +582,10 @@ public class LevelModel {
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
+		if (box.getDeactivated()) box.drawState(canvas, Color.BLACK);
+		else if (box.getDeactivating())	box.drawState(canvas, Color.GRAY);
 		canvas.end();
-		
+
 		// Now draw the shadows
 		if (rayhandler != null && activeLight != -1) {
 			rayhandler.render();

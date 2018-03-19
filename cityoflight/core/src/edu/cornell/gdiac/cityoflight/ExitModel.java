@@ -26,13 +26,14 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * Note that the constructor does very little.  The true initialization happens
  * by reading the JSON value.
  */
-public class ExitModel extends BoxObstacle {
+public class ExitModel extends WheelObstacle {
 
 	/**
 	 * Create a new ExitModel with degenerate settings
 	 */	
 	public ExitModel() {
-		super(0,0,1,1);
+//		super(0,0,1,1);
+		super(0,0,1);
 		setSensor(true);
 	}
 	
@@ -47,10 +48,9 @@ public class ExitModel extends BoxObstacle {
 	public void initialize(JsonValue json) {
 		setName(json.name());
 		float[] pos  = json.get("pos").asFloatArray();
-		float[] size = json.get("size").asFloatArray();
+		float radius = json.get("radius").asFloat();
 		setPosition(pos[0],pos[1]);
-		setDimension(size[0],size[1]);
-		
+		setRadius(radius);
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
 		setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
