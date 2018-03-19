@@ -9,8 +9,8 @@
     		"wrap":  	false,
 			"strip":	{
 				"size":		9,
-				"rows":		9,
-				"cols":		1,
+				"rows":		1,
+				"cols":		9,
 				"first":	0
 			}
     	},
@@ -19,13 +19,17 @@
 			"wrap":  	false,
 		},
 		"box": {
-			"file":		"textures/tile2.png",
+			"file":		"textures/box_d.png",
 			"wrap":		false,
 		},
         "goal": { 
          	"file":		"textures/well.png",
          	"wrap":		false,
-         }
+         },
+		"bird": {
+			"file":		"textures/bird.png",
+			"wrap":		false,
+		}
   	},
   	"fonts": {
   		"display": {
@@ -33,4 +37,9 @@
   			"size": 	64
   		},
   	},
+	"sounds": {
+		"box_noise": {
+			"file":		"sounds/box.wav"
+		}
+	}
 }
