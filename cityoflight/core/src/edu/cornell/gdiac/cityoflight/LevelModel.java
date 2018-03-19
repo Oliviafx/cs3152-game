@@ -634,7 +634,10 @@ public class LevelModel {
 		}
 
 		if (box.getDeactivated()){
-			box.drawDeactivated(canvas);
+			box.drawDeactivated(canvas, Color.BLACK);
+		}
+		else if (box.getDeactivating()){
+			box.drawDeactivated(canvas, Color.GRAY);
 		}
 		canvas.end();
 		// Now draw the shadows

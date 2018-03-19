@@ -391,24 +391,40 @@ public class GameController implements Screen, ContactListener {
 			box.setActive(true);
 			box.setDoesExist(true);
 			box.setDeactivated(false);
+			box.setDeactivating(false);
 		}
 		box.applyForce();
 
 		float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
 
-		// if box should deactivate
+//		// if box should deactivate ORIGINAL CODE
+//		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
+//			box.setDeactivated(true);
+//			box.deactivatePhysics(level.getWorld());
+//		}
+
+		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.INNER_RADIUS){
+//			box.setDeactivated(true);
+//			box.deactivate();
+			box.setDeactivating(true);
+		}
+
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
-			box.deactivatePhysics(level.getWorld());
+			box.deactivate();
 		}
 
-		// reactivating
-		if (box.getDoesExist() && box.getDeactivated() && Math.abs(dist) < box.REACTIVATE){
-			box.setDeactivated(false);
-			box.activatePhysics(level.getWorld());
-			box.setActive(true);
+//		// reactivating ORIGINAL CODE
+//		if (box.getDoesExist() && box.getDeactivated() && Math.abs(dist) < box.REACTIVATE){
+//			box.setDeactivated(false);
+//			box.activatePhysics(level.getWorld());
+//			box.setActive(true);
+//		}
 
-		}
+//		if (box.getDoesExist() && box.getDeactivated() && Math.abs(dist) < box.REACTIVATE){
+//			box.setDeactivated(false);
+//			box.reactivate();
+//		}
 
 		// debug color green
 		if (box.getDeactivated()){
@@ -559,7 +575,7 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
 			AnnetteModel annette = level.getAnnette();
-//			BoxModel box = level.getBox();
+			BoxModel box = level.getBox();
 			DudeModel creature = level.getCreature();
 			ExitModel door   = level.getExit();
 			
@@ -570,6 +586,15 @@ public class GameController implements Screen, ContactListener {
 			}
 			if ((bd1 == annette && bd2 == creature) || (bd1 == creature && bd2 == annette)) {
 				setFailure(true);
+			}
+
+			// check reactivation
+
+			if ((bd1 == annette && bd2 == box  ) ||
+					(bd1 == box   && bd2 == annette)) {
+				box.setDeactivated(false);
+				box.setDeactivating(false);
+				box.reactivate();
 			}
 
 		} catch (Exception e) {

@@ -27,7 +27,7 @@
         "width":      	0.5,
 		"height":      	1.0,
         "bodytype":    	"dynamic",
-        "density":        1.0,
+        "density":        2.5,
         "friction":       0.0,
         "restitution":    0.0,
       	"force": 		 450.0,
@@ -42,7 +42,7 @@
        	"debugopacity":	192,
 	},
 	"creature": {
-		"pos":        	[ 6.0, 7.0],
+		"pos":        	[ 7.5, 7.0],
 		"radius":      	0.5,
 		"bodytype":    	"dynamic",
 		"density":        1.0,

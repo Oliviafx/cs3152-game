@@ -47,7 +47,7 @@ public class BoxModel extends BoxObstacle {
     /** Random value set as of now */
     private static final float DEFAULT_THRUST = 15.0f;
 
-    public static final float REACTIVATE   = 1.5f;
+//    public static final float REACTIVATE   = 1.5f;
     public static final float INNER_RADIUS = 3.0f;
     public static final float OUTER_RADIUS = 5.0f;
 
@@ -83,6 +83,8 @@ public class BoxModel extends BoxObstacle {
     private boolean doesExist;
     /** If the box is deactivated */
     private boolean deactivated;
+    /** If the box is deactivating */
+    private boolean deactivating;
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
@@ -241,12 +243,37 @@ public class BoxModel extends BoxObstacle {
     public void setDeactivated(boolean value) {
 
         deactivated = value;
-        if (deactivated) {
-            super.releaseFixtures();
-        }
-        else {
-            super.createFixtures();
-        }
+//        if (deactivated) {
+//            super.releaseFixtures();
+//        }
+//        else {
+//            super.createFixtures();
+//        }
+    }
+
+    /**
+     * Returns whether the box is deactivating
+     *
+     * @return true if the box is deactivating
+     */
+    public boolean getDeactivating() {
+        return deactivating;
+    }
+
+    /**
+     * Sets whether the box is active or not
+     *
+     * @param value true if the box is active
+     */
+    public void setDeactivating(boolean value) {
+
+        deactivating = value;
+//        if (deactivated) {
+//            super.releaseFixtures();
+//        }
+//        else {
+//            super.createFixtures();
+//        }
     }
 
 /////////////////////////////////
@@ -427,6 +454,19 @@ public class BoxModel extends BoxObstacle {
     /**
      * Immediately removes the object from the physics world
      */
+    protected void deactivate() {
+////		obj.deactivatePhysics(world);
+        short collideBits = LevelModel.bitStringToShort("0010");
+        short excludeBits = LevelModel.bitStringToComplement("0000");
+        Filter filter = new Filter();
+        filter.categoryBits = collideBits;
+        filter.maskBits = excludeBits;
+        setFilterData(filter);
+    }
+
+    /**
+     * Immediately removes the object from the physics world
+     */
     protected void reactivate() {
 ////		obj.deactivatePhysics(world);
         short collideBits = LevelModel.bitStringToShort("0001");
@@ -439,27 +479,7 @@ public class BoxModel extends BoxObstacle {
     }
 
     /**
-     * Applies the force to the body of this box
-     *
-     * This method should be called after the force attribute is set.
-     *
-     * (3/5/2018) Might need to modify
-     */
-//    public void applyForce() {
-//        if (!isActive()) {
-//            return;
-//        }
-//
-//        // Orient the force with rotation.
-//        affineCache.setToRotationRad(getAngle());
-//        affineCache.applyTo(force);
-//
-//        // Apply force to the box BODY, not the box
-//        body.applyForceToCenter(force, true);
-//    }
-
-    /**
-     * Applies the force to the body of Annette
+     * Applies the force to the body of the box
      *
      * This method should be called after the force attribute is set.
      */
@@ -562,9 +582,9 @@ public class BoxModel extends BoxObstacle {
 //        canvas.draw(mainBox,Color.WHITE,origin.x,offsety,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
     }
 
-    public void drawDeactivated(ObstacleCanvas canvas) {
+    public void drawDeactivated(ObstacleCanvas canvas, Color color) {
         if (texture != null) {
-            canvas.draw(texture,Color.GRAY,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+            canvas.draw(texture, color,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
         }
     }
 }
