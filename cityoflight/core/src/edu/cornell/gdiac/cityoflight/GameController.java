@@ -3,9 +3,15 @@
  *
  * This combines the WorldController with the mini-game specific PlatformController
  * in the last lab.  With that said, some of the work is now offloaded to the new
+<<<<<<< HEAD
  * LevelModel class, which allows us to serialize and deserialize a level. 
  * 
  * This is a refactored version of WorldController from Lab 4.  It separate the 
+=======
+ * LevelModel class, which allows us to serialize and deserialize a level.
+ *
+ * This is a refactored version of WorldController from Lab 4.  It separate the
+>>>>>>> master
  * level out into a new class called LevelModel.  This model is, in turn, read
  * from a JSON file.
  *
@@ -37,8 +43,13 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * singleton asset manager to manage the various assets.
  */
 public class GameController implements Screen, ContactListener {
+<<<<<<< HEAD
 	/** 
 	 * Tracks the asset state.  Otherwise subclasses will try to load assets 
+=======
+	/**
+	 * Tracks the asset state.  Otherwise subclasses will try to load assets
+>>>>>>> master
 	 */
 	protected enum AssetState {
 		/** No assets loaded */
@@ -48,24 +59,39 @@ public class GameController implements Screen, ContactListener {
 		/** Assets are complete */
 		COMPLETE
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/** The reader to process JSON files */
 	private JsonReader jsonReader;
 	/** The JSON asset directory */
 	private JsonValue  assetDirectory;
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
+<<<<<<< HEAD
 	
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
 	
+=======
+
+	/** The font for giving messages to the player */
+	protected BitmapFont displayFont;
+
+>>>>>>> master
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
 
 	/** Offset for box when summoning */
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/**
 	 * Preloads the assets for this controller.
 	 *
@@ -74,12 +100,20 @@ public class GameController implements Screen, ContactListener {
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
 	 *
+<<<<<<< HEAD
 	 */	
+=======
+	 */
+>>>>>>> master
 	public void preLoadContent() {
 		if (assetState != AssetState.EMPTY) {
 			return;
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> master
 		assetState = AssetState.LOADING;
 
 		jsonReader = new JsonReader();
@@ -101,17 +135,30 @@ public class GameController implements Screen, ContactListener {
 		if (assetState != AssetState.LOADING) {
 			return;
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> master
 		JsonAssetManager.getInstance().allocateDirectory();
 		displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
 		assetState = AssetState.COMPLETE;
 	}
+<<<<<<< HEAD
 	
 
 	/** 
 	 * Unloads the assets for this game.
 	 * 
 	 * This method erases the static variables.  It also deletes the associated textures 
+=======
+
+
+	/**
+	 * Unloads the assets for this game.
+	 *
+	 * This method erases the static variables.  It also deletes the associated textures
+>>>>>>> master
 	 * from the asset manager. If no assets are loaded, this method does nothing.
 	 *
 	 */
@@ -120,7 +167,11 @@ public class GameController implements Screen, ContactListener {
 		JsonAssetManager.clearInstance();
 	}
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/** Exit code for quitting the game */
 	public static final int EXIT_QUIT = 0;
     /** How many frames after winning/losing do we continue? */
@@ -133,7 +184,11 @@ public class GameController implements Screen, ContactListener {
 
 	/** Reference to the game level */
 	protected LevelModel level;
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> master
 	/** Whether or not this is an active controller */
 	private boolean active;
 	/** Whether we have completed this level */
@@ -196,7 +251,11 @@ public class GameController implements Screen, ContactListener {
 		}
 		failed = value;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/**
 	 * Returns true if this is the active screen
 	 *
@@ -216,7 +275,11 @@ public class GameController implements Screen, ContactListener {
 	public ObstacleCanvas getCanvas() {
 		return canvas;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/**
 	 * Sets the canvas associated with this controller
 	 *
@@ -228,9 +291,15 @@ public class GameController implements Screen, ContactListener {
 	public void setCanvas(ObstacleCanvas canvas) {
 		this.canvas = canvas;
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Creates a new game world 
+=======
+
+	/**
+	 * Creates a new game world
+>>>>>>> master
 	 *
 	 * The physics bounds and drawing scale are now stored in the LevelModel and
 	 * defined by the appropriate JSON file.
@@ -246,7 +315,11 @@ public class GameController implements Screen, ContactListener {
 		setComplete(false);
 		setFailure(false);
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/**
 	 * Dispose of all (non-static) resources allocated to this mode.
 	 */
@@ -255,26 +328,46 @@ public class GameController implements Screen, ContactListener {
 		level  = null;
 		canvas = null;
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Resets the status of the game so that we can play again.
 	 *
 	 * This method disposes of the level and creates a new one. It will 
+=======
+
+	/**
+	 * Resets the status of the game so that we can play again.
+	 *
+	 * This method disposes of the level and creates a new one. It will
+>>>>>>> master
 	 * reread from the JSON file, allowing us to make changes on the fly.
 	 */
 	public void reset() {
 		level.dispose();
+<<<<<<< HEAD
 		
 		setComplete(false);
 		setFailure(false);
 		countdown = -1;
 		
+=======
+
+		setComplete(false);
+		setFailure(false);
+		countdown = -1;
+
+>>>>>>> master
 		// Reload the json each time
 		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/**
 	 * Returns whether to process the update loop
 	 *
@@ -283,7 +376,11 @@ public class GameController implements Screen, ContactListener {
 	 * normally.
 	 *
 	 * @param dt Number of seconds since last animation frame
+<<<<<<< HEAD
 	 * 
+=======
+	 *
+>>>>>>> master
 	 * @return whether to process the update loop
 	 */
 	public boolean preUpdate(float dt) {
@@ -297,12 +394,20 @@ public class GameController implements Screen, ContactListener {
 		if (input.didDebug()) {
 			level.setDebug(!level.getDebug());
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> master
 		// Handle resets
 		if (input.didReset()) {
 			reset();
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> master
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
 			listener.exitScreen(this, EXIT_QUIT);
@@ -312,12 +417,22 @@ public class GameController implements Screen, ContactListener {
 		} else if (countdown == 0) {
 			reset();
 		}
+<<<<<<< HEAD
 		
 		return true;
 	}
 	
 	private Vector2 aAngleCache = new Vector2();
 	private Vector2 cAngleCache = new Vector2();
+=======
+
+		return true;
+	}
+
+	private Vector2 aAngleCache = new Vector2();
+	private Vector2 cAngleCache = new Vector2();
+	private Vector2 dAngleCache = new Vector2();
+>>>>>>> master
 
 	/**
 	 * The core gameplay loop of this world.
@@ -336,6 +451,13 @@ public class GameController implements Screen, ContactListener {
 		CreatureModel fred = level.getCreature(1);
 		CreatureModel john = level.getCreature(2);
 		BoxModel box = level.getBox();
+<<<<<<< HEAD
+=======
+		DistractionModel distraction = level.getDistraction();
+//		if (level.isDistraction()) {
+//			distraction.setPosition(annette.getPosition());
+//		}
+>>>>>>> master
 		InputController input = InputController.getInstance();
 
 		float xoff = 0;
@@ -343,20 +465,59 @@ public class GameController implements Screen, ContactListener {
 
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
+<<<<<<< HEAD
 		if (aAngleCache.len2() > 0.0f) {
 			float angle = aAngleCache.angle();
 			// Convert to radians with up as 0
 			angle = (float)Math.PI*(angle-90.0f)/180.0f;
 			annette.setAngle(angle);
 		}
+=======
+//		if (aAngleCache.len2() > 0.0f) {
+//			float angle = aAngleCache.angle();
+//			// Convert to radians with up as 0
+//			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//			annette.setAngle(angle);
+//		}
+>>>>>>> master
 		aAngleCache.scl(annette.getForce());
 		annette.setMovement(aAngleCache.x,aAngleCache.y);
 		annette.setDirection(input.getDirection());
 		annette.setSummoning(InputController.getInstance().didSpace());
+<<<<<<< HEAD
 		annette.applyForce();
 
 		//creature
 		cAngleCache.set(0.0f,3.0f);
+=======
+//		System.out.println("Input direction null");
+//		System.out.println(input.getDirection()==null);
+		annette.setBird(input.didX());
+		annette.applyForce();
+
+		//Check if distraction was called
+		if (annette.getBird()&&!level.isDistraction() ) {
+//			System.out.println("here");
+			level.createDistraction(levelFormat);
+			level.getDistraction().setAlive(true);
+			dAngleCache.set(input.getaHoriz(),input.getaVert());
+			//			dAngleCache.set(1,1);
+			if (dAngleCache.len2() > 0.0f) {
+				float angle = aAngleCache.angle();
+				// Convert to radians with up as 0
+				angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//				annette.setAngle(angle);
+			}
+			if (distraction != null) {
+				dAngleCache.scl(distraction.getForce());
+				distraction.setMovement(dAngleCache.x,dAngleCache.y);
+			}
+		}
+//		level.getDistraction().setAlive(input.didX()&&!level.getDistraction().getAlive());
+
+		//creature
+		cAngleCache.set(0.0f,7.0f);
+>>>>>>> master
 		if (cAngleCache.len2() > 0.0f) {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
@@ -367,7 +528,11 @@ public class GameController implements Screen, ContactListener {
 		bob.setMovement(cAngleCache.x,cAngleCache.y);
 		bob.applyForce();
 
+<<<<<<< HEAD
 		cAngleCache.set(3.0f,0.0f);
+=======
+		cAngleCache.set(10.0f,0.0f);
+>>>>>>> master
 		if (cAngleCache.len2() > 0.0f) {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
@@ -378,7 +543,11 @@ public class GameController implements Screen, ContactListener {
 		fred.setMovement(cAngleCache.x,cAngleCache.y);
 		fred.applyForce();
 
+<<<<<<< HEAD
 		cAngleCache.set(0.3f,-1.8f);
+=======
+		cAngleCache.set(10.2f,-0.8f);
+>>>>>>> master
 		if (cAngleCache.len2() > 0.0f) {
 			float angle = cAngleCache.angle();
 			// Convert to radians with up as 0
@@ -440,7 +609,11 @@ public class GameController implements Screen, ContactListener {
 		checkFail();
 		level.update(dt);
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/**
 	 * Draw the physics objects to the canvas
 	 *
@@ -453,9 +626,15 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void draw(float delta) {
 		canvas.clear();
+<<<<<<< HEAD
 		
 		level.draw(canvas);
 				
+=======
+
+		level.draw(canvas);
+//		level.getDistraction().draw(canvas);
+>>>>>>> master
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
@@ -469,11 +648,19 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Called when the Screen is resized. 
 	 *
 	 * This can happen at any point during a non-paused state but will never happen 
+=======
+
+	/**
+	 * Called when the Screen is resized.
+	 *
+	 * This can happen at any point during a non-paused state but will never happen
+>>>>>>> master
 	 * before a call to show().
 	 *
 	 * @param width  The new width in pixels
@@ -502,8 +689,13 @@ public class GameController implements Screen, ContactListener {
 
 	/**
 	 * Called when the Screen is paused.
+<<<<<<< HEAD
 	 * 
 	 * This is usually when it's not active or visible on screen. An Application is 
+=======
+	 *
+	 * This is usually when it's not active or visible on screen. An Application is
+>>>>>>> master
 	 * also paused before it is destroyed.
 	 */
 	public void pause() {
@@ -518,7 +710,11 @@ public class GameController implements Screen, ContactListener {
 	public void resume() {
 		// TODO Auto-generated method stub
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> master
 	/**
 	 * Called when this screen becomes the current screen for a Game.
 	 */
@@ -548,9 +744,15 @@ public class GameController implements Screen, ContactListener {
 		AnnetteModel annette   = level.getAnnette();
 
 		//Check for losing condition
+<<<<<<< HEAD
 		if (level.getLight(0).contains(annette.getX(), annette.getY())||
 				level.getLight(1).contains(annette.getX(), annette.getY())||
 				level.getLight(2).contains(annette.getX(), annette.getY())) {
+=======
+		if (level.getVision(0).contains(annette.getX(), annette.getY())||
+				level.getVision(1).contains(annette.getX(), annette.getY())||
+				level.getVision(2).contains(annette.getX(), annette.getY())) {
+>>>>>>> master
 			setFailure(true);
 		}
 	}
@@ -558,7 +760,11 @@ public class GameController implements Screen, ContactListener {
 	/**
 	 * Callback method for the start of a collision
 	 *
+<<<<<<< HEAD
 	 * This method is called when we first get a collision between two objects.  We use 
+=======
+	 * This method is called when we first get a collision between two objects.  We use
+>>>>>>> master
 	 * this method to test if it is the "right" kind of collision.  In particular, we
 	 * use it to test if we made it to the win door.
 	 *
@@ -573,7 +779,11 @@ public class GameController implements Screen, ContactListener {
 
 		Object fd1 = fix1.getUserData();
 		Object fd2 = fix2.getUserData();
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> master
 		try {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
@@ -584,7 +794,18 @@ public class GameController implements Screen, ContactListener {
 			CreatureModel fred = level.getCreature(1);
 			CreatureModel john = level.getCreature(2);
 			ExitModel door   = level.getExit();
+<<<<<<< HEAD
 			
+=======
+			DistractionModel distraction = level.getDistraction();
+			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
+			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
+			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
+			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
+//			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
+			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
+			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
+>>>>>>> master
 			// Check for win condition
 			if ((bd1 == annette && bd2 == door  ) ||
 				(bd1 == door   && bd2 == annette)) {
@@ -596,6 +817,31 @@ public class GameController implements Screen, ContactListener {
 					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
 				setFailure(true);
 			}
+<<<<<<< HEAD
+=======
+			// Check if bird hits box
+			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
+				annette.setBird(false);
+				distraction.setAlive(false);
+//				distraction.deactivatePhysics(level.getWorld());
+//				distraction.setDeactivated(false);
+			}
+			if ((bd1 == distraction && (bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4 ))|| //bd2==maze5) ||
+					bd2 == distraction && (bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4 )) { //bd1 == maze5))) {
+				System.out.println("here");
+				annette.setBird(false);
+				distraction.setAlive(false);
+
+			}
+			if ((bd1 == distraction && (bd2==wall1 || bd2==wall2)) || //(bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4) ||
+					(bd2 == distraction && (bd1==wall1 || bd2==wall2))) {//level.getMazes().contains(bd2))) {//(bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4))) {
+				System.out.println("here");
+				annette.setBird(false);
+				distraction.setAlive(false);
+			}
+
+
+>>>>>>> master
 
 			// check reactivation
 
@@ -618,4 +864,8 @@ public class GameController implements Screen, ContactListener {
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
 	public void preSolve(Contact contact, Manifold oldManifold) {}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
