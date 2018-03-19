@@ -53,8 +53,8 @@ public class AnnetteModel extends BoxObstacle {
     private FilmStrip sidefilmstrip;
     private FilmStrip upfilmstrip;
     private FilmStrip downfilmstrip;
-    
-    
+
+
     /** The current animation frame of the avatar */
     private int startFrame;
 
@@ -281,7 +281,7 @@ public class AnnetteModel extends BoxObstacle {
      */
     public AnnetteModel() {
         super(0,0,1.0f, 1.0f);
-        setFixedRotation(false);
+        setFixedRotation(true);
         this.direction = Direction.RIGHT;
         this.isbird = false;
     }
@@ -424,7 +424,7 @@ public class AnnetteModel extends BoxObstacle {
     public void draw(ObstacleCanvas canvas) {
 
         FilmStrip dirTexture = null;
-        float flipped = 1f;
+        float flipped = 0.6f;
 
         switch (direction) {
             case RIGHT:
@@ -433,7 +433,7 @@ public class AnnetteModel extends BoxObstacle {
 
                 break;
             case LEFT:
-                flipped = -1f;
+                flipped = -0.6f;
                 setTexture(sidefilmstrip);
                 dirTexture = sidefilmstrip;
 
@@ -450,7 +450,7 @@ public class AnnetteModel extends BoxObstacle {
         }
 
         if (texture != null) {
-            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, 1f);
+            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, 0.6f);
         }
     }
 

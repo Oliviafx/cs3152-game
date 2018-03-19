@@ -289,7 +289,7 @@ public class CreatureModel extends WheelObstacle {
      *
      * We use this method to reset cooldowns.
      *
-     * @param delta Number of seconds since last animation frame
+     * @param dt Number of seconds since last animation frame
      */
     public void update(float dt) {
         // Animate if necessary
@@ -318,7 +318,7 @@ public class CreatureModel extends WheelObstacle {
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,getAngle(),1.0f,1.0f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,0,0.75f,0.75f);
         }
     }
 }

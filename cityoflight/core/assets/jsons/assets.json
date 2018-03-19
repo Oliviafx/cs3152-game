@@ -1,17 +1,47 @@
 {
     "textures": {
-		"earth": {
-			"file": "textures/tile.png",
-			"wrap": true
+    	"earth": {
+    		"file":		"textures/tile.png",
+    		"wrap":		true
+    	},
+    	"annette": {
+    		"file": 	"textures/sideAnnette.png",
+    		"wrap":  	false,
+			"strip":	{
+				"size":		9,
+				"rows":		1,
+				"cols":		9,
+				"first":	0
+			}
+    	},
+		"snail": {
+			"file": 	"textures/SnailSide.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
 		},
-		"annette": {
-			"file": "textures/sideAnnette.png",
-			"wrap": false,
-			"strip": {
-				"size": 9,
-				"rows": 1,
-				"cols": 9,
-				"first": 0
+		"tarasque": {
+			"file": 	"textures/tarasqueside.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		16,
+				"rows":		1,
+				"cols":		16,
+				"first":	0
+			}
+		},
+		"blanche": {
+			"file": 	"textures/blancheside.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		24,
+				"rows":		1,
+				"cols":		24,
+				"first":	0
 			}
 		},
 		"annetteDown": {
