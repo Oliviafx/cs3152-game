@@ -1,0 +1,3 @@
+Controls: Players can control Annette's movement with the ARROW keys. Summoning a box is controlled with SPACE. The distraction is conjured with X. As usual, R will reset the level, ESC closes the game, and O will toggle debug mode.
+
+Objective: Reach the exit tile in the top left while avoiding contact with the creatures and their lines of sight. The box will obstruct creature and Annette's movement as well as the lines of sight until it is deactivated (indicated by the box going black). The gray box indicates it is in the "phase" of deactivation, which is to say it still functions as a box, but Annette is near the boundary of deactivation. Once placed, the box cannot be moved; however, it can be reactivated by Annette's collision with it.
