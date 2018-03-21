@@ -79,6 +79,9 @@ public class LevelModel {
 	/** Whether or not the level is in debug mode (showing off physics) */
 	private boolean debug;
 
+	/** Alpha constant for box deactivation*/
+	private int alpha = 255;
+
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
 
@@ -651,14 +654,26 @@ public class LevelModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		canvas.clear();
+		Color color;
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
-		if (box.getDeactivated()) box.drawState(canvas, Color.BLACK);
-		else if (box.getDeactivating())	box.drawState(canvas, Color.GRAY);
+		if (box.getDeactivated()) {
+			box.drawState(canvas, Color.BLACK);
+			alpha = 255;
+		}
+		else if (box.getDeactivating())	{
+			color = Color.GRAY;
+			if (alpha > 30) {
+				alpha = alpha - 1;
+			}
+			color.a = alpha;
+			box.drawState(canvas, color);
+
+		}
 		canvas.end();
 
 		// Now draw the shadows

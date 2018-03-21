@@ -636,13 +636,15 @@ public class GameController implements Screen, ContactListener {
 				annette.setBird(false);
 				distraction.setAlive(false);
 //				distraction.deactivatePhysics(level.getWorld());
-//				distraction.setDeactivated(false);
+//				distraction.setActive(false);
+				level.objects.remove(distraction);
 			}
 			if ((bd1 == distraction && (bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4 ))|| //bd2==maze5) ||
 					bd2 == distraction && (bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4 )) { //bd1 == maze5))) {
 				System.out.println("here");
 				annette.setBird(false);
 				distraction.setAlive(false);
+				level.objects.remove(distraction);
 
 			}
 			if ((bd1 == distraction && (bd2==wall1 || bd2==wall2)) || //(bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4) ||
@@ -650,9 +652,18 @@ public class GameController implements Screen, ContactListener {
 				System.out.println("here");
 				annette.setBird(false);
 				distraction.setAlive(false);
+				level.objects.remove(distraction);
 			}
 
-
+			for (Obstacle b : level.getBarriers()) {
+				if ((bd1 == b && bd2 == distraction) || (bd1 == distraction && bd2==b)) {
+					annette.setBird(false);
+					distraction.setAlive(false);
+//				distraction.deactivatePhysics(level.getWorld());
+//				distraction.setActive(false);
+					level.objects.remove(distraction);
+				}
+			}
 
 			// check reactivation
 
