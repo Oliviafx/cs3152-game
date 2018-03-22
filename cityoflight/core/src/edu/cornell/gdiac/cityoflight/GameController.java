@@ -613,13 +613,13 @@ public class GameController implements Screen, ContactListener {
 			CreatureModel john = level.getCreature(2);
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
-			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
-			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
-			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
-			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
-//			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
-			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
-			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
+//			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
+//			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
+//			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
+//			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
+////			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
+//			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
+//			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
 			// Check for win condition
 			if ((bd1 == annette && bd2 == door  ) ||
 				(bd1 == door   && bd2 == annette)) {
@@ -638,31 +638,17 @@ public class GameController implements Screen, ContactListener {
 //				distraction.deactivatePhysics(level.getWorld());
 //				distraction.setActive(false);
 				level.objects.remove(distraction);
+//				distraction.dispose();
+//				distraction.deactivatePhysics(level.getWorld());
 			}
-//			if ((bd1 == distraction && (bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4 ))|| //bd2==maze5) ||
-//					bd2 == distraction && (bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4 )) { //bd1 == maze5))) {
-//				System.out.println("here");
-//				annette.setBird(false);
-//				distraction.setAlive(false);
-//				level.objects.remove(distraction);
-//
-//			}
-
-//			if ((bd1 == distraction && (bd2==wall1 || bd2==wall2)) || //(bd2==maze1 || bd2 == maze2 || bd2 == maze3 || bd2 == maze4) ||
-//					(bd2 == distraction && (bd1==wall1 || bd2==wall2))) {//level.getMazes().contains(bd2))) {//(bd1==maze1 || bd1==maze2 || bd1 == maze3 || bd1 == maze4))) {
-//				System.out.println("here");
-//				annette.setBird(false);
-//				distraction.setAlive(false);
-//				level.objects.remove(distraction);
-//			}
 
 			for (Obstacle b : level.getMazes()) {
 				if ((bd1 == b && bd2 == distraction) || (bd1 == distraction && bd2 == b )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
-//				distraction.deactivatePhysics(level.getWorld());
-//				distraction.setActive(false);
 					level.objects.remove(distraction);
+//					distraction.dispose();
+//					distraction.deactivatePhysics(level.getWorld());
 				}
 			}
 
@@ -670,9 +656,16 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
-//				distraction.deactivatePhysics(level.getWorld());
-//				distraction.setActive(false);
-					level.objects.remove(distraction);
+//					level.objects.remove(distraction);
+//					distraction.dispose();
+//					distraction.setDeactivated(true);
+				}
+			}
+
+			for (CreatureModel c : level.getAllCreatures()) {
+				if ((bd1 == c && bd2 == distraction) || (bd1 == distraction && bd2 == c )) {
+					// some code that sets creature alertness idk
+					System.out.println("distract creature");
 				}
 			}
 
