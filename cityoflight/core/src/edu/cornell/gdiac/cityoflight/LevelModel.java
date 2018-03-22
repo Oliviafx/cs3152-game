@@ -171,6 +171,15 @@ public class LevelModel {
 	}
 
 	/**
+	 * Returns a reference to the creature
+	 *
+	 * @return a reference to the creature
+	 */
+	public Array<CreatureModel> getAllCreatures() {
+		return creatures;
+	}
+
+	/**
 	 * Returns a reference to a light
 	 *
 	 * @return a reference to a light
@@ -393,6 +402,7 @@ public class LevelModel {
         distraction.setDrawScale(scale);
         activate(distraction);
         distraction.setActive(true);
+        distraction.setAlive(true);
 //		distraction.activatePhysics(world);
     }
 
@@ -559,10 +569,11 @@ public class LevelModel {
 			world = null;
 		}
 
-		if (distraction != null) {
-			distraction.setAlive(false);
-//			distraction = null;
-		}
+//		if (distraction != null) {
+//			distraction.setAlive(false);
+//			objects.remove(distraction);
+////			distraction = null;
+//		}
 	}
 
 	/**
@@ -613,8 +624,13 @@ public class LevelModel {
             if (distraction!=null) {
 //				System.out.println(distraction.getX());
 //				System.out.println(distraction.getY());
-                distraction.update(dt);
+
+				distraction.update(dt);
+				if (!distraction.getAlive()) {
+					objects.remove(distraction);
+				}
             }
+
 			return true;
 		}
 		return false;
@@ -672,8 +688,13 @@ public class LevelModel {
 			}
 			color.a = alpha;
 			box.drawState(canvas, color);
-
 		}
+//		else if (!box.getDeactivating()) {
+//			alpha = 255;
+//			color = Color.WHITE;
+//			color.a = alpha;
+//			box.drawState(canvas, color);
+//		}
 		canvas.end();
 
 		// Now draw the shadows
