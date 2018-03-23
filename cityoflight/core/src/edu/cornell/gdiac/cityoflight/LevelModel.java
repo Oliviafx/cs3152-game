@@ -159,9 +159,17 @@ public class LevelModel {
 	}
 
 	/**
-	 * Returns a reference to the creature
+	 * Returns a reference to the creature array
 	 *
-	 * @return a reference to the creature
+	 * @return a reference to the creature array
+	 */
+	public Array<CreatureModel> getCreature(){ return creatures; }
+
+	/**
+	 * Returns a creature of the specified index
+	 *
+	 * @param index the index of the creature to return
+	 * @return a creature of the specified index
 	 */
 	public CreatureModel getCreature(int index) {
 		return creatures.get(index);
