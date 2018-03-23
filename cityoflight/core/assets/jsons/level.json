@@ -68,11 +68,11 @@
 			"pos":        	[ 4.0, 7.0],
 			"radius":      	0.8,
 			"bodytype":    	"dynamic",
-			"density":        100.0,
+			"density":        1.0,
 			"friction":       0.0,
 			"restitution":    0.0,
-			"force": 		  450.0,
-			"damping": 		  10.0,
+			"force": 		  1.0,
+			"damping": 		  1.0,
 			"maxspeed": 	  10.0,
 			"collideBits":	"0001",
 			"excludeBits":	"0000",
@@ -209,7 +209,7 @@
   	"interior": {
 		"maze2": {
         	"pos":        	[ 1.5f, 1.5f],
-        	"size":       	[ 1f, 1f],
+        	"size":       	[ 10f, 5f],
         	"pad":       	[ 0.1f, 0.1f],
         	"bodytype":     "static",
             "density":        0.0,
@@ -220,48 +220,6 @@
         	"texture":      "earth",
             "debugcolor":   "yellow",
             "debugopacity":  200
-		},
-		"maze3": {
-        	"pos":        	[ 8.0f, 8.0f],
-        	"size":       	[ 2.0f, 2.0f],
-        	"pad":       	[ 0.1f, 0.1f],
-        	"bodytype":     "static",
-            "density":        0.0,
-            "friction":       0.4,
-            "restitution":    0.1,
-    	  	"collideBits":	"1000",
-	      	"excludeBits":	"0000",
-        	"texture":      "earth",
-            "debugcolor":   "yellow",
-            "debugopacity":  200
-		},
-		"maze4": {
-        	"pos":        	[ 1.5f, 4.5f],
-        	"size":       	[ 1f, 1f],
-        	"pad":       	[ 0.1f, 0.1f],
-        	"bodytype":     "static",
-            "density":        0.0,
-            "friction":       0.4,
-            "restitution":    0.1,
-    	  	"collideBits":	"1000",
-	      	"excludeBits":	"0000",
-        	"texture":      "earth",
-            "debugcolor":   "yellow",
-            "debugopacity":  200
-		},
-		"maze5": {
-        	"pos":        	[ 1.5f, 6.0f],
-        	"size":       	[ 1f, 1f],
-        	"pad":       	[ 0.1f, 0.1f],
-        	"bodytype":     "static",
-            "density":        0.0,
-            "friction":       0.4,
-            "restitution":    0.1,
-    	  	"collideBits":	"1000",
-	      	"excludeBits":	"0000",
-        	"texture":      "earth",
-            "debugcolor":   "yellow",
-            "debugopacity":  200
-  		}
+		}
   	}
  }
