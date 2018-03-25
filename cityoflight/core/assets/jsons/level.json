@@ -53,7 +53,7 @@
       	"force": 		 450.0,
       	"damping": 		 10.0,
       	"maxspeed": 	  10.0,
-      	"collideBits":	"0010",
+       	"collideBits":	"0010",
       	"excludeBits":	"0000",
       	"startframe":       0,
       	"walklimit":		4,
