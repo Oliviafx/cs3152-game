@@ -1,5 +1,7 @@
 # CS3152: Mystique
 
+**TECHNICAL PROTOTYPE RELEASE IS ON THE BRANCH LABELED 'amanda'**
+
 ## Fire Works (Group 9)
 * Amanda Trang (at668)
 * Catherine Sadoff (cs895) 
