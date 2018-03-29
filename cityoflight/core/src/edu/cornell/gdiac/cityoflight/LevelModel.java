@@ -79,6 +79,9 @@ public class LevelModel {
 	/** Whether or not the level is in debug mode (showing off physics) */
 	private boolean debug;
 
+	/** Alpha constant for box deactivation*/
+	private int alpha = 255;
+
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
 
@@ -165,6 +168,15 @@ public class LevelModel {
 	 */
 	public CreatureModel getCreature(int index) {
 		return creatures.get(index);
+	}
+
+	/**
+	 * Returns a reference to the creature
+	 *
+	 * @return a reference to the creature
+	 */
+	public Array<CreatureModel> getAllCreatures() {
+		return creatures;
 	}
 
 	/**
@@ -390,6 +402,7 @@ public class LevelModel {
         distraction.setDrawScale(scale);
         activate(distraction);
         distraction.setActive(true);
+        distraction.setAlive(true);
 //		distraction.activatePhysics(world);
     }
 
@@ -556,10 +569,11 @@ public class LevelModel {
 			world = null;
 		}
 
-		if (distraction != null) {
-			distraction.setAlive(false);
-//			distraction = null;
-		}
+//		if (distraction != null) {
+//			distraction.setAlive(false);
+//			objects.remove(distraction);
+////			distraction = null;
+//		}
 	}
 
 	/**
@@ -610,8 +624,13 @@ public class LevelModel {
             if (distraction!=null) {
 //				System.out.println(distraction.getX());
 //				System.out.println(distraction.getY());
-                distraction.update(dt);
+
+				distraction.update(dt);
+				if (!distraction.getAlive()) {
+					objects.remove(distraction);
+				}
             }
+
 			return true;
 		}
 		return false;
@@ -651,14 +670,31 @@ public class LevelModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		canvas.clear();
+		Color color;
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
-		if (box.getDeactivated()) box.drawState(canvas, Color.BLACK);
-		else if (box.getDeactivating())	box.drawState(canvas, Color.GRAY);
+		if (box.getDeactivated()) {
+			box.drawState(canvas, Color.BLACK);
+			alpha = 255;
+		}
+		else if (box.getDeactivating())	{
+			color = Color.GRAY;
+			if (alpha > 30) {
+				alpha = alpha - 1;
+			}
+			color.a = alpha;
+			box.drawState(canvas, color);
+		}
+//		else if (!box.getDeactivating()) {
+//			alpha = 255;
+//			color = Color.WHITE;
+//			color.a = alpha;
+//			box.drawState(canvas, color);
+//		}
 		canvas.end();
 
 		// Now draw the shadows
