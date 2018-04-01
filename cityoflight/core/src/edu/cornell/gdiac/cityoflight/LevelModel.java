@@ -360,6 +360,7 @@ public class LevelModel {
         // Create cone lights to be line of sights of creatures.
         createLineofSight(levelFormat.get("vision"));
         // Create the creatures and attach light sources
+		// createCreatures(levelFormat.get("creatures"));
         createCreature(levelFormat.get("creatures"), "snail", 0);
         createCreature(levelFormat.get("creatures"), "tarasque", 1);
         createCreature(levelFormat.get("creatures"), "blanche", 2);
@@ -497,22 +498,37 @@ public class LevelModel {
 	/**
 	 *
 	 * @param creaturejson
+	 */
+	public void createCreatures(JsonValue creaturejson){
+		CreatureModel creature = new CreatureModel();
+		int index = 0;
+		JsonValue creaturedata = creaturejson.child();
+    	while (creaturedata != null) {
+			creature.initialize(creaturedata);
+			creature.setDrawScale(scale);
+			activate(creature);
+			attachVision(creature, lights.get(index));
+			creatures.add(creature);
+
+			creaturedata = creaturedata.next();
+			index++;
+		}
+	}
+
+	/**
+	 *
+	 * @param creaturejson
 	 * @param name
 	 * @param index the index for the creature and the light which the creature is attached to
 	 */
 	public void createCreature(JsonValue creaturejson, String name, int index){
 		CreatureModel creature = new CreatureModel();
 		JsonValue creaturedata = creaturejson.get(name);
-//		while (creaturedata != null) {
-			//if (creaturedata == null) {System.out.println ("no json found");}
 			creature.initialize(creaturedata);
 			creature.setDrawScale(scale);
 			creatures.add(creature);
 			activate(creature);
 			attachVision(creature, lights.get(index));
-//			creaturedata = creaturedata.next();
-//		}
-
 	}
 
 	/**
