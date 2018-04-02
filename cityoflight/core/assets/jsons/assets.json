@@ -91,5 +91,17 @@
 				"box_noise": {
 					"file": "sounds/box.wav"
 				}
+				"ambient-low": {
+					"file": "sounds/ambient_low.wav"
+				}
+				"footsteps": {
+					"file": "sounds/footsteps.wav"
+				}
+				"slam": {
+					"file": "sounds/slam.wav"
+				}
+				"select": {
+					"file": "sounds/select_test.wav"
+				}
 			}
 		}

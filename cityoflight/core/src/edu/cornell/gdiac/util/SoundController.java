@@ -233,6 +233,11 @@ public class SoundController {
 		frameLimit = value;
 	}
 
+
+	public Array<String> getCollection() {
+		return collection;
+	}
+
 	/// Sound Management
 	/**
 	 * Uses the asset manager to allocate a sound
