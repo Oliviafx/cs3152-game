@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -480,10 +481,10 @@ public class GameController implements Screen, ContactListener {
 	 * @param delta
 	 */
 	public void draw(float delta) {
+
 		canvas.clear();
 
 		level.draw(canvas);
-//		level.getDistraction().draw(canvas);
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
