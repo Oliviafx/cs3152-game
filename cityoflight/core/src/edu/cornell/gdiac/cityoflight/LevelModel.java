@@ -93,6 +93,8 @@ public class LevelModel {
 	/** The world scale */
 	protected Vector2 scale;
 
+	protected Affine2 otran;
+
 	/** The camera defining the RayHandler view; scale is in physics coordinates */
 	protected OrthographicCamera raycamera;
 	/** The rayhandler for storing lights, and drawing them (SIGH) */
@@ -141,6 +143,15 @@ public class LevelModel {
 	 */
 	public World getWorld() {
 		return world;
+	}
+
+	/**
+	 * Returns a reference to the lighting rayhandler
+	 *
+	 * @return a reference to the lighting rayhandler
+	 */
+	public Affine2 getOtran() {
+		return otran;
 	}
 
 	/**
@@ -669,11 +680,29 @@ public class LevelModel {
 	 * @param canvas	the drawing context
 	 */
 	public void draw(ObstacleCanvas canvas) {
+
 		canvas.clear();
 		Color color;
 
+		AnnetteModel annette = getAnnette();
+
+		Vector2 pos = annette.getPosition();
+		Vector2 scale = annette.getDrawScale();
+		Affine2 oTran = new Affine2();
+		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
+		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
+		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
+		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
+		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+
+		oTran.setToTranslation(-50*tx, -50*ty);
+		Affine2 wTran = new Affine2();
+		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
+		oTran.mul(wTran);
+
 		// Draw the sprites first (will be hidden by shadows)
-		canvas.begin();
+		canvas.begin(oTran);
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
@@ -689,12 +718,7 @@ public class LevelModel {
 			color.a = alpha;
 			box.drawState(canvas, color);
 		}
-//		else if (!box.getDeactivating()) {
-//			alpha = 255;
-//			color = Color.WHITE;
-//			color.a = alpha;
-//			box.drawState(canvas, color);
-//		}
+
 		canvas.end();
 
 		// Now draw the shadows
@@ -704,7 +728,7 @@ public class LevelModel {
 
 		// Draw debugging on top of everything.
 		if (debug) {
-			canvas.beginDebug();
+			canvas.beginDebug(oTran);
 			for(Obstacle obj : objects) {
 				obj.drawDebug(canvas);
 			}
