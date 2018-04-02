@@ -47,7 +47,7 @@ public class BoxModel extends BoxObstacle {
     /** Random value set as of now */
     private static final float DEFAULT_THRUST = 15.0f;
 
-    public static final float INNER_RADIUS = 2.7f;
+    public static final float INNER_RADIUS = 0.01f;
     public static final float OUTER_RADIUS = 5.0f;
 
     /** The texture filmstrip for the box */

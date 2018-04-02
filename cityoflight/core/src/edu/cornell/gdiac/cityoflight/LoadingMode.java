@@ -26,6 +26,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.assets.*;
 import com.badlogic.gdx.graphics.*;
@@ -106,6 +107,8 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private ObstacleCanvas canvas;
 	/** Listener that will update the player mode when we are done */
 	private ScreenListener listener;
+
+	private SoundController sound = SoundController.getInstance();
 
 	/** The width of the progress bar */	
 	private int width;
@@ -443,6 +446,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) { 
 		if (pressState == 1) {
 			pressState = 2;
+			System.out.println(sound.play("select", "sounds/select_test.wav", false, 1));
 			return false;
 		}
 		return true;
@@ -481,6 +485,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	public boolean buttonUp (Controller controller, int buttonCode) {
 		if (pressState == 1 && buttonCode == startButton) {
 			pressState = 2;
+			System.out.println(sound.play("select", "sounds/select_test.wav", false, 1));
 			return false;
 		}
 		return true;
@@ -519,6 +524,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	public boolean keyUp(int keycode) { 
 		if (keycode == Input.Keys.N || keycode == Input.Keys.P) {
 			pressState = 2;
+			System.out.println(sound.play("select", "sounds/select_test.wav", false, 1));
 			return false;			
 		}
 		return true; 

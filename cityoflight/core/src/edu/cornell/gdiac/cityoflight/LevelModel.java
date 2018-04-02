@@ -293,6 +293,26 @@ public class LevelModel {
 	}
 
 	/**
+	 * Returns whether this level is currently in debug node
+	 *
+	 * If the level is in debug mode, then the physics bodies will all be drawn as
+	 * wireframes onscreen
+	 *
+	 * @return whether this level is currently in debug node
+	 */
+	public int getAlpha() { return alpha; }
+
+	/**
+	 * Sets whether this level is currently in debug node
+	 *
+	 * If the level is in debug mode, then the physics bodies will all be drawn as
+	 * wireframes onscreen
+	 *
+	 * @param value	whether this level is currently in debug node
+	 */
+	public void setAlpha(int value) { alpha = value; }
+
+	/**
 	 * Creates a new LevelModel
 	 *
 	 * The level is empty and there is no active physics world.  You must read
@@ -685,6 +705,7 @@ public class LevelModel {
 		Color color;
 
 		AnnetteModel annette = getAnnette();
+		BoxModel box = getBox();
 
 		Vector2 pos = annette.getPosition();
 		Vector2 scale = annette.getDrawScale();
@@ -712,8 +733,11 @@ public class LevelModel {
 		}
 		else if (box.getDeactivating())	{
 			color = Color.GRAY;
+			float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
+			float temp = (1 - (dist / BoxModel.OUTER_RADIUS)) * 255;
 			if (alpha > 30) {
-				alpha = alpha - 1;
+				temp = temp - 1;
+				alpha = (int) temp;
 			}
 			color.a = alpha;
 			box.drawState(canvas, color);
