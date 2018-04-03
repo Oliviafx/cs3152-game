@@ -470,7 +470,7 @@ public class GameController implements Screen, ContactListener {
 			box.setDoesExist(true);
 			box.setDeactivated(false);
 			box.setDeactivating(false);
-			sound.play("box", "sounds/box.wav", false, 1);
+			sound.play("box", "sounds/box.wav", false, 0.8f);
 
 		}
 		box.applyForce();
