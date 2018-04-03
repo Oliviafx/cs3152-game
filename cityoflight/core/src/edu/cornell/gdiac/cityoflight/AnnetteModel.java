@@ -399,10 +399,32 @@ public class AnnetteModel extends BoxObstacle {
     public void update(float dt) {
         // Animate if necessary
         if (animate && walkCool == 0) {
-            if (sidefilmstrip != null) {
-                int next = (sidefilmstrip.getFrame()+1) % sidefilmstrip.getSize();
-                sidefilmstrip.setFrame(next);
-            }
+            switch (direction) {
+                case RIGHT:
+                    if (sidefilmstrip != null) {
+                        int next = (sidefilmstrip.getFrame()+1) % sidefilmstrip.getSize();
+                        sidefilmstrip.setFrame(next);
+                    }
+                    break;
+                case LEFT:
+                    if (sidefilmstrip != null) {
+                        int next = (sidefilmstrip.getFrame()+1) % sidefilmstrip.getSize();
+                        sidefilmstrip.setFrame(next);
+                    }
+                    break;
+                case UP:
+                    if (upfilmstrip != null){
+                        int next = (upfilmstrip.getFrame()+1) % upfilmstrip.getSize();
+                        upfilmstrip.setFrame(next);
+                    }
+                    break;
+                case DOWN:
+                    setTexture(sidefilmstrip);
+                    if (downfilmstrip != null){
+                        int next = (downfilmstrip.getFrame()+1) % downfilmstrip.getSize();
+                        downfilmstrip.setFrame(next);
+                    }
+                }
             walkCool = walkLimit;
         } else if (walkCool > 0) {
             walkCool--;
