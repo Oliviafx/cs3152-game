@@ -879,7 +879,7 @@ public class ObstacleCanvas {
 		local.inv();
 		computeVertices(local,region.getVertices());
 	}
-	
+
 	/**
 	 * Transform the given vertices by the affine transform
 	 */

@@ -93,7 +93,9 @@ public class AnnetteModel extends BoxObstacle {
      *
      * @param value the directional movement of this character.
      */
-    public void setMovement(Vector2 value) { setMovement(value.x,value.y);    }
+    public void setMovement(Vector2 value) {
+        setMovement(value.x,value.y);
+    }
 
     /**
      * Sets the directional movement of this character.

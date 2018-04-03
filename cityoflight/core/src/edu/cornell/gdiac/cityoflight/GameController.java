@@ -370,8 +370,9 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-		System.out.println(sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f));
-
+//		System.out.println(sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f));
+		sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f);
+//		System.out.println(sound.play("menu", "sounds/main_melody.wav", true, 0.75f));
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 //		if (aAngleCache.len2() > 0.0f) {
@@ -390,9 +391,9 @@ public class GameController implements Screen, ContactListener {
 
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
-//			System.out.println(sound.play("distraction", "sounds/box.wav", false, 1));
 //			System.out.println("here");
 			level.createDistraction(levelFormat);
+			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
 			//			dAngleCache.set(1,1);
@@ -469,7 +470,7 @@ public class GameController implements Screen, ContactListener {
 			box.setDoesExist(true);
 			box.setDeactivated(false);
 			box.setDeactivating(false);
-			System.out.println(sound.play("box", "sounds/box.wav", false, 1));
+			sound.play("box", "sounds/box.wav", false, 1);
 
 		}
 		box.applyForce();
@@ -487,7 +488,7 @@ public class GameController implements Screen, ContactListener {
 			box.setDeactivated(true);
 			box.deactivate();
 //			sound.stop("box");
-			System.out.println(sound.play("slam", "sounds/slam.wav", false, 0.5f));
+			sound.play("slam", "sounds/slam.wav", false, 0.5f);
 
 		}
 
