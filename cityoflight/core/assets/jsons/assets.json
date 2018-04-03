@@ -4,6 +4,10 @@
     		"file":		"textures/tile.png",
     		"wrap":		true
     	},
+		"ground": {
+			"file":		"textures/earthtile.png",
+			"wrap":		true
+		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
     		"wrap":  	false,
@@ -90,16 +94,22 @@
 			"sounds": {
 				"box_noise": {
 					"file": "sounds/box.wav"
-				}
+				},
 				"ambient-low": {
 					"file": "sounds/ambient_low.wav"
-				}
+				},
 				"footsteps": {
 					"file": "sounds/footsteps.wav"
-				}
+				},
+				"menu": {
+					"file": "sounds/main_melody.wav"
+				},
 				"slam": {
 					"file": "sounds/slam.wav"
-				}
+				},
+				"distraction": {
+					"file": "sounds/distraction.wav"
+				},
 				"select": {
 					"file": "sounds/select_test.wav"
 				}
