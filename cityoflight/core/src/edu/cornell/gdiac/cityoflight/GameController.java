@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -143,6 +144,8 @@ public class GameController implements Screen, ContactListener {
 	/** Countdown active for winning or losing */
 	private int countdown;
 
+	private float dist;
+
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
@@ -230,6 +233,19 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	/**
+	 * Returns the canvas associated with this controller
+	 *
+	 * The canvas is shared across all controllers
+	 *
+	 * @return canvas associated with this controller
+	 */
+	public float getDist() {
+		return dist;
+	}
+
+
+
+	/**
 	 * Creates a new game world
 	 *
 	 * The physics bounds and drawing scale are now stored in the LevelModel and
@@ -263,6 +279,12 @@ public class GameController implements Screen, ContactListener {
 	 * reread from the JSON file, allowing us to make changes on the fly.
 	 */
 	public void reset() {
+		SoundController sound = SoundController.getInstance();
+
+//		for (String key : sound.getCollection()) {
+//			sound.stop(key);
+//		}
+
 		level.dispose();
 
 		setComplete(false);
@@ -343,9 +365,14 @@ public class GameController implements Screen, ContactListener {
 //		}
 		InputController input = InputController.getInstance();
 
+		SoundController sound = SoundController.getInstance();
+
 		float xoff = 0;
 		float yoff = 0;
 
+//		System.out.println(sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f));
+		sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f);
+//		System.out.println(sound.play("menu", "sounds/main_melody.wav", true, 0.75f));
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 //		if (aAngleCache.len2() > 0.0f) {
@@ -357,9 +384,8 @@ public class GameController implements Screen, ContactListener {
 		aAngleCache.scl(annette.getForce());
 		annette.setMovement(aAngleCache.x,aAngleCache.y);
 		annette.setDirection(input.getDirection());
+
 		annette.setSummoning(InputController.getInstance().didSpace());
-//		System.out.println("Input direction null");
-//		System.out.println(input.getDirection()==null);
 		annette.setBird(input.didX());
 		annette.applyForce();
 
@@ -367,6 +393,7 @@ public class GameController implements Screen, ContactListener {
 		if (annette.getBird()&&!level.isDistraction() ) {
 //			System.out.println("here");
 			level.createDistraction(levelFormat);
+			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
 			//			dAngleCache.set(1,1);
@@ -443,20 +470,26 @@ public class GameController implements Screen, ContactListener {
 			box.setDoesExist(true);
 			box.setDeactivated(false);
 			box.setDeactivating(false);
+			sound.play("box", "sounds/box.wav", false, 0.8f);
+
 		}
 		box.applyForce();
 
-		float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
+		dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
 
 		// box is deactivatING
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.INNER_RADIUS){
 			box.setDeactivating(true);
+
 		}
 
 		// box is deactivatED
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
+//			sound.stop("box");
+			sound.play("slam", "sounds/slam.wav", false, 0.5f);
+
 		}
 
 		// set debug colors
@@ -480,10 +513,10 @@ public class GameController implements Screen, ContactListener {
 	 * @param delta
 	 */
 	public void draw(float delta) {
+
 		canvas.clear();
 
 		level.draw(canvas);
-//		level.getDistraction().draw(canvas);
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
@@ -676,6 +709,7 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivated(false);
 				box.setDeactivating(false);
 				box.reactivate();
+				level.setAlpha(255);
 			}
 
 		} catch (Exception e) {

@@ -82,6 +82,11 @@ public class LevelModel {
 	/** Alpha constant for box deactivation*/
 	private int alpha = 255;
 
+	private static final int MAX_ALPHA = 255;
+	private static final float BOX_MARGIN = 0.8f;
+
+	private static final float TRANSLATION = -50.0f;
+
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
 
@@ -92,6 +97,8 @@ public class LevelModel {
 	protected Rectangle bounds;
 	/** The world scale */
 	protected Vector2 scale;
+
+	protected Affine2 otran;
 
 	/** The camera defining the RayHandler view; scale is in physics coordinates */
 	protected OrthographicCamera raycamera;
@@ -141,6 +148,11 @@ public class LevelModel {
 	 */
 	public World getWorld() {
 		return world;
+	}
+
+
+	public Affine2 getOtran() {
+		return otran;
 	}
 
 	/**
@@ -280,6 +292,26 @@ public class LevelModel {
 	public void setMinFPS(int value) {
 		minFPS = value;
 	}
+
+	/**
+	 * Returns whether this level is currently in debug node
+	 *
+	 * If the level is in debug mode, then the physics bodies will all be drawn as
+	 * wireframes onscreen
+	 *
+	 * @return whether this level is currently in debug node
+	 */
+	public int getAlpha() { return alpha; }
+
+	/**
+	 * Sets whether this level is currently in debug node
+	 *
+	 * If the level is in debug mode, then the physics bodies will all be drawn as
+	 * wireframes onscreen
+	 *
+	 * @param value	whether this level is currently in debug node
+	 */
+	public void setAlpha(int value) { alpha = value; }
 
 	/**
 	 * Creates a new LevelModel
@@ -669,11 +701,38 @@ public class LevelModel {
 	 * @param canvas	the drawing context
 	 */
 	public void draw(ObstacleCanvas canvas) {
+
 		canvas.clear();
 		Color color;
 
+		AnnetteModel annette = getAnnette();
+		BoxModel box = getBox();
+
+		Vector2 pos = annette.getPosition();
+		Vector2 scale = annette.getDrawScale();
+		Affine2 oTran = new Affine2();
+		Affine2 wTran = new Affine2();
+
+		// Accounts for edges of screen
+		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
+		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
+		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
+		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
+		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+
+		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
+		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
+		oTran.mul(wTran);
+
+		if (rayhandler != null) {
+			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
+			rayhandler.render();
+		}
+
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
+
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
@@ -683,24 +742,15 @@ public class LevelModel {
 		}
 		else if (box.getDeactivating())	{
 			color = Color.GRAY;
-			if (alpha > 30) {
-				alpha = alpha - 1;
-			}
+			float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
+			float temp = (1 - ((dist - BOX_MARGIN) / BoxModel.OUTER_RADIUS)) * MAX_ALPHA;
+			temp = temp - 1;
+			alpha = (int) temp;
 			color.a = alpha;
 			box.drawState(canvas, color);
 		}
-//		else if (!box.getDeactivating()) {
-//			alpha = 255;
-//			color = Color.WHITE;
-//			color.a = alpha;
-//			box.drawState(canvas, color);
-//		}
-		canvas.end();
 
-		// Now draw the shadows
-		if (rayhandler != null) {
-			rayhandler.render();
-		}
+		canvas.end();
 
 		// Draw debugging on top of everything.
 		if (debug) {
