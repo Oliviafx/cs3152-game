@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import edu.cornell.gdiac.physics.lights.LightSource;
 import edu.cornell.gdiac.util.*;
 
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -65,6 +66,7 @@ public class GameController implements Screen, ContactListener {
 	/** Offset for box when summoning */
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
+
 
 	/**
 	 * Preloads the assets for this controller.
@@ -142,7 +144,6 @@ public class GameController implements Screen, ContactListener {
 	private boolean failed;
 	/** Countdown active for winning or losing */
 	private int countdown;
-
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
@@ -320,6 +321,7 @@ public class GameController implements Screen, ContactListener {
 	private Vector2 cAngleCache = new Vector2();
 	private Vector2 dAngleCache = new Vector2();
 
+
 	/**
 	 * The core gameplay loop of this world.
 	 *
@@ -333,9 +335,7 @@ public class GameController implements Screen, ContactListener {
 	public void update(float dt) {
 		// Process actions in object model
 		AnnetteModel annette = level.getAnnette();
-		CreatureModel bob = level.getCreature(0);
-		CreatureModel fred = level.getCreature(1);
-		CreatureModel john = level.getCreature(2);
+
 		BoxModel box = level.getBox();
 		DistractionModel distraction = level.getDistraction();
 //		if (level.isDistraction()) {
@@ -383,39 +383,41 @@ public class GameController implements Screen, ContactListener {
 		}
 //		level.getDistraction().setAlive(input.didX()&&!level.getDistraction().getAlive());
 
-		//creature
-		cAngleCache.set(0.0f,7.0f);
-		if (cAngleCache.len2() > 0.0f) {
-			float angle = cAngleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			bob.setAngle(angle);
-		}
-		cAngleCache.scl(bob.getForce());
-		bob.setMovement(cAngleCache.x,cAngleCache.y);
-		bob.applyForce();
+		// creature AI temporary.
 
-		cAngleCache.set(10.0f,0.0f);
-		if (cAngleCache.len2() > 0.0f) {
-			float angle = cAngleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			fred.setAngle(angle);
-		}
-		cAngleCache.scl(fred.getForce());
-		fred.setMovement(cAngleCache.x,cAngleCache.y);
-		fred.applyForce();
+        int index = 0;
+        CreatureModel currentcreature = level.getCreature(index);
 
-		cAngleCache.set(10.2f,-0.8f);
-		if (cAngleCache.len2() > 0.0f) {
-			float angle = cAngleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			john.setAngle(angle);
-		}
-		cAngleCache.scl(john.getForce());
-		john.setMovement(cAngleCache.x,cAngleCache.y);
-		john.applyForce();
+        while (currentcreature != null){
+			currentcreature.setTurnCool(currentcreature.getTurnCool() - 1);
+
+			if (currentcreature.getType() == 1) {
+				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
+					System.out.println("snail behavior: changing direction");
+					currentcreature.setXInput(-currentcreature.getXInput());
+					currentcreature.setYInput(-currentcreature.getYInput());
+					currentcreature.setStuck(false);
+					currentcreature.setTurnCool(currentcreature.getTurnLimit());
+				}
+			}
+
+			cAngleCache.set(currentcreature.getXInput(),currentcreature.getYInput());
+			//System.out.println("movement = " + currentcreature.getMovement());
+
+			if (cAngleCache.len2() > 0.0f) {
+                float angle = cAngleCache.angle();
+                // Convert to radians with up as 0
+                angle = (float)Math.PI*(angle-90.0f)/180.0f;
+                currentcreature.setAngle(angle);
+            }
+            cAngleCache.scl(currentcreature.getForce());
+            currentcreature.setMovement(cAngleCache.x,cAngleCache.y);
+            currentcreature.applyForce();
+
+            // try to get next creature from level.
+            index ++;
+            currentcreature = level.getCreature(index);
+        }
 
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
@@ -465,7 +467,7 @@ public class GameController implements Screen, ContactListener {
 		else box.setDebugColor(Color.GREEN);
 
 		// Turn the physics engine crank.
-		checkFail();
+		checkSeen();
 		level.update(dt);
 	}
 
@@ -572,15 +574,16 @@ public class GameController implements Screen, ContactListener {
 		this.listener = listener;
 	}
 
-	public void checkFail(){
-		AnnetteModel annette   = level.getAnnette();
+	public void checkSeen(){
+		AnnetteModel annette = level.getAnnette();
 
-		//Check for losing condition
-		if (level.getVision(0).contains(annette.getX(), annette.getY())||
-				level.getVision(1).contains(annette.getX(), annette.getY())||
-				level.getVision(2).contains(annette.getX(), annette.getY())) {
-			setFailure(true);
-		}
+		// Check condition : Annette gets seen
+        for (LightSource currentlight : level.getVision()){
+            if (currentlight.contains(annette.getX(), annette.getY())){
+                setFailure(true);
+            }
+        }
+
 	}
 
 	/**
@@ -608,29 +611,22 @@ public class GameController implements Screen, ContactListener {
 
 			AnnetteModel annette = level.getAnnette();
 			BoxModel box = level.getBox();
-			CreatureModel bob = level.getCreature(0);
-			CreatureModel fred = level.getCreature(1);
-			CreatureModel john = level.getCreature(2);
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
-//			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
-//			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
-//			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
-//			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
-////			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
-//			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
-//			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
-			// Check for win condition
-			if ((bd1 == annette && bd2 == door  ) ||
-				(bd1 == door   && bd2 == annette)) {
+
+            // Check for win condition : Annette reaches exit
+			if ( (bd1 == annette && bd2 == door) || (bd1 == door && bd2 == annette) ){
 				setComplete(true);
 			}
-			// Check for losing condition
-			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
-					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
-					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
-				setFailure(true);
-			}
+
+
+            // Check for losing condition : Annette collides with creature.
+            for (CreatureModel currentcreature : level.getCreature()){
+                if ( (bd1 == annette && bd2 == currentcreature) || (bd1 == currentcreature && bd2 == annette) ){
+                    setFailure(true);
+                }
+            }
+
 			// Check if bird hits box
 			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
 				annette.setBird(false);
@@ -662,16 +658,31 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 
-			for (CreatureModel c : level.getAllCreatures()) {
+			for (CreatureModel c : level.getCreature()) {
 				if ((bd1 == c && bd2 == distraction) || (bd1 == distraction && bd2 == c )) {
 					// some code that sets creature alertness idk
 					System.out.println("distract creature");
 				}
 			}
 
+			for (CreatureModel c : level.getCreature()) {
+				for (Obstacle o : level.getBarriers()) {
+					if ((bd1 == c && bd2 == o) || (bd1 == o && bd2 == c)) {
+						c.setStuck(true);
+					}
+				}
+			}
+
+
+			for (CreatureModel c : level.getCreature()) {
+					if ((bd1 == c && bd2 == box) || (bd1 == box && bd2 == c)) {
+						c.setStuck(true);
+					}
+			}
+
 			// check reactivation
 
-			if ((bd1 == annette && bd2 == box  ) ||
+			if ((bd1 == annette && bd2 == box ) ||
 					(bd1 == box   && bd2 == annette)) {
 				box.setDeactivated(false);
 				box.setDeactivating(false);
