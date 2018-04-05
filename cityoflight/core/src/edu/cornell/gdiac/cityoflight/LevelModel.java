@@ -7,7 +7,7 @@
  * JSON demo for more information.
  *
  * There are two major differences from JSON Demo.  First is the fixStep method.  This
- * ensures that the physics engine is really moving at the same rate as the visual 
+ * ensures that the physics engine is really moving at the same rate as the visual
  * framerate. You can usually survive without this addition.  However, when the physics
  * adjusts shadows, it is very important.  See this website for more information about
  * what is going on here.
@@ -15,8 +15,8 @@
  * http://gafferongames.com/game-physics/fix-your-timestep/
  *
  * The second addition is the RayHandler.  This is an attachment to the physics world
- * for drawing shadows.  Technically, this is a view, and really should be part of 
- * GameCanvas.  However, in true graphics programmer garbage design, this is tightly 
+ * for drawing shadows.  Technically, this is a view, and really should be part of
+ * GameCanvas.  However, in true graphics programmer garbage design, this is tightly
  * coupled the the physics world and cannot be separated.  So we store it here and
  * make it part of the draw method.  This is the best of many bad options.
  *
@@ -49,7 +49,7 @@ import java.util.*;
  *
  * The level contains its own Box2d World, as the World settings are defined by the
  * JSON file.  There is generally no controller code in this class, except for the
- * update method for moving ahead one timestep.  All of the other methods are getters 
+ * update method for moving ahead one timestep.  All of the other methods are getters
  * and setters.  The getters allow the GameController class to modify the level elements.
  */
 public class LevelModel {
@@ -78,7 +78,15 @@ public class LevelModel {
 
 	/** Whether or not the level is in debug mode (showing off physics) */
 	private boolean debug;
-	
+
+	/** Alpha constant for box deactivation*/
+	private int alpha = 255;
+
+	private static final int MAX_ALPHA = 255;
+	private static final float BOX_MARGIN = 0.8f;
+
+	private static final float TRANSLATION = -50.0f;
+
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
 
@@ -90,13 +98,15 @@ public class LevelModel {
 	/** The world scale */
 	protected Vector2 scale;
 
+	protected Affine2 otran;
+
 	/** The camera defining the RayHandler view; scale is in physics coordinates */
 	protected OrthographicCamera raycamera;
 	/** The rayhandler for storing lights, and drawing them (SIGH) */
 	protected RayHandler rayhandler;
 	/** All of the active lights that we loaded from the JSON file */
 	private Array<LightSource> lights = new Array<LightSource>();
-	
+
 	// TO FIX THE TIMESTEP
 	/** The maximum frames per second setting for this level */
 	protected int maxFPS;
@@ -113,7 +123,7 @@ public class LevelModel {
 
 	/**
 	 * Returns the bounding rectangle for the physics world
-	 * 
+	 *
 	 * The size of the rectangle is in physics, coordinates, not screen coordinates
 	 *
 	 * @return the bounding rectangle for the physics world
@@ -139,7 +149,12 @@ public class LevelModel {
 	public World getWorld() {
 		return world;
 	}
-	
+
+
+	public Affine2 getOtran() {
+		return otran;
+	}
+
 	/**
 	 * Returns a reference to the lighting rayhandler
 	 *
@@ -165,6 +180,15 @@ public class LevelModel {
 	 */
 	public CreatureModel getCreature(int index) {
 		return creatures.get(index);
+	}
+
+	/**
+	 * Returns a reference to the creature
+	 *
+	 * @return a reference to the creature
+	 */
+	public Array<CreatureModel> getAllCreatures() {
+		return creatures;
 	}
 
 	/**
@@ -194,13 +218,13 @@ public class LevelModel {
 
 	/**
 	 * Returns a reference to the exit door
-	 * 
+	 *
 	 * @return a reference to the exit door
 	 */
 	public ExitModel getExit() {
 		return goalDoor;
 	}
-	
+
 	/**
 	 * Returns whether this level is currently in debug node
 	 *
@@ -208,11 +232,11 @@ public class LevelModel {
 	 * wireframes onscreen
 	 *
 	 * @return whether this level is currently in debug node
-	 */	
+	 */
 	public boolean getDebug() {
 		return debug;
 	}
-	
+
 	/**
 	 * Sets whether this level is currently in debug node
 	 *
@@ -220,11 +244,11 @@ public class LevelModel {
 	 * wireframes onscreen
 	 *
 	 * @param value	whether this level is currently in debug node
-	 */	
+	 */
 	public void setDebug(boolean value) {
 		debug = value;
 	}
-	
+
 	/**
 	 * Returns the maximum FPS supported by this level
 	 *
@@ -235,7 +259,7 @@ public class LevelModel {
 	public int getMaxFPS() {
 		return maxFPS;
 	}
-	
+
 	/**
 	 * Sets the maximum FPS supported by this level
 	 *
@@ -270,8 +294,28 @@ public class LevelModel {
 	}
 
 	/**
+	 * Returns whether this level is currently in debug node
+	 *
+	 * If the level is in debug mode, then the physics bodies will all be drawn as
+	 * wireframes onscreen
+	 *
+	 * @return whether this level is currently in debug node
+	 */
+	public int getAlpha() { return alpha; }
+
+	/**
+	 * Sets whether this level is currently in debug node
+	 *
+	 * If the level is in debug mode, then the physics bodies will all be drawn as
+	 * wireframes onscreen
+	 *
+	 * @param value	whether this level is currently in debug node
+	 */
+	public void setAlpha(int value) { alpha = value; }
+
+	/**
 	 * Creates a new LevelModel
-	 * 
+	 *
 	 * The level is empty and there is no active physics world.  You must read
 	 * the JSON file to initialize the level
 	 */
@@ -281,7 +325,7 @@ public class LevelModel {
 		scale = new Vector2(1,1);
 		debug  = false;
 	}
-	
+
 	/**
 	 * Lays out the game geography from the given JSON file
 	 *
@@ -340,6 +384,10 @@ public class LevelModel {
         // Create Annette
         annette = new AnnetteModel();
         JsonValue annettedata = levelFormat.get("annette");
+		JsonValue downdata = levelFormat.get("annetteDown");
+		JsonValue updata = levelFormat.get("annetteUp");
+
+
         annette.initialize(annettedata);
         annette.setDrawScale(scale);
         activate(annette);
@@ -348,10 +396,9 @@ public class LevelModel {
         // Create cone lights to be line of sights of creatures.
         createLineofSight(levelFormat.get("vision"));
         // Create the creatures and attach light sources
-        createCreature(levelFormat.get("creatures"), "bob", 0);
-        createCreature(levelFormat.get("creatures"), "fred", 1);
-        createCreature(levelFormat.get("creatures"), "john", 2);
-
+        createCreature(levelFormat.get("creatures"), "snail", 0);
+        createCreature(levelFormat.get("creatures"), "tarasque", 1);
+        createCreature(levelFormat.get("creatures"), "blanche", 2);
 
         // Create box
         box = new BoxModel(1, 1);
@@ -362,7 +409,6 @@ public class LevelModel {
             activate(box);
             box.setActive(true);
         }
-
 
         if (distraction != null) {
             distraction.setAlive(false);
@@ -388,6 +434,7 @@ public class LevelModel {
         distraction.setDrawScale(scale);
         activate(distraction);
         distraction.setActive(true);
+        distraction.setAlive(true);
 //		distraction.activatePhysics(world);
     }
 
@@ -410,7 +457,7 @@ public class LevelModel {
 		RayHandler.useDiffuseLight(light.getBoolean("diffuse"));
 		rayhandler = new RayHandler(world, Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
 		rayhandler.setCombinedMatrix(raycamera);
-			
+
 		float[] color = light.get("color").asFloatArray();
 		rayhandler.setAmbientLight(color[0], color[0], color[0], color[0]);
 		int blur = light.getInt("blur");
@@ -441,7 +488,7 @@ public class LevelModel {
 			PointSource point = new PointSource(rayhandler, rays, Color.WHITE, dist, pos[0], pos[1]);
 			point.setColor(color[0],color[1],color[2],color[3]);
 			point.setSoft(light.getBoolean("soft"));
-			
+
 			// Create a filter to exclude see through items
 			Filter f = new Filter();
 			f.maskBits = bitStringToComplement(light.getString("excludeBits"));
@@ -492,13 +539,17 @@ public class LevelModel {
 	 */
 	public void createCreature(JsonValue creaturejson, String name, int index){
 		CreatureModel creature = new CreatureModel();
-		JsonValue creaturedata = creaturejson.child();
-		//if (creaturedata == null) {System.out.println ("no json found");}
-		creature.initialize(creaturedata);
-		creature.setDrawScale(scale);
-		creatures.add(creature);
-		activate(creature);
-		attachVision(creature, lights.get(index));
+		JsonValue creaturedata = creaturejson.get(name);
+//		while (creaturedata != null) {
+			//if (creaturedata == null) {System.out.println ("no json found");}
+			creature.initialize(creaturedata);
+			creature.setDrawScale(scale);
+			creatures.add(creature);
+			activate(creature);
+			attachVision(creature, lights.get(index));
+//			creaturedata = creaturedata.next();
+//		}
+
 	}
 
 	/**
@@ -514,10 +565,12 @@ public class LevelModel {
 		light.attachToBody(creature.getBody(), light.getX(), light.getY(), light.getDirection());
 	}
 
+
+
 	/**
 	 * Disposes of all resources for this model.
 	 *
-	 * Because of all the heavy weight physics stuff, this method is absolutely 
+	 * Because of all the heavy weight physics stuff, this method is absolutely
 	 * necessary whenever we reset a level.
 	 */
 	public void dispose() {
@@ -525,26 +578,34 @@ public class LevelModel {
 			light.remove();
 		}
 		lights.clear();
-		
+
 		if (rayhandler != null) {
 			rayhandler.dispose();
 			rayhandler = null;
 		}
-		
+
 		for(Obstacle obj : objects) {
 			obj.deactivatePhysics(world);
 			obj.dispose();
 		}
 		objects.clear();
+
+		for(CreatureModel c : creatures) {
+			c.deactivatePhysics(world);
+			c.dispose();
+		}
+		creatures.clear();
+
 		if (world != null) {
 			world.dispose();
 			world = null;
 		}
 
-		if (distraction != null) {
-			distraction.setAlive(false);
-//			distraction = null;
-		}
+//		if (distraction != null) {
+//			distraction.setAlive(false);
+//			objects.remove(distraction);
+////			distraction = null;
+//		}
 	}
 
 	/**
@@ -572,7 +633,7 @@ public class LevelModel {
 		boolean vert  = (bounds.y <= obj.getY() && obj.getY() <= bounds.y+bounds.height);
 		return horiz && vert;
 	}
-	
+
 	/**
 	 * Updates all of the models in the level.
 	 *
@@ -595,13 +656,18 @@ public class LevelModel {
             if (distraction!=null) {
 //				System.out.println(distraction.getX());
 //				System.out.println(distraction.getY());
-                distraction.update(dt);
+
+				distraction.update(dt);
+				if (!distraction.getAlive()) {
+					objects.remove(distraction);
+				}
             }
+
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Fixes the physics frame rate to be in sync with the animation framerate
 	 *
@@ -611,12 +677,12 @@ public class LevelModel {
 	 */
 	private boolean fixedStep(float dt) {
 		if (world == null) return false;
-		
+
 		physicsTimeLeft += dt;
 		if (physicsTimeLeft > maxTimePerFrame) {
 			physicsTimeLeft = maxTimePerFrame;
 		}
-		
+
 		boolean stepped = false;
 		while (physicsTimeLeft >= timeStep) {
 			world.step(timeStep, WORLD_VELOC, WORLD_POSIT);
@@ -625,7 +691,7 @@ public class LevelModel {
 		}
 		return stepped;
 	}
-	
+
 	/**
 	 * Draws the level to the given game canvas
 	 *
@@ -635,22 +701,57 @@ public class LevelModel {
 	 * @param canvas	the drawing context
 	 */
 	public void draw(ObstacleCanvas canvas) {
+
 		canvas.clear();
-		
+		Color color;
+
+		AnnetteModel annette = getAnnette();
+		BoxModel box = getBox();
+
+		Vector2 pos = annette.getPosition();
+		Vector2 scale = annette.getDrawScale();
+		Affine2 oTran = new Affine2();
+		Affine2 wTran = new Affine2();
+
+		// Accounts for edges of screen
+		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
+		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
+		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
+		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
+		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+
+		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
+		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
+		oTran.mul(wTran);
+
+		if (rayhandler != null) {
+			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
+			rayhandler.render();
+		}
+
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
+
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
-		if (box.getDeactivated()) box.drawState(canvas, Color.BLACK);
-		else if (box.getDeactivating())	box.drawState(canvas, Color.GRAY);
+		if (box.getDeactivated()) {
+			box.drawState(canvas, Color.BLACK);
+			alpha = 255;
+		}
+		else if (box.getDeactivating())	{
+			color = Color.GRAY;
+			float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
+			float temp = (1 - ((dist - BOX_MARGIN) / BoxModel.OUTER_RADIUS)) * MAX_ALPHA;
+			temp = temp - 1;
+			alpha = (int) temp;
+			color.a = alpha;
+			box.drawState(canvas, color);
+		}
+
 		canvas.end();
 
-		// Now draw the shadows
-		if (rayhandler != null) {
-			rayhandler.render();
-		}
-		
 		// Draw debugging on top of everything.
 		if (debug) {
 			canvas.beginDebug();
@@ -660,17 +761,17 @@ public class LevelModel {
 			canvas.endDebug();
 		}
 	}
-	
-	
+
+
 	/**
 	 * Returns a string equivalent to the sequence of bits in s
 	 *
 	 * This function assumes that s is a string of 0s and 1s of length < 16.
-	 * This function allows the JSON file to specify bit arrays in a readable 
+	 * This function allows the JSON file to specify bit arrays in a readable
 	 * format.
 	 *
 	 * @param s the string representation of the bit array
-	 * 
+	 *
 	 * @return a string equivalent to the sequence of bits in s
 	 */
 	public static short bitStringToShort(String s) {
@@ -684,7 +785,7 @@ public class LevelModel {
 		}
 		return value;
 	}
-	
+
 	/**
 	 * Returns a string equivalent to the COMPLEMENT of bits in s
 	 *
@@ -693,7 +794,7 @@ public class LevelModel {
 	 * in a readable format.
 	 *
 	 * @param s the string representation of the bit array
-	 * 
+	 *
 	 * @return a string equivalent to the COMPLEMENT of bits in s
 	 */
 	public static short bitStringToComplement(String s) {

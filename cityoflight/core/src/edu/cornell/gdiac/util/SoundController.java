@@ -90,7 +90,7 @@ public class SoundController {
 	/** The default sound length limit */
 	private static final int DEFAULT_LIMIT = 120;
 	/** The default limit on sounds per frame */
-	private static final int DEFAULT_FRAME = 2;
+	private static final int DEFAULT_FRAME = 5;
 	
 	/** The singleton Sound controller instance */
 	private static SoundController controller;
@@ -231,6 +231,11 @@ public class SoundController {
 	 */
 	public void setFrameLimit(int value) {
 		frameLimit = value;
+	}
+
+
+	public Array<String> getCollection() {
+		return collection;
 	}
 
 	/// Sound Management

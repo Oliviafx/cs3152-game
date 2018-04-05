@@ -50,7 +50,11 @@ public class AnnetteModel extends BoxObstacle {
     private boolean isSummoning;
 
     /** FilmStrip pointer to the texture region */
-    private FilmStrip filmstrip;
+    private FilmStrip sidefilmstrip;
+    private FilmStrip upfilmstrip;
+    private FilmStrip downfilmstrip;
+
+
     /** The current animation frame of the avatar */
     private int startFrame;
 
@@ -61,11 +65,6 @@ public class AnnetteModel extends BoxObstacle {
     private boolean isbird;
     /** The current horizontal movement of the character */
     private float   hormovement;
-    /** Which direction is the character facing */
-    private boolean faceRight;
-    private boolean faceLeft;
-    private boolean faceUp;
-    private boolean faceDown;
     /**
      * Enumeration to identify which direction Annette is facing.
      */
@@ -282,7 +281,7 @@ public class AnnetteModel extends BoxObstacle {
      */
     public AnnetteModel() {
         super(0,0,1.0f, 1.0f);
-        setFixedRotation(false);
+        setFixedRotation(true);
         this.direction = Direction.RIGHT;
         this.isbird = false;
     }
@@ -293,13 +292,13 @@ public class AnnetteModel extends BoxObstacle {
      * The JSON value has been parsed and is part of a bigger level file.  However,
      * this JSON value is limited to the Annette subtree
      *
-     * @param json	the JSON subtree defining the Annette
+     * @param sideJson	the JSON subtree defining the Annette
      */
-    public void initialize(JsonValue json) {
-        setName(json.name());
-        float[] pos  = json.get("pos").asFloatArray();
-        float width = json.get("width").asFloat();
-        float height = json.get("height").asFloat();
+    public void initialize(JsonValue sideJson) {
+        setName(sideJson.name());
+        float[] pos  = sideJson.get("pos").asFloatArray();
+        float width = sideJson.get("width").asFloat();
+        float height = sideJson.get("height").asFloat();
         setPosition(pos[0],pos[1]);
         setWidth(width);
         setHeight(height);
@@ -307,19 +306,19 @@ public class AnnetteModel extends BoxObstacle {
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
-        setForce(json.get("force").asFloat());
-        setDamping(json.get("damping").asFloat());
-        setMaxSpeed(json.get("maxspeed").asFloat());
-        setStartFrame(json.get("startframe").asInt());
-        setWalkLimit(json.get("walklimit").asInt());
+        setBodyType(sideJson.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        setDensity(sideJson.get("density").asFloat());
+        setFriction(sideJson.get("friction").asFloat());
+        setRestitution(sideJson.get("restitution").asFloat());
+        setForce(sideJson.get("force").asFloat());
+        setDamping(sideJson.get("damping").asFloat());
+        setMaxSpeed(sideJson.get("maxspeed").asFloat());
+        setStartFrame(sideJson.get("startframe").asInt());
+        setWalkLimit(sideJson.get("walklimit").asInt());
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort(sideJson.get("collideBits").asString());
+        short excludeBits = LevelModel.bitStringToComplement(sideJson.get("excludeBits").asString());
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -328,25 +327,42 @@ public class AnnetteModel extends BoxObstacle {
         // Reflection is best way to convert name to color
         Color debugColor;
         try {
-            String cname = json.get("debugcolor").asString().toUpperCase();
+            String cname = sideJson.get("debugcolor").asString().toUpperCase();
             Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
             debugColor = new Color((Color)field.get(null));
         } catch (Exception e) {
             debugColor = null; // Not defined
         }
-        int opacity = json.get("debugopacity").asInt();
+        int opacity = sideJson.get("debugopacity").asInt();
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
         // Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
+        String key = sideJson.get("texture").asString();
         TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
         try {
-            filmstrip = (FilmStrip)texture;
+            sidefilmstrip = (FilmStrip)texture;
         } catch (Exception e) {
-            filmstrip = null;
+            sidefilmstrip = null;
         }
         setTexture(texture);
+
+        String key2 = sideJson.get("texture2").asString();
+        TextureRegion texture2 = JsonAssetManager.getInstance().getEntry(key2, TextureRegion.class);
+        try {
+            downfilmstrip = (FilmStrip)texture2;
+        } catch (Exception e) {
+            downfilmstrip = null;
+        }
+
+        String key3 = sideJson.get("texture3").asString();
+        TextureRegion texture3 = JsonAssetManager.getInstance().getEntry(key3, TextureRegion.class);
+        try {
+            upfilmstrip = (FilmStrip)texture3;
+        } catch (Exception e) {
+            upfilmstrip = null;
+        }
+
     }
 
     /**
@@ -383,16 +399,16 @@ public class AnnetteModel extends BoxObstacle {
     public void update(float dt) {
         // Animate if necessary
         if (animate && walkCool == 0) {
-            if (filmstrip != null) {
-                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
-                filmstrip.setFrame(next);
+            if (sidefilmstrip != null) {
+                int next = (sidefilmstrip.getFrame()+1) % sidefilmstrip.getSize();
+                sidefilmstrip.setFrame(next);
             }
             walkCool = walkLimit;
         } else if (walkCool > 0) {
             walkCool--;
         } else if (!animate) {
-            if (filmstrip != null) {
-                filmstrip.setFrame(startFrame);
+            if (sidefilmstrip != null) {
+                sidefilmstrip.setFrame(startFrame);
             }
             walkCool = 0;
         }
@@ -406,8 +422,36 @@ public class AnnetteModel extends BoxObstacle {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
+
+        FilmStrip dirTexture = null;
+        float flipped = 0.6f;
+
+        switch (direction) {
+            case RIGHT:
+                setTexture(sidefilmstrip);
+                dirTexture = sidefilmstrip;
+
+                break;
+            case LEFT:
+                flipped = -0.6f;
+                setTexture(sidefilmstrip);
+                dirTexture = sidefilmstrip;
+
+                break;
+            case UP:
+                setTexture(sidefilmstrip);
+                dirTexture = upfilmstrip;
+
+                break;
+            case DOWN:
+                setTexture(sidefilmstrip);
+                dirTexture = downfilmstrip;
+
+        }
+
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,getAngle(),1.0f,1.0f);
+            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, 0.6f);
         }
     }
+
 }
