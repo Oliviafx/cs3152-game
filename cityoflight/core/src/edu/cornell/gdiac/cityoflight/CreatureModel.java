@@ -20,13 +20,14 @@ import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
+import edu.cornell.gdiac.physics.lights.LightSource;
 
 import java.lang.reflect.*;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.obstacle.*;
 
 /**
- * Creature avatar for the game.
+ * Creature model for the game.
  *
  * Note that the constructor does very little.  The true initialization happens
  * by reading the JSON value.
@@ -40,7 +41,7 @@ public class CreatureModel extends WheelObstacle {
     /** The maximum character speed */
     private float maxspeed;
 
-    /** The current horizontal movement of the creature */
+    /** The current directional movement of the creature */
     private Vector2 movement = new Vector2();
     /** Whether or not to animate the current frame */
     private boolean animate = false;
@@ -57,6 +58,23 @@ public class CreatureModel extends WheelObstacle {
 
     /** Cache for internal force calculations */
     private Vector2 forceCache = new Vector2();
+
+    // Behavior and AI related constants
+    /** Creature type identifier. */
+    // 1: Lou Carcolh | 2: Tarasque | 3: Dame Blanche
+    private int type;
+    /** Base horizontal movement speed of a creature */
+    private float xinput;
+    /** Base vertical movement speed of a creature */
+    private float yinput;
+    /** Whether a creature can no longer go in its intended direction and should change routes. */
+    private boolean isStuck = false;
+    /** How many frames until the creature can turn again */
+    private int turnCool = 0;
+    /** The standard number of frames to wait until the creature can turn again */
+    private int turnLimit;
+    /** refers to the vision of the creature */
+    private LightSource vision = null;
 
     /**
      * Returns the directional movement of the creature.
@@ -86,7 +104,7 @@ public class CreatureModel extends WheelObstacle {
      * This is the result of input times dude creature.
      *
      * @param dx the horizontal movement of this creature.
-     * @param dy the horizontal movement of this creature.
+     * @param dy the vertical movement of this creature.
      */
     public void setMovement(float dx, float dy) {
         movement.set(dx,dy);
@@ -190,6 +208,82 @@ public class CreatureModel extends WheelObstacle {
         walkLimit = value;
     }
 
+    /**
+     * Returns whether the monster can advance on its route
+     *
+     * @return whether the monster can advance on its route
+     */
+    public boolean getStuck(){ return isStuck; }
+
+    /**
+     * Sets whether the monster can advance on its route
+     *
+     * @param value	whether the monster can advance on its route
+     */
+    public void setStuck(boolean value){ isStuck = value; }
+
+    /**
+     * Returns the cooldown between successive turns
+     *
+     * @return the cooldown between successive turns
+     */
+    public int getTurnCool(){ return turnCool; }
+
+    /**
+     * Sets the cooldown between successive turns
+     *
+     * @param value	the cooldown between successive turns
+     */
+    public void setTurnCool(int value){ turnCool = value; }
+
+    /**
+     * Returns the cooldown limit between successive turns
+     *
+     * @return the cooldown limit between successive turns
+     */
+    public int getTurnLimit(){ return turnLimit; }
+
+    /**
+     * Sets the cooldown limit between successive turns
+     *
+     * @param value	the cooldown limit between successive turns
+     */
+    public void setTurnLimit(int value){ turnLimit = value; }
+
+    /**
+     * Returns the horizontal base speed of the creature
+     *
+     * @return the horizontal base speed of the creature
+     */
+    public float getXInput(){ return xinput; }
+
+    /**
+     * Sets the horizontal base speed of the creature
+     *
+     * @param value	the horizontal base speed of the creature
+     */
+    public void setXInput(float value){ xinput = value; }
+
+    /**
+     * Returns the vertical base speed of the creature
+     *
+     * @return the vertical base speed of the creature
+     */
+    public float getYInput(){ return yinput; }
+
+    /**
+     * Sets the vertical base speed of the creature
+     *
+     * @param value	the vertical base speed of the creature
+     */
+    public void setYInput(float value){ yinput = value; }
+
+    public int getType(){ return type; }
+    public void setType(int value) { type = value; }
+
+    public LightSource getVision() { return vision; }
+    public void setVision(LightSource l){ vision = l; }
+
 
     /**
      * Creates a new creature with degenerate settings
@@ -227,6 +321,11 @@ public class CreatureModel extends WheelObstacle {
         setMaxSpeed(json.get("maxspeed").asFloat());
         setStartFrame(json.get("startframe").asInt());
         setWalkLimit(json.get("walklimit").asInt());
+
+        setType(json.get("type").asInt());
+        setTurnLimit(json.get("turnlimit").asInt());
+        setXInput(json.get("xinput").asFloat());
+        setYInput(json.get("yinput").asFloat());
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
