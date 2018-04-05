@@ -126,6 +126,12 @@ public class GameController implements Screen, ContactListener {
 	public static final int EXIT_QUIT = 0;
     /** How many frames after winning/losing do we continue? */
 	public static final int EXIT_COUNT = 120;
+	/** Exit code for going to the main menu screen */
+	public static final int EXIT_MENU = 1;
+	/** Exit code for going to the game screen */
+	public static final int EXIT_PLAY = 2;
+	/** Exit code for going to the level select screen */
+	public static final int EXIT_LEVEL = 3;
 
 	/** Reference to the game canvas */
 	protected ObstacleCanvas canvas;
