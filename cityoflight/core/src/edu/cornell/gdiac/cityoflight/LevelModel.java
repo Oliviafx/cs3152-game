@@ -381,7 +381,7 @@ public class LevelModel {
         // Create cone lights to be line of sights of creatures.
         createLineofSight(levelFormat.get("vision"));
         // Create the creatures and attach light sources
-		  createCreatures(levelFormat.get("creatures"));
+		createCreatures(levelFormat.get("creatures"));
         //createCreature(levelFormat.get("creatures"), "snail", 0);
         //createCreature(levelFormat.get("creatures"), "tarasque", 1);
         //createCreature(levelFormat.get("creatures"), "blanche", 2);

@@ -136,6 +136,9 @@ public class GameController implements Screen, ContactListener {
 	/** Reference to the game level */
 	protected LevelModel level;
 
+	/** Reference to the AIControllers */
+	private Array<AIController> AIcontrollers = new Array<AIController>();
+
 	/** Whether or not this is an active controller */
 	private boolean active;
 	/** Whether we have completed this level */
@@ -266,6 +269,7 @@ public class GameController implements Screen, ContactListener {
 	public void reset() {
 		level.dispose();
 
+		AIcontrollers.clear();
 		setComplete(false);
 		setFailure(false);
 		countdown = -1;
@@ -318,7 +322,7 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	private Vector2 aAngleCache = new Vector2();
-	private Vector2 cAngleCache = new Vector2();
+	//private Vector2 cAngleCache = new Vector2();
 	private Vector2 dAngleCache = new Vector2();
 
 
@@ -383,67 +387,73 @@ public class GameController implements Screen, ContactListener {
 		}
 //		level.getDistraction().setAlive(input.didX()&&!level.getDistraction().getAlive());
 
-		// creature AI temporary.
+		// creature AI.
+		createAIControllers();
 
-        int index = 0;
-        CreatureModel currentcreature = level.getCreature(index);
+		for (AIController controller : AIcontrollers){
+			controller.chooseAction();
+			controller.doAction();
+		}
 
-        while (currentcreature != null){
-			currentcreature.setTurnCool(currentcreature.getTurnCool() - 1);
+//        int index = 0;
+//        CreatureModel currentcreature = level.getCreature(index);
+//
+//        while (currentcreature != null){
+//			currentcreature.setTurnCool(currentcreature.getTurnCool() - 1);
+//
+//			if (currentcreature.getType() == 1) {
+//				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
+//					System.out.println("snail behavior: change direction");
+//					currentcreature.setXInput(-currentcreature.getXInput());
+//					currentcreature.setYInput(-currentcreature.getYInput());
+//					currentcreature.setStuck(false);
+//					currentcreature.setTurnCool(currentcreature.getTurnLimit());
+//				}
+//			}
+//
+//			if (currentcreature.getType() == 2){
+//				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
+//					System.out.println("dragon behavior: turns right");
+//					if (currentcreature.getXInput() > 0){
+//						currentcreature.setYInput(-currentcreature.getXInput());
+//						currentcreature.setXInput(0);
+//					} else if (currentcreature.getXInput() < 0){
+//						currentcreature.setYInput(-currentcreature.getXInput());
+//						currentcreature.setXInput(0);
+//					} else if (currentcreature.getYInput() > 0){
+//						currentcreature.setXInput(currentcreature.getYInput());
+//						currentcreature.setYInput(0);
+//					} else if (currentcreature.getYInput() < 0){
+//						currentcreature.setXInput(currentcreature.getYInput());
+//						currentcreature.setYInput(0);
+//					}
+//
+//					currentcreature.setStuck(false);
+//					currentcreature.setTurnCool(currentcreature.getTurnLimit());
+//				}
+//			}
+//
+//			if (currentcreature.getType() == 3){
+//				// dame blanche.
+//			}
 
-			if (currentcreature.getType() == 1) {
-				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
-					System.out.println("snail behavior: change direction");
-					currentcreature.setXInput(-currentcreature.getXInput());
-					currentcreature.setYInput(-currentcreature.getYInput());
-					currentcreature.setStuck(false);
-					currentcreature.setTurnCool(currentcreature.getTurnLimit());
-				}
-			}
+//			cAngleCache.set(currentcreature.getXInput(),currentcreature.getYInput());
+//			//System.out.println("movement = " + currentcreature.getMovement());
+//
+//			if (cAngleCache.len2() > 0.0f) {
+//                float angle = cAngleCache.angle();
+//                // Convert to radians with up as 0
+//                angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//                currentcreature.setAngle(angle);
+//            }
+//            cAngleCache.scl(currentcreature.getForce());
+//            currentcreature.setMovement(cAngleCache.x,cAngleCache.y);
+//            currentcreature.applyForce();
 
-			if (currentcreature.getType() == 2){
-				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
-					System.out.println("dragon behavior: turns right");
-					if (currentcreature.getXInput() > 0){
-						currentcreature.setYInput(-currentcreature.getXInput());
-						currentcreature.setXInput(0);
-					} else if (currentcreature.getXInput() < 0){
-						currentcreature.setYInput(-currentcreature.getXInput());
-						currentcreature.setXInput(0);
-					} else if (currentcreature.getYInput() > 0){
-						currentcreature.setXInput(currentcreature.getYInput());
-						currentcreature.setYInput(0);
-					} else if (currentcreature.getYInput() < 0){
-						currentcreature.setXInput(currentcreature.getYInput());
-						currentcreature.setYInput(0);
-					}
-
-					currentcreature.setStuck(false);
-					currentcreature.setTurnCool(currentcreature.getTurnLimit());
-				}
-			}
-
-			if (currentcreature.getType() == 3){
-				// dame blanche.
-			}
-
-			cAngleCache.set(currentcreature.getXInput(),currentcreature.getYInput());
-			//System.out.println("movement = " + currentcreature.getMovement());
-
-			if (cAngleCache.len2() > 0.0f) {
-                float angle = cAngleCache.angle();
-                // Convert to radians with up as 0
-                angle = (float)Math.PI*(angle-90.0f)/180.0f;
-                currentcreature.setAngle(angle);
-            }
-            cAngleCache.scl(currentcreature.getForce());
-            currentcreature.setMovement(cAngleCache.x,cAngleCache.y);
-            currentcreature.applyForce();
-
-            // try to get next creature from level.
-            index ++;
-            currentcreature = level.getCreature(index);
-        }
+//            // try to get next creature from level.
+//            index ++;
+//            currentcreature = level.getCreature(index);
+//        }
 
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
@@ -493,7 +503,7 @@ public class GameController implements Screen, ContactListener {
 		else box.setDebugColor(Color.GREEN);
 
 		// Turn the physics engine crank.
-		checkSeen();
+//		checkSeen();
 		level.update(dt);
 	}
 
@@ -521,7 +531,7 @@ public class GameController implements Screen, ContactListener {
 		} else if (failed) {
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("You have\nbeen seen.\nGoodbye", displayFont, 0.0f);
+			canvas.drawTextCentered("you lose. don't mime.", displayFont, 0.0f);
 			canvas.end();
 		}
 	}
@@ -600,17 +610,17 @@ public class GameController implements Screen, ContactListener {
 		this.listener = listener;
 	}
 
-	public void checkSeen(){
-		AnnetteModel annette = level.getAnnette();
-
-		// Check condition : Annette gets seen
-        for (LightSource currentlight : level.getVision()){
-            if (currentlight.contains(annette.getX(), annette.getY())){
-                setFailure(true);
-            }
-        }
-
-	}
+//	public void checkSeen(){
+//		AnnetteModel annette = level.getAnnette();
+//
+//		// Check condition : Annette gets seen
+//        for (LightSource currentlight : level.getVision()){
+//            if (currentlight.contains(annette.getX(), annette.getY())){
+//                setFailure(true);
+//            }
+//        }
+//
+//	}
 
 	/**
 	 * Callback method for the start of a collision
@@ -719,6 +729,17 @@ public class GameController implements Screen, ContactListener {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void createAIControllers(){
+
+		if (AIcontrollers.size == 0) {
+			for (CreatureModel c : level.getCreature()) {
+				System.out.println("creating 1 AI controller.");
+				AIController controller = new AIController(c, level);
+				AIcontrollers.add(controller);
+			}
+		}
 	}
 
 	/** Unused ContactListener method */
