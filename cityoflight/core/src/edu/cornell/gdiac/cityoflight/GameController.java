@@ -393,12 +393,38 @@ public class GameController implements Screen, ContactListener {
 
 			if (currentcreature.getType() == 1) {
 				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
-					System.out.println("snail behavior: changing direction");
+					System.out.println("snail behavior: change direction");
 					currentcreature.setXInput(-currentcreature.getXInput());
 					currentcreature.setYInput(-currentcreature.getYInput());
 					currentcreature.setStuck(false);
 					currentcreature.setTurnCool(currentcreature.getTurnLimit());
 				}
+			}
+
+			if (currentcreature.getType() == 2){
+				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
+					System.out.println("dragon behavior: turns right");
+					if (currentcreature.getXInput() > 0){
+						currentcreature.setYInput(-currentcreature.getXInput());
+						currentcreature.setXInput(0);
+					} else if (currentcreature.getXInput() < 0){
+						currentcreature.setYInput(-currentcreature.getXInput());
+						currentcreature.setXInput(0);
+					} else if (currentcreature.getYInput() > 0){
+						currentcreature.setXInput(currentcreature.getYInput());
+						currentcreature.setYInput(0);
+					} else if (currentcreature.getYInput() < 0){
+						currentcreature.setXInput(currentcreature.getYInput());
+						currentcreature.setYInput(0);
+					}
+
+					currentcreature.setStuck(false);
+					currentcreature.setTurnCool(currentcreature.getTurnLimit());
+				}
+			}
+
+			if (currentcreature.getType() == 3){
+				// dame blanche.
 			}
 
 			cAngleCache.set(currentcreature.getXInput(),currentcreature.getYInput());
