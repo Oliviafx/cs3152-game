@@ -281,6 +281,10 @@ public class GameController implements Screen, ContactListener {
 	public void reset() {
 		SoundController sound = SoundController.getInstance();
 
+		for (String key : sound.getCollection()) {
+			sound.stop(key);
+		}
+
 		level.dispose();
 
 		setComplete(false);
@@ -389,6 +393,7 @@ public class GameController implements Screen, ContactListener {
 		if (annette.getBird()&&!level.isDistraction() ) {
 //			System.out.println("here");
 			level.createDistraction(levelFormat);
+			sound.stop("distraction");
 			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
@@ -466,6 +471,7 @@ public class GameController implements Screen, ContactListener {
 			box.setDoesExist(true);
 			box.setDeactivated(false);
 			box.setDeactivating(false);
+			sound.stop("box");
 			sound.play("box", "sounds/box.wav", false, 0.8f);
 
 		}
@@ -483,8 +489,8 @@ public class GameController implements Screen, ContactListener {
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
-//			sound.stop("box");
-			sound.play("slam", "sounds/slam.wav", false, 0.5f);
+			sound.stop("slam");
+			System.out.println(sound.play("slam", "sounds/slam.wav", false, 0.5f));
 
 		}
 
@@ -642,6 +648,7 @@ public class GameController implements Screen, ContactListener {
 			CreatureModel john = level.getCreature(2);
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
+			SoundController sound = SoundController.getInstance();
 //			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
 //			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
 //			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
@@ -706,6 +713,8 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
+				sound.stop("box");
+				sound.play("box", "sounds/box.wav", false, 0.8f);
 			}
 
 		} catch (Exception e) {
