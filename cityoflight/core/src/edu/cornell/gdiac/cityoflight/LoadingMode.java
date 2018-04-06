@@ -191,6 +191,7 @@ public class LoadingMode implements Screen {
 	 * @param millis The loading budget in milliseconds
 	 */
 	public LoadingMode(ObstacleCanvas canvas, int millis) {
+		System.out.println("using loading mode????");
 		this.manager = JsonAssetManager.getInstance();
 		this.canvas  = canvas;
 		budget = millis;

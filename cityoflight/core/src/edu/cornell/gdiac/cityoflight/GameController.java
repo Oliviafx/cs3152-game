@@ -258,6 +258,7 @@ public class GameController implements Screen, ContactListener {
 	 * defined by the appropriate JSON file.
 	 */
 	public GameController() {
+		System.out.println("gamecontroller");
 		jsonReader = new JsonReader();
 		level = new LevelModel();
 		complete = false;
