@@ -60,6 +60,7 @@ public class CreatureModel extends WheelObstacle {
     private Vector2 forceCache = new Vector2();
 
     // Behavior and AI related constants
+
     /** Creature type identifier. */
     // 1: Lou Carcolh | 2: Tarasque | 3: Dame Blanche
     private int type;
@@ -73,6 +74,10 @@ public class CreatureModel extends WheelObstacle {
     private int turnCool = 0;
     /** The standard number of frames to wait until the creature can turn again */
     private int turnLimit;
+    /** How many frames until the creature will drop chase aggro again */
+    private int aggroCool = 0;
+    /** The standard number of frames to wait until the creature will drop aggro */
+    private int aggroLimit;
     /** refers to the vision of the creature */
     private LightSource vision = null;
 
@@ -251,6 +256,34 @@ public class CreatureModel extends WheelObstacle {
     public void setTurnLimit(int value){ turnLimit = value; }
 
     /**
+     * Returns the cooldown between successive turns
+     *
+     * @return the cooldown between successive turns
+     */
+    public int getAggroCool(){ return aggroCool; }
+
+    /**
+     * Sets the cooldown between successive turns
+     *
+     * @param value	the cooldown between successive turns
+     */
+    public void setAggroCool(int value){ aggroCool = value; }
+
+    /**
+     * Returns the cooldown limit between successive turns
+     *
+     * @return the cooldown limit between successive turns
+     */
+    public int getAggroLimit(){ return aggroLimit; }
+
+    /**
+     * Sets the cooldown limit between successive turns
+     *
+     * @param value	the cooldown limit between successive turns
+     */
+    public void setAggroLimit(int value){ aggroLimit = value; }
+
+    /**
      * Returns the horizontal base speed of the creature
      *
      * @return the horizontal base speed of the creature
@@ -277,6 +310,15 @@ public class CreatureModel extends WheelObstacle {
      * @param value	the vertical base speed of the creature
      */
     public void setYInput(float value){ yinput = value; }
+
+    /**
+     * Returns the base movement speed of the creature
+     *
+     * @return the base movement speed of the creature
+     */
+    public float getSpeedInput() {
+        return (float) Math.sqrt((xinput * xinput) + (yinput * yinput));
+    }
 
     public int getType(){ return type; }
     public void setType(int value) { type = value; }
@@ -321,6 +363,7 @@ public class CreatureModel extends WheelObstacle {
         setMaxSpeed(json.get("maxspeed").asFloat());
         setStartFrame(json.get("startframe").asInt());
         setWalkLimit(json.get("walklimit").asInt());
+        setAggroLimit(json.get("aggrolimit").asInt());
 
         setType(json.get("type").asInt());
         setTurnLimit(json.get("turnlimit").asInt());
