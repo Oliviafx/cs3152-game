@@ -281,10 +281,6 @@ public class GameController implements Screen, ContactListener {
 	public void reset() {
 		SoundController sound = SoundController.getInstance();
 
-//		for (String key : sound.getCollection()) {
-//			sound.stop(key);
-//		}
-
 		level.dispose();
 
 		setComplete(false);
@@ -371,7 +367,7 @@ public class GameController implements Screen, ContactListener {
 		float yoff = 0;
 
 //		System.out.println(sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f));
-		sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f);
+		sound.play("harp", "sounds/bg_test2.wav", true, 0.75f);
 //		System.out.println(sound.play("menu", "sounds/main_melody.wav", true, 0.75f));
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());

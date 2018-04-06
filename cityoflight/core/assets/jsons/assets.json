@@ -96,7 +96,7 @@
 					"file": "sounds/box.wav"
 				},
 				"ambient-low": {
-					"file": "sounds/ambient_low.wav"
+					"file": "sounds/bg_test2.wav"
 				},
 				"footsteps": {
 					"file": "sounds/footsteps.wav"
