@@ -56,6 +56,7 @@ public class GDXRoot extends Game implements ScreenListener {
 	 * the asynchronous loader for all other assets.
 	 */
 	public void create() {
+		System.out.println("what's going on");
 		canvas  = new ObstacleCanvas();
 		loading = new LoadingMode(canvas,1);
 		menu = new MenuMode(canvas);
