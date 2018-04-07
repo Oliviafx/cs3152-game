@@ -40,7 +40,9 @@ public class GDXRoot extends Game implements ScreenListener {
 	/** Player mode for the menu screen (CONTROLLER CLASS) */
 	private MenuMode menu;
 	/** Player mode for the level screen (CONTROLLER CLASS) */
-//	private LevelController levels;
+	private LevelController levels;
+	/** Player mode for the pause screen (CONTROLLER CLASS) */
+	private PauseMode pause;
 	/** List of all WorldControllers */
 //	private WorldController[] controllers;
 
@@ -56,11 +58,11 @@ public class GDXRoot extends Game implements ScreenListener {
 	 * the asynchronous loader for all other assets.
 	 */
 	public void create() {
-		System.out.println("what's going on");
 		canvas  = new ObstacleCanvas();
 		loading = new LoadingMode(canvas,1);
 		menu = new MenuMode(canvas);
-//		levels = new LevelController(canvas);
+		levels = new LevelController(canvas);
+		pause = new PauseMode(canvas);
 		// Initialize the three game worlds
 		controller = new GameController();
 		controller.preLoadContent();
@@ -83,7 +85,8 @@ public class GDXRoot extends Game implements ScreenListener {
 		canvas = null;
 
 		menu = null;
-//		levels = null;
+		levels = null;
+		pause = null;
 		// Unload all of the resources
 		super.dispose();
 	}
@@ -111,20 +114,25 @@ public class GDXRoot extends Game implements ScreenListener {
 	 * @param exitCode The state of the screen upon exit
 	 */
 	public void exitScreen(Screen screen, int exitCode) {
-		System.out.println(exitCode);
 		if (exitCode == GameController.EXIT_MENU) {
-			System.out.println("menu");
 			menu.setScreenListener(this);
 			menu.setCanvas(canvas);
 			menu.reset();
 			setScreen(menu);
 		}
-//		if (exitCode == GameController.EXIT_LEVEL) {
-//			levels.setScreenListener(this);
-//			levels.setCanvas(canvas);
-//			levels.reset();
-//			setScreen(levels);
-//		}
+		if (exitCode == GameController.EXIT_LEVEL) {
+			levels.setScreenListener(this);
+			levels.setCanvas(canvas);
+			levels.reset();
+			setScreen(levels);
+		}
+
+		if (exitCode == GameController.EXIT_PAUSE) {
+			pause.setScreenListener(this);
+			pause.setCanvas(canvas);
+			pause.reset();
+			setScreen(pause);
+		}
 //		else if (screen == loading) {
 //			System.out.println("here");
 //			controller.loadContent();
@@ -142,9 +150,10 @@ public class GDXRoot extends Game implements ScreenListener {
 			controller.setCanvas(canvas);
 			controller.reset();
 			setScreen(controller);
-
-			loading.dispose();
-			loading = null;
+			if (loading !=null) {
+				loading.dispose();
+				loading = null;
+			}
 		}
 
 		else if (exitCode == GameController.EXIT_QUIT) {

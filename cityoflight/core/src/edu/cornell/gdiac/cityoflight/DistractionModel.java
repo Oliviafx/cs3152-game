@@ -22,14 +22,17 @@ public class DistractionModel extends WheelObstacle {
     /**
      * The amount by which the bird's x and y coordinates will change each frame while it is moving.
      */
-    private static final float BIRD_STEP = 1f;
-    private static final float HOFFSET = 1f;
-    private static final float VOFFSET = 1f;
+    private static final float BIRD_STEP = 2f;
+    private static final float HOFFSET = .25f;
+    private static final float VOFFSET = .25f;
 
     private static final int BIRD_LIFE = 300;
     private static final float BIRD_RADIUS = .25f;
 
     private static final float STOPPING_DISTANCE = 3f;
+
+    private static final String BIRD_SPRITE = "textures/bird.png";
+
     /**
      * The sprite for the bird.
      */
@@ -37,11 +40,11 @@ public class DistractionModel extends WheelObstacle {
     /**
      * The bird's x coordinate on the screen.
      */
-    private float x;
+//    private float x;
     /**
      * The bird's y coordinate on the screen.
      */
-    private float y;
+//    private float y;
 
     private Vector2 position;
     /**
@@ -84,11 +87,15 @@ public class DistractionModel extends WheelObstacle {
 
     public DistractionModel(float x, float y, boolean alive, AnnetteModel.Direction direction) {
         super(x, y, BIRD_RADIUS);
-        this.position = new Vector2(x,y);
-        this.alive = true;
+
+//        this.x = x-10;
+//        this.y = y;
+//        this.position = new Vector2(x,y);
+
+        this.alive = alive;
         this.direction = direction;
         this.life = BIRD_LIFE;
-        setPositionByOffset();
+        setPositionByOffset(x, y);
     }
 
 
@@ -120,10 +127,10 @@ public class DistractionModel extends WheelObstacle {
         this.force = force;
     }
 
-    public void setPosition(Vector2 value) {
-        this.x = value.x;
-        this.y = value.y;
-    }
+//    public void setPosition(Vector2 value) {
+//        this.x = value.x;
+//        this.y = value.y;
+//    }
 
     public void setDamping(float value) {
         damping = value;
@@ -157,13 +164,12 @@ public class DistractionModel extends WheelObstacle {
     public void setDeactivated(boolean value) {
 
         alive = value;
-        if (!alive) {
-            super.releaseFixtures();
-        }
-        else {
-            super.createFixtures();
-        }
+//        if (!alive) {
+//            this.destroyBody();
+//        }
     }
+
+
 
 
     /**
@@ -190,31 +196,60 @@ public class DistractionModel extends WheelObstacle {
         movement.set(dx,dy);
     }
 
-    private void setPositionByOffset() {
+//    private static float setXByOffset(float val, AnnetteModel.Direction direction) {
+//        float result=0;
+//        System.out.println("initial x "+val);
+//        switch(direction) {
+//            case RIGHT:
+//                result = val + HOFFSET;
+//                break;
+//            case LEFT:
+//                result = val - HOFFSET;
+//                break;
+//        }
+//        return result;
+//    }
+
+//    private static float setYByOffset(float val, AnnetteModel.Direction direction) {
+//        float result=0;
+//        System.out.println("initial y "+val);
+//        switch(direction) {
+//            case UP:
+//                result = val + VOFFSET;
+//                break;
+//            case DOWN:
+//                result = val - VOFFSET;
+//                break;
+//        }
+//        return result;
+//    }
+
+    private void setPositionByOffset(float x, float y) {
 
         switch(direction) {
             case RIGHT :
-                this.x+=HOFFSET;
+                setX(x+HOFFSET);
                 break;
             case LEFT:
-                this.x -= HOFFSET;
+//                System.out.println("here");
+                setX(x - HOFFSET);
                 break;
             case UP:
-                this.y+=VOFFSET;
+                setY(y+VOFFSET);
                 break;
             case DOWN:
-                this.y -= VOFFSET;
+                setY(y - VOFFSET);
                 break;
         }
     }
 
-    public void initialize(JsonValue json, float xoff, float yoff) {
+    public void initialize(JsonValue json) {
 
         setName(json.name());
 //        float[] pos = json.get("pos").asFloatArray();
 //        float width = json.get("radius").asFloat();
 //        float height = json.get("radius").asFloat();
-        setPosition(this.x + xoff, this.y + yoff);
+//        setPositionByOffset();
 //        System.out.println("this.x " + this.x);
 //        setWidth(width);
 //        setHeight(height);
@@ -261,7 +296,7 @@ public class DistractionModel extends WheelObstacle {
 //        } catch (Exception e) {
 //            birdsprite = null;
 //        }
-        setTexture(texture);
+        setTexture(birdsprite);
     }
 
     public void draw(ObstacleCanvas canvas) {

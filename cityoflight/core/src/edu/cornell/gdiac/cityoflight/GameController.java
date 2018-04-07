@@ -132,6 +132,8 @@ public class GameController implements Screen, ContactListener {
 	public static final int EXIT_PLAY = 2;
 	/** Exit code for going to the level select screen */
 	public static final int EXIT_LEVEL = 3;
+	/** Exit code for going to the pause menu */
+	public static final int EXIT_PAUSE = 4;
 
 	/** Reference to the game canvas */
 	protected ObstacleCanvas canvas;
@@ -258,7 +260,6 @@ public class GameController implements Screen, ContactListener {
 	 * defined by the appropriate JSON file.
 	 */
 	public GameController() {
-		System.out.println("gamecontroller");
 		jsonReader = new JsonReader();
 		level = new LevelModel();
 		complete = false;
@@ -336,7 +337,11 @@ public class GameController implements Screen, ContactListener {
 		if (input.didExit()) {
 			listener.exitScreen(this, EXIT_QUIT);
 			return false;
-		} else if (countdown > 0) {
+		}
+		else if (input.didPause()) {
+			listener.exitScreen(this, EXIT_PAUSE);
+		}
+		else if (countdown > 0) {
 			countdown--;
 		} else if (countdown == 0) {
 			reset();
@@ -411,6 +416,7 @@ public class GameController implements Screen, ContactListener {
 //				annette.setAngle(angle);
 			}
 			if (distraction != null) {
+				distraction.deactivatePhysics(level.getWorld());
 				dAngleCache.scl(distraction.getForce());
 				distraction.setMovement(dAngleCache.x,dAngleCache.y);
 			}
@@ -675,6 +681,9 @@ public class GameController implements Screen, ContactListener {
 			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
 				annette.setBird(false);
 				distraction.setAlive(false);
+				distraction.deactivatePhysics(level.getWorld());
+				level.getWorld().destroyBody(distraction.getBody());
+				distraction.dispose();
 //				distraction.deactivatePhysics(level.getWorld());
 //				distraction.setActive(false);
 				level.objects.remove(distraction);
