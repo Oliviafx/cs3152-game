@@ -70,6 +70,8 @@ public class CreatureModel extends WheelObstacle {
     private float yinput;
     /** Whether a creature can no longer go in its intended direction and should change routes. */
     private boolean isStuck = false;
+    /** Whether a creature is distracted */
+    private boolean isDistracted = false;
     /** How many frames until the creature can turn again */
     private int turnCool = 0;
     /** The standard number of frames to wait until the creature can turn again */
@@ -226,6 +228,20 @@ public class CreatureModel extends WheelObstacle {
      * @param value	whether the monster can advance on its route
      */
     public void setStuck(boolean value){ isStuck = value; }
+
+    /**
+     * Returns whether the monster is distracted.
+     *
+     * @return whether the monster is distracted.
+     */
+    public boolean getDistracted(){ return isDistracted; }
+
+    /**
+     * Sets whether the monster is distracted.
+     *
+     * @param value	whether whether the monster is distracted.
+     */
+    public void setDistracted(boolean value){ isDistracted = value; }
 
     /**
      * Returns the cooldown between successive turns

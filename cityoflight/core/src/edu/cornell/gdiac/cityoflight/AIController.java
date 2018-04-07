@@ -14,8 +14,8 @@ public class AIController{
 
         /** The creature is patrolling around */
         PATROL,
-        /** The creature has Annette in line of sight or senses her around */
-        SEEK,
+        /** The creature senses Annette around without seeing her*/
+        SENSE,
         /** The creature is being distracted */
         DISTRACT,
         /** The creature actively chases Annette (pathfinding) */
@@ -37,6 +37,11 @@ public class AIController{
     /** Annette's last seen position */
     private Vector2 lastseen;
 
+    /** Stores original line of sight distance */
+    private float sightDistanceCache;
+
+    private float LouSenseDistance = 5.5f;
+
     /**
      * Creates an AIController for the creature with the given id.
      *
@@ -47,6 +52,7 @@ public class AIController{
         this.creature = creature;
         this.light = this.creature.getVision();
         this.level = level;
+        this.sightDistanceCache = creature.getVision().getDistance();
 
         state = FSMState.PATROL;
         ticks = 0;
@@ -73,6 +79,11 @@ public class AIController{
             case PATROL:
 
                 if (creature.getType() == 1) {
+
+                    if (creature.getVision().getDistance() > sightDistanceCache) {
+                        creature.getVision().setDistance(creature.getVision().getDistance() - 0.1f);
+                    }
+
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
                         System.out.println("snail behavior: change direction");
                         creature.setXInput(-creature.getXInput());
@@ -122,24 +133,51 @@ public class AIController{
                 creature.applyForce();
 
                 break;
-            case SEEK:
+
+            case SENSE:
+
+                if (creature.getType() == 1){
+                    if (creature.getVision().getDistance() <= LouSenseDistance) {
+                        creature.getVision().setDistance(creature.getVision().getDistance() + 0.1f);
+                    }
+
+                    if (creature.getStuck() && creature.getTurnCool() <= 0) {
+                        System.out.println("snail behavior: change direction");
+                        creature.setXInput(-creature.getXInput());
+                        creature.setYInput(-creature.getYInput());
+                        creature.setStuck(false);
+                        creature.setTurnCool(creature.getTurnLimit());
+                    }
+                }
+
+                cAngleCache.set(creature.getXInput(),creature.getYInput());
+
+                if (cAngleCache.len2() > 0.0f) {
+                    float angle = cAngleCache.angle();
+                    // Convert to radians with up as 0
+                    angle = (float)Math.PI*(angle-90.0f)/180.0f;
+                    creature.setAngle(angle);
+                }
+                cAngleCache.scl(creature.getForce());
+                creature.setMovement(cAngleCache.x,cAngleCache.y);
+                creature.applyForce();
+
 
                 break;
+
             case DISTRACT:
 
                 break;
+
             case CHASE:
 
                 if (creature.getType() == 1) {
                     //System.out.println("snail behavior: go towards Annette's position");
 
-//                    if (creature.getStuck() && creature.getTurnCool() <= 0) {
-//                        System.out.println("snail behavior: change direction");
-//                        creature.setXInput(-creature.getXInput());
-//                        creature.setYInput(-creature.getYInput());
-//                        creature.setStuck(false);
-//                        creature.setTurnCool(creature.getTurnLimit());
-//                    }
+                    if (creature.getVision().getDistance() < LouSenseDistance) {
+                        creature.getVision().setDistance(creature.getVision().getDistance() + 0.1f);
+                    }
+
                     if (creature.getTurnCool() <= 0) {
                         cAngleCache.set(getNextMovement().x, getNextMovement().y);
                         creature.setTurnCool(creature.getTurnLimit());
@@ -173,7 +211,6 @@ public class AIController{
     private void changeStateIfApplicable() {
         // Add initialization code as necessary
         //#region PUT YOUR CODE HERE
-
         //#endregion
 
         // Next state depends on current state.
@@ -189,12 +226,28 @@ public class AIController{
                 } else if (isDistracted()) {
                     System.out.println("patrol -> distract");
                     state = FSMState.DISTRACT;
+                } else if (canSenseAnnette()){
+                    System.out.println("patrol -> sense");
+                    state = FSMState.SENSE;
                 }
                 //#endregion
                 break;
 
-            case SEEK: // Do not pre-empt with FSMState in a case
+            case SENSE: // Do not pre-empt with FSMState in a case
                 //#region PUT YOUR CODE HERE
+
+                if (canSeeAnnette()) {
+                    System.out.println("sense -> chase");
+                    recordLastSeen();
+                    creature.setAggroCool(creature.getAggroLimit());
+                    state = FSMState.CHASE;
+                } else if (isDistracted()){
+                    System.out.println("sense -> distract");
+                    state = FSMState.DISTRACT;
+                } else if (!canSenseAnnette()){
+                    System.out.println("sense -> patrol");
+                    state = FSMState.PATROL;
+                }
 
                 //#endregion
                 break;
@@ -207,6 +260,9 @@ public class AIController{
                     recordLastSeen();
                     creature.setAggroCool(creature.getAggroLimit());
                     state = FSMState.CHASE;
+                } else if (!isDistracted() && canSenseAnnette()){
+                    System.out.println("distract -> sense");
+                    state = FSMState.SENSE;
                 } else if (!isDistracted()) {
                     System.out.println("distract -> patrol");
                     state = FSMState.PATROL;
@@ -222,7 +278,10 @@ public class AIController{
                     recordLastSeen();
                 }
 
-                if (!canSeeAnnette() && creature.getAggroCool() <= 0 ) {
+                if (!canSeeAnnette() && canSenseAnnette() && creature.getAggroCool() <= 0 ){
+                    System.out.println("chase -> sense");
+                    state = FSMState.SENSE;
+                }else if (!canSeeAnnette() && !canSenseAnnette() && creature.getAggroCool() <= 0 ) {
                     System.out.println("chase -> patrol");
                     state = FSMState.PATROL;
                 }
@@ -253,6 +312,21 @@ public class AIController{
                 light.contains(annette.getX()+annette.getWidth()/2, annette.getY()+annette.getHeight()/2));
     }
 
+    public boolean annetteHasMoved() {
+        //System.out.println("checking if Annette moved");
+        return (level.getAnnette().getMovement().x != 0 || level.getAnnette().getMovement().y != 0);
+    }
+
+
+    public boolean canSenseAnnette(){
+        if (creature.getType() == 1) {
+            return (creature.getPosition().sub(level.getAnnette().getPosition()).len() <= LouSenseDistance &&
+                    annetteHasMoved());
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Record Annette's position.
      */
@@ -261,6 +335,10 @@ public class AIController{
         lastseen = level.getAnnette().getPosition();
     }
 
+
+    /**
+     * Determine next movement for snail
+     */
     public Vector2 getNextMovement(){
 
         Vector2 nextMove = new Vector2();
@@ -303,17 +381,26 @@ public class AIController{
 
     /**
      * Checks whether the creature is distracted by the distraction.
-     * Onlu checks for the middle of the model (since the distraction is small.)
+     * OnlY checks for the middle of the model (since the distraction is small.)
      *
      * @return
      */
-    public boolean isDistracted(){
+    public void testDistracted(){
         try {
             DistractionModel distraction = level.getDistraction();
-            return (light.contains(distraction.getX(), distraction.getY()));
+            if (light.contains(distraction.getX(), distraction.getY())){
+                System.out.println("distracted = true");
+                creature.setDistracted(true);
+            }
         } catch (NullPointerException e){
-            return false;
+            creature.setDistracted(false);
         }
+    }
+
+    public boolean isDistracted(){
+        System.out.println("testing for distraction");
+        testDistracted();
+        return creature.getDistracted();
     }
 
 }

@@ -696,8 +696,7 @@ public class GameController implements Screen, ContactListener {
 
 			for (CreatureModel c : level.getCreature()) {
 				if ((bd1 == c && bd2 == distraction) || (bd1 == distraction && bd2 == c )) {
-					// some code that sets creature alertness idk
-					System.out.println("distract creature");
+					c.setDistracted(true);
 				}
 			}
 
