@@ -163,7 +163,6 @@ public class LoadingMode implements Screen {
 	 * @return true if the player is ready to go
 	 */
 	public boolean isReady() {
-		System.out.println(progress==1);
 		return progress==1;
 
 	}
@@ -191,7 +190,6 @@ public class LoadingMode implements Screen {
 	 * @param millis The loading budget in milliseconds
 	 */
 	public LoadingMode(ObstacleCanvas canvas, int millis) {
-		System.out.println("using loading mode????");
 		this.manager = JsonAssetManager.getInstance();
 		this.canvas  = canvas;
 		budget = millis;
@@ -328,10 +326,8 @@ public class LoadingMode implements Screen {
 		if (active) {
 			update(delta);
 			draw();
-			System.out.println("after draw");
 			// We are are ready, notify our listener
 			if (isReady() && listener != null) {
-				System.out.println("ready");
 				listener.exitScreen(this, 1);
 			}
 		}

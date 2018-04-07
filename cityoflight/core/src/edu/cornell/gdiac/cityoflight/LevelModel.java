@@ -430,7 +430,7 @@ public class LevelModel {
 //		System.out.println(annette.getDirection() == null);
         distraction = new DistractionModel(annette.getX(), annette.getY(), false, annette.getDirection());
         JsonValue distractiondata = levelFormat.get("distraction");
-//		distraction.initialize(distractiondata, 0, 0);
+		distraction.initialize(distractiondata);
         distraction.setDrawScale(scale);
         activate(distraction);
         distraction.setActive(true);
