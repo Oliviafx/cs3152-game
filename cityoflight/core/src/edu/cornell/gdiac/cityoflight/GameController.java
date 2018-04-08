@@ -738,12 +738,16 @@ public class GameController implements Screen, ContactListener {
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
+				sound.stop("win");
+				sound.play("win", "sounds/win.wav", false, 0.5f);
 			}
 
 			//collision with creature lose state
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					setFailure(true);
+					sound.stop("lose");
+					sound.play("lose", "sounds/lose.wav", false, 0.5f);
 				}
 			}
 
