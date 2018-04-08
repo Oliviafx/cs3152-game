@@ -293,9 +293,9 @@ public class GameController implements Screen, ContactListener {
 	public void reset() {
 		SoundController sound = SoundController.getInstance();
 
-//		for (String key : sound.getCollection()) {
-//			sound.stop(key);
-//		}
+		for (String key : sound.getCollection()) {
+			sound.stop(key);
+		}
 
 		level.dispose();
 
@@ -387,7 +387,7 @@ public class GameController implements Screen, ContactListener {
 		float yoff = 0;
 
 //		System.out.println(sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f));
-		sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f);
+		sound.play("harp", "sounds/bg_test2.wav", true, 0.75f);
 //		System.out.println(sound.play("menu", "sounds/main_melody.wav", true, 0.75f));
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
@@ -409,6 +409,7 @@ public class GameController implements Screen, ContactListener {
 		if (annette.getBird()&&!level.isDistraction() ) {
 //			System.out.println("here");
 			level.createDistraction(levelFormat);
+			sound.stop("distraction");
 			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
@@ -521,6 +522,7 @@ public class GameController implements Screen, ContactListener {
 			box.setDoesExist(true);
 			box.setDeactivated(false);
 			box.setDeactivating(false);
+			sound.stop("box");
 			sound.play("box", "sounds/box.wav", false, 0.8f);
 
 		}
@@ -538,8 +540,8 @@ public class GameController implements Screen, ContactListener {
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
-//			sound.stop("box");
-			sound.play("slam", "sounds/slam.wav", false, 0.5f);
+			sound.stop("slam");
+			System.out.println(sound.play("slam", "sounds/slam.wav", false, 0.5f));
 
 		}
 
@@ -696,8 +698,17 @@ public class GameController implements Screen, ContactListener {
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
 
-            // Check for win condition : Annette reaches exit
-			if ( (bd1 == annette && bd2 == door) || (bd1 == door && bd2 == annette) ){
+			SoundController sound = SoundController.getInstance();
+//			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
+//			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
+//			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
+//			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
+////			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
+//			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
+//			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
+
+            // Check for win condition
+			if ((bd1 == annette && bd2 == door) || (bd1 == door && bd2 == annette)) {
 				setComplete(true);
 			}
 
@@ -757,6 +768,20 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 
+			for (CreatureModel c : level.getCreature()) {
+			    int index = 0;
+                CreatureModel c2 = level.getCreature(index);
+
+			    do {
+                    if (c != c2) {
+                        if ((bd1 == c && bd2 == c2) || (bd1 == c2 && bd2 == c)) {
+                            c.setStuck(true);
+                        }
+                    }
+                    index++;
+                    c2 = level.getCreature(index);
+                } while (c2 != null);
+            }
 
 			for (CreatureModel c : level.getCreature()) {
 					if ((bd1 == c && bd2 == box) || (bd1 == box && bd2 == c)) {
@@ -772,6 +797,8 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
+				sound.stop("box");
+				sound.play("box", "sounds/box.wav", false, 0.8f);
 			}
 
 		} catch (Exception e) {

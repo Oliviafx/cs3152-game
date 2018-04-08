@@ -32,10 +32,10 @@
 	"creatures": {
 		"snail": {
 		    "type":         1,
-			"pos":        	[ 3.0, 5.0],
+			"pos":        	[ 10.0, 5.0],
 			"radius":      	0.8,
 			"bodytype":    	"dynamic",
-			"xinput":        125.0,
+			"xinput":        -125.0,
 			"yinput":        0.0,
 			"density":        1.0,
 			"friction":       0.0,
@@ -78,10 +78,10 @@
         },
 		"lady": {
 		    "type":         3,
-			"pos":        	[ 2.0, 7.0],
+			"pos":        	[ 11, 7.0],
 			"radius":      	0.8,
 			"bodytype":    	"dynamic",
-			"xinput":        180.0,
+			"xinput":        -180.0,
 			"yinput":        0.0,
 			"density":        1.0,
 			"friction":       0.0,

@@ -84,7 +84,6 @@ public class LevelModel {
 
 	private static final int MAX_ALPHA = 255;
 	private static final float BOX_MARGIN = 0.8f;
-
 	private static final float TRANSLATION = -50.0f;
 
 	/** All the objects in the world. */
