@@ -550,6 +550,10 @@ public class LevelModel {
 			creature.setDrawScale(scale);
 			creatures.add(creature);
 			activate(creature);
+
+			if (creature.getType() == 3){
+				lights.get(index).setXray(true);
+			}
 			attachVision(creature, lights.get(index));
 	}
 
