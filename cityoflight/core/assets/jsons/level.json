@@ -30,41 +30,42 @@
        	"debugopacity":	192,
 	},
 	"creatures": {
-		"snail": {
-		    "type":         1,
-			"pos":        	[ 1.0, 7.0],
+		"lady": {
+		    "type":         3,
+			"pos":        	[ 2.0, 7.0],
 			"radius":      	0.8,
 			"bodytype":    	"dynamic",
-			"xinput":        125.0,
+			"xinput":        180.0,
 			"yinput":        0.0,
 			"density":        1.0,
 			"friction":       0.0,
 			"restitution":    0.0,
 			"force": 		  1.0,
 			"damping": 		  1.0,
-			"maxspeed": 	  8.0,
+			"maxspeed": 	  50.0,
 			"collideBits":	"0001",
 			"excludeBits":	"0000",
 			"startframe":       0,
 			"walklimit":		4,
 			"turnlimit":       10,
-			"aggrolimit":      100,
-			"texture":     	"snail",
+			"aggrolimit":      150,
+			"texture":     	"blanche",
 			"debugcolor":  	"white",
 			"debugopacity":	192,
-		}
+        }
+
 	},
 	"vision": {
-		"snailVision": {
+		"ladyVision": {
 			"color":		[0.2, 0.2, 0.5, 0.3],
 			"pos":			[  0,   0],
-			"distance":		  4,
-			"angle":	 	  85,
+			"distance":		  10,
+			"angle":	 	  20,
 			"facing":		  90,
 			"rays":			 512,
 			"soft":			false,
 			"excludeBits":	"0010"
-		}
+        }
 	},
     "box": {
 		"width":      	1,

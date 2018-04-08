@@ -39,8 +39,13 @@ public class AIController{
 
     /** Stores original line of sight distance */
     private float sightDistanceCache;
+    /** Stores original speed */
+    private float speedCache;
 
-    private float LouSenseDistance = 5.5f;
+    private float LouSenseDistance = 5.0f;
+    private float TarasqueSpeedGain = 5.0f;
+    private float BlancheMaxSpeedGain = 3.5f;
+    private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
     /**
      * Creates an AIController for the creature with the given id.
@@ -53,6 +58,7 @@ public class AIController{
         this.light = this.creature.getVision();
         this.level = level;
         this.sightDistanceCache = creature.getVision().getDistance();
+        this.speedCache = creature.getSpeedInput();
 
         state = FSMState.PATROL;
         ticks = 0;
@@ -91,47 +97,57 @@ public class AIController{
                         creature.setStuck(false);
                         creature.setTurnCool(creature.getTurnLimit());
                     }
-                }
-
-                if (creature.getType() == 2){
+                } else if (creature.getType() == 2){
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        System.out.println("dragon behavior: turns right");
-                        if (creature.getXInput() > 0){
-                            creature.setYInput(-creature.getXInput());
-                            creature.setXInput(0);
-                        } else if (creature.getXInput() < 0){
-                            creature.setYInput(-creature.getXInput());
-                            creature.setXInput(0);
-                        } else if (creature.getYInput() > 0){
-                            creature.setXInput(creature.getYInput());
-                            creature.setYInput(0);
-                        } else if (creature.getYInput() < 0){
-                            creature.setXInput(creature.getYInput());
-                            creature.setYInput(0);
+
+                        if (turnRight()) {
+                            System.out.println("dragon behavior: turns right");
+                            if (creature.getXInput() > 0) {
+                                creature.setYInput(-creature.getXInput());
+                                creature.setXInput(0);
+                            } else if (creature.getXInput() < 0) {
+                                creature.setYInput(-creature.getXInput());
+                                creature.setXInput(0);
+                            } else if (creature.getYInput() > 0) {
+                                creature.setXInput(creature.getYInput());
+                                creature.setYInput(0);
+                            } else if (creature.getYInput() < 0) {
+                                creature.setXInput(creature.getYInput());
+                                creature.setYInput(0);
+                            }
+                        } else /* turn left */ {
+                            System.out.println("dragon behavior: turns left");
+                            if (creature.getXInput() > 0) {
+                                creature.setYInput(creature.getXInput());
+                                creature.setXInput(0);
+                            } else if (creature.getXInput() < 0) {
+                                creature.setYInput(creature.getXInput());
+                                creature.setXInput(0);
+                            } else if (creature.getYInput() > 0) {
+                                creature.setXInput(-creature.getYInput());
+                                creature.setYInput(0);
+                            } else if (creature.getYInput() < 0) {
+                                creature.setXInput(-creature.getYInput());
+                                creature.setYInput(0);
+                            }
                         }
 
                         creature.setStuck(false);
                         creature.setTurnCool(creature.getTurnLimit());
                     }
-                }
-
-                if (creature.getType() == 3){
-                    // dame blanche.
+                } else if (creature.getType() == 3){
+                    BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
+                    if (creature.getStuck() && creature.getTurnCool() <= 0) {
+                        System.out.println("blanche behavior: change direction");
+                        creature.setXInput(-creature.getXInput());
+                        creature.setYInput(-creature.getYInput());
+                        creature.setStuck(false);
+                        creature.setTurnCool(creature.getTurnLimit());
+                    }
                 }
 
                 cAngleCache.set(creature.getXInput(),creature.getYInput());
                 //System.out.println("movement = " + currentcreature.getMovement());
-
-                if (cAngleCache.len2() > 0.0f) {
-                    float angle = cAngleCache.angle();
-                    // Convert to radians with up as 0
-                    angle = (float)Math.PI*(angle-90.0f)/180.0f;
-                    creature.setAngle(angle);
-                }
-                cAngleCache.scl(creature.getForce());
-                creature.setMovement(cAngleCache.x,cAngleCache.y);
-                creature.applyForce();
-
                 break;
 
             case SENSE:
@@ -152,17 +168,6 @@ public class AIController{
 
                 cAngleCache.set(creature.getXInput(),creature.getYInput());
 
-                if (cAngleCache.len2() > 0.0f) {
-                    float angle = cAngleCache.angle();
-                    // Convert to radians with up as 0
-                    angle = (float)Math.PI*(angle-90.0f)/180.0f;
-                    creature.setAngle(angle);
-                }
-                cAngleCache.scl(creature.getForce());
-                creature.setMovement(cAngleCache.x,cAngleCache.y);
-                creature.applyForce();
-
-
                 break;
 
             case DISTRACT:
@@ -182,21 +187,37 @@ public class AIController{
                         cAngleCache.set(getNextMovement().x, getNextMovement().y);
                         creature.setTurnCool(creature.getTurnLimit());
                     }
-                }
 
+                } else if (creature.getType() == 2) {
 
-                if (cAngleCache.len2() > 0.0f) {
-                    float angle = cAngleCache.angle();
-                    // Convert to radians with up as 0
-                    angle = (float)Math.PI*(angle-90.0f)/180.0f;
-                    creature.setAngle(angle);
+                    if (creature.getTurnCool() <= 0) {
+                        cAngleCache.set(creature.getXInput()*TarasqueSpeedGain, creature.getYInput()*TarasqueSpeedGain);
+                        creature.setTurnCool(creature.getTurnLimit());
+                    }
+
+                } else if (creature.getType() == 3){
+
+                    if (creature.getTurnCool() <= 0) {
+                        cAngleCache.set(getNextMovement().x * BlancheCurrentSpeedGain, getNextMovement().y * BlancheCurrentSpeedGain);
+                        creature.setTurnCool(creature.getTurnLimit());
+                        if (BlancheCurrentSpeedGain > 0) {
+                            BlancheCurrentSpeedGain -= 0.1;
+                            System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
+                        }
+                    }
                 }
-                cAngleCache.scl(creature.getForce());
-                creature.setMovement(cAngleCache.x,cAngleCache.y);
-                creature.applyForce();
                 break;
         }
 
+        if (cAngleCache.len2() > 0.0f) {
+            float angle = cAngleCache.angle();
+            // Convert to radians with up as 0
+            angle = (float)Math.PI*(angle-90.0f)/180.0f;
+            creature.setAngle(angle);
+        }
+        cAngleCache.scl(creature.getForce());
+        creature.setMovement(cAngleCache.x,cAngleCache.y);
+        creature.applyForce();
     }
 
     /**
@@ -228,6 +249,7 @@ public class AIController{
                     state = FSMState.DISTRACT;
                 } else if (canSenseAnnette()){
                     System.out.println("patrol -> sense");
+                    creature.setAggroCool(creature.getAggroLimit());
                     state = FSMState.SENSE;
                 }
                 //#endregion
@@ -244,7 +266,7 @@ public class AIController{
                 } else if (isDistracted()){
                     System.out.println("sense -> distract");
                     state = FSMState.DISTRACT;
-                } else if (!canSenseAnnette()){
+                } else if (!canSenseAnnette() && creature.getAggroCool() <= 0){
                     System.out.println("sense -> patrol");
                     state = FSMState.PATROL;
                 }
@@ -262,6 +284,7 @@ public class AIController{
                     state = FSMState.CHASE;
                 } else if (!isDistracted() && canSenseAnnette()){
                     System.out.println("distract -> sense");
+                    creature.setAggroCool(creature.getAggroLimit());
                     state = FSMState.SENSE;
                 } else if (!isDistracted()) {
                     System.out.println("distract -> patrol");
@@ -280,6 +303,7 @@ public class AIController{
 
                 if (!canSeeAnnette() && canSenseAnnette() && creature.getAggroCool() <= 0 ){
                     System.out.println("chase -> sense");
+                    creature.setAggroCool(creature.getAggroLimit());
                     state = FSMState.SENSE;
                 }else if (!canSeeAnnette() && !canSenseAnnette() && creature.getAggroCool() <= 0 ) {
                     System.out.println("chase -> patrol");
@@ -312,12 +336,21 @@ public class AIController{
                 light.contains(annette.getX()+annette.getWidth()/2, annette.getY()+annette.getHeight()/2));
     }
 
+    /**
+     * Checks whether Annette is moving.
+     *
+     * @return
+     */
     public boolean annetteHasMoved() {
         //System.out.println("checking if Annette moved");
         return (level.getAnnette().getMovement().x != 0 || level.getAnnette().getMovement().y != 0);
     }
 
-
+    /**
+     * Checks whether Annette can be sensed by some means other than vision.
+     *
+     * @return
+     */
     public boolean canSenseAnnette(){
         if (creature.getType() == 1) {
             return (creature.getPosition().sub(level.getAnnette().getPosition()).len() <= LouSenseDistance &&
@@ -337,7 +370,7 @@ public class AIController{
 
 
     /**
-     * Determine next movement for snail
+     * Determine next movement for active chasing
      */
     public Vector2 getNextMovement(){
 
@@ -381,26 +414,32 @@ public class AIController{
 
     /**
      * Checks whether the creature is distracted by the distraction.
-     * OnlY checks for the middle of the model (since the distraction is small.)
+     * Only checks for the middle of the model (since the distraction is small.)
      *
      * @return
      */
     public void testDistracted(){
+        //System.out.println("testing for distraction");
         try {
             DistractionModel distraction = level.getDistraction();
-            if (light.contains(distraction.getX(), distraction.getY())){
+            if (light.contains(distraction.getX(), distraction.getY()) && creature.getType() != 2){
                 System.out.println("distracted = true");
                 creature.setDistracted(true);
             }
         } catch (NullPointerException e){
+            //System.out.println("distraction is null");
             creature.setDistracted(false);
         }
     }
 
     public boolean isDistracted(){
-        System.out.println("testing for distraction");
+        //System.out.println("testing for distraction");
         testDistracted();
         return creature.getDistracted();
+    }
+
+    public boolean turnRight(){
+        return (Math.random() > 0.5);
     }
 
 }
