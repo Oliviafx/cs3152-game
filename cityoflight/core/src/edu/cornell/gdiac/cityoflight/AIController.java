@@ -427,7 +427,7 @@ public class AIController{
                 creature.setDistracted(true);
             }
         } catch (NullPointerException e){
-            //System.out.println("distraction is null");
+            System.out.println("distraction is null");
             creature.setDistracted(false);
         }
     }
@@ -437,6 +437,7 @@ public class AIController{
         testDistracted();
         return creature.getDistracted();
     }
+
 
     public boolean turnRight(){
         return (Math.random() > 0.5);
