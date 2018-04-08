@@ -173,30 +173,47 @@ public class LevelModel {
 	}
 
 	/**
-	 * Returns a reference to the creature
+	 * Returns a reference to the creature array
 	 *
-	 * @return a reference to the creature
+	 * @return a reference to the creature array
+	 */
+	public Array<CreatureModel> getCreature(){ return creatures; }
+
+	/**
+	 * Returns a creature of the specified index
+	 *
+	 * @param index the index of the creature to return
+	 * @return a creature of the specified index
 	 */
 	public CreatureModel getCreature(int index) {
-		return creatures.get(index);
+		try {
+			return creatures.get(index);
+		} catch (IndexOutOfBoundsException e){
+			//System.out.println(" creature of index " + index + " does not exist.");
+			return null;
+		}
 	}
 
 	/**
-	 * Returns a reference to the creature
+	 * Returns a reference to the vision array
 	 *
-	 * @return a reference to the creature
+	 * @return a reference to the vision array
 	 */
-	public Array<CreatureModel> getAllCreatures() {
-		return creatures;
-	}
+	public Array<LightSource> getVision() { return lights; }
 
 	/**
 	 * Returns a reference to a light
 	 *
 	 * @return a reference to a light
 	 */
-	public LightSource getVision(int index) {return lights.get(index);}
-
+	public LightSource getVision(int index) {
+		try {
+			return lights.get(index);
+		} catch (IndexOutOfBoundsException e){
+			System.out.println(" visioncone of index " + index + " does not exist.");
+			return null;
+		}
+	}
 
 	/**
 	 * Returns a reference to the box
@@ -398,9 +415,10 @@ public class LevelModel {
         // Create cone lights to be line of sights of creatures.
         createLineofSight(levelFormat.get("vision"));
         // Create the creatures and attach light sources
-        createCreature(levelFormat.get("creatures"), "snail", 0);
-        createCreature(levelFormat.get("creatures"), "tarasque", 1);
-        createCreature(levelFormat.get("creatures"), "blanche", 2);
+		createCreatures(levelFormat.get("creatures"));
+        //createCreature(levelFormat.get("creatures"), "snail", 0);
+        //createCreature(levelFormat.get("creatures"), "tarasque", 1);
+        //createCreature(levelFormat.get("creatures"), "blanche", 2);
 
         // Create box
         box = new BoxModel(1, 1);
@@ -432,7 +450,7 @@ public class LevelModel {
 //		System.out.println(annette.getDirection() == null);
         distraction = new DistractionModel(annette.getX(), annette.getY(), false, annette.getDirection());
         JsonValue distractiondata = levelFormat.get("distraction");
-//		distraction.initialize(distractiondata, 0, 0);
+		distraction.initialize(distractiondata);
         distraction.setDrawScale(scale);
         activate(distraction);
         distraction.setActive(true);
@@ -536,22 +554,41 @@ public class LevelModel {
 	/**
 	 *
 	 * @param creaturejson
+	 */
+	public void createCreatures(JsonValue creaturejson){
+		JsonValue creaturedata = creaturejson.child();
+		int index = 0;
+    	while (creaturedata != null) {
+			System.out.println("index = " + index);
+			CreatureModel creature = new CreatureModel();
+			creature.initialize(creaturedata);
+			creature.setDrawScale(scale);
+			activate(creature);
+			attachVision(creature, lights.get(index));
+			creatures.add(creature);
+			creaturedata = creaturedata.next();
+			index = index + 1;
+		}
+	}
+
+	/**
+	 *
+	 * @param creaturejson
 	 * @param name
 	 * @param index the index for the creature and the light which the creature is attached to
 	 */
 	public void createCreature(JsonValue creaturejson, String name, int index){
 		CreatureModel creature = new CreatureModel();
 		JsonValue creaturedata = creaturejson.get(name);
-//		while (creaturedata != null) {
-			//if (creaturedata == null) {System.out.println ("no json found");}
 			creature.initialize(creaturedata);
 			creature.setDrawScale(scale);
 			creatures.add(creature);
 			activate(creature);
-			attachVision(creature, lights.get(index));
-//			creaturedata = creaturedata.next();
-//		}
 
+			if (creature.getType() == 3){
+				lights.get(index).setXray(true);
+			}
+			attachVision(creature, lights.get(index));
 	}
 
 	/**
@@ -565,6 +602,7 @@ public class LevelModel {
 	 */
 	public void attachVision (CreatureModel creature, LightSource light){
 		light.attachToBody(creature.getBody(), light.getX(), light.getY(), light.getDirection());
+		creature.setVision(light);
 	}
 
 
