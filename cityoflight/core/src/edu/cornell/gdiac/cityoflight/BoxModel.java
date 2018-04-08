@@ -406,6 +406,7 @@ public class BoxModel extends BoxObstacle {
             filmstrip = null;
         }
         setTexture(texture);
+//        setSensor(true);
     }
 
 
