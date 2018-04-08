@@ -84,7 +84,6 @@ public class LevelModel {
 
 	private static final int MAX_ALPHA = 255;
 	private static final float BOX_MARGIN = 0.8f;
-
 	private static final float TRANSLATION = -50.0f;
 
 	/** All the objects in the world. */
@@ -174,30 +173,47 @@ public class LevelModel {
 	}
 
 	/**
-	 * Returns a reference to the creature
+	 * Returns a reference to the creature array
 	 *
-	 * @return a reference to the creature
+	 * @return a reference to the creature array
+	 */
+	public Array<CreatureModel> getCreature(){ return creatures; }
+
+	/**
+	 * Returns a creature of the specified index
+	 *
+	 * @param index the index of the creature to return
+	 * @return a creature of the specified index
 	 */
 	public CreatureModel getCreature(int index) {
-		return creatures.get(index);
+		try {
+			return creatures.get(index);
+		} catch (IndexOutOfBoundsException e){
+			//System.out.println(" creature of index " + index + " does not exist.");
+			return null;
+		}
 	}
 
 	/**
-	 * Returns a reference to the creature
+	 * Returns a reference to the vision array
 	 *
-	 * @return a reference to the creature
+	 * @return a reference to the vision array
 	 */
-	public Array<CreatureModel> getAllCreatures() {
-		return creatures;
-	}
+	public Array<LightSource> getVision() { return lights; }
 
 	/**
 	 * Returns a reference to a light
 	 *
 	 * @return a reference to a light
 	 */
-	public LightSource getVision(int index) {return lights.get(index);}
-
+	public LightSource getVision(int index) {
+		try {
+			return lights.get(index);
+		} catch (IndexOutOfBoundsException e){
+			System.out.println(" visioncone of index " + index + " does not exist.");
+			return null;
+		}
+	}
 
 	/**
 	 * Returns a reference to the box
@@ -313,6 +329,9 @@ public class LevelModel {
 	 */
 	public void setAlpha(int value) { alpha = value; }
 
+
+	public float getTranslation() { return TRANSLATION; }
+
 	/**
 	 * Creates a new LevelModel
 	 *
@@ -396,19 +415,20 @@ public class LevelModel {
         // Create cone lights to be line of sights of creatures.
         createLineofSight(levelFormat.get("vision"));
         // Create the creatures and attach light sources
-        createCreature(levelFormat.get("creatures"), "snail", 0);
-        createCreature(levelFormat.get("creatures"), "tarasque", 1);
-        createCreature(levelFormat.get("creatures"), "blanche", 2);
+		createCreatures(levelFormat.get("creatures"));
+        //createCreature(levelFormat.get("creatures"), "snail", 0);
+        //createCreature(levelFormat.get("creatures"), "tarasque", 1);
+        //createCreature(levelFormat.get("creatures"), "blanche", 2);
 
         // Create box
         box = new BoxModel(1, 1);
-        JsonValue boxdata = levelFormat.get("box");
-        if (annette.isSummoning() && !box.getDoesExist()) {
-            box.initialize(boxdata, annette.getPosition(), 0, 0);
-            box.setDrawScale(scale);
-            activate(box);
-            box.setActive(true);
-        }
+//        JsonValue boxdata = levelFormat.get("box");
+//        if (annette.isSummoning() && !box.getDoesExist()) {
+//            box.initialize(boxdata, annette.getPosition(), 0, 0);
+//            box.setDrawScale(scale);
+//            activate(box);
+//            box.setActive(true);
+//        }
 
         if (distraction != null) {
             distraction.setAlive(false);
@@ -534,22 +554,41 @@ public class LevelModel {
 	/**
 	 *
 	 * @param creaturejson
+	 */
+	public void createCreatures(JsonValue creaturejson){
+		JsonValue creaturedata = creaturejson.child();
+		int index = 0;
+    	while (creaturedata != null) {
+			System.out.println("index = " + index);
+			CreatureModel creature = new CreatureModel();
+			creature.initialize(creaturedata);
+			creature.setDrawScale(scale);
+			activate(creature);
+			attachVision(creature, lights.get(index));
+			creatures.add(creature);
+			creaturedata = creaturedata.next();
+			index = index + 1;
+		}
+	}
+
+	/**
+	 *
+	 * @param creaturejson
 	 * @param name
 	 * @param index the index for the creature and the light which the creature is attached to
 	 */
 	public void createCreature(JsonValue creaturejson, String name, int index){
 		CreatureModel creature = new CreatureModel();
 		JsonValue creaturedata = creaturejson.get(name);
-//		while (creaturedata != null) {
-			//if (creaturedata == null) {System.out.println ("no json found");}
 			creature.initialize(creaturedata);
 			creature.setDrawScale(scale);
 			creatures.add(creature);
 			activate(creature);
-			attachVision(creature, lights.get(index));
-//			creaturedata = creaturedata.next();
-//		}
 
+			if (creature.getType() == 3){
+				lights.get(index).setXray(true);
+			}
+			attachVision(creature, lights.get(index));
 	}
 
 	/**
@@ -563,6 +602,7 @@ public class LevelModel {
 	 */
 	public void attachVision (CreatureModel creature, LightSource light){
 		light.attachToBody(creature.getBody(), light.getX(), light.getY(), light.getDirection());
+		creature.setVision(light);
 	}
 
 
@@ -714,8 +754,10 @@ public class LevelModel {
 		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
-		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
-		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
+//		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
+		float cameraXStart = 0;
+//		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
+		float cameraYStart = 0;
 		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
 		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
@@ -726,7 +768,7 @@ public class LevelModel {
 		oTran.mul(wTran);
 
 		if (rayhandler != null) {
-			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
+			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth() * 2, canvas.getHeight() * 2);
 			rayhandler.render();
 		}
 
@@ -744,7 +786,7 @@ public class LevelModel {
 			color = Color.GRAY;
 			float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
 			float temp = (1 - ((dist - BOX_MARGIN) / BoxModel.OUTER_RADIUS)) * MAX_ALPHA;
-			temp = temp - 1;
+			temp = temp - 5;
 			alpha = (int) temp;
 			color.a = alpha;
 			box.drawState(canvas, color);

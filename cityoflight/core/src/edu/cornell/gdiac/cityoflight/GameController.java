@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import edu.cornell.gdiac.physics.lights.LightSource;
 import edu.cornell.gdiac.util.*;
 
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -66,6 +67,8 @@ public class GameController implements Screen, ContactListener {
 	/** Offset for box when summoning */
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
+	public static final float	TEMP_SCALE	= 0.5f;
+
 
 	/**
 	 * Preloads the assets for this controller.
@@ -143,6 +146,9 @@ public class GameController implements Screen, ContactListener {
 	/** Reference to the game level */
 	protected LevelModel level;
 
+	/** Reference to the AIControllers */
+	private Array<AIController> AIcontrollers = new Array<AIController>();
+
 	/** Whether or not this is an active controller */
 	private boolean active;
 	/** Whether we have completed this level */
@@ -154,6 +160,10 @@ public class GameController implements Screen, ContactListener {
 
 	private float dist;
 
+	private boolean downBox = false;
+	private boolean upBox = false;
+	private boolean rightBox = false;
+	private boolean leftBox = false;
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
@@ -251,6 +261,10 @@ public class GameController implements Screen, ContactListener {
 		return dist;
 	}
 
+	public boolean getDownBox() { return downBox; }
+	public boolean getUpBox() { return upBox; }
+	public boolean getRightBox() { return rightBox; }
+	public boolean getLeftBox() { return leftBox; }
 
 
 	/**
@@ -289,12 +303,13 @@ public class GameController implements Screen, ContactListener {
 	public void reset() {
 		SoundController sound = SoundController.getInstance();
 
-//		for (String key : sound.getCollection()) {
-//			sound.stop(key);
-//		}
+		for (String key : sound.getCollection()) {
+			sound.stop(key);
+		}
 
 		level.dispose();
 
+		AIcontrollers.clear();
 		setComplete(false);
 		setFailure(false);
 		countdown = -1;
@@ -351,8 +366,9 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	private Vector2 aAngleCache = new Vector2();
-	private Vector2 cAngleCache = new Vector2();
+	//private Vector2 cAngleCache = new Vector2();
 	private Vector2 dAngleCache = new Vector2();
+
 
 	/**
 	 * The core gameplay loop of this world.
@@ -367,9 +383,7 @@ public class GameController implements Screen, ContactListener {
 	public void update(float dt) {
 		// Process actions in object model
 		AnnetteModel annette = level.getAnnette();
-		CreatureModel bob = level.getCreature(0);
-		CreatureModel fred = level.getCreature(1);
-		CreatureModel john = level.getCreature(2);
+
 		BoxModel box = level.getBox();
 		DistractionModel distraction = level.getDistraction();
 //		if (level.isDistraction()) {
@@ -382,9 +396,8 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-//		System.out.println(sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f));
-		sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f);
-//		System.out.println(sound.play("menu", "sounds/main_melody.wav", true, 0.75f));
+		sound.play("harp", "sounds/bg_test2.wav", true, 0.75f);
+
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 //		if (aAngleCache.len2() > 0.0f) {
@@ -404,6 +417,7 @@ public class GameController implements Screen, ContactListener {
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
 			level.createDistraction(levelFormat);
+			sound.stop("distraction");
 			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
@@ -422,68 +436,119 @@ public class GameController implements Screen, ContactListener {
 		}
 //		level.getDistraction().setAlive(input.didX()&&!level.getDistraction().getAlive());
 
-		//creature
-		cAngleCache.set(0.0f,7.0f);
-		if (cAngleCache.len2() > 0.0f) {
-			float angle = cAngleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			bob.setAngle(angle);
-		}
-		cAngleCache.scl(bob.getForce());
-		bob.setMovement(cAngleCache.x,cAngleCache.y);
-		bob.applyForce();
+		// creature AI.
+		createAIControllers();
 
-		cAngleCache.set(10.0f,0.0f);
-		if (cAngleCache.len2() > 0.0f) {
-			float angle = cAngleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			fred.setAngle(angle);
+		for (AIController controller : AIcontrollers){
+			controller.chooseAction();
+			controller.doAction();
 		}
-		cAngleCache.scl(fred.getForce());
-		fred.setMovement(cAngleCache.x,cAngleCache.y);
-		fred.applyForce();
 
-		cAngleCache.set(10.2f,-0.8f);
-		if (cAngleCache.len2() > 0.0f) {
-			float angle = cAngleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			john.setAngle(angle);
-		}
-		cAngleCache.scl(john.getForce());
-		john.setMovement(cAngleCache.x,cAngleCache.y);
-		john.applyForce();
+//        int index = 0;
+//        CreatureModel currentcreature = level.getCreature(index);
+//
+//        while (currentcreature != null){
+//			currentcreature.setTurnCool(currentcreature.getTurnCool() - 1);
+//
+//			if (currentcreature.getType() == 1) {
+//				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
+//					System.out.println("snail behavior: change direction");
+//					currentcreature.setXInput(-currentcreature.getXInput());
+//					currentcreature.setYInput(-currentcreature.getYInput());
+//					currentcreature.setStuck(false);
+//					currentcreature.setTurnCool(currentcreature.getTurnLimit());
+//				}
+//			}
+//
+//			if (currentcreature.getType() == 2){
+//				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
+//					System.out.println("dragon behavior: turns right");
+//					if (currentcreature.getXInput() > 0){
+//						currentcreature.setYInput(-currentcreature.getXInput());
+//						currentcreature.setXInput(0);
+//					} else if (currentcreature.getXInput() < 0){
+//						currentcreature.setYInput(-currentcreature.getXInput());
+//						currentcreature.setXInput(0);
+//					} else if (currentcreature.getYInput() > 0){
+//						currentcreature.setXInput(currentcreature.getYInput());
+//						currentcreature.setYInput(0);
+//					} else if (currentcreature.getYInput() < 0){
+//						currentcreature.setXInput(currentcreature.getYInput());
+//						currentcreature.setYInput(0);
+//					}
+//
+//					currentcreature.setStuck(false);
+//					currentcreature.setTurnCool(currentcreature.getTurnLimit());
+//				}
+//			}
+//
+//			if (currentcreature.getType() == 3){
+//				// dame blanche.
+//			}
+
+//			cAngleCache.set(currentcreature.getXInput(),currentcreature.getYInput());
+//			//System.out.println("movement = " + currentcreature.getMovement());
+//
+//			if (cAngleCache.len2() > 0.0f) {
+//                float angle = cAngleCache.angle();
+//                // Convert to radians with up as 0
+//                angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//                currentcreature.setAngle(angle);
+//            }
+//            cAngleCache.scl(currentcreature.getForce());
+//            currentcreature.setMovement(cAngleCache.x,cAngleCache.y);
+//            currentcreature.applyForce();
+
+//            // try to get next creature from level.
+//            index ++;
+//            currentcreature = level.getCreature(index);
+//        }
 
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
+//		System.out.println("scale " + level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
+			boolean canBox;
 
 			// get direction annette is facing
 			switch (annette.getDirection()) {
-				case RIGHT: xoff = BOX_HOFFSET;
+				case RIGHT:
+					xoff = BOX_HOFFSET;
+					canBox = rightBox;
 					break;
-				case LEFT:	xoff = -BOX_HOFFSET;
+				case LEFT:
+					xoff = -BOX_HOFFSET;
+					canBox = leftBox;
 					break;
-				case UP:	yoff = BOX_VOFFSET;
+				case UP:
+					yoff = BOX_VOFFSET;
+					canBox = upBox;
 					break;
-				case DOWN:	yoff = -BOX_VOFFSET;
+				case DOWN:
+					yoff = -BOX_VOFFSET;
+					canBox = downBox;
 					break;
 				default: {
 					xoff = 0;
 					yoff = 0;
+					canBox = false;
 					break;
 				}
 			}
-			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
-			level.activate(box);
-			box.setActive(true);
-			box.setDoesExist(true);
-			box.setDeactivated(false);
-			box.setDeactivating(false);
-			sound.play("box", "sounds/box.wav", false, 0.8f);
-
+			if (canBox) {
+				box.initialize(boxdata, annette.getPosition(), xoff, yoff);
+				level.activate(box);
+				box.setActive(true);
+				box.setDoesExist(true);
+				box.setDeactivated(false);
+				box.setDeactivating(false);
+				sound.stop("box");
+				sound.play("box", "sounds/box.wav", false, 0.8f);
+			}
+			else {
+				sound.stop("nobox");
+				sound.play("nobox", "sounds/nobox.wav", false, 0.75f);
+			}
 		}
 		box.applyForce();
 
@@ -499,7 +564,7 @@ public class GameController implements Screen, ContactListener {
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
-//			sound.stop("box");
+			sound.stop("slam");
 			sound.play("slam", "sounds/slam.wav", false, 0.5f);
 
 		}
@@ -510,7 +575,7 @@ public class GameController implements Screen, ContactListener {
 		else box.setDebugColor(Color.GREEN);
 
 		// Turn the physics engine crank.
-		checkFail();
+//		checkSeen();
 		level.update(dt);
 	}
 
@@ -538,7 +603,7 @@ public class GameController implements Screen, ContactListener {
 		} else if (failed) {
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("You have\nbeen seen.\nGoodbye", displayFont, 0.0f);
+			canvas.drawTextCentered("you lose. don't mime.", displayFont, 0.0f);
 			canvas.end();
 		}
 	}
@@ -617,16 +682,17 @@ public class GameController implements Screen, ContactListener {
 		this.listener = listener;
 	}
 
-	public void checkFail(){
-		AnnetteModel annette   = level.getAnnette();
-
-		//Check for losing condition
-		if (level.getVision(0).contains(annette.getX(), annette.getY())||
-				level.getVision(1).contains(annette.getX(), annette.getY())||
-				level.getVision(2).contains(annette.getX(), annette.getY())) {
-			setFailure(true);
-		}
-	}
+//	public void checkSeen(){
+//		AnnetteModel annette = level.getAnnette();
+//
+//		// Check condition : Annette gets seen
+//        for (LightSource currentlight : level.getVision()){
+//            if (currentlight.contains(annette.getX(), annette.getY())){
+//                setFailure(true);
+//            }
+//        }
+//
+//	}
 
 	/**
 	 * Callback method for the start of a collision
@@ -651,81 +717,122 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
+			String sf1 = "";
+			String sf2 = "";
+
+			if (fd1 != null) {
+				sf1 = (String)fd1;
+			}
+			if (fd2 != null) {
+				sf2 = (String)fd2;
+			}
+
 			AnnetteModel annette = level.getAnnette();
 			BoxModel box = level.getBox();
-			CreatureModel bob = level.getCreature(0);
-			CreatureModel fred = level.getCreature(1);
-			CreatureModel john = level.getCreature(2);
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
-//			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
-//			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
-//			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
-//			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
-////			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
-//			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
-//			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
-			// Check for win condition
-			if ((bd1 == annette && bd2 == door  ) ||
-				(bd1 == door   && bd2 == annette)) {
+
+			SoundController sound = SoundController.getInstance();
+
+			// win state
+			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
 			}
-			// Check for losing condition
-			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
-					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
-					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
-				setFailure(true);
+
+			//collision with creature lose state
+			for (CreatureModel c : level.getCreature()){
+				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
+					setFailure(true);
+				}
 			}
+
+			// checking sensors to see if box can be made
+			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) { downBox = false; }
+			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) { upBox = false; }
+			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) { rightBox = false; }
+			if (sf1.contains("annetteLeft") || sf2.contains("annetteLeft")) { leftBox = false; }
+
+
 			// Check if bird hits box
 			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
 				annette.setBird(false);
 				distraction.setAlive(false);
-				distraction.deactivatePhysics(level.getWorld());
-				level.getWorld().destroyBody(distraction.getBody());
+//				distraction.deactivatePhysics(level.getWorld());
+//				level.getWorld().destroyBody(distraction.getBody());
 				distraction.dispose();
 //				distraction.deactivatePhysics(level.getWorld());
 //				distraction.setActive(false);
 				level.objects.remove(distraction);
-//				distraction.dispose();
-//				distraction.deactivatePhysics(level.getWorld());
 			}
 
+			// check for distraction collisions with mazes
 			for (Obstacle b : level.getMazes()) {
 				if ((bd1 == b && bd2 == distraction) || (bd1 == distraction && bd2 == b )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
 					level.objects.remove(distraction);
-//					distraction.dispose();
-//					distraction.deactivatePhysics(level.getWorld());
 				}
 			}
 
+			// check for distraction collisions with barriers
 			for (Obstacle w : level.getBarriers()) {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
-//					level.objects.remove(distraction);
-//					distraction.dispose();
-//					distraction.setDeactivated(true);
 				}
 			}
 
-			for (CreatureModel c : level.getAllCreatures()) {
+			// check if creature is distracted
+			for (CreatureModel c : level.getCreature()) {
 				if ((bd1 == c && bd2 == distraction) || (bd1 == distraction && bd2 == c )) {
-					// some code that sets creature alertness idk
-					System.out.println("distract creature");
+					c.setDistracted(true);
 				}
 			}
+
+			// check if creature hits barrier
+			for (CreatureModel c : level.getCreature()) {
+				for (Obstacle o : level.getBarriers()) {
+					if ((bd1 == c && bd2 == o) || (bd1 == o && bd2 == c)) {
+						c.setStuck(true);
+					}
+				}
+				for (Obstacle o : level.getMazes()) {
+					if ((bd1 == c && bd2 == o) || (bd1 == o && bd2 == c)) {
+						c.setStuck(true);
+					}
+				}
+				if ((bd1 == c && bd2 == box) || (bd1 == box && bd2 == c)) {
+					c.setStuck(true);
+				}
+			}
+
+			for (CreatureModel c : level.getCreature()) {
+			    int index = 0;
+                CreatureModel c2 = level.getCreature(index);
+
+			    do {
+                    if (c != c2) {
+                        if ((bd1 == c && bd2 == c2) || (bd1 == c2 && bd2 == c)) {
+                            c.setStuck(true);
+                        }
+                    }
+                    index++;
+                    c2 = level.getCreature(index);
+                } while (c2 != null);
+            }
 
 			// check reactivation
 
-			if ((bd1 == annette && bd2 == box  ) ||
-					(bd1 == box   && bd2 == annette)) {
+			if ((sf1.contains("center") && bd2 == box  ) ||
+					(bd1 == box   && sf2.contains("center"))) {
 				box.setDeactivated(false);
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
+				sound.stop("box");
+				sound.play("box", "sounds/box.wav", false, 0.8f);
 			}
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -733,8 +840,24 @@ public class GameController implements Screen, ContactListener {
 
 	}
 
+	public void createAIControllers(){
+
+		if (AIcontrollers.size == 0) {
+			for (CreatureModel c : level.getCreature()) {
+				System.out.println("creating 1 AI controller.");
+				AIController controller = new AIController(c, level);
+				AIcontrollers.add(controller);
+			}
+		}
+	}
+
 	/** Unused ContactListener method */
-	public void endContact(Contact contact) {}
+	public void endContact(Contact contact) {
+		downBox = true;
+		upBox = true;
+		rightBox = true;
+		leftBox = true;
+	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
