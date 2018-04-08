@@ -65,6 +65,22 @@ public class AnnetteModel extends BoxObstacle {
     private boolean isbird;
     /** The current horizontal movement of the character */
     private float   hormovement;
+
+    /** The color to show off the debug shape */
+    private Color debugColor;
+
+    private PolygonShape sensorShapeD;
+    private Fixture sensorFixtureD;
+    private PolygonShape sensorShapeU;
+    private Fixture sensorFixtureU;
+    private PolygonShape sensorShapeR;
+    private Fixture sensorFixtureR;
+    private PolygonShape sensorShapeL;
+    private Fixture sensorFixtureL;
+    private PolygonShape annetteShape;
+    private Fixture annetteFixture;
+
+
     /**
      * Enumeration to identify which direction Annette is facing.
      */
@@ -239,6 +255,15 @@ public class AnnetteModel extends BoxObstacle {
 
     public boolean getBird() {return this.isbird;}
 
+    /**
+     * Returns the color to display the physics outline
+     *
+     * @return the color to display the physics outline
+     */
+    public Color getDebugColor() {
+        return debugColor;
+    }
+
     /** Taken from Lab 4.
      * Sets left/right movement of this character.
      *
@@ -284,6 +309,7 @@ public class AnnetteModel extends BoxObstacle {
         setFixedRotation(true);
         this.direction = Direction.RIGHT;
         this.isbird = false;
+        debugColor = Color.BLUE;
     }
 
     /**
@@ -302,7 +328,9 @@ public class AnnetteModel extends BoxObstacle {
         setPosition(pos[0],pos[1]);
         setWidth(width);
         setHeight(height);
+
         //setRadius(radius);
+
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
@@ -363,6 +391,76 @@ public class AnnetteModel extends BoxObstacle {
             upfilmstrip = null;
         }
 
+//        annetteFixture = body.createFixture(sensorDefR);
+//        annetteFixture.setUserData("annetteRight");
+
+    }
+
+    /**
+     * Creates the physics Body(s) for this object, adding them to the world.
+     *
+     * Implementations of this method should NOT retain a reference to World.
+     * That is a tight coupling that we should avoid.
+     *
+     * @param world Box2D world to store body
+     *
+     * @return true if object allocation succeeded
+     */
+    public boolean activatePhysics(World world) {
+        if (!super.activatePhysics(world)) {
+            return false;
+        }
+        Vector2 sensorCenterD = new Vector2(0, -((getHeight()/2) + 0.5f));
+        FixtureDef sensorDefD = new FixtureDef();
+        sensorDefD.isSensor = true;
+        sensorShapeD = new PolygonShape();
+        sensorShapeD.setAsBox(0.5f, 0.5f, sensorCenterD,0);
+        sensorDefD.shape = sensorShapeD;
+        sensorFixtureD = body.createFixture(sensorDefD);
+        sensorFixtureD.setUserData("annetteDown");
+
+        Vector2 sensorCenterU = new Vector2(0, ((getHeight()/2) + 0.5f));
+        FixtureDef sensorDefU = new FixtureDef();
+        sensorDefU.isSensor = true;
+        sensorShapeU = new PolygonShape();
+        sensorShapeU.setAsBox(0.5f, 0.5f, sensorCenterU,0);
+        sensorDefU.shape = sensorShapeU;
+        sensorFixtureU = body.createFixture(sensorDefU);
+        sensorFixtureU.setUserData("annetteUp");
+
+        Vector2 sensorCenterR = new Vector2(getWidth() / 2 + 0.5f, 0);
+        FixtureDef sensorDefR = new FixtureDef();
+        sensorDefR.isSensor = true;
+        sensorShapeR = new PolygonShape();
+        sensorShapeR.setAsBox(0.5f, 0.5f, sensorCenterR,0);
+        sensorDefR.shape = sensorShapeR;
+        sensorFixtureR = body.createFixture(sensorDefR);
+        sensorFixtureR.setUserData("annetteRight");
+
+        Vector2 sensorCenterL = new Vector2(-(getWidth() / 2 + 0.5f), 0);
+        FixtureDef sensorDefL = new FixtureDef();
+        sensorDefL.isSensor = true;
+        sensorShapeL = new PolygonShape();
+        sensorShapeL.setAsBox(0.5f, 0.5f, sensorCenterL,0);
+        sensorDefL.shape = sensorShapeL;
+        sensorFixtureL = body.createFixture(sensorDefL);
+        sensorFixtureL.setUserData("annetteLeft");
+
+        Vector2 annetteCenter = new Vector2(0, 0);
+        FixtureDef annetteDef = new FixtureDef();
+        annetteDef.isSensor = true;
+        annetteShape = new PolygonShape();
+        annetteShape.setAsBox((getWidth() / 2) + 0.05f, (getHeight() / 2) + 0.05f, annetteCenter,0);
+        annetteDef.shape = annetteShape;
+        annetteFixture = body.createFixture(annetteDef);
+        annetteFixture.setUserData("center");
+
+        short collideBits = LevelModel.bitStringToShort("0010");
+        Filter filter = new Filter();
+        filter.categoryBits = collideBits;
+        setFilterData(filter);
+
+        return true;
     }
 
     /**
@@ -473,6 +571,24 @@ public class AnnetteModel extends BoxObstacle {
 
         if (texture != null) {
             canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, 0.6f);
+        }
+    }
+
+    /**
+     * Draws the outline of the physics body.
+     *
+     * This method can be helpful for understanding issues with collisions.
+     *
+     * @param canvas Drawing context
+     */
+    public void drawDebug(ObstacleCanvas canvas) {
+        super.drawDebug(canvas);
+        if (debugColor != null) {
+            canvas.drawPhysics(sensorShapeD,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
+            canvas.drawPhysics(sensorShapeU,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
+            canvas.drawPhysics(sensorShapeR,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
+            canvas.drawPhysics(sensorShapeL,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
+            canvas.drawPhysics(annetteShape,Color.ORANGE,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
         }
     }
 

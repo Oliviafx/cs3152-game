@@ -113,5 +113,8 @@
 				"select": {
 					"file": "sounds/select_test.wav"
 				}
+				"nobobx": {
+					"file": "sounds/nobox.wav"
+				}
 			}
 		}

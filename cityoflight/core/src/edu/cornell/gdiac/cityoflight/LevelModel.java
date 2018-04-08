@@ -312,6 +312,9 @@ public class LevelModel {
 	 */
 	public void setAlpha(int value) { alpha = value; }
 
+
+	public float getTranslation() { return TRANSLATION; }
+
 	/**
 	 * Creates a new LevelModel
 	 *
@@ -743,7 +746,7 @@ public class LevelModel {
 			color = Color.GRAY;
 			float dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
 			float temp = (1 - ((dist - BOX_MARGIN) / BoxModel.OUTER_RADIUS)) * MAX_ALPHA;
-			temp = temp - 1;
+			temp = temp - 5;
 			alpha = (int) temp;
 			color.a = alpha;
 			box.drawState(canvas, color);

@@ -61,7 +61,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private Texture playButton;
 	/** Texture atlas to support a progress bar */
 	private Texture statusBar;
-	
+
 	// statusBar is a "texture atlas." Break it up into parts.
 	/** Left cap to the status background (grey region) */
 	private TextureRegion statusBkgLeft;

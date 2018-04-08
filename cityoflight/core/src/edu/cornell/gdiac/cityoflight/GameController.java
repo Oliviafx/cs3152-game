@@ -146,6 +146,11 @@ public class GameController implements Screen, ContactListener {
 
 	private float dist;
 
+	private boolean downBox = false;
+	private boolean upBox = false;
+	private boolean rightBox = false;
+	private boolean leftBox = false;
+
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
@@ -243,6 +248,10 @@ public class GameController implements Screen, ContactListener {
 		return dist;
 	}
 
+	public boolean getDownBox() { return downBox; }
+	public boolean getUpBox() { return upBox; }
+	public boolean getRightBox() { return rightBox; }
+	public boolean getLeftBox() { return leftBox; }
 
 
 	/**
@@ -370,9 +379,8 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-//		System.out.println(sound.play("ambient_low", "sounds/ambient_low.wav", true, 0.75f));
 		sound.play("harp", "sounds/bg_test2.wav", true, 0.75f);
-//		System.out.println(sound.play("menu", "sounds/main_melody.wav", true, 0.75f));
+
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 //		if (aAngleCache.len2() > 0.0f) {
@@ -448,16 +456,25 @@ public class GameController implements Screen, ContactListener {
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
+			boolean canBox = true;
 
 			// get direction annette is facing
 			switch (annette.getDirection()) {
-				case RIGHT: xoff = BOX_HOFFSET;
+				case RIGHT:
+					xoff = BOX_HOFFSET;
+					canBox = canBox && rightBox;
 					break;
-				case LEFT:	xoff = -BOX_HOFFSET;
+				case LEFT:
+					xoff = -BOX_HOFFSET;
+					canBox = canBox && leftBox;
 					break;
-				case UP:	yoff = BOX_VOFFSET;
+				case UP:
+					yoff = BOX_VOFFSET;
+					canBox = canBox && upBox;
 					break;
-				case DOWN:	yoff = -BOX_VOFFSET;
+				case DOWN:
+					yoff = -BOX_VOFFSET;
+					canBox = canBox && downBox;
 					break;
 				default: {
 					xoff = 0;
@@ -465,15 +482,20 @@ public class GameController implements Screen, ContactListener {
 					break;
 				}
 			}
-			box.initialize(boxdata, annette.getPosition(), xoff, yoff);
-			level.activate(box);
-			box.setActive(true);
-			box.setDoesExist(true);
-			box.setDeactivated(false);
-			box.setDeactivating(false);
-			sound.stop("box");
-			sound.play("box", "sounds/box.wav", false, 0.8f);
-
+			if (canBox) {
+				box.initialize(boxdata, annette.getPosition(), xoff, yoff);
+				level.activate(box);
+				box.setActive(true);
+				box.setDoesExist(true);
+				box.setDeactivated(false);
+				box.setDeactivating(false);
+				sound.stop("box");
+				sound.play("box", "sounds/box.wav", false, 0.8f);
+			}
+			else {
+				sound.stop("nobox");
+				sound.play("nobox", "sounds/nobox.wav", false, 0.75f);
+			}
 		}
 		box.applyForce();
 
@@ -490,7 +512,7 @@ public class GameController implements Screen, ContactListener {
 			box.setDeactivated(true);
 			box.deactivate();
 			sound.stop("slam");
-			System.out.println(sound.play("slam", "sounds/slam.wav", false, 0.5f));
+			sound.play("slam", "sounds/slam.wav", false, 0.5f);
 
 		}
 
@@ -641,6 +663,16 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
+			String sf1 = "";
+			String sf2 = "";
+
+			if (fd1 != null) {
+				sf1 = (String)fd1;
+			}
+			if (fd2 != null) {
+				sf2 = (String)fd2;
+			}
+
 			AnnetteModel annette = level.getAnnette();
 			BoxModel box = level.getBox();
 			CreatureModel bob = level.getCreature(0);
@@ -656,17 +688,63 @@ public class GameController implements Screen, ContactListener {
 ////			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
 //			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
 //			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
+
 			// Check for win condition
-			if ((bd1 == annette && bd2 == door  ) ||
-				(bd1 == door   && bd2 == annette)) {
+//			if ((bd1 == annette && bd2 == door  ) ||
+//				(bd1 == door   && bd2 == annette)) {
+//				setComplete(true);
+//			}
+////			 Check for losing condition
+//			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
+//					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
+//					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
+//				setFailure(true);
+//			}
+
+			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
 			}
-			// Check for losing condition
-			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
-					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
-					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
+
+			if ((sf1.contains("center") && bd2 == bob) || (sf2.contains("center") && bd1 == bob)) {
 				setFailure(true);
 			}
+			if ((sf1.contains("center") && bd2 == fred) || (sf2.contains("center") && bd1 == fred)) {
+				setFailure(true);
+			}
+			if ((sf1.contains("center") && bd2 == john) || (sf2.contains("center") && bd1 == john)) {
+				setFailure(true);
+			}
+
+			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) {
+				downBox = false;
+				System.out.println("down");
+			}
+			else {
+				downBox = true;
+			}
+			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) {
+				upBox = false;
+				System.out.println("up");
+			}
+			else {
+				upBox = true;
+			}
+			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) {
+				rightBox = false;
+				System.out.println("right");
+			}
+			else {
+				rightBox = true;
+			}
+			if (sf1.contains("annetteLeft") || sf2.contains("annetteLeft")) {
+				leftBox = false;
+				System.out.println("left");
+			}
+			else {
+				leftBox = true;
+			}
+
+
 			// Check if bird hits box
 			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
 				annette.setBird(false);
@@ -692,6 +770,7 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
+
 //					level.objects.remove(distraction);
 //					distraction.dispose();
 //					distraction.setDeactivated(true);
@@ -707,8 +786,8 @@ public class GameController implements Screen, ContactListener {
 
 			// check reactivation
 
-			if ((bd1 == annette && bd2 == box  ) ||
-					(bd1 == box   && bd2 == annette)) {
+			if ((sf1.contains("center") && bd2 == box  ) ||
+					(bd1 == box   && sf2.contains("center"))) {
 				box.setDeactivated(false);
 				box.setDeactivating(false);
 				box.reactivate();
@@ -717,6 +796,7 @@ public class GameController implements Screen, ContactListener {
 				sound.play("box", "sounds/box.wav", false, 0.8f);
 			}
 
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -724,7 +804,12 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	/** Unused ContactListener method */
-	public void endContact(Contact contact) {}
+	public void endContact(Contact contact) {
+		downBox = true;
+		upBox = true;
+		rightBox = true;
+		leftBox = true;
+	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
