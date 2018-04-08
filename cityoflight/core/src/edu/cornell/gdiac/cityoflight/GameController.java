@@ -419,7 +419,7 @@ public class GameController implements Screen, ContactListener {
 //			System.out.println("here");
 			level.createDistraction(levelFormat);
 			sound.stop("distraction");
-			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
+			sound.play("distraction", "sounds/distraction.wav", false, 0.2f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
 			//			dAngleCache.set(1,1);
@@ -768,6 +768,8 @@ public class GameController implements Screen, ContactListener {
 //				distraction.deactivatePhysics(level.getWorld());
 //				distraction.setActive(false);
 				level.objects.remove(distraction);
+				sound.stop("poof");
+				sound.play("poof", "sounds/poof.wav", false, 1.0f);
 			}
 
 			// check for distraction collisions with mazes
@@ -776,6 +778,8 @@ public class GameController implements Screen, ContactListener {
 					annette.setBird(false);
 					distraction.setAlive(false);
 					level.objects.remove(distraction);
+					sound.stop("poof");
+					sound.play("poof", "sounds/poof.wav", false, 1.0f);
 				}
 			}
 
@@ -784,6 +788,8 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
+					sound.stop("poof");
+					sound.play("poof", "sounds/poof.wav", false, 1.0f);
 				}
 			}
 
