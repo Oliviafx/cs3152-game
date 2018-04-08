@@ -98,11 +98,11 @@
 				"ambient-low": {
 					"file": "sounds/bg_test2.wav"
 				},
-				"footsteps": {
-					"file": "sounds/footsteps.wav"
+				"win": {
+					"file": "sounds/win.wav"
 				},
-				"menu": {
-					"file": "sounds/main_melody.wav"
+				"lose": {
+					"file": "sounds/lose.wav"
 				},
 				"slam": {
 					"file": "sounds/slam.wav"
