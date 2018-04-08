@@ -104,6 +104,9 @@
 				"lose": {
 					"file": "sounds/lose.wav"
 				},
+				"poof": {
+					"file": "sounds/poof.wav"
+				},
 				"slam": {
 					"file": "sounds/slam.wav"
 				},
