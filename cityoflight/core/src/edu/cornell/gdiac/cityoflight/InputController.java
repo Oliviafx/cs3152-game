@@ -64,6 +64,9 @@ public class InputController {
 	private boolean xPressed;
 	private boolean xPrevious;
 
+	private boolean pausePressed;
+	private boolean pausePrevious;
+
 	/** How much did Annette move horizontally? */
 	private float aHoriz;
 	/** How much did Annette move vertically? */
@@ -177,6 +180,10 @@ public class InputController {
 	public boolean didExit() {
 		return exitPressed && !exitPrevious;
 	}
+
+	public boolean didPause() {
+		return pausePressed && !pausePrevious;
+	}
 	
 	/**
 	 * Creates a new input controller
@@ -203,6 +210,8 @@ public class InputController {
 //		prevPrevious = prevPressed;
 		spacePrevious = spacePressed;
 		xPrevious = xPressed;
+		exitPrevious = exitPressed;
+		pausePrevious=pausePressed;
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
 			readGamepad();
@@ -250,6 +259,7 @@ public class InputController {
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		spacePressed = (secondary && spacePressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
 		xPressed = (secondary && xPressed) || (Gdx.input.isKeyPressed(Input.Keys.X));
+		pausePressed = (secondary && pausePressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
 		// Annette Directional controls
 		aHoriz = (secondary ? aHoriz : 0.0f);
 		aVert = (secondary ? aVert : 0.0f);

@@ -26,7 +26,7 @@ public class ConeSource extends ConeLight implements LightSource {
 	private static float DEFAULT_DISTANCE = 15.0f;
 	/** The default (half) cone witdth */
 	private static float DEFAULT_ANGLE    = 30.0f;
-	
+
 	/** Copy of the collision filter.  Necessary because the original version is private */
 	protected Filter collisions;
 	
