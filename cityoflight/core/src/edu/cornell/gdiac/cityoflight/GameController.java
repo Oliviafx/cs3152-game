@@ -456,29 +456,30 @@ public class GameController implements Screen, ContactListener {
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
-			boolean canBox = true;
+			boolean canBox;
 
 			// get direction annette is facing
 			switch (annette.getDirection()) {
 				case RIGHT:
 					xoff = BOX_HOFFSET;
-					canBox = canBox && rightBox;
+					canBox = rightBox;
 					break;
 				case LEFT:
 					xoff = -BOX_HOFFSET;
-					canBox = canBox && leftBox;
+					canBox = leftBox;
 					break;
 				case UP:
 					yoff = BOX_VOFFSET;
-					canBox = canBox && upBox;
+					canBox = upBox;
 					break;
 				case DOWN:
 					yoff = -BOX_VOFFSET;
-					canBox = canBox && downBox;
+					canBox = downBox;
 					break;
 				default: {
 					xoff = 0;
 					yoff = 0;
+					canBox = false;
 					break;
 				}
 			}
@@ -681,79 +682,29 @@ public class GameController implements Screen, ContactListener {
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
 			SoundController sound = SoundController.getInstance();
-//			InteriorModel maze1 = (InteriorModel)level.getMazes().get(0);
-//			InteriorModel maze2 = (InteriorModel)level.getMazes().get(1);
-//			InteriorModel maze3 = (InteriorModel)level.getMazes().get(2);
-//			InteriorModel maze4 = (InteriorModel)level.getMazes().get(3);
-////			InteriorModel maze5 = (InteriorModel)level.getMazes().get(4);
-//			ExteriorModel wall1 = (ExteriorModel)level.getBarriers().get(0);
-//			ExteriorModel wall2 = (ExteriorModel)level.getBarriers().get(1);
 
-			// Check for win condition
-//			if ((bd1 == annette && bd2 == door  ) ||
-//				(bd1 == door   && bd2 == annette)) {
-//				setComplete(true);
-//			}
-////			 Check for losing condition
-//			if ((bd1 == annette && bd2 == bob) || (bd1 == bob && bd2 == annette) ||
-//					(bd1 == annette && bd2 == fred) || (bd1 == fred && bd2 ==annette) ||
-//					(bd1 == annette && bd2 == john) || (bd1 == john && bd2 ==annette)) {
-//				setFailure(true);
-//			}
 
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
 			}
 
-			if ((sf1.contains("center") && bd2 == bob) || (sf2.contains("center") && bd1 == bob)) {
-				setFailure(true);
-			}
-			if ((sf1.contains("center") && bd2 == fred) || (sf2.contains("center") && bd1 == fred)) {
-				setFailure(true);
-			}
-			if ((sf1.contains("center") && bd2 == john) || (sf2.contains("center") && bd1 == john)) {
+			if ((sf1.contains("center") && bd2 == bob) || (sf2.contains("center") && bd1 == bob) ||
+					(sf1.contains("center") && bd2 == fred) || (sf2.contains("center") && bd1 == fred) ||
+					(sf1.contains("center") && bd2 == john) || (sf2.contains("center") && bd1 == john)) {
 				setFailure(true);
 			}
 
-			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) {
-				downBox = false;
-				System.out.println("down");
-			}
-			else {
-				downBox = true;
-			}
-			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) {
-				upBox = false;
-				System.out.println("up");
-			}
-			else {
-				upBox = true;
-			}
-			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) {
-				rightBox = false;
-				System.out.println("right");
-			}
-			else {
-				rightBox = true;
-			}
-			if (sf1.contains("annetteLeft") || sf2.contains("annetteLeft")) {
-				leftBox = false;
-				System.out.println("left");
-			}
-			else {
-				leftBox = true;
-			}
+			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) { downBox = false; }
+			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) { upBox = false; }
+			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) { rightBox = false; }
+			if (sf1.contains("annetteLeft") || sf2.contains("annetteLeft")) { leftBox = false; }
 
 
 			// Check if bird hits box
 			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
 				annette.setBird(false);
 				distraction.setAlive(false);
-//				distraction.deactivatePhysics(level.getWorld());
-//				distraction.setActive(false);
 				level.objects.remove(distraction);
-//				distraction.dispose();
-//				distraction.deactivatePhysics(level.getWorld());
 			}
 
 			for (Obstacle b : level.getMazes()) {
@@ -761,8 +712,6 @@ public class GameController implements Screen, ContactListener {
 					annette.setBird(false);
 					distraction.setAlive(false);
 					level.objects.remove(distraction);
-//					distraction.dispose();
-//					distraction.deactivatePhysics(level.getWorld());
 				}
 			}
 
@@ -770,10 +719,6 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
-
-//					level.objects.remove(distraction);
-//					distraction.dispose();
-//					distraction.setDeactivated(true);
 				}
 			}
 
