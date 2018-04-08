@@ -406,6 +406,7 @@ public class BoxModel extends BoxObstacle {
             filmstrip = null;
         }
         setTexture(texture);
+//        setSensor(true);
     }
 
 
@@ -555,16 +556,16 @@ public class BoxModel extends BoxObstacle {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
-        super.draw(canvas); // Box
+//        super.draw(canvas); // Box
 
         /** (3/5/2018) might need to change the code below; copied from RocketModel */
 //        float offsety = mainBox.getRegionHeight()-origin.y;
-//        canvas.draw(mainBox,Color.WHITE,origin.x,offsety,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+        canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1 * GameController.TEMP_SCALE,1 * GameController.TEMP_SCALE);
     }
 
     public void drawState(ObstacleCanvas canvas, Color color) {
         if (texture != null) {
-            canvas.draw(texture, color,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+            canvas.draw(texture, color,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1 * GameController.TEMP_SCALE,1 * GameController.TEMP_SCALE);
         }
     }
 }
