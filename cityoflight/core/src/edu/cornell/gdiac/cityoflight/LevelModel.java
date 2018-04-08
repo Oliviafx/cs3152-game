@@ -404,13 +404,13 @@ public class LevelModel {
 
         // Create box
         box = new BoxModel(1, 1);
-        JsonValue boxdata = levelFormat.get("box");
-        if (annette.isSummoning() && !box.getDoesExist()) {
-            box.initialize(boxdata, annette.getPosition(), 0, 0);
-            box.setDrawScale(scale);
-            activate(box);
-            box.setActive(true);
-        }
+//        JsonValue boxdata = levelFormat.get("box");
+//        if (annette.isSummoning() && !box.getDoesExist()) {
+//            box.initialize(boxdata, annette.getPosition(), 0, 0);
+//            box.setDrawScale(scale);
+//            activate(box);
+//            box.setActive(true);
+//        }
 
         if (distraction != null) {
             distraction.setAlive(false);
