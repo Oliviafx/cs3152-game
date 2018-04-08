@@ -735,17 +735,19 @@ public class GameController implements Screen, ContactListener {
 
 			SoundController sound = SoundController.getInstance();
 
-
+			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
 			}
 
+			//collision with creature lose state
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					setFailure(true);
 				}
 			}
 
+			// checking sensors to see if box can be made
 			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) { downBox = false; }
 			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) { upBox = false; }
 			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) { rightBox = false; }
@@ -764,6 +766,7 @@ public class GameController implements Screen, ContactListener {
 				level.objects.remove(distraction);
 			}
 
+			// check for distraction collisions with mazes
 			for (Obstacle b : level.getMazes()) {
 				if ((bd1 == b && bd2 == distraction) || (bd1 == distraction && bd2 == b )) {
 					annette.setBird(false);
@@ -772,6 +775,7 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 
+			// check for distraction collisions with barriers
 			for (Obstacle w : level.getBarriers()) {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
@@ -779,17 +783,27 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 
+			// check if creature is distracted
 			for (CreatureModel c : level.getCreature()) {
 				if ((bd1 == c && bd2 == distraction) || (bd1 == distraction && bd2 == c )) {
 					c.setDistracted(true);
 				}
 			}
 
+			// check if creature hits barrier
 			for (CreatureModel c : level.getCreature()) {
 				for (Obstacle o : level.getBarriers()) {
 					if ((bd1 == c && bd2 == o) || (bd1 == o && bd2 == c)) {
 						c.setStuck(true);
 					}
+				}
+				for (Obstacle o : level.getMazes()) {
+					if ((bd1 == c && bd2 == o) || (bd1 == o && bd2 == c)) {
+						c.setStuck(true);
+					}
+				}
+				if ((bd1 == c && bd2 == box) || (bd1 == box && bd2 == c)) {
+					c.setStuck(true);
 				}
 			}
 
@@ -807,12 +821,6 @@ public class GameController implements Screen, ContactListener {
                     c2 = level.getCreature(index);
                 } while (c2 != null);
             }
-
-			for (CreatureModel c : level.getCreature()) {
-					if ((bd1 == c && bd2 == box) || (bd1 == box && bd2 == c)) {
-						c.setStuck(true);
-					}
-			}
 
 			// check reactivation
 

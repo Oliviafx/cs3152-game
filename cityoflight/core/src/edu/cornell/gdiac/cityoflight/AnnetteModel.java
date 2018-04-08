@@ -80,6 +80,8 @@ public class AnnetteModel extends BoxObstacle {
     private PolygonShape annetteShape;
     private Fixture annetteFixture;
 
+    private static float SENSOR_SIZE = 0.5f;
+
 
     /**
      * Enumeration to identify which direction Annette is facing.
@@ -414,7 +416,7 @@ public class AnnetteModel extends BoxObstacle {
         FixtureDef sensorDefD = new FixtureDef();
         sensorDefD.isSensor = true;
         sensorShapeD = new PolygonShape();
-        sensorShapeD.setAsBox(0.5f, 0.5f, sensorCenterD,0);
+        sensorShapeD.setAsBox(SENSOR_SIZE, SENSOR_SIZE, sensorCenterD,0);
         sensorDefD.shape = sensorShapeD;
         sensorFixtureD = body.createFixture(sensorDefD);
         sensorFixtureD.setUserData("annetteDown");
@@ -423,7 +425,7 @@ public class AnnetteModel extends BoxObstacle {
         FixtureDef sensorDefU = new FixtureDef();
         sensorDefU.isSensor = true;
         sensorShapeU = new PolygonShape();
-        sensorShapeU.setAsBox(0.5f, 0.5f, sensorCenterU,0);
+        sensorShapeU.setAsBox(SENSOR_SIZE, SENSOR_SIZE, sensorCenterU,0);
         sensorDefU.shape = sensorShapeU;
         sensorFixtureU = body.createFixture(sensorDefU);
         sensorFixtureU.setUserData("annetteUp");
@@ -432,7 +434,7 @@ public class AnnetteModel extends BoxObstacle {
         FixtureDef sensorDefR = new FixtureDef();
         sensorDefR.isSensor = true;
         sensorShapeR = new PolygonShape();
-        sensorShapeR.setAsBox(0.5f, 0.5f, sensorCenterR,0);
+        sensorShapeR.setAsBox(SENSOR_SIZE, SENSOR_SIZE, sensorCenterR,0);
         sensorDefR.shape = sensorShapeR;
         sensorFixtureR = body.createFixture(sensorDefR);
         sensorFixtureR.setUserData("annetteRight");
@@ -441,7 +443,7 @@ public class AnnetteModel extends BoxObstacle {
         FixtureDef sensorDefL = new FixtureDef();
         sensorDefL.isSensor = true;
         sensorShapeL = new PolygonShape();
-        sensorShapeL.setAsBox(0.5f, 0.5f, sensorCenterL,0);
+        sensorShapeL.setAsBox(SENSOR_SIZE, SENSOR_SIZE, sensorCenterL,0);
         sensorDefL.shape = sensorShapeL;
         sensorFixtureL = body.createFixture(sensorDefL);
         sensorFixtureL.setUserData("annetteLeft");
