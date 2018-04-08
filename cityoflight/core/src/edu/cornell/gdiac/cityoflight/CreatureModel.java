@@ -83,6 +83,8 @@ public class CreatureModel extends WheelObstacle {
     /** refers to the vision of the creature */
     private LightSource vision = null;
 
+    private float tempScale = 0.5f;
+
     /**
      * Returns the directional movement of the creature.
      *
@@ -476,7 +478,7 @@ public class CreatureModel extends WheelObstacle {
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,0,0.75f,0.75f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,0,0.75f * tempScale,0.75f * tempScale);
         }
     }
 }

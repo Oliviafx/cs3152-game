@@ -80,6 +80,8 @@ public class AnnetteModel extends BoxObstacle {
     private PolygonShape annetteShape;
     private Fixture annetteFixture;
 
+    private float tempScale = 0.5f;
+
 
     /**
      * Enumeration to identify which direction Annette is facing.
@@ -570,7 +572,7 @@ public class AnnetteModel extends BoxObstacle {
         }
 
         if (texture != null) {
-            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, 0.6f);
+            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped * tempScale, Math.abs(flipped) * tempScale);
         }
     }
 

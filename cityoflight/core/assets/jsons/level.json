@@ -1,5 +1,5 @@
 {
-	"physicsSize":  	[16.0,12.0],
+	"physicsSize":  	[32.0,24.0],
 	"graphicSize":    	[ 800, 600],
 	"fpsRange":		  	[  20,  60],
 	"lighting": {
@@ -169,7 +169,7 @@
     "debugopacity": 192,
   },
     "exit": {
-        "pos":          [ 1.5, 10.35],
+        "pos":          [ 1.5, 21.35],
 		"radius":		  0.5,
         "bodytype":    	"static",
         "density":  	  0.0,
@@ -184,12 +184,12 @@
     "exterior": {
         "wall1": {
             "vertices": 16,
-            "boundary": [ 8.0f, 12.0f,  8.0f, 11.5f,  0.5f, 11.5f,
+            "boundary": [ 8.0f, 24.0f,  8.0f, 23.5f,  0.5f, 23.5f,
 			  			  0.5f,  0.5f,  8.0f,  0.5f,  8.0f,  0.0f,
-			  			  0.0f,  0.0f,  0.0f, 12.0f],
-            "padding":  [ 8.0f, 12.0f,  8.0f, 11.4f,  0.6f, 11.4f,
+			  			  0.0f,  0.0f,  0.0f, 24.0f],
+            "padding":  [ 8.0f, 24.0f,  8.0f, 23.4f,  0.6f, 23.4f,
 			  			  0.6f,  0.6f,  8.0f,  0.6f,  8.0f,  0.0f,
-			  			  0.0f,  0.0f,  0.0f, 12.0f],
+			  			  0.0f,  0.0f,  0.0f, 24.0f],
             "bodytype":  	"static",
             "density":        0.0,
             "friction":       0.2,
@@ -202,12 +202,12 @@
 		},
 		"wall2": {
             "vertices": 16,
-            "boundary": [16.0f, 12.0f, 16.0f,  0.0f,  8.0f,  0.0f,
-                          8.0f,  0.5f, 15.5f,  0.5f, 15.5f, 11.5f,
-                          8.0f, 11.5f,  8.0f, 12.0f],
-            "padding":  [16.0f, 12.0f, 16.0f,  0.0f,  8.0f,  0.0f,
-                          8.0f,  0.6f, 15.4f,  0.6f, 15.4f, 11.4f,
-                          8.0f, 11.4f,  8.0f, 12.0f],
+            "boundary": [32.0f, 24.0f, 32.0f,  0.0f,  8.0f,  0.0f,
+                          8.0f,  0.5f, 31.5f,  0.5f, 31.5f, 23.5f,
+                          8.0f, 23.5f,  8.0f, 24.0f],
+            "padding":  [32.0f, 24.0f, 32.0f,  0.0f,  8.0f,  0.0f,
+                          8.0f,  0.6f, 31.4f,  0.6f, 31.4f, 23.4f,
+                          8.0f, 23.4f,  8.0f, 24.0f],
             "bodytype":     "static",
             "density":        0.0,
             "friction":       0.4,
@@ -219,6 +219,62 @@
             "debugopacity":  200
         }
     },
-  	"interior": {
-  	}
+	"interior": {
+		"maze2": {
+			"pos":        	[ 20.5f, 1.5f],
+			"size":       	[ 1f, 1f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "earth",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+		"maze3": {
+			"pos":        	[ 8.0f, 8.0f],
+			"size":       	[ 2.0f, 2.0f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "earth",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+		"maze4": {
+			"pos":        	[ 10.5f, 4.5f],
+			"size":       	[ 1f, 1f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "earth",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+		"maze5": {
+			"pos":        	[ 15.5f, 15.0f],
+			"size":       	[ 5f, 5f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "earth",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		}
+	}
  }

@@ -754,8 +754,10 @@ public class LevelModel {
 		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
-		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
-		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
+//		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
+		float cameraXStart = 0;
+//		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
+		float cameraYStart = 0;
 		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
 		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
@@ -766,7 +768,7 @@ public class LevelModel {
 		oTran.mul(wTran);
 
 		if (rayhandler != null) {
-			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
+			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth() * 2, canvas.getHeight() * 2);
 			rayhandler.render();
 		}
 
