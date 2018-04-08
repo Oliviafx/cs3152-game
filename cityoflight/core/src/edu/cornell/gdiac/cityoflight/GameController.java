@@ -506,6 +506,7 @@ public class GameController implements Screen, ContactListener {
 
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
+//		System.out.println("scale " + level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
 			boolean canBox;
 

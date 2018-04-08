@@ -49,6 +49,7 @@ public class BoxModel extends BoxObstacle {
 
     public static final float INNER_RADIUS = 1.0f;
     public static final float OUTER_RADIUS = 5.0f;
+    private float tempScale = 0.5f;
 
     /** The texture filmstrip for the box */
     FilmStrip mainBox;
@@ -556,16 +557,16 @@ public class BoxModel extends BoxObstacle {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
-        super.draw(canvas); // Box
+//        super.draw(canvas); // Box
 
         /** (3/5/2018) might need to change the code below; copied from RocketModel */
 //        float offsety = mainBox.getRegionHeight()-origin.y;
-//        canvas.draw(mainBox,Color.WHITE,origin.x,offsety,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+        canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1 * tempScale,1 * tempScale);
     }
 
     public void drawState(ObstacleCanvas canvas, Color color) {
         if (texture != null) {
-            canvas.draw(texture, color,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1);
+            canvas.draw(texture, color,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1 * tempScale,1 * tempScale);
         }
     }
 }
