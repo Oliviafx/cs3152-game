@@ -18,6 +18,26 @@
 				"first":	0
 			}
     	},
+		"annetteDown": {
+			"file": "textures/frontAnnette.png",
+			"wrap": false,
+			"strip": {
+				"size": 12,
+				"rows": 1,
+				"cols": 12,
+				"first": 1
+			}
+		},
+		"annetteUp": {
+			"file": "textures/backAnnette.png",
+			"wrap": false,
+			"strip": {
+				"size": 12,
+				"rows": 1,
+				"cols": 12,
+				"first": 1
+			}
+		},
 		"snail": {
 			"file": 	"textures/SnailSide.png",
 			"wrap":  	false,
@@ -48,43 +68,23 @@
 				"first":	0
 			}
 		},
-		"annetteDown": {
-			"file": "textures/frontAnnette.png",
-			"wrap": false,
-			"strip": {
-				"size": 12,
-				"rows": 1,
-				"cols": 12,
-				"first": 0
+			"dude": {
+				"file": "textures/creature.png",
+				"wrap": false
+			},
+			"box": {
+				"file": "textures/box_d.png",
+				"wrap": false
+			},
+			"goal": {
+				"file": "textures/well.png",
+				"wrap": false
+			},
+			"bird": {
+				"file": "textures/bird.png",
+				"wrap": false
 			}
 		},
-			"annetteUp": {
-				"file": "textures/backAnnette.png",
-				"wrap": false,
-				"strip": {
-					"size": 12,
-					"rows": 1,
-					"cols": 12,
-					"first": 0
-				}
-			},
-				"dude": {
-					"file": "textures/creature.png",
-					"wrap": false
-				},
-				"box": {
-					"file": "textures/box_d.png",
-					"wrap": false
-				},
-				"goal": {
-					"file": "textures/well.png",
-					"wrap": false
-				},
-				"bird": {
-					"file": "textures/bird.png",
-					"wrap": false
-				}
-			},
 			"fonts": {
 				"display": {
 					"file": "fonts/Akong_agi.ttf",
@@ -96,7 +96,7 @@
 					"file": "sounds/box.wav"
 				},
 				"ambient-low": {
-					"file": "sounds/ambient_low.wav"
+					"file": "sounds/bg_test2.wav"
 				},
 				"footsteps": {
 					"file": "sounds/footsteps.wav"

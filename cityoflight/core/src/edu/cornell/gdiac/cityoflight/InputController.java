@@ -268,15 +268,15 @@ public class InputController {
 			aHoriz += 1.0f;
 			this.direction = AnnetteModel.Direction.RIGHT;
 		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			aHoriz -= 1.0f;
 			this.direction = AnnetteModel.Direction.LEFT;
 		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			aVert += 1.0f;
 			this.direction = AnnetteModel.Direction.UP;
 		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 			aVert -= 1.0f;
 			this.direction = AnnetteModel.Direction.DOWN;
 		}

@@ -37,6 +37,9 @@ public class AIController{
     /** Annette's last seen position */
     private Vector2 lastseen;
 
+    /** The distraction's last seen position */
+    private Vector2 lastseendistraction;
+
     /** Stores original line of sight distance */
     private float sightDistanceCache;
     /** Stores original speed */
@@ -171,6 +174,20 @@ public class AIController{
                 break;
 
             case DISTRACT:
+
+                if (creature.getType() == 1){
+                    cAngleCache.set(0,0);
+                }else if (creature.getType() == 3){
+
+                    if (creature.getTurnCool() <= 0) {
+                        cAngleCache.set(getNextDistractMovement().x * BlancheCurrentSpeedGain, getNextDistractMovement().y * BlancheCurrentSpeedGain);
+                        creature.setTurnCool(creature.getTurnLimit());
+                        if (BlancheCurrentSpeedGain > 0) {
+                            BlancheCurrentSpeedGain -= 0.1;
+                            System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
+                        }
+                    }
+                }
 
                 break;
 
@@ -370,7 +387,7 @@ public class AIController{
 
 
     /**
-     * Determine next movement for active chasing
+     * Determine next movement for active chasing Annette
      */
     public Vector2 getNextMovement(){
 
@@ -380,6 +397,46 @@ public class AIController{
         try {
             float x_diff = creature.getX() - lastseen.x;
             float y_diff = creature.getY() - lastseen.y;
+
+            int dir = (Math.abs(x_diff) > Math.abs(y_diff)) ? 0 : 1; // 0: move horizontally; 1: vertical: move horizontally
+
+            if (dir == 0) {
+                nextMove.y = 0;
+
+                if (x_diff >= 0) {
+                    //System.out.println ("chase LEFT");
+                    nextMove.x = -creature.getSpeedInput();
+                } else {
+                    //System.out.println ("chase RIGHT");
+                    nextMove.x = creature.getSpeedInput();
+                }
+
+            } else if (dir == 1) {
+                nextMove.x = 0;
+
+                if (y_diff >= 0) {
+                    //System.out.println ("chase DOWN");
+                    nextMove.y = -creature.getSpeedInput();
+                } else {
+                    //System.out.println ("chase UP");
+                    nextMove.y = creature.getSpeedInput();
+                }
+            }
+        } catch (NullPointerException e){
+            System.out.println ("null pointer");
+        }
+
+        return nextMove;
+    }
+
+    public Vector2 getNextDistractMovement(){
+
+        Vector2 nextMove = new Vector2();
+
+
+        try {
+            float x_diff = creature.getX() - lastseendistraction.x;
+            float y_diff = creature.getY() - lastseendistraction.y;
 
             int dir = (Math.abs(x_diff) > Math.abs(y_diff)) ? 0 : 1; // 0: move horizontally; 1: vertical: move horizontally
 
@@ -423,11 +480,15 @@ public class AIController{
         try {
             DistractionModel distraction = level.getDistraction();
             if (light.contains(distraction.getX(), distraction.getY()) && creature.getType() != 2){
-                System.out.println("distracted = true");
+                //System.out.println("distracted = true");
+                lastseendistraction = distraction.getPosition();
+                //System.out.println("distractionposition = " + lastseendistraction);
                 creature.setDistracted(true);
+            }else{
+                creature.setDistracted(false);
             }
         } catch (NullPointerException e){
-            System.out.println("distraction is null");
+            //System.out.println("distraction is null");
             creature.setDistracted(false);
         }
     }
@@ -437,7 +498,6 @@ public class AIController{
         testDistracted();
         return creature.getDistracted();
     }
-
 
     public boolean turnRight(){
         return (Math.random() > 0.5);
