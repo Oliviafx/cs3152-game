@@ -266,40 +266,6 @@ public class AnnetteModel extends BoxObstacle {
         return debugColor;
     }
 
-    /** Taken from Lab 4.
-     * Sets left/right movement of this character.
-     *
-     * This is the result of input times dude force.
-     *
-     * @param value left/right movement of this character.
-     */
-//    public void setMovement(Direction value) {
-//        if (value != null) {
-//            switch (direction) {
-//                case RIGHT:
-//                    setMovement(new Vector2(force, 0));
-//                    break;
-//                case LEFT:
-//                    setMovement(new Vector2(-force, 0));
-//                    break;
-//                case UP:
-//                    setMovement(new Vector2(0, force));
-//                    break;
-//                case DOWN:
-//                    setMovement(new Vector2(0, -force));
-//            }
-//        }
-//    }
-
-        //        hormovement = value;
-//        // Change facing if appropriate
-//        if (hormovement < 0) {
-//            faceRight = false;
-//        } else if (hormovement > 0) {
-//            faceRight = true;
-//        }
-//    }
-
 
     /**
      * Creates Annette with degenerate settings
@@ -331,7 +297,6 @@ public class AnnetteModel extends BoxObstacle {
         setWidth(width);
         setHeight(height);
 
-        //setRadius(radius);
 
 
         // Technically, we should do error checking here.
@@ -393,8 +358,6 @@ public class AnnetteModel extends BoxObstacle {
             upfilmstrip = null;
         }
 
-//        annetteFixture = body.createFixture(sensorDefR);
-//        annetteFixture.setUserData("annetteRight");
 
     }
 

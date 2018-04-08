@@ -437,17 +437,14 @@ public class LevelModel {
 
     public boolean isDistraction() {
         if (distraction != null) {
-//			System.out.println(distraction.getAlive());
             return distraction.getAlive();
         }
         else {
-//			System.out.println("distraction null");
             return false;
         }
     }
 
     public void createDistraction(JsonValue levelFormat) {
-//		System.out.println(annette.getDirection() == null);
         distraction = new DistractionModel(annette.getX(), annette.getY(), false, annette.getDirection());
         JsonValue distractiondata = levelFormat.get("distraction");
 		distraction.initialize(distractiondata);

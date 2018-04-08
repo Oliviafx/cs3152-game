@@ -45,12 +45,6 @@ public class InputController {
 	/** Whether the reset button was pressed. */
 	private boolean resetPressed;
 	private boolean resetPrevious;
-//	/** Whether the button to advanced worlds was pressed. */
-//	private boolean nextPressed;
-//	private boolean nextPrevious;
-//	/** Whether the button to step back worlds was pressed. */
-//	private boolean prevPressed;
-//	private boolean prevPrevious;
 	/** Whether the debug toggle was pressed. */
 	private boolean debugPressed;
 	private boolean debugPrevious;
@@ -145,23 +139,6 @@ public class InputController {
 	}
 
 	public boolean didX() { return xPressed && !xPrevious; }
-//	/**
-//	 * Returns true if the player wants to go to the next level.
-//	 *
-//	 * @return true if the player wants to go to the next level.
-//	 */
-//	public boolean didForward() {
-//		return nextPressed && !nextPrevious;
-//	}
-//
-//	/**
-//	 * Returns true if the player wants to go to the previous level.
-//	 *
-//	 * @return true if the player wants to go to the previous level.
-//	 */
-//	public boolean didBack() {
-//		return prevPressed && !prevPrevious;
-//	}
 	
 	/**
 	 * Returns true if the player wants to go toggle the debug mode.
