@@ -67,6 +67,7 @@ public class GameController implements Screen, ContactListener {
 	/** Offset for box when summoning */
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
+	public static final float	TEMP_SCALE	= 0.5f;
 
 
 	/**
