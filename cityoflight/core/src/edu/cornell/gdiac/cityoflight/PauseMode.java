@@ -21,13 +21,13 @@ import edu.cornell.gdiac.util.ScreenListener;
 public class PauseMode implements Screen, ControllerListener, ContactListener, InputProcessor {
 
 
-    private static final String BACKGROUND_FILE = "textures/pausemenu.png";
+    private static final String BACKGROUND_FILE = "textures/menu assets/background.png";
     private static final String PLAY_BTN_FILE = "textures/resume.png";
     private static final String QUIT_BTN_FILE = "textures/quit.png";
     /** Standard window size (for scaling) */
-    private static int STANDARD_WIDTH  = 800;
+    private static int STANDARD_WIDTH  = 1792;
     /** Standard window height (for scaling) */
-    private static int STANDARD_HEIGHT = 700;
+    private static int STANDARD_HEIGHT = 1024;
 
     /** Amount to scale the play button */
     private static float BUTTON_SCALE  = 0.75f;
@@ -139,12 +139,12 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         if (playButton == null) {
             playButton = new Texture(PLAY_BTN_FILE);
             playButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-            System.out.println("play not null");
+//            System.out.println("play not null");
         }
         if (quitButton == null) {
             quitButton = new Texture(QUIT_BTN_FILE);
             quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-            System.out.println("quit not null");
+//            System.out.println("quit not null");
 //            create();
         }
     }

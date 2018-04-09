@@ -1,5 +1,6 @@
 package edu.cornell.gdiac.cityoflight;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -26,65 +27,125 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
     }
     private Texture background;
+    private Texture backButton;
     private ObstacleCanvas canvas;
-    private static final String LEVEL_BACKGROUND_FILE = "textures/levelfake.png";
+    private static final String LEVEL_BACKGROUND_FILE = "textures/level select assets/UI.png";
+    private static final String BACK_FILE = "textures/level select assets/menu_button.png";
+
+    private ScreenListener listener;
     private boolean active;
+
+    private float scale;
+
+    private int pressState;
+    private int backX = 623;
+    private int backY = 59;
 
     public LevelController(ObstacleCanvas drawcanvas) {
         canvas = drawcanvas;
         background = new Texture(LEVEL_BACKGROUND_FILE);
+        backButton = new Texture(BACK_FILE);
         active = false;
+        pressState = 0;
 
+    }
+
+    public boolean isReady() {
+        return pressState == 2;
     }
 
     public void setCanvas(ObstacleCanvas canvas) {
         this.canvas = canvas;
     }
     public void draw(){
-        System.out.println("drawing");
-        canvas.begin();
-        canvas.draw(background,0,0);
-        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(graphics.getDeltaTime());
-        stage.draw();
-        canvas.end();
+        if (active) {
+            canvas.begin();
+        if (background != null) {
+            canvas.draw(background, 0, 0);
+        }
+        if (backButton != null) {
+            Color tint = (pressState == 1 ? Color.GRAY : Color.WHITE);
+            canvas.draw(backButton, tint, 0, 0, backX, backY, 0, 1, 1);
+        }
+//        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//        stage.act(graphics.getDeltaTime());
+//        stage.draw();
+            canvas.end();
+        }
     }
     public void update(float delta) {
-        create();
+//        create();
+    }
+
+    public void setActive(boolean val) {
+        active = val;
+        if (active) {
+            Gdx.input.setInputProcessor(this);
+        }
     }
 
     private Stage stage;
     private Table table;
 
     public void create () {
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-
-        table = new Table();
-        table.setFillParent(true);
-        stage.addActor(table);
-
-        table.setDebug(true); // This is optional, but enables debug lines for tables.
+//        stage = new Stage();
+//        Gdx.input.setInputProcessor(stage);
+//        table = new Table();
+//        table.setFillParent(true);
+//        stage.addActor(table);
+//
+//        table.setDebug(true); // This is optional, but enables debug lines for tables.
 
         // Add widgets to the table here.
     }
 
     public void resize (int width, int height) {
+        float sx = ((float)width)/800;
+        float sy = ((float)height)/700;
+        scale = (sx < sy ? sx : sy);
         if (stage != null) {
             stage.getViewport().update(width, height, true);
         }
     }
 
-    public void render () {
-        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(graphics.getDeltaTime());
-        stage.draw();
+//    public void render () {
+//        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//        stage.act(graphics.getDeltaTime());
+//        stage.draw();
+//    }
+    public void render(float delta) {
+        if (active) {
+            update(delta);
+
+
+            draw();
+
+//            stage.draw();
+//            stage.act();
+
+            if (isReady() && listener != null) {
+                listener.exitScreen(this, 1);
+            }
+        }
     }
 
     public void dispose() {
-        stage.dispose();
+        if (stage != null) {
+            stage.dispose();
+        }
+        if (background != null) {
+            background.dispose();
+            background = null;
+        }
+        if (backButton != null){
+            backButton.dispose();
+            backButton = null;
+        }
+        pressState = 0;
+        active = false;
     }
     public void show() {
+//        System.out.println("show");
         // Useless if called in outside animation loop
         active = true;
     }
@@ -96,7 +157,12 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         // TODO Auto-generated method stub
     }
 
-    public void reset() {
+    public void reset(ObstacleCanvas canvas) {
+//        dispose();
+        background = new Texture(LEVEL_BACKGROUND_FILE);
+        backButton = new Texture(BACK_FILE);
+        setCanvas(canvas);
+//        setActive(true);
     }
 
     /**
@@ -105,12 +171,13 @@ public class LevelController implements Screen, ControllerListener, ContactListe
      * The ScreenListener will respond to requests to quit.
      */
     public void setScreenListener(ScreenListener listener) {
-//        this.listener = listener;
+        this.listener = listener;
     }
     /**
      * Called when this screen is no longer the current screen for a Game.
      */
     public void hide() {
+        active = false;
         // Useless if called in outside animation loop
     }
 
@@ -121,25 +188,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 //    public void dispose() {}
 
 //    public void resize(int width, int height) {}
-    /**
-     * Called when the Screen should render itself.
-     *
-     * We defer to the other methods update() and draw().  However, it is VERY important
-     * that we only quit AFTER a draw.
-     *
-     * @param delta Number of seconds since last animation frame
-     */
-    public void render(float delta) {
-        if (active) {
-            update(delta);
-            draw();
-//            if (isReady() && listener != null) {
-//
-//                System.out.println(isReady());
-//                listener.exitScreen(this, 2);
-//            }
-        }
-    }
+
 
     /**
      * Called when the mouse wheel was scrolled. (UNSUPPORTED)
@@ -174,15 +223,23 @@ public class LevelController implements Screen, ControllerListener, ContactListe
      * @return whether to hand the event to other listeners.
      */
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-//        if (playButton == null || pressState == 2) {
-//            return true;
-//        }
+        if (backButton == null || pressState == 2) {
+//            System.out.println("pressState is 2");
+            return true;
+        }
 //
 //         Flip to match graphics coordinates
 //        screenY = heightY-screenY;
 //
 //         TODO: Fix scaling
 //         Play button is a circle.
+
+        float radius = backButton.getWidth()*backButton.getHeight();
+        float dist = (screenX-backX)*(screenX-backX)+(screenY-backX)*(screenY-backX);
+        if (dist < radius*radius) {
+//            System.out.println("pressState is 1");
+            pressState = 1;
+        }
 //        float radius = BUTTON_SCALE*scale*playButton.getWidth()/2.0f;
 //        float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
 //        if (dist < radius*radius) {
@@ -203,10 +260,10 @@ public class LevelController implements Screen, ControllerListener, ContactListe
      * @return whether to hand the event to other listeners.
      */
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-//        if (pressState == 1) {
-//            pressState = 2;
-//            return false;
-//        }
+        if (pressState == 1) {
+            pressState = 2;
+            return false;
+        }
         return true;
     }
 
