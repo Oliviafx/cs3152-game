@@ -754,12 +754,12 @@ public class LevelModel {
 		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
-//		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
-		float cameraXStart = 0;
-//		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
-		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
-		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
+		float cameraXStart = canvas.getWidth()/(5f * scale.x);
+//		float cameraXStart = 0;
+		float cameraYStart = canvas.getHeight()/(5f * scale.y);
+//		float cameraYStart = 0;
+		float cameraXEnd = canvas.getWidth()/((0.01f) * scale.x);
+		float cameraYEnd = canvas.getHeight()/((0.01f) * scale.y);
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 

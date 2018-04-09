@@ -396,7 +396,7 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-		sound.play("harp", "sounds/bg_test2.wav", true, 0.75f);
+		sound.play("bg_test2_music", "sounds/bg_test2_music.wav", true, 0.75f);
 
 		// Rotate the avatar to face the direction of movement
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
@@ -418,8 +418,8 @@ public class GameController implements Screen, ContactListener {
 		if (annette.getBird()&&!level.isDistraction() ) {
 //			System.out.println("here");
 			level.createDistraction(levelFormat);
-			sound.stop("distraction");
-			sound.play("distraction", "sounds/distraction.wav", false, 0.2f);
+			sound.stop("distraction_effect");
+			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
 			//			dAngleCache.set(1,1);
@@ -543,12 +543,12 @@ public class GameController implements Screen, ContactListener {
 				box.setDoesExist(true);
 				box.setDeactivated(false);
 				box.setDeactivating(false);
-				sound.stop("box");
-				sound.play("box", "sounds/box.wav", false, 0.8f);
+				sound.stop("box_effect");
+				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 			}
 			else {
-				sound.stop("nobox");
-				sound.play("nobox", "sounds/nobox.wav", false, 0.75f);
+				sound.stop("no_box_effect");
+				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
 			}
 		}
 		box.applyForce();
@@ -565,8 +565,8 @@ public class GameController implements Screen, ContactListener {
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
-			sound.stop("slam");
-			sound.play("slam", "sounds/slam.wav", false, 0.5f);
+			sound.stop("box_deactivate_effect");
+			sound.play("box_deactivate_effect", "sounds/box_deactivate_effect.wav", false, 0.5f);
 
 		}
 
@@ -738,16 +738,16 @@ public class GameController implements Screen, ContactListener {
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
-				sound.stop("win");
-				sound.play("win", "sounds/win.wav", false, 0.5f);
+				sound.stop("win_effect");
+				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
 			}
 
 			//collision with creature lose state
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					setFailure(true);
-					sound.stop("lose");
-					sound.play("lose", "sounds/lose.wav", false, 0.5f);
+					sound.stop("lose_effect");
+					sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f);
 				}
 			}
 
@@ -768,8 +768,8 @@ public class GameController implements Screen, ContactListener {
 //				distraction.deactivatePhysics(level.getWorld());
 //				distraction.setActive(false);
 				level.objects.remove(distraction);
-				sound.stop("poof");
-				sound.play("poof", "sounds/poof.wav", false, 1.0f);
+				sound.stop("distraction_gone_effect");
+				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 			}
 
 			// check for distraction collisions with mazes
@@ -778,8 +778,8 @@ public class GameController implements Screen, ContactListener {
 					annette.setBird(false);
 					distraction.setAlive(false);
 					level.objects.remove(distraction);
-					sound.stop("poof");
-					sound.play("poof", "sounds/poof.wav", false, 1.0f);
+					sound.stop("distraction_gone_effect");
+					sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 				}
 			}
 
@@ -788,8 +788,8 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
-					sound.stop("poof");
-					sound.play("poof", "sounds/poof.wav", false, 1.0f);
+					sound.stop("distraction_gone_effect");
+					sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 				}
 			}
 
@@ -840,8 +840,8 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
-				sound.stop("box");
-				sound.play("box", "sounds/box.wav", false, 0.8f);
+				sound.stop("box_effect");
+				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 			}
 
 
