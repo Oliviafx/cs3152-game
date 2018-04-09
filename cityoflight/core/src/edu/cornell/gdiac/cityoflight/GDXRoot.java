@@ -60,8 +60,8 @@ public class GDXRoot extends Game implements ScreenListener {
 	public void create() {
 		canvas  = new ObstacleCanvas();
 		loading = new LoadingMode(canvas,1);
-		menu = new MenuMode(canvas);
-		levels = new LevelController(canvas);
+//		menu = new MenuMode(canvas, this);
+//		levels = new LevelController(canvas);
 		pause = new PauseMode(canvas);
 		// Initialize the three game worlds
 		controller = new GameController();
@@ -115,16 +115,39 @@ public class GDXRoot extends Game implements ScreenListener {
 	 */
 	public void exitScreen(Screen screen, int exitCode) {
 		if (exitCode == GameController.EXIT_MENU) {
+//			loading.dispose();
+//			loading = null;
+		    menu = new MenuMode(canvas, this);
+			setScreen(menu);
+			//			setScreen(menu);
+//			System.out.println(getScreen().equals(levels));
+
+//			if (getScreen().equals(levels)) {
+//				System.out.println("hiding");
+//				levels.hide();
+//			}
+			if (levels != null) {
+				levels.dispose();
+				levels.setActive(false);
+				levels = null;
+			}
 			menu.setScreenListener(this);
 			menu.setCanvas(canvas);
 			menu.reset();
-			setScreen(menu);
+
+
+
+
 		}
 		if (exitCode == GameController.EXIT_LEVEL) {
+			menu.dispose();
+			menu = null;
+			levels = new LevelController(canvas);
 			levels.setScreenListener(this);
 			levels.setCanvas(canvas);
-			levels.reset();
+			levels.reset(canvas);
 			setScreen(levels);
+			levels.setActive(true);
 		}
 
 		if (exitCode == GameController.EXIT_PAUSE) {
@@ -145,6 +168,8 @@ public class GDXRoot extends Game implements ScreenListener {
 //			loading = null;
 //		}
 		else if (exitCode == GameController.EXIT_PLAY) {
+			menu.dispose();
+			menu = null;
 			controller.loadContent();
 			controller.setScreenListener(this);
 			controller.setCanvas(canvas);
@@ -162,4 +187,7 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 	}
 
+	public void render() {
+		super.render();
+	}
 }
