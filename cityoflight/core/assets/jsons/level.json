@@ -201,23 +201,23 @@
             "debugopacity":  200
 		},
 		"wall2": {
-            "vertices": 16,
-            "boundary": [32.0f, 24.0f, 32.0f,  0.0f,  8.0f,  0.0f,
-                          8.0f,  0.5f, 31.5f,  0.5f, 31.5f, 23.5f,
-                          8.0f, 23.5f,  8.0f, 24.0f],
-            "padding":  [32.0f, 24.0f, 32.0f,  0.0f,  8.0f,  0.0f,
-                          8.0f,  0.6f, 31.4f,  0.6f, 31.4f, 23.4f,
-                          8.0f, 23.4f,  8.0f, 24.0f],
-            "bodytype":     "static",
-            "density":        0.0,
-            "friction":       0.4,
-            "restitution":    0.1,
-    	  	"collideBits":	"0100",
-	      	"excludeBits":	"0000",
-            "texture":      "earth",
-            "debugcolor":   "yellow",
-            "debugopacity":  200
-        }
+			"vertices": 16,
+			"boundary": [32.0f, 24.0f, 32.0f,  0.0f,  8.0f,  0.0f,
+				8.0f,  0.5f, 31.5f,  0.5f, 31.5f, 23.5f,
+				8.0f, 23.5f,  8.0f, 24.0f],
+			"padding":  [32.0f, 24.0f, 32.0f,  0.0f,  8.0f,  0.0f,
+				8.0f,  0.6f, 31.4f,  0.6f, 31.4f, 23.4f,
+				8.0f, 23.4f,  8.0f, 24.0f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"0100",
+			"excludeBits":	"0000",
+			"texture":      "earth",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		}
     },
 	"interior": {
 		"maze2": {
