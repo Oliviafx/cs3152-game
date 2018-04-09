@@ -594,17 +594,28 @@ public class GameController implements Screen, ContactListener {
 
 		canvas.clear();
 
+		AnnetteModel annette = level.getAnnette();
+		Vector2 pos = annette.getPosition();
+		Vector2 scale = annette.getDrawScale();
+
+		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
+		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
+		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
+		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
+
 		level.draw(canvas);
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("well of power", displayFont, 0.0f);
+			canvas.drawTextCentered("complete.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
 			canvas.end();
 		} else if (failed) {
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("you lose. don't mime.", displayFont, 0.0f);
+			canvas.drawTextCentered("you lose.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
 			canvas.end();
 		}
 	}

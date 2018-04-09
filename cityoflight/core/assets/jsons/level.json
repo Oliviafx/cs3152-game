@@ -18,7 +18,7 @@
         "restitution":    0.0,
       	"force": 		 450.0,
       	"damping": 		 10.0,
-      	"maxspeed": 	  10.0,
+      	"maxspeed": 	  20.0,
        	"collideBits":	"0010",
       	"excludeBits":	"0000",
       	"startframe":       0,
@@ -263,8 +263,8 @@
 			"debugopacity":  200
 		},
 		"maze5": {
-			"pos":        	[ 13.5f, 15.0f],
-			"size":       	[ 5f, 5f],
+			"pos":        	[ 12.8f, 17.5f],
+			"size":       	[ 5f, 4f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
 			"density":        0.0,
@@ -272,7 +272,21 @@
 			"restitution":    0.1,
 			"collideBits":	"1000",
 			"excludeBits":	"0000",
-			"texture":      "earth",
+			"texture":      "128_bookstore",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		}
+		"maze6": {
+			"pos":        	[ 17.9f, 17.5f],
+			"size":       	[ 5f, 4f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "128_cafe_blue",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		}

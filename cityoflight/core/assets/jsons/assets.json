@@ -12,6 +12,14 @@
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
 		},
+		"128_bookstore": {
+			"file": 	"textures/128_bookstore.png",
+			"wrap": 	true
+		},
+		"128_cafe_blue": {
+			"file": 	"textures/128_cafe_blue.png",
+			"wrap": 	true
+		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
     		"wrap":  	false,

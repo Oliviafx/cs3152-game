@@ -84,7 +84,7 @@ public class LevelModel {
 
 	private static final int MAX_ALPHA = 255;
 	private static final float BOX_MARGIN = 0.8f;
-	private static final float TRANSLATION = -50.0f;
+	public static final float TRANSLATION = -50.0f;
 
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
@@ -772,7 +772,9 @@ public class LevelModel {
 			obj.draw(canvas);
 		}
 		if (box.getDeactivated()) {
-			box.drawState(canvas, Color.BLACK);
+			color = Color.DARK_GRAY;
+			color.a = 1;
+			box.drawState(canvas, color);
 			alpha = 255;
 		}
 		else if (box.getDeactivating())	{
