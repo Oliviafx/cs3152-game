@@ -79,7 +79,29 @@
 				"cols":		12,
 				"first":	0
 			}
+
 		},
+		"snail_up": {
+			"file": "textures/snail_up.png",
+			"wrap": false,
+			"strip": {
+				"size": 15,
+				"rows": 1,
+				"cols": 15,
+				"first": 0
+			}
+		},
+		"snail_down": {
+			"file": "textures/snail_down.png",
+			"wrap": false,
+			"strip": {
+				"size": 15,
+				"rows": 1,
+				"cols": 15,
+				"first": 0
+			}
+		},
+
 		"tarasque": {
 			"file": 	"textures/tarasque_side.png",
 			"wrap":  	false,
@@ -145,8 +167,14 @@
 				"wrap": false
 			},
 			"box": {
-				"file": "textures/box_d.png",
-				"wrap": false
+				"file": 	"textures/crate.png",
+				"wrap":  	false,
+				"strip":	{
+					"size":		10,
+					"rows":		1,
+					"cols":		10,
+					"first":	0
+				}
 			},
 			"goal": {
 				"file": "textures/well.png",
