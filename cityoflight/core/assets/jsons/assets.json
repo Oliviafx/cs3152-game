@@ -16,6 +16,10 @@
 			"file":		"textures/64_building_short_left.png",
 			"wrap":		true
 		},
+		"64_building_short_nolight": {
+			"file":		"textures/64_building_short_nolight.png",
+			"wrap":		true
+		},
 		"64_building_tall": {
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
