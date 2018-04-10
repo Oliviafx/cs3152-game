@@ -142,7 +142,7 @@
 		"excludeBits":  "0011",
 		"startframe":       0,
 		"walklimit":        4,
-		"texture":      "bird",
+		"texture":      "distraction",
 		"debugcolor":   "white",
 		"debugopacity": 192,
 	  },
