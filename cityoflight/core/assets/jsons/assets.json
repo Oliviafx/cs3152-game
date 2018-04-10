@@ -132,9 +132,15 @@
 				"file": "textures/well.png",
 				"wrap": false
 			},
-			"bird": {
+			"distraction": {
 				"file": "textures/bird.png",
-				"wrap": false
+				"wrap": false,
+				"strip": {
+					"size": 12,
+					"rows": 1,
+					"cols": 12,
+					"first": 1
+				}
 			}
 		},
 			"fonts": {

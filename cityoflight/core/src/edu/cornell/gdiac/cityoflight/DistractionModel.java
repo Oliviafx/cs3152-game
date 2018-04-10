@@ -33,6 +33,8 @@ public class DistractionModel extends WheelObstacle {
 
     private static final String BIRD_SPRITE = "textures/bird.png";
 
+    private FilmStrip filmStrip;
+
     /**
      * The sprite for the bird.
      */
@@ -288,20 +290,20 @@ public class DistractionModel extends WheelObstacle {
 //        debugColor.mul(opacity / 255.0f);
 //        setDebugColor(debugColor);
 
-        // Now get the texture from the AssetManager singleton
-//        String key = json.get("texture").asString();
-//        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
-//        try {
-//            birdsprite = (FilmStrip)texture;
-//        } catch (Exception e) {
-//            birdsprite = null;
-//        }
-        setTexture(birdsprite);
+//         Now get the texture from the AssetManager singleton
+        String key = json.get("texture").asString();
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+        try {
+            filmStrip = (FilmStrip)texture;
+        } catch (Exception e) {
+            filmStrip = null;
+        }
+        setTexture(filmStrip);
     }
 
     public void draw(ObstacleCanvas canvas) {
         if ((birdsprite != null) && alive) {
-            canvas.draw(birdsprite, Color.WHITE, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
+            canvas.draw(filmStrip, Color.WHITE, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
                     this.body.getPosition().y * drawScale.y, getAngle(), .25f * GameController.TEMP_SCALE, .25f * GameController.TEMP_SCALE);
         }
     }
@@ -316,6 +318,7 @@ public class DistractionModel extends WheelObstacle {
                         break;
                     case LEFT:
                         this.getBody().setLinearVelocity(-BIRD_STEP, 0);
+
                         break;
                     case UP:
                         this.getBody().setLinearVelocity(0, BIRD_STEP);
@@ -323,6 +326,10 @@ public class DistractionModel extends WheelObstacle {
                     case DOWN:
                         this.getBody().setLinearVelocity(0, -BIRD_STEP);
                         break;
+                }
+                if (filmStrip != null) {
+                    int next = (filmStrip.getFrame()+1) % filmStrip.getSize();
+                    filmStrip.setFrame(next);
                 }
 
             }
