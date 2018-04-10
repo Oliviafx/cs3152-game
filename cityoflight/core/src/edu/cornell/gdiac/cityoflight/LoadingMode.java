@@ -51,7 +51,7 @@ import edu.cornell.gdiac.util.*;
  */
 public class LoadingMode implements Screen {
 	// Textures necessary to support the loading screen
-	private static final String BACKGROUND_FILE = "textures/loading.png";
+	private static final String BACKGROUND_FILE = "textures/loading assets/UI.png";
 	private static final String PROGRESS_FILE = "textures/progressbar.png";
 //	private static final String PLAY_BTN_FILE = "textures/play.png";
 
@@ -349,7 +349,7 @@ public class LoadingMode implements Screen {
 		scale = (sx < sy ? sx : sy);
 
 		this.width = (int)(BAR_WIDTH_RATIO*width);
-		centerY = (int)(BAR_HEIGHT_RATIO*height);
+		centerY = (int)(BAR_HEIGHT_RATIO*height*2);
 		centerX = width/2;
 		heightY = height;
 	}
