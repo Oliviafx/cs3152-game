@@ -355,6 +355,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		else if (input.didPause()) {
 			listener.exitScreen(this, EXIT_PAUSE);
+			return false;
 		}
 		else if (countdown > 0) {
 			countdown--;
@@ -416,7 +417,6 @@ public class GameController implements Screen, ContactListener {
 
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
-//			System.out.println("here");
 			level.createDistraction(levelFormat);
 			sound.stop("distraction_effect");
 			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f);
@@ -645,8 +645,12 @@ public class GameController implements Screen, ContactListener {
 		if (active) {
 			if (preUpdate(delta)) {
 				update(delta);
+                draw(delta);
 			}
-			draw(delta);
+            else {
+			    listener.exitScreen(this, EXIT_PAUSE);
+            }
+
 		}
 	}
 

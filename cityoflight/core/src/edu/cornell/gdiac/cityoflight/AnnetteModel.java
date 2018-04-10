@@ -572,7 +572,7 @@ public class AnnetteModel extends BoxObstacle {
         }
 
         if (texture != null) {
-            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
+            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
         }
     }
 
