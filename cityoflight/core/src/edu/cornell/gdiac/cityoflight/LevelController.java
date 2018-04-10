@@ -38,8 +38,11 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private float scale;
 
     private int pressState;
-    private int backX = 623;
-    private int backY = 59;
+    private int backX = 250;
+    private int backY = 35;
+    private int startX = 350;
+    private int startY = 35;
+    private int startState;
 
     public LevelController(ObstacleCanvas drawcanvas) {
         canvas = drawcanvas;
@@ -47,6 +50,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         backButton = new Texture(BACK_FILE);
         active = false;
         pressState = 0;
+        startState = 0;
 
     }
 
@@ -65,7 +69,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         }
         if (backButton != null) {
             Color tint = (pressState == 1 ? Color.GRAY : Color.WHITE);
-            canvas.draw(backButton, tint, 0, 0, backX, backY, 0, 1, 1);
+//            canvas.draw(backButton, tint, 0, 0, backX, backY, 0, .65f, .6f);
         }
 //        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //        stage.act(graphics.getDeltaTime());
