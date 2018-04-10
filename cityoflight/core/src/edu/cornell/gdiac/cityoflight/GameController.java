@@ -430,7 +430,7 @@ public class GameController implements Screen, ContactListener {
 //				annette.setAngle(angle);
 			}
 			if (distraction != null) {
-				distraction.deactivatePhysics(level.getWorld());
+//				distraction.deactivatePhysics(level.getWorld());
 				dAngleCache.scl(distraction.getForce());
 				distraction.setMovement(dAngleCache.x,dAngleCache.y);
 			}
