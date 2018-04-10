@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import edu.cornell.gdiac.physics.obstacle.Obstacle;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
@@ -21,7 +22,66 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 public class MenuMode implements Screen, ControllerListener, ContactListener, InputProcessor {
     //
-//    public class MyActor extends Actor {
+    public class MyActor extends Actor {
+        public float x;
+        public float y;
+        public float width;
+        public float height;
+        public MyListener listener;
+        public MyActor(float x, float y, MyListener listen) {
+            this.x=x;
+            this.y=y;
+            listener = listen;
+        }
+        public boolean getHover() {
+            return listener.getHover();
+        }
+
+    }
+
+    public class MyListener extends ClickListener {
+
+        public boolean hover;
+        public MyListener() {
+            hover = false;
+        }
+        public boolean getHover() { return hover; }
+        @Override
+        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            System.out.println("enter");
+            hover = true;
+//            if (fromActor == play) {
+//                hoverplay = true;
+//            }
+//            else if (fromActor == level) {
+//                hoverlevel = true;
+//            }
+//            else if (fromActor == setting) {
+//                hoversetting = true;
+//            }
+//            else if (fromActor == quit){
+//                hoverquit = true;
+//            }
+        }
+
+        @Override
+        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            hover = false;
+//            if (toActor == play) {
+//                hoverplay = false;
+//            }
+//            else if (toActor == level) {
+//                hoverlevel = false;
+//            }
+//            else if (toActor == setting) {
+//                hoversetting = false;
+//            }
+//            else if (toActor == quit){
+//                hoverquit = false;
+//            }
+        }
+
+
 //        public int getExit() { return exit; }
 //        Texture texture;
 //        float actorX;
@@ -57,11 +117,38 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //                }
 //            }
 //        }
-//    }
+    }
 //
-    private static final String PLAY_BTN_FILE = "textures/playgame.png";
-    private static final String LEVEL_BTN_FILE = "textures/levelselect.png";
-    /** Background texture for start-up */
+    private static final String BACKGROUND_FILE ="textures/menu assets/background.png";
+    private static final String PLAY_BTN_FILE = "textures/menu assets/start_game.png";
+    private static final String LEVEL_BTN_FILE = "textures/menu assets/level_select.png";
+    private static final String TITLE_FILE ="textures/menu assets/title.png";
+    private static final String SETTINGS_FILE ="textures/menu assets/setting.png";
+    private static final String QUIT_FILE ="textures/menu assets/quit.png";
+    private static final String LEVEL_HOVER_FILE ="textures/menu assets/level_select_hover.png";
+    private static final String PLAY_HOVER ="textures/menu assets/start_game_hover.png";
+    private static final String SETTINGS_HOVER ="textures/menu assets/setting_hover.png";
+    private static final String QUIT_HOVER ="textures/menu assets/quit_hover.png";
+
+
+
+    private Texture title;
+    private Texture settingsButton;
+    private Texture quitButton;
+
+    private Texture playHover;
+    private Texture levelHover;
+    private Texture settingsHover;
+    private Texture quitHover;
+
+    private MyActor play;
+    private boolean hoverplay;
+    private MyActor level;
+    private boolean hoverlevel;
+    private MyActor setting;
+    private boolean hoversetting;
+    private MyActor quit;
+    private boolean hoverquit;
     /** Play button to display when done */
     private Texture playButton;
     private Texture levelButton;
@@ -69,15 +156,20 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private static float BUTTON_SCALE  = 0.75f;
     /** Listener that will update the player mode when we are done */
     private ScreenListener listener;
+    private InputListener inputlisten;
     /** The current state of the play button */
     private int pressState;
     private int levelState;
+    private int settingsState;
+    private int quitState;
     /** Support for the X-Box start button in place of play button */
     private int   startButton;
     /** Whether or not this player mode is still active */
     private boolean active;
 
+    private Game parent;
 
+    /** Background texture for start-up */
     private Texture background;
     /** Standard window size (for scaling) */
     private static int STANDARD_WIDTH  = 800;
@@ -86,7 +178,6 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
     ObstacleCanvas drawcanvas;
 
-    private static final String BACKGROUND_FILE = "textures/loading.png";
     /** The height of the canvas window (necessary since sprite origin != screen origin) */
     private int heightY;
     /** Scaling factor for when the student changes the resolution. */
@@ -97,22 +188,61 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private float playY;
     private float levelX;
     private float levelY;
+    private float settingsX;
+    private float settingsY;
+    private float quitX;
+    private float quitY;
 
     LoadingMode loading;
 
     Stage stage;
 
-    public MenuMode(ObstacleCanvas canvas) {
+    public boolean getHover(MyActor actor) {
+        if (actor != null) {
+            return actor.getHover();
+        }
+        return false;
+    }
+
+    public MenuMode(ObstacleCanvas canvas, Game parent) {
         drawcanvas = canvas;
         background = new Texture(BACKGROUND_FILE);
+        title = new Texture(TITLE_FILE);
 
         pressState = 0;
         levelState = 0;
+        settingsState = 0;
+        quitState = 0;
         playButton = null;
         levelButton = null;
+        settingsButton = null;
+        quitButton = null;
         active = false;
+        this.parent = parent;
 
-        loading = new LoadingMode(drawcanvas);
+
+        playX = 600;
+        playY = 300;
+        levelX = 600;
+        levelY = 250;
+        settingsX = 600;
+        settingsY = 200;
+        quitX = 600;
+        quitY = 150;
+
+
+//        level = new MyActor(levelX, levelY, new MyListener());
+//        setting = new MyActor(settingsX,settingsY,new MyListener());
+//        quit = new MyActor(quitX,quitY,new MyListener());
+//
+//        level.setPosition(levelX, levelY);
+//        setting.setPosition(settingsX, settingsY);
+//        quit.setPosition(quitX, quitY);
+
+//        level.addListener(new MyListener());
+//        setting.addListener(new MyListener());
+//        setting.addListener(new MyListener());
+//        loading = new LoadingMode(drawcanvas);
         Gdx.input.setInputProcessor(this);
 
 //        for(Controller controller : Controllers.getControllers()) {
@@ -121,8 +251,21 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
     }
 
-//    public void create() {
+    public void create() {
 //        stage = new Stage();
+//        if (play == null) {
+//            play = new MyActor(playX,playY, new MyListener());
+//            play.setPosition(playX, playY);
+//            play.setWidth(playButton.getWidth());
+//            play.setHeight(playButton.getHeight());
+//            play.setTouchable(Touchable.enabled);
+//            play.addListener(play.listener);
+//            stage.addActor(play);
+
+
+        }
+
+
 //        Gdx.input.setInputProcessor(stage);
 //        if (playButton != null) {
 //            MyActor playbutton = new MyActor(playButton, playX, playY, "play");
@@ -165,6 +308,14 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         return levelState == 2;
     }
 
+    public boolean toSettings() {
+        return settingsState == 2;
+    }
+
+    public boolean didQuit() {
+        return quitState == 2;
+    }
+
     public void reset() {
     }
     /**
@@ -181,7 +332,15 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             levelButton.dispose();
             levelButton = null;
         }
-        stage.dispose();
+        if (settingsButton != null) {
+            settingsButton.dispose();
+            settingsButton = null;
+        }
+        if (quitButton != null) {
+            quitButton.dispose();
+            quitButton = null;
+        }
+        //        stage.dispose();
     }
 
     public void resize(int width, int height) {
@@ -191,10 +350,10 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         scale = (sx < sy ? sx : sy);
 
         this.width = (int)(.66f*width);
-        playY = (int)(.25f*height);
-        playX = width/2;
-        levelY = (int)(.25f*height);
-        levelX = width/2;
+//        playY = (int)(.25f*height);
+//        playX = width/2;
+//        levelY = (int)(.25f*height);
+//        levelX = width/2;
         heightY = height;
     }
 
@@ -231,6 +390,10 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     public void setScreenListener(ScreenListener listener) {
         this.listener = listener;
     }
+
+    public void setInputListener(InputListener listener) {
+        this.inputlisten = listener;
+    }
     /**
      * Called when this screen is no longer the current screen for a Game.
      */
@@ -251,7 +414,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         update();
         draw();
 //            stage.draw();
-//            stage.act();
+        if (stage != null) { stage.act(); }
 
         if (isReady() && listener != null) {
 
@@ -261,6 +424,15 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
             listener.exitScreen(this, 3);
         }
+
+//        if (toSettings() && listener != null) {
+//
+//        }
+
+        if (didQuit()) {
+            listener.exitScreen(this, 0);
+        }
+
     }
 
 
@@ -278,25 +450,92 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         if (playButton == null) {
             playButton = new Texture(PLAY_BTN_FILE);
             playButton.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+            create();
+        }
+        if (playHover == null) {
+            playHover = new Texture(PLAY_HOVER);
+            playHover.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
         }
         if (levelButton == null) {
             levelButton = new Texture(LEVEL_BTN_FILE);
             levelButton.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+//            level.setWidth(levelButton.getWidth());
+//            level.setHeight(levelButton.getHeight());
+
+        }
+        if (levelHover == null) {
+            levelHover = new Texture(LEVEL_HOVER_FILE);
+            levelHover.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 //            create();
         }
+        if (settingsButton == null) {
+            settingsButton = new Texture(SETTINGS_FILE);
+            levelButton.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+//            setting.setWidth(settingsButton.getWidth());
+//            setting.setHeight(settingsButton.getHeight());
+        }
+        if (settingsHover == null) {
+            settingsHover = new Texture(SETTINGS_HOVER);
+            settingsHover.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+//            create();
+        }
+        if (quitButton == null) {
+            quitButton = new Texture(QUIT_FILE);
+            quitButton.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+//            quit.setWidth(quitButton.getWidth());
+//            quit.setHeight(quitButton.getHeight());
+        }
+        if (quitHover == null) {
+            quitHover = new Texture(QUIT_HOVER);
+            quitHover.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+//            create();
+        }
+
+
     }
 
+
     public void draw() {
-        drawcanvas.begin();
-        drawcanvas.draw(background, 0, 0);
-        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
-        drawcanvas.draw(playButton, tint, playButton.getWidth()/2, playButton.getHeight()/2,
-                playX, playY, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-        Color tint2 = (levelState == 1 ? Color.GRAY: Color.WHITE);
-        drawcanvas.draw(levelButton, tint2, levelButton.getWidth()/2, levelButton.getHeight()/2,
-                playX, playY-100, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-        drawcanvas.end();
+        if (drawcanvas != null) {
+            drawcanvas.begin();
+            drawcanvas.draw(background, 0, 0);
+            drawcanvas.draw(title, 480, 350);
+//        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
+//            if (getHover(play)) {
+            if (pressState == 1) {
+                drawcanvas.draw(playHover, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
+                        playX - playButton.getWidth() / 5, playY-playButton.getHeight()/3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            } else {
+                drawcanvas.draw(playButton, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
+                        playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            }
+//            if (hoverlevel) {
+            if (levelState == 1) {
+                drawcanvas.draw(levelHover, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
+                        levelX-levelButton.getWidth()/6, levelY-levelButton.getHeight()/2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            } else {
+                drawcanvas.draw(levelButton, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
+                        levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            } //        Color tint2 = (levelState == 1 ? Color.GRAY: Color.WHITE);
+//            if (hoversetting) {
+            if (settingsState == 1) {
+                drawcanvas.draw(settingsHover, Color.WHITE, settingsButton.getWidth() / 2, settingsButton.getHeight() / 2,
+                        settingsX-settingsButton.getWidth()/3, settingsY-settingsButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            } else {
+                drawcanvas.draw(settingsButton, Color.WHITE, settingsButton.getWidth() / 2, settingsButton.getHeight() / 2,
+                        settingsX, settingsY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            }
+//            if (hoverquit) {
+            if (quitState == 1) {
+                drawcanvas.draw(quitHover, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
+                        quitX-quitButton.getWidth(), quitY-quitButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            } else {
+                drawcanvas.draw(quitButton, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
+                        quitX, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            }
+            drawcanvas.end();
+        }
     }
 
 
@@ -325,6 +564,13 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         if (levelButton == null || levelState == 2) {
             return true;
         }
+        if (settingsButton == null || settingsState == 2) {
+            return true;
+        }
+        if (quitButton == null || quitState == 2) {
+            return true;
+        }
+
         // Flip to match graphics coordinates
         screenY = heightY-screenY;
 
@@ -332,13 +578,22 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         // Play button is a circle.
         float radius = BUTTON_SCALE*scale*playButton.getWidth()/2.0f;
         float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
-        if (dist < radius*radius) {
+        if (dist < radius*2) {
             pressState = 1;
         }
 
-        float dist2 = (screenX-playX)*(screenX-playX)+(screenY-(playY-100))*(screenY-(playY-100));
-        if (dist2 < radius) {
+        float dist2 = (screenX-levelX)*(screenX-levelX)+(screenY-levelY)*(screenY-levelY);
+        if (dist2 < radius*2) {
             levelState = 1;
+        }
+
+        float dist3 = (screenX-settingsX)*(screenX-settingsX)+(screenY-settingsY)*(screenY-settingsY);
+        if (dist3 < radius*2) {
+            settingsState = 1;
+        }
+        float dist4 = (screenX-quitX)*(screenX-quitX)+(screenY-quitY)*(screenY-quitY);
+        if (dist4 < radius*2) {
+            quitState = 1;
         }
         return false;
     }
@@ -362,6 +617,14 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         }
         if (levelState == 1) {
             levelState = 2;
+            return false;
+        }
+        if (settingsState == 1) {
+            settingsState = 2;
+            return false;
+        }
+        if (quitState == 1) {
+            quitState = 2;
             return false;
         }
         return true;

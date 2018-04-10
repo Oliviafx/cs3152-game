@@ -4,17 +4,29 @@
     		"file":		"textures/tile.png",
     		"wrap":		true
     	},
-		"ground": {
-			"file":		"textures/earthtile.png",
+		"64_building_short": {
+			"file":		"textures/64_building_short.png",
 			"wrap":		true
+		},
+		"64_building_tall": {
+			"file": 	"textures/64_building_tall.png",
+			"wrap": 	true
+		},
+		"128_bookstore": {
+			"file": 	"textures/128_bookstore.png",
+			"wrap": 	true
+		},
+		"128_cafe_blue": {
+			"file": 	"textures/128_cafe_blue.png",
+			"wrap": 	true
 		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
     		"wrap":  	false,
 			"strip":	{
-				"size":		9,
+				"size":		10,
 				"rows":		1,
-				"cols":		9,
+				"cols":		10,
 				"first":	0
 			}
     	},
@@ -49,7 +61,37 @@
 			}
 		},
 		"tarasque": {
-			"file": 	"textures/tarasqueside.png",
+			"file": 	"textures/tarasque_side.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		30,
+				"rows":		1,
+				"cols":		30,
+				"first":	0
+			}
+		},
+		"tarasque_up": {
+			"file": 	"textures/tarasque_up.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"tarasque_down": {
+			"file": 	"textures/tarasque_down.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"blanche": {
+			"file": 	"textures/blanche_side.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		16,
@@ -58,13 +100,23 @@
 				"first":	0
 			}
 		},
-		"blanche": {
-			"file": 	"textures/blancheside.png",
+		"blanche_up": {
+			"file": 	"textures/blanche_up.png",
 			"wrap":  	false,
 			"strip":	{
-				"size":		24,
+				"size":		15,
 				"rows":		1,
-				"cols":		24,
+				"cols":		15,
+				"first":	0
+			}
+		},
+		"blanche_down": {
+			"file": 	"textures/blanche_down.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		15,
+				"rows":		1,
+				"cols":		15,
 				"first":	0
 			}
 		},
@@ -92,29 +144,32 @@
 				}
 			},
 			"sounds": {
-				"box_noise": {
-					"file": "sounds/box.wav"
+				"box_effect": {
+					"file": "sounds/box_effect.wav"
 				},
-				"ambient-low": {
-					"file": "sounds/bg_test2.wav"
+				"bg_test2_music": {
+					"file": "sounds/bg_test2_music.wav"
 				},
-				"footsteps": {
-					"file": "sounds/footsteps.wav"
+				"win_effect": {
+					"file": "sounds/win_effect.wav"
 				},
-				"menu": {
-					"file": "sounds/main_melody.wav"
+				"lose_effect": {
+					"file": "sounds/lose_effect.wav"
 				},
-				"slam": {
-					"file": "sounds/slam.wav"
+				"distraction_gone_effect": {
+					"file": "sounds/distraction_gone_effect.wav"
 				},
-				"distraction": {
-					"file": "sounds/distraction.wav"
+				"no_box_effect": {
+					"file": "sounds/no_box_effect.wav"
 				},
-				"select": {
-					"file": "sounds/select_test.wav"
+				"distraction_effect": {
+					"file": "sounds/distraction_effect.wav"
+				},
+				"select_test_effect": {
+					"file": "sounds/select_test_effect.wav"
 				}
-				"nobobx": {
-					"file": "sounds/nobox.wav"
+				"box_deactivate_effect": {
+					"file": "sounds/box_deactivate_effect.wav"
 				}
 			}
 		}
