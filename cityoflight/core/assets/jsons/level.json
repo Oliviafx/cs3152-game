@@ -199,7 +199,7 @@
     },
 	"interior": {
 		"maze2": {
-			"pos":        	[ 24.35f, 17.8f],
+			"pos":        	[ 26.9f, 17.8f],
 			"size":       	[ 2.4f, 4.8f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
