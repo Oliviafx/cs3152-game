@@ -221,14 +221,14 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         this.parent = parent;
 
 
-        playX = 1400;
-        playY = 600;
-        levelX = 1400;
-        levelY = 500;
-        settingsX = 1400;
-        settingsY = 400;
-        quitX = 1400;
-        quitY = 300;
+        playX = 600;
+        playY = 300;
+        levelX = 600;
+        levelY = 250;
+        settingsX = 600;
+        settingsY = 200;
+        quitX = 600;
+        quitY = 150;
 
 
 //        level = new MyActor(levelX, levelY, new MyListener());
@@ -252,15 +252,15 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     }
 
     public void create() {
-        stage = new Stage();
-        if (play == null) {
-            play = new MyActor(playX,playY, new MyListener());
+//        stage = new Stage();
+//        if (play == null) {
+//            play = new MyActor(playX,playY, new MyListener());
 //            play.setPosition(playX, playY);
-            play.setWidth(playButton.getWidth());
-            play.setHeight(playButton.getHeight());
-            play.setTouchable(Touchable.enabled);
-            play.addListener(play.listener);
-            stage.addActor(play);
+//            play.setWidth(playButton.getWidth());
+//            play.setHeight(playButton.getHeight());
+//            play.setTouchable(Touchable.enabled);
+//            play.addListener(play.listener);
+//            stage.addActor(play);
 
 
         }
@@ -277,7 +277,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //            levelbutton.setTouchable(Touchable.enabled);
 //            stage.addActor(levelbutton);
 //        }
-    }
+//    }
 
     /**
      * Returns true if all assets are loaded and the player is ready to go.
@@ -500,12 +500,12 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         if (drawcanvas != null) {
             drawcanvas.begin();
             drawcanvas.draw(background, 0, 0);
-            drawcanvas.draw(title, 1080, 650);
+            drawcanvas.draw(title, 480, 350);
 //        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
 //            if (getHover(play)) {
             if (pressState == 1) {
                 drawcanvas.draw(playHover, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
-                        playX - playButton.getWidth() / 3, playY-playButton.getHeight()/2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                        playX - playButton.getWidth() / 5, playY-playButton.getHeight()/3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
             } else {
                 drawcanvas.draw(playButton, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
                         playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
@@ -513,7 +513,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //            if (hoverlevel) {
             if (levelState == 1) {
                 drawcanvas.draw(levelHover, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
-                        levelX-levelButton.getWidth()/4, levelY-levelButton.getHeight()/2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                        levelX-levelButton.getWidth()/6, levelY-levelButton.getHeight()/2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
             } else {
                 drawcanvas.draw(levelButton, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
                         levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
@@ -521,7 +521,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //            if (hoversetting) {
             if (settingsState == 1) {
                 drawcanvas.draw(settingsHover, Color.WHITE, settingsButton.getWidth() / 2, settingsButton.getHeight() / 2,
-                        settingsX, settingsY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                        settingsX-settingsButton.getWidth()/3, settingsY-settingsButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
             } else {
                 drawcanvas.draw(settingsButton, Color.WHITE, settingsButton.getWidth() / 2, settingsButton.getHeight() / 2,
                         settingsX, settingsY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
@@ -529,7 +529,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //            if (hoverquit) {
             if (quitState == 1) {
                 drawcanvas.draw(quitHover, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
-                        quitX-quitButton.getWidth()*1.5f, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                        quitX-quitButton.getWidth(), quitY-quitButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
             } else {
                 drawcanvas.draw(quitButton, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
                         quitX, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
