@@ -97,8 +97,6 @@ public class LevelModel {
 	/** The world scale */
 	protected Vector2 scale;
 
-	protected Affine2 otran;
-
 	/** The camera defining the RayHandler view; scale is in physics coordinates */
 	protected OrthographicCamera raycamera;
 	/** The rayhandler for storing lights, and drawing them (SIGH) */
@@ -119,6 +117,9 @@ public class LevelModel {
 	protected float maxTimePerFrame;
 	/** The amount of time that has passed without updating the frame */
 	protected float physicsTimeLeft;
+
+	private static final String BACKGROUND_FILE = "textures/bg.png";
+	private Texture background;
 
 	/**
 	 * Returns the bounding rectangle for the physics world
@@ -147,11 +148,6 @@ public class LevelModel {
 	 */
 	public World getWorld() {
 		return world;
-	}
-
-
-	public Affine2 getOtran() {
-		return otran;
 	}
 
 	/**
@@ -343,6 +339,7 @@ public class LevelModel {
 		bounds = new Rectangle(0,0,1,1);
 		scale = new Vector2(1,1);
 		debug  = false;
+		background = null;
 	}
 
 	/**
@@ -351,6 +348,7 @@ public class LevelModel {
 	 * @param levelFormat	the JSON tree defining the level
 	 */
 	public void populate(JsonValue levelFormat) {
+		background = new Texture(BACKGROUND_FILE);
         float[] pSize = levelFormat.get("physicsSize").asFloatArray();
         int[] gSize = levelFormat.get("graphicSize").asIntArray();
 
@@ -634,6 +632,8 @@ public class LevelModel {
 			world = null;
 		}
 
+		background = null;
+
 //		if (distraction != null) {
 //			distraction.setAlive(false);
 //			objects.remove(distraction);
@@ -760,12 +760,17 @@ public class LevelModel {
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
 		oTran.mul(wTran);
 
+		// Draw the sprites first (will be hidden by shadows)
+		canvas.begin();
+//		canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas. getHeight());
+		canvas.draw(background, 0, 0);
+		canvas.end();
+
 		if (rayhandler != null) {
 			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth() * 2, canvas.getHeight() * 2);
 			rayhandler.render();
 		}
 
-		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
 
 		int n = objects.size();
@@ -780,6 +785,11 @@ public class LevelModel {
 				}
 			}
 		}
+
+//		canvas.begin();
+
+//		System.out.println("BACKGROUND!!!");
+//		canvas.end();
 
 
 		for(Obstacle obj : objects) {
@@ -812,6 +822,7 @@ public class LevelModel {
 			}
 			canvas.endDebug();
 		}
+
 	}
 
 

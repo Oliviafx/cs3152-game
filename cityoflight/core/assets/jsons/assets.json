@@ -4,6 +4,10 @@
     		"file":		"textures/tile.png",
     		"wrap":		true
     	},
+		"64_street": {
+			"file":		"textures/64_street.png",
+			"wrap":		true
+		},
 		"64_building_short": {
 			"file":		"textures/64_building_short.png",
 			"wrap":		true
@@ -20,6 +24,14 @@
 			"file": 	"textures/128_cafe_blue.png",
 			"wrap": 	true
 		},
+		"128_cafe_red": {
+			"file": 	"textures/128_cafe_red.png",
+			"wrap": 	true
+		},
+		"128_flowershop": {
+			"file": 	"textures/128_flowershop.png",
+			"wrap": 	true
+		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
     		"wrap":  	false,
@@ -27,7 +39,7 @@
 				"size":		10,
 				"rows":		1,
 				"cols":		10,
-				"first":	0
+				"first":	3
 			}
     	},
 		"annetteDown": {

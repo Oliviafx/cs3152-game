@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -68,6 +69,8 @@ public class GameController implements Screen, ContactListener {
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
 	public static final float	TEMP_SCALE	= 0.5f;
+
+
 
 
 	/**
@@ -164,6 +167,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean upBox = false;
 	private boolean rightBox = false;
 	private boolean leftBox = false;
+
+
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;

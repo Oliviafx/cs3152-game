@@ -21,7 +21,7 @@
       	"maxspeed": 	  20.0,
        	"collideBits":	"0010",
       	"excludeBits":	"0000",
-      	"startframe":       0,
+      	"startframe":       3,
       	"walklimit":		4,
         "texture":     	"annette",
 		"texture2": "annetteDown",
@@ -46,7 +46,7 @@
 		},
 		"dragon": {
 		    "type":         2,
-			"pos":        	[ 8.0, 10.0],
+			"pos":        	[ 8.0, 12.0],
 			"radius":      	0.8,
 			"xinput":        0,
 			"yinput":        300.0,
@@ -174,7 +174,7 @@
             "restitution":    0.1,
     	  	"collideBits":	"1000",
 	      	"excludeBits":	"0000",
-            "texture":      "earth",
+            "texture":      "64_building_tall",
             "debugcolor":   "yellow",
             "debugopacity":  200
 		},
@@ -192,7 +192,7 @@
 			"restitution":    0.1,
 			"collideBits":	"0100",
 			"excludeBits":	"0000",
-			"texture":      "earth",
+			"texture":      "64_building_tall",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		}
@@ -227,8 +227,8 @@
 			"debugopacity":  200
 		},
 		"maze4": {
-			"pos":        	[ 21.5f, 7.5f],
-			"size":       	[ 5f, 1f],
+			"pos":        	[ 23f, 7.5f],
+			"size":       	[ 5f, 4f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
 			"density":        0.0,
@@ -236,11 +236,25 @@
 			"restitution":    0.1,
 			"collideBits":	"1000",
 			"excludeBits":	"0000",
-			"texture":      "earth",
+			"texture":      "128_flowershop",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		},
 		"maze5": {
+			"pos":        	[ 7.7f, 17.5f],
+			"size":       	[ 5f, 4f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "128_flowershop",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+		"maze6": {
 			"pos":        	[ 12.8f, 17.5f],
 			"size":       	[ 5f, 4f],
 			"pad":       	[ 0.1f, 0.1f],
@@ -253,8 +267,8 @@
 			"texture":      "128_bookstore",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
-		}
-		"maze6": {
+		},
+		"maze7": {
 			"pos":        	[ 17.9f, 17.5f],
 			"size":       	[ 5f, 4f],
 			"pad":       	[ 0.1f, 0.1f],
@@ -268,5 +282,19 @@
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		}
+		"maze8": {
+			"pos":        	[ 2.6f, 17.5f],
+			"size":       	[ 5f, 4f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "128_cafe_red",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
 	}
  }
