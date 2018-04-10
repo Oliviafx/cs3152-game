@@ -303,8 +303,16 @@ public class DistractionModel extends WheelObstacle {
 
     public void draw(ObstacleCanvas canvas) {
         if ((birdsprite != null) && alive) {
+
+            float flipped = 0.3f;
+
+            switch (direction) {
+                case LEFT:
+                    flipped = -0.3f;
+                    break;
+            }
             canvas.draw(filmStrip, Color.WHITE, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
-                    this.body.getPosition().y * drawScale.y, getAngle(), .25f * GameController.TEMP_SCALE, .25f * GameController.TEMP_SCALE);
+                    this.body.getPosition().y * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
         }
     }
 
