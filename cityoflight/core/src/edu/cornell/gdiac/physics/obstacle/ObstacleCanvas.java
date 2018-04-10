@@ -916,7 +916,7 @@ public class ObstacleCanvas {
      * @param font The font to use
      * @param offset The y-value offset from the center of the screen.
      */
-    public void drawTextCentered(String text, BitmapFont font, float offset) {
+    public void drawTextCentered(String text, BitmapFont font, float xOff, float yOff) {
 		if (active != DrawPass.STANDARD) {
 			Gdx.app.error("GameCanvas", "Cannot draw without active begin()", new IllegalStateException());
 			return;
@@ -925,7 +925,7 @@ public class ObstacleCanvas {
 		GlyphLayout layout = new GlyphLayout(font,text);
 		float x = (getWidth()  - layout.width) / 2.0f;
 		float y = (getHeight() + layout.height) / 2.0f;
-		font.draw(spriteBatch, layout, x, y+offset);
+		font.draw(spriteBatch, layout, x+xOff, y+yOff);
     }
     
 	/**
