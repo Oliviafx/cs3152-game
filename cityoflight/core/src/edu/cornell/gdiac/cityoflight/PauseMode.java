@@ -151,7 +151,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
     public void draw() {
         canvas.begin();
-        canvas.draw(background, 0, 0);
+        canvas.draw(background, Color.WHITE, 0, 0, STANDARD_WIDTH/2 ,STANDARD_HEIGHT/2, 0, .5f, .5f);
         Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
         canvas.draw(playButton, tint, playButton.getWidth()/2, playButton.getHeight()/2,
                 playX, playY, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
