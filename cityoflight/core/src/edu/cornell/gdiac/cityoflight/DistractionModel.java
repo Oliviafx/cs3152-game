@@ -22,7 +22,7 @@ public class DistractionModel extends WheelObstacle {
     /**
      * The amount by which the bird's x and y coordinates will change each frame while it is moving.
      */
-    private static final float BIRD_STEP = 2f;
+    private static final float BIRD_STEP = 4f;
     private static final float HOFFSET = .25f;
     private static final float VOFFSET = .25f;
 

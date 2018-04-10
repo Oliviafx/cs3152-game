@@ -39,8 +39,8 @@
 			"collideBits":	"0001",
 			"excludeBits":	"0000",
 			"texture":     	"snail",
-			"texture2":     "snail",
-			"texture3":     "snail",
+			"texture2": "snail_down",
+			"texture3": "snail_up",
 			"debugcolor":  	"white",
 			"debugopacity":	192,
 		},
@@ -60,7 +60,7 @@
         },
 		"lady": {
 		    "type":         3,
-			"pos":        	[ 11, 7.0],
+			"pos":        	[ 15, 7.0],
 			"radius":      	0.8,
 			"xinput":        -180.0,
 			"yinput":        0.0,
@@ -296,5 +296,62 @@
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		},
+        "maze9": {
+          "pos":        	[ 6.45f, 7.25f],
+          "size":       	[ 2.4f, 4.0f],
+          "pad":       	[ 0.1f, 0.1f],
+          "bodytype":     "static",
+          "density":        0.0,
+          "friction":       0.4,
+          "restitution":    0.1,
+          "collideBits":	"1000",
+          "excludeBits":	"0000",
+          "texture":      "64_building_short_left",
+          "debugcolor":   "yellow",
+          "debugopacity":  200
+        },
+		"maze10": {
+			"pos":        	[ 11.45f, 7.25f],
+			"size":       	[ 2.4f, 4.0f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "64_building_short_left",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+		"maze11": {
+			"pos":        	[ 3.95f, 7.25f],
+			"size":       	[ 2.4f, 4.0f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "64_building_short_nolight",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+		"maze12": {
+			"pos":        	[ 1.45f, 7.25f],
+			"size":       	[ 2.4f, 4.0f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "64_building_short",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+
 	}
  }

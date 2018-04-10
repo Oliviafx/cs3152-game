@@ -12,6 +12,14 @@
 			"file":		"textures/64_building_short.png",
 			"wrap":		true
 		},
+		"64_building_short_left": {
+			"file":		"textures/64_building_short_left.png",
+			"wrap":		true
+		},
+		"64_building_short_nolight": {
+			"file":		"textures/64_building_short_nolight.png",
+			"wrap":		true
+		},
 		"64_building_tall": {
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
@@ -71,7 +79,29 @@
 				"cols":		12,
 				"first":	0
 			}
+
 		},
+		"snail_up": {
+			"file": "textures/snail_up.png",
+			"wrap": false,
+			"strip": {
+				"size": 15,
+				"rows": 1,
+				"cols": 15,
+				"first": 0
+			}
+		},
+		"snail_down": {
+			"file": "textures/snail_down.png",
+			"wrap": false,
+			"strip": {
+				"size": 15,
+				"rows": 1,
+				"cols": 15,
+				"first": 0
+			}
+		},
+
 		"tarasque": {
 			"file": 	"textures/tarasque_side.png",
 			"wrap":  	false,
@@ -137,8 +167,14 @@
 				"wrap": false
 			},
 			"box": {
-				"file": "textures/box_d.png",
-				"wrap": false
+				"file": 	"textures/crate.png",
+				"wrap":  	false,
+				"strip":	{
+					"size":		10,
+					"rows":		1,
+					"cols":		10,
+					"first":	0
+				}
 			},
 			"goal": {
 				"file": "textures/well.png",
@@ -185,9 +221,12 @@
 				},
 				"select_test_effect": {
 					"file": "sounds/select_test_effect.wav"
-				}
+				},
 				"box_deactivate_effect": {
 					"file": "sounds/box_deactivate_effect.wav"
-				}
+				},
+                "seen_effect": {
+                  "file": "sounds/seen_effect.wav"
+                }
 			}
 		}

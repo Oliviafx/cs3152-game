@@ -753,9 +753,9 @@ public class LevelModel {
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 
-		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
-		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
-		oTran.mul(wTran);
+//		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
+//		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
+//		oTran.mul(wTran);
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
