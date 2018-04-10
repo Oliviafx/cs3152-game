@@ -12,6 +12,10 @@
 			"file":		"textures/64_building_short.png",
 			"wrap":		true
 		},
+		"64_building_short_left": {
+			"file":		"textures/64_building_short_left.png",
+			"wrap":		true
+		},
 		"64_building_tall": {
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
@@ -185,9 +189,12 @@
 				},
 				"select_test_effect": {
 					"file": "sounds/select_test_effect.wav"
-				}
+				},
 				"box_deactivate_effect": {
 					"file": "sounds/box_deactivate_effect.wav"
-				}
+				},
+                "seen_effect": {
+                  "file": "sounds/seen_effect.wav"
+                }
 			}
 		}
