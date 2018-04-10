@@ -475,8 +475,10 @@ public class BoxModel extends BoxObstacle {
 
         // Apply force for movement
         if (getMovement().len2() > 0f) {
+            System.out.println("getmovement " + getMovement().x + " , " + getMovement().y);
+            System.out.println("in apply force of boxmodel");
             forceCache.set(getMovement());
-            body.applyForce(forceCache,getPosition(),true);
+            body.applyForce(forceCache, getPosition(),true);
             animate = true;
         } else {
             animate = false;

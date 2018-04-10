@@ -386,9 +386,7 @@ public class GameController implements Screen, ContactListener {
 
 		BoxModel box = level.getBox();
 		DistractionModel distraction = level.getDistraction();
-//		if (level.isDistraction()) {
-//			distraction.setPosition(annette.getPosition());
-//		}
+
 		InputController input = InputController.getInstance();
 
 		SoundController sound = SoundController.getInstance();
@@ -398,45 +396,6 @@ public class GameController implements Screen, ContactListener {
 
 		sound.play("harp", "sounds/bg_test2.wav", true, 0.75f);
 
-		// Rotate the avatar to face the direction of movement
-		aAngleCache.set(input.getaHoriz(),input.getaVert());
-//		if (aAngleCache.len2() > 0.0f) {
-//			float angle = aAngleCache.angle();
-//			// Convert to radians with up as 0
-//			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-//			annette.setAngle(angle);
-//		}
-		aAngleCache.scl(annette.getForce());
-		annette.setMovement(aAngleCache.x,aAngleCache.y);
-		annette.setDirection(input.getDirection());
-
-		annette.setSummoning(InputController.getInstance().didSpace());
-		annette.setBird(input.didX());
-		annette.applyForce();
-
-		//Check if distraction was called
-		if (annette.getBird()&&!level.isDistraction() ) {
-//			System.out.println("here");
-			level.createDistraction(levelFormat);
-			sound.stop("distraction");
-			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
-			level.getDistraction().setAlive(true);
-			dAngleCache.set(input.getaHoriz(),input.getaVert());
-			//			dAngleCache.set(1,1);
-			if (dAngleCache.len2() > 0.0f) {
-				float angle = aAngleCache.angle();
-				// Convert to radians with up as 0
-				angle = (float)Math.PI*(angle-90.0f)/180.0f;
-//				annette.setAngle(angle);
-			}
-			if (distraction != null) {
-//				distraction.deactivatePhysics(level.getWorld());
-				dAngleCache.scl(distraction.getForce());
-				distraction.setMovement(dAngleCache.x,dAngleCache.y);
-			}
-		}
-//		level.getDistraction().setAlive(input.didX()&&!level.getDistraction().getAlive());
-
 		// creature AI.
 		createAIControllers();
 
@@ -445,69 +404,44 @@ public class GameController implements Screen, ContactListener {
 			controller.doAction();
 		}
 
-//        int index = 0;
-//        CreatureModel currentcreature = level.getCreature(index);
-//
-//        while (currentcreature != null){
-//			currentcreature.setTurnCool(currentcreature.getTurnCool() - 1);
-//
-//			if (currentcreature.getType() == 1) {
-//				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
-//					System.out.println("snail behavior: change direction");
-//					currentcreature.setXInput(-currentcreature.getXInput());
-//					currentcreature.setYInput(-currentcreature.getYInput());
-//					currentcreature.setStuck(false);
-//					currentcreature.setTurnCool(currentcreature.getTurnLimit());
-//				}
-//			}
-//
-//			if (currentcreature.getType() == 2){
-//				if (currentcreature.getStuck() && currentcreature.getTurnCool() <= 0) {
-//					System.out.println("dragon behavior: turns right");
-//					if (currentcreature.getXInput() > 0){
-//						currentcreature.setYInput(-currentcreature.getXInput());
-//						currentcreature.setXInput(0);
-//					} else if (currentcreature.getXInput() < 0){
-//						currentcreature.setYInput(-currentcreature.getXInput());
-//						currentcreature.setXInput(0);
-//					} else if (currentcreature.getYInput() > 0){
-//						currentcreature.setXInput(currentcreature.getYInput());
-//						currentcreature.setYInput(0);
-//					} else if (currentcreature.getYInput() < 0){
-//						currentcreature.setXInput(currentcreature.getYInput());
-//						currentcreature.setYInput(0);
-//					}
-//
-//					currentcreature.setStuck(false);
-//					currentcreature.setTurnCool(currentcreature.getTurnLimit());
-//				}
-//			}
-//
-//			if (currentcreature.getType() == 3){
-//				// dame blanche.
-//			}
 
-//			cAngleCache.set(currentcreature.getXInput(),currentcreature.getYInput());
-//			//System.out.println("movement = " + currentcreature.getMovement());
-//
-//			if (cAngleCache.len2() > 0.0f) {
-//                float angle = cAngleCache.angle();
-//                // Convert to radians with up as 0
-//                angle = (float)Math.PI*(angle-90.0f)/180.0f;
-//                currentcreature.setAngle(angle);
-//            }
-//            cAngleCache.scl(currentcreature.getForce());
-//            currentcreature.setMovement(cAngleCache.x,cAngleCache.y);
-//            currentcreature.applyForce();
+		// Rotate the avatar to face the direction of movement
+		aAngleCache.set(input.getaHoriz(),input.getaVert());
 
-//            // try to get next creature from level.
-//            index ++;
-//            currentcreature = level.getCreature(index);
-//        }
+		//set walking in place
+		annette.setWalkingInPlace(InputController.getInstance().didHoldShift());
+		aAngleCache.scl(annette.getForce());
+		annette.setDirection(input.getDirection());
+
+
+		annette.setSummoning(InputController.getInstance().didSpace());
+		annette.setBird(input.didX());
+		annette.applyForce();
+
+		//Check if distraction was called
+		if (annette.getBird()&&!level.isDistraction() ) {
+			level.createDistraction(levelFormat);
+			sound.stop("distraction");
+			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
+			level.getDistraction().setAlive(true);
+			dAngleCache.set(input.getaHoriz(),input.getaVert());
+
+			if (dAngleCache.len2() > 0.0f) {
+				float angle = aAngleCache.angle();
+				// Convert to radians with up as 0
+				angle = (float)Math.PI*(angle-90.0f)/180.0f;
+
+			}
+			if (distraction != null) {
+
+				dAngleCache.scl(distraction.getForce());
+				distraction.setMovement(dAngleCache.x,dAngleCache.y);
+			}
+		}
+
 
 		JsonValue boxdata = levelFormat.get("box");
 		box.setDrawScale(level.scale);
-//		System.out.println("scale " + level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
 			boolean canBox;
 
@@ -575,8 +509,33 @@ public class GameController implements Screen, ContactListener {
 		else if (box.getDeactivating()) box.setDebugColor(Color.YELLOW);
 		else box.setDebugColor(Color.GREEN);
 
+
+		if(annette.isWalkingInPlace()){
+
+			for(AIController controller: AIcontrollers){
+				System.out.println("we have " + controller.getCreature().getName() + " and it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
+				controller.getCreature().setXInput(controller.getCreature().getXInput() - aAngleCache.x);
+				controller.getCreature().setYInput(controller.getCreature().getYInput() - aAngleCache.y);
+				System.out.println("now it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
+			}
+
+			System.out.println("input: " + input.getaHoriz() + " " + input.getaVert());
+
+			if(box.getDoesExist()){
+				box.setMovement(input.getaHoriz(), input.getaVert());
+				box.applyForce();
+			}
+
+			if(annette.getBird()){
+				//did we decide that we didn't want to be able to summon the bird &
+				//walk in place @ the same time?
+			}
+
+		} else{
+			annette.setMovement(aAngleCache.x,aAngleCache.y);
+		}
+
 		// Turn the physics engine crank.
-//		checkSeen();
 		level.update(dt);
 	}
 
@@ -683,17 +642,6 @@ public class GameController implements Screen, ContactListener {
 		this.listener = listener;
 	}
 
-//	public void checkSeen(){
-//		AnnetteModel annette = level.getAnnette();
-//
-//		// Check condition : Annette gets seen
-//        for (LightSource currentlight : level.getVision()){
-//            if (currentlight.contains(annette.getX(), annette.getY())){
-//                setFailure(true);
-//            }
-//        }
-//
-//	}
 
 	/**
 	 * Callback method for the start of a collision

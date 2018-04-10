@@ -49,6 +49,9 @@ public class AnnetteModel extends BoxObstacle {
     /** Whether we are actively summoning */
     private boolean isSummoning;
 
+    /** Whether we are actively walking in place */
+    private boolean isWalkingInPlace;
+
     /** FilmStrip pointer to the texture region */
     private FilmStrip sidefilmstrip;
     private FilmStrip upfilmstrip;
@@ -555,6 +558,15 @@ public class AnnetteModel extends BoxObstacle {
             canvas.drawPhysics(sensorShapeL,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
             canvas.drawPhysics(annetteShape,Color.ORANGE,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
         }
+    }
+
+
+    public boolean isWalkingInPlace(){
+        return isWalkingInPlace;
+    }
+
+    public void setWalkingInPlace(boolean value){
+        isWalkingInPlace = value;
     }
 
 }
