@@ -20,6 +20,11 @@
 			"file":		"textures/64_building_short_nolight.png",
 			"wrap":		true
 		},
+		"64_building_short_right": {
+			"file":		"textures/64_building_short_right.png",
+			"wrap":		true
+		},
+
 		"64_building_tall": {
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
@@ -34,6 +39,14 @@
 		},
 		"128_cafe_red": {
 			"file": 	"textures/128_cafe_red.png",
+			"wrap": 	true
+		},
+		"128_cafe_purple": {
+			"file": 	"textures/128_cafe_purple.png",
+			"wrap": 	true
+		},
+		"128_cafe_green": {
+			"file": 	"textures/128_cafe_green.png",
 			"wrap": 	true
 		},
 		"128_flowershop": {
@@ -228,5 +241,8 @@
                 "seen_effect": {
                   "file": "sounds/seen_effect.wav"
                 }
+				"ambient_effect": {
+					"file": "sounds/ambient_effect.wav"
+				}
 			}
 		}
