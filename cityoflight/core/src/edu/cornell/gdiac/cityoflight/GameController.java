@@ -355,6 +355,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		else if (input.didPause()) {
 			listener.exitScreen(this, EXIT_PAUSE);
+			return false;
 		}
 		else if (countdown > 0) {
 			countdown--;
@@ -633,8 +634,12 @@ public class GameController implements Screen, ContactListener {
 		if (active) {
 			if (preUpdate(delta)) {
 				update(delta);
+                draw(delta);
 			}
-			draw(delta);
+            else {
+			    listener.exitScreen(this, EXIT_PAUSE);
+            }
+
 		}
 	}
 
