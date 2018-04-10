@@ -87,7 +87,7 @@ public class LevelModel {
 	public static final float TRANSLATION = -50.0f;
 
 	/** All the objects in the world. */
-	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
+	protected ArrayList<Obstacle> objects  = new ArrayList<Obstacle>();
 
 	// LET THE TIGHT COUPLING BEGIN
 	/** The Box2D world */
@@ -768,9 +768,24 @@ public class LevelModel {
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
 
+		int n = objects.size();
+		for (int x=0; x<n; x++) // bubble sort outer loop
+		{
+			for (int i=0; i < n - x - 1; i++) {
+				if (objects.get(i).getLowestY() < (objects.get(i+1).getLowestY()) )
+				{
+					Obstacle temp = objects.get(i);
+					objects.set(i,objects.get(i+1) );
+					objects.set(i+1, temp);
+				}
+			}
+		}
+
+
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
+
 		if (box.getDeactivated()) {
 			color = Color.DARK_GRAY;
 			color.a = 1;

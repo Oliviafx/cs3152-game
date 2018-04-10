@@ -49,6 +49,13 @@ public class BoxObstacle extends SimpleObstacle {
 		return sizeCache.set(dimension);
 	}
 
+	public float getLowestY(){
+
+		return (dimension.y)/2 + body.getPosition().y;
+	}
+
+
+
 	/** 
 	 * Sets the dimensions of this box
 	 *
