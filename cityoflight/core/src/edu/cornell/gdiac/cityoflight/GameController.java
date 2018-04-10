@@ -519,7 +519,7 @@ public class GameController implements Screen, ContactListener {
 		else box.setDebugColor(Color.GREEN);
 
 
-		if(annette.isWalkingInPlace() && !stopWalkInPlace){
+		if(annette.isWalkingInPlace() && !stopWalkInPlace && !annette.getBird()){
 
 			for(AIController controller: AIcontrollers){
 
@@ -527,21 +527,16 @@ public class GameController implements Screen, ContactListener {
 					stopWalkInPlace = true;
 				}
 
-				if(!stopWalkInPlace){
-					controller.getCreature().setXInput(controller.getCreature().getXInput() - aAngleCache.x);
-					controller.getCreature().setYInput(controller.getCreature().getYInput() - aAngleCache.y);
-				}
-				//System.out.println("we have " + controller.getCreature().getName() + " and it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
-
-				//System.out.println("now it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
 			}
 
 			System.out.println("input: " + input.getaHoriz() + " " + input.getaVert());
 
 			if(!stopWalkInPlace){
 				if(box.getDoesExist()){
-					box.setMovement(input.getaHoriz(), input.getaVert());
-					box.applyForce();
+					box.setX(box.getX() + input.getcHoriz());
+					box.setY(box.getY() + input.getcVert());
+					//box.setMovement(input.getaHoriz(), input.getaVert());
+					//box.applyForce();
 				}
 
 				if(annette.getBird()){
@@ -590,12 +585,12 @@ public class GameController implements Screen, ContactListener {
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("complete.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Level Complete!", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
 			canvas.end();
 		} else if (failed) {
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("you lose.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Game Over!", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
 			canvas.end();
 		}
 	}

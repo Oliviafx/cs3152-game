@@ -255,22 +255,22 @@ public class InputController {
 
 			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 				aHoriz += 1.0f;
-				//cHoriz -= 1.0f;
+				cHoriz -= 0.05f;
 				this.direction = AnnetteModel.Direction.RIGHT;
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 				aHoriz -= 1.0f;
-				//cHoriz += 1.0f;
+				cHoriz += 0.05f;
 				this.direction = AnnetteModel.Direction.LEFT;
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				aVert += 1.0f;
-				//cVert -= 1.0f;
+				cVert -= 0.05f;
 				this.direction = AnnetteModel.Direction.UP;
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				aVert -= 1.0f;
-				//cVert += 1.0f;
+				cVert += 0.05f;
 				this.direction = AnnetteModel.Direction.DOWN;
 			}
 
@@ -292,7 +292,7 @@ public class InputController {
 				this.direction = AnnetteModel.Direction.DOWN;
 			}
 
-
+			/*
 			// Creature Directional controls
 			cHoriz = (secondary ? cHoriz : 0.0f);
 			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -309,6 +309,7 @@ public class InputController {
 			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				cVert -= 1.0f;
 			}
+			*/
 
 			shiftPrevious = false;
 
