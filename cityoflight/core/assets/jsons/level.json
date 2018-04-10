@@ -320,7 +320,7 @@
 			"restitution":    0.1,
 			"collideBits":	"1000",
 			"excludeBits":	"0000",
-			"texture":      "64_building_short_left",
+			"texture":      "64_building_short",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		},
@@ -334,24 +334,11 @@
 			"restitution":    0.1,
 			"collideBits":	"1000",
 			"excludeBits":	"0000",
-			"texture":      "64_building_short_left",
-			"debugcolor":   "yellow",
-			"debugopacity":  200
-		},
-		"maze12": {
-			"pos":        	[ 1.45f, 7.25f],
-			"size":       	[ 2.4f, 4.0f],
-			"pad":       	[ 0.1f, 0.1f],
-			"bodytype":     "static",
-			"density":        0.0,
-			"friction":       0.4,
-			"restitution":    0.1,
-			"collideBits":	"1000",
-			"excludeBits":	"0000",
 			"texture":      "64_building_short",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		},
+
 
 	}
  }
