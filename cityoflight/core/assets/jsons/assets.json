@@ -12,9 +12,9 @@
     		"file": 	"textures/sideAnnette.png",
     		"wrap":  	false,
 			"strip":	{
-				"size":		9,
+				"size":		10,
 				"rows":		1,
-				"cols":		9,
+				"cols":		10,
 				"first":	0
 			}
     	},
@@ -49,7 +49,37 @@
 			}
 		},
 		"tarasque": {
-			"file": 	"textures/tarasqueside.png",
+			"file": 	"textures/tarasque_side.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		30,
+				"rows":		1,
+				"cols":		30,
+				"first":	0
+			}
+		},
+		"tarasque_up": {
+			"file": 	"textures/tarasque_up.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"tarasque_down": {
+			"file": 	"textures/tarasque_down.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"blanche": {
+			"file": 	"textures/blanche_side.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		16,
@@ -58,13 +88,23 @@
 				"first":	0
 			}
 		},
-		"blanche": {
-			"file": 	"textures/blancheside.png",
+		"blanche_up": {
+			"file": 	"textures/blanche_up.png",
 			"wrap":  	false,
 			"strip":	{
-				"size":		24,
+				"size":		15,
 				"rows":		1,
-				"cols":		24,
+				"cols":		15,
+				"first":	0
+			}
+		},
+		"blanche_down": {
+			"file": 	"textures/blanche_down.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		15,
+				"rows":		1,
+				"cols":		15,
 				"first":	0
 			}
 		},

@@ -67,6 +67,8 @@ public abstract class Obstacle {
 	/** A cache value for when the user wants to access the drawing scale */
 	protected Vector2 scaleCache = new Vector2();
 
+	protected float lowestY = 0;
+
 
 	/// BodyDef Methods
 	/**
@@ -107,6 +109,15 @@ public abstract class Obstacle {
 	public Vector2 getPosition() {
 		return positionCache.set(bodyinfo.position);
 	}
+
+	/**
+	 * Returns the y value closest to the bottom of the screen within the obstacle's
+	 * hitbox
+	 *
+	 * @return the lowest y value in the obstacle's hitbox
+	 */
+	public float getLowestY() {
+		return lowestY;}
 	
 	/**
 	 * Sets the current position for this physics body
