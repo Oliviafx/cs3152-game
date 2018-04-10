@@ -84,7 +84,7 @@ public class LevelModel {
 
 	private static final int MAX_ALPHA = 255;
 	private static final float BOX_MARGIN = 0.8f;
-	private static final float TRANSLATION = -50.0f;
+	public static final float TRANSLATION = -50.0f;
 
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
@@ -422,13 +422,6 @@ public class LevelModel {
 
         // Create box
         box = new BoxModel(1, 1);
-//        JsonValue boxdata = levelFormat.get("box");
-//        if (annette.isSummoning() && !box.getDoesExist()) {
-//            box.initialize(boxdata, annette.getPosition(), 0, 0);
-//            box.setDrawScale(scale);
-//            activate(box);
-//            box.setActive(true);
-//        }
 
         if (distraction != null) {
             distraction.setAlive(false);
@@ -754,12 +747,12 @@ public class LevelModel {
 		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
-//		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
-		float cameraXStart = 0;
-//		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
-		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
-		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
+		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
+//		float cameraXStart = 0;
+		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
+//		float cameraYStart = 0;
+		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 
@@ -779,7 +772,9 @@ public class LevelModel {
 			obj.draw(canvas);
 		}
 		if (box.getDeactivated()) {
-			box.drawState(canvas, Color.BLACK);
+			color = Color.DARK_GRAY;
+			color.a = 1;
+			box.drawState(canvas, color);
 			alpha = 255;
 		}
 		else if (box.getDeactivating())	{
