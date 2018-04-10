@@ -14,11 +14,11 @@ public class AIController{
 
         /** The creature is patrolling around */
         PATROL,
-        /** The creature senses Annette around without seeing her*/
+        /** The creature senses Annette around (by some means other than sight) */
         SENSE,
-        /** The creature is being distracted */
+        /** The creature is being distracted (by Annette's distraction) */
         DISTRACT,
-        /** The creature actively chases Annette (pathfinding) */
+        /** The creature chases Annette */
         CHASE
     }
 
@@ -45,9 +45,12 @@ public class AIController{
     /** Stores original speed */
     private float speedCache;
 
-    private float LouSenseDistance = 5.0f;
+    /**
+     * Constants for creatures' specific characteristics and/or behavior
+     */
+    private float LouSenseDistance = 6.0f;
     private float TarasqueSpeedGain = 5.0f;
-    private float BlancheMaxSpeedGain = 3.5f;
+    private float BlancheMaxSpeedGain = 4.5f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
     /**
@@ -69,7 +72,9 @@ public class AIController{
 
     private Vector2 cAngleCache = new Vector2();
 
-
+    /**
+     * Use this method for the AIcontroller to decide what to do next.
+     */
     public void chooseAction(){
         // Increment the number of ticks.
         ticks++;
@@ -82,6 +87,9 @@ public class AIController{
         }
     }
 
+    /**
+     * This method defines what the action to do actually is.
+     */
     public void doAction(){
 
         switch(state){
@@ -89,22 +97,27 @@ public class AIController{
 
                 if (creature.getType() == 1) {
 
+                    // reset vision radius to normal.
                     if (creature.getVision().getDistance() > sightDistanceCache) {
                         creature.getVision().setDistance(creature.getVision().getDistance() - 0.1f);
                     }
 
+                    // if snail collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        System.out.println("snail behavior: change direction");
+                        System.out.println("snail behavior: go other way around");
                         creature.setXInput(-creature.getXInput());
                         creature.setYInput(-creature.getYInput());
                         creature.setStuck(false);
                         creature.setTurnCool(creature.getTurnLimit());
                     }
+
                 } else if (creature.getType() == 2){
+
+                    // if dragon collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
 
                         if (turnRight()) {
-                            System.out.println("dragon behavior: turns right");
+                            System.out.println("dragon behavior: go in opposite direction");
                             if (creature.getXInput() > 0) {
                                 creature.setYInput(-creature.getXInput());
                                 creature.setXInput(0);
@@ -138,10 +151,13 @@ public class AIController{
                         creature.setStuck(false);
                         creature.setTurnCool(creature.getTurnLimit());
                     }
+
                 } else if (creature.getType() == 3){
                     BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
+
+                    // if blanche collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        System.out.println("blanche behavior: change direction");
+                        System.out.println("blanche behavior: go in opposite direction");
                         creature.setXInput(-creature.getXInput());
                         creature.setYInput(-creature.getYInput());
                         creature.setStuck(false);
@@ -160,6 +176,7 @@ public class AIController{
                         creature.getVision().setDistance(creature.getVision().getDistance() + 0.1f);
                     }
 
+                    // if snail collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
                         System.out.println("snail behavior: change direction");
                         creature.setXInput(-creature.getXInput());
@@ -170,32 +187,34 @@ public class AIController{
                 }
 
                 cAngleCache.set(creature.getXInput(),creature.getYInput());
-
                 break;
 
             case DISTRACT:
 
                 if (creature.getType() == 1){
-                    cAngleCache.set(0,0);
+                    cAngleCache.set(0,0); // snail does not move when distracted
+
                 }else if (creature.getType() == 3){
 
                     if (creature.getTurnCool() <= 0) {
+
                         cAngleCache.set(getNextDistractMovement().x * BlancheCurrentSpeedGain, getNextDistractMovement().y * BlancheCurrentSpeedGain);
                         creature.setTurnCool(creature.getTurnLimit());
-                        if (BlancheCurrentSpeedGain > 0) {
+
+                        if (BlancheCurrentSpeedGain > 0.5) {
                             BlancheCurrentSpeedGain -= 0.1;
                             System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
                         }
                     }
                 }
-
                 break;
 
             case CHASE:
 
                 if (creature.getType() == 1) {
-                    //System.out.println("snail behavior: go towards Annette's position");
+                    //System.out.println("snail: chasing Annette");
 
+                    // extending snail vision range to max if it wan't already
                     if (creature.getVision().getDistance() < LouSenseDistance) {
                         creature.getVision().setDistance(creature.getVision().getDistance() + 0.1f);
                     }
@@ -215,7 +234,7 @@ public class AIController{
                 } else if (creature.getType() == 3){
 
                     if (creature.getTurnCool() <= 0) {
-                        cAngleCache.set(getNextMovement().x * BlancheCurrentSpeedGain, getNextMovement().y * BlancheCurrentSpeedGain);
+                            cAngleCache.set(getNextMovement().x * BlancheCurrentSpeedGain, getNextMovement().y * BlancheCurrentSpeedGain);
                         creature.setTurnCool(creature.getTurnLimit());
                         if (BlancheCurrentSpeedGain > 0) {
                             BlancheCurrentSpeedGain -= 0.1;
@@ -226,6 +245,7 @@ public class AIController{
                 break;
         }
 
+        // code for actual movement - cAngleCache should be set already
         if (cAngleCache.len2() > 0.0f) {
             float angle = cAngleCache.angle();
             // Convert to radians with up as 0
