@@ -69,6 +69,9 @@ public class AIController{
 
     private Vector2 cAngleCache = new Vector2();
 
+    public CreatureModel getCreature(){
+        return creature;
+    }
 
     public void chooseAction(){
         // Increment the number of ticks.
