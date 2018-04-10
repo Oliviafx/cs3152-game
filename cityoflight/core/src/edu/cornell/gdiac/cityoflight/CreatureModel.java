@@ -53,6 +53,13 @@ public class CreatureModel extends WheelObstacle {
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
+    /**FilmStrip for side animation*/
+    private FilmStrip sideAnim;
+    /**FilmStrip for side animation*/
+    private FilmStrip upAnim;
+    /**FilmStrip for side animation*/
+    private FilmStrip downAnim;
+
     /** The current animation frame of the creature */
     private int startFrame;
 
@@ -82,6 +89,32 @@ public class CreatureModel extends WheelObstacle {
     private int aggroLimit;
     /** refers to the vision of the creature */
     private LightSource vision = null;
+
+
+    /**
+     * constants for creature characteristics
+     */
+
+    private int LOU_TURN_LIMIT = 30; // as a snail, Lou turns pretty slowly.
+    private int DRAGON_TURN_LIMIT = 4; // the dragon should turn quick, otherwise it would seem like it's "bumping" into a wall for too long.
+    private int BLANCHE_TURN_LIMIT = 10;
+
+    private int LOU_AGGRO_COUNTDOWN = 150;
+    private int DRAGON_AGGRO_COUNTDOWN = 20;
+    private int BLANCHE_AGGRO_COUNTDOWN = 150;
+
+    private float LOU_MAX_SPEED = 10.0f;
+    private float DRAGON_MAX_SPEED = 30.0f;
+    private float BLANCHE_MAX_SPEED = 30.0f;
+
+    private int CREATURE_START_FRAME = 0;
+    private int CREATURE_WALK_COOL = 4;
+    private float CREATURE_DENSITY = 1.0f;
+    private float CREATURE_FRICTION = 0.0f;
+    private float CREATURE_RESTITUTION = 0.0f;
+    private float CREATURE_FORCE = 1.0f;
+    private float CREATURE_DAMPING = 1.0f;
+    private String CREATURE_BODY_TYPE = "dynamic";
 
     /**
      * Returns the directional movement of the creature.
@@ -370,19 +403,8 @@ public class CreatureModel extends WheelObstacle {
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
-        setForce(json.get("force").asFloat());
-        setDamping(json.get("damping").asFloat());
-        setMaxSpeed(json.get("maxspeed").asFloat());
-        setStartFrame(json.get("startframe").asInt());
-        setWalkLimit(json.get("walklimit").asInt());
-        setAggroLimit(json.get("aggrolimit").asInt());
-
         setType(json.get("type").asInt());
-        setTurnLimit(json.get("turnlimit").asInt());
+
         setXInput(json.get("xinput").asFloat());
         setYInput(json.get("yinput").asFloat());
 
@@ -412,10 +434,54 @@ public class CreatureModel extends WheelObstacle {
         TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
         try {
             filmstrip = (FilmStrip)texture;
+            sideAnim = (FilmStrip)texture;
         } catch (Exception e) {
             filmstrip = null;
+            sideAnim = null;
         }
+
+        String key2 = json.get("texture2").asString();
+        TextureRegion texture2 = JsonAssetManager.getInstance().getEntry(key2, TextureRegion.class);
+        try {
+            downAnim = (FilmStrip)texture2;
+        } catch (Exception e) {
+            downAnim = null;
+        }
+
+        String key3 = json.get("texture3").asString();
+        TextureRegion texture3 = JsonAssetManager.getInstance().getEntry(key3, TextureRegion.class);
+        try {
+            upAnim = (FilmStrip)texture3;
+        } catch (Exception e) {
+            upAnim = null;
+        }
+
         setTexture(texture);
+
+        setBodyType(CREATURE_BODY_TYPE.equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        setStartFrame(CREATURE_START_FRAME);
+        setWalkLimit(CREATURE_WALK_COOL);
+        setDensity (CREATURE_DENSITY);
+        setFriction(CREATURE_FRICTION);
+        setRestitution(CREATURE_RESTITUTION);
+        setForce(CREATURE_FORCE);
+        setDamping(CREATURE_DAMPING);
+
+        if (type == 1){
+            turnLimit = LOU_TURN_LIMIT;
+            aggroLimit = LOU_AGGRO_COUNTDOWN;
+            setMaxSpeed(LOU_MAX_SPEED);
+        }else if (type == 2){
+            turnLimit = DRAGON_TURN_LIMIT;
+            aggroLimit = DRAGON_AGGRO_COUNTDOWN;
+            setMaxSpeed(DRAGON_MAX_SPEED);
+        }else if (type == 3){
+            turnLimit = BLANCHE_TURN_LIMIT;
+            aggroLimit = BLANCHE_AGGRO_COUNTDOWN;
+            setMaxSpeed(BLANCHE_MAX_SPEED);
+        }else{
+            System.out.println ("wrong type of creature. should never get here");
+        }
     }
 
     /**
@@ -475,8 +541,38 @@ public class CreatureModel extends WheelObstacle {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
-        if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,0,0.75f * GameController.TEMP_SCALE,0.75f * GameController.TEMP_SCALE);
+        int isReflected = movement.x < 0 ? -1 : 1;
+        int xOffset = 0;
+
+
+        FilmStrip dirTexture = null;
+        if(movement.x != 0)
+        {
+            setTexture(sideAnim);
+            dirTexture = sideAnim;
+            filmstrip = sideAnim;
+        }
+        else if(movement.y > 0)
+        {
+            setTexture(sideAnim);
+            dirTexture = upAnim;
+            filmstrip = upAnim;
+            //change so that sprite bounds are not offset for tarasque
+           // if(type == 2) xOffset = 0;
+        }
+        else if(movement.y < 0){
+            setTexture(sideAnim);
+            dirTexture = downAnim;
+            filmstrip = downAnim;
+            //if(type == 2) xOffset = 0;
+        }
+        else{
+            if(texture!= null)
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
+        }
+
+        if (texture != null && dirTexture != null) {
+            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + xOffset,getY()*drawScale.y,0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
         }
     }
 }

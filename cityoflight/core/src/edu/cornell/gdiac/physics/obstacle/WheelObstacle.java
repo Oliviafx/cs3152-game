@@ -47,6 +47,8 @@ public class WheelObstacle extends SimpleObstacle {
 		shape.setRadius(value);
 		markDirty(true);
 	}
+
+	public float getLowestY(){ return getPosition().y; }
 	
 	/**
 	 * Returns the color to display the physics outline

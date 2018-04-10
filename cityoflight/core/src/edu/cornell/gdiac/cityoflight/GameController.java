@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -68,6 +69,8 @@ public class GameController implements Screen, ContactListener {
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
 	public static final float	TEMP_SCALE	= 0.5f;
+
+	private boolean stopWalkInPlace = false;
 
 
 	/**
@@ -164,6 +167,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean upBox = false;
 	private boolean rightBox = false;
 	private boolean leftBox = false;
+
+
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
@@ -313,6 +318,7 @@ public class GameController implements Screen, ContactListener {
 		setComplete(false);
 		setFailure(false);
 		countdown = -1;
+		stopWalkInPlace = false;
 
 		// Reload the json each time
 		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level.json"));
@@ -355,6 +361,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		else if (input.didPause()) {
 			listener.exitScreen(this, EXIT_PAUSE);
+			return false;
 		}
 		else if (countdown > 0) {
 			countdown--;
@@ -394,7 +401,7 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-		sound.play("harp", "sounds/bg_test2.wav", true, 0.75f);
+		sound.play("bg_test2_music", "sounds/bg_test2_music.wav", true, 0.75f);
 
 		// creature AI.
 		createAIControllers();
@@ -421,8 +428,8 @@ public class GameController implements Screen, ContactListener {
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
 			level.createDistraction(levelFormat);
-			sound.stop("distraction");
-			sound.play("distraction", "sounds/distraction.wav", false, 0.25f);
+			sound.stop("distraction_effect");
+			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
 
@@ -477,12 +484,12 @@ public class GameController implements Screen, ContactListener {
 				box.setDoesExist(true);
 				box.setDeactivated(false);
 				box.setDeactivating(false);
-				sound.stop("box");
-				sound.play("box", "sounds/box.wav", false, 0.8f);
+				sound.stop("box_effect");
+				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 			}
 			else {
-				sound.stop("nobox");
-				sound.play("nobox", "sounds/nobox.wav", false, 0.75f);
+				sound.stop("no_box_effect");
+				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
 			}
 		}
 		box.applyForce();
@@ -499,8 +506,8 @@ public class GameController implements Screen, ContactListener {
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
-			sound.stop("slam");
-			sound.play("slam", "sounds/slam.wav", false, 0.5f);
+			sound.stop("box_deactivate_effect");
+			sound.play("box_deactivate_effect", "sounds/box_deactivate_effect.wav", false, 0.5f);
 
 		}
 
@@ -510,26 +517,37 @@ public class GameController implements Screen, ContactListener {
 		else box.setDebugColor(Color.GREEN);
 
 
-		if(annette.isWalkingInPlace()){
+		if(annette.isWalkingInPlace() && !stopWalkInPlace){
 
 			for(AIController controller: AIcontrollers){
-				System.out.println("we have " + controller.getCreature().getName() + " and it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
-				controller.getCreature().setXInput(controller.getCreature().getXInput() - aAngleCache.x);
-				controller.getCreature().setYInput(controller.getCreature().getYInput() - aAngleCache.y);
-				System.out.println("now it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
+
+				if(controller.getCreature().getStuck()){
+					stopWalkInPlace = true;
+				}
+
+				if(!stopWalkInPlace){
+					controller.getCreature().setXInput(controller.getCreature().getXInput() - aAngleCache.x);
+					controller.getCreature().setYInput(controller.getCreature().getYInput() - aAngleCache.y);
+				}
+				//System.out.println("we have " + controller.getCreature().getName() + " and it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
+
+				//System.out.println("now it's position is: " + controller.getCreature().getX() + ", " + controller.getCreature().getY());
 			}
 
 			System.out.println("input: " + input.getaHoriz() + " " + input.getaVert());
 
-			if(box.getDoesExist()){
-				box.setMovement(input.getaHoriz(), input.getaVert());
-				box.applyForce();
+			if(!stopWalkInPlace){
+				if(box.getDoesExist()){
+					box.setMovement(input.getaHoriz(), input.getaVert());
+					box.applyForce();
+				}
+
+				if(annette.getBird()){
+					//did we decide that we didn't want to be able to summon the bird &
+					//walk in place @ the same time?
+				}
 			}
 
-			if(annette.getBird()){
-				//did we decide that we didn't want to be able to summon the bird &
-				//walk in place @ the same time?
-			}
 
 		} else{
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
@@ -553,17 +571,28 @@ public class GameController implements Screen, ContactListener {
 
 		canvas.clear();
 
+		AnnetteModel annette = level.getAnnette();
+		Vector2 pos = annette.getPosition();
+		Vector2 scale = annette.getDrawScale();
+
+		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
+		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
+		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
+		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
+
 		level.draw(canvas);
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("well of power", displayFont, 0.0f);
+			canvas.drawTextCentered("complete.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
 			canvas.end();
 		} else if (failed) {
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("you lose. don't mime.", displayFont, 0.0f);
+			canvas.drawTextCentered("you lose.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
 			canvas.end();
 		}
 	}
@@ -593,8 +622,12 @@ public class GameController implements Screen, ContactListener {
 		if (active) {
 			if (preUpdate(delta)) {
 				update(delta);
+                draw(delta);
 			}
-			draw(delta);
+            else {
+			    listener.exitScreen(this, EXIT_PAUSE);
+            }
+
 		}
 	}
 
@@ -686,12 +719,16 @@ public class GameController implements Screen, ContactListener {
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
+				sound.stop("win_effect");
+				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
 			}
 
 			//collision with creature lose state
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					setFailure(true);
+					sound.stop("lose_effect");
+					sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f);
 				}
 			}
 
@@ -712,6 +749,8 @@ public class GameController implements Screen, ContactListener {
 //				distraction.deactivatePhysics(level.getWorld());
 //				distraction.setActive(false);
 				level.objects.remove(distraction);
+				sound.stop("distraction_gone_effect");
+				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 			}
 
 			// check for distraction collisions with mazes
@@ -720,6 +759,8 @@ public class GameController implements Screen, ContactListener {
 					annette.setBird(false);
 					distraction.setAlive(false);
 					level.objects.remove(distraction);
+					sound.stop("distraction_gone_effect");
+					sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 				}
 			}
 
@@ -728,6 +769,8 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
+					sound.stop("distraction_gone_effect");
+					sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 				}
 			}
 
@@ -778,8 +821,8 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
-				sound.stop("box");
-				sound.play("box", "sounds/box.wav", false, 0.8f);
+				sound.stop("box_effect");
+				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 			}
 
 

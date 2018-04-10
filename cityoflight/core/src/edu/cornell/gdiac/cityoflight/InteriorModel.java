@@ -281,5 +281,5 @@ public class InteriorModel extends BoxObstacle {
 		if (region != null) {
 			canvas.draw(region,Color.WHITE,0,0,(getX()-anchor.x)*drawScale.x,(getY()-anchor.y)*drawScale.y,getAngle(),1,1);
 		}
-	}	
+	}
 }

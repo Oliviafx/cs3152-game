@@ -84,10 +84,10 @@ public class LevelModel {
 
 	private static final int MAX_ALPHA = 255;
 	private static final float BOX_MARGIN = 0.8f;
-	private static final float TRANSLATION = -50.0f;
+	public static final float TRANSLATION = -50.0f;
 
 	/** All the objects in the world. */
-	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
+	protected ArrayList<Obstacle> objects  = new ArrayList<Obstacle>();
 
 	// LET THE TIGHT COUPLING BEGIN
 	/** The Box2D world */
@@ -96,8 +96,6 @@ public class LevelModel {
 	protected Rectangle bounds;
 	/** The world scale */
 	protected Vector2 scale;
-
-	protected Affine2 otran;
 
 	/** The camera defining the RayHandler view; scale is in physics coordinates */
 	protected OrthographicCamera raycamera;
@@ -119,6 +117,9 @@ public class LevelModel {
 	protected float maxTimePerFrame;
 	/** The amount of time that has passed without updating the frame */
 	protected float physicsTimeLeft;
+
+	private static final String BACKGROUND_FILE = "textures/bg.png";
+	private Texture background;
 
 	/**
 	 * Returns the bounding rectangle for the physics world
@@ -147,11 +148,6 @@ public class LevelModel {
 	 */
 	public World getWorld() {
 		return world;
-	}
-
-
-	public Affine2 getOtran() {
-		return otran;
 	}
 
 	/**
@@ -343,6 +339,7 @@ public class LevelModel {
 		bounds = new Rectangle(0,0,1,1);
 		scale = new Vector2(1,1);
 		debug  = false;
+		background = null;
 	}
 
 	/**
@@ -351,6 +348,7 @@ public class LevelModel {
 	 * @param levelFormat	the JSON tree defining the level
 	 */
 	public void populate(JsonValue levelFormat) {
+		background = new Texture(BACKGROUND_FILE);
         float[] pSize = levelFormat.get("physicsSize").asFloatArray();
         int[] gSize = levelFormat.get("graphicSize").asIntArray();
 
@@ -422,13 +420,6 @@ public class LevelModel {
 
         // Create box
         box = new BoxModel(1, 1);
-//        JsonValue boxdata = levelFormat.get("box");
-//        if (annette.isSummoning() && !box.getDoesExist()) {
-//            box.initialize(boxdata, annette.getPosition(), 0, 0);
-//            box.setDrawScale(scale);
-//            activate(box);
-//            box.setActive(true);
-//        }
 
         if (distraction != null) {
             distraction.setAlive(false);
@@ -638,6 +629,8 @@ public class LevelModel {
 			world = null;
 		}
 
+		background = null;
+
 //		if (distraction != null) {
 //			distraction.setAlive(false);
 //			objects.remove(distraction);
@@ -751,12 +744,12 @@ public class LevelModel {
 		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
-//		float cameraXStart = canvas.getWidth()/(2.5f * scale.x);
-		float cameraXStart = 0;
-//		float cameraYStart = canvas.getHeight()/(2.5f * scale.y);
-		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth()*5.0f/(scale.x);
-		float cameraYEnd = canvas.getHeight()*5.0f/(scale.y);
+		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
+//		float cameraXStart = 0;
+		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
+//		float cameraYStart = 0;
+		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 
@@ -764,19 +757,46 @@ public class LevelModel {
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
 		oTran.mul(wTran);
 
+		// Draw the sprites first (will be hidden by shadows)
+		canvas.begin();
+//		canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas. getHeight());
+		canvas.draw(background, 0, 0);
+		canvas.end();
+
 		if (rayhandler != null) {
 			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth() * 2, canvas.getHeight() * 2);
 			rayhandler.render();
 		}
 
-		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
+
+		int n = objects.size();
+		for (int x=0; x<n; x++) // bubble sort outer loop
+		{
+			for (int i=0; i < n - x - 1; i++) {
+				if (objects.get(i).getLowestY() < (objects.get(i+1).getLowestY()) )
+				{
+					Obstacle temp = objects.get(i);
+					objects.set(i,objects.get(i+1) );
+					objects.set(i+1, temp);
+				}
+			}
+		}
+
+//		canvas.begin();
+
+//		System.out.println("BACKGROUND!!!");
+//		canvas.end();
+
 
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
+
 		if (box.getDeactivated()) {
-			box.drawState(canvas, Color.BLACK);
+			color = Color.DARK_GRAY;
+			color.a = 1;
+			box.drawState(canvas, color);
 			alpha = 255;
 		}
 		else if (box.getDeactivating())	{
@@ -799,6 +819,7 @@ public class LevelModel {
 			}
 			canvas.endDebug();
 		}
+
 	}
 
 
