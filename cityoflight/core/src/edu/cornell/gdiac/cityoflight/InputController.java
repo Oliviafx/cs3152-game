@@ -64,6 +64,9 @@ public class InputController {
 	private boolean shiftPressed;
 	private boolean shiftPrevious;
 
+	/** the arrow key (for movement) that was last pressed */
+	int lastPressedKey;
+
 	/** How much did Annette move horizontally? */
 	private float aHoriz;
 	/** How much did Annette move vertically? */
@@ -275,19 +278,22 @@ public class InputController {
 			}
 
 		} else {
-			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+
+			findLastKey();
+
+			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && lastPressedKey == Input.Keys.RIGHT) {
 				aHoriz += 1.0f;
 				this.direction = AnnetteModel.Direction.RIGHT;
 			}
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && lastPressedKey == Input.Keys.LEFT) {
 				aHoriz -= 1.0f;
 				this.direction = AnnetteModel.Direction.LEFT;
 			}
-			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			if (Gdx.input.isKeyPressed(Input.Keys.UP) && lastPressedKey == Input.Keys.UP) {
 				aVert += 1.0f;
 				this.direction = AnnetteModel.Direction.UP;
 			}
-			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastPressedKey == Input.Keys.DOWN) {
 				aVert -= 1.0f;
 				this.direction = AnnetteModel.Direction.DOWN;
 			}
@@ -313,10 +319,22 @@ public class InputController {
 
 			shiftPrevious = false;
 
-
 		}
+	}
 
-
-
+	/**
+	 * Find the last arrow key that was pressed.
+	 * @return
+	 */
+	private void findLastKey() {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
+			lastPressedKey = Input.Keys.RIGHT;
+		} else if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
+			lastPressedKey = Input.Keys.LEFT;
+		} else if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+			lastPressedKey = Input.Keys.UP;
+		} else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+			lastPressedKey = Input.Keys.DOWN;
+		}
 	}
 }

@@ -87,6 +87,7 @@ public class AIController{
 
         creature.setTurnCool(creature.getTurnCool() - 1);
         creature.setAggroCool(creature.getAggroCool() - 1);
+        //System.out.println("aggro left: " + creature.getAggroCool());
 
         if (ticks % 10 == 0) {
             changeStateIfApplicable();
@@ -216,8 +217,6 @@ public class AIController{
                 break;
 
             case CHASE:
-                recordLastSeen();
-                creature.setAggroCool(creature.getAggroLimit());
 
                 if (creature.getType() == 1) {
                     //System.out.println("snail: chasing Annette");
@@ -254,12 +253,12 @@ public class AIController{
         }
 
         // code for actual movement - cAngleCache should be set already
-        if (cAngleCache.len2() > 0.0f) {
-            float angle = cAngleCache.angle();
-            // Convert to radians with up as 0
-            angle = (float)Math.PI*(angle-90.0f)/180.0f;
-            creature.setAngle(angle);
-        }
+//        if (cAngleCache.len2() > 0.0f) {
+//            float angle = cAngleCache.angle();
+//            // Convert to radians with up as 0
+//            angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//            creature.setAngle(angle);
+//        }
         cAngleCache.scl(creature.getForce());
 
 
@@ -293,6 +292,8 @@ public class AIController{
                 //#region PUT YOUR CODE HERE
 
                 if (canSeeAnnette()) {
+                    recordLastSeen();
+                    creature.setAggroCool(creature.getAggroLimit());
                     System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> chase");
                     state = FSMState.CHASE;
@@ -312,6 +313,8 @@ public class AIController{
                 //#region PUT YOUR CODE HERE
 
                 if (canSeeAnnette()) {
+                    recordLastSeen();
+                    creature.setAggroCool(creature.getAggroLimit());
                     System.out.print(creature.getName() + ": ");
                     System.out.println("sense -> chase");
                     state = FSMState.CHASE;
@@ -332,6 +335,8 @@ public class AIController{
                 //#region PUT YOUR CODE HERE
 
                 if (canSeeAnnette()) {
+                    recordLastSeen();
+                    creature.setAggroCool(creature.getAggroLimit());
                     System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> chase");
                     state = FSMState.CHASE;
@@ -349,6 +354,11 @@ public class AIController{
 
             case CHASE: // Do not pre-empt with FSMState in a case
                 //#region PUT YOUR CODE HERE
+
+                if (canSeeAnnette()){
+                    recordLastSeen();
+                    creature.setAggroCool(creature.getAggroLimit());
+                }
 
                 if (!canSeeAnnette() && canSenseAnnette() && creature.getAggroCool() <= 0 ){
                     System.out.print(creature.getName() + ": ");
