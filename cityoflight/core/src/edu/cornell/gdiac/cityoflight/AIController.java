@@ -48,9 +48,9 @@ public class AIController{
     /**
      * Constants for creatures' specific characteristics and/or behavior
      */
-    private float LouSenseDistance = 6.0f;
-    private float TarasqueSpeedGain = 5.0f;
-    private float BlancheMaxSpeedGain = 4.5f;
+    private float LouSenseDistance = 5.0f;
+    private float TarasqueSpeedGain = 4.0f;
+    private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
     /**
@@ -87,6 +87,7 @@ public class AIController{
 
         creature.setTurnCool(creature.getTurnCool() - 1);
         creature.setAggroCool(creature.getAggroCool() - 1);
+        //System.out.println("aggro left: " + creature.getAggroCool());
 
         if (ticks % 10 == 0) {
             changeStateIfApplicable();
@@ -108,9 +109,9 @@ public class AIController{
                         creature.getVision().setDistance(creature.getVision().getDistance() - 0.1f);
                     }
 
-                    // if snail collides with wall
+                    // if snail collides with anything
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        System.out.println("snail behavior: go other way around");
+                        //System.out.println("snail behavior: go other way around");
                         creature.setXInput(-creature.getXInput());
                         creature.setYInput(-creature.getYInput());
                         creature.setStuck(false);
@@ -123,7 +124,7 @@ public class AIController{
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
 
                         if (turnRight()) {
-                            System.out.println("dragon behavior: go in opposite direction");
+                            //System.out.println("dragon behavior: go in opposite direction");
                             if (creature.getXInput() > 0) {
                                 creature.setYInput(-creature.getXInput());
                                 creature.setXInput(0);
@@ -138,7 +139,7 @@ public class AIController{
                                 creature.setYInput(0);
                             }
                         } else /* turn left */ {
-                            System.out.println("dragon behavior: turns left");
+                            //System.out.println("dragon behavior: turns left");
                             if (creature.getXInput() > 0) {
                                 creature.setYInput(creature.getXInput());
                                 creature.setXInput(0);
@@ -163,7 +164,7 @@ public class AIController{
 
                     // if blanche collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        System.out.println("blanche behavior: go in opposite direction");
+                        //System.out.println("blanche behavior: go in opposite direction");
                         creature.setXInput(-creature.getXInput());
                         creature.setYInput(-creature.getYInput());
                         creature.setStuck(false);
@@ -184,7 +185,7 @@ public class AIController{
 
                     // if snail collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        System.out.println("snail behavior: change direction");
+                        //System.out.println("snail behavior: change direction");
                         creature.setXInput(-creature.getXInput());
                         creature.setYInput(-creature.getYInput());
                         creature.setStuck(false);
@@ -207,9 +208,9 @@ public class AIController{
                         cAngleCache.set(getNextDistractMovement().x * BlancheCurrentSpeedGain, getNextDistractMovement().y * BlancheCurrentSpeedGain);
                         creature.setTurnCool(creature.getTurnLimit());
 
-                        if (BlancheCurrentSpeedGain > 0.5) {
+                        if (BlancheCurrentSpeedGain > 1.0) {
                             BlancheCurrentSpeedGain -= 0.1;
-                            System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
+                            //System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
                         }
                     }
                 }
@@ -244,7 +245,7 @@ public class AIController{
                         creature.setTurnCool(creature.getTurnLimit());
                         if (BlancheCurrentSpeedGain > 0) {
                             BlancheCurrentSpeedGain -= 0.1;
-                            System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
+                            //System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
                         }
                     }
                 }
@@ -252,12 +253,12 @@ public class AIController{
         }
 
         // code for actual movement - cAngleCache should be set already
-        if (cAngleCache.len2() > 0.0f) {
-            float angle = cAngleCache.angle();
-            // Convert to radians with up as 0
-            angle = (float)Math.PI*(angle-90.0f)/180.0f;
-            creature.setAngle(angle);
-        }
+//        if (cAngleCache.len2() > 0.0f) {
+//            float angle = cAngleCache.angle();
+//            // Convert to radians with up as 0
+//            angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//            creature.setAngle(angle);
+//        }
         cAngleCache.scl(creature.getForce());
 
 
@@ -284,9 +285,6 @@ public class AIController{
      * Annette comes into the line of sight.
      */
     private void changeStateIfApplicable() {
-        // Add initialization code as necessary
-        //#region PUT YOUR CODE HERE
-        //#endregion
 
         // Next state depends on current state.
         switch (state) {
@@ -294,16 +292,18 @@ public class AIController{
                 //#region PUT YOUR CODE HERE
 
                 if (canSeeAnnette()) {
-                    System.out.println("patrol -> chase");
                     recordLastSeen();
                     creature.setAggroCool(creature.getAggroLimit());
+                    System.out.print(creature.getName() + ": ");
+                    System.out.println("patrol -> chase");
                     state = FSMState.CHASE;
                 } else if (isDistracted()) {
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> distract");
                     state = FSMState.DISTRACT;
                 } else if (canSenseAnnette()){
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> sense");
-                    creature.setAggroCool(creature.getAggroLimit());
                     state = FSMState.SENSE;
                 }
                 //#endregion
@@ -313,14 +313,17 @@ public class AIController{
                 //#region PUT YOUR CODE HERE
 
                 if (canSeeAnnette()) {
-                    System.out.println("sense -> chase");
                     recordLastSeen();
                     creature.setAggroCool(creature.getAggroLimit());
+                    System.out.print(creature.getName() + ": ");
+                    System.out.println("sense -> chase");
                     state = FSMState.CHASE;
                 } else if (isDistracted()){
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("sense -> distract");
                     state = FSMState.DISTRACT;
-                } else if (!canSenseAnnette() && creature.getAggroCool() <= 0){
+                } else if (!canSenseAnnette()){
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("sense -> patrol");
                     state = FSMState.PATROL;
                 }
@@ -332,15 +335,17 @@ public class AIController{
                 //#region PUT YOUR CODE HERE
 
                 if (canSeeAnnette()) {
-                    System.out.println("distract -> chase");
                     recordLastSeen();
                     creature.setAggroCool(creature.getAggroLimit());
+                    System.out.print(creature.getName() + ": ");
+                    System.out.println("distract -> chase");
                     state = FSMState.CHASE;
                 } else if (!isDistracted() && canSenseAnnette()){
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> sense");
-                    creature.setAggroCool(creature.getAggroLimit());
                     state = FSMState.SENSE;
                 } else if (!isDistracted()) {
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> patrol");
                     state = FSMState.PATROL;
                 }
@@ -351,15 +356,16 @@ public class AIController{
                 //#region PUT YOUR CODE HERE
 
                 if (canSeeAnnette()){
-                    creature.setAggroCool(creature.getAggroLimit());
                     recordLastSeen();
+                    creature.setAggroCool(creature.getAggroLimit());
                 }
 
                 if (!canSeeAnnette() && canSenseAnnette() && creature.getAggroCool() <= 0 ){
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("chase -> sense");
-                    creature.setAggroCool(creature.getAggroLimit());
                     state = FSMState.SENSE;
                 }else if (!canSeeAnnette() && !canSenseAnnette() && creature.getAggroCool() <= 0 ) {
+                    System.out.print(creature.getName() + ": ");
                     System.out.println("chase -> patrol");
                     state = FSMState.PATROL;
                 }
