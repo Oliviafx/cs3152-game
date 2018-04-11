@@ -451,7 +451,8 @@ public class AnnetteModel extends BoxObstacle {
             body.applyForce(forceCache,getPosition(),true);
             animate = true;
         } else {
-            animate = false;
+            if (isWalkingInPlace){ animate = true; }
+            else{ animate = false; }
         }
     }
 
