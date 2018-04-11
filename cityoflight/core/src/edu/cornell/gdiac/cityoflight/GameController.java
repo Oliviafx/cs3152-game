@@ -367,7 +367,6 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	private Vector2 aAngleCache = new Vector2();
-	//private Vector2 cAngleCache = new Vector2();
 	private Vector2 dAngleCache = new Vector2();
 
 
@@ -445,8 +444,6 @@ public class GameController implements Screen, ContactListener {
 
 		for (AIController controller : AIcontrollers){
 			controller.chooseAction();
-			if (controller.canSeeAnnette()) {
-			}
 			controller.doAction();
 		}
 
@@ -522,10 +519,11 @@ public class GameController implements Screen, ContactListener {
 
 
 		if(annette.isWalkingInPlace() && !annette.getBird()){
-				if(box.getDoesExist()){
-					box.setX(box.getX() + input.getcHoriz());
-					box.setY(box.getY() + input.getcVert());
-				}
+		    if(box.getDoesExist()){
+		        box.setX(box.getX() + input.getcHoriz());
+		        box.setY(box.getY() + input.getcVert());
+		    }
+		    annette.setMovement(0,0);
 
 		} else{
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
