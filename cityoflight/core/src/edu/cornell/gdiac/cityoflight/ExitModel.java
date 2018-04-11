@@ -36,6 +36,8 @@ public class ExitModel extends WheelObstacle {
 		super(0,0,1);
 		setSensor(true);
 	}
+
+
 	
 	/**
 	 * Initializes the exit door via the given JSON value
