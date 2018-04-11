@@ -78,7 +78,7 @@ public class DistractionModel extends WheelObstacle {
 
     /** Returns if the bird is currently on the screen */
     public boolean getAlive() {
-        return alive;
+        return life != 0;
     }
 
     public void setAlive(boolean value) {
