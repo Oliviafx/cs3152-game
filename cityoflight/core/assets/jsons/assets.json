@@ -8,6 +8,10 @@
 			"file":		"textures/64_street.png",
 			"wrap":		true
 		},
+		"64_sidewalk": {
+			"file":		"textures/64_sidewalk.png",
+			"wrap":		true
+		},
 		"64_building_short": {
 			"file":		"textures/64_building_short.png",
 			"wrap":		true
