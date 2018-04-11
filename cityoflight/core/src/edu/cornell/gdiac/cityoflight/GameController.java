@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -68,6 +69,8 @@ public class GameController implements Screen, ContactListener {
 	private static final float  BOX_HOFFSET = 1.0f;
 	private static final float  BOX_VOFFSET = 1.0f;
 	public static final float	TEMP_SCALE	= 0.5f;
+
+
 
 
 	/**
@@ -149,6 +152,8 @@ public class GameController implements Screen, ContactListener {
 	/** Reference to the AIControllers */
 	private Array<AIController> AIcontrollers = new Array<AIController>();
 
+	private SoundController sound;
+
 	/** Whether or not this is an active controller */
 	private boolean active;
 	/** Whether we have completed this level */
@@ -164,6 +169,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean upBox = false;
 	private boolean rightBox = false;
 	private boolean leftBox = false;
+
+
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
@@ -257,14 +264,6 @@ public class GameController implements Screen, ContactListener {
 	 *
 	 * @return canvas associated with this controller
 	 */
-	public float getDist() {
-		return dist;
-	}
-
-	public boolean getDownBox() { return downBox; }
-	public boolean getUpBox() { return upBox; }
-	public boolean getRightBox() { return rightBox; }
-	public boolean getLeftBox() { return leftBox; }
 
 
 	/**
@@ -280,6 +279,7 @@ public class GameController implements Screen, ContactListener {
 		failed = false;
 		active = false;
 		countdown = -1;
+		sound = SoundController.getInstance();
 
 		setComplete(false);
 		setFailure(false);
@@ -301,7 +301,6 @@ public class GameController implements Screen, ContactListener {
 	 * reread from the JSON file, allowing us to make changes on the fly.
 	 */
 	public void reset() {
-		SoundController sound = SoundController.getInstance();
 
 		for (String key : sound.getCollection()) {
 			sound.stop(key);
@@ -392,8 +391,6 @@ public class GameController implements Screen, ContactListener {
 //		}
 		InputController input = InputController.getInstance();
 
-		SoundController sound = SoundController.getInstance();
-
 		float xoff = 0;
 		float yoff = 0;
 
@@ -442,6 +439,10 @@ public class GameController implements Screen, ContactListener {
 
 		for (AIController controller : AIcontrollers){
 			controller.chooseAction();
+			if (controller.canSeeAnnette()) {
+//				sound.stop("seen_effect");
+//				System.out.println(sound.play("seen_effect", "sounds/seen_effect,wav", false, 0.5f));
+			}
 			controller.doAction();
 		}
 
@@ -543,11 +544,11 @@ public class GameController implements Screen, ContactListener {
 				box.setDoesExist(true);
 				box.setDeactivated(false);
 				box.setDeactivating(false);
-				sound.stop("box_effect");
+//				sound.stop("box_effect");
 				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 			}
 			else {
-				sound.stop("no_box_effect");
+//				sound.stop("no_box_effect");
 				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
 			}
 		}
@@ -565,7 +566,7 @@ public class GameController implements Screen, ContactListener {
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
-			sound.stop("box_deactivate_effect");
+//			sound.stop("box_deactivate_effect");
 			sound.play("box_deactivate_effect", "sounds/box_deactivate_effect.wav", false, 0.5f);
 
 		}
@@ -578,6 +579,7 @@ public class GameController implements Screen, ContactListener {
 		// Turn the physics engine crank.
 //		checkSeen();
 		level.update(dt);
+		sound.update();
 	}
 
 	/**
@@ -747,8 +749,6 @@ public class GameController implements Screen, ContactListener {
 			BoxModel box = level.getBox();
 			ExitModel door   = level.getExit();
 			DistractionModel distraction = level.getDistraction();
-
-			SoundController sound = SoundController.getInstance();
 
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {

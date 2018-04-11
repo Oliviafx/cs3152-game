@@ -425,9 +425,9 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             listener.exitScreen(this, 3);
         }
 
-//        if (toSettings() && listener != null) {
-//
-//        }
+        if (toSettings() && listener != null) {
+            settingsState = 0;
+        }
 
         if (didQuit()) {
             listener.exitScreen(this, 0);
@@ -576,23 +576,25 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         // TODO: Fix scaling
         // Play button is a circle.
-        float radius = BUTTON_SCALE*scale*playButton.getWidth()/2.0f;
+//        float radius = BUTTON_SCALE*scale*playButton.getWidth()/2.0f;
         float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
-        if (dist < radius*2) {
+        if (dist < playButton.getWidth()*playButton.getHeight()*.75f && screenY > levelY +levelButton.getHeight()) {
             pressState = 1;
         }
 
         float dist2 = (screenX-levelX)*(screenX-levelX)+(screenY-levelY)*(screenY-levelY);
-        if (dist2 < radius*2) {
+        if (dist2 < levelButton.getWidth()*levelButton.getHeight()*.75f && screenY < playY - playButton.getHeight() &&
+                screenY >= levelY) {
             levelState = 1;
         }
 
         float dist3 = (screenX-settingsX)*(screenX-settingsX)+(screenY-settingsY)*(screenY-settingsY);
-        if (dist3 < radius*2) {
+        if (dist3 < settingsButton.getWidth()*settingsButton.getHeight() && screenY < levelY - levelButton.getHeight()
+                && screenY >= settingsY) {
             settingsState = 1;
         }
         float dist4 = (screenX-quitX)*(screenX-quitX)+(screenY-quitY)*(screenY-quitY);
-        if (dist4 < radius*2) {
+        if (dist4 < quitButton.getHeight()*quitButton.getWidth() && screenY < settingsY - settingsButton.getHeight()) {
             quitState = 1;
         }
         return false;
