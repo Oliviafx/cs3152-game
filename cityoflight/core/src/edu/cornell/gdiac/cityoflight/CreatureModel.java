@@ -139,7 +139,7 @@ public class CreatureModel extends WheelObstacle {
     /**
      * Sets the directional movement of this creature.
      *
-     * This is the result of input times dude creature.
+     * This is the result of input times creature force.
      *
      * @param dx the horizontal movement of this creature.
      * @param dy the vertical movement of this creature.
