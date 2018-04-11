@@ -74,10 +74,14 @@ public class InputController {
 	/** How much did Annette move vertically? */
 	private float aVert;
 
-	/** How much did creature move horizontally? */
+	/** How much to move creature horizontally? */
 	private float cHoriz;
-	/** How much did creature move vertically? */
+	/** How much to move creature vertically? */
 	private float cVert;
+	/** How much to move box horizontally? */
+	private float bHoriz;
+	/** How much to move box vertically? */
+	private float bVert;
 	
 	/** An X-Box controller (if it is connected) */
 	XBox360Controller xbox;
@@ -126,6 +130,9 @@ public class InputController {
 	public float getcVert() {
 		return cVert;
 	}
+
+	public float getbHoriz() { return bHoriz; }
+	public float getbVert() { return bVert; }
 
 	/**
 	 * Returns true if the reset button was pressed.
@@ -258,37 +265,48 @@ public class InputController {
 
 
 		if(shiftPressed && shiftPrevious) {
+
+			bHoriz = (secondary ? cHoriz : 0.0f);
+			bVert = (secondary ? cVert : 0.0f);
 			cHoriz = (secondary ? cHoriz : 0.0f);
 			cVert = (secondary ? cVert : 0.0f);
 
 			if (rightPressed && !leftPressed && !upPressed && !downPressed){
-				cHoriz -= 0.05f;
+				bHoriz -= 0.05f;
+				cHoriz -= 0.02f;
 				this.direction = AnnetteModel.Direction.RIGHT;
 			} else if (!rightPressed && leftPressed && !upPressed && !downPressed){
-				cHoriz += 0.05f;
+				bHoriz += 0.05f;
+				cHoriz += 0.02f;
 				this.direction = AnnetteModel.Direction.LEFT;
 			} else if (!rightPressed && !leftPressed && upPressed && !downPressed){
-				cVert -= 0.05f;
+				bVert -= 0.05f;
+				cVert -= 0.02f;
 				this.direction = AnnetteModel.Direction.UP;
 			} else if (!rightPressed && !leftPressed && !upPressed && downPressed){
-				cVert += 0.05f;
+				bVert += 0.05f;
+				cVert += 0.02f;
 				this.direction = AnnetteModel.Direction.DOWN;
 			} else {
 
 				if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && lastPressedKey == Input.Keys.RIGHT) {
-					cHoriz -= 0.05f;
+					bHoriz -= 0.05f;
+					cHoriz -= 0.02f;
 					this.direction = AnnetteModel.Direction.RIGHT;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && lastPressedKey == Input.Keys.LEFT) {
-					cHoriz += 0.05f;
+					bHoriz += 0.05f;
+					cHoriz += 0.02f;
 					this.direction = AnnetteModel.Direction.LEFT;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.UP) && lastPressedKey == Input.Keys.UP) {
-					cVert -= 0.05f;
+					bVert -= 0.05f;
+					cVert -= 0.02f;
 					this.direction = AnnetteModel.Direction.UP;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastPressedKey == Input.Keys.DOWN) {
-					cVert += 0.05f;
+					bVert += 0.05f;
+					cVert += 0.02f;
 					this.direction = AnnetteModel.Direction.DOWN;
 				}
 			}

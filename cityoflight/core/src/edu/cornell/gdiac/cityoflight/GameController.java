@@ -523,8 +523,8 @@ public class GameController implements Screen, ContactListener {
 		    level.getRadiusOfPower().setActive(true);
 		    level.darkenLights(level.getRayHandler());
 		    if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
-		        box.setX(box.getX() + input.getcHoriz());
-		        box.setY(box.getY() + input.getcVert());
+		        box.setX(box.getX() + input.getbHoriz());
+		        box.setY(box.getY() + input.getbVert());
 		    }
 		    annette.setMovement(0,0);
 
