@@ -103,6 +103,10 @@ public class LevelModel {
 	protected RayHandler rayhandler;
 	/** All of the active lights that we loaded from the JSON file */
 	private Array<LightSource> lights = new Array<LightSource>();
+	/** The indicator for the radius of the "move in place" power */
+	private LightSource radiusOfPower;
+
+	private float normal_r, normal_g, normal_b, normal_alp;
 
 	// TO FIX THE TIMESTEP
 	/** The maximum frames per second setting for this level */
@@ -209,6 +213,10 @@ public class LevelModel {
 			System.out.println(" visioncone of index " + index + " does not exist.");
 			return null;
 		}
+	}
+
+	public LightSource getRadiusOfPower(){
+		return radiusOfPower;
 	}
 
 	/**
@@ -373,8 +381,6 @@ public class LevelModel {
         if (levelFormat.has("lighting")) {
             initLighting(levelFormat.get("lighting"));
         }
-//		createPointLights(levelFormat.get("pointlights"));
-//		createConeLights(levelFormat.get("conelights"));
 
         // Add level goal
         goalDoor = new ExitModel();
@@ -408,11 +414,14 @@ public class LevelModel {
 		JsonValue downdata = levelFormat.get("annetteDown");
 		JsonValue updata = levelFormat.get("annetteUp");
 
-
         annette.initialize(annettedata);
         annette.setDrawScale(scale);
         activate(annette);
-        //attachLights(creature);
+
+		// Create the light indicating the move in place range.
+		createRadiusofPower(levelFormat.get("powerradius"));
+		attachPowerRadius(getAnnette(),radiusOfPower);
+
 
         // Create cone lights to be line of sights of creatures.
         createLineofSight(levelFormat.get("vision"));
@@ -480,7 +489,6 @@ public class LevelModel {
 	 * Creates the ambient lighting for the level
 	 *
 	 * This is the amount of lighting that the level has without any light sources.
-	 * However, if activeLight is -1, this will be ignored and the level will be
 	 * completely visible.
 	 *
 	 * @param  light	the JSON tree defining the light
@@ -496,10 +504,22 @@ public class LevelModel {
 		rayhandler.setCombinedMatrix(raycamera);
 
 		float[] color = light.get("color").asFloatArray();
-		rayhandler.setAmbientLight(color[0], color[0], color[0], color[0]);
+		rayhandler.setAmbientLight(color[0], color[1], color[2], color[3]);
+		normal_r = color[0];
+		normal_g = color[1];
+		normal_b = color[2];
+		normal_alp = color[3];
 		int blur = light.getInt("blur");
 		rayhandler.setBlur(blur > 0);
 		rayhandler.setBlurNum(blur);
+	}
+
+	public void darkenLights(RayHandler r){
+		r.setAmbientLight(normal_r * 0.3f,normal_g * 0.3f,normal_b * 0.3f,normal_alp * 0.2f);
+	}
+
+	public void brightenLights(RayHandler r){
+		r.setAmbientLight(normal_r,normal_g,normal_b,normal_alp);
 	}
 
 	/**
@@ -514,26 +534,24 @@ public class LevelModel {
 	 *
 	 * @param  json	the JSON tree defining the list of point lights
 	 */
-	private void createPointLights(JsonValue json) {
-		JsonValue light = json.child();
-	    while (light != null) {
-	    	float[] color = light.get("color").asFloatArray();
-	    	float[] pos = light.get("pos").asFloatArray();
-	    	float dist  = light.getFloat("distance");
-	    	int rays = light.getInt("rays");
+	private void createRadiusofPower(JsonValue light) {
+		float[] color = light.get("color").asFloatArray();
+		float[] pos = light.get("pos").asFloatArray();
+		float dist  = light.getFloat("distance");
+		int rays = light.getInt("rays");
 
-			PointSource point = new PointSource(rayhandler, rays, Color.WHITE, dist, pos[0], pos[1]);
-			point.setColor(color[0],color[1],color[2],color[3]);
-			point.setSoft(light.getBoolean("soft"));
+		PointSource point = new PointSource(rayhandler, rays, Color.WHITE, dist, pos[0], pos[1]);
+		point.setColor(color[0],color[1],color[2],color[3]);
+		point.setSoft(light.getBoolean("soft"));
+		point.setXray(true);
 
-			// Create a filter to exclude see through items
-			Filter f = new Filter();
-			f.maskBits = bitStringToComplement(light.getString("excludeBits"));
-			point.setContactFilter(f);
-			point.setActive(false); // TURN ON LATER
-			lights.add(point);
-	        light = light.next();
-	    }
+		// Create a filter to exclude see through items
+		Filter f = new Filter();
+		f.maskBits = bitStringToComplement(light.getString("excludeBits"));
+		point.setContactFilter(f);
+		point.setActive(false); // TURN ON LATER
+
+		radiusOfPower = point;
 	}
 
 	/**
@@ -622,7 +640,9 @@ public class LevelModel {
 		creature.setVision(light);
 	}
 
-
+	public void attachPowerRadius (AnnetteModel annette, LightSource light){
+		light.attachToBody(annette.getBody());
+	}
 
 	/**
 	 * Disposes of all resources for this model.
@@ -795,6 +815,7 @@ public class LevelModel {
 		if (rayhandler != null) {
 			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth() * 2, canvas.getHeight() * 2);
 			rayhandler.render();
+
 		}
 
 		canvas.begin();
