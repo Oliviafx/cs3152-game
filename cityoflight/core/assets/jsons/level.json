@@ -142,8 +142,9 @@
 		"debugopacity": 192,
 	  },
     "exit": {
-        "pos":          [ 30, 21.35],
-		"radius":		  0.5,
+        "pos":          [ 30, 22],
+		"width":      	1,
+		"height":      	1.75,
         "bodytype":    	"static",
         "density":  	  0.0,
         "friction":       0.0,
