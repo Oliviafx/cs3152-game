@@ -174,7 +174,7 @@
             "restitution":    0.1,
     	  	"collideBits":	"1000",
 	      	"excludeBits":	"0000",
-            "texture":      "64_building_tall",
+            "texture":      "64_sidewalk",
             "debugcolor":   "yellow",
             "debugopacity":  200
 		},
@@ -192,7 +192,7 @@
 			"restitution":    0.1,
 			"collideBits":	"0100",
 			"excludeBits":	"0000",
-			"texture":      "64_building_tall",
+			"texture":      "64_sidewalk",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
 		}
