@@ -267,6 +267,7 @@ public class AIController{
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
             creature.setMovement(cAngleCache.x , cAngleCache.x );
+//            creature.setMovement(0, 0);
 
         } else {
             creature.setMovement(cAngleCache.x,cAngleCache.y);
