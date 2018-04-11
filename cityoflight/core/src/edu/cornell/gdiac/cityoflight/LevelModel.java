@@ -118,7 +118,7 @@ public class LevelModel {
 	/** The amount of time that has passed without updating the frame */
 	protected float physicsTimeLeft;
 
-	private static final String BACKGROUND_FILE = "textures/bg.png";
+	private static final String BACKGROUND_FILE = "textures/temp4.png";
 	private Texture background;
 
 	/**
