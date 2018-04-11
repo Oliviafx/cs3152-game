@@ -13,7 +13,7 @@
         "width":      	0.8,
 		"height":      	0.4,
         "bodytype":    	"dynamic",
-        "density":        4.0,
+        "density":        8.0,
         "friction":       0.0,
         "restitution":    0.0,
       	"force": 		 450.0,
