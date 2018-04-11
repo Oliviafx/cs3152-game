@@ -426,6 +426,31 @@ public class LevelModel {
         }
     }
 
+    public void addObjects(JsonValue levelFormat) {
+		JsonValue buildings = levelFormat.getChild("Buildings");
+		while (buildings != null) {
+			ExteriorModel obj = new ExteriorModel();
+			obj.initialize(buildings);
+			obj.setDrawScale(scale);
+			activate(obj);
+			barriers.add(obj);
+			buildings = buildings.next();
+		}
+
+		JsonValue boundaries = levelFormat.getChild("Boundaries");
+		while (boundaries != null) {
+			InteriorModel obj = new InteriorModel();
+			obj.initialize(boundaries);
+			obj.setDrawScale(scale);
+			activate(obj);
+			mazes.add(obj);
+			boundaries = boundaries.next();
+		}
+
+
+	}
+
+
     public boolean isDistraction() {
         if (distraction != null) {
 //			System.out.println(distraction.getAlive());
