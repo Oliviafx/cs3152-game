@@ -3,10 +3,24 @@
 	"graphicSize":    	[ 800, 600],
 	"fpsRange":		  	[  20,  60],
 	"lighting": {
-		"color":	  	[0.67, 0.67, 0.67, 0.67],
+		"color":	  	[0.6, 0.6, 0.6, 0.6],
 		"gamma":		true,
 		"diffuse":		true,
 		"blur":			3
+	},
+	"lighting_dark": {
+		"color":	  	[0.2, 0.2, 0.2, 0.2],
+		"gamma":		true,
+		"diffuse":		true,
+		"blur":			3
+	},
+	"powerradius": {
+		"color":		[0.6, 0.0, 0.0, 0.3],
+		"pos":			[  0,   0],
+		"distance":		  11,
+		"rays":			 512,
+		"soft":			false,
+		"excludeBits":	"0010"
 	},
 	"annette": {
         "pos":        	[ 10.0, 2.5],
