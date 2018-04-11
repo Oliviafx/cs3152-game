@@ -561,7 +561,6 @@ public class AnnetteModel extends BoxObstacle {
         }
     }
 
-
     public boolean isWalkingInPlace(){
         return isWalkingInPlace;
     }

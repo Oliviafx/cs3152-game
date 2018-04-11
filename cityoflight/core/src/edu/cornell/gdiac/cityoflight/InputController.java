@@ -194,7 +194,7 @@ public class InputController {
 		spacePrevious = spacePressed;
 		xPrevious = xPressed;
 		exitPrevious = exitPressed;
-		pausePrevious=pausePressed;
+		pausePrevious = pausePressed;
 		shiftPrevious = shiftPressed;
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
@@ -260,41 +260,41 @@ public class InputController {
 			cVert = (secondary ? cVert : 0.0f);
 
 			if (rightPressed && !leftPressed && !upPressed && !downPressed){
-				aHoriz += 1.0f;
-				//cHoriz -= 0.01f;
+				//aHoriz += 1.0f;
+				cHoriz -= 0.05f;
 				this.direction = AnnetteModel.Direction.RIGHT;
 			} else if (!rightPressed && leftPressed && !upPressed && !downPressed){
-				aHoriz -= 1.0f;
-				//cHoriz += 0.01f;
+				//aHoriz -= 1.0f;
+				cHoriz += 0.05f;
 				this.direction = AnnetteModel.Direction.LEFT;
 			} else if (!rightPressed && !leftPressed && upPressed && !downPressed){
-				aVert += 1.0f;
-				//cVert -= 0.01f;
+				//aVert += 1.0f;
+				cVert -= 0.05f;
 				this.direction = AnnetteModel.Direction.UP;
 			} else if (!rightPressed && !leftPressed && !upPressed && downPressed){
-				aVert -= 1.0f;
-				//cVert += 0.01f;
+				//aVert -= 1.0f;
+				cVert += 0.05f;
 				this.direction = AnnetteModel.Direction.DOWN;
 			} else {
 
 				if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && lastPressedKey == Input.Keys.RIGHT) {
-					aHoriz += 1.0f;
-					//cHoriz -= 0.01f;
+					//aHoriz += 1.0f;
+					cHoriz -= 0.05f;
 					this.direction = AnnetteModel.Direction.RIGHT;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && lastPressedKey == Input.Keys.LEFT) {
-					aHoriz -= 1.0f;
-					//cHoriz += 0.01f;
+					//aHoriz -= 1.0f;
+					cHoriz += 0.05f;
 					this.direction = AnnetteModel.Direction.LEFT;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.UP) && lastPressedKey == Input.Keys.UP) {
-					aVert += 1.0f;
-					//cVert -= 0.01f;
+					//aVert += 1.0f;
+					cVert -= 0.05f;
 					this.direction = AnnetteModel.Direction.UP;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastPressedKey == Input.Keys.DOWN) {
-					aVert -= 1.0f;
-					//cVert += 0.01f;
+					//aVert -= 1.0f;
+					cVert += 0.05f;
 					this.direction = AnnetteModel.Direction.DOWN;
 				}
 			}
@@ -332,7 +332,6 @@ public class InputController {
 					this.direction = AnnetteModel.Direction.DOWN;
 				}
 			}
-
 			shiftPrevious = false;
 		}
 	}
