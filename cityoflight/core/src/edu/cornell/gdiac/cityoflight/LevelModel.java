@@ -220,6 +220,10 @@ public class LevelModel {
 		return box;
 	}
 
+	public void setBox(BoxModel value) {
+	    box = value;
+    }
+
 
 	public DistractionModel getDistraction() {
 		return distraction;
