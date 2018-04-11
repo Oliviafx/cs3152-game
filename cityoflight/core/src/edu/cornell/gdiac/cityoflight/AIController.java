@@ -261,7 +261,7 @@ public class AIController{
         cAngleCache.scl(creature.getForce());
 
 
-        if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird()){
+        if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird() && !creature.getStuck()){
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
             creature.setMovement(cAngleCache.x , cAngleCache.x );
@@ -348,7 +348,7 @@ public class AIController{
 
             case CHASE: // Do not pre-empt with FSMState in a case
                 //#region PUT YOUR CODE HERE
-                /*
+
                 if (canSeeAnnette()){
                     creature.setAggroCool(creature.getAggroLimit());
                     recordLastSeen();
@@ -362,7 +362,7 @@ public class AIController{
                     System.out.println("chase -> patrol");
                     state = FSMState.PATROL;
                 }
-*/
+
                 //#endregion
                 break;
 

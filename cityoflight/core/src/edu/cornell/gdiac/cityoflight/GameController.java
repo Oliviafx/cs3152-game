@@ -521,31 +521,11 @@ public class GameController implements Screen, ContactListener {
 		else box.setDebugColor(Color.GREEN);
 
 
-		if(annette.isWalkingInPlace() && !stopWalkInPlace && !annette.getBird()){
-
-			for(AIController controller: AIcontrollers){
-
-				if(controller.getCreature().getStuck()){
-					stopWalkInPlace = true;
-				}
-			}
-
-			System.out.println("input: " + input.getaHoriz() + " " + input.getaVert());
-
-			if(!stopWalkInPlace){
+		if(annette.isWalkingInPlace() && !annette.getBird()){
 				if(box.getDoesExist()){
 					box.setX(box.getX() + input.getcHoriz());
 					box.setY(box.getY() + input.getcVert());
-					//box.setMovement(input.getaHoriz(), input.getaVert());
-					//box.applyForce();
 				}
-
-				if(annette.getBird()){
-					//did we decide that we didn't want to be able to summon the bird &
-					//walk in place @ the same time?
-				}
-			}
-
 
 		} else{
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
@@ -850,4 +830,5 @@ public class GameController implements Screen, ContactListener {
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
 	public void preSolve(Contact contact, Manifold oldManifold) {}
+
 }
