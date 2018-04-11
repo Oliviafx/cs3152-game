@@ -191,8 +191,6 @@ public class InputController {
 		resetPrevious  = resetPressed;
 		debugPrevious  = debugPressed;
 		exitPrevious = exitPressed;
-//		nextPrevious = nextPressed;
-//		prevPrevious = prevPressed;
 		spacePrevious = spacePressed;
 		xPrevious = xPressed;
 		exitPrevious = exitPressed;
@@ -218,8 +216,6 @@ public class InputController {
 	private void readGamepad() {
 		resetPressed = xbox.getStart();
 		exitPressed  = xbox.getBack();
-//		nextPressed  = xbox.getRB();
-//		prevPressed  = xbox.getLB();
 		debugPressed  = xbox.getY();
 
 		// Increase animation frame, but only if trying to move
@@ -251,40 +247,59 @@ public class InputController {
 		aHoriz = (secondary ? aHoriz : 0.0f);
 		aVert = (secondary ? aVert : 0.0f);
 
+		// If more than one direction is pressed, the one last pressed has precedence.
+		findLastKey();
+		boolean rightPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
+		boolean leftPressed = Gdx.input.isKeyPressed(Input.Keys.LEFT);
+		boolean upPressed = Gdx.input.isKeyPressed(Input.Keys.UP);
+		boolean downPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
+
 
 		if(shiftPressed && shiftPrevious) {
 			cHoriz = (secondary ? cHoriz : 0.0f);
 			cVert = (secondary ? cVert : 0.0f);
 
-			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			if (rightPressed && !leftPressed && !upPressed && !downPressed){
 				aHoriz += 1.0f;
-				cHoriz -= 0.01f;
+				//cHoriz -= 0.01f;
 				this.direction = AnnetteModel.Direction.RIGHT;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			} else if (!rightPressed && leftPressed && !upPressed && !downPressed){
 				aHoriz -= 1.0f;
-				cHoriz += 0.01f;
+				//cHoriz += 0.01f;
 				this.direction = AnnetteModel.Direction.LEFT;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			} else if (!rightPressed && !leftPressed && upPressed && !downPressed){
 				aVert += 1.0f;
-				cVert -= 0.01f;
+				//cVert -= 0.01f;
 				this.direction = AnnetteModel.Direction.UP;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			} else if (!rightPressed && !leftPressed && !upPressed && downPressed){
 				aVert -= 1.0f;
-				cVert += 0.01f;
+				//cVert += 0.01f;
 				this.direction = AnnetteModel.Direction.DOWN;
+			} else {
+
+				if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && lastPressedKey == Input.Keys.RIGHT) {
+					aHoriz += 1.0f;
+					//cHoriz -= 0.01f;
+					this.direction = AnnetteModel.Direction.RIGHT;
+				}
+				if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && lastPressedKey == Input.Keys.LEFT) {
+					aHoriz -= 1.0f;
+					//cHoriz += 0.01f;
+					this.direction = AnnetteModel.Direction.LEFT;
+				}
+				if (Gdx.input.isKeyPressed(Input.Keys.UP) && lastPressedKey == Input.Keys.UP) {
+					aVert += 1.0f;
+					//cVert -= 0.01f;
+					this.direction = AnnetteModel.Direction.UP;
+				}
+				if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastPressedKey == Input.Keys.DOWN) {
+					aVert -= 1.0f;
+					//cVert += 0.01f;
+					this.direction = AnnetteModel.Direction.DOWN;
+				}
 			}
 
 		} else {
-
-			// If more than one direction is pressed, the one last pressed has precedence.
-			findLastKey();
-			boolean rightPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
-			boolean leftPressed = Gdx.input.isKeyPressed(Input.Keys.LEFT);
-			boolean upPressed = Gdx.input.isKeyPressed(Input.Keys.UP);
-			boolean downPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
 
 			if (rightPressed && !leftPressed && !upPressed && !downPressed){
 				aHoriz += 1.0f;
@@ -318,27 +333,7 @@ public class InputController {
 				}
 			}
 
-			/*
-			// Creature Directional controls
-			cHoriz = (secondary ? cHoriz : 0.0f);
-			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-				cHoriz += 1.0f;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-				cHoriz -= 1.0f;
-			}
-
-			cVert = (secondary ? cVert : 0.0f);
-			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				cVert += 1.0f;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				cVert -= 1.0f;
-			}
-			*/
-
 			shiftPrevious = false;
-
 		}
 	}
 

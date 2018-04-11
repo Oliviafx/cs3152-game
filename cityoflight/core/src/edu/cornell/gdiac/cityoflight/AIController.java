@@ -252,13 +252,12 @@ public class AIController{
                 break;
         }
 
-        // code for actual movement - cAngleCache should be set already
-//        if (cAngleCache.len2() > 0.0f) {
-//            float angle = cAngleCache.angle();
-//            // Convert to radians with up as 0
-//            angle = (float)Math.PI*(angle-90.0f)/180.0f;
-//            creature.setAngle(angle);
-//        }
+        if (cAngleCache.len2() > 0.0f) {
+            float angle = cAngleCache.angle();
+            // Convert to radians with up as 0
+            angle = (float)Math.PI*(angle-90.0f)/180.0f;
+            creature.setAngle(angle);
+        }
         cAngleCache.scl(creature.getForce());
 
 
@@ -266,7 +265,7 @@ public class AIController{
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
             creature.setMovement(cAngleCache.x , cAngleCache.x );
-//            creature.setMovement(0, 0);
+//          creature.setMovement(0, 0);
 
         } else {
             creature.setMovement(cAngleCache.x,cAngleCache.y);
