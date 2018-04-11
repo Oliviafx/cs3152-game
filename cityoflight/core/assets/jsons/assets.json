@@ -177,7 +177,7 @@
 				}
 			},
 			"goal": {
-				"file": "textures/well.png",
+				"file": "textures/lamppost2.png",
 				"wrap": false
 			},
 			"distraction": {
