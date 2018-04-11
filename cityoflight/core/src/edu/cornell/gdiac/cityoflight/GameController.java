@@ -70,8 +70,10 @@ public class GameController implements Screen, ContactListener {
 	private static final float  BOX_VOFFSET = 1.0f;
 	public static final float	TEMP_SCALE	= 0.5f;
 
-	private boolean stopWalkInPlace = false;
+    /** Walk in place effective range */
+	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 40.0f;
 
+	private boolean stopWalkInPlace = false;
 
 	/**
 	 * Preloads the assets for this controller.
@@ -413,7 +415,6 @@ public class GameController implements Screen, ContactListener {
 		aAngleCache.scl(annette.getForce());
 		annette.setDirection(input.getDirection());
 
-
 		annette.setSummoning(InputController.getInstance().didSpace());
 		annette.setBird(input.didX());
 		annette.applyForce();
@@ -550,13 +551,17 @@ public class GameController implements Screen, ContactListener {
 
 
 		if(annette.isWalkingInPlace() && !annette.getBird()){
-		    if(box.getDoesExist()){
-		        box.setX(box.getX() + input.getcHoriz());
-		        box.setY(box.getY() + input.getcVert());
+		    level.getRadiusOfPower().setActive(true);
+		    level.darkenLights(level.getRayHandler());
+		    if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
+		        box.setX(box.getX() + input.getbHoriz());
+		        box.setY(box.getY() + input.getbVert());
 		    }
 		    annette.setMovement(0,0);
 
 		} else{
+            level.getRadiusOfPower().setActive(false);
+            level.brightenLights(level.getRayHandler());
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
 		}
 
@@ -564,6 +569,8 @@ public class GameController implements Screen, ContactListener {
 		level.update(dt);
 		sound.update();
 	}
+
+
 
 	/**
 	 * Draw the physics objects to the canvas

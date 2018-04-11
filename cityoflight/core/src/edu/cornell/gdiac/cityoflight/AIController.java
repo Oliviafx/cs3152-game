@@ -261,12 +261,13 @@ public class AIController{
         cAngleCache.scl(creature.getForce());
 
 
-        if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird() && !creature.getStuck()){
+        if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird() && !creature.getStuck()
+                && (level.getAnnette().getPosition().sub(creature.getPosition()).len2() <= 40.0f) ){
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
 
-            creature.setMovement(cAngleCache.x , cAngleCache.y );
-            //creature.setMovement(0, 0);
+//            creature.setMovement(cAngleCache.x , cAngleCache.y );
+            creature.setMovement(0, 0);
 
         } else {
             creature.setMovement(cAngleCache.x,cAngleCache.y);
