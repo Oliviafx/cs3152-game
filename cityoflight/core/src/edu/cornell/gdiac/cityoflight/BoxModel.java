@@ -72,7 +72,7 @@ public class BoxModel extends BoxObstacle {
     /** The current horizontal movement of the character */
     private Vector2 movement = new Vector2();
     /** Whether or not to animate the current frame */
-    private boolean animate = false;
+    private boolean animate = true;
 
     /** If the box has been summoned */
     private boolean doesExist;
@@ -88,6 +88,14 @@ public class BoxModel extends BoxObstacle {
 
     /** Cache for internal force calculations */
     private Vector2 forceCache = new Vector2();
+
+    private int boxCool = 0;
+    private int shineLimitCountdown = 0;
+
+    /** Time between box frames*/
+    private final int boxLimit = 5;
+    /** Time between animations of box shining*/
+    private final int shineLimit = 100;
 
     /**
      * Returns the directional movement of this character.
@@ -477,9 +485,7 @@ public class BoxModel extends BoxObstacle {
         if (getMovement().len2() > 0f) {
             forceCache.set(getMovement());
             body.applyForce(forceCache,getPosition(),true);
-            animate = true;
-        } else {
-            animate = false;
+
         }
     }
 
@@ -523,31 +529,36 @@ public class BoxModel extends BoxObstacle {
      *
      * If the animation is not active, it will reset to the initial animation frame.
      *
-     * @param  on       Whether the animation is active
      */
-    public void animateBox(boolean on) {
-        FilmStrip node = mainBox;
-        boolean cycle = mainCycle;
+    public void update(float dt) {
+        // Animate if necessary
+        if(shineLimitCountdown==0)
+            animate = true;
 
-        if (on) {
-            // Turn on the flames and go back and forth
-            if (node.getFrame() == 0 || node.getFrame() == 1) {
-                cycle = true;
-            } else if (node.getFrame() == node.getSize()-1) {
-                cycle = false;
-            }
-
-            // Increment
-            if (cycle) {
-                node.setFrame(node.getFrame()+1);
-            } else {
-                node.setFrame(node.getFrame()-1);
-            }
-        } else {
-            node.setFrame(0);
+        if (animate && boxCool == 0) {
+                    if (filmstrip != null) {
+                        int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
+                        if(next < filmstrip.getFrame()) {
+                            animate = false;
+                            shineLimitCountdown = shineLimit;
+                        }
+                        else
+                        filmstrip.setFrame(next);
+                    }
+            boxCool = boxLimit;
         }
 
-        mainCycle = cycle;
+        else if (boxCool > 0) {
+            boxCool--;
+        } else if (!animate) {
+            if (filmstrip != null) {
+                filmstrip.setFrame(startFrame);
+            }
+            shineLimitCountdown--;
+            boxCool = 0;
+        }
+
+        super.update(dt);
     }
 
     /**

@@ -92,6 +92,31 @@ public class CreatureModel extends WheelObstacle {
 
 
     /**
+     * constants for creature characteristics
+     */
+
+    private int LOU_TURN_LIMIT = 30; // as a snail, Lou turns pretty slowly.
+    private int DRAGON_TURN_LIMIT = 4; // the dragon should turn quick, otherwise it would seem like it's "bumping" into a wall for too long.
+    private int BLANCHE_TURN_LIMIT = 10;
+
+    private int LOU_AGGRO_COUNTDOWN = 150;
+    private int DRAGON_AGGRO_COUNTDOWN = 20;
+    private int BLANCHE_AGGRO_COUNTDOWN = 150;
+
+    private float LOU_MAX_SPEED = 10.0f;
+    private float DRAGON_MAX_SPEED = 30.0f;
+    private float BLANCHE_MAX_SPEED = 30.0f;
+
+    private int CREATURE_START_FRAME = 0;
+    private int CREATURE_WALK_COOL = 4;
+    private float CREATURE_DENSITY = 1.0f;
+    private float CREATURE_FRICTION = 0.0f;
+    private float CREATURE_RESTITUTION = 0.0f;
+    private float CREATURE_FORCE = 1.0f;
+    private float CREATURE_DAMPING = 1.0f;
+    private String CREATURE_BODY_TYPE = "dynamic";
+
+    /**
      * Returns the directional movement of the creature.
      *
      * This is the result of input times creature force.
@@ -378,19 +403,8 @@ public class CreatureModel extends WheelObstacle {
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
-        setForce(json.get("force").asFloat());
-        setDamping(json.get("damping").asFloat());
-        setMaxSpeed(json.get("maxspeed").asFloat());
-        setStartFrame(json.get("startframe").asInt());
-        setWalkLimit(json.get("walklimit").asInt());
-        setAggroLimit(json.get("aggrolimit").asInt());
-
         setType(json.get("type").asInt());
-        setTurnLimit(json.get("turnlimit").asInt());
+
         setXInput(json.get("xinput").asFloat());
         setYInput(json.get("yinput").asFloat());
 
@@ -426,8 +440,6 @@ public class CreatureModel extends WheelObstacle {
             sideAnim = null;
         }
 
-        setTexture(texture);
-
         String key2 = json.get("texture2").asString();
         TextureRegion texture2 = JsonAssetManager.getInstance().getEntry(key2, TextureRegion.class);
         try {
@@ -444,7 +456,32 @@ public class CreatureModel extends WheelObstacle {
             upAnim = null;
         }
 
+        setTexture(texture);
 
+        setBodyType(CREATURE_BODY_TYPE.equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        setStartFrame(CREATURE_START_FRAME);
+        setWalkLimit(CREATURE_WALK_COOL);
+        setDensity (CREATURE_DENSITY);
+        setFriction(CREATURE_FRICTION);
+        setRestitution(CREATURE_RESTITUTION);
+        setForce(CREATURE_FORCE);
+        setDamping(CREATURE_DAMPING);
+
+        if (type == 1){
+            turnLimit = LOU_TURN_LIMIT;
+            aggroLimit = LOU_AGGRO_COUNTDOWN;
+            setMaxSpeed(LOU_MAX_SPEED);
+        }else if (type == 2){
+            turnLimit = DRAGON_TURN_LIMIT;
+            aggroLimit = DRAGON_AGGRO_COUNTDOWN;
+            setMaxSpeed(DRAGON_MAX_SPEED);
+        }else if (type == 3){
+            turnLimit = BLANCHE_TURN_LIMIT;
+            aggroLimit = BLANCHE_AGGRO_COUNTDOWN;
+            setMaxSpeed(BLANCHE_MAX_SPEED);
+        }else{
+            System.out.println ("wrong type of creature. should never get here");
+        }
     }
 
     /**
