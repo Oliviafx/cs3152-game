@@ -264,14 +264,15 @@ public class AIController{
         if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird() && !creature.getStuck()){
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
+
             creature.setMovement(cAngleCache.x , cAngleCache.x );
-//          creature.setMovement(0, 0);
+            //creature.setMovement(0, 0);
 
         } else {
             creature.setMovement(cAngleCache.x,cAngleCache.y);
         }
 
-        creature.applyForce();
+        creature.applyForce(level.getAnnette().isWalkingInPlace());
     }
 
     /**

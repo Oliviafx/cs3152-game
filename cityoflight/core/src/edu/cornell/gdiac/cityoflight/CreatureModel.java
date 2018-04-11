@@ -487,7 +487,7 @@ public class CreatureModel extends WheelObstacle {
      *
      * This method should be called after the force attribute is set.
      */
-    public void applyForce() {
+    public void applyForce(boolean isWalkingInPlace) {
         if (!isActive()) {
             return;
         }
@@ -502,7 +502,11 @@ public class CreatureModel extends WheelObstacle {
             body.applyForce(forceCache,getPosition(),true);
             animate = true;
         } else {
-            animate = false;
+            if (isWalkingInPlace) {
+                animate = true;
+            } else {
+                animate = false;
+            }
         }
     }
 
@@ -541,8 +545,6 @@ public class CreatureModel extends WheelObstacle {
     public void draw(ObstacleCanvas canvas) {
         int isReflected = movement.x < 0 ? -1 : 1;
         int xOffset = 0;
-
-
         FilmStrip dirTexture = null;
         if(movement.x != 0)
         {
