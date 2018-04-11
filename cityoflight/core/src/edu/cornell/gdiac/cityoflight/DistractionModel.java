@@ -26,8 +26,9 @@ public class DistractionModel extends WheelObstacle {
     private static final float HOFFSET = .25f;
     private static final float VOFFSET = .25f;
 
-    private static final int BIRD_LIFE = 300;
+    private static final int BIRD_LIFE = 100;
     private static final float BIRD_RADIUS = .25f;
+
 
     private static final float STOPPING_DISTANCE = 3f;
 
@@ -71,6 +72,9 @@ public class DistractionModel extends WheelObstacle {
     private Vector2 movement = new Vector2();
 
     private float force;
+
+    /** Alpha constant for bird fade*/
+    private int alpha = 255;
 
     /** Returns if the bird is currently on the screen */
     public boolean getAlive() {
@@ -304,7 +308,8 @@ public class DistractionModel extends WheelObstacle {
     public void draw(ObstacleCanvas canvas) {
         if ((birdsprite != null) && alive) {
             Color color = Color.GRAY;
-            color.a = 1/life;
+            alpha = (int)((1-((float)life/BIRD_LIFE))*255);
+            color.a = alpha;
 //            canvas.draw(birdsprite, color, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
 //                    this.body.getPosition().y * drawScale.y, getAngle(), .25f * GameController.TEMP_SCALE, .25f * GameController.TEMP_SCALE);
 //=======
