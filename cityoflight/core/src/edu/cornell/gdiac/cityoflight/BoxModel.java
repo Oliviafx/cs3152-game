@@ -49,6 +49,7 @@ public class BoxModel extends BoxObstacle {
 
     public static final float INNER_RADIUS = 1.0f;
     public static final float OUTER_RADIUS = 5.0f;
+    public static final float GONE_RADIUS = 10.0f;
 
     /** The texture filmstrip for the box */
     FilmStrip mainBox;
@@ -578,7 +579,9 @@ public class BoxModel extends BoxObstacle {
 
     public void drawState(ObstacleCanvas canvas, Color color) {
         if (texture != null) {
-            canvas.draw(texture, color,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1 * GameController.TEMP_SCALE,1 * GameController.TEMP_SCALE);
+            if (doesExist) {
+                canvas.draw(texture, color, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.x, getAngle(), 1 * GameController.TEMP_SCALE, 1 * GameController.TEMP_SCALE);
+            }
         }
     }
 }
