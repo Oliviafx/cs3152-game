@@ -90,7 +90,6 @@ public class CreatureModel extends WheelObstacle {
     /** refers to the vision of the creature */
     private LightSource vision = null;
 
-
     /** constants for creature characteristics */
 
     private int LOU_TURN_LIMIT = 30; // as a snail, Lou turns pretty slowly.
