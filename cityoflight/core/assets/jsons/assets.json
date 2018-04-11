@@ -198,7 +198,7 @@
 				}
 			},
 			"goal": {
-				"file": "textures/lamppost2.png",
+				"file": "textures/lamppost.png",
 				"wrap": false
 			},
 			"distraction": {
