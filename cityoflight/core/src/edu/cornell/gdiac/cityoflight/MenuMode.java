@@ -119,7 +119,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //        }
     }
 //
-    private static final String BACKGROUND_FILE ="textures/menu assets/background.png";
+    private static final String BACKGROUND_FILE ="textures/menu assets/bg_800.png";
     private static final String PLAY_BTN_FILE = "textures/menu assets/start_game.png";
     private static final String LEVEL_BTN_FILE = "textures/menu assets/level_select.png";
     private static final String TITLE_FILE ="textures/menu assets/title.png";
