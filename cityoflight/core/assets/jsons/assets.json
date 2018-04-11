@@ -4,6 +4,10 @@
     		"file":		"textures/tile.png",
     		"wrap":		true
     	},
+		"transparent": {
+			"file":		"textures/transparent.png",
+			"wrap":		true
+		},
 		"64_street": {
 			"file":		"textures/64_street.png",
 			"wrap":		true
