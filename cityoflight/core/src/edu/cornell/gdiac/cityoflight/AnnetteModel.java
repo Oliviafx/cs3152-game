@@ -291,12 +291,14 @@ public class AnnetteModel extends BoxObstacle {
      *
      * @param sideJson	the JSON subtree defining the Annette
      */
-    public void initialize(JsonValue sideJson) {
+    public void initialize(JsonValue sideJson, JsonValue aBounds) {
         setName(sideJson.name());
-        float[] pos  = sideJson.get("pos").asFloatArray();
-        float width = sideJson.get("width").asFloat();
-        float height = sideJson.get("height").asFloat();
-        setPosition(pos[0],pos[1]);
+        float x = aBounds.get("x").asFloat();
+        float y = aBounds.get("y").asFloat();
+
+        float width = aBounds.get("width").asFloat();
+        float height = aBounds.get("height").asFloat();
+        setPosition(x,y);
         setWidth(width);
         setHeight(height);
 
