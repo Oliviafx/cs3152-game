@@ -410,7 +410,7 @@ public class GameController implements Screen, ContactListener {
 
 		//set walking in place
 		annette.setWalkingInPlace(InputController.getInstance().didHoldShift());
-		if (annette.isWalkingInPlace()) { sound.play("ambient_effect", "sounds/ambient_effect.wav", true, 0.25f); }
+		if (annette.isWalkingInPlace()) { sound.play("ambient_effect", "sounds/ambient_effect.wav", true, 0.1f); }
 		else { sound.stop("ambient_effect"); }
 		aAngleCache.scl(annette.getForce());
 		annette.setDirection(input.getDirection());
