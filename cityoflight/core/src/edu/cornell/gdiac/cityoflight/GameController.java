@@ -510,6 +510,7 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 			else {
+				sound.stop("no_box_effect");
 				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
 			}
 		}
@@ -770,8 +771,6 @@ public class GameController implements Screen, ContactListener {
 					annette.setBird(false);
 					distraction.setAlive(false);
 					level.objects.remove(distraction);
-//					sound.stop("distraction_gone_effect");
-//					sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 				}
 			}
 
@@ -780,10 +779,29 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
-//					sound.stop("distraction_gone_effect");
-//					sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 				}
 			}
+
+
+			for (Obstacle b : level.getMazes()) {
+				if ((bd1 == b && bd2 == annette) || (bd1 == annette && bd2 == b )
+						|| (sf1.contains("center") && bd2 == b) || (sf2.contains("center") && bd1 == b)) {
+					downBox = false;
+					upBox = false;
+					leftBox = false;
+					rightBox = false;
+				}
+			}
+			// check for distraction collisions with barriers
+			for (Obstacle w : level.getBarriers()) {
+				if ((bd1 == w && bd2 == annette) || (bd1 == annette && bd2== w )) {
+					downBox = false;
+					upBox = false;
+					leftBox = false;
+					rightBox = false;
+				}
+			}
+
 
 			// check if creature is distracted
 			for (CreatureModel c : level.getCreature()) {
@@ -855,10 +873,48 @@ public class GameController implements Screen, ContactListener {
 
 	/** Unused ContactListener method */
 	public void endContact(Contact contact) {
-		downBox = true;
-		upBox = true;
-		rightBox = true;
-		leftBox = true;
+		Fixture fix1 = contact.getFixtureA();
+		Fixture fix2 = contact.getFixtureB();
+
+		Body body1 = fix1.getBody();
+		Body body2 = fix2.getBody();
+
+		Object fd1 = fix1.getUserData();
+		Object fd2 = fix2.getUserData();
+
+		Obstacle bd1 = (Obstacle) body1.getUserData();
+		Obstacle bd2 = (Obstacle) body2.getUserData();
+
+		String sf1 = "";
+		String sf2 = "";
+
+		if (fd1 != null) {
+			sf1 = (String) fd1;
+		}
+		if (fd2 != null) {
+			sf2 = (String) fd2;
+		}
+
+		AnnetteModel annette = level.getAnnette();
+
+		for (Obstacle b : level.getMazes()) {
+			if (!(bd1 == b && bd2 == annette) && !(bd1 == annette && bd2 == b)
+					&& !(sf1.contains("center") && bd2 == b) && !(sf2.contains("center") && bd1 == b)) {
+				downBox = true;
+				upBox = true;
+				leftBox = true;
+				rightBox = true;
+			}
+		}
+		for (Obstacle w : level.getBarriers()) {
+			if (!(bd1 == w && bd2 == annette) && !(bd1 == annette && bd2 == w)
+					&& !(sf1.contains("center") && bd2 == w) && !(sf2.contains("center") && bd1 == w)) {
+				downBox = true;
+				upBox = true;
+				leftBox = true;
+				rightBox = true;
+			}
+		}
 	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
