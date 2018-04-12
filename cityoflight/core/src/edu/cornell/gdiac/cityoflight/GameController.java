@@ -70,7 +70,7 @@ public class GameController implements Screen, ContactListener {
 	private static final float  BOX_VOFFSET = 1.0f;
 	public static final float	TEMP_SCALE	= 0.5f;
 
-    /** Walk in place effective range */
+	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 40.0f;
 
 	private boolean stopWalkInPlace = false;
@@ -132,7 +132,7 @@ public class GameController implements Screen, ContactListener {
 
 	/** Exit code for quitting the game */
 	public static final int EXIT_QUIT = 0;
-    /** How many frames after winning/losing do we continue? */
+	/** How many frames after winning/losing do we continue? */
 	public static final int EXIT_COUNT = 120;
 	/** Exit code for going to the main menu screen */
 	public static final int EXIT_MENU = 1;
@@ -403,8 +403,6 @@ public class GameController implements Screen, ContactListener {
 			controller.chooseAction();
 			controller.doAction();
 		}
-//		if (annette.getMovement())
-//		System.out.println(annette.getMovement());
 
 
 		// Rotate the avatar to face the direction of movement
@@ -519,8 +517,11 @@ public class GameController implements Screen, ContactListener {
 					level.objects.remove(box);
 				}
 			}
-			sound.stop("no_box_effect");
-			sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
+			else {
+				sound.stop("no_box_effect");
+				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
+			}
+
 		}
 		box.applyForce();
 
@@ -558,17 +559,17 @@ public class GameController implements Screen, ContactListener {
 
 
 		if(annette.isWalkingInPlace() && !annette.getBird()){
-		    level.getRadiusOfPower().setActive(true);
-		    level.darkenLights(level.getRayHandler());
-		    if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
-		        box.setX(box.getX() + input.getbHoriz());
-		        box.setY(box.getY() + input.getbVert());
-		    }
-		    annette.setMovement(0,0);
+			level.getRadiusOfPower().setActive(true);
+			level.darkenLights(level.getRayHandler());
+			if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
+				box.setX(box.getX() + input.getbHoriz());
+				box.setY(box.getY() + input.getbVert());
+			}
+			annette.setMovement(0,0);
 
 		} else{
-            level.getRadiusOfPower().setActive(false);
-            level.brightenLights(level.getRayHandler());
+			level.getRadiusOfPower().setActive(false);
+			level.brightenLights(level.getRayHandler());
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
 		}
 
@@ -644,11 +645,11 @@ public class GameController implements Screen, ContactListener {
 		if (active) {
 			if (preUpdate(delta)) {
 				update(delta);
-                draw(delta);
+				draw(delta);
 			}
-            else {
-			    listener.exitScreen(this, EXIT_PAUSE);
-            }
+			else {
+				listener.exitScreen(this, EXIT_PAUSE);
+			}
 
 		}
 	}
@@ -752,15 +753,14 @@ public class GameController implements Screen, ContactListener {
 
 			// checking sensors to see if box can be made
 			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) {
-//				System.out.println("down");
 				downBox = false; }
-//			else { downBox = true; }
+			else { downBox = true; }
 			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) { upBox = false; }
-//			else { upBox = true; }
+			else { upBox = true; }
 			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) { rightBox = false; }
-//			else { rightBox = true; }
+			else { rightBox = true; }
 			if (sf1.contains("annetteLeft") || sf2.contains("annetteLeft")) { leftBox = false; }
-//			else { leftBox = true; }
+			else { leftBox = true; }
 
 
 			// Check if bird hits box
@@ -837,19 +837,19 @@ public class GameController implements Screen, ContactListener {
 			}
 
 			for (CreatureModel c : level.getCreature()) {
-			    int index = 0;
-                CreatureModel c2 = level.getCreature(index);
+				int index = 0;
+				CreatureModel c2 = level.getCreature(index);
 
-			    do {
-                    if (c != c2) {
-                        if ((bd1 == c && bd2 == c2) || (bd1 == c2 && bd2 == c)) {
-                            c.setStuck(true);
-                        }
-                    }
-                    index++;
-                    c2 = level.getCreature(index);
-                } while (c2 != null);
-            }
+				do {
+					if (c != c2) {
+						if ((bd1 == c && bd2 == c2) || (bd1 == c2 && bd2 == c)) {
+							c.setStuck(true);
+						}
+					}
+					index++;
+					c2 = level.getCreature(index);
+				} while (c2 != null);
+			}
 
 			// check reactivation
 			if (((sf1.contains("center") && bd2 == box  ) ||
@@ -879,70 +879,7 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	/** Unused ContactListener method */
-	public void endContact(Contact contact) {
-		Fixture fix1 = contact.getFixtureA();
-		Fixture fix2 = contact.getFixtureB();
-
-		Body body1 = fix1.getBody();
-		Body body2 = fix2.getBody();
-
-		Object fd1 = fix1.getUserData();
-		Object fd2 = fix2.getUserData();
-
-		Obstacle bd1 = (Obstacle) body1.getUserData();
-		Obstacle bd2 = (Obstacle) body2.getUserData();
-
-		String sf1 = "";
-		String sf2 = "";
-
-		if (fd1 != null) {
-			sf1 = (String) fd1;
-		}
-		if (fd2 != null) {
-			sf2 = (String) fd2;
-		}
-
-		AnnetteModel annette = level.getAnnette();
-//
-//		for (Obstacle b : level.getMazes()) {
-//			if (!(bd1 == b && bd2 == annette) && !(bd1 == annette && bd2 == b)
-//					&& !(sf1.contains("center") && bd2 == b) && !(sf2.contains("center") && bd1 == b)) {
-//				downBox = true;
-//				upBox = true;
-//				leftBox = true;
-//				rightBox = true;
-//			}
-//		}
-//		for (Obstacle w : level.getBarriers()) {
-//			if (!(bd1 == w && bd2 == annette) && !(bd1 == annette && bd2 == w)
-//					&& !(sf1.contains("center") && bd2 == w) && !(sf2.contains("center") && bd1 == w)) {
-//				downBox = true;
-//				upBox = true;
-//				leftBox = true;
-//				rightBox = true;
-//			}
-//		}
-//
-		// checking sensors to see if box can be made
-
-//		System.out.println(annette.getMovement());
-
-		if (annette.getMovement().x > 0 || annette.getMovement().y > 0) {
-//			System.out.println("true");
-			if (!(sf1.contains("annetteDown")) && !(sf2.contains("annetteDown"))) {
-				downBox = true;
-			}
-			if (!(sf1.contains("annetteUp")) && !(sf2.contains("annetteUp"))) {
-				upBox = true;
-			}
-			if (!(sf1.contains("annetteRight")) && !(sf2.contains("annetteRight"))) {
-				rightBox = true;
-			}
-			if (!(sf1.contains("annetteLeft")) && !(sf2.contains("annetteLeft"))) {
-				leftBox = true;
-			}
-		}
-	}
+	public void endContact(Contact contact) {}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
