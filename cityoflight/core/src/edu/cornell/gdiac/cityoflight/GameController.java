@@ -754,11 +754,8 @@ public class GameController implements Screen, ContactListener {
 			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
 				annette.setBird(false);
 				distraction.setAlive(false);
-//				distraction.deactivatePhysics(level.getWorld());
-//				level.getWorld().destroyBody(distraction.getBody());
+				distraction.deactivatePhysics(level.getWorld());
 				distraction.dispose();
-//				distraction.deactivatePhysics(level.getWorld());
-//				distraction.setActive(false);
 				level.objects.remove(distraction);
 //				sound.stop("distraction_gone_effect");
 //				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
