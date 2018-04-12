@@ -248,9 +248,12 @@
 				},
                 "seen_effect": {
                   "file": "sounds/seen_effect.wav"
-                }
+                },
 				"ambient_effect": {
 					"file": "sounds/ambient_effect.wav"
+				},
+				"box_gone_effect": {
+					"file": "sounds/box_gone_effect.wav"
 				}
 			}
 		}

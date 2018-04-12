@@ -540,8 +540,8 @@ public class GameController implements Screen, ContactListener {
 			box.deactivatePhysics(level.getWorld());
 			box.dispose();
 			level.objects.remove(box);
-			sound.stop("box_deactivate_effect");
-			sound.play("box_deactivate_effect", "sounds/box_deactivate_effect.wav", false, 0.5f);
+			sound.stop("box_gone_effect");
+			sound.play("box_gone_effect", "sounds/box_gone_effect.wav", false, 0.5f);
 		}
 
 		// set debug colors
