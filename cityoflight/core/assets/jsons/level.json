@@ -212,7 +212,7 @@
 	},
 	"interior": {
 		"maze3": {
-			"pos":        	[ 8.95f, 7.25f],
+			"pos":        	[ 8.9f, 7.25f],
 			"size":       	[ 2.4f, 4.0f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
@@ -226,7 +226,7 @@
 			"debugopacity":  200
 		},
 		"maze4": {
-			"pos":        	[ 23f, 7.5f],
+			"pos":        	[ 23f, 7.25f],
 			"size":       	[ 5f, 4f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
@@ -282,7 +282,7 @@
 			"debugopacity":  200
 		},
 		"maze9": {
-			"pos":        	[ 6.45f, 7.25f],
+			"pos":        	[ 6.5f, 7.25f],
 			"size":       	[ 2.4f, 4.0f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
@@ -296,7 +296,7 @@
 			"debugopacity":  200
 		},
 		"maze10": {
-			"pos":        	[ 11.45f, 7.25f],
+			"pos":        	[ 11.3f, 7.25f],
 			"size":       	[ 2.4f, 4.0f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
@@ -310,7 +310,7 @@
 			"debugopacity":  200
 		},
 		"maze11": {
-			"pos":        	[ 3.95f, 7.25f],
+			"pos":        	[ 4.1f, 7.25f],
 			"size":       	[ 2.4f, 4.0f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
@@ -324,7 +324,7 @@
 			"debugopacity":  200
 		},
 		"maze12": {
-			"pos":        	[ 1.45f, 7.25f],
+			"pos":        	[ 1.7f, 7.25f],
 			"size":       	[ 2.4f, 4.0f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",
@@ -352,7 +352,7 @@
 			"debugopacity":  200
 		},
 		"maze10": {
-			"pos":        	[ 14f, 7.25f],
+			"pos":        	[ 13.7f, 7.25f],
 			"size":       	[ 2.4f, 4.0f],
 			"pad":       	[ 0.1f, 0.1f],
 			"bodytype":     "static",

@@ -515,7 +515,7 @@ public class LevelModel {
 	}
 
 	public void darkenLights(RayHandler r){
-		r.setAmbientLight(normal_r * 0.3f,normal_g * 0.3f,normal_b * 0.3f,normal_alp * 0.2f);
+		r.setAmbientLight(normal_r * 0.0f,normal_g * 0.0f,normal_b * 0.0f,normal_alp * 0.0f);
 	}
 
 	public void brightenLights(RayHandler r){
