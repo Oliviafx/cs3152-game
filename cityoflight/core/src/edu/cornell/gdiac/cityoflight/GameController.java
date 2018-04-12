@@ -403,6 +403,8 @@ public class GameController implements Screen, ContactListener {
 			controller.chooseAction();
 			controller.doAction();
 		}
+//		if (annette.getMovement())
+//		System.out.println(annette.getMovement());
 
 
 		// Rotate the avatar to face the direction of movement
@@ -752,13 +754,13 @@ public class GameController implements Screen, ContactListener {
 			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) {
 //				System.out.println("down");
 				downBox = false; }
-			else { downBox = true; }
+//			else { downBox = true; }
 			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) { upBox = false; }
-			else { upBox = true; }
+//			else { upBox = true; }
 			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) { rightBox = false; }
-			else { rightBox = true; }
+//			else { rightBox = true; }
 			if (sf1.contains("annetteLeft") || sf2.contains("annetteLeft")) { leftBox = false; }
-			else { leftBox = true; }
+//			else { leftBox = true; }
 
 
 			// Check if bird hits box
@@ -921,11 +923,25 @@ public class GameController implements Screen, ContactListener {
 //			}
 //		}
 //
-//		// checking sensors to see if box can be made
-//		if (!(sf1.contains("annetteDown")) && !(sf2.contains("annetteDown"))) { downBox = true; }
-//		if (!(sf1.contains("annetteUp")) && !(sf2.contains("annetteUp"))) { upBox = true; }
-//		if (!(sf1.contains("annetteRight")) && !(sf2.contains("annetteRight"))) { rightBox = true; }
-//		if (!(sf1.contains("annetteLeft")) && !(sf2.contains("annetteLeft"))) { leftBox = true; }
+		// checking sensors to see if box can be made
+
+//		System.out.println(annette.getMovement());
+
+		if (annette.getMovement().x > 0 || annette.getMovement().y > 0) {
+//			System.out.println("true");
+			if (!(sf1.contains("annetteDown")) && !(sf2.contains("annetteDown"))) {
+				downBox = true;
+			}
+			if (!(sf1.contains("annetteUp")) && !(sf2.contains("annetteUp"))) {
+				upBox = true;
+			}
+			if (!(sf1.contains("annetteRight")) && !(sf2.contains("annetteRight"))) {
+				rightBox = true;
+			}
+			if (!(sf1.contains("annetteLeft")) && !(sf2.contains("annetteLeft"))) {
+				leftBox = true;
+			}
+		}
 	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
