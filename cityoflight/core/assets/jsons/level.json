@@ -47,7 +47,8 @@
 		"snail": {
 			"type":         1,
 			"pos":        	[ 20.0, 3.0],
-			"radius":      	0.8,
+			"width":		1.5,
+			"height":		1.5,
 			"xinput":        -125.0,
 			"yinput":        0.0,
 			"collideBits":	"0001",
@@ -61,7 +62,8 @@
 		"dragon": {
 			"type":         2,
 			"pos":        	[ 20.0, 22.0],
-			"radius":      	0.8,
+			"width":		1.5,
+			"height":		1.5,
 			"xinput":        0,
 			"yinput":        300.0,
 			"collideBits":	"0001",
@@ -75,7 +77,8 @@
 		"lady": {
 			"type":         3,
 			"pos":        	[ 15, 12.0],
-			"radius":      	0.8,
+			"width":		1.5,
+			"height":		1.5,
 			"xinput":        -180.0,
 			"yinput":        0.0,
 			"collideBits":	"0001",

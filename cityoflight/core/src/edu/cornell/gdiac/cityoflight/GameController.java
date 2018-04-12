@@ -488,26 +488,19 @@ public class GameController implements Screen, ContactListener {
 			if (canBox) {
 				try {
 					box.initialize(boxdata, annette.getPosition(), xoff, yoff);
-					level.activate(box);
-					box.setActive(true);
-					box.setDoesExist(true);
-					box.setDeactivated(false);
-					box.setDeactivating(false);
-//				sound.stop("box_effect");
-					sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 				}
 				catch (Exception e) {
 					box = new BoxModel(1, 1);
 					level.setBox(box);
 					box.setDrawScale(level.scale);
 					box.initialize(boxdata, annette.getPosition(), xoff, yoff);
-					level.activate(box);
-					box.setActive(true);
-					box.setDoesExist(true);
-					box.setDeactivated(false);
-					box.setDeactivating(false);
-					sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 				}
+				level.activate(box);
+				box.setActive(true);
+				box.setDoesExist(true);
+				box.setDeactivated(false);
+				box.setDeactivating(false);
+				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
 			}
 			else {
 				sound.stop("no_box_effect");
@@ -745,10 +738,16 @@ public class GameController implements Screen, ContactListener {
 			}
 
 			// checking sensors to see if box can be made
-			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) { downBox = false; }
+			if (sf1.contains("annetteDown") || sf2.contains("annetteDown")) {
+//				System.out.println("down");
+				downBox = false; }
+			else { downBox = true; }
 			if (sf1.contains("annetteUp") || sf2.contains("annetteUp")) { upBox = false; }
+			else { upBox = true; }
 			if (sf1.contains("annetteRight") || sf2.contains("annetteRight")) { rightBox = false; }
+			else { rightBox = true; }
 			if (sf1.contains("annetteLeft") || sf2.contains("annetteLeft")) { leftBox = false; }
+			else { leftBox = true; }
 
 
 			// Check if bird hits box
@@ -782,7 +781,7 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 
-
+			// check annette against mazes
 			for (Obstacle b : level.getMazes()) {
 				if ((bd1 == b && bd2 == annette) || (bd1 == annette && bd2 == b )
 						|| (sf1.contains("center") && bd2 == b) || (sf2.contains("center") && bd1 == b)) {
@@ -792,7 +791,7 @@ public class GameController implements Screen, ContactListener {
 					rightBox = false;
 				}
 			}
-			// check for distraction collisions with barriers
+			// check annette against barriers
 			for (Obstacle w : level.getBarriers()) {
 				if ((bd1 == w && bd2 == annette) || (bd1 == annette && bd2== w )) {
 					downBox = false;
@@ -843,7 +842,6 @@ public class GameController implements Screen, ContactListener {
             }
 
 			// check reactivation
-
 			if ((sf1.contains("center") && bd2 == box  ) ||
 					(bd1 == box   && sf2.contains("center"))) {
 				box.setDeactivated(false);
@@ -861,7 +859,6 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	public void createAIControllers(){
-
 		if (AIcontrollers.size == 0) {
 			for (CreatureModel c : level.getCreature()) {
 				System.out.println("creating 1 AI controller.");
@@ -896,25 +893,31 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		AnnetteModel annette = level.getAnnette();
-
-		for (Obstacle b : level.getMazes()) {
-			if (!(bd1 == b && bd2 == annette) && !(bd1 == annette && bd2 == b)
-					&& !(sf1.contains("center") && bd2 == b) && !(sf2.contains("center") && bd1 == b)) {
-				downBox = true;
-				upBox = true;
-				leftBox = true;
-				rightBox = true;
-			}
-		}
-		for (Obstacle w : level.getBarriers()) {
-			if (!(bd1 == w && bd2 == annette) && !(bd1 == annette && bd2 == w)
-					&& !(sf1.contains("center") && bd2 == w) && !(sf2.contains("center") && bd1 == w)) {
-				downBox = true;
-				upBox = true;
-				leftBox = true;
-				rightBox = true;
-			}
-		}
+//
+//		for (Obstacle b : level.getMazes()) {
+//			if (!(bd1 == b && bd2 == annette) && !(bd1 == annette && bd2 == b)
+//					&& !(sf1.contains("center") && bd2 == b) && !(sf2.contains("center") && bd1 == b)) {
+//				downBox = true;
+//				upBox = true;
+//				leftBox = true;
+//				rightBox = true;
+//			}
+//		}
+//		for (Obstacle w : level.getBarriers()) {
+//			if (!(bd1 == w && bd2 == annette) && !(bd1 == annette && bd2 == w)
+//					&& !(sf1.contains("center") && bd2 == w) && !(sf2.contains("center") && bd1 == w)) {
+//				downBox = true;
+//				upBox = true;
+//				leftBox = true;
+//				rightBox = true;
+//			}
+//		}
+//
+//		// checking sensors to see if box can be made
+//		if (!(sf1.contains("annetteDown")) && !(sf2.contains("annetteDown"))) { downBox = true; }
+//		if (!(sf1.contains("annetteUp")) && !(sf2.contains("annetteUp"))) { upBox = true; }
+//		if (!(sf1.contains("annetteRight")) && !(sf2.contains("annetteRight"))) { rightBox = true; }
+//		if (!(sf1.contains("annetteLeft")) && !(sf2.contains("annetteLeft"))) { leftBox = true; }
 	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}

@@ -32,7 +32,7 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * Note that the constructor does very little.  The true initialization happens
  * by reading the JSON value.
  */
-public class CreatureModel extends WheelObstacle {
+public class CreatureModel extends BoxObstacle {
     // Physics constants
     /** The factor to multiply by the input */
     private float force;
@@ -379,7 +379,7 @@ public class CreatureModel extends WheelObstacle {
      * The main purpose of this constructor is to set the initial capsule orientation.
      */
     public CreatureModel() {
-        super(0,0,1.0f);
+        super(0,0, 1.0f,1.0f);
         setFixedRotation(false);
     }
 
@@ -394,9 +394,13 @@ public class CreatureModel extends WheelObstacle {
     public void initialize(JsonValue json) {
         setName(json.name());
         float[] pos  = json.get("pos").asFloatArray();
-        float radius = json.get("radius").asFloat();
+//        float radius = json.get("radius").asFloat();
+        float width = json.get("width").asFloat();
+        float height = json.get("height").asFloat();
         setPosition(pos[0],pos[1]);
-        setRadius(radius);
+//        setRadius(radius);
+        setWidth(width);
+        setHeight(height);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
