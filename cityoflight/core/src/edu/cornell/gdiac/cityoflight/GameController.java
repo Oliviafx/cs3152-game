@@ -508,6 +508,15 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 		else if (annette.isSummoning() && box.getDoesExist()) {
+			if (dist  <= BoxModel.INNER_RADIUS){
+				if (annette.isSummoning() && box.getDoesExist()) {
+					System.out.println("delete");
+					box.setDoesExist(false);
+					box.deactivatePhysics(level.getWorld());
+					box.dispose();
+					level.objects.remove(box);
+				}
+			}
 			sound.stop("no_box_effect");
 			sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
 		}
@@ -537,6 +546,8 @@ public class GameController implements Screen, ContactListener {
 			sound.stop("box_gone_effect");
 			sound.play("box_gone_effect", "sounds/box_gone_effect.wav", false, 0.5f);
 		}
+
+
 
 		// set debug colors
 		if (box.getDeactivated()) box.setDebugColor(Color.RED);
@@ -842,8 +853,8 @@ public class GameController implements Screen, ContactListener {
             }
 
 			// check reactivation
-			if ((sf1.contains("center") && bd2 == box  ) ||
-					(bd1 == box   && sf2.contains("center"))) {
+			if (((sf1.contains("center") && bd2 == box  ) ||
+					(bd1 == box   && sf2.contains("center"))) && box.getDeactivated()) {
 				box.setDeactivated(false);
 				box.setDeactivating(false);
 				box.reactivate();
