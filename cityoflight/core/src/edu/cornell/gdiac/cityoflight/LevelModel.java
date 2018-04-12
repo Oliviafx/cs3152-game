@@ -342,12 +342,171 @@ public class LevelModel {
 		background = null;
 	}
 
+	public void populateNew(JsonValue levelFormat){
+
+
+		background = new Texture(BACKGROUND_FILE);
+
+		int tileHeight = levelFormat.get("height").asInt();
+		int tileWidth = levelFormat.get("width").asInt();
+		//how many tiles
+		float[] pSize = {(float)tileHeight, (float)tileWidth};
+
+		int tileSize = levelFormat.get("tilewidth").asInt();
+
+        //pixels width, height
+		int[] gSize = {tileWidth*tileSize,tileHeight*tileSize};
+
+
+		world = new World(Vector2.Zero, false);
+		bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
+		scale.x = gSize[0] / pSize[0];
+		scale.y = gSize[1] / pSize[1];
+
+		// FPS is hardcoded now
+		int[] fps = { 20,  60};
+		maxFPS = fps[1];
+		minFPS = fps[0];
+		timeStep = 1.0f / maxFPS;
+		maxSteps = 1.0f + maxFPS / minFPS;
+		maxTimePerFrame = timeStep * maxSteps;
+
+		// Create the lighting if appropriate
+		if (levelFormat.has("lighting")) {
+			float c0 = levelFormat.get("lightingColor0").asFloat();
+			float c1 = levelFormat.get("lightingColor1").asFloat();
+			float c2 = levelFormat.get("lightingColor2").asFloat();
+			float c3 = levelFormat.get("lightingColor3").asFloat();
+			float[] colors = {c0,c1,c2,c3};
+			boolean gamma = levelFormat.get("lightingGamma").asBoolean();
+			boolean diffuse = levelFormat.get("lightingDiffuse").asBoolean();
+			int blur = levelFormat.get("lightingBlur").asInt();
+			initLighting(colors, gamma, diffuse, blur);
+		}
+//		createPointLights(levelFormat.get("pointlights"));
+//		createConeLights(levelFormat.get("conelights"));
+
+		// Add level goal
+
+		JsonValue idMap = levelFormat.get("tilesets");
+		JsonValue exitId = null;
+		int annetteId = 0;
+
+		//assign ID numbers to assets
+		for(int i = 0; i< idMap.size; i++){
+			String name = idMap.get(i).get("name").asString();
+
+			if(name.equals("exit")){
+				exitId = idMap.get(i);
+			}
+			else if (name.equals(""))
+		}
+
+		//loop through tiles to find specified ids and initialize
+		JsonValue layers = levelFormat.get("layers");
+		for(int i = 0; i < layers.size; i++){
+			JsonValue layer = layers.get(i);
+
+			if(layer.get("type").asString().equals("tilelayer")){
+
+				int[] data = layer.get("data").asIntArray();
+				int height = layer.get("height").asInt();
+				int width = layer.get("width").asInt();
+				int[][] dataMatrix = new int[width][height];
+
+				for(int j = 0; j < height*width; j++){
+					dataMatrix[j%width][(j - (6%width))/height] = data[j];
+				}
+
+			}
+			else{
+				JsonValue objects = layer.get("objects");
+				for(int j = 0; j< objects.size; j++){
+					JsonValue obj = objects.get(j);
+					int id = obj.get("id").asInt();
+					//check ids equal to specific objects
+					if(exitId.get("firstgid").asInt() == id){
+						goalDoor = new ExitModel();
+						float x = obj.get("x").asFloat();
+						float y = obj.get("y").asFloat();
+						float[] pos = {x,y};
+						float width = obj.get("width").asFloat();
+						float height = obj.get("height").asFloat();
+						String debugC = obj.get("debugColor").asString();
+						String tex = obj.get("texture").asString();
+						goalDoor.initialize(pos,width,height,debugC, tex);
+						goalDoor.setDrawScale(scale);
+						activate(goalDoor);
+					}
+					else if (annetteId == id){
+						// Create Annette
+						annette = new AnnetteModel();
+						JsonValue annettedata = levelFormat.get("annette");
+
+						annette.initialize(annettedata);
+						annette.setDrawScale(scale);
+						activate(annette);
+
+
+					}
+				}
+
+				//this is an object layer
+
+			}
+		}
+
+
+
+
+
+//		JsonValue bounds = levelFormat.getChild("exterior");
+//		while (bounds != null) {
+//			ExteriorModel obj = new ExteriorModel();
+//			obj.initialize(bounds);
+//			obj.setDrawScale(scale);
+//			activate(obj);
+//			barriers.add(obj);
+//			bounds = bounds.next();
+//		}
+
+		JsonValue walls = levelFormat.getChild("interior");
+		while (walls != null) {
+			InteriorModel obj = new InteriorModel();
+			obj.initialize(walls);
+			obj.setDrawScale(scale);
+			activate(obj);
+			mazes.add(obj);
+			walls = walls.next();
+		}
+
+
+		//attachLights(creature);
+
+		// Create cone lights to be line of sights of creatures.
+		createLineofSight(levelFormat.get("vision"));
+		// Create the creatures and attach light sources
+		createCreatures(levelFormat.get("creatures"));
+		//createCreature(levelFormat.get("creatures"), "snail", 0);
+		//createCreature(levelFormat.get("creatures"), "tarasque", 1);
+		//createCreature(levelFormat.get("creatures"), "blanche", 2);
+
+		// Create box
+		box = new BoxModel(1, 1);
+
+		if (distraction != null) {
+			distraction.setAlive(false);
+		}
+
+	}
+
 	/**
 	 * Lays out the game geography from the given JSON file
 	 *
 	 * @param levelFormat	the JSON tree defining the level
 	 */
 	public void populate(JsonValue levelFormat) {
+
 		background = new Texture(BACKGROUND_FILE);
         float[] pSize = levelFormat.get("physicsSize").asFloatArray();
         int[] gSize = levelFormat.get("graphicSize").asIntArray();
@@ -367,7 +526,7 @@ public class LevelModel {
 
         // Create the lighting if appropriate
         if (levelFormat.has("lighting")) {
-            initLighting(levelFormat.get("lighting"));
+            //initLighting(levelFormat.get("lighting"));
         }
 //		createPointLights(levelFormat.get("pointlights"));
 //		createConeLights(levelFormat.get("conelights"));
@@ -454,21 +613,19 @@ public class LevelModel {
 	 * However, if activeLight is -1, this will be ignored and the level will be
 	 * completely visible.
 	 *
-	 * @param  light	the JSON tree defining the light
+	 *
 	 */
-	private void initLighting(JsonValue light) {
+	private void initLighting(float[] color, boolean gamma, boolean diffuse, int blur) {
 		raycamera = new OrthographicCamera(bounds.width,bounds.height);
 		raycamera.position.set(bounds.width/2.0f, bounds.height/2.0f, 0);
 		raycamera.update();
 
-		RayHandler.setGammaCorrection(light.getBoolean("gamma"));
-		RayHandler.useDiffuseLight(light.getBoolean("diffuse"));
+		RayHandler.setGammaCorrection(gamma);
+		RayHandler.useDiffuseLight(diffuse);
 		rayhandler = new RayHandler(world, Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
 		rayhandler.setCombinedMatrix(raycamera);
 
-		float[] color = light.get("color").asFloatArray();
 		rayhandler.setAmbientLight(color[0], color[0], color[0], color[0]);
-		int blur = light.getInt("blur");
 		rayhandler.setBlur(blur > 0);
 		rayhandler.setBlurNum(blur);
 	}
