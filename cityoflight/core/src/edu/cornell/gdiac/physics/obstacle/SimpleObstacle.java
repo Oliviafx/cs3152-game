@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import edu.cornell.gdiac.cityoflight.GameController;
 
 /**
  * Base model class to support collisions.
@@ -774,7 +775,7 @@ public abstract class SimpleObstacle extends Obstacle {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),0.5f,0.5f);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE, GameController.TEMP_SCALE);
 		}
 	}
 	

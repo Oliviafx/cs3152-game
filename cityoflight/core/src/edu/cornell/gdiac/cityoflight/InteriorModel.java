@@ -279,7 +279,7 @@ public class InteriorModel extends BoxObstacle {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (region != null) {
-			canvas.draw(region,Color.WHITE,0,0,(getX()-anchor.x)*drawScale.x,(getY()-anchor.y)*drawScale.y,getAngle(),1,1);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE, GameController.TEMP_SCALE);
 		}
 	}
 }
