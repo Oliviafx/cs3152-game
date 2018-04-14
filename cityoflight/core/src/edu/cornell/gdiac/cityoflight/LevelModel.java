@@ -73,6 +73,8 @@ public class LevelModel {
 	/**Reference to background tiles*/
 	private Array<BackgroundModel> tiles = new Array<BackgroundModel>();
 
+
+
 	/** The interior models */
 	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
 	/** The exterior models */
@@ -131,8 +133,6 @@ public class LevelModel {
 	private static final String BLANCHE_LAYER_NAME = "Blanche";
 	private static final String TARASQUE_LAYER_NAME = "Tarasque";
 	private static final String SNAIL_LAYER_NAME = "Snail";
-
-
 
 	/**
 	 * Returns the bounding rectangle for the physics world
@@ -377,15 +377,20 @@ public class LevelModel {
 		//how many tiles
 //		float[] pSize = {(float)tileHeight * tileWidth, (float)tileWidth * tileWidth};
 
-		float[] pSize = {32, 24};
-		int[] gSize = {32*64,24*64};
+		// how many tiles
+		float[] pSize = {(float)tileWidth, (float)tileHeight};
+		// pixels width, height
+		int[] gSize = {tileWidth*tileSize,tileHeight*tileSize};
 
 
 
 		world = new World(Vector2.Zero, false);
 		bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
-		scale.x = gSize[0] / pSize[0];
-		scale.y = gSize[1] / pSize[1];
+		scale.x = tileSize;
+//		scale.x = gSize[0] / pSize[0];
+//		System.out.println("scale.x: " + scale.x);
+		scale.y = tileSize;
+//		scale.y = gSize[1] / pSize[1];
 
 		// FPS is hardcoded now
 		int[] fps = { 20,  60};
@@ -427,20 +432,31 @@ public class LevelModel {
 		JsonValue layers = levelFormat.get("layers");
 		JsonValue lineOfSightJSON = null;
 
+		//loop through to find the name keys of textures used
+		HashMap<Integer, String> idToTexture = new HashMap<Integer, String>();
+		for(int j = 0; j< idMap.size; j++){
+			JsonValue obj = idMap.get(j);
+
+			int id = obj.get("firstgid").asInt();
+			String tex = obj.get("name").asString();
+//			System.out.println(tex + " : " + id);
+			idToTexture.put(id,tex);
+		}
 
 		for(int i = 0; i < layers.size; i++){
 			JsonValue layer = layers.get(i);
 			String layerName = layer.get("name").asString();
+
+			// just for the Object layers
 			JsonValue objects = layer.get("objects");
 
 			if(layerName.equals("box_Boundaries")){
-
+				// TODO
 			}
 			else if(layerName.equals(BLANCHE_LAYER_NAME) ||
 					layerName.equals(SNAIL_LAYER_NAME) ||
 					layerName.equals(TARASQUE_LAYER_NAME)){
 				System.out.println("loading creatures");
-
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -449,7 +465,9 @@ public class LevelModel {
 				//assign building and box values to indexes in hashmaps
 				for(int j = 0; j< objects.size; j++){
 					JsonValue obj = objects.get(j);
+//					System.out.println(obj + "next obj is: ");
 					String objName = obj.get("name").asString();
+//					System.out.println(objName + "next objName is: ");
 					String[] bSplit = objName.split(layerName.toLowerCase());
 					if(bSplit[1].length() > 3 ){
 						//add to box list
@@ -541,8 +559,10 @@ public class LevelModel {
 					if(obj.get("name").asString().equals("annette")){
 						annetteData = obj.get("properties");
 					}
-					else annetteBounds = obj;
-
+					else if (obj.get("name").asString().equals("annette_box")) {
+						annetteBounds = obj;
+//						System.out.println(obj);
+					}
 				}
 
 				annette.initialize(annetteData, annetteBounds);
@@ -636,8 +656,9 @@ public class LevelModel {
 
 			}
 			else if(layerName.equals("Outline")){
-
-
+				int[] data = layer.get("data").asIntArray();
+				int height = layer.get("height").asInt();
+				int width = layer.get("width").asInt();
 
 
 			}
@@ -648,16 +669,8 @@ public class LevelModel {
 				int[] data = layer.get("data").asIntArray();
 				int height = layer.get("height").asInt();
 				int width = layer.get("width").asInt();
-				//loop through to find the name keys of textures used
-				HashMap<Integer, String> idToTexture = new HashMap<Integer, String>();
-				for(int j = 0; j< idMap.size; j++){
-					JsonValue obj = idMap.get(j);
 
-					int id = obj.get("firstgid").asInt();
-					String tex = obj.get("name").asString();
-					//System.out.println(tex + " : " + id);
-					idToTexture.put(id,tex);
-				}
+
 
 				HashMap<Integer, FilmStrip> idToFilmStrip = new HashMap<Integer, FilmStrip>();
 
@@ -665,6 +678,7 @@ public class LevelModel {
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
 					int newx = (height - 1 - ((j - (6%width))/height));
 					int newy = (j%width);
+					System.out.println("newx "+ newx + " new y " + newy);
 
 					if(idToFilmStrip.containsKey(data[j])){
 						tiles.add(new BackgroundModel(newx, newy, idToFilmStrip.get(data[j])));
@@ -1249,7 +1263,7 @@ public class LevelModel {
 		//DRAWS BACKGROUND TILES HERE
 		for(int i =0;i< tiles.size; i++){
 			tiles.get(i).draw(canvas);
-			//System.out.println(annette.getX());
+//			System.out.println(annette.getX());
 
 		}
 

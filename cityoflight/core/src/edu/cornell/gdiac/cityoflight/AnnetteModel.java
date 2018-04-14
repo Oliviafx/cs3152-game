@@ -296,7 +296,7 @@ public class AnnetteModel extends BoxObstacle {
         float x = aBounds.get("x").asFloat() / 64;
         float y = aBounds.get("y").asFloat() / 64;
 
-        System.out.println(x + " " + y);
+        System.out.println(x + " " + y + " annette initialize");
 
         float width = aBounds.get("width").asFloat();
         float height = aBounds.get("height").asFloat();
