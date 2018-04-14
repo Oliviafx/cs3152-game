@@ -8,6 +8,7 @@ import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
+
 /**Provides drawing functions for background tiles with no obstacles*/
 public class BackgroundModel {
     private int x;
@@ -21,11 +22,12 @@ public class BackgroundModel {
     }
 
     public void draw(ObstacleCanvas canvas){
-        float scale = GameController.TEMP_SCALE;
+//        float scale = GameController.TEMP_SCALE;
+        float scale = 64; // hard coded
         if (tileTexture != null) {
-           // System.out.println("x: "+x+", y: "+y);
-            canvas.draw(tileTexture, Color.WHITE, x, y, x * scale, y * scale, 0,scale , scale);
-           // System.out.println("drawing tiles");
+//            System.out.println("x*scale: "+ x * scale +", y*scale: "+ y * scale);
+            canvas.draw(tileTexture, Color.WHITE, x * scale, y * scale, x, y, 0,scale , scale);
+//            System.out.println("drawing tiles");
         }
         else{
             System.out.println("tex not found");
