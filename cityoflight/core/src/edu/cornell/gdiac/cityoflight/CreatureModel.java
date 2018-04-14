@@ -389,15 +389,15 @@ public class CreatureModel extends BoxObstacle {
      * The JSON value has been parsed and is part of a bigger level file.  However,
      * this JSON value is limited to the creature subtree.
      *
-     * @param json	the JSON subtree defining the creature
+     * @param json	the
      */
-    public void initialize(JsonValue json) {
+    public void initialize(JsonValue json, JsonValue bounds, FilmStrip tex1, FilmStrip tex2, FilmStrip tex3) {
         setName(json.name());
-        float[] pos  = json.get("pos").asFloatArray();
+        float[] pos  = {bounds.get("x").asFloat(),bounds.get("y").asFloat()};
 //        float radius = json.get("radius").asFloat();
-        float width = json.get("width").asFloat();
-        float height = json.get("height").asFloat();
-        setPosition(pos[0],pos[1]);
+        float width = bounds.get("width").asFloat();
+        float height = bounds.get("height").asFloat();
+        setPosition(pos[0]/64,pos[1]/64);
 //        setRadius(radius);
         setWidth(width);
         setHeight(height);
@@ -430,34 +430,15 @@ public class CreatureModel extends BoxObstacle {
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
-        // Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
-        try {
-            filmstrip = (FilmStrip)texture;
-            sideAnim = (FilmStrip)texture;
-        } catch (Exception e) {
-            filmstrip = null;
-            sideAnim = null;
-        }
 
-        String key2 = json.get("texture2").asString();
-        TextureRegion texture2 = JsonAssetManager.getInstance().getEntry(key2, TextureRegion.class);
-        try {
-            downAnim = (FilmStrip)texture2;
-        } catch (Exception e) {
-            downAnim = null;
-        }
+        filmstrip = tex1;
+        sideAnim = tex1;
 
-        String key3 = json.get("texture3").asString();
-        TextureRegion texture3 = JsonAssetManager.getInstance().getEntry(key3, TextureRegion.class);
-        try {
-            upAnim = (FilmStrip)texture3;
-        } catch (Exception e) {
-            upAnim = null;
-        }
+        downAnim = tex2;
 
-        setTexture(texture);
+        upAnim = tex3;
+
+        setTexture(tex1);
 
         setBodyType(CREATURE_BODY_TYPE.equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
         setStartFrame(CREATURE_START_FRAME);
@@ -546,6 +527,7 @@ public class CreatureModel extends BoxObstacle {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
+        System.out.println(origin.x + " "+ origin.y);
         int isReflected = movement.x < 0 ? -1 : 1;
         int xOffset = 0;
         FilmStrip dirTexture = null;

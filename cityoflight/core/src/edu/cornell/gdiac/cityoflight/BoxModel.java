@@ -359,7 +359,7 @@ public class BoxModel extends BoxObstacle {
 
 
     public void initialize(JsonValue json, Vector2 annettepos, float xoff, float yoff) {
-        setName(json.name());
+        setName("box");
         float width = json.get("width").asFloat();
         float height = json.get("height").asFloat();
         setWidth(width);
