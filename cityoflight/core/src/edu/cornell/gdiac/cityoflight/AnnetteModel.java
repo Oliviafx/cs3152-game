@@ -292,9 +292,11 @@ public class AnnetteModel extends BoxObstacle {
      * @param sideJson	the JSON subtree defining the Annette
      */
     public void initialize(JsonValue sideJson, JsonValue aBounds) {
-        setName(sideJson.name());
-        float x = aBounds.get("x").asFloat();
-        float y = aBounds.get("y").asFloat();
+        setName("annette");
+        float x = aBounds.get("x").asFloat() / 64;
+        float y = aBounds.get("y").asFloat() / 64;
+
+        System.out.println(x + " " + y);
 
         float width = aBounds.get("width").asFloat();
         float height = aBounds.get("height").asFloat();
@@ -541,7 +543,11 @@ public class AnnetteModel extends BoxObstacle {
         }
 
         if (texture != null) {
+            System.out.println(getX() + " " + getY());
             canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
+        }
+        else{
+            System.out.println("can't find annette texture");
         }
     }
 
