@@ -684,6 +684,7 @@ public class LevelModel {
 
 					if(idToFilmStrip.containsKey(data[j])){
 						tiles.add(new BackgroundModel(newx, newy, idToFilmStrip.get(data[j])));
+						System.out.println("j " + j);
 					}
 					else{
 						if(! idToTexture.containsKey(data[j])){
@@ -706,12 +707,14 @@ public class LevelModel {
 
 							//System.out.println(tileTexture!=null);
 
-							for(int k = 0; k< j-f;k++){
-								//TODO: implement different frames here
-								tileTexture.setFrame(0);
-
-								idToFilmStrip.put(data[j] - f + k, tileTexture);
-							}
+//							for(int k = 0; k< j-f;k++){
+//								//TODO: implement different frames here
+//								System.out.println("j in loop " + j);
+//								System.out.println("data " + data[j]);
+//								tileTexture.setFrame(data[j] - f);
+//
+//								idToFilmStrip.put(data[j] - f + k, tileTexture);
+//							}
 
 						}
 						else {
@@ -727,6 +730,33 @@ public class LevelModel {
 							//idToFilmStrip.put(data[j], tileTexture);
 						}
 					}
+					int f = 0;
+					while(f<j && !idToTexture.containsKey(data[j] - f)){
+
+						f++;
+					}
+					//System.out.println(data[j] + " : "+ (data[j] - f));
+					String texName = idToTexture.get(data[j] - f);
+					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
+					//System.out.println("texname "+texName);
+					FilmStrip tileTexture;
+					try {
+						tileTexture = (FilmStrip) texture;
+					} catch (Exception e) {
+						tileTexture = null;
+					}
+
+					//System.out.println(tileTexture!=null);
+
+					for(int k = 0; k< j-f;k++){
+						//TODO: implement different frames here
+						System.out.println("j in loop " + j);
+						System.out.println("data " + (data[j] - 1));
+						tileTexture.setFrame(11);
+
+						idToFilmStrip.put(data[j] - f + k, tileTexture);
+					}
+
 
 				}
 			}
