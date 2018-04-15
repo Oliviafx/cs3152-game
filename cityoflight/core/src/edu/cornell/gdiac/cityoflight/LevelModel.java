@@ -1294,7 +1294,7 @@ public class LevelModel {
 //		oTran.mul(wTran);
 
 		// Draw the sprites first (will be hidden by shadows)
-		canvas.begin(oTran);
+		canvas.begin();
 		//canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas.getHeight());
 		//canvas.draw(background, 0, 0);
 
@@ -1319,7 +1319,7 @@ public class LevelModel {
 
 		}
 
-		canvas.begin(oTran);
+		canvas.begin();
 
 		int n = objects.size();
 		for (int x=0; x<n; x++) // bubble sort outer loop
@@ -1365,7 +1365,7 @@ public class LevelModel {
 
 		// Draw debugging on top of everything.
 		if (debug) {
-			canvas.beginDebug(oTran);
+			canvas.beginDebug();
 			for(Obstacle obj : objects) {
 				obj.drawDebug(canvas);
 			}

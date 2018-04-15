@@ -277,15 +277,14 @@ public class InteriorModel extends BoxObstacle {
 
 		if (region != null) {
 
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE, GameController.TEMP_SCALE);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
 		}
 	}
 
 	public void drawDebug(ObstacleCanvas canvas) {
 		super.drawDebug(canvas);
 //		if (self.debugColor != null) {
-			canvas.drawPhysics(shape,Color.GREEN, getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE, GameController.TEMP_SCALE);
-//            canvas.drawPhysics(annetteShape, Color.WHITE, 400, 300, getAngle(), GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
+			canvas.drawPhysics(shape,Color.GREEN, getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE * 2);
 //		}
 	}
 }
