@@ -386,11 +386,11 @@ public class LevelModel {
 
 		world = new World(Vector2.Zero, false);
 		bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
-		scale.x = tileSize;
-//		scale.x = gSize[0] / pSize[0];
-//		System.out.println("scale.x: " + scale.x);
-		scale.y = tileSize;
-//		scale.y = gSize[1] / pSize[1];
+//		scale.x = tileSize;
+		scale.x = gSize[0] / pSize[0];
+		System.out.println("scale.x: " + scale.x);
+//		scale.y = tileSize;
+		scale.y = gSize[1] / pSize[1];
 
 		// FPS is hardcoded now
 		int[] fps = { 20,  60};
@@ -524,6 +524,7 @@ public class LevelModel {
 					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
 					creature.initialize(buildingJSON, boxJSON, film[0],film[1],film[2]);
+//					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.setDrawScale(scale);
 					activate(creature);
 					System.out.println(lights.get(index) + ": lights");
@@ -648,6 +649,7 @@ public class LevelModel {
 						obj2.initialize(pos, size, pad, debugColor, film);
 						obj2.setDrawScale(scale);
 						activate(obj2);
+//						System.out.println(pos[0] + " " + pos[1]);
 						System.out.println("activating building");
 						mazes.add(obj2);
 					}
@@ -678,7 +680,7 @@ public class LevelModel {
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
 					int newx = (height - 1 - ((j - (6%width))/height));
 					int newy = (j%width);
-					System.out.println("newx "+ newx + " new y " + newy);
+//					System.out.println("newx "+ newx + " new y " + newy);
 
 					if(idToFilmStrip.containsKey(data[j])){
 						tiles.add(new BackgroundModel(newx, newy, idToFilmStrip.get(data[j])));
@@ -1177,6 +1179,7 @@ public class LevelModel {
 			annette.update(dt);
 			for (CreatureModel creature : creatures){
 				creature.update(dt);
+//				System.out.println(creature.getPosition());
 			}
 			goalDoor.update(dt);
 			box.update(dt);
@@ -1251,8 +1254,13 @@ public class LevelModel {
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
 
-//		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
-//		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
+		System.out.println(pos.x + " " + pos.y);
+
+//		float tx = pos.x;
+//		float ty = pos.y;
+
+		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
+		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
 //		oTran.mul(wTran);
 
 		// Draw the sprites first (will be hidden by shadows)
@@ -1272,7 +1280,11 @@ public class LevelModel {
 		canvas.end();
 
 		if (rayhandler != null) {
-			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth() * 2, canvas.getHeight() * 2);
+//			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight(), canvas.getWidth()/4, canvas.getHeight()/4);
+			raycamera.position.set(tx, ty, 0);
+//			raycamera.zoom = raycamera.zoom / 2;
+			raycamera.update();
+			rayhandler.setCombinedMatrix(raycamera);
 			rayhandler.render();
 
 		}
@@ -1300,7 +1312,7 @@ public class LevelModel {
 
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
-			System.out.println(obj.getName());
+//			System.out.println(obj.getName());
 		}
 
 		if (box.getDeactivated()) {

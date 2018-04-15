@@ -300,7 +300,8 @@ public class AnnetteModel extends BoxObstacle {
 
         float width = aBounds.get("width").asFloat();
         float height = aBounds.get("height").asFloat();
-        setPosition(x,y);
+//        setPosition(x,y);
+        setPosition(1, 1);
         setWidth(width);
         setHeight(height);
 
@@ -543,8 +544,8 @@ public class AnnetteModel extends BoxObstacle {
         }
 
         if (texture != null) {
-            System.out.println(getX() + " " + getY());
-            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
+//            System.out.println(getX() * drawScale.x + " " + getY() * drawScale.y);
+            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, 400, 300, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
         }
         else{
             System.out.println("can't find annette texture");
@@ -566,6 +567,7 @@ public class AnnetteModel extends BoxObstacle {
             canvas.drawPhysics(sensorShapeR,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
             canvas.drawPhysics(sensorShapeL,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
             canvas.drawPhysics(annetteShape,Color.ORANGE,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
+//            canvas.drawPhysics(annetteShape, Color.WHITE, 400, 300, getAngle(), GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
         }
     }
 

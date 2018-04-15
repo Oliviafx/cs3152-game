@@ -26,7 +26,7 @@ public class BackgroundModel {
         float scale = 64; // hard coded
         if (tileTexture != null) {
 //            System.out.println("x*scale: "+ x * scale +", y*scale: "+ y * scale);
-            canvas.draw(tileTexture, Color.WHITE, x * scale, y * scale, x, y, 0,scale , scale);
+            canvas.draw(tileTexture, Color.WHITE, 0, 0 , x * scale, y * scale, 0,1 , 1);
 //            System.out.println("drawing tiles");
         }
         else{
