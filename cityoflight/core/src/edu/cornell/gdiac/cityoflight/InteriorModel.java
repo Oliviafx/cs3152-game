@@ -246,7 +246,7 @@ public class InteriorModel extends BoxObstacle {
 		
 		// Create the collision filter (used for light penetration)
       	short collideBits = LevelModel.bitStringToShort("1000");
-      	short excludeBits = LevelModel.bitStringToComplement("0000");
+      	short excludeBits = LevelModel.bitStringToComplement("0010");
       	Filter filter = new Filter();
       	filter.categoryBits = collideBits;
       	filter.maskBits = excludeBits;
@@ -279,5 +279,13 @@ public class InteriorModel extends BoxObstacle {
 
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE, GameController.TEMP_SCALE);
 		}
+	}
+
+	public void drawDebug(ObstacleCanvas canvas) {
+		super.drawDebug(canvas);
+//		if (self.debugColor != null) {
+			canvas.drawPhysics(shape,Color.GREEN, getX()*drawScale.x,getY()*drawScale.x,getAngle(),GameController.TEMP_SCALE, GameController.TEMP_SCALE);
+//            canvas.drawPhysics(annetteShape, Color.WHITE, 400, 300, getAngle(), GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
+//		}
 	}
 }
