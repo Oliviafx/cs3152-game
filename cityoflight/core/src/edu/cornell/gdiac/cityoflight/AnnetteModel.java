@@ -301,8 +301,8 @@ public class AnnetteModel extends BoxObstacle {
 
         float width = aBounds.get("width").asFloat()/64;
         float height = aBounds.get("height").asFloat()/64;
-//        setPosition(x,y);
-        setPosition(1, 1);
+        setPosition(x,y);
+//        setPosition(1, 1);
         setWidth(width);
         setHeight(height);
 
