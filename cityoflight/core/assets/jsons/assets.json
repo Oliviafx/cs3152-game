@@ -61,6 +61,16 @@
 			"file": 	"textures/128_flowershop.png",
 			"wrap": 	true
 		},
+		"floor_tiles": {
+			"file": 	"textures/floor_tiles.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		4,
+				"cols":		3,
+				"first":	1
+			}
+		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
     		"wrap":  	false,
