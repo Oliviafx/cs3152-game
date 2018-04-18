@@ -1325,6 +1325,7 @@ public class LevelModel {
 		for (int x=0; x<n; x++) // bubble sort outer loop
 		{
 			for (int i=0; i < n - x - 1; i++) {
+				System.out.println("lowestY: "+ objects.get(i).getName() + " -- " + objects.get(i).getLowestY());
 				if (objects.get(i).getLowestY() < (objects.get(i+1).getLowestY()) )
 				{
 					Obstacle temp = objects.get(i);
