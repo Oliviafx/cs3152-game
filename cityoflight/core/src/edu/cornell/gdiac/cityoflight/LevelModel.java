@@ -678,8 +678,8 @@ public class LevelModel {
 
 				for(int j = 0; j < height*width; j++){
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
-					int newx = (height - 1 - ((j - (6%width))/height));
-					int newy = (j%width);
+					int newx = j % width; //(height - 1 - ((j - (6%width))/height));
+					int newy = j / width;//(j%width);
 //					System.out.println("newx "+ newx + " new y " + newy);
 
 					if(idToFilmStrip.containsKey(data[j])){
@@ -1294,7 +1294,7 @@ public class LevelModel {
 //		oTran.mul(wTran);
 
 		// Draw the sprites first (will be hidden by shadows)
-		canvas.begin();
+		canvas.begin(oTran);
 		//canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas.getHeight());
 		//canvas.draw(background, 0, 0);
 

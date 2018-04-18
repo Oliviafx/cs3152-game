@@ -360,8 +360,9 @@ public class BoxModel extends BoxObstacle {
 
     public void initialize(JsonValue json, Vector2 annettepos, float xoff, float yoff) {
         setName("box");
-        float width = json.get("width").asFloat();
-        float height = json.get("height").asFloat();
+        float width = json.get("width").asFloat()/64;
+//        System.out.println("drawScale.x " + drawScale.x);
+        float height = json.get("height").asFloat()/64;
         setWidth(width);
         setHeight(height);
         setPosition(annettepos.x + xoff,annettepos.y + yoff);
