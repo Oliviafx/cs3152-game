@@ -530,7 +530,7 @@ public class CreatureModel extends BoxObstacle {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
-        System.out.println(origin.x + " "+ origin.y);
+//        System.out.println(origin.x + " "+ origin.y);
         int isReflected = movement.x < 0 ? -1 : 1;
         int xOffset = 0;
         FilmStrip dirTexture = null;
@@ -557,12 +557,12 @@ public class CreatureModel extends BoxObstacle {
         else{
             if(texture!= null)
 
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX(),getY(),0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX(),getY(),0,0.75f * isReflected,0.75f);
         }
 
         if (texture != null && dirTexture != null) {
-            System.out.println("creature position " + getX() + " " + getY());
-            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,getX() + xOffset,getY(),0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
+//            System.out.println("creature position " + getX() + " " + getY());
+            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,getX() + xOffset,getY(),0,0.75f* isReflected,0.75f);
         }
     }
 }
