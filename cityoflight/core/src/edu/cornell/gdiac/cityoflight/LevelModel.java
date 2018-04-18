@@ -610,11 +610,8 @@ public class LevelModel {
 
 				}
 
-				HashMap<String, TextureRegion> idToFilmStrip = new HashMap<String, TextureRegion>();
-
-
 				//initialize buildings
-				for(int j = 0; j<numToBuilding.size()/2; j++){
+				for(int j = 0; j<numToBuilding.size(); j++){
 
 					TextureRegion film = null;
 					JsonValue buildingJSON = numToBuilding.get((j+1) + "").get("properties");
@@ -622,17 +619,13 @@ public class LevelModel {
 					String textName = buildingJSON.get("texture").asString();
 
 
-					if(idToFilmStrip.containsKey(textName)){
-						film = idToFilmStrip.get(textName);
-					}
-					else{
+					TextureRegion texture = JsonAssetManager.getInstance().getEntry(textName.trim(), TextureRegion.class);
+					film = texture;
 
-						TextureRegion texture = JsonAssetManager.getInstance().getEntry(textName.trim(), TextureRegion.class);
-						//System.out.println("textname: "+textName + " : "+(textName.equals("64_building_short")));
-						film = texture;
+					System.out.println("textname: "+textName + " : " + texture);
 
-						idToFilmStrip.put(textName,texture);
-					}
+
+
 
 
 
@@ -684,7 +677,6 @@ public class LevelModel {
 
 					if(idToFilmStrip.containsKey(data[j])){
 						tiles.add(new BackgroundModel(newx, newy, idToFilmStrip.get(data[j])));
-						System.out.println("j " + j);
 					}
 					else{
 						if(! idToTexture.containsKey(data[j])){
@@ -1284,7 +1276,7 @@ public class LevelModel {
 //		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
 
-		System.out.println(pos.x + " " + pos.y);
+		//System.out.println(pos.x + " " + pos.y);
 
 		float tx = pos.x;
 		float ty = pos.y;
@@ -1325,7 +1317,7 @@ public class LevelModel {
 		for (int x=0; x<n; x++) // bubble sort outer loop
 		{
 			for (int i=0; i < n - x - 1; i++) {
-				System.out.println("lowestY: "+ objects.get(i).getName() + " -- " + objects.get(i).getLowestY());
+				//System.out.println("lowestY: "+ objects.get(i).getName() + " -- " + objects.get(i).getLowestY());
 				if (objects.get(i).getLowestY() < (objects.get(i+1).getLowestY()) )
 				{
 					Obstacle temp = objects.get(i);
