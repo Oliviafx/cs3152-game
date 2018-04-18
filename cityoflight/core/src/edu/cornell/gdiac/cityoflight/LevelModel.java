@@ -388,7 +388,7 @@ public class LevelModel {
 		bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
 //		scale.x = tileSize;
 		scale.x = gSize[0] / pSize[0];
-		System.out.println("scale.x: " + scale.x);
+//		System.out.println("scale.x: " + scale.x);
 //		scale.y = tileSize;
 		scale.y = gSize[1] / pSize[1];
 
@@ -633,9 +633,9 @@ public class LevelModel {
 
 					InteriorModel obj2 = new InteriorModel();
 					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64};
-					float[] size = {boxJSON.get("width").asFloat(),boxJSON.get("height").asFloat()};
+					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
 					float[] pad = { 0.1f, 0.1f};
-					String debugColor = "yellow";
+					String debugColor = "red";
 
 					if(film!= null) {
 
@@ -1317,7 +1317,6 @@ public class LevelModel {
 		for (int x=0; x<n; x++) // bubble sort outer loop
 		{
 			for (int i=0; i < n - x - 1; i++) {
-				//System.out.println("lowestY: "+ objects.get(i).getName() + " -- " + objects.get(i).getLowestY());
 				if (objects.get(i).getLowestY() < (objects.get(i+1).getLowestY()) )
 				{
 					Obstacle temp = objects.get(i);
