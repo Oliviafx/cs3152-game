@@ -89,7 +89,7 @@ public class LevelModel {
 
 	private static final int MAX_ALPHA = 255;
 	private static final float BOX_MARGIN = 0.8f;
-	public static final float TRANSLATION = -50.0f;
+	public static final float TRANSLATION = -64;
 
 	/** All the objects in the world. */
 	protected ArrayList<Obstacle> objects  = new ArrayList<Obstacle>();
@@ -750,8 +750,8 @@ public class LevelModel {
 
 					for(int k = 0; k< j-f;k++){
 						//TODO: implement different frames here
-						System.out.println("j in loop " + j);
-						System.out.println("data " + (data[j] - 1));
+//						System.out.println("j in loop " + j);
+//						System.out.println("data " + (data[j] - 1));
 						tileTexture.setFrame(11);
 
 						idToFilmStrip.put(data[j] - f + k, tileTexture);
@@ -1289,7 +1289,7 @@ public class LevelModel {
 		float tx = pos.x;
 		float ty = pos.y;
 
-		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
+		oTran.setToTranslation(TRANSLATION*tx + canvas.getWidth()/2, TRANSLATION*ty + canvas.getHeight()/2);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
 //		oTran.mul(wTran);
 
