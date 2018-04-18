@@ -59,10 +59,10 @@ public class ExitModel extends BoxObstacle {
 
 
 		setName("exit");
-		setPosition(pos[0],pos[1]);
+		setPosition(pos[0]/64,pos[1]/64);
 //		setRadius(radius);
-		setWidth(width);
-		setHeight(height);
+		setWidth(width/64);
+		setHeight(height/64);
 
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
