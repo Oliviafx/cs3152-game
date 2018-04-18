@@ -1280,14 +1280,14 @@ public class LevelModel {
 //		float cameraYStart = 0;
 		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
 		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
-		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
-		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
-		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
+//		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+//		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+//		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
 
 		System.out.println(pos.x + " " + pos.y);
 
-//		float tx = pos.x;
-//		float ty = pos.y;
+		float tx = pos.x;
+		float ty = pos.y;
 
 		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
@@ -1319,7 +1319,7 @@ public class LevelModel {
 
 		}
 
-		canvas.begin();
+		canvas.begin(oTran);
 
 		int n = objects.size();
 		for (int x=0; x<n; x++) // bubble sort outer loop
@@ -1365,7 +1365,7 @@ public class LevelModel {
 
 		// Draw debugging on top of everything.
 		if (debug) {
-			canvas.beginDebug();
+			canvas.beginDebug(oTran);
 			for(Obstacle obj : objects) {
 				obj.drawDebug(canvas);
 			}
