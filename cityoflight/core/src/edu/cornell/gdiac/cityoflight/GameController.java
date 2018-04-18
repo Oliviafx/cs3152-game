@@ -317,7 +317,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level.json"));
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/test.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
@@ -725,7 +725,7 @@ public class GameController implements Screen, ContactListener {
 
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
-				setComplete(true);
+//				setComplete(true);
 				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
 			}
 
@@ -733,7 +733,7 @@ public class GameController implements Screen, ContactListener {
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					if (!isFailure()) { sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f); }
-					setFailure(true);
+//					setFailure(true);
 				}
 			}
 

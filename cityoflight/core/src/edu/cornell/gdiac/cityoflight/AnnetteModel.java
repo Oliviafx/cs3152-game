@@ -291,12 +291,18 @@ public class AnnetteModel extends BoxObstacle {
      *
      * @param sideJson	the JSON subtree defining the Annette
      */
-    public void initialize(JsonValue sideJson) {
-        setName(sideJson.name());
-        float[] pos  = sideJson.get("pos").asFloatArray();
-        float width = sideJson.get("width").asFloat();
-        float height = sideJson.get("height").asFloat();
-        setPosition(pos[0],pos[1]);
+    public void initialize(JsonValue sideJson, JsonValue aBounds) {
+        setName("annette");
+        float x = aBounds.get("x").asFloat() / 64;
+//        System.out.println("drawScale.x " + drawScale.x);
+        float y = aBounds.get("y").asFloat() / 64;
+
+        System.out.println(x + " " + y + " annette initialize");
+
+        float width = aBounds.get("width").asFloat()/64;
+        float height = aBounds.get("height").asFloat()/64;
+        setPosition(x,y);
+//        setPosition(1, 1);
         setWidth(width);
         setHeight(height);
 
@@ -539,7 +545,11 @@ public class AnnetteModel extends BoxObstacle {
         }
 
         if (texture != null) {
+            System.out.println("annette x " + getX() * drawScale.x + " annette y " + getY() * drawScale.y);
             canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
+        }
+        else{
+            System.out.println("can't find annette texture");
         }
     }
 
@@ -558,6 +568,7 @@ public class AnnetteModel extends BoxObstacle {
             canvas.drawPhysics(sensorShapeR,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
             canvas.drawPhysics(sensorShapeL,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
             canvas.drawPhysics(annetteShape,Color.ORANGE,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
+//            canvas.drawPhysics(annetteShape, Color.WHITE, 400, 300, getAngle(), GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
         }
     }
 
