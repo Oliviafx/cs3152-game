@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import edu.cornell.gdiac.physics.lights.LightSource;
 import edu.cornell.gdiac.util.*;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import edu.cornell.gdiac.physics.obstacle.*;
 
@@ -71,7 +72,8 @@ public class GameController implements Screen, ContactListener {
 	public static final float	TEMP_SCALE	= 0.5f;
 
 	/** Walk in place effective range */
-	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 40.0f;
+	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
+	private ShapeRenderer renderer = new ShapeRenderer();
 
 	private boolean stopWalkInPlace = false;
 
@@ -559,8 +561,9 @@ public class GameController implements Screen, ContactListener {
 
 
 		if(annette.isWalkingInPlace() && !annette.getBird()){
-			level.getRadiusOfPower().setActive(true);
+			//level.getRadiusOfPower().setActive(true);
 			level.darkenLights(level.getRayHandler());
+			drawWalkInPlace();
 			if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
 				box.setX(box.getX() + input.getbHoriz());
 				box.setY(box.getY() + input.getbVert());
@@ -876,6 +879,14 @@ public class GameController implements Screen, ContactListener {
 				AIcontrollers.add(controller);
 			}
 		}
+	}
+
+	public void drawWalkInPlace(){
+		System.out.println("start draw");
+		renderer.begin(ShapeRenderer.ShapeType.Line);
+		renderer.setColor(Color.GOLD);
+		renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), WALK_IN_PLACE_EFFECTIVE_RANGE);
+		renderer.end();
 	}
 
 	/** Unused ContactListener method */

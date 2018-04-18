@@ -45,12 +45,15 @@ public class AIController{
     /** Stores original speed */
     private float speedCache;
 
+    /** Walk in place effective range */
+    public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
+
     /**
      * Constants for creatures' specific characteristics and/or behavior
      */
     private float LouSenseDistance = 5.0f;
-    private float TarasqueSpeedGain = 4.0f;
-    private float BlancheMaxSpeedGain = 3.0f;
+    private float TarasqueSpeedGain = 3.0f;
+    private float BlancheMaxSpeedGain = 2.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
     /**
