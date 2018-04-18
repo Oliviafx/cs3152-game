@@ -392,12 +392,14 @@ public class CreatureModel extends BoxObstacle {
      * @param json	the
      */
     public void initialize(JsonValue json, JsonValue bounds, FilmStrip tex1, FilmStrip tex2, FilmStrip tex3) {
+
         setName(json.name());
-        float[] pos  = {bounds.get("x").asFloat(),bounds.get("y").asFloat() };
+        float[] pos  = {bounds.get("x").asFloat() / 64, bounds.get("y").asFloat() / 64};
 //        float radius = json.get("radius").asFloat();
         float width = bounds.get("width").asFloat() / 64;
         float height = bounds.get("height").asFloat() / 64;
-        setPosition(pos[0]/64,pos[1]/64);
+
+        setPosition(pos[0],pos[1]);
 
 //        setRadius(radius);
         setWidth(width);
@@ -554,11 +556,13 @@ public class CreatureModel extends BoxObstacle {
         }
         else{
             if(texture!= null)
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
+
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX(),getY(),0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
         }
 
         if (texture != null && dirTexture != null) {
-            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + xOffset,getY()*drawScale.y,0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
+            System.out.println("creature position " + getX() + " " + getY());
+            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,getX() + xOffset,getY(),0,0.75f * GameController.TEMP_SCALE * isReflected,0.75f * GameController.TEMP_SCALE);
         }
     }
 }
