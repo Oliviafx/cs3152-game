@@ -2,7 +2,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 12, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 9, 9, 9, 9, 9, 12, 9, 9, 9, 9, 12, 12, 12, 12, 9, 9, 9, 9, 9, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12],
+         "data":[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 0, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 12, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 9, 9, 9, 9, 9, 12, 9, 9, 9, 9, 12, 12, 12, 12, 9, 9, 9, 9, 9, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12],
          "height":14,
          "name":"Base",
          "opacity":1,
@@ -22,57 +22,60 @@
          "width":14,
          "x":0,
          "y":0
-        },
-       {
+        }, 
+        {
          "draworder":"topdown",
          "name":"vision_properties",
          "objects":[
-           {
-             "height":0,
-             "id":83,
-             "name":"lady_vision",
-             "properties":
-             {
-               "a":0.3,
-               "angle":20,
-               "b":0.5,
-               "distance":10,
-               "excludeBits":"0010",
-               "facing":90,
-               "g":0.2,
-               "r":0.2,
-               "rays":512,
-               "soft":false
-             },
-             "propertytypes":
-             {
-               "angle":"int",
-               "color":"string",
-               "distance":"int",
-               "excludeBits":"string",
-               "facing":"int",
-               "rays":"int",
-               "soft":"bool"
-             },
-             "rotation":0,
-             "type":"",
-             "visible":true,
-             "width":0,
-             "x":160,
-             "y":160
-           }],
+                {
+                 "height":0,
+                 "id":83,
+                 "name":"lady_vision",
+                 "properties":
+                    {
+                     "a":"0.3",
+                     "angle":20,
+                     "b":"0.5",
+                     "distance":10,
+                     "excludeBits":"0010",
+                     "facing":90,
+                     "g":"0.2",
+                     "r":"0.2",
+                     "rays":512,
+                     "soft":false
+                    },
+                 "propertytypes":
+                    {
+                     "a":"string",
+                     "angle":"int",
+                     "b":"string",
+                     "distance":"int",
+                     "excludeBits":"string",
+                     "facing":"int",
+                     "g":"string",
+                     "r":"string",
+                     "rays":"int",
+                     "soft":"bool"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":160,
+                 "y":160
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
-       },
+        }, 
         {
          "draworder":"topdown",
          "name":"Blanche",
          "objects":[
                 {
-                 "gid":40,
+                 "gid":39,
                  "height":128,
                  "id":77,
                  "name":"blanche1",
@@ -137,7 +140,7 @@
          "name":"Annette",
          "objects":[
                 {
-                 "gid":33,
+                 "gid":32,
                  "height":96,
                  "id":74,
                  "name":"annette",
@@ -317,8 +320,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":192,
-                 "y":256
+                 "x":130.666666666667,
+                 "y":574.666666666667
                 }, 
                 {
                  "height":64,
@@ -328,8 +331,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":192,
-                 "y":192
+                 "x":130.666666666667,
+                 "y":512.666666666667
                 }, 
                 {
                  "gid":20,
@@ -658,7 +661,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":576,
+                 "x":528,
                  "y":256
                 }, 
                 {
@@ -689,7 +692,7 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":256,
+                 "x":230.666666666667,
                  "y":256
                 }, 
                 {
@@ -720,7 +723,7 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":448,
+                 "x":356,
                  "y":256
                 }, 
                 {
@@ -751,8 +754,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":384,
-                 "y":256
+                 "x":145.333333333333,
+                 "y":257.333333333333
                 }, 
                 {
                  "height":64,
@@ -762,7 +765,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":384,
+                 "x":145.333333333333,
                  "y":192
                 }],
          "opacity":1,
@@ -787,7 +790,6 @@
          "name":"Exit",
          "objects":[
                 {
-                 "gid":29,
                  "height":128,
                  "id":57,
                  "name":"exit",
@@ -890,7 +892,7 @@
          "name":"Bird",
          "objects":[
                 {
-                 "gid":59,
+                 "gid":58,
                  "height":47,
                  "id":84,
                  "name":"bird",
@@ -1016,14 +1018,14 @@
         }],
  "nextobjectid":127,
  "orientation":"orthogonal",
- "renderorder":"right-down",
+ "renderorder":"left-up",
  "tiledversion":"1.1.3",
  "tileheight":64,
  "tilesets":[
         {
          "columns":3,
          "firstgid":1,
-         "image":"..\/Art assets\/tiles\/floor tiles.png",
+         "image":"..\/textures\/floor_tiles.png",
          "imageheight":256,
          "imagewidth":192,
          "margin":0,
@@ -1079,7 +1081,7 @@
         {
          "columns":1,
          "firstgid":19,
-         "image":"..\/Art assets\/building assets\/64_building_short_side.png",
+         "image":"..\/textures\/building assets\/64_building_short.png",
          "imageheight":128,
          "imagewidth":64,
          "margin":0,
@@ -1157,21 +1159,21 @@
         {
          "columns":1,
          "firstgid":29,
-         "image":"..\/Art assets\/building assets\/slice1.png",
-         "imageheight":128,
+         "image":"..\/textures\/exit.png",
+         "imageheight":64,
          "imagewidth":64,
          "margin":0,
          "name":"lamppost",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":0,
          "tileheight":128,
          "tilewidth":64,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":10,
-         "firstgid":30,
-         "image":"..\/Art assets\/characters\/sideAnnette.png",
+         "firstgid":29,
+         "image":"..\/textures\/sideAnnette.png",
          "imageheight":128,
          "imagewidth":920,
          "margin":0,
@@ -1184,8 +1186,8 @@
         }, 
         {
          "columns":16,
-         "firstgid":40,
-         "image":"..\/Art assets\/characters\/blanche_side.png",
+         "firstgid":39,
+         "image":"..\/textures\/blanche_side.png",
          "imageheight":128,
          "imagewidth":1888,
          "margin":0,
@@ -1198,8 +1200,8 @@
         }, 
         {
          "columns":12,
-         "firstgid":56,
-         "image":"..\/Art assets\/characters\/bird.png",
+         "firstgid":55,
+         "image":"..\/textures\/bird.png",
          "imageheight":64,
          "imagewidth":1044,
          "margin":0,
