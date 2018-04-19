@@ -549,7 +549,7 @@ public class AnnetteModel extends BoxObstacle {
             canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, Math.abs(flipped));
         }
         else{
-            System.out.println("can't find annette texture");
+//            System.out.println("can't find annette texture");
         }
     }
 

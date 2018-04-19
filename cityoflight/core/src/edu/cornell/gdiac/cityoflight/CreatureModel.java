@@ -554,15 +554,16 @@ public class CreatureModel extends BoxObstacle {
             filmstrip = downAnim;
             //if(type == 2) xOffset = 0;
         }
-        else{
-            if(texture!= null)
-
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX(),getY(),0,0.75f * isReflected,0.75f);
+        else {
+            if (texture != null) {
+                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, 0, 0.75f * isReflected, 0.75f);
+            }
         }
 
         if (texture != null && dirTexture != null) {
+
 //            System.out.println("creature position " + getX() + " " + getY());
-            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,getX() + xOffset,getY(),0,0.75f* isReflected,0.75f);
+            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y,0,0.75f* isReflected,0.75f);
         }
     }
 }

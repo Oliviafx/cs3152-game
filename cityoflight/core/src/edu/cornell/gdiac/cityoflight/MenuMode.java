@@ -48,7 +48,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         public boolean getHover() { return hover; }
         @Override
         public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-            System.out.println("enter");
+//            System.out.println("enter");
             hover = true;
 //            if (fromActor == play) {
 //                hoverplay = true;

@@ -219,7 +219,7 @@ public class LevelModel {
 		try {
 			return lights.get(index);
 		} catch (IndexOutOfBoundsException e){
-			System.out.println(" visioncone of index " + index + " does not exist.");
+//			System.out.println(" visioncone of index " + index + " does not exist.");
 			return null;
 		}
 	}
@@ -524,7 +524,7 @@ public class LevelModel {
 					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
 					creature.initialize(buildingJSON, boxJSON, film[0],film[1],film[2]);
-//					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
+					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.setDrawScale(scale);
 					activate(creature);
 					System.out.println(lights.get(index) + ": lights");
@@ -549,7 +549,7 @@ public class LevelModel {
 
 			}
 			else if(layerName.equals("Annette")){
-				System.out.println("loading annette");
+//				System.out.println("loading annette");
 
 
 				annette = new AnnetteModel();
@@ -580,7 +580,7 @@ public class LevelModel {
 
 			}
 			else if(layerName.equals("Buildings")){
-				System.out.println("loading buildings");
+//				System.out.println("loading buildings");
 
 				HashMap<String, JsonValue> numToBuilding = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -643,7 +643,7 @@ public class LevelModel {
 						obj2.setDrawScale(scale);
 						activate(obj2);
 //						System.out.println(pos[0] + " " + pos[1]);
-						System.out.println("activating building");
+//						System.out.println("activating building");
 						mazes.add(obj2);
 					}
 				}
@@ -658,7 +658,7 @@ public class LevelModel {
 
 			}
 			else if(layerName.equals("Base")){
-				System.out.println("loading background");
+//				System.out.println("loading background");
 
 
 				int[] data = layer.get("data").asIntArray();
@@ -753,7 +753,7 @@ public class LevelModel {
 				}
 			}
 			else if (layerName.equals("Exit")){
-				System.out.println("loading exit");
+//				System.out.println("loading exit");
 
 
 				JsonValue exitValues = null;
