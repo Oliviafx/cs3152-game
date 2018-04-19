@@ -388,6 +388,7 @@ public class LevelModel {
         goalDoor.setDrawScale(scale);
         activate(goalDoor);
 
+
         JsonValue bounds = levelFormat.getChild("exterior");
         while (bounds != null) {
             ExteriorModel obj = new ExteriorModel();
