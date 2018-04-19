@@ -609,6 +609,12 @@ public class GameController implements Screen, ContactListener {
 		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
 
 
+		System.out.println("DRAW HEHEHEHE");
+		renderer.begin(ShapeRenderer.ShapeType.Filled);
+		renderer.setColor(Color.RED);
+		renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), 100, 3);
+		renderer.end();
+
 		level.draw(canvas);
 		// Final message
 		if (complete && !failed) {
@@ -617,11 +623,6 @@ public class GameController implements Screen, ContactListener {
 			canvas.drawTextCentered("Level Complete!", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
 			canvas.end();
 		} else if (failed) {
-			System.out.println("DRAW HEHEHEHE");
-			renderer.begin(ShapeRenderer.ShapeType.Line);
-			renderer.setColor(Color.RED);
-			renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), WALK_IN_PLACE_EFFECTIVE_RANGE, 3);
-			renderer.end();
 
 			displayFont.setColor(Color.CHARTREUSE);
 			canvas.begin(); // DO NOT SCALE
