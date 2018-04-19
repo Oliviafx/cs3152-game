@@ -642,7 +642,7 @@ public class LevelModel {
 						obj2.initialize(pos, size, pad, debugColor, film);
 						obj2.setDrawScale(scale);
 						activate(obj2);
-//						System.out.println(pos[0] + " " + pos[1]);
+						System.out.println(pos[0] + " " + pos[1]);
 //						System.out.println("activating building");
 						mazes.add(obj2);
 					}
