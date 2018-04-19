@@ -37,6 +37,12 @@
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
 		},
+
+		"64_building_short_side": {
+			"file": 	"textures/64_building_short_side.png",
+			"wrap": 	true
+		},
+		
 		"128_bookstore": {
 			"file": 	"textures/128_bookstore.png",
 			"wrap": 	true
