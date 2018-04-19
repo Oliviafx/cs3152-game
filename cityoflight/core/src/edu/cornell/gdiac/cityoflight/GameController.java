@@ -563,7 +563,7 @@ public class GameController implements Screen, ContactListener {
 		if(annette.isWalkingInPlace() && !annette.getBird()){
 			//level.getRadiusOfPower().setActive(true);
 			level.darkenLights(level.getRayHandler());
-			drawWalkInPlace();
+			//drawWalkInPlace();
 			if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
 				box.setX(box.getX() + input.getbHoriz());
 				box.setY(box.getY() + input.getbVert());
@@ -608,6 +608,7 @@ public class GameController implements Screen, ContactListener {
 		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
 
+
 		level.draw(canvas);
 		// Final message
 		if (complete && !failed) {
@@ -616,6 +617,17 @@ public class GameController implements Screen, ContactListener {
 			canvas.drawTextCentered("Level Complete!", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
 			canvas.end();
 		} else if (failed) {
+			System.out.println("DRAW HEHEHEHE");
+			renderer.begin(ShapeRenderer.ShapeType.Line);
+			renderer.setColor(Color.RED);
+			renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), WALK_IN_PLACE_EFFECTIVE_RANGE, 3);
+			renderer.end();
+
+			displayFont.setColor(Color.CHARTREUSE);
+			canvas.begin(); // DO NOT SCALE
+			canvas.drawTextCentered("testtest", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
+			canvas.end();
+
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
 			canvas.drawTextCentered("Game Over!", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
@@ -887,6 +899,7 @@ public class GameController implements Screen, ContactListener {
 		renderer.setColor(Color.GOLD);
 		renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), WALK_IN_PLACE_EFFECTIVE_RANGE);
 		renderer.end();
+		System.out.println("end draw");
 	}
 
 	/** Unused ContactListener method */
