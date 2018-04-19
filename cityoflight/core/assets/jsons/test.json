@@ -187,7 +187,7 @@
                  "y":848
                 }, 
                 {
-                 "height":96,
+                 "height":25,
                  "id":73,
                  "name":"annette_box",
                  "rotation":0,
@@ -195,7 +195,7 @@
                  "visible":true,
                  "width":64,
                  "x":48,
-                 "y":752
+                 "y":823
                 }],
          "opacity":1,
          "type":"objectgroup",

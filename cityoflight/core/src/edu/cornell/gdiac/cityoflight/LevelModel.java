@@ -89,7 +89,7 @@ public class LevelModel {
 
 	private static final int MAX_ALPHA = 255;
 	private static final float BOX_MARGIN = 0.8f;
-	public static final float TRANSLATION = -50.0f;
+	public static final float TRANSLATION = -64;
 
 	/** All the objects in the world. */
 	protected ArrayList<Obstacle> objects  = new ArrayList<Obstacle>();
@@ -388,7 +388,7 @@ public class LevelModel {
 		bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
 //		scale.x = tileSize;
 		scale.x = gSize[0] / pSize[0];
-		System.out.println("scale.x: " + scale.x);
+//		System.out.println("scale.x: " + scale.x);
 //		scale.y = tileSize;
 		scale.y = gSize[1] / pSize[1];
 
@@ -610,11 +610,8 @@ public class LevelModel {
 
 				}
 
-				HashMap<String, TextureRegion> idToFilmStrip = new HashMap<String, TextureRegion>();
-
-
 				//initialize buildings
-				for(int j = 0; j<numToBuilding.size()/2; j++){
+				for(int j = 0; j<numToBuilding.size(); j++){
 
 					TextureRegion film = null;
 					JsonValue buildingJSON = numToBuilding.get((j+1) + "").get("properties");
@@ -622,17 +619,13 @@ public class LevelModel {
 					String textName = buildingJSON.get("texture").asString();
 
 
-					if(idToFilmStrip.containsKey(textName)){
-						film = idToFilmStrip.get(textName);
-					}
-					else{
+					TextureRegion texture = JsonAssetManager.getInstance().getEntry(textName.trim(), TextureRegion.class);
+					film = texture;
 
-						TextureRegion texture = JsonAssetManager.getInstance().getEntry(textName.trim(), TextureRegion.class);
-						//System.out.println("textname: "+textName + " : "+(textName.equals("64_building_short")));
-						film = texture;
+					System.out.println("textname: "+textName + " : " + texture);
 
-						idToFilmStrip.put(textName,texture);
-					}
+
+
 
 
 
@@ -640,9 +633,9 @@ public class LevelModel {
 
 					InteriorModel obj2 = new InteriorModel();
 					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64};
-					float[] size = {boxJSON.get("width").asFloat(),boxJSON.get("height").asFloat()};
+					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
 					float[] pad = { 0.1f, 0.1f};
-					String debugColor = "yellow";
+					String debugColor = "red";
 
 					if(film!= null) {
 
@@ -684,7 +677,6 @@ public class LevelModel {
 
 					if(idToFilmStrip.containsKey(data[j])){
 						tiles.add(new BackgroundModel(newx, newy, idToFilmStrip.get(data[j])));
-						System.out.println("j " + j);
 					}
 					else{
 						if(! idToTexture.containsKey(data[j])){
@@ -750,8 +742,8 @@ public class LevelModel {
 
 					for(int k = 0; k< j-f;k++){
 						//TODO: implement different frames here
-						System.out.println("j in loop " + j);
-						System.out.println("data " + (data[j] - 1));
+//						System.out.println("j in loop " + j);
+//						System.out.println("data " + (data[j] - 1));
 						tileTexture.setFrame(11);
 
 						idToFilmStrip.put(data[j] - f + k, tileTexture);
@@ -1284,12 +1276,12 @@ public class LevelModel {
 //		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
 
-		System.out.println(pos.x + " " + pos.y);
+		//System.out.println(pos.x + " " + pos.y);
 
 		float tx = pos.x;
 		float ty = pos.y;
 
-		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
+		oTran.setToTranslation(TRANSLATION*tx + canvas.getWidth()/2, TRANSLATION*ty + canvas.getHeight()/2);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
 //		oTran.mul(wTran);
 
@@ -1325,7 +1317,6 @@ public class LevelModel {
 		for (int x=0; x<n; x++) // bubble sort outer loop
 		{
 			for (int i=0; i < n - x - 1; i++) {
-				System.out.println("lowestY: "+ objects.get(i).getName() + " -- " + objects.get(i).getLowestY());
 				if (objects.get(i).getLowestY() < (objects.get(i+1).getLowestY()) )
 				{
 					Obstacle temp = objects.get(i);
