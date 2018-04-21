@@ -254,6 +254,9 @@
 				},
 				"box_gone_effect": {
 					"file": "sounds/box_gone_effect.wav"
+				},
+				"bgm": {
+					"file": "sounds/80bpm_music.wav"
 				}
 			}
 		}
