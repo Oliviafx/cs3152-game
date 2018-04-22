@@ -70,6 +70,8 @@ public class LevelModel {
 	/** Reference to the distraction bird */
 	private DistractionModel distraction;
 
+	private IndicatorModel indicator;
+
 	/** The interior models */
 	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
 	/** The exterior models */
@@ -438,6 +440,10 @@ public class LevelModel {
         if (distraction != null) {
             distraction.setAlive(false);
         }
+
+        // Creater indicator
+        indicator = new IndicatorModel();
+
     }
 
     public void addObjects(JsonValue levelFormat) {
@@ -732,6 +738,9 @@ public class LevelModel {
 			}
 			goalDoor.update(dt);
 			box.update(dt);
+			if (indicator != null){
+			    indicator.update(dt);
+            }
             if (distraction!=null) {
 //				System.out.println(distraction.getX());
 //				System.out.println(distraction.getY());
