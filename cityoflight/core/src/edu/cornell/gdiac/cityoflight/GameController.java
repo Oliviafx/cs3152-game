@@ -28,6 +28,7 @@ import edu.cornell.gdiac.util.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import edu.cornell.gdiac.physics.obstacle.*;
+import javafx.scene.transform.Affine;
 
 /**
  * Gameplay controller for the game.
@@ -74,6 +75,9 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 	private ShapeRenderer renderer = new ShapeRenderer();
+	private SpriteBatch batcher = new SpriteBatch();
+	private FilmStrip filmstrip_wip;
+	Affine2 scaling = new Affine2();
 
 	private boolean stopWalkInPlace = false;
 
@@ -608,14 +612,10 @@ public class GameController implements Screen, ContactListener {
 		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
 
-
-		System.out.println("DRAW HEHEHEHE");
-		renderer.begin(ShapeRenderer.ShapeType.Filled);
-		renderer.setColor(Color.RED);
-		renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), 100, 3);
-		renderer.end();
-
 		level.draw(canvas);
+
+		drawWalkInPlace();
+
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
@@ -624,17 +624,43 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		} else if (failed) {
 
-			displayFont.setColor(Color.CHARTREUSE);
-			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("testtest", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
-			canvas.end();
-
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
 			canvas.drawTextCentered("Game Over!", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
 			canvas.end();
 		}
 	}
+
+
+	public void drawWalkInPlace(){
+		System.out.println("start draw");
+		//renderer.begin(ShapeRenderer.ShapeType.Line);
+		//renderer.setColor(Color.GOLD);
+		//renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), WALK_IN_PLACE_EFFECTIVE_RANGE);
+		//renderer.end();
+		// Now get the texture from the AssetManager singleton
+
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("circle", TextureRegion.class);
+		//System.out.println("texture = " + texture );
+
+		try {
+			filmstrip_wip = (FilmStrip)texture;
+		} catch (Exception e) {
+			filmstrip_wip = null;
+		}
+
+
+//		canvas.draw(texture,Color.WHITE,level.getAnnette().getX(),level.getAnnette().getY(),level.getAnnette().getX(),level.getAnnette().getY(),1 * TEMP_SCALE,1 * TEMP_SCALE);
+
+		batcher.begin();
+		scaling.preScale(level.scale);
+		//batcher.draw(texture,level.getAnnette().getX(),level.getAnnette().getY(),scaling);
+		batcher.draw(filmstrip_wip,level.getAnnette().getX(),level.getAnnette().getY(),100,100);
+		batcher.end();
+
+		System.out.println("end draw");
+	}
+
 
 	/**
 	 * Called when the Screen is resized.
@@ -892,15 +918,6 @@ public class GameController implements Screen, ContactListener {
 				AIcontrollers.add(controller);
 			}
 		}
-	}
-
-	public void drawWalkInPlace(){
-		System.out.println("start draw");
-		renderer.begin(ShapeRenderer.ShapeType.Line);
-		renderer.setColor(Color.GOLD);
-		renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), WALK_IN_PLACE_EFFECTIVE_RANGE);
-		renderer.end();
-		System.out.println("end draw");
 	}
 
 	/** Unused ContactListener method */
