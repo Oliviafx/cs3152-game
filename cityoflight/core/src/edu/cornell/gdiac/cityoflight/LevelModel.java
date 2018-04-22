@@ -890,12 +890,22 @@ public class LevelModel {
 
     public void createDistraction(JsonValue levelFormat) {
         distraction = new DistractionModel(annette.getX(), annette.getY(), false, annette.getDirection());
-        JsonValue distractiondata = levelFormat.get("distraction");
-		distraction.initialize(distractiondata);
-        distraction.setDrawScale(scale);
-        activate(distraction);
-        distraction.setActive(true);
-        distraction.setAlive(true);
+        JsonValue layers = levelFormat.get("layers");
+        for(int i =0; i< layers.size; i++){
+        	if(layers.get(i).get("name").asString().equals("Bird")){
+        		//initialize bird here
+				JsonValue distractiondata = layers.get(i).get("objects");
+				JsonValue birdinfo = distractiondata.get(0).get("properties");
+				JsonValue birdbox = distractiondata.get(1);
+				distraction.initialize(birdinfo, birdbox);
+
+				distraction.setDrawScale(scale);
+				activate(distraction);
+				distraction.setActive(true);
+				distraction.setAlive(true);
+			}
+		}
+
 //		distraction.activatePhysics(world);
     }
 

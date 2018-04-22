@@ -215,9 +215,9 @@
 				"file": "textures/bird.png",
 				"wrap": false,
 				"strip": {
-					"size": 12,
+					"size": 6,
 					"rows": 1,
-					"cols": 12,
+					"cols": 6,
 					"first": 1
 				}
 			}
