@@ -265,5 +265,8 @@
 				"box_gone_effect": {
 					"file": "sounds/box_gone_effect.wav"
 				}
+				"120bpm_music": {
+					"file": "sounds/120bpm_music.wav"
+				}
 			}
 		}

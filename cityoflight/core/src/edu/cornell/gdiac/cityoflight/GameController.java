@@ -17,6 +17,7 @@ package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -156,6 +157,8 @@ public class GameController implements Screen, ContactListener {
 
 	private SoundController sound;
 
+	private Music bgm;
+
 	/** Whether or not this is an active controller */
 	private boolean active;
 	/** Whether we have completed this level */
@@ -282,6 +285,8 @@ public class GameController implements Screen, ContactListener {
 		active = false;
 		countdown = -1;
 		sound = SoundController.getInstance();
+		bgm = Gdx.audio.newMusic(Gdx.files.internal("sounds/120bpm_music.wav"));
+		bgm.setLooping(true);
 
 		setComplete(false);
 		setFailure(false);
@@ -394,7 +399,8 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-		sound.play("bg_test2_music", "sounds/bg_test2_music.wav", true, 0.75f);
+//		sound.play("120bpm_music", "sounds/120bpm_music.wav", true, 0.75f);
+		bgm.play();
 
 		// creature AI.
 		createAIControllers();
