@@ -46,7 +46,7 @@ public class AIController{
     private float speedCache;
 
     /** Walk in place effective range */
-    public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
+    public float WALK_IN_PLACE_EFFECTIVE_RANGE = 30.0f;
 
     /**
      * Constants for creatures' specific characteristics and/or behavior
@@ -265,7 +265,7 @@ public class AIController{
 
 
         if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird() && !creature.getStuck()
-                && (level.getAnnette().getPosition().sub(creature.getPosition()).len2() <= 40.0f) ){
+                && (level.getAnnette().getPosition().sub(creature.getPosition()).len2() <=  WALK_IN_PLACE_EFFECTIVE_RANGE) ){
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
 
