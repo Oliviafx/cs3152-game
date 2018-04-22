@@ -469,6 +469,8 @@ public class LevelModel {
 					String objName = obj.get("name").asString();
 //					System.out.println(objName + "next objName is: ");
 					String[] bSplit = objName.split(layerName.toLowerCase());
+//					System.out.println("bSplit[0]: " + bSplit[0]);
+
 					if(bSplit[1].length() > 3 ){
 						//add to box list
 						numToBox.put(bSplit[1].split("box")[1],obj);
@@ -527,6 +529,7 @@ public class LevelModel {
 					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.setDrawScale(scale);
 					activate(creature);
+					System.out.println(lights.size + ": lights size");
 					System.out.println(lights.get(index) + ": lights");
 					attachVision(creature, lights.get(index));
 					creatures.add(creature);
@@ -670,7 +673,7 @@ public class LevelModel {
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
 					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
 					int newy = j / width;//(j%width);
-//					System.out.println("newx "+ newx + " new y " + newy);
+					System.out.println("newx "+ newx + " new y " + newy);
 
 
 					int f = 0;
@@ -680,8 +683,10 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-					System.out.println(texName);
+//					System.out.println("texture name: " + texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
+
+					// IMPORTANT PROBLEM: TEXTURE IS NULL
 					if(texture != null) {
 						System.out.println(texture.getRegionHeight());
 						TextureRegion[][] textures = texture.split(64, 64);
@@ -1009,6 +1014,7 @@ public class LevelModel {
 
 			}
 
+		System.out.println("lightArr.length: " + lightArr.length);
 		for(int i = 0; i<lightArr.length;i++){
 			lights.add(lightArr[i]);
 		}
@@ -1233,7 +1239,9 @@ public class LevelModel {
 		//canvas.draw(background, 0, 0);
 
 		//DRAWS BACKGROUND TILES HERE
+//        System.out.println("tiles.size: " + tiles.size);
 		for(int i =0;i< tiles.size; i++){
+//		    System.out.println("tiles being drawn: " + tiles.get(i));
 			tiles.get(i).draw(canvas);
 //			System.out.println(annette.getX());
 
