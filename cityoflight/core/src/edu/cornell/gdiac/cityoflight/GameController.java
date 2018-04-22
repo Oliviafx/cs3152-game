@@ -74,11 +74,13 @@ public class GameController implements Screen, ContactListener {
 
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
-	private ShapeRenderer renderer = new ShapeRenderer();
 	private SpriteBatch batcher = new SpriteBatch();
-	private FilmStrip filmstrip_wip;
-	boolean hasAnimated = false;
-	Affine2 scaling = new Affine2();
+	private FilmStrip indicator_out;
+	private FilmStrip indicator_loop;
+	private boolean walkhasAnimated = false;
+	private int animateCOOLTIME = 2;
+	private int animateCool = animateCOOLTIME;
+
 
 	private boolean stopWalkInPlace = false;
 
@@ -577,9 +579,9 @@ public class GameController implements Screen, ContactListener {
 		} else{
 			level.getRadiusOfPower().setActive(false);
 			level.brightenLights(level.getRayHandler());
-			hasAnimated = false;
-			if (filmstrip_wip != null){
-				filmstrip_wip.setFrame(0);
+			walkhasAnimated = false;
+			if (indicator_out != null){
+				indicator_out.setFrame(0);
 			}
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
 		}
@@ -640,35 +642,49 @@ public class GameController implements Screen, ContactListener {
 
 	public void drawWalkInPlace(){
 
-		System.out.println ("start drawing");
+		//System.out.println ("start drawing");
 
-		// Get the texture from the AssetManager singleton
-
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("circle", TextureRegion.class);
-		//System.out.println("texture = " + texture );
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_out", TextureRegion.class);
+		TextureRegion texture2 = JsonAssetManager.getInstance().getEntry("indicator_loop", TextureRegion.class);
 
 		try {
-			filmstrip_wip = (FilmStrip)texture;
+			indicator_out = (FilmStrip)texture;
+			indicator_loop = (FilmStrip)texture2;
 		} catch (Exception e) {
-			filmstrip_wip = null;
+			indicator_out = null;
+			indicator_loop = null;
 		}
 
-		//System.out.println("filmstrip_wip = " + filmstrip_wip );
-
-		if(hasAnimated == false && filmstrip_wip != null){
-
-			int next = (filmstrip_wip.getFrame()+1);
-			if (next < filmstrip_wip.getSize()) {
-				filmstrip_wip.setFrame(next);
-			}else{
-				hasAnimated = true;
+		if(walkhasAnimated == false && indicator_out != null){
+			if (animateCool <= 0) {
+				int next = (indicator_out.getFrame() + 1);
+				if (next < indicator_out.getSize()) {
+					indicator_out.setFrame(next);
+				} else {
+					indicator_out.setFrame(0);
+					walkhasAnimated = true;
+					System.out.println("set animated to : " + walkhasAnimated);
+				}
+				animateCool = animateCOOLTIME;
 			}
+			batcher.begin();
+			batcher.draw(indicator_out,(level.getAnnette().getX()  * level.scale.x) - 100,
+					(level.getAnnette().getY() * level.scale.y) - 100, 200, 200);
+			batcher.end();
+
+		}else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
+			if (animateCool <= 0) {
+				int next2 = (indicator_loop.getFrame() + 1) % indicator_loop.getSize();
+				indicator_loop.setFrame(next2);
+				animateCool = animateCOOLTIME;
+			}
+			batcher.begin();
+			batcher.draw(indicator_loop,(level.getAnnette().getX()  * level.scale.x) - 100,
+					(level.getAnnette().getY() * level.scale.y) - 100, 200, 200);
+			batcher.end();
 		}
 
-		batcher.begin();
-		batcher.draw(filmstrip_wip,(level.getAnnette().getX()  * level.scale.x) - 100,
-				(level.getAnnette().getY() * level.scale.y) - 100, 200, 200);
-		batcher.end();
+		animateCool --;
 	}
 
 

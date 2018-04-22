@@ -211,13 +211,23 @@
 				"first": 1
 			}
 		},
-		"circle" : {
-			"file" : "textures/indicator.png",
+		"indicator_out" : {
+			"file" : "textures/indicator_out.png",
 			"wrap" : false,
 			"strip": {
 				"size": 15,
 				"rows": 1,
 				"cols": 15,
+				"first": 1
+			}
+		},
+		"indicator_loop" : {
+			"file" : "textures/indicator_loop.png",
+			"wrap" : false,
+			"strip": {
+				"size": 14,
+				"rows": 1,
+				"cols": 14,
 				"first": 1
 			}
 		}
