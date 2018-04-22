@@ -212,7 +212,7 @@
 			}
 		},
 		"circle" : {
-			"file" : "textures/indicator_test.png",
+			"file" : "textures/indicator.png",
 			"wrap" : false,
 			"strip": {
 				"size": 15,

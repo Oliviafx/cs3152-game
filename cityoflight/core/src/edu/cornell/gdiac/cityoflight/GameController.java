@@ -77,6 +77,7 @@ public class GameController implements Screen, ContactListener {
 	private ShapeRenderer renderer = new ShapeRenderer();
 	private SpriteBatch batcher = new SpriteBatch();
 	private FilmStrip filmstrip_wip;
+	boolean hasAnimated = false;
 	Affine2 scaling = new Affine2();
 
 	private boolean stopWalkInPlace = false;
@@ -565,9 +566,8 @@ public class GameController implements Screen, ContactListener {
 
 
 		if(annette.isWalkingInPlace() && !annette.getBird()){
-			//level.getRadiusOfPower().setActive(true);
+			level.getRadiusOfPower().setActive(true);
 			level.darkenLights(level.getRayHandler());
-			//drawWalkInPlace();
 			if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
 				box.setX(box.getX() + input.getbHoriz());
 				box.setY(box.getY() + input.getbVert());
@@ -577,6 +577,10 @@ public class GameController implements Screen, ContactListener {
 		} else{
 			level.getRadiusOfPower().setActive(false);
 			level.brightenLights(level.getRayHandler());
+			hasAnimated = false;
+			if (filmstrip_wip != null){
+				filmstrip_wip.setFrame(0);
+			}
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
 		}
 
@@ -614,7 +618,9 @@ public class GameController implements Screen, ContactListener {
 
 		level.draw(canvas);
 
-		drawWalkInPlace();
+		if (level.getAnnette().isWalkingInPlace()){
+			drawWalkInPlace();
+		}
 
 		// Final message
 		if (complete && !failed) {
@@ -633,12 +639,10 @@ public class GameController implements Screen, ContactListener {
 
 
 	public void drawWalkInPlace(){
-		System.out.println("start draw");
-		//renderer.begin(ShapeRenderer.ShapeType.Line);
-		//renderer.setColor(Color.GOLD);
-		//renderer.circle(level.getAnnette().getX(), level.getAnnette().getY(), WALK_IN_PLACE_EFFECTIVE_RANGE);
-		//renderer.end();
-		// Now get the texture from the AssetManager singleton
+
+		System.out.println ("start drawing");
+
+		// Get the texture from the AssetManager singleton
 
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry("circle", TextureRegion.class);
 		//System.out.println("texture = " + texture );
@@ -649,16 +653,22 @@ public class GameController implements Screen, ContactListener {
 			filmstrip_wip = null;
 		}
 
+		//System.out.println("filmstrip_wip = " + filmstrip_wip );
 
-//		canvas.draw(texture,Color.WHITE,level.getAnnette().getX(),level.getAnnette().getY(),level.getAnnette().getX(),level.getAnnette().getY(),1 * TEMP_SCALE,1 * TEMP_SCALE);
+		if(hasAnimated == false && filmstrip_wip != null){
+
+			int next = (filmstrip_wip.getFrame()+1);
+			if (next < filmstrip_wip.getSize()) {
+				filmstrip_wip.setFrame(next);
+			}else{
+				hasAnimated = true;
+			}
+		}
 
 		batcher.begin();
-		scaling.preScale(level.scale);
-		//batcher.draw(texture,level.getAnnette().getX(),level.getAnnette().getY(),scaling);
-		batcher.draw(filmstrip_wip,level.getAnnette().getX(),level.getAnnette().getY(),100,100);
+		batcher.draw(filmstrip_wip,(level.getAnnette().getX()  * level.scale.x) - 100,
+				(level.getAnnette().getY() * level.scale.y) - 100, 200, 200);
 		batcher.end();
-
-		System.out.println("end draw");
 	}
 
 
