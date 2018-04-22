@@ -666,88 +666,30 @@ public class LevelModel {
 				int width = layer.get("width").asInt();
 
 
-
-				HashMap<Integer, FilmStrip> idToFilmStrip = new HashMap<Integer, FilmStrip>();
-
 				for(int j = 0; j < height*width; j++){
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
-					int newx = j % width; //(height - 1 - ((j - (6%width))/height));
+					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
 					int newy = j / width;//(j%width);
 //					System.out.println("newx "+ newx + " new y " + newy);
 
-					if(idToFilmStrip.containsKey(data[j])){
-						tiles.add(new BackgroundModel(newx, newy, idToFilmStrip.get(data[j])));
-					}
-					else{
-						if(! idToTexture.containsKey(data[j])){
-							//add filmstrip data here
-							int f = 0;
-							while(f<j && !idToTexture.containsKey(data[j] - f)){
 
-								f++;
-							}
-							//System.out.println(data[j] + " : "+ (data[j] - f));
-							String texName = idToTexture.get(data[j] - f);
-							TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
-							//System.out.println("texname "+texName);
-							FilmStrip tileTexture;
-							try {
-								tileTexture = (FilmStrip) texture;
-							} catch (Exception e) {
-								tileTexture = null;
-							}
-
-							//System.out.println(tileTexture!=null);
-
-//							for(int k = 0; k< j-f;k++){
-//								//TODO: implement different frames here
-//								System.out.println("j in loop " + j);
-//								System.out.println("data " + data[j]);
-//								tileTexture.setFrame(data[j] - f);
-//
-//								idToFilmStrip.put(data[j] - f + k, tileTexture);
-//							}
-
-						}
-						else {
-							String texName = idToTexture.get(data[j]);
-							TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
-							FilmStrip tileTexture;
-							try {
-								tileTexture = (FilmStrip) texture;
-							} catch (Exception e) {
-								tileTexture = null;
-							}
-							//tiles.add(new BackgroundModel(newx, newy, tileTexture));
-							//idToFilmStrip.put(data[j], tileTexture);
-						}
-					}
 					int f = 0;
-					while(f<j && !idToTexture.containsKey(data[j] - f)){
+					while(f<data[j] && !idToTexture.containsKey(data[j] - f)){
 
 						f++;
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
+					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
-					//System.out.println("texname "+texName);
-					FilmStrip tileTexture;
-					try {
-						tileTexture = (FilmStrip) texture;
-					} catch (Exception e) {
-						tileTexture = null;
+					if(texture != null) {
+						System.out.println(texture.getRegionHeight());
+						TextureRegion[][] textures = texture.split(64, 64);
+						System.out.println(f % textures.length + " " + f / textures.length);
+						TextureRegion texNew = textures[f / textures[0].length][f % textures[0].length];
+						tiles.add(new BackgroundModel(newx, newy, texNew));
 					}
 
-					//System.out.println(tileTexture!=null);
-
-					for(int k = 0; k< j-f;k++){
-						//TODO: implement different frames here
-//						System.out.println("j in loop " + j);
-//						System.out.println("data " + (data[j] - 1));
-						tileTexture.setFrame(11);
-
-						idToFilmStrip.put(data[j] - f + k, tileTexture);
-					}
 
 
 				}
