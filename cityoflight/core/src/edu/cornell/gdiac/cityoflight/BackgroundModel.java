@@ -13,9 +13,9 @@ import edu.cornell.gdiac.util.JsonAssetManager;
 public class BackgroundModel {
     private int x;
     private int y;
-    private FilmStrip tileTexture;
+    private TextureRegion tileTexture;
 
-    public BackgroundModel(int x1, int y1, FilmStrip tileTexture1){
+    public BackgroundModel(int x1, int y1, TextureRegion tileTexture1){
         x=x1;
         y=y1;
         tileTexture = tileTexture1;
