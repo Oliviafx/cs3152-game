@@ -462,7 +462,11 @@ public class GameController implements Screen, ContactListener {
 		}
 
 
-		JsonValue boxdata = levelFormat.get("box");
+
+
+
+
+
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
 			boolean canBox;
@@ -493,13 +497,14 @@ public class GameController implements Screen, ContactListener {
 			}
 			if (canBox) {
 				try {
-					box.initialize(boxdata, annette.getPosition(), xoff, yoff);
+
+					box.initialize(levelFormat, annette.getPosition(), xoff, yoff);
 				}
 				catch (Exception e) {
 					box = new BoxModel(1, 1);
 					level.setBox(box);
 					box.setDrawScale(level.scale);
-					box.initialize(boxdata, annette.getPosition(), xoff, yoff);
+					box.initialize(levelFormat, annette.getPosition(), xoff, yoff);
 				}
 				level.activate(box);
 				box.setActive(true);
