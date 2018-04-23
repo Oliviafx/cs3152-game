@@ -270,7 +270,7 @@ public class AIController{
 
         if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird()
                 && (level.getAnnette().getPosition().sub(creature.getPosition()).len2() <=  WALK_IN_PLACE_EFFECTIVE_RANGE) ){
-            System.out.println("effective!");
+            //System.out.println("effective!");
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
 
