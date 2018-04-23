@@ -359,9 +359,10 @@ public class BoxModel extends BoxObstacle {
 
 
     public void initialize(JsonValue json, Vector2 annettepos, float xoff, float yoff) {
-        setName(json.name());
-        float width = json.get("width").asFloat();
-        float height = json.get("height").asFloat();
+        setName("box");
+        float width = json.get("width").asFloat()/64;
+//        System.out.println("drawScale.x " + drawScale.x);
+        float height = json.get("height").asFloat()/64;
         setWidth(width);
         setHeight(height);
         setPosition(annettepos.x + xoff,annettepos.y + yoff);
@@ -484,8 +485,8 @@ public class BoxModel extends BoxObstacle {
 
         // Apply force for movement
         if (getMovement().len2() > 0f) {
-            System.out.println("getmovement " + getMovement().x + " , " + getMovement().y);
-            System.out.println("in apply force of boxmodel");
+//            System.out.println("getmovement " + getMovement().x + " , " + getMovement().y);
+//            System.out.println("in apply force of boxmodel");
             forceCache.set(getMovement());
             body.applyForce(forceCache,getPosition(),true);
 

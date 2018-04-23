@@ -312,7 +312,7 @@ public class InputController {
 		} else {
 
 			if (rightPressed && !leftPressed && !upPressed && !downPressed){
-				aHoriz += 1.2f;
+				aHoriz += ANNETTE_DEFAULT_SPEED;
 				this.direction = AnnetteModel.Direction.RIGHT;
 			} else if (!rightPressed && leftPressed && !upPressed && !downPressed){
 				aHoriz -= ANNETTE_DEFAULT_SPEED;

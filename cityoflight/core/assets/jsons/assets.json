@@ -37,6 +37,12 @@
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
 		},
+
+		"64_building_short_side": {
+			"file": 	"textures/64_building_short_side.png",
+			"wrap": 	true
+		},
+		
 		"128_bookstore": {
 			"file": 	"textures/128_bookstore.png",
 			"wrap": 	true
@@ -60,6 +66,10 @@
 		"128_flowershop": {
 			"file": 	"textures/128_flowershop.png",
 			"wrap": 	true
+		},
+		"floor_tiles": {
+			"file": 	"textures/floor_tiles.png",
+			"wrap":  	true
 		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
@@ -122,7 +132,6 @@
 				"first": 0
 			}
 		},
-
 		"tarasque": {
 			"file": 	"textures/tarasque_side.png",
 			"wrap":  	false,
@@ -229,7 +238,6 @@
 				"rows": 1,
 				"cols": 14,
 				"first": 1
-			}
 		},
 		"indicator_seen" : {
 			"file" : "textures/isseen.png",
@@ -284,6 +292,9 @@
 		},
 		"box_gone_effect": {
 			"file": "sounds/box_gone_effect.wav"
+		},
+		"120bpm_music": {
+			"file": "sounds/120bpm_music.wav"
 		}
 	}
 }
