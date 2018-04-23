@@ -334,7 +334,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/medium.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
@@ -632,7 +632,7 @@ public class GameController implements Screen, ContactListener {
 		level.draw(canvas);
 
 		if (level.getAnnette().isWalkingInPlace()){
-			drawWalkInPlace();
+			 drawWalkInPlace();
 		}
 
 		for (AIController controller : AIcontrollers){
@@ -703,20 +703,25 @@ public class GameController implements Screen, ContactListener {
 				}
 				animateCool = animateCOOLTIME;
 			}
-			batcher.begin();
+			canvas.begin();
 			System.out.println("annette_x = " + level.getAnnette().getX());
 			System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("annette_x = " + level.getAnnette().getX());
 			//System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("level.scale.x = " + level.scale.x);
 			//System.out.println("level.scale.y = " + level.scale.y);
-			batcher.draw(indicator_out,
+
+			canvas.draw(indicator_out,
 					(level.getAnnette().getX() * level.scale.x) - 200,
-					(level.getAnnette().getY() * level.scale.y) - 200,
-					400, 400);
+					(level.getAnnette().getY() * level.scale.y) - 200);
+
+//			batcher.draw(indicator_out,
+//					(level.getAnnette().getX() * level.scale.x) - 200,
+//					(level.getAnnette().getY() * level.scale.y) - 200,
+//					400, 400);
 			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
 			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
-			batcher.end();
+			canvas.end();
 
 		}else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
 			if (animateCool <= 0) {
