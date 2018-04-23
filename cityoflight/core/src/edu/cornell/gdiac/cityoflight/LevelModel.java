@@ -469,7 +469,7 @@ public class LevelModel {
 //                        System.out.println(pSize[0]);
 //                        System.out.println(pSize[1]);
 
-					obj2.initialize(pos, size, pad, debugColor, null, pSize[1]);
+					obj2.initialize(pos, size, pad, debugColor, null, pSize[1], 0, 0);
 					obj2.setDrawScale(scale);
 					activate(obj2);
 //					System.out.println(pos[0] + " " + pos[1]);
@@ -614,6 +614,9 @@ public class LevelModel {
 //				System.out.println("loading boundaries");
 				HashMap<String, JsonValue> boundaryArray = new HashMap<String, JsonValue>();
 
+//				float offsetx = 0;
+//                float offsety = 0;
+
 
 				//assign building and box values to indexes in hashmaps
 //				System.out.println(objects.size);
@@ -630,7 +633,7 @@ public class LevelModel {
 //						System.out.println(pSize[0]);
 //						System.out.println(pSize[1]);
 //                    String objName = obj.get("name").asString();
-					obj2.initialize(pos, size, pad, debugColor, null, pSize[1]);
+					obj2.initialize(pos, size, pad, debugColor, null, pSize[1], 0, 0);
 					obj2.setDrawScale(scale);
 					activate(obj2);
 //					System.out.println(pos[0] + " " + pos[1]);
@@ -658,12 +661,23 @@ public class LevelModel {
 				HashMap<String, JsonValue> numToBuilding = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
 
+                // default offset is 0
+                float offsetx = 0;
+                float offsety = 0;
 
 				//assign building and box values to indexes in hashmaps
 				for(int j = 0; j< objects.size; j++){
 
 					JsonValue obj = objects.get(j);
 					String objName = obj.get("name").asString();
+
+					// if offsets are being defined
+					if (layer.has("offsetx") || layer.has("offsety")) {
+					    // offsets are defined in the physics scale
+                        offsetx = layer.get("offsetx").asInt()/scale.x;
+                        offsety = layer.get("offsety").asInt()/scale.y;
+                        System.out.println("offsetx: " + offsetx + ", offsety: " + offsety);
+                    }
 
 					String[] bSplit = objName.split("building");
 
@@ -704,8 +718,9 @@ public class LevelModel {
 
 
 
+                    // BUILDINGS
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64};
+					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 1};
 					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
 					float[] pad = { 0.1f, 0.1f};
 					String debugColor = "red";
@@ -716,7 +731,7 @@ public class LevelModel {
 //						System.out.println(pSize[0]);
 //						System.out.println(pSize[1]);
 
-						obj2.initialize(pos, size, pad, debugColor, film, pSize[1]);
+						obj2.initialize(pos, size, pad, debugColor, film, pSize[1], offsetx, offsety);
 						obj2.setDrawScale(scale);
 						activate(obj2);
 //						System.out.println(pos[0] + " " + pos[1]);
@@ -745,8 +760,9 @@ public class LevelModel {
 
 				for(int j = 0; j < height*width; j++){
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
+//                    System.out.println("width: " + width + ", height: " + height);
 					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
-					int newy = width - (j / width);//(j%width);
+					int newy = height - (j / width);//(j%width);
 //					System.out.println("newx "+ newx + " new y " + newy);
 
 
