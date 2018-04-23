@@ -443,13 +443,11 @@ public class LevelModel {
 		for (int i = 0; i < layers.size; i++) {
 			JsonValue layer = layers.get(i);
 			String layerName = layer.get("name").asString();
-
 			// just for the Object layers
 			JsonValue objects = layer.get("objects");
 
-			if (layerName.equals("box_Boundaries")) {
-				// TODO
-			} else if (layerName.equals(BLANCHE_LAYER_NAME) ||
+
+			if (layerName.equals(BLANCHE_LAYER_NAME) ||
 					layerName.equals(SNAIL_LAYER_NAME) ||
 					layerName.equals(TARASQUE_LAYER_NAME)) {
 				System.out.println("loading creatures");
@@ -517,14 +515,14 @@ public class LevelModel {
 					else if (name.contains("blanche"))
 						index = 2;
 
-					System.out.println("index = " + index);
+//					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
 					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2]);
-					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
+//					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.setDrawScale(scale);
 					activate(creature);
-					System.out.println(lights.size + ": lights size");
-					System.out.println(lights.get(index) + ": lights");
+//					System.out.println(lights.size + ": lights size");
+//					System.out.println(lights.get(index) + ": lights");
 					attachVision(creature, lights.get(index));
 					creatures.add(creature);
 
@@ -542,7 +540,7 @@ public class LevelModel {
 				createLineofSight(lineOfSightJSON);
 
 			} else if (layerName.equals("Annette")) {
-//				System.out.println("loading annette");
+				System.out.println("loading annette");
 
 
 				annette = new AnnetteModel();
@@ -568,42 +566,44 @@ public class LevelModel {
 
 
 			} else if (layerName.equals("box_Boundaries")) {
-				//TODO:
-//				HashMap<String, JsonValue> numToBuilding = new HashMap<String, JsonValue>();
-//				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
-				JsonValue boundaryData = null;
-				JsonValue boundaryBounds = null;
-				for (int f = 0; f < 2; f++) {
-					JsonValue obj = objects.get(f);
-					System.out.println(obj == null);
-					if (obj.get("name").asString().equals("boundary")) {
-						boundaryData = obj.get("polyline");
-					}
-				}
+				System.out.println("loading boundaries");
+				HashMap<String, JsonValue> boundaryArray = new HashMap<String, JsonValue>();
+
 
 				//assign building and box values to indexes in hashmaps
-//				for (int j = 0; j < objects.size; j++) {
-				for (JsonValue json : boundaryData) {
+				System.out.println(objects.size);
+				for (int j = 0; j < objects.size; j++) {
+
+					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {json.get("x").asFloat() / 64, json.get("y").asFloat() / 64};
-					float[] size = pSize;//{boundaryData.get("width").asFloat() / 64, boundaryData.get("height").asFloat() / 64};
+					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64};
+					float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
 
-//						if (film != null) {
-					System.out.println("psize");
-					System.out.println(pSize);
+
+//						System.out.println("psize");
+//						System.out.println(pSize[0]);
+//						System.out.println(pSize[1]);
 
 					obj2.initialize(pos, size, pad, debugColor, null, pSize[1]);
 					obj2.setDrawScale(scale);
 					activate(obj2);
 					System.out.println(pos[0] + " " + pos[1]);
-//						System.out.println("activating building");
+					System.out.println("activating building");
 					mazes.add(obj2);
+					String objName = obj.get("name").asString();
+					System.out.println(objName);
+
+					String[] bSplit = objName.split("boundary");
+
+					boundaryArray.put(bSplit[1], obj);
+//					System.out.println(bSplit[1]);
+//					System.out.println("boundary "+j + "2 : "+ bSplit[1]);
+
 				}
+
 			}
-
-
 
 
 
@@ -703,7 +703,7 @@ public class LevelModel {
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
 					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
 					int newy = width - (j / width);//(j%width);
-					System.out.println("newx "+ newx + " new y " + newy);
+//					System.out.println("newx "+ newx + " new y " + newy);
 
 
 					int f = 0;
@@ -713,14 +713,14 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-					System.out.println(texName);
+//					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
 
 					// IMPORTANT PROBLEM: TEXTURE IS NULL
 					if(texture != null) {
-						System.out.println(texture.getRegionHeight());
+//						System.out.println(texture.getRegionHeight());
 						TextureRegion[][] textures = texture.split(64, 64);
-						System.out.println(f % textures.length + " " + f / textures.length);
+//						System.out.println(f % textures.length + " " + f / textures.length);
 						TextureRegion texNew = textures[f / textures[0].length][f % textures[0].length];
 						tiles.add(new BackgroundModel(newx, newy, texNew));
 					}
@@ -1089,7 +1089,7 @@ public class LevelModel {
 		JsonValue creaturedata = creaturejson.child();
 		int index = 0;
     	while (creaturedata != null) {
-			System.out.println("index = " + index);
+//			System.out.println("index = " + index);
 			CreatureModel creature = new CreatureModel();
 			//creature.initialize(creaturedata);
 			creature.setDrawScale(scale);
