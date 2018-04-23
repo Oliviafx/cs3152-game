@@ -603,13 +603,13 @@ public class BoxModel extends BoxObstacle {
 
         /** (3/5/2018) might need to change the code below; copied from RocketModel */
 //        float offsety = mainBox.getRegionHeight()-origin.y;
-        canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1 * GameController.TEMP_SCALE,1 * GameController.TEMP_SCALE);
+        canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),2 * GameController.TEMP_SCALE,2 * GameController.TEMP_SCALE);
     }
 
     public void drawState(ObstacleCanvas canvas, Color color) {
         if (texture != null) {
             if (doesExist) {
-                canvas.draw(texture, color, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.x, getAngle(), 1 * GameController.TEMP_SCALE, 1 * GameController.TEMP_SCALE);
+                canvas.draw(texture, color, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.x, getAngle(), 2 * GameController.TEMP_SCALE, 2 * GameController.TEMP_SCALE);
             }
         }
     }
