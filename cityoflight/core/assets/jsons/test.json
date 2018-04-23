@@ -42,7 +42,9 @@
                      "g":0.2,
                      "r":0.2,
                      "rays":512,
-                     "soft":false
+                     "soft":false,
+                     "xoffset":118,
+                     "yoffset":128
                     },
                  "propertytypes":
                     {
@@ -55,15 +57,19 @@
                      "g":"float",
                      "r":"float",
                      "rays":"int",
-                     "soft":"bool"
+                     "soft":"bool",
+                     "xoffset":"float",
+                     "yoffset":"float"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":160,
-                 "y":160
+                 "x":64,
+                 "y":176
                 }],
+         "offsetx":281.333333333333,
+         "offsety":240,
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -151,7 +157,7 @@
                      "damping":10,
                      "debugcolor":"white",
                      "debugopacity":192,
-                     "density":16,
+                     "density":4,
                      "excludeBits":"0000",
                      "force":450,
                      "friction":0,
@@ -956,7 +962,7 @@
          "name":"Crate",
          "objects":[
                 {
-                 "gid":62,
+                 "gid":68,
                  "height":59,
                  "id":128,
                  "name":"crate",
@@ -1080,7 +1086,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":137,
+ "nextobjectid":138,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.3",
@@ -1263,22 +1269,22 @@
          "transparentcolor":"#ff00ff"
         }, 
         {
-         "columns":6,
+         "columns":12,
          "firstgid":56,
          "image":"..\/textures\/bird.png",
          "imageheight":64,
-         "imagewidth":522,
+         "imagewidth":1044,
          "margin":0,
          "name":"bird",
          "spacing":0,
-         "tilecount":6,
+         "tilecount":12,
          "tileheight":64,
          "tilewidth":87,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":10,
-         "firstgid":62,
+         "firstgid":68,
          "image":"..\/textures\/crate.png",
          "imageheight":59,
          "imagewidth":640,
