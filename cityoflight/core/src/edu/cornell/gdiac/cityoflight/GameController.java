@@ -865,7 +865,7 @@ public class GameController implements Screen, ContactListener {
 
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
-//				setComplete(true);
+				setComplete(true);
 				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
 			}
 
@@ -873,7 +873,7 @@ public class GameController implements Screen, ContactListener {
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					if (!isFailure()) { sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f); }
-//					setFailure(true);
+					setFailure(true);
 				}
 			}
 
@@ -1005,7 +1005,48 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	/** Unused ContactListener method */
-	public void endContact(Contact contact) {}
+	public void endContact(Contact contact) {
+		Fixture fix1 = contact.getFixtureA();
+		Fixture fix2 = contact.getFixtureB();
+
+		Body body1 = fix1.getBody();
+		Body body2 = fix2.getBody();
+
+		Object fd1 = fix1.getUserData();
+		Object fd2 = fix2.getUserData();
+
+		try {
+			Obstacle bd1 = (Obstacle) body1.getUserData();
+			Obstacle bd2 = (Obstacle) body2.getUserData();
+
+			String sf1 = "";
+			String sf2 = "";
+
+			if (fd1 != null) {
+				sf1 = (String) fd1;
+			}
+			if (fd2 != null) {
+				sf2 = (String) fd2;
+			}
+
+			AnnetteModel annette = level.getAnnette();
+//			BoxModel box = level.getBox();
+
+			// checking sensors to see if box can be made
+			if (!sf1.contains("annetteDown") || !sf2.contains("annetteDown")) {
+				downBox = true; }
+//			else { downBox = true; }
+			if (!sf1.contains("annetteUp") || !sf2.contains("annetteUp")) { upBox = true; }
+//			else { upBox = true; }
+			if (!sf1.contains("annetteRight") || !sf2.contains("annetteRight")) { rightBox = true; }
+//			else { rightBox = true; }
+			if (!sf1.contains("annetteLeft") || !sf2.contains("annetteLeft")) { leftBox = true; }
+//			else { leftBox = true; }
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
