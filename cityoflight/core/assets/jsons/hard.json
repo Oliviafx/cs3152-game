@@ -1648,26 +1648,26 @@
           "y":960
         },
         {
-          "height":32,
+          "height":102,
           "id":123,
           "name":"blanche_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":95,
+          "width":103,
           "x":513,
-          "y":255
+          "y":185
         },
         {
-          "height":35,
+          "height":102,
           "id":124,
           "name":"blanche_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":96,
+          "width":103,
           "x":720,
-          "y":907
+          "y":840
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1764,7 +1764,7 @@
           "y":678
         },
         {
-          "height":44,
+          "height":94,
           "id":121,
           "name":"snail_box1",
           "rotation":0,
@@ -1772,10 +1772,10 @@
           "visible":true,
           "width":148,
           "x":1364,
-          "y":346
+          "y":296
         },
         {
-          "height":49,
+          "height":94,
           "id":122,
           "name":"snail_box2",
           "rotation":0,
@@ -1783,7 +1783,7 @@
           "visible":true,
           "width":149,
           "x":2070,
-          "y":620
+          "y":575
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -2463,5 +2463,4 @@
   "tilewidth":64,
   "type":"map",
   "version":1,
-  "width":36
-}
+  "width":
