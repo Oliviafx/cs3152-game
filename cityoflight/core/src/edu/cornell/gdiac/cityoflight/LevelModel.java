@@ -797,7 +797,7 @@ public class LevelModel {
 				float height = boundValues.get("height").asFloat();
 				String debugC = "yellow";
 				String tex = exitValues.get("texture").asString();
-				goalDoor.initialize(pos,width,height,debugC, tex);
+				goalDoor.initialize(pos,width,height,debugC, tex, pSize);
 				goalDoor.setDrawScale(scale);
 				activate(goalDoor);
 

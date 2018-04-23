@@ -48,7 +48,7 @@ public class ExitModel extends BoxObstacle {
 	 *
 	 *
 	 */
-	public void initialize(float[] pos, float width, float height, String debugColors, String textr) {
+	public void initialize(float[] pos, float width, float height, String debugColors, String textr, float[] pSize) {
 //
 //		"bodytype":    	"static",
 //				"density":  	  0.0,
@@ -59,7 +59,7 @@ public class ExitModel extends BoxObstacle {
 
 
 		setName("exit");
-		setPosition(pos[0]/64,pos[1]/64);
+		setPosition(pSize[0] - pos[0]/64 - 1,pos[1]/64 + 2);
 //		setRadius(radius);
 		setWidth(width/64);
 		setHeight(height/64);

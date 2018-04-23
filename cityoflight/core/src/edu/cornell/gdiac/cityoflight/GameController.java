@@ -547,7 +547,7 @@ public class GameController implements Screen, ContactListener {
 		box.applyForce();
 
 		dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
-		System.out.println(dist);
+//		System.out.println(dist);
 		// box is deactivatING
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.INNER_RADIUS){
 			box.setDeactivating(true);
