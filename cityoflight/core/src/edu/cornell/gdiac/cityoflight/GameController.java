@@ -70,7 +70,7 @@ public class GameController implements Screen, ContactListener {
 
 	/** Offset for box when summoning */
 	private static final float  BOX_HOFFSET = 1.0f;
-	private static final float  BOX_VOFFSET = 1.0f;
+	private static final float  BOX_VOFFSET = 0.8f;
 	public static final float	TEMP_SCALE	= 0.5f;
 
 	/** Walk in place effective range */
@@ -533,7 +533,6 @@ public class GameController implements Screen, ContactListener {
 		else if (annette.isSummoning() && box.getDoesExist()) {
 			if (dist  <= BoxModel.INNER_RADIUS){
 				if (annette.isSummoning() && box.getDoesExist()) {
-					System.out.println("delete");
 					box.setDoesExist(false);
 					box.deactivatePhysics(level.getWorld());
 					box.dispose();
@@ -544,11 +543,11 @@ public class GameController implements Screen, ContactListener {
 				sound.stop("no_box_effect");
 				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
 			}
-
 		}
 		box.applyForce();
 
 		dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
+		System.out.println(dist);
 		// box is deactivatING
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.INNER_RADIUS){
 			box.setDeactivating(true);
