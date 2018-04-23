@@ -491,6 +491,7 @@ public class LevelModel {
 //				System.out.println("loading vision");
 
 				lineOfSightJSON = objects;
+				System.out.println(objects);
 //				for (CreatureModel c : creatures) {
 					createLineofSight(lineOfSightJSON);
 //				}
@@ -1289,6 +1290,7 @@ public class LevelModel {
 				creature.getVision().setPosition(creature.getX()+creature.getWidth()/2,creature.getY()+creature.getHeight());
 				if (creature.getMovement().x > 0) {
 					creature.getVision().setDirection(0);
+					creature.getVision().setPosition(creature.getX()-creature.getWidth()/2,creature.getY()+creature.getHeight());
 				}
 				else if (creature.getMovement().x < 0) {
 					creature.getVision().setDirection(180);
