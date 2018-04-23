@@ -106,7 +106,7 @@ public class CreatureModel extends BoxObstacle {
 
     private int CREATURE_START_FRAME = 0;
     private int CREATURE_WALK_COOL = 4;
-    private float CREATURE_DENSITY = 1.0f;
+    private float CREATURE_DENSITY = 8.0f;
     private float CREATURE_FRICTION = 0.0f;
     private float CREATURE_RESTITUTION = 0.0f;
     private float CREATURE_FORCE = 1.0f;
@@ -440,7 +440,6 @@ public class CreatureModel extends BoxObstacle {
         downAnim = tex2;
 
         upAnim = tex3;
-
         setTexture(tex1);
 
         setBodyType(CREATURE_BODY_TYPE.equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
@@ -542,14 +541,14 @@ public class CreatureModel extends BoxObstacle {
         }
         else if(movement.y > 0)
         {
-            setTexture(sideAnim);
+            setTexture(upAnim);
             dirTexture = upAnim;
             filmstrip = upAnim;
             //change so that sprite bounds are not offset for tarasque
            // if(type == 2) xOffset = 0;
         }
         else if(movement.y < 0){
-            setTexture(sideAnim);
+            setTexture(downAnim);
             dirTexture = downAnim;
             filmstrip = downAnim;
             //if(type == 2) xOffset = 0;

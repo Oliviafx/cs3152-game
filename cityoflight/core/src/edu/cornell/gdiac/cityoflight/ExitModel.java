@@ -97,4 +97,18 @@ public class ExitModel extends BoxObstacle {
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
 		setTexture(texture);
 	}
+
+	/**
+	 * Draws the physics object.
+	 *
+	 * @param canvas Drawing context
+	 */
+	public void draw(ObstacleCanvas canvas) {
+
+		if (texture != null) {
+
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y+texture.getRegionHeight()/3, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
+//			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
+		}
+	}
 }
