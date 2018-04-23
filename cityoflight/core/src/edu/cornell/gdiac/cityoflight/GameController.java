@@ -643,15 +643,15 @@ public class GameController implements Screen, ContactListener {
 
 		// Final message
 		if (complete && !failed) {
-			displayFont.setColor(Color.YELLOW);
+			displayFont.setColor(Color.GOLDENROD);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("Level Complete!", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Cleared.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
 			canvas.end();
 		} else if (failed) {
 
-			displayFont.setColor(Color.RED);
+			displayFont.setColor(Color.FIREBRICK);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("Game Over!", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Defeated.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
 			canvas.end();
 		}
 	}
