@@ -238,6 +238,7 @@
 				"rows": 1,
 				"cols": 14,
 				"first": 1
+			}
 		},
 		"indicator_seen" : {
 			"file" : "textures/isseen.png",
