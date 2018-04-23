@@ -541,7 +541,6 @@ public class AnnetteModel extends BoxObstacle {
             case DOWN:
                 setTexture(sidefilmstrip);
                 dirTexture = downfilmstrip;
-
         }
 
         if (texture != null) {
