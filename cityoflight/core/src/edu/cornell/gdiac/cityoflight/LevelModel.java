@@ -1372,7 +1372,7 @@ public class LevelModel {
 		// Accounts for edges of screen
 		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
 //		float cameraXStart = 0;
-		float cameraYStart = canvas.getHeight() * 3f/(5.0f * scale.y);
+		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
 //		float cameraYStart = 0;
 		float cameraXEnd = canvas.getWidth() * 1.74f / scale.x;
 		float cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
@@ -1408,7 +1408,7 @@ public class LevelModel {
 		if (rayhandler != null) {
 //			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
 			raycamera.position.set(tx, ty, 0);
-//			raycamera.zoom = raycamera.zoom / 2;
+//			raycamera.zoom = raycamera.zoom 2;
 			raycamera.update();
 			rayhandler.setCombinedMatrix(raycamera);
 			rayhandler.render();
