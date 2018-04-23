@@ -591,8 +591,10 @@ public class LevelModel {
 					String debugColor = "red";
 
 //						if (film != null) {
+					System.out.println("psize");
+					System.out.println(pSize);
 
-					obj2.initialize(pos, size, pad, debugColor, null);
+					obj2.initialize(pos, size, pad, debugColor, null, pSize[1]);
 					obj2.setDrawScale(scale);
 					activate(obj2);
 					System.out.println(pos[0] + " " + pos[1]);
@@ -666,7 +668,11 @@ public class LevelModel {
 
 					if(film!= null) {
 
-						obj2.initialize(pos, size, pad, debugColor, film);
+//						System.out.println("psize");
+//						System.out.println(pSize[0]);
+//						System.out.println(pSize[1]);
+
+						obj2.initialize(pos, size, pad, debugColor, film, pSize[1]);
 						obj2.setDrawScale(scale);
 						activate(obj2);
 //						System.out.println(pos[0] + " " + pos[1]);

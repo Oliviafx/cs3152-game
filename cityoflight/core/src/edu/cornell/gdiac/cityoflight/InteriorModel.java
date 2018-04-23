@@ -228,12 +228,12 @@ public class InteriorModel extends BoxObstacle {
 	 * this JSON value is limited to the platform subtree
 	 *
 	 */
-	public void initialize(float[] pos, float[] size, float[] pad, String debugClr, TextureRegion tex) {
+	public void initialize(float[] pos, float[] size, float[] pad, String debugClr, TextureRegion tex, float height) {
 		if (tex != null) {
 			setTexture(tex);
 		}
 		setName("Static obstacle");
-		setPosition(pos[0]+ size[0]/2,pos[1]+size[1]/2);
+		setPosition(pos[0]+ size[0]/2,height - (pos[1]-size[1]/2));
 
 		setDimension(size[0],size[1]);
 		setPadding(pad[0],pad[1]);
@@ -279,6 +279,7 @@ public class InteriorModel extends BoxObstacle {
 		if (region != null) {
 
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y+texture.getRegionHeight()/4, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
+//			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
 		}
 	}
 
