@@ -229,10 +229,12 @@ public class InteriorModel extends BoxObstacle {
 	 *
 	 */
 	public void initialize(float[] pos, float[] size, float[] pad, String debugClr, TextureRegion tex) {
-		setTexture(tex);
+		if (tex != null) {
+			setTexture(tex);
+		}
 		setName("Static obstacle");
 
-		setPosition(pos[0],pos[1]);
+		setPosition(pos[0]+ size[0]/2,pos[1]+size[1]/2);
 
 		setDimension(size[0],size[1]);
 		setPadding(pad[0],pad[1]);
