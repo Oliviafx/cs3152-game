@@ -706,8 +706,8 @@ public class GameController implements Screen, ContactListener {
 			batcher.begin();
 			System.out.println("annette_x = " + level.getAnnette().getX());
 			System.out.println("annette_y = " + level.getAnnette().getY());
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) + 200,
-			//		(level.getAnnette().getY() / 64 * level.scale.y) + 100, 400, 400);
+			//batcher.draw(indicator_loop,(level.getAnnette().getX() * level.scale.x) - 200,
+			//		(level.getAnnette().getY() * level.scale.y) - 200, 400, 400);
 			batcher.draw(indicator_out,(level.getAnnette().getX() / 64 * level.scale.x + 100),
 					(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
 			batcher.end();
@@ -746,12 +746,12 @@ public class GameController implements Screen, ContactListener {
 				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
 			}
 			batcher.begin();
-//			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
-//					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
+			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
+					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
 
 			// These numbers are just guess and check...
-			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
-					(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
+			//batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
+			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
 			batcher.end();
 		}
 	}
