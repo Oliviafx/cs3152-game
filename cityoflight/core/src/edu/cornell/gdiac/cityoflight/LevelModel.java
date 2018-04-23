@@ -129,7 +129,7 @@ public class LevelModel {
 	/** The amount of time that has passed without updating the frame */
 	protected float physicsTimeLeft;
 
-	private static final String BACKGROUND_FILE = "textures/alpha_demo.png";
+	private static final String BACKGROUND_FILE = "textures/black.png";
 	private Texture background;
 
 	private static final String BLANCHE_LAYER_NAME = "Blanche";
@@ -1386,7 +1386,7 @@ public class LevelModel {
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin(oTran);
-		//canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas.getHeight());
+		canvas.draw(background, Color.WHITE, 0, 0, canvas.getWidth() * 2, canvas.getHeight() * 2);
 		//canvas.draw(background, 0, 0);
 
 		//DRAWS BACKGROUND TILES HERE

@@ -402,8 +402,10 @@ public class CreatureModel extends BoxObstacle {
         setPosition(pos[0],pos[1]);
 
 //        setRadius(radius);
-        setWidth(width);
-        setHeight(height);
+//        setWidth(width);
+//        setHeight(height);
+        setWidth(height);
+        setHeight(width);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
@@ -555,14 +557,14 @@ public class CreatureModel extends BoxObstacle {
         }
         else {
             if (texture != null) {
-                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y, 0, 0.75f * isReflected, 0.75f);
+                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y+texture.getRegionHeight()/6, 0, 0.75f * isReflected, 0.75f);
             }
         }
 
         if (texture != null && dirTexture != null) {
 
 //            System.out.println("creature position " + getX() + " " + getY());
-            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y,0,0.75f* isReflected,0.75f);
+            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y+texture.getRegionHeight()/6,0,0.75f* isReflected,0.75f);
         }
     }
 }
