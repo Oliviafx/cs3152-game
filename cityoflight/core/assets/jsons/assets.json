@@ -37,6 +37,12 @@
 			"file": 	"textures/64_building_tall.png",
 			"wrap": 	true
 		},
+
+		"64_building_short_side": {
+			"file": 	"textures/64_building_short_side.png",
+			"wrap": 	true
+		},
+		
 		"128_bookstore": {
 			"file": 	"textures/128_bookstore.png",
 			"wrap": 	true
@@ -60,6 +66,10 @@
 		"128_flowershop": {
 			"file": 	"textures/128_flowershop.png",
 			"wrap": 	true
+		},
+		"floor_tiles": {
+			"file": 	"textures/floor_tiles.png",
+			"wrap":  	true
 		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
@@ -122,7 +132,6 @@
 				"first": 0
 			}
 		},
-
 		"tarasque": {
 			"file": 	"textures/tarasque_side.png",
 			"wrap":  	false,
@@ -183,77 +192,110 @@
 				"first":	0
 			}
 		},
-			"dude": {
-				"file": "textures/creature.png",
-				"wrap": false
-			},
-			"box": {
-				"file": 	"textures/crate.png",
-				"wrap":  	false,
+		"dude": {
+			"file": "textures/creature.png",
+			"wrap": false
+		},
+		"box": {
+			"file": 	"textures/crate.png",
+			"wrap":  	false,
 				"strip":	{
-					"size":		10,
-					"rows":		1,
-					"cols":		10,
-					"first":	0
-				}
-			},
-			"goal": {
-				"file": "textures/lamppost.png",
-				"wrap": false
-			},
-			"distraction": {
-				"file": "textures/bird.png",
-				"wrap": false,
-				"strip": {
-					"size": 12,
-					"rows": 1,
-					"cols": 12,
-					"first": 1
-				}
+				"size":		10,
+				"rows":		1,
+				"cols":		10,
+				"first":	0
 			}
 		},
-			"fonts": {
-				"display": {
-					"file": "fonts/MarkerFelt.ttf",
-					"size": 64
-				}
-			},
-			"sounds": {
-				"box_effect": {
-					"file": "sounds/box_effect.wav"
-				},
-				"bg_test2_music": {
-					"file": "sounds/bg_test2_music.wav"
-				},
-				"win_effect": {
-					"file": "sounds/win_effect.wav"
-				},
-				"lose_effect": {
-					"file": "sounds/lose_effect.wav"
-				},
-				"distraction_gone_effect": {
-					"file": "sounds/distraction_gone_effect.wav"
-				},
-				"no_box_effect": {
-					"file": "sounds/no_box_effect.wav"
-				},
-				"distraction_effect": {
-					"file": "sounds/distraction_effect.wav"
-				},
-				"select_test_effect": {
-					"file": "sounds/select_test_effect.wav"
-				},
-				"box_deactivate_effect": {
-					"file": "sounds/box_deactivate_effect.wav"
-				},
-                "seen_effect": {
-                  "file": "sounds/seen_effect.wav"
-                },
-				"ambient_effect": {
-					"file": "sounds/ambient_effect.wav"
-				},
-				"box_gone_effect": {
-					"file": "sounds/box_gone_effect.wav"
-				}
+		"goal": {
+			"file": "textures/lamppost.png",
+			"wrap": false
+		},
+		"distraction": {
+			"file": "textures/bird.png",
+			"wrap": false,
+			"strip": {
+				"size": 12,
+				"rows": 1,
+				"cols": 12,
+				"first": 1
+			}
+		},
+		"indicator_out" : {
+			"file" : "textures/indicator_out.png",
+			"wrap" : false,
+			"strip": {
+				"size": 15,
+				"rows": 1,
+				"cols": 15,
+				"first": 1
+			}
+		},
+		"indicator_loop" : {
+			"file" : "textures/indicator_loop.png",
+			"wrap" : false,
+			"strip": {
+				"size": 14,
+				"rows": 1,
+				"cols": 14,
+				"first": 1
+			}
+		},
+		"indicator_seen" : {
+			"file" : "textures/isseen.png",
+			"wrap" : false,
+			"strip": {
+				"size": 15,
+				"rows": 1,
+				"cols": 15,
+				"first": 1
 			}
 		}
+	},
+	"fonts": {
+		"display": {
+			"file": "fonts/Belladona.ttf",
+			"size": 64
+		}
+	},
+	"sounds": {
+		"box_effect": {
+			"file": "sounds/box_effect.wav"
+		},
+		"bg_test2_music": {
+			"file": "sounds/bg_test2_music.wav"
+		},
+		"win_effect": {
+			"file": "sounds/win_effect.wav"
+		},
+		"lose_effect": {
+			"file": "sounds/lose_effect.wav"
+		},
+		"distraction_gone_effect": {
+			"file": "sounds/distraction_gone_effect.wav"
+		},
+		"no_box_effect": {
+			"file": "sounds/no_box_effect.wav"
+		},
+		"distraction_effect": {
+			"file": "sounds/distraction_effect.wav"
+		},
+		"select_test_effect": {
+			"file": "sounds/select_test_effect.wav"
+		},
+		"box_deactivate_effect": {
+			"file": "sounds/box_deactivate_effect.wav"
+		},
+        "seen_effect": {
+            "file": "sounds/seen_effect.wav"
+        },
+		"ambient_effect": {
+			"file": "sounds/ambient_effect.wav"
+		},
+		"box_gone_effect": {
+			"file": "sounds/box_gone_effect.wav"
+		},
+		"120bpm_music": {
+			"file": "sounds/120bpm_music.wav"
+		}
+	}
+}

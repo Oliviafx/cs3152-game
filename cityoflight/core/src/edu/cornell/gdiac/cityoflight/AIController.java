@@ -45,11 +45,18 @@ public class AIController{
     /** Stores original speed */
     private float speedCache;
 
+    /** Walk in place effective range */
+    public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
+
+    public boolean isChasing(){
+        return state == FSMState.CHASE;
+    }
+
     /**
      * Constants for creatures' specific characteristics and/or behavior
      */
     private float LouSenseDistance = 5.0f;
-    private float TarasqueSpeedGain = 4.0f;
+    private float TarasqueSpeedGain = 3.0f;
     private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
@@ -243,7 +250,7 @@ public class AIController{
                     if (creature.getTurnCool() <= 0) {
                             cAngleCache.set(getNextMovement().x * BlancheCurrentSpeedGain, getNextMovement().y * BlancheCurrentSpeedGain);
                         creature.setTurnCool(creature.getTurnLimit());
-                        if (BlancheCurrentSpeedGain > 0) {
+                        if (BlancheCurrentSpeedGain > 1.0) {
                             BlancheCurrentSpeedGain -= 0.1;
                             //System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
                         }
@@ -261,13 +268,14 @@ public class AIController{
         cAngleCache.scl(creature.getForce());
 
 
-        if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird() && !creature.getStuck()
-                && (level.getAnnette().getPosition().sub(creature.getPosition()).len2() <= 40.0f) ){
+        if(level.getAnnette().isWalkingInPlace() && !level.getAnnette().getBird()
+                && (level.getAnnette().getPosition().sub(creature.getPosition()).len2() <=  WALK_IN_PLACE_EFFECTIVE_RANGE) ){
+            System.out.println("effective!");
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
 
             creature.setMovement(cAngleCache.x , cAngleCache.y );
-//            creature.setMovement(0, 0);
+//          creature.setMovement(0, 0);
 
         } else {
             creature.setMovement(cAngleCache.x,cAngleCache.y);
