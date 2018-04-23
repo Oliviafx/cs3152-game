@@ -34,9 +34,9 @@
           "properties":
           {
             "a":0.3,
-            "angle":4,
+            "angle":8,
             "b":0.5,
-            "distance":25,
+            "distance":50,
             "excludeBits":"0010",
             "facing":90,
             "g":0.2,
@@ -71,9 +71,9 @@
           "properties":
           {
             "a":0.3,
-            "angle":4,
+            "angle":8,
             "b":0.5,
-            "distance":25,
+            "distance":50,
             "excludeBits":"0010",
             "facing":90,
             "g":0.2,
@@ -110,7 +110,7 @@
             "a":0.3,
             "angle":20,
             "b":0.5,
-            "distance":10,
+            "distance":20,
             "excludeBits":"0010",
             "facing":90,
             "g":0.2,
@@ -147,7 +147,7 @@
             "a":0.3,
             "angle":20,
             "b":0.5,
-            "distance":10,
+            "distance":20,
             "excludeBits":"0010",
             "facing":90,
             "g":0.2,
@@ -1486,8 +1486,8 @@
           "type":"",
           "visible":true,
           "width":90,
-          "x":400,
-          "y":688
+          "x":411,
+          "y":496
         },
         {
           "gid":51,
@@ -1528,30 +1528,30 @@
           "type":"",
           "visible":true,
           "width":90,
-          "x":1040,
-          "y":688
+          "x":894,
+          "y":834
         },
         {
-          "height":145,
+          "height":108,
           "id":125,
           "name":"tarasque_box1",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":89,
-          "x":400,
-          "y":543
+          "x":411,
+          "y":368
         },
         {
-          "height":139,
+          "height":113,
           "id":126,
           "name":"tarasque_box2",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":90,
-          "x":1040,
-          "y":474
+          "x":894,
+          "y":622
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1602,8 +1602,8 @@
           "type":"",
           "visible":true,
           "width":118,
-          "x":512,
-          "y":304
+          "x":514,
+          "y":377
         },
         {
           "gid":63,
@@ -1644,8 +1644,8 @@
           "type":"",
           "visible":true,
           "width":118,
-          "x":720,
-          "y":960
+          "x":722,
+          "y":893
         },
         {
           "height":102,
@@ -1655,8 +1655,8 @@
           "type":"",
           "visible":true,
           "width":103,
-          "x":513,
-          "y":185
+          "x":515,
+          "y":258
         },
         {
           "height":102,
@@ -1666,8 +1666,8 @@
           "type":"",
           "visible":true,
           "width":103,
-          "x":720,
-          "y":840
+          "x":722,
+          "y":773
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1770,8 +1770,8 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":148,
-          "x":1364,
+          "width":103,
+          "x":1409,
           "y":296
         },
         {
@@ -1781,8 +1781,8 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":149,
-          "x":2070,
+          "width":102,
+          "x":2117,
           "y":575
         }],
       "opacity":1,
@@ -2184,7 +2184,7 @@
         }],
       "opacity":1,
       "type":"objectgroup",
-      "visible":true,
+      "visible":false,
       "x":0,
       "y":0
     }],
