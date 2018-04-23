@@ -759,7 +759,7 @@ public class LevelModel {
 //                    System.out.println("width: " + width + ", height: " + height);
 					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
 					int newy = height - (j / width);//(j%width);
-					System.out.println("newx "+ newx + " new y " + newy);
+//					System.out.println("newx "+ newx + " new y " + newy);
 
 
 					int f = 0;
