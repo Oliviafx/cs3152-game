@@ -75,6 +75,8 @@ public class LevelModel {
 
 
 
+	private IndicatorModel indicator;
+
 	/** The interior models */
 	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
 	/** The exterior models */
@@ -869,6 +871,7 @@ public class LevelModel {
         goalDoor.setDrawScale(scale);
         activate(goalDoor);
 
+
         JsonValue bounds = levelFormat.getChild("exterior");
         while (bounds != null) {
             ExteriorModel obj = new ExteriorModel();
@@ -918,6 +921,10 @@ public class LevelModel {
         if (distraction != null) {
             distraction.setAlive(false);
         }
+
+        // Creater indicator
+        indicator = new IndicatorModel();
+
     }
 
 //    public void addObjects(JsonValue levelFormat) {
@@ -943,7 +950,6 @@ public class LevelModel {
 //
 //
 //	}
-
 
     public boolean isDistraction() {
         if (distraction != null) {
@@ -1025,7 +1031,7 @@ public class LevelModel {
 	}
 
 	public void darkenLights(RayHandler r){
-		r.setAmbientLight(normal_r * 0.3f,normal_g * 0.3f,normal_b * 0.3f,normal_alp * 0.2f);
+		r.setAmbientLight(normal_r * 0.2f,normal_g * 0.f,normal_b * 0.2f,normal_alp * 0.2f);
 	}
 
 	public void brightenLights(RayHandler r){
@@ -1249,6 +1255,9 @@ public class LevelModel {
 			}
 			goalDoor.update(dt);
 			box.update(dt);
+			if (indicator != null){
+			    indicator.update(dt);
+            }
             if (distraction!=null) {
 //				System.out.println(distraction.getX());
 //				System.out.println(distraction.getY());
