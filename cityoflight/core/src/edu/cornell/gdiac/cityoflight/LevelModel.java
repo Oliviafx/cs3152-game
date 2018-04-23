@@ -543,7 +543,7 @@ public class LevelModel {
 
 
 					for (int f = 0; f < 3; f++) {
-						if (idToFilmStrip.containsKey(textName+f)) {
+						if (idToFilmStrip.containsKey(textName)) {
 							System.out.println(textName);
 							film[f] = idToFilmStrip.get(textures[f]);
 						} else {
@@ -560,7 +560,7 @@ public class LevelModel {
 					}
 
 					int index = 0;
-					if (name.contains("dragon"))
+					if (name.contains("tarasque"))
 						index = 1;
 					else if (name.contains("blanche"))
 						index = 2;
@@ -568,7 +568,7 @@ public class LevelModel {
 //					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
 //					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
-
+                    System.out.println(film[0]==null);
 					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2], pSize[1]);
 //					System.out.println(creature.getPosition().x*64 + " " + creature.getPosition().y*64);
 					creature.setDrawScale(scale);
@@ -576,7 +576,8 @@ public class LevelModel {
 //					System.out.println(lights.size + ": lights size");
 //					System.out.println(lights.get(index) + ": lights");
 //					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
-					attachVision(creature, lights.get(index));
+                    System.out.println("index is "+index);
+                    attachVision(creature, lights.get(index));
 					creatures.add(creature);
 
 				}
@@ -1137,12 +1138,16 @@ public class LevelModel {
 			else if (name.equals("lady_vision"))
 				index = 2;
 
+//			System.out.println("index is: " + index);
 			lightArr[index] = cone;
 
 			}
 		for(int i = 0; i<lightArr.length;i++){
 			lights.add(lightArr[i]);
 		}
+        System.out.println("lightArr.length = "+lightArr.length);
+        System.out.println("lights.size: " + lights.size);
+        System.out.println("lights 1 == null: "+lights.get(1)==null);
 
 	}
 
@@ -1178,7 +1183,7 @@ public class LevelModel {
 	 *
 	 */
 	public void attachVision (CreatureModel creature, LightSource light){
-		System.out.println(light.getX() + " " + light.getY());
+//		System.out.println(light.getX() + " " + light.getY());
 		light.setPosition(creature.getX()+creature.getWidth()/2, creature.getY()+creature.getHeight()/2);
 		light.setDirection(0);
 //		light.attachToBody(creature.getBody(), 0, 0, light.getDirection());
