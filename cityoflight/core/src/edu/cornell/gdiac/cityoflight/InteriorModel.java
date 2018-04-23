@@ -233,7 +233,6 @@ public class InteriorModel extends BoxObstacle {
 			setTexture(tex);
 		}
 		setName("Static obstacle");
-
 		setPosition(pos[0]+ size[0]/2,pos[1]+size[1]/2);
 
 		setDimension(size[0],size[1]);
