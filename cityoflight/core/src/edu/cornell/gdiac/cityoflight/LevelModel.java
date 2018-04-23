@@ -696,8 +696,8 @@ public class LevelModel {
 				for(int j = 0; j < height*width; j++){
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
 					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
-					int newy = j / width;//(j%width);
-//					System.out.println("newx "+ newx + " new y " + newy);
+					int newy = width - (j / width);//(j%width);
+					System.out.println("newx "+ newx + " new y " + newy);
 
 
 					int f = 0;
@@ -910,6 +910,27 @@ public class LevelModel {
         else {
             return false;
         }
+    }
+
+    public void createBox(JsonValue levelFormat) {
+        box = new BoxModel(annette.getX(), annette.getY());
+        JsonValue layers = levelFormat.get("layers");
+        for(int i =0; i< layers.size; i++){
+            if(layers.get(i).get("name").asString().equals("Bird")){
+                //initialize bird here
+                JsonValue distractiondata = layers.get(i).get("objects");
+                JsonValue birdinfo = distractiondata.get(0).get("properties");
+                JsonValue birdbox = distractiondata.get(1);
+                distraction.initialize(birdinfo, birdbox);
+
+                distraction.setDrawScale(scale);
+                activate(distraction);
+                distraction.setActive(true);
+                distraction.setAlive(true);
+            }
+        }
+
+//		distraction.activatePhysics(world);
     }
 
     public void createDistraction(JsonValue levelFormat) {
@@ -1247,12 +1268,12 @@ public class LevelModel {
 		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
-		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
+		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
 //		float cameraXStart = 0;
-		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
+		float cameraYStart = canvas.getHeight() * 2.5f/(5.0f * scale.y);
 //		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
+		float cameraXEnd = canvas.getWidth() * 0.6f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 1f / scale.y;
 //		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 //		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
