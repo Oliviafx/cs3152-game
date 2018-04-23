@@ -106,7 +106,7 @@ public class CreatureModel extends BoxObstacle {
 
     private int CREATURE_START_FRAME = 0;
     private int CREATURE_WALK_COOL = 4;
-    private float CREATURE_DENSITY = 4.0f;
+    private float CREATURE_DENSITY = 2.0f;
     private float CREATURE_FRICTION = 0.0f;
     private float CREATURE_RESTITUTION = 0.0f;
     private float CREATURE_FORCE = 1.0f;

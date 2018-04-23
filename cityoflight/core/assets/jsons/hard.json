@@ -1648,26 +1648,26 @@
           "y":960
         },
         {
-          "height":32,
+          "height":102,
           "id":123,
           "name":"blanche_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":95,
+          "width":103,
           "x":513,
-          "y":255
+          "y":185
         },
         {
-          "height":35,
+          "height":102,
           "id":124,
           "name":"blanche_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":96,
+          "width":103,
           "x":720,
-          "y":907
+          "y":840
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1677,13 +1677,13 @@
     },
     {
       "draworder":"topdown",
-      "name":"Carcolh",
+      "name":"Snail",
       "objects":[
         {
           "gid":84,
           "height":128,
           "id":56,
-          "name":"carcolh1",
+          "name":"snail1",
           "properties":
           {
             "bodytype":"dynamic",
@@ -1725,7 +1725,7 @@
           "gid":84,
           "height":128,
           "id":57,
-          "name":"carcolh2",
+          "name":"snail2",
           "properties":
           {
             "bodytype":"dynamic",
@@ -1760,30 +1760,30 @@
           "type":"",
           "visible":true,
           "width":203,
-          "x":2064,
-          "y":688
+          "x":2066,
+          "y":678
         },
         {
-          "height":44,
+          "height":94,
           "id":121,
-          "name":"carcolh_box1",
+          "name":"snail_box1",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":148,
           "x":1364,
-          "y":346
+          "y":296
         },
         {
-          "height":49,
+          "height":94,
           "id":122,
-          "name":"carcolh_box2",
+          "name":"snail_box2",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":149,
-          "x":2068,
-          "y":630
+          "x":2070,
+          "y":575
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -2179,8 +2179,8 @@
           "type":"",
           "visible":true,
           "width":960,
-          "x":1344,
-          "y":480
+          "x":1342,
+          "y":477
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -2188,7 +2188,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":134,
+  "nextobjectid":135,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
