@@ -81,6 +81,9 @@ public class GameController implements Screen, ContactListener {
 	private int animateCOOLTIME = 2;
 	private int animateCool = animateCOOLTIME;
 
+	private FilmStrip indicator_seen;
+	private boolean seenhasAnimated = false;
+
 
 	private boolean stopWalkInPlace = false;
 
@@ -624,6 +627,20 @@ public class GameController implements Screen, ContactListener {
 			drawWalkInPlace();
 		}
 
+		for (AIController controller : AIcontrollers){
+			if(controller.isChasing()) {
+				drawisSeen();
+			}
+		}
+
+		if (noOneSeesMe()){
+			//System.out.println("in seen reset");
+			seenhasAnimated = false;
+			if (indicator_seen != null){
+				indicator_seen.setFrame(0);
+			}
+		}
+
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
@@ -639,6 +656,15 @@ public class GameController implements Screen, ContactListener {
 		}
 	}
 
+	public boolean noOneSeesMe(){
+		boolean isbeingseen = false;
+		for (AIController controller : AIcontrollers){
+			if(controller.isChasing()) {
+				isbeingseen = true;
+			}
+		}
+		return !isbeingseen;
+	}
 
 	public void drawWalkInPlace(){
 
@@ -687,6 +713,28 @@ public class GameController implements Screen, ContactListener {
 		animateCool --;
 	}
 
+	public void drawisSeen() {
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_seen", TextureRegion.class);
+		try {
+			indicator_seen = (FilmStrip) texture;
+		} catch (Exception e) {
+			indicator_seen = null;
+		}
+
+		if (indicator_seen != null) {
+			int next = (indicator_seen.getFrame() + 1);
+			if (next < indicator_seen.getSize() && !seenhasAnimated) {
+				indicator_seen.setFrame(next);
+			}else{
+				seenhasAnimated = true;
+				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
+			}
+			batcher.begin();
+			batcher.draw(indicator_seen, (level.getAnnette().getX() * level.scale.x) - 10,
+					(level.getAnnette().getY() * level.scale.y) + 30, 20, 20);
+			batcher.end();
+		}
+	}
 
 	/**
 	 * Called when the Screen is resized.
