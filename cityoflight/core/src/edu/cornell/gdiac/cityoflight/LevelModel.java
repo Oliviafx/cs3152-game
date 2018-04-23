@@ -445,6 +445,7 @@ public class LevelModel {
 		for (int i = 0; i < layers.size; i++) {
 			JsonValue layer = layers.get(i);
 			String layerName = layer.get("name").asString();
+
 			// just for the Object layers
 			JsonValue objects = layer.get("objects");
 
@@ -556,8 +557,9 @@ public class LevelModel {
 
 //					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
-					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2]);
 //					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
+					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2], pSize[1]);
+					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.setDrawScale(scale);
 					activate(creature);
 //					System.out.println(lights.size + ": lights size");
@@ -595,7 +597,7 @@ public class LevelModel {
 					}
 				}
 
-				annette.initialize(annetteData, annetteBounds);
+				annette.initialize(annetteData, annetteBounds, pSize[1]);
 				annette.setDrawScale(scale);
 				activate(annette);
 
@@ -1355,7 +1357,7 @@ public class LevelModel {
 		canvas.end();
 
 		if (rayhandler != null) {
-//			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight(), canvas.getWidth()/4, canvas.getHeight()/4);
+//			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
 			raycamera.position.set(tx, ty, 0);
 //			raycamera.zoom = raycamera.zoom / 2;
 			raycamera.update();
