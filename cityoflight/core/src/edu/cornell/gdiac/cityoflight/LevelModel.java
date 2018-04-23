@@ -75,6 +75,8 @@ public class LevelModel {
 
 
 
+	private IndicatorModel indicator;
+
 	/** The interior models */
 	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
 	/** The exterior models */
@@ -446,8 +448,45 @@ public class LevelModel {
 			// just for the Object layers
 			JsonValue objects = layer.get("objects");
 
-
-			if (layerName.equals(BLANCHE_LAYER_NAME) ||
+//			if (layerName.equals("box_Boundaries")) {
+//                HashMap<String, JsonValue> boundaryArray = new HashMap<String, JsonValue>();
+//
+//
+//                //assign building and box values to indexes in hashmaps
+//                System.out.println(objects.size);
+//                for (int j = 0; j < objects.size; j++) {
+//
+//                    JsonValue obj = objects.get(j);
+//                    InteriorModel obj2 = new InteriorModel();
+//                    float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat() / 64};
+//                    float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
+//                    float[] pad = {0.1f, 0.1f};
+//                    String debugColor = "red";
+//
+//
+////                        System.out.println("psize");
+////                        System.out.println(pSize[0]);
+////                        System.out.println(pSize[1]);
+//
+//                    obj2.initialize(pos, size, pad, debugColor, null, pSize[1]);
+//                    obj2.setDrawScale(scale);
+//                    activate(obj2);
+//                    System.out.println(pos[0] + " " + pos[1]);
+//                    System.out.println("activating building");
+//                    mazes.add(obj2);
+//                    String objName = obj.get("name").asString();
+//                    System.out.println(objName);
+//
+//                    String[] bSplit = objName.split("boundary");
+//
+////					boundaryArray.put(bSplit[1], obj);
+////                    System.out.println(bSplit[1]);
+////                    System.out.println("boundary "+j + "2 : "+ bSplit[1]);
+//
+//                }
+//            }
+//			} else if (layerName.equals(BLANCHE_LAYER_NAME) ||
+             if (layerName.equals(BLANCHE_LAYER_NAME) ||
 					layerName.equals(SNAIL_LAYER_NAME) ||
 					layerName.equals(TARASQUE_LAYER_NAME)) {
 				System.out.println("loading creatures");
@@ -571,9 +610,8 @@ public class LevelModel {
 
 
 				//assign building and box values to indexes in hashmaps
-				System.out.println(objects.size);
+//				System.out.println(objects.size);
 				for (int j = 0; j < objects.size; j++) {
-
 					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
 					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64};
@@ -582,22 +620,22 @@ public class LevelModel {
 					String debugColor = "red";
 
 
-//						System.out.println("psize");
+//                    System.out.println(objName);
 //						System.out.println(pSize[0]);
 //						System.out.println(pSize[1]);
-
+//                    String objName = obj.get("name").asString();
 					obj2.initialize(pos, size, pad, debugColor, null, pSize[1]);
 					obj2.setDrawScale(scale);
 					activate(obj2);
-					System.out.println(pos[0] + " " + pos[1]);
-					System.out.println("activating building");
+//					System.out.println(pos[0] + " " + pos[1]);
+//					System.out.println("activating building");
 					mazes.add(obj2);
-					String objName = obj.get("name").asString();
-					System.out.println(objName);
 
-					String[] bSplit = objName.split("boundary");
 
-					boundaryArray.put(bSplit[1], obj);
+
+//					String[] bSplit = objName.split("boundary");
+//
+//					boundaryArray.put(bSplit[1], obj);
 //					System.out.println(bSplit[1]);
 //					System.out.println("boundary "+j + "2 : "+ bSplit[1]);
 
@@ -882,6 +920,10 @@ public class LevelModel {
         if (distraction != null) {
             distraction.setAlive(false);
         }
+
+        // Creater indicator
+        indicator = new IndicatorModel();
+
     }
 
 //    public void addObjects(JsonValue levelFormat) {
@@ -989,7 +1031,7 @@ public class LevelModel {
 	}
 
 	public void darkenLights(RayHandler r){
-		r.setAmbientLight(normal_r * 0.3f,normal_g * 0.3f,normal_b * 0.3f,normal_alp * 0.2f);
+		r.setAmbientLight(normal_r * 0.2f,normal_g * 0.f,normal_b * 0.2f,normal_alp * 0.2f);
 	}
 
 	public void brightenLights(RayHandler r){
@@ -1213,6 +1255,9 @@ public class LevelModel {
 			}
 			goalDoor.update(dt);
 			box.update(dt);
+			if (indicator != null){
+			    indicator.update(dt);
+            }
             if (distraction!=null) {
 //				System.out.println(distraction.getX());
 //				System.out.println(distraction.getY());

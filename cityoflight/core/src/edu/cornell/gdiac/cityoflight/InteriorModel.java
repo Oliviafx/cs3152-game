@@ -77,6 +77,7 @@ public class InteriorModel extends BoxObstacle {
 		short[] tris = {0,1,3,3,2,1};
 		anchor = new Vector2(getX(),getY());
 		region = new PolygonRegion(texture,scaled,tris);
+
 	}
 	
 	/**
@@ -85,6 +86,8 @@ public class InteriorModel extends BoxObstacle {
 	protected void resize(float width, float height) {
 		super.resize(width,height);
 		initRegion();
+//		System.out.println("resize interior");
+
 	}
 	
 	/**
@@ -232,10 +235,11 @@ public class InteriorModel extends BoxObstacle {
 		if (tex != null) {
 			setTexture(tex);
 		}
+
 		setName("Static obstacle");
 		setPosition(pos[0]+ size[0]/2,height - (pos[1]-size[1]/2));
-
 		setDimension(size[0],size[1]);
+
 		setPadding(pad[0],pad[1]);
 		
 		// Technically, we should do error checking here.
