@@ -17,6 +17,7 @@ package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -25,8 +26,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import edu.cornell.gdiac.physics.lights.LightSource;
 import edu.cornell.gdiac.util.*;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import edu.cornell.gdiac.physics.obstacle.*;
+import javafx.scene.transform.Affine;
 
 /**
  * Gameplay controller for the game.
@@ -67,11 +70,21 @@ public class GameController implements Screen, ContactListener {
 
 	/** Offset for box when summoning */
 	private static final float  BOX_HOFFSET = 1.0f;
-	private static final float  BOX_VOFFSET = 1.0f;
+	private static final float  BOX_VOFFSET = 0.8f;
 	public static final float	TEMP_SCALE	= 0.5f;
 
 	/** Walk in place effective range */
-	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 40.0f;
+	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
+	private SpriteBatch batcher = new SpriteBatch();
+	private FilmStrip indicator_out;
+	private FilmStrip indicator_loop;
+	private boolean walkhasAnimated = false;
+	private int animateCOOLTIME = 2;
+	private int animateCool = animateCOOLTIME;
+
+	private FilmStrip indicator_seen;
+	private boolean seenhasAnimated = false;
+
 
 	private boolean stopWalkInPlace = false;
 
@@ -155,6 +168,8 @@ public class GameController implements Screen, ContactListener {
 	private Array<AIController> AIcontrollers = new Array<AIController>();
 
 	private SoundController sound;
+
+	private Music bgm;
 
 	/** Whether or not this is an active controller */
 	private boolean active;
@@ -282,6 +297,8 @@ public class GameController implements Screen, ContactListener {
 		active = false;
 		countdown = -1;
 		sound = SoundController.getInstance();
+		bgm = Gdx.audio.newMusic(Gdx.files.internal("sounds/120bpm_music.wav"));
+		bgm.setLooping(true);
 
 		setComplete(false);
 		setFailure(false);
@@ -317,7 +334,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level.json"));
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/test.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
@@ -394,7 +411,8 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-		sound.play("bg_test2_music", "sounds/bg_test2_music.wav", true, 0.75f);
+//		sound.play("120bpm_music", "sounds/120bpm_music.wav", true, 0.75f);
+		bgm.play();
 
 		// creature AI.
 		createAIControllers();
@@ -454,7 +472,11 @@ public class GameController implements Screen, ContactListener {
 		}
 
 
-		JsonValue boxdata = levelFormat.get("box");
+
+
+
+
+
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
 			boolean canBox;
@@ -485,13 +507,14 @@ public class GameController implements Screen, ContactListener {
 			}
 			if (canBox) {
 				try {
-					box.initialize(boxdata, annette.getPosition(), xoff, yoff);
+
+					box.initialize(levelFormat, annette.getPosition(), xoff, yoff);
 				}
 				catch (Exception e) {
 					box = new BoxModel(1, 1);
 					level.setBox(box);
 					box.setDrawScale(level.scale);
-					box.initialize(boxdata, annette.getPosition(), xoff, yoff);
+					box.initialize(levelFormat, annette.getPosition(), xoff, yoff);
 				}
 				level.activate(box);
 				box.setActive(true);
@@ -518,11 +541,11 @@ public class GameController implements Screen, ContactListener {
 				sound.stop("no_box_effect");
 				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
 			}
-
 		}
 		box.applyForce();
 
 		dist = (float)Math.hypot(Math.abs(box.getPosition().x - annette.getPosition().x), Math.abs(box.getPosition().y - annette.getPosition().y));
+//		System.out.println(dist);
 		// box is deactivatING
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.INNER_RADIUS){
 			box.setDeactivating(true);
@@ -567,6 +590,10 @@ public class GameController implements Screen, ContactListener {
 		} else{
 			level.getRadiusOfPower().setActive(false);
 			level.brightenLights(level.getRayHandler());
+			walkhasAnimated = false;
+			if (indicator_out != null){
+				indicator_out.setFrame(0);
+			}
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
 		}
 
@@ -603,17 +630,117 @@ public class GameController implements Screen, ContactListener {
 		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
 
 		level.draw(canvas);
+
+		if (level.getAnnette().isWalkingInPlace()){
+			drawWalkInPlace();
+		}
+
+		for (AIController controller : AIcontrollers){
+			if(controller.isChasing()) {
+				drawisSeen();
+			}
+		}
+
+		if (noOneSeesMe()){
+			//System.out.println("in seen reset");
+			seenhasAnimated = false;
+			if (indicator_seen != null){
+				indicator_seen.setFrame(0);
+			}
+		}
+
 		// Final message
 		if (complete && !failed) {
-			displayFont.setColor(Color.YELLOW);
+			displayFont.setColor(Color.GOLDENROD);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("Level Complete!", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Cleared.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
 			canvas.end();
 		} else if (failed) {
-			displayFont.setColor(Color.RED);
+
+			displayFont.setColor(Color.FIREBRICK);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("Game Over!", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Defeated.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
 			canvas.end();
+		}
+	}
+
+	public boolean noOneSeesMe(){
+		boolean isbeingseen = false;
+		for (AIController controller : AIcontrollers){
+			if(controller.isChasing()) {
+				isbeingseen = true;
+			}
+		}
+		return !isbeingseen;
+	}
+
+	public void drawWalkInPlace(){
+
+		//System.out.println ("start drawing");
+
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_out", TextureRegion.class);
+		TextureRegion texture2 = JsonAssetManager.getInstance().getEntry("indicator_loop", TextureRegion.class);
+
+		try {
+			indicator_out = (FilmStrip)texture;
+			indicator_loop = (FilmStrip)texture2;
+		} catch (Exception e) {
+			indicator_out = null;
+			indicator_loop = null;
+		}
+
+		if(walkhasAnimated == false && indicator_out != null){
+			if (animateCool <= 0) {
+				int next = (indicator_out.getFrame() + 1);
+				if (next < indicator_out.getSize()) {
+					indicator_out.setFrame(next);
+				} else {
+					indicator_out.setFrame(0);
+					walkhasAnimated = true;
+					System.out.println("set animated to : " + walkhasAnimated);
+				}
+				animateCool = animateCOOLTIME;
+			}
+			batcher.begin();
+			batcher.draw(indicator_out,(level.getAnnette().getX()  * level.scale.x) - 100,
+					(level.getAnnette().getY() * level.scale.y) - 100, 200, 200);
+			batcher.end();
+
+		}else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
+			if (animateCool <= 0) {
+				int next2 = (indicator_loop.getFrame() + 1) % indicator_loop.getSize();
+				indicator_loop.setFrame(next2);
+				animateCool = animateCOOLTIME;
+			}
+			batcher.begin();
+			batcher.draw(indicator_loop,(level.getAnnette().getX()  * level.scale.x) - 100,
+					(level.getAnnette().getY() * level.scale.y) - 100, 200, 200);
+			batcher.end();
+		}
+
+		animateCool --;
+	}
+
+	public void drawisSeen() {
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_seen", TextureRegion.class);
+		try {
+			indicator_seen = (FilmStrip) texture;
+		} catch (Exception e) {
+			indicator_seen = null;
+		}
+
+		if (indicator_seen != null) {
+			int next = (indicator_seen.getFrame() + 1);
+			if (next < indicator_seen.getSize() && !seenhasAnimated) {
+				indicator_seen.setFrame(next);
+			}else{
+				seenhasAnimated = true;
+				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
+			}
+			batcher.begin();
+			batcher.draw(indicator_seen, (level.getAnnette().getX() * level.scale.x) - 10,
+					(level.getAnnette().getY() * level.scale.y) + 30, 20, 20);
+			batcher.end();
 		}
 	}
 
@@ -736,7 +863,7 @@ public class GameController implements Screen, ContactListener {
 
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
-				setComplete(true);
+//				setComplete(true);
 				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
 			}
 
@@ -744,7 +871,7 @@ public class GameController implements Screen, ContactListener {
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					if (!isFailure()) { sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f); }
-					setFailure(true);
+//					setFailure(true);
 				}
 			}
 
