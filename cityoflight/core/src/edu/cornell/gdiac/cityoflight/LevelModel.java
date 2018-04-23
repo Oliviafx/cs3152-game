@@ -1323,18 +1323,18 @@ public class LevelModel {
 		// Accounts for edges of screen
 		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
 //		float cameraXStart = 0;
-		float cameraYStart = canvas.getHeight() * 2.5f/(5.0f * scale.y);
+		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
 //		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth() * 0.6f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 1f / scale.y;
-//		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
-//		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+		float cameraXEnd = canvas.getWidth() * 0.62f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
 
 		//System.out.println(pos.x + " " + pos.y);
 
-		float tx = pos.x;
-		float ty = pos.y;
+//		float tx = pos.x;
+//		float ty = pos.y;
 
 		oTran.setToTranslation(TRANSLATION*tx + canvas.getWidth()/2, TRANSLATION*ty + canvas.getHeight()/2);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
