@@ -1677,13 +1677,13 @@
     },
     {
       "draworder":"topdown",
-      "name":"Carcolh",
+      "name":"Snail",
       "objects":[
         {
           "gid":84,
           "height":128,
           "id":56,
-          "name":"carcolh1",
+          "name":"snail1",
           "properties":
           {
             "bodytype":"dynamic",
@@ -1725,7 +1725,7 @@
           "gid":84,
           "height":128,
           "id":57,
-          "name":"carcolh2",
+          "name":"snail2",
           "properties":
           {
             "bodytype":"dynamic",
@@ -1766,7 +1766,7 @@
         {
           "height":44,
           "id":121,
-          "name":"carcolh_box1",
+          "name":"snail_box1",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1777,7 +1777,7 @@
         {
           "height":49,
           "id":122,
-          "name":"carcolh_box2",
+          "name":"snail_box2",
           "rotation":0,
           "type":"",
           "visible":true,
