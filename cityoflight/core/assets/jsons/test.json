@@ -831,56 +831,48 @@
       "name":"box_Boundaries",
       "objects":[
         {
-          "height":0,
-          "id":86,
-          "name":"boundary",
-          "polyline":[
-            {
-              "x":0,
-              "y":0
-            },
-            {
-              "x":0,
-              "y":-896
-            },
-            {
-              "x":896,
-              "y":-896
-            },
-            {
-              "x":896,
-              "y":0
-            },
-            {
-              "x":0,
-              "y":0
-            },
-            {
-              "x":16,
-              "y":0
-            },
-            {
-              "x":16,
-              "y":-880
-            },
-            {
-              "x":880,
-              "y":-880
-            },
-            {
-              "x":880,
-              "y":-16
-            },
-            {
-              "x":16,
-              "y":-16
-            }],
+          "height":896,
+          "id":132,
+          "name":"boundary1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":0,
+          "width":16,
           "x":0,
-          "y":896
+          "y":0
+        },
+        {
+          "height":16,
+          "id":133,
+          "name":"boundary2",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":896,
+          "x":0,
+          "y":0
+        },
+        {
+          "height":896,
+          "id":134,
+          "name":"boundary3",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":16,
+          "x":880,
+          "y":0
+        },
+        {
+          "height":16,
+          "id":135,
+          "name":"boundar4",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":896,
+          "x":0,
+          "y":880
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1088,7 +1080,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":130,
+  "nextobjectid":136,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
