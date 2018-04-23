@@ -450,10 +450,9 @@ public class LevelModel {
 			// just for the Object layers
 			JsonValue objects = layer.get("objects");
 
-			if(layerName.equals("box_Boundaries")){
-				// TODO
-			}
-			else if(layerName.equals(BLANCHE_LAYER_NAME) ||
+//			if(layerName.equals("box_Boundaries")){
+
+			if(layerName.equals(BLANCHE_LAYER_NAME) ||
 					layerName.equals(SNAIL_LAYER_NAME) ||
 					layerName.equals(TARASQUE_LAYER_NAME)){
 				System.out.println("loading creatures");
@@ -579,9 +578,46 @@ public class LevelModel {
 
 
 			}
-			else if(layerName.equals("box_Boundaries")){
+			else if(layerName.equals("box_Boundaries")) {
+				//TODO:
+//				HashMap<String, JsonValue> numToBuilding = new HashMap<String, JsonValue>();
+//				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
+				JsonValue boundaryData = null;
+				JsonValue boundaryBounds = null;
+				for (int f = 0; f < 4; f++) {
+					JsonValue obj = objects.get(f);
+					System.out.println(obj == null);
+					if (obj.get("name").asString().equals("boundary")) {
+						boundaryData = obj.get("polyline");
+					}
+				}
 
+				//assign building and box values to indexes in hashmaps
+				for (int j = 0; j < objects.size; j++) {
+
+					InteriorModel obj2 = new InteriorModel();
+					float[] pos = {boundaryData.get("x").asFloat() / 64, boundaryData.get("y").asFloat() / 64};
+					System.out.println("pos is " + pos);
+					float[] size = {boundaryData.get("width").asFloat() / 64, boundaryData.get("height").asFloat() / 64};
+					float[] pad = {0.1f, 0.1f};
+					String debugColor = "red";
+
+//						if (film != null) {
+
+					obj2.initialize(pos, size, pad, debugColor, null);
+					obj2.setDrawScale(scale);
+					activate(obj2);
+					System.out.println(pos[0] + " " + pos[1]);
+//						System.out.println("activating building");
+					mazes.add(obj2);
+				}
 			}
+
+
+
+
+
+
 			else if(layerName.equals("Buildings")){
 //				System.out.println("loading buildings");
 
@@ -673,7 +709,7 @@ public class LevelModel {
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
 					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
 					int newy = j / width;//(j%width);
-					System.out.println("newx "+ newx + " new y " + newy);
+//					System.out.println("newx "+ newx + " new y " + newy);
 
 
 					int f = 0;
@@ -683,7 +719,7 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-//					System.out.println("texture name: " + texName);
+					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
 
 					// IMPORTANT PROBLEM: TEXTURE IS NULL
@@ -1024,7 +1060,6 @@ public class LevelModel {
 
 			}
 
-		System.out.println("lightArr.length: " + lightArr.length);
 		for(int i = 0; i<lightArr.length;i++){
 			lights.add(lightArr[i]);
 		}
@@ -1245,8 +1280,8 @@ public class LevelModel {
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin(oTran);
-		//canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas.getHeight());
-		//canvas.draw(background, 0, 0);
+		canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas.getHeight());
+		canvas.draw(background, 0, 0);
 
 		//DRAWS BACKGROUND TILES HERE
 //        System.out.println("tiles.size: " + tiles.size);
