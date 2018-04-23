@@ -249,9 +249,9 @@ public class DistractionModel extends WheelObstacle {
         }
     }
 
-    public void initialize(JsonValue json) {
+    public void initialize(JsonValue birdinfo, JsonValue birdbox) {
 
-        setName(json.name());
+        setName("distraction");
 //        float[] pos = json.get("pos").asFloatArray();
 //        float width = json.get("radius").asFloat();
 //        float height = json.get("radius").asFloat();
@@ -263,19 +263,19 @@ public class DistractionModel extends WheelObstacle {
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
-        setForce(json.get("force").asFloat());
-        setDamping(json.get("damping").asFloat());
-        setMaxSpeed(json.get("maxspeed").asFloat());
+        setBodyType(birdinfo.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        setDensity(birdinfo.get("density").asFloat());
+        setFriction(birdinfo.get("friction").asFloat());
+        setRestitution(birdinfo.get("restitution").asFloat());
+        setForce(birdinfo.get("force").asFloat());
+        setDamping(birdinfo.get("damping").asFloat());
+        setMaxSpeed(birdinfo.get("maxspeed").asFloat());
 //        setStartFrame(json.get("startframe").asInt());
 //        setWalkLimit(json.get("walklimit").asInt());
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort(birdinfo.get("collideBits").asString());
+        short excludeBits = LevelModel.bitStringToComplement(birdinfo.get("excludeBits").asString());
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -295,7 +295,7 @@ public class DistractionModel extends WheelObstacle {
 //        setDebugColor(debugColor);
 
 //         Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
+        String key = birdinfo.get("texture").asString();
         TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
         try {
             filmStrip = (FilmStrip)texture;
@@ -322,7 +322,7 @@ public class DistractionModel extends WheelObstacle {
                     break;
             }
             canvas.draw(filmStrip, color, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
-                    this.body.getPosition().y * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
+                    this.body.getPosition().y * drawScale.y, getAngle(), flipped * GameController.TEMP_SCALE * 3, Math.abs(flipped) * GameController.TEMP_SCALE * 3);
         }
     }
 
@@ -345,7 +345,7 @@ public class DistractionModel extends WheelObstacle {
                         this.getBody().setLinearVelocity(0, -BIRD_STEP);
                         break;
                 }
-                if (filmStrip != null) {
+                if (filmStrip != null ) {
                     int next = (filmStrip.getFrame()+1) % filmStrip.getSize();
                     filmStrip.setFrame(next);
                 }
