@@ -363,7 +363,7 @@ public class LevelModel {
 		background = null;
 	}
 
-	public void populate(JsonValue levelFormat){
+	public void populate(JsonValue levelFormat) {
 
 
 		background = new Texture(BACKGROUND_FILE);
@@ -378,10 +378,9 @@ public class LevelModel {
 //		float[] pSize = {(float)tileHeight * tileWidth, (float)tileWidth * tileWidth};
 
 		// how many tiles
-		float[] pSize = {(float)tileWidth, (float)tileHeight};
+		float[] pSize = {(float) tileWidth, (float) tileHeight};
 		// pixels width, height
-		int[] gSize = {tileWidth*tileSize,tileHeight*tileSize};
-
+		int[] gSize = {tileWidth * tileSize, tileHeight * tileSize};
 
 
 		world = new World(Vector2.Zero, false);
@@ -393,7 +392,7 @@ public class LevelModel {
 		scale.y = gSize[1] / pSize[1];
 
 		// FPS is hardcoded now
-		int[] fps = { 20,  60};
+		int[] fps = {20, 60};
 		maxFPS = fps[1];
 		minFPS = fps[0];
 		timeStep = 1.0f / maxFPS;
@@ -406,13 +405,12 @@ public class LevelModel {
 			float c1 = levelFormat.get("lightingColor1").asFloat();
 			float c2 = levelFormat.get("lightingColor2").asFloat();
 			float c3 = levelFormat.get("lightingColor3").asFloat();
-			float[] colors = {c0,c1,c2,c3};
+			float[] colors = {c0, c1, c2, c3};
 			boolean gamma = levelFormat.get("lightingGamma").asBoolean();
 			boolean diffuse = levelFormat.get("lightingDiffuse").asBoolean();
 			int blur = levelFormat.get("lightingBlur").asInt();
 			initLighting(colors, gamma, diffuse, blur);
-		}
-		else{
+		} else {
 
 			float[] colors = {0.6f, 0.6f, 0.6f, 0.6f};
 			boolean gamma = true;
@@ -424,7 +422,6 @@ public class LevelModel {
 //		createConeLights(levelFormat.get("conelights"));
 
 
-
 		JsonValue idMap = levelFormat.get("tilesets");
 		tiles = new Array<BackgroundModel>();
 
@@ -434,27 +431,27 @@ public class LevelModel {
 
 		//loop through to find the name keys of textures used
 		HashMap<Integer, String> idToTexture = new HashMap<Integer, String>();
-		for(int j = 0; j< idMap.size; j++){
+		for (int j = 0; j < idMap.size; j++) {
 			JsonValue obj = idMap.get(j);
 
 			int id = obj.get("firstgid").asInt();
 			String tex = obj.get("name").asString();
 //			System.out.println(tex + " : " + id);
-			idToTexture.put(id,tex);
+			idToTexture.put(id, tex);
 		}
 
-		for(int i = 0; i < layers.size; i++){
+		for (int i = 0; i < layers.size; i++) {
 			JsonValue layer = layers.get(i);
 			String layerName = layer.get("name").asString();
 
 			// just for the Object layers
 			JsonValue objects = layer.get("objects");
 
-//			if(layerName.equals("box_Boundaries")){
-
-			if(layerName.equals(BLANCHE_LAYER_NAME) ||
+			if (layerName.equals("box_Boundaries")) {
+				// TODO
+			} else if (layerName.equals(BLANCHE_LAYER_NAME) ||
 					layerName.equals(SNAIL_LAYER_NAME) ||
-					layerName.equals(TARASQUE_LAYER_NAME)){
+					layerName.equals(TARASQUE_LAYER_NAME)) {
 				System.out.println("loading creatures");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
@@ -462,7 +459,7 @@ public class LevelModel {
 
 
 				//assign building and box values to indexes in hashmaps
-				for(int j = 0; j< objects.size; j++){
+				for (int j = 0; j < objects.size; j++) {
 					JsonValue obj = objects.get(j);
 //					System.out.println(obj + "next obj is: ");
 					String objName = obj.get("name").asString();
@@ -470,14 +467,13 @@ public class LevelModel {
 					String[] bSplit = objName.split(layerName.toLowerCase());
 //					System.out.println("bSplit[0]: " + bSplit[0]);
 
-					if(bSplit[1].length() > 3 ){
+					if (bSplit[1].length() > 3) {
 						//add to box list
-						numToBox.put(bSplit[1].split("box")[1],obj);
+						numToBox.put(bSplit[1].split("box")[1], obj);
 						//System.out.println(bSplit[1].split("box")[1]+" j ");
-					}
-					else{
+					} else {
 						//add to building list
-						numToCreature.put(bSplit[1],obj);
+						numToCreature.put(bSplit[1], obj);
 						//System.out.println(bSplit[1]);
 					}
 
@@ -486,45 +482,44 @@ public class LevelModel {
 				HashMap<String, FilmStrip> idToFilmStrip = new HashMap<String, FilmStrip>();
 
 				//initialize creatures
-				for(int j = 0; j<numToCreature.size(); j++){
+				for (int j = 0; j < numToCreature.size(); j++) {
 					//System.out.println(j);
 
 					FilmStrip[] film = new FilmStrip[3];
-					JsonValue buildingJSON = numToCreature.get(""+(j+1)).get("properties");
-					JsonValue boxJSON = numToBox.get(""+(j+1));
+					JsonValue buildingJSON = numToCreature.get("" + (j + 1)).get("properties");
+					JsonValue boxJSON = numToBox.get("" + (j + 1));
 					String textName = buildingJSON.get("texture").asString();
 					String textName2 = buildingJSON.get("texture2").asString();
 					String textName3 = buildingJSON.get("texture3").asString();
 					String[] textures = {textName, textName2, textName3};
 
-					String name = numToCreature.get(""+(j+1)).get("name").asString();
+					String name = numToCreature.get("" + (j + 1)).get("name").asString();
 
-					for(int f = 0; f< 3; f++){
-						if(idToFilmStrip.containsKey(textName)){
+					for (int f = 0; f < 3; f++) {
+						if (idToFilmStrip.containsKey(textName)) {
 							film[f] = idToFilmStrip.get(textures[f]);
-						}
-						else{
+						} else {
 							TextureRegion texture = JsonAssetManager.getInstance().getEntry(textures[f], TextureRegion.class);
 							FilmStrip tileTexture;
 							try {
-								tileTexture = (FilmStrip)texture;
+								tileTexture = (FilmStrip) texture;
 							} catch (Exception e) {
 								tileTexture = null;
 							}
 							film[f] = tileTexture;
-							idToFilmStrip.put(textName,tileTexture);
+							idToFilmStrip.put(textName, tileTexture);
 						}
 					}
 
 					int index = 0;
-					if(name.contains("dragon"))
+					if (name.contains("dragon"))
 						index = 1;
 					else if (name.contains("blanche"))
 						index = 2;
 
 					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
-					creature.initialize(buildingJSON, boxJSON, film[0],film[1],film[2]);
+					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2]);
 					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.setDrawScale(scale);
 					activate(creature);
@@ -535,34 +530,29 @@ public class LevelModel {
 
 				}
 
-			}
-
-			else if(layerName.equals("creature_bounds")){
+			} else if (layerName.equals("creature_bounds")) {
 				//This is the creature patrol area
 
 
-			}
-			else if (layerName.equals("vision_properties")){
+			} else if (layerName.equals("vision_properties")) {
 				//DEFINE THIS BEFORE CREATURES GET INITIALIZED
 				System.out.println("loading vision");
 
 				lineOfSightJSON = objects;
 				createLineofSight(lineOfSightJSON);
 
-			}
-			else if(layerName.equals("Annette")){
+			} else if (layerName.equals("Annette")) {
 //				System.out.println("loading annette");
 
 
 				annette = new AnnetteModel();
 				JsonValue annetteData = null;
 				JsonValue annetteBounds = null;
-				for(int f = 0; f< 2; f++){
+				for (int f = 0; f < 2; f++) {
 					JsonValue obj = objects.get(f);
-					if(obj.get("name").asString().equals("annette")){
+					if (obj.get("name").asString().equals("annette")) {
 						annetteData = obj.get("properties");
-					}
-					else if (obj.get("name").asString().equals("annette_box")) {
+					} else if (obj.get("name").asString().equals("annette_box")) {
 						annetteBounds = obj;
 //						System.out.println(obj);
 					}
@@ -574,17 +564,16 @@ public class LevelModel {
 
 				// Create the light indicating the move in place range.
 				createRadiusofPower();
-				attachPowerRadius(getAnnette(),radiusOfPower);
+				attachPowerRadius(getAnnette(), radiusOfPower);
 
 
-			}
-			else if(layerName.equals("box_Boundaries")) {
+			} else if (layerName.equals("box_Boundaries")) {
 				//TODO:
 //				HashMap<String, JsonValue> numToBuilding = new HashMap<String, JsonValue>();
 //				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
 				JsonValue boundaryData = null;
 				JsonValue boundaryBounds = null;
-				for (int f = 0; f < 4; f++) {
+				for (int f = 0; f < 2; f++) {
 					JsonValue obj = objects.get(f);
 					System.out.println(obj == null);
 					if (obj.get("name").asString().equals("boundary")) {
@@ -593,12 +582,11 @@ public class LevelModel {
 				}
 
 				//assign building and box values to indexes in hashmaps
-				for (int j = 0; j < objects.size; j++) {
-
+//				for (int j = 0; j < objects.size; j++) {
+				for (JsonValue json : boundaryData) {
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {boundaryData.get("x").asFloat() / 64, boundaryData.get("y").asFloat() / 64};
-					System.out.println("pos is " + pos);
-					float[] size = {boundaryData.get("width").asFloat() / 64, boundaryData.get("height").asFloat() / 64};
+					float[] pos = {json.get("x").asFloat() / 64, json.get("y").asFloat() / 64};
+					float[] size = pSize;//{boundaryData.get("width").asFloat() / 64, boundaryData.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
 
@@ -661,7 +649,7 @@ public class LevelModel {
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(textName.trim(), TextureRegion.class);
 					film = texture;
 
-					System.out.println("textname: "+textName + " : " + texture);
+//					System.out.println("textname: "+textName + " : " + texture);
 
 
 
@@ -681,7 +669,7 @@ public class LevelModel {
 						obj2.initialize(pos, size, pad, debugColor, film);
 						obj2.setDrawScale(scale);
 						activate(obj2);
-						System.out.println(pos[0] + " " + pos[1]);
+//						System.out.println(pos[0] + " " + pos[1]);
 //						System.out.println("activating building");
 						mazes.add(obj2);
 					}
@@ -1280,13 +1268,11 @@ public class LevelModel {
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin(oTran);
-		canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas.getHeight());
-		canvas.draw(background, 0, 0);
+		//canvas.draw(background, Color.LIGHT_GRAY, 0, 0, canvas.getWidth(), canvas.getHeight());
+		//canvas.draw(background, 0, 0);
 
 		//DRAWS BACKGROUND TILES HERE
-//        System.out.println("tiles.size: " + tiles.size);
 		for(int i =0;i< tiles.size; i++){
-//		    System.out.println("tiles being drawn: " + tiles.get(i));
 			tiles.get(i).draw(canvas);
 //			System.out.println(annette.getX());
 

@@ -297,7 +297,7 @@ public class AnnetteModel extends BoxObstacle {
 //        System.out.println("drawScale.x " + drawScale.x);
         float y = aBounds.get("y").asFloat() / 64;// -200/64;
 
-        System.out.println(x*64 + " " + y*64 + " annette initialize");
+//        System.out.println(x*64 + " " + y*64 + " annette initialize");
 
         float width = aBounds.get("width").asFloat()/64;
         float height = aBounds.get("height").asFloat()/64;
@@ -545,7 +545,7 @@ public class AnnetteModel extends BoxObstacle {
         }
 
         if (texture != null) {
-            System.out.println("annette x " + getX() * drawScale.x + " annette y " + getY() * drawScale.y);
+//            System.out.println("annette x " + getX() * drawScale.x + " annette y " + getY() * drawScale.y);
             canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, Math.abs(flipped));
         }
         else{

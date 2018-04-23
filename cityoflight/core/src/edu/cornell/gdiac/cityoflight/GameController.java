@@ -322,7 +322,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/test.json"));
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/test2.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
