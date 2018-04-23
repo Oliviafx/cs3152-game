@@ -457,7 +457,8 @@ public class LevelModel {
 
 					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64};
+//					setPosition(pos[0]+ size[0]/2,height - (pos[1]-size[1]/2));
+					float[] pos = {obj.get("x").asFloat() / 64,  ((obj.get("y").asFloat() / 64) + obj.get("height").asFloat()/64) - 1};
 					float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
