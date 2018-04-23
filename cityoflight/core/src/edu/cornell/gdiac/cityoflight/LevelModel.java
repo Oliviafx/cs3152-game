@@ -541,8 +541,10 @@ public class LevelModel {
 
 					String name = numToCreature.get("" + (j + 1)).get("name").asString();
 
+
 					for (int f = 0; f < 3; f++) {
-						if (idToFilmStrip.containsKey(textName)) {
+						if (idToFilmStrip.containsKey(textName+f)) {
+							System.out.println(textName);
 							film[f] = idToFilmStrip.get(textures[f]);
 						} else {
 							TextureRegion texture = JsonAssetManager.getInstance().getEntry(textures[f], TextureRegion.class);
@@ -553,7 +555,7 @@ public class LevelModel {
 								tileTexture = null;
 							}
 							film[f] = tileTexture;
-							idToFilmStrip.put(textName, tileTexture);
+							idToFilmStrip.put(textName+f, tileTexture);
 						}
 					}
 
@@ -566,6 +568,7 @@ public class LevelModel {
 //					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
 //					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
+
 					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2], pSize[1]);
 //					System.out.println(creature.getPosition().x*64 + " " + creature.getPosition().y*64);
 					creature.setDrawScale(scale);
@@ -676,7 +679,7 @@ public class LevelModel {
 					    // offsets are defined in the physics scale
                         offsetx = layer.get("offsetx").asInt()/scale.x;
                         offsety = layer.get("offsety").asInt()/scale.y;
-                        System.out.println("offsetx: " + offsetx + ", offsety: " + offsety);
+//                        System.out.println("offsetx: " + offsetx + ", offsety: " + offsety);
                     }
 
 					String[] bSplit = objName.split("building");
@@ -1110,7 +1113,7 @@ public class LevelModel {
 			float b = light.get("b").asFloat();
 			float a = light.get("a").asFloat();
 			float[] color = {r,g,b,a};
-			float[] pos ={light.get("xoffset").asFloat()/64,light.get("yoffset").asFloat()/64};
+			float[] pos ={obj.get("x").asFloat()/64,obj.get("x").asFloat()/64};
 //			System.out.println("pos lights "+pos[0]*64+" "+ pos[1]*64);
 			float dist  = light.get("distance").asFloat();
 			float face  = light.get("facing").asFloat();
@@ -1284,13 +1287,15 @@ public class LevelModel {
 				}
 				else if (creature.getMovement().x < 0) {
 					creature.getVision().setDirection(180);
-					creature.getVision().setPosition(creature.getX()+creature.getWidth()/2,creature.getY()+creature.getHeight());
+					creature.getVision().setPosition(creature.getX()-creature.getWidth()/4,creature.getY()+creature.getHeight());
 				}
 				else if (creature.getMovement().y < 0) {
 					creature.getVision().setDirection(270);
+					creature.getVision().setPosition(creature.getX()+creature.getWidth()/4,creature.getY()-creature.getHeight()/2);
 				}
 				else if (creature.getMovement().y > 0) {
 					creature.getVision().setDirection(90);
+					creature.getVision().setPosition(creature.getX()+creature.getWidth()/4,creature.getY()+creature.getHeight()/2);
 				}
 //				System.out.println(creature.getPosition());
 			}
