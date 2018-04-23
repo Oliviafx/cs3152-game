@@ -106,7 +106,7 @@ public class CreatureModel extends BoxObstacle {
 
     private int CREATURE_START_FRAME = 0;
     private int CREATURE_WALK_COOL = 4;
-    private float CREATURE_DENSITY = 4.0f;
+    private float CREATURE_DENSITY = 6.0f;
     private float CREATURE_FRICTION = 0.0f;
     private float CREATURE_RESTITUTION = 0.0f;
     private float CREATURE_FORCE = 1.0f;
@@ -404,8 +404,6 @@ public class CreatureModel extends BoxObstacle {
 //        setRadius(radius);
         setWidth(width);
         setHeight(height);
-//        setWidth(height);
-//        setHeight(width);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
