@@ -459,7 +459,8 @@ public class LevelModel {
 
 					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64};
+//					setPosition(pos[0]+ size[0]/2,height - (pos[1]-size[1]/2));
+					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64 - 1};
 					float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
@@ -554,14 +555,15 @@ public class LevelModel {
 					else if (name.contains("blanche"))
 						index = 2;
 
-					System.out.println("index = " + index);
+//					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
-					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2]);
+//					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
+					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2], pSize[1]);
 					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.setDrawScale(scale);
 					activate(creature);
-					System.out.println(lights.size + ": lights size");
-					System.out.println(lights.get(index) + ": lights");
+//					System.out.println(lights.size + ": lights size");
+//					System.out.println(lights.get(index) + ": lights");
 					attachVision(creature, lights.get(index));
 					creatures.add(creature);
 
@@ -579,7 +581,7 @@ public class LevelModel {
 				createLineofSight(lineOfSightJSON);
 
 			} else if (layerName.equals("Annette")) {
-//				System.out.println("loading annette");
+				System.out.println("loading annette");
 
 
 				annette = new AnnetteModel();
@@ -595,7 +597,7 @@ public class LevelModel {
 					}
 				}
 
-				annette.initialize(annetteData, annetteBounds);
+				annette.initialize(annetteData, annetteBounds, pSize[1]);
 				annette.setDrawScale(scale);
 				activate(annette);
 
@@ -605,42 +607,43 @@ public class LevelModel {
 
 
 			} else if (layerName.equals("box_Boundaries")) {
-				//TODO:
-//				HashMap<String, JsonValue> numToBuilding = new HashMap<String, JsonValue>();
-//				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
-				JsonValue boundaryData = null;
-				JsonValue boundaryBounds = null;
-				for (int f = 0; f < 2; f++) {
-					JsonValue obj = objects.get(f);
-					System.out.println(obj == null);
-					if (obj.get("name").asString().equals("boundary")) {
-						boundaryData = obj.get("polyline");
-					}
-				}
+				System.out.println("loading boundaries");
+				HashMap<String, JsonValue> boundaryArray = new HashMap<String, JsonValue>();
+
 
 				//assign building and box values to indexes in hashmaps
-//				for (int j = 0; j < objects.size; j++) {
-				for (JsonValue json : boundaryData) {
+//				System.out.println(objects.size);
+				for (int j = 0; j < objects.size; j++) {
+					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {json.get("x").asFloat() / 64, json.get("y").asFloat() / 64};
-					float[] size = pSize;//{boundaryData.get("width").asFloat() / 64, boundaryData.get("height").asFloat() / 64};
+					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64};
+					float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
 
-//						if (film != null) {
-					System.out.println("psize");
-					System.out.println(pSize);
 
+//                    System.out.println(objName);
+//						System.out.println(pSize[0]);
+//						System.out.println(pSize[1]);
+//                    String objName = obj.get("name").asString();
 					obj2.initialize(pos, size, pad, debugColor, null, pSize[1]);
 					obj2.setDrawScale(scale);
 					activate(obj2);
-					System.out.println(pos[0] + " " + pos[1]);
-//						System.out.println("activating building");
+//					System.out.println(pos[0] + " " + pos[1]);
+//					System.out.println("activating building");
 					mazes.add(obj2);
+
+
+
+//					String[] bSplit = objName.split("boundary");
+//
+//					boundaryArray.put(bSplit[1], obj);
+//					System.out.println(bSplit[1]);
+//					System.out.println("boundary "+j + "2 : "+ bSplit[1]);
+
 				}
+
 			}
-
-
 
 
 
@@ -740,7 +743,7 @@ public class LevelModel {
 					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
 					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
 					int newy = width - (j / width);//(j%width);
-					System.out.println("newx "+ newx + " new y " + newy);
+//					System.out.println("newx "+ newx + " new y " + newy);
 
 
 					int f = 0;
@@ -750,14 +753,14 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-					System.out.println(texName);
+//					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
 
 					// IMPORTANT PROBLEM: TEXTURE IS NULL
 					if(texture != null) {
-						System.out.println(texture.getRegionHeight());
+//						System.out.println(texture.getRegionHeight());
 						TextureRegion[][] textures = texture.split(64, 64);
-						System.out.println(f % textures.length + " " + f / textures.length);
+//						System.out.println(f % textures.length + " " + f / textures.length);
 						TextureRegion texNew = textures[f / textures[0].length][f % textures[0].length];
 						tiles.add(new BackgroundModel(newx, newy, texNew));
 					}
@@ -796,7 +799,7 @@ public class LevelModel {
 				float height = boundValues.get("height").asFloat();
 				String debugC = "yellow";
 				String tex = exitValues.get("texture").asString();
-				goalDoor.initialize(pos,width,height,debugC, tex);
+				goalDoor.initialize(pos,width,height,debugC, tex, pSize);
 				goalDoor.setDrawScale(scale);
 				activate(goalDoor);
 
@@ -869,7 +872,6 @@ public class LevelModel {
         //goalDoor.initialize(levelFormat.get("exit"));
         goalDoor.setDrawScale(scale);
         activate(goalDoor);
-
 
         JsonValue bounds = levelFormat.getChild("exterior");
         while (bounds != null) {
@@ -949,6 +951,7 @@ public class LevelModel {
 //
 //
 //	}
+
 
     public boolean isDistraction() {
         if (distraction != null) {
@@ -1130,7 +1133,7 @@ public class LevelModel {
 		JsonValue creaturedata = creaturejson.child();
 		int index = 0;
     	while (creaturedata != null) {
-			System.out.println("index = " + index);
+//			System.out.println("index = " + index);
 			CreatureModel creature = new CreatureModel();
 			//creature.initialize(creaturedata);
 			creature.setDrawScale(scale);
@@ -1320,18 +1323,18 @@ public class LevelModel {
 		// Accounts for edges of screen
 		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
 //		float cameraXStart = 0;
-		float cameraYStart = canvas.getHeight() * 2.5f/(5.0f * scale.y);
+		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
 //		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth() * 0.6f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 1f / scale.y;
-//		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
-//		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+		float cameraXEnd = canvas.getWidth() * 0.62f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
 
 		//System.out.println(pos.x + " " + pos.y);
 
-		float tx = pos.x;
-		float ty = pos.y;
+//		float tx = pos.x;
+//		float ty = pos.y;
 
 		oTran.setToTranslation(TRANSLATION*tx + canvas.getWidth()/2, TRANSLATION*ty + canvas.getHeight()/2);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
@@ -1354,7 +1357,7 @@ public class LevelModel {
 		canvas.end();
 
 		if (rayhandler != null) {
-//			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight(), canvas.getWidth()/4, canvas.getHeight()/4);
+//			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
 			raycamera.position.set(tx, ty, 0);
 //			raycamera.zoom = raycamera.zoom / 2;
 			raycamera.update();

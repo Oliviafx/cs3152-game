@@ -291,11 +291,11 @@ public class AnnetteModel extends BoxObstacle {
      *
      * @param sideJson	the JSON subtree defining the Annette
      */
-    public void initialize(JsonValue sideJson, JsonValue aBounds) {
+    public void initialize(JsonValue sideJson, JsonValue aBounds, float pSize1) {
         setName("annette");
         float x = aBounds.get("x").asFloat() / 64; //+ 200/64;
 //        System.out.println("drawScale.x " + drawScale.x);
-        float y = aBounds.get("y").asFloat() / 64;// -200/64;
+        float y = pSize1 - aBounds.get("y").asFloat() / 64;// -200/64;
 
 //        System.out.println(x*64 + " " + y*64 + " annette initialize");
 
