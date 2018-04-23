@@ -29,14 +29,14 @@
       "objects":[
         {
           "height":0,
-          "id":64,
-          "name":"lady_vision",
+          "id":70,
+          "name":"dragon_vision",
           "properties":
           {
             "a":0.3,
-            "angle":20,
+            "angle":4,
             "b":0.5,
-            "distance":10,
+            "distance":25,
             "excludeBits":"0010",
             "facing":90,
             "g":0.2,
@@ -61,8 +61,8 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":656,
-          "y":384
+          "x":643,
+          "y":393
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -72,13 +72,13 @@
     },
     {
       "draworder":"topdown",
-      "name":"Blanche",
+      "name":"Tarasque",
       "objects":[
         {
-          "gid":28,
-          "height":128,
-          "id":23,
-          "name":"blanche1",
+          "gid":68,
+          "height":229,
+          "id":67,
+          "name":"tarasque1",
           "properties":
           {
             "bodytype":"dynamic",
@@ -87,13 +87,12 @@
             "debugopacity":192,
             "excludeBits":"0000",
             "startframe":0,
-            "texture":"blanche",
-            "texture2":"blanche_down",
-            "texture3":"blanche_up",
-            "type":3,
-            "walklimit":4,
-            "xinput":-180,
-            "yinput":0
+            "texture":"tarasque",
+            "texture2":"tarasque_down",
+            "texture3":"tarasque_up",
+            "type":2,
+            "xinput":0,
+            "yinput":300
           },
           "propertytypes":
           {
@@ -107,27 +106,26 @@
             "texture2":"string",
             "texture3":"string",
             "type":"int",
-            "walklimit":"int",
             "xinput":"float",
             "yinput":"float"
           },
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":118,
-          "x":576,
-          "y":416
+          "width":90,
+          "x":597,
+          "y":461
         },
         {
-          "height":32,
-          "id":44,
-          "name":"blanche_box1",
+          "height":139,
+          "id":68,
+          "name":"tarasque_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":96,
-          "x":576,
-          "y":368
+          "width":88,
+          "x":598,
+          "y":319
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -411,7 +409,7 @@
             "damping":10,
             "debugcolor":"white",
             "debugopacity":192,
-            "density":12,
+            "density":4,
             "excludeBits":"0000",
             "force":450,
             "friction":0,
@@ -737,7 +735,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":65,
+  "nextobjectid":71,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
@@ -909,6 +907,20 @@
       "tilecount":6,
       "tileheight":64,
       "tilewidth":87,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":12,
+      "firstgid":68,
+      "image":"..\/Art assets\/characters\/tarasque_down.png",
+      "imageheight":229,
+      "imagewidth":1080,
+      "margin":0,
+      "name":"tarasque_down",
+      "spacing":0,
+      "tilecount":12,
+      "tileheight":229,
+      "tilewidth":90,
       "transparentcolor":"#ff00ff"
     }],
   "tilewidth":64,
