@@ -334,7 +334,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/test.json"));
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
@@ -653,13 +653,15 @@ public class GameController implements Screen, ContactListener {
 		if (complete && !failed) {
 			displayFont.setColor(Color.GOLDENROD);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("Cleared.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
+//			canvas.drawTextCentered("Cleared.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Cleared.", displayFont);
 			canvas.end();
 		} else if (failed) {
 
 			displayFont.setColor(Color.FIREBRICK);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("Defeated.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
+//			canvas.drawTextCentered("Defeated.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
+			canvas.drawTextCentered("Defeated.", displayFont);
 			canvas.end();
 		}
 	}
@@ -704,10 +706,14 @@ public class GameController implements Screen, ContactListener {
 			batcher.begin();
 			System.out.println("annette_x = " + level.getAnnette().getX());
 			System.out.println("annette_y = " + level.getAnnette().getY());
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) + 200,
-			//		(level.getAnnette().getY() / 64 * level.scale.y) + 100, 400, 400);
-			batcher.draw(indicator_out,(level.getAnnette().getX() / 64 * level.scale.x + 100),
-					(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
+			//System.out.println("level.scale.x = " + level.scale.x);
+			//System.out.println("level.scale.y = " + level.scale.y);
+			batcher.draw(indicator_out,
+					(level.getAnnette().getX()) - 200,
+					(level.getAnnette().getY()) - 200,
+					400, 400);
+			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
+			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
 			batcher.end();
 
 		}else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
@@ -717,10 +723,10 @@ public class GameController implements Screen, ContactListener {
 				animateCool = animateCOOLTIME;
 			}
 			batcher.begin();
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) + 200,
-			//		(level.getAnnette().getY() / 64 * level.scale.y) + 100, 600, 400);
-			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
-					(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
+			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
+					(level.getAnnette().getY() / 64 * level.scale.y) - 200, 400, 400);
+			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
+			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
 			batcher.end();
 		}
 
@@ -744,12 +750,12 @@ public class GameController implements Screen, ContactListener {
 				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
 			}
 			batcher.begin();
-//			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
-//					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
+			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
+					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
 
 			// These numbers are just guess and check...
-			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
-					(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
+			//batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
+			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
 			batcher.end();
 		}
 	}
@@ -873,7 +879,7 @@ public class GameController implements Screen, ContactListener {
 
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
-//				setComplete(true);
+				setComplete(true);
 				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
 			}
 
@@ -881,7 +887,7 @@ public class GameController implements Screen, ContactListener {
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
 					if (!isFailure()) { sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f); }
-//					setFailure(true);
+					setFailure(true);
 				}
 			}
 
@@ -1013,7 +1019,48 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	/** Unused ContactListener method */
-	public void endContact(Contact contact) {}
+	public void endContact(Contact contact) {
+		Fixture fix1 = contact.getFixtureA();
+		Fixture fix2 = contact.getFixtureB();
+
+		Body body1 = fix1.getBody();
+		Body body2 = fix2.getBody();
+
+		Object fd1 = fix1.getUserData();
+		Object fd2 = fix2.getUserData();
+
+		try {
+			Obstacle bd1 = (Obstacle) body1.getUserData();
+			Obstacle bd2 = (Obstacle) body2.getUserData();
+
+			String sf1 = "";
+			String sf2 = "";
+
+			if (fd1 != null) {
+				sf1 = (String) fd1;
+			}
+			if (fd2 != null) {
+				sf2 = (String) fd2;
+			}
+
+			AnnetteModel annette = level.getAnnette();
+//			BoxModel box = level.getBox();
+
+			// checking sensors to see if box can be made
+			if (!sf1.contains("annetteDown") || !sf2.contains("annetteDown")) {
+				downBox = true; }
+//			else { downBox = true; }
+			if (!sf1.contains("annetteUp") || !sf2.contains("annetteUp")) { upBox = true; }
+//			else { upBox = true; }
+			if (!sf1.contains("annetteRight") || !sf2.contains("annetteRight")) { rightBox = true; }
+//			else { rightBox = true; }
+			if (!sf1.contains("annetteLeft") || !sf2.contains("annetteLeft")) { leftBox = true; }
+//			else { leftBox = true; }
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
