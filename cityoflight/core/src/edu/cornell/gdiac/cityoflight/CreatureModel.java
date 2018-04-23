@@ -391,10 +391,10 @@ public class CreatureModel extends BoxObstacle {
      *
      * @param json	the
      */
-    public void initialize(JsonValue json, JsonValue bounds, FilmStrip tex1, FilmStrip tex2, FilmStrip tex3) {
+    public void initialize(JsonValue json, JsonValue bounds, FilmStrip tex1, FilmStrip tex2, FilmStrip tex3, float pSize1) {
 
         setName(json.name());
-        float[] pos  = {bounds.get("x").asFloat() / 64, bounds.get("y").asFloat() / 64};
+        float[] pos  = {bounds.get("x").asFloat() / 64, pSize1 - bounds.get("y").asFloat() / 64};
 //        float radius = json.get("radius").asFloat();
         float width = bounds.get("width").asFloat() / 64;
         float height = bounds.get("height").asFloat() / 64;

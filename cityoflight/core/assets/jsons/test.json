@@ -92,7 +92,7 @@
             "texture3":"blanche_up",
             "type":3,
             "walklimit":4,
-            "xinput":-180,
+            "xinput":180,
             "yinput":0
           },
           "propertytypes":
