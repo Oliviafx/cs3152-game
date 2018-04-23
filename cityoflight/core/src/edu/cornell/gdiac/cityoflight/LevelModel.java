@@ -454,7 +454,6 @@ public class LevelModel {
 
 
 				//assign building and box values to indexes in hashmaps
-				System.out.println(objects.size);
 				for (int j = 0; j < objects.size; j++) {
 
 					JsonValue obj = objects.get(j);
@@ -473,11 +472,11 @@ public class LevelModel {
 					obj2.initialize(pos, size, pad, debugColor, null, pSize[1], 0, 0);
 					obj2.setDrawScale(scale);
 					activate(obj2);
-					System.out.println(pos[0] + " " + pos[1]);
-					System.out.println("activating building");
+//					System.out.println(pos[0] + " " + pos[1]);
+//					System.out.println("activating building");
 					mazes.add(obj2);
 					String objName = obj.get("name").asString();
-					System.out.println(objName);
+//					System.out.println(objName);
 
 					String[] bSplit = objName.split("boundary");
 
@@ -487,10 +486,19 @@ public class LevelModel {
 
 				}
 
+			} else if (layerName.equals("vision_properties")) {
+				//DEFINE THIS BEFORE CREATURES GET INITIALIZED
+//				System.out.println("loading vision");
+
+				lineOfSightJSON = objects;
+//				for (CreatureModel c : creatures) {
+					createLineofSight(lineOfSightJSON);
+//				}
+
 			} else if (layerName.equals(BLANCHE_LAYER_NAME) ||
 					layerName.equals(SNAIL_LAYER_NAME) ||
 					layerName.equals(TARASQUE_LAYER_NAME)) {
-				System.out.println("loading creatures");
+//				System.out.println("loading creatures");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -559,11 +567,12 @@ public class LevelModel {
 					CreatureModel creature = new CreatureModel();
 //					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
 					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2], pSize[1]);
-					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
+//					System.out.println(creature.getPosition().x*64 + " " + creature.getPosition().y*64);
 					creature.setDrawScale(scale);
 					activate(creature);
 //					System.out.println(lights.size + ": lights size");
 //					System.out.println(lights.get(index) + ": lights");
+//					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
 					attachVision(creature, lights.get(index));
 					creatures.add(creature);
 
@@ -573,15 +582,10 @@ public class LevelModel {
 				//This is the creature patrol area
 
 
-			} else if (layerName.equals("vision_properties")) {
-				//DEFINE THIS BEFORE CREATURES GET INITIALIZED
-				System.out.println("loading vision");
 
-				lineOfSightJSON = objects;
-				createLineofSight(lineOfSightJSON);
 
 			} else if (layerName.equals("Annette")) {
-				System.out.println("loading annette");
+//				System.out.println("loading annette");
 
 
 				annette = new AnnetteModel();
@@ -607,7 +611,7 @@ public class LevelModel {
 
 
 			} else if (layerName.equals("box_Boundaries")) {
-				System.out.println("loading boundaries");
+//				System.out.println("loading boundaries");
 				HashMap<String, JsonValue> boundaryArray = new HashMap<String, JsonValue>();
 
 //				float offsetx = 0;
@@ -853,96 +857,95 @@ public class LevelModel {
 	/**
 	 * Lays out the game geography from the given JSON file
 	 *
-	 * @param levelFormat	the JSON tree defining the level
 	 */
-	public void populateOld(JsonValue levelFormat) {
-
-		background = new Texture(BACKGROUND_FILE);
-//        float[] pSize = levelFormat.get("physicsSize").asFloatArray();
-//        int[] gSize = levelFormat.get("graphicSize").asIntArray();
-
-		float[] pSize = {32, 24};
-		int[] gSize = {32*64,24*64};
-
-		world = new World(Vector2.Zero, false);
-		bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
-		scale.x = gSize[0] / pSize[0];
-		scale.y = gSize[1] / pSize[1];
-
-		// FPS is hardcoded now
-		int[] fps = { 20,  60};
-		maxFPS = fps[1];
-		minFPS = fps[0];
-		timeStep = 1.0f / maxFPS;
-		maxSteps = 1.0f + maxFPS / minFPS;
-		maxTimePerFrame = timeStep * maxSteps;
-
-
-        // Create the lighting if appropriate
-        if (levelFormat.has("lighting")) {
-            //initLighting(levelFormat.get("lighting"));
-        }
-
-        // Add level goal
-        goalDoor = new ExitModel();
-        //goalDoor.initialize(levelFormat.get("exit"));
-        goalDoor.setDrawScale(scale);
-        activate(goalDoor);
-
-        JsonValue bounds = levelFormat.getChild("exterior");
-        while (bounds != null) {
-            ExteriorModel obj = new ExteriorModel();
-            obj.initialize(bounds);
-            obj.setDrawScale(scale);
-            activate(obj);
-            barriers.add(obj);
-            bounds = bounds.next();
-        }
-
-        JsonValue walls = levelFormat.getChild("interior");
-        while (walls != null) {
-            InteriorModel obj = new InteriorModel();
-           // obj.initialize(walls);
-            obj.setDrawScale(scale);
-            activate(obj);
-            mazes.add(obj);
-            walls = walls.next();
-        }
-
-        // Create Annette
-        annette = new AnnetteModel();
-        JsonValue annettedata = levelFormat.get("annette");
-		JsonValue downdata = levelFormat.get("annetteDown");
-		JsonValue updata = levelFormat.get("annetteUp");
-
-        //annette.initialize(annettedata);
-        annette.setDrawScale(scale);
-        activate(annette);
-
-		// Create the light indicating the move in place range.
-		createRadiusofPower();
-		attachPowerRadius(getAnnette(),radiusOfPower);
-
-
-        // Create cone lights to be line of sights of creatures.
-        createLineofSight(levelFormat.get("vision"));
-        // Create the creatures and attach light sources
-		createCreatures(levelFormat.get("creatures"));
-        //createCreature(levelFormat.get("creatures"), "snail", 0);
-        //createCreature(levelFormat.get("creatures"), "tarasque", 1);
-        //createCreature(levelFormat.get("creatures"), "blanche", 2);
-
-        // Create box
-        box = new BoxModel(1, 1);
-
-        if (distraction != null) {
-            distraction.setAlive(false);
-        }
-
-        // Creater indicator
-        indicator = new IndicatorModel();
-
-    }
+//	public void populateOld(JsonValue levelFormat) {
+//
+//		background = new Texture(BACKGROUND_FILE);
+////        float[] pSize = levelFormat.get("physicsSize").asFloatArray();
+////        int[] gSize = levelFormat.get("graphicSize").asIntArray();
+//
+//		float[] pSize = {32, 24};
+//		int[] gSize = {32*64,24*64};
+//
+//		world = new World(Vector2.Zero, false);
+//		bounds = new Rectangle(0, 0, pSize[0], pSize[1]);
+//		scale.x = gSize[0] / pSize[0];
+//		scale.y = gSize[1] / pSize[1];
+//
+//		// FPS is hardcoded now
+//		int[] fps = { 20,  60};
+//		maxFPS = fps[1];
+//		minFPS = fps[0];
+//		timeStep = 1.0f / maxFPS;
+//		maxSteps = 1.0f + maxFPS / minFPS;
+//		maxTimePerFrame = timeStep * maxSteps;
+//
+//
+//        // Create the lighting if appropriate
+//        if (levelFormat.has("lighting")) {
+//            //initLighting(levelFormat.get("lighting"));
+//        }
+//
+//        // Add level goal
+//        goalDoor = new ExitModel();
+//        //goalDoor.initialize(levelFormat.get("exit"));
+//        goalDoor.setDrawScale(scale);
+//        activate(goalDoor);
+//
+//        JsonValue bounds = levelFormat.getChild("exterior");
+//        while (bounds != null) {
+//            ExteriorModel obj = new ExteriorModel();
+//            obj.initialize(bounds);
+//            obj.setDrawScale(scale);
+//            activate(obj);
+//            barriers.add(obj);
+//            bounds = bounds.next();
+//        }
+//
+//        JsonValue walls = levelFormat.getChild("interior");
+//        while (walls != null) {
+//            InteriorModel obj = new InteriorModel();
+//           // obj.initialize(walls);
+//            obj.setDrawScale(scale);
+//            activate(obj);
+//            mazes.add(obj);
+//            walls = walls.next();
+//        }
+//
+//        // Create Annette
+//        annette = new AnnetteModel();
+//        JsonValue annettedata = levelFormat.get("annette");
+//		JsonValue downdata = levelFormat.get("annetteDown");
+//		JsonValue updata = levelFormat.get("annetteUp");
+//
+//        //annette.initialize(annettedata);
+//        annette.setDrawScale(scale);
+//        activate(annette);
+//
+//		// Create the light indicating the move in place range.
+//		createRadiusofPower();
+//		attachPowerRadius(getAnnette(),radiusOfPower);
+//
+//
+//        // Create cone lights to be line of sights of creatures.
+//        createLineofSight(levelFormat.get("vision"));
+//        // Create the creatures and attach light sources
+//		createCreatures(levelFormat.get("creatures"));
+//        //createCreature(levelFormat.get("creatures"), "snail", 0);
+//        //createCreature(levelFormat.get("creatures"), "tarasque", 1);
+//        //createCreature(levelFormat.get("creatures"), "blanche", 2);
+//
+//        // Create box
+//        box = new BoxModel(1, 1);
+//
+//        if (distraction != null) {
+//            distraction.setAlive(false);
+//        }
+//
+//        // Creater indicator
+//        indicator = new IndicatorModel();
+//
+//    }
 
 //    public void addObjects(JsonValue levelFormat) {
 //		JsonValue buildings = levelFormat.getChild("Buildings");
@@ -1097,7 +1100,6 @@ public class LevelModel {
 	 * @param  json	the JSON tree defining the list of cone lights
 	 */
 	private void createLineofSight(JsonValue json) {
-
 		ConeSource[] lightArr = new ConeSource[3];
 
 		for(int i = 0; i< json.size; i++){
@@ -1108,7 +1110,8 @@ public class LevelModel {
 			float b = light.get("b").asFloat();
 			float a = light.get("a").asFloat();
 			float[] color = {r,g,b,a};
-			float[] pos = {obj.get("x").asFloat()/64,obj.get("y").asFloat()/64};
+			float[] pos ={light.get("xoffset").asFloat()/64,light.get("yoffset").asFloat()/64};
+//			System.out.println("pos lights "+pos[0]*64+" "+ pos[1]*64);
 			float dist  = light.get("distance").asFloat();
 			float face  = light.get("facing").asFloat();
 			float angle = light.get("angle").asFloat();
@@ -1134,7 +1137,6 @@ public class LevelModel {
 			lightArr[index] = cone;
 
 			}
-
 		for(int i = 0; i<lightArr.length;i++){
 			lights.add(lightArr[i]);
 		}
@@ -1145,21 +1147,21 @@ public class LevelModel {
 	 * loop through object list and add
 	 * @param creaturejson
 	 */
-	public void createCreatures(JsonValue creaturejson){
-		JsonValue creaturedata = creaturejson.child();
-		int index = 0;
-    	while (creaturedata != null) {
-//			System.out.println("index = " + index);
-			CreatureModel creature = new CreatureModel();
-			//creature.initialize(creaturedata);
-			creature.setDrawScale(scale);
-			activate(creature);
-			attachVision(creature, lights.get(index));
-			creatures.add(creature);
-			creaturedata = creaturedata.next();
-			index = index + 1;
-		}
-	}
+//	public void createCreatures(JsonValue creaturejson){
+//		JsonValue creaturedata = creaturejson.child();
+//		int index = 0;
+//    	while (creaturedata != null) {
+////			System.out.println("index = " + index);
+//			CreatureModel creature = new CreatureModel();
+//			//creature.initialize(creaturedata);
+//			creature.setDrawScale(scale);
+//			activate(creature);
+//			attachVision(creature, lights.get(index));
+//			creatures.add(creature);
+//			creaturedata = creaturedata.next();
+//			index = index + 1;
+//		}
+//	}
 
 
 
@@ -1173,7 +1175,11 @@ public class LevelModel {
 	 *
 	 */
 	public void attachVision (CreatureModel creature, LightSource light){
-		light.attachToBody(creature.getBody(), light.getX(), light.getY(), light.getDirection());
+		System.out.println(light.getX() + " " + light.getY());
+		light.setPosition(creature.getX()+creature.getWidth()/2, creature.getY()+creature.getHeight()/2);
+		light.setDirection(0);
+//		light.attachToBody(creature.getBody(), 0, 0, light.getDirection());
+
 		creature.setVision(light);
 	}
 
@@ -1265,10 +1271,27 @@ public class LevelModel {
 		if (fixedStep(dt)) {
 			if (rayhandler != null) {
 				rayhandler.update();
-			}
+
+				}
+
+
 			annette.update(dt);
 			for (CreatureModel creature : creatures){
 				creature.update(dt);
+				creature.getVision().setPosition(creature.getX()+creature.getWidth()/2,creature.getY()+creature.getHeight());
+				if (creature.getMovement().x > 0) {
+					creature.getVision().setDirection(0);
+				}
+				else if (creature.getMovement().x < 0) {
+					creature.getVision().setDirection(180);
+					creature.getVision().setPosition(creature.getX()+creature.getWidth()/2,creature.getY()+creature.getHeight());
+				}
+				else if (creature.getMovement().y < 0) {
+					creature.getVision().setDirection(270);
+				}
+				else if (creature.getMovement().y > 0) {
+					creature.getVision().setDirection(90);
+				}
 //				System.out.println(creature.getPosition());
 			}
 			goalDoor.update(dt);

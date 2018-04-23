@@ -440,7 +440,6 @@ public class GameController implements Screen, ContactListener {
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
 			level.createDistraction(levelFormat);
-//			sound.stop("distraction_effect");
 			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
@@ -460,7 +459,6 @@ public class GameController implements Screen, ContactListener {
 
 		if (distraction != null) {
 			if (!distraction.getAlive() && distraction.isActive()) {
-//				sound.stop("distraction_gone_effect");
 				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 			}
 		}
