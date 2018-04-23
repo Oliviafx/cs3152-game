@@ -230,6 +230,16 @@
 				"cols": 14,
 				"first": 1
 			}
+		},
+		"indicator_seen" : {
+			"file" : "textures/isseen.png",
+			"wrap" : false,
+			"strip": {
+				"size": 15,
+				"rows": 1,
+				"cols": 15,
+				"first": 1
+			}
 		}
 	},
 	"fonts": {
