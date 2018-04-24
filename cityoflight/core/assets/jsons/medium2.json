@@ -25,6 +25,90 @@
     },
     {
       "draworder":"topdown",
+      "name":"vision_properties",
+      "objects":[
+        {
+          "height":0,
+          "id":59,
+          "name":"dragon_vision",
+          "properties":
+          {
+            "a":0.3,
+            "angle":4,
+            "b":0.5,
+            "distance":25,
+            "excludeBits":"0010",
+            "facing":90,
+            "g":0.2,
+            "r":0.2,
+            "rays":512,
+            "soft":false
+          },
+          "propertytypes":
+          {
+            "a":"float",
+            "angle":"int",
+            "b":"float",
+            "distance":"int",
+            "excludeBits":"string",
+            "facing":"int",
+            "g":"float",
+            "r":"float",
+            "rays":"int",
+            "soft":"bool"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":0,
+          "x":432,
+          "y":656
+        },
+        {
+          "height":0,
+          "id":60,
+          "name":"dragon_vision",
+          "properties":
+          {
+            "a":0.3,
+            "angle":4,
+            "b":0.5,
+            "distance":25,
+            "excludeBits":"0010",
+            "facing":90,
+            "g":0.2,
+            "r":0.2,
+            "rays":512,
+            "soft":false
+          },
+          "propertytypes":
+          {
+            "a":"float",
+            "angle":"int",
+            "b":"float",
+            "distance":"int",
+            "excludeBits":"string",
+            "facing":"int",
+            "g":"float",
+            "r":"float",
+            "rays":"int",
+            "soft":"bool"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":0,
+          "x":944,
+          "y":320
+        }],
+      "opacity":1,
+      "type":"objectgroup",
+      "visible":true,
+      "x":0,
+      "y":0
+    },
+    {
+      "draworder":"topdown",
       "name":"Buildings",
       "objects":[
         {
@@ -231,7 +315,7 @@
           "visible":true,
           "width":256,
           "x":576,
-          "y":912
+          "y":896
         },
         {
           "height":160,
@@ -386,7 +470,7 @@
           "visible":true,
           "width":128,
           "x":1216,
-          "y":912
+          "y":896
         },
         {
           "height":160,
@@ -738,6 +822,114 @@
       "y":0
     },
     {
+      "data":[0, 0, 0, 21, 0, 0, 0, 0, 0, 15, 0, 17, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "height":14,
+      "name":"Roofs",
+      "offsetx":0,
+      "offsety":16,
+      "opacity":1,
+      "type":"tilelayer",
+      "visible":true,
+      "width":24,
+      "x":0,
+      "y":0
+    },
+    {
+      "draworder":"topdown",
+      "name":"Exit",
+      "objects":[
+        {
+          "gid":43,
+          "height":128,
+          "id":16,
+          "name":"exit",
+          "properties":
+          {
+            "texture":"goal"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":1424,
+          "y":849
+        },
+        {
+          "height":17,
+          "id":46,
+          "name":"exit_box",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":63,
+          "x":1424,
+          "y":832
+        }],
+      "opacity":1,
+      "type":"objectgroup",
+      "visible":true,
+      "x":0,
+      "y":0
+    },
+    {
+      "draworder":"topdown",
+      "name":"box_Boundaries",
+      "objects":[
+        {
+          "height":896,
+          "id":51,
+          "name":"boundary1",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":16,
+          "x":0,
+          "y":0
+        },
+        {
+          "height":16,
+          "id":66,
+          "name":"boundary2",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":1536,
+          "x":0,
+          "y":0
+        },
+        {
+          "height":896,
+          "id":53,
+          "name":"boundary3",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":16,
+          "x":1520,
+          "y":0
+        },
+        {
+          "height":16,
+          "id":54,
+          "name":"boundary4",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":1536,
+          "x":0,
+          "y":880
+        }],
+      "opacity":1,
+      "type":"objectgroup",
+      "visible":true,
+      "x":0,
+      "y":0
+    },
+    {
       "draworder":"topdown",
       "name":"Bird",
       "objects":[
@@ -792,40 +984,15 @@
           "y":64
         },
         {
-          "height":0,
-          "id":45,
+          "height":28,
+          "id":65,
           "name":"bird_box",
-          "polygon":[
-            {
-              "x":0,
-              "y":0
-            },
-            {
-              "x":50,
-              "y":0
-            },
-            {
-              "x":55,
-              "y":14
-            },
-            {
-              "x":43,
-              "y":15
-            },
-            {
-              "x":37,
-              "y":23
-            },
-            {
-              "x":22,
-              "y":19
-            }],
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":0,
-          "x":68,
-          "y":29
+          "width":59,
+          "x":66,
+          "y":28
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -858,209 +1025,6 @@
           "width":256,
           "x":832,
           "y":0
-        },
-        {
-          "height":368,
-          "id":57,
-          "name":"tarasque_bounds",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":384,
-          "x":832,
-          "y":528
-        }],
-      "opacity":1,
-      "type":"objectgroup",
-      "visible":true,
-      "x":0,
-      "y":0
-    },
-    {
-      "draworder":"topdown",
-      "name":"box_Boundaries",
-      "objects":[
-        {
-          "height":896,
-          "id":51,
-          "name":"boundary1",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":16,
-          "x":0,
-          "y":0
-        },
-        {
-          "height":0,
-          "id":52,
-          "name":"boundary2",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":1536,
-          "x":0,
-          "y":0
-        },
-        {
-          "height":896,
-          "id":53,
-          "name":"boundary3",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":16,
-          "x":1520,
-          "y":0
-        },
-        {
-          "height":16,
-          "id":54,
-          "name":"boundary4",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":1536,
-          "x":0,
-          "y":880
-        }],
-      "opacity":1,
-      "type":"objectgroup",
-      "visible":true,
-      "x":0,
-      "y":0
-    },
-    {
-      "draworder":"topdown",
-      "name":"vision_properties",
-      "objects":[
-        {
-          "height":0,
-          "id":59,
-          "name":"dragon_vision",
-          "properties":
-          {
-            "a":0.3,
-            "angle":4,
-            "b":0.5,
-            "distance":25,
-            "excludeBits":"0010",
-            "facing":90,
-            "g":0.2,
-            "r":0.2,
-            "rays":512,
-            "soft":false
-          },
-          "propertytypes":
-          {
-            "a":"float",
-            "angle":"int",
-            "b":"float",
-            "distance":"int",
-            "excludeBits":"string",
-            "facing":"int",
-            "g":"float",
-            "r":"float",
-            "rays":"int",
-            "soft":"bool"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":0,
-          "x":432,
-          "y":656
-        },
-        {
-          "height":0,
-          "id":60,
-          "name":"dragon_vision",
-          "properties":
-          {
-            "a":0.3,
-            "angle":4,
-            "b":0.5,
-            "distance":25,
-            "excludeBits":"0010",
-            "facing":90,
-            "g":0.2,
-            "r":0.2,
-            "rays":512,
-            "soft":false
-          },
-          "propertytypes":
-          {
-            "a":"float",
-            "angle":"int",
-            "b":"float",
-            "distance":"int",
-            "excludeBits":"string",
-            "facing":"int",
-            "g":"float",
-            "r":"float",
-            "rays":"int",
-            "soft":"bool"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":0,
-          "x":944,
-          "y":320
-        }],
-      "opacity":1,
-      "type":"objectgroup",
-      "visible":true,
-      "x":0,
-      "y":0
-    },
-    {
-      "data":[0, 0, 0, 21, 0, 0, 0, 0, 0, 15, 0, 17, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      "height":14,
-      "name":"Roofs",
-      "offsetx":0,
-      "offsety":16,
-      "opacity":1,
-      "type":"tilelayer",
-      "visible":true,
-      "width":24,
-      "x":0,
-      "y":0
-    },
-    {
-      "draworder":"topdown",
-      "name":"Exit",
-      "objects":[
-        {
-          "gid":43,
-          "height":128,
-          "id":16,
-          "name":"exit",
-          "properties":
-          {
-            "texture":"goal"
-          },
-          "propertytypes":
-          {
-            "texture":"string"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":64,
-          "x":1424,
-          "y":849
-        },
-        {
-          "height":17,
-          "id":46,
-          "name":"exit_box",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":63,
-          "x":1424,
-          "y":832
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1068,7 +1032,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":65,
+  "nextobjectid":67,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
