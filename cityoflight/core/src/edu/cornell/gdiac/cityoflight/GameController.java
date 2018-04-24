@@ -334,7 +334,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/medium2.json"));
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/hard.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
@@ -704,8 +704,8 @@ public class GameController implements Screen, ContactListener {
 				animateCool = animateCOOLTIME;
 			}
 			batcher.begin();
-			System.out.println("annette_x = " + level.getAnnette().getX());
-			System.out.println("annette_y = " + level.getAnnette().getY());
+//			System.out.println("annette_x = " + level.getAnnette().getX());
+//			System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("annette_x = " + level.getAnnette().getX());
 			//System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("level.scale.x = " + level.scale.x);
@@ -752,8 +752,9 @@ public class GameController implements Screen, ContactListener {
 				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
 			}
 			batcher.begin();
-			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
-					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
+//			System.out.println("exclamation "+(level.getAnnette().getX()*level.scale.x) + " " + (level.getAnnette().getY()*level.scale.y));
+			batcher.draw(indicator_seen,(level.getAnnette().getX() + canvas.getWidth()/2-20 ),
+					(level.getAnnette().getY()  * level.scale.y), 50, 40);
 
 			// These numbers are just guess and check...
 			//batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
