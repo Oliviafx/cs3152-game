@@ -1486,8 +1486,8 @@
           "type":"",
           "visible":true,
           "width":90,
-          "x":400,
-          "y":688
+          "x":411,
+          "y":496
         },
         {
           "gid":51,
@@ -1528,30 +1528,30 @@
           "type":"",
           "visible":true,
           "width":90,
-          "x":1040,
-          "y":688
+          "x":894,
+          "y":834
         },
         {
-          "height":145,
+          "height":108,
           "id":125,
           "name":"tarasque_box1",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":89,
-          "x":400,
-          "y":543
+          "x":411,
+          "y":368
         },
         {
-          "height":139,
+          "height":113,
           "id":126,
           "name":"tarasque_box2",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":90,
-          "x":1040,
-          "y":474
+          "x":894,
+          "y":622
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1602,8 +1602,8 @@
           "type":"",
           "visible":true,
           "width":118,
-          "x":512,
-          "y":304
+          "x":514,
+          "y":377
         },
         {
           "gid":63,
@@ -1644,30 +1644,30 @@
           "type":"",
           "visible":true,
           "width":118,
-          "x":720,
-          "y":960
+          "x":722,
+          "y":893
         },
         {
-          "height":32,
+          "height":102,
           "id":123,
           "name":"blanche_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":95,
-          "x":513,
-          "y":255
+          "width":103,
+          "x":515,
+          "y":258
         },
         {
-          "height":35,
+          "height":102,
           "id":124,
           "name":"blanche_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":96,
-          "x":720,
-          "y":907
+          "width":103,
+          "x":722,
+          "y":773
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1677,13 +1677,13 @@
     },
     {
       "draworder":"topdown",
-      "name":"Carcolh",
+      "name":"Snail",
       "objects":[
         {
           "gid":84,
           "height":128,
           "id":56,
-          "name":"carcolh1",
+          "name":"snail1",
           "properties":
           {
             "bodytype":"dynamic",
@@ -1725,7 +1725,7 @@
           "gid":84,
           "height":128,
           "id":57,
-          "name":"carcolh2",
+          "name":"snail2",
           "properties":
           {
             "bodytype":"dynamic",
@@ -1760,30 +1760,30 @@
           "type":"",
           "visible":true,
           "width":203,
-          "x":2064,
-          "y":688
+          "x":2066,
+          "y":678
         },
         {
-          "height":44,
+          "height":94,
           "id":121,
-          "name":"carcolh_box1",
+          "name":"snail_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":148,
-          "x":1364,
-          "y":346
+          "width":103,
+          "x":1409,
+          "y":296
         },
         {
-          "height":49,
+          "height":94,
           "id":122,
-          "name":"carcolh_box2",
+          "name":"snail_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":149,
-          "x":2068,
-          "y":630
+          "width":102,
+          "x":2117,
+          "y":575
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -2179,16 +2179,16 @@
           "type":"",
           "visible":true,
           "width":960,
-          "x":1344,
-          "y":480
+          "x":1342,
+          "y":477
         }],
       "opacity":1,
       "type":"objectgroup",
-      "visible":true,
+      "visible":false,
       "x":0,
       "y":0
     }],
-  "nextobjectid":134,
+  "nextobjectid":135,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
