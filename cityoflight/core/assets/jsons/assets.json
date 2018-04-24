@@ -78,6 +78,10 @@
 			"file": 	"textures/128_cafe_red.png",
 			"wrap": 	true
 		},
+		"cafe_red": {
+			"file": 	"textures/cafe_red.png",
+			"wrap": 	true
+		},
 		"128_cafe_purple": {
 			"file": 	"textures/128_cafe_purple.png",
 			"wrap": 	true
