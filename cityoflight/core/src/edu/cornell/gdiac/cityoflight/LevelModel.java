@@ -932,7 +932,7 @@ public class LevelModel {
 
                     // BUILDINGS
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 1};
+					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 1.75f};
 					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
 					float[] pad = { 0.1f, 0.1f};
 					String debugColor = "red";
