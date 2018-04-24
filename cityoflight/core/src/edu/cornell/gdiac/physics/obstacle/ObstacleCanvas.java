@@ -94,6 +94,8 @@ public class ObstacleCanvas {
 	/** Cache object to handle raw textures */
 	private TextureRegion holder;
 
+
+
 	/**
 	 * Creates a new GameCanvas determined by the application configuration.
 	 * 
