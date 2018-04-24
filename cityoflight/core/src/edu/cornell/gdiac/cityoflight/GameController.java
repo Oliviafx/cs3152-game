@@ -703,24 +703,25 @@ public class GameController implements Screen, ContactListener {
 				}
 				animateCool = animateCOOLTIME;
 			}
-			canvas.begin();
-			System.out.println("annette_x = " + level.getAnnette().getX());
-			System.out.println("annette_y = " + level.getAnnette().getY());
+
+			canvas.begin(level.getoTran());
+
+			//batcher.begin();
+			//System.out.println("annette_x = " + level.getAnnette().getX());
+			//System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("annette_x = " + level.getAnnette().getX());
 			//System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("level.scale.x = " + level.scale.x);
 			//System.out.println("level.scale.y = " + level.scale.y);
 
-			canvas.draw(indicator_out,
-					(level.getAnnette().getX() * level.scale.x) - 200,
-					(level.getAnnette().getY() * level.scale.y) - 200);
-
 //			batcher.draw(indicator_out,
-//					(level.getAnnette().getX() * level.scale.x) - 200,
-//					(level.getAnnette().getY() * level.scale.y) - 200,
+//					(level.getTX()) - 200,
+//					(level.getTY()) - 200,
 //					400, 400);
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
-			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
+
+			canvas.draw(indicator_out, Color.FIREBRICK,150f, 150f, (level.getAnnette().getX() * level.scale.x),
+					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
+			//batcher.end();
 			canvas.end();
 
 		}else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
@@ -729,12 +730,14 @@ public class GameController implements Screen, ContactListener {
 				indicator_loop.setFrame(next2);
 				animateCool = animateCOOLTIME;
 			}
-			batcher.begin();
-			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
-					(level.getAnnette().getY() / 64 * level.scale.y) - 200, 400, 400);
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
-			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
-			batcher.end();
+			//batcher.begin();
+			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
+			//		(level.getAnnette().getY() / 64 * level.scale.y) - 200, 400, 400);
+			//batcher.end();
+			canvas.begin(level.getoTran());
+			canvas.draw(indicator_loop, Color.GOLDENROD,150f, 150f, (level.getAnnette().getX() * level.scale.x),
+					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
+			canvas.end();
 		}
 
 		animateCool --;
@@ -756,14 +759,15 @@ public class GameController implements Screen, ContactListener {
 				seenhasAnimated = true;
 				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
 			}
-			batcher.begin();
-			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
-					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
-
-			// These numbers are just guess and check...
-			//batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
-			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
-			batcher.end();
+//			batcher.begin();
+//			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
+//					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
+//			batcher.end();
+			canvas.begin(level.getoTran());
+			canvas.draw(indicator_seen,
+					(level.getAnnette().getX() * level.scale.x) - 15,
+					(level.getAnnette().getY() * level.scale.y) + 30);
+			canvas.end();
 		}
 	}
 
