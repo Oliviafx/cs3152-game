@@ -93,7 +93,7 @@ public class CreatureModel extends BoxObstacle {
     /** constants for creature characteristics */
 
     private int LOU_TURN_LIMIT = 30; // as a snail, Lou turns pretty slowly.
-    private int DRAGON_TURN_LIMIT = 4; // the dragon should turn quick, otherwise it would seem like it's "bumping" into a wall for too long.
+    private int DRAGON_TURN_LIMIT = 15; // the dragon should turn quick, otherwise it would seem like it's "bumping" into a wall for too long.
     private int BLANCHE_TURN_LIMIT = 10;
 
     private int LOU_AGGRO_COUNTDOWN = 150;
