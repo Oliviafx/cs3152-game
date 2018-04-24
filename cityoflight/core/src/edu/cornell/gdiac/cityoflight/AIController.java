@@ -553,7 +553,8 @@ public class AIController{
     }
 
     public boolean turnRight(){
-        return (Math.random() > 0.5);
+//        return (Math.random() > 0.5);
+        return (true);
     }
 
 }

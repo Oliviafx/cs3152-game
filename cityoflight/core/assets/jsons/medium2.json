@@ -695,7 +695,7 @@
             "damping":10,
             "debugcolor":"white",
             "debugopacity":192,
-            "density":4,
+            "density":16,
             "excludeBits":"0000",
             "force":450,
             "friction":0,
@@ -1025,6 +1025,39 @@
           "width":256,
           "x":832,
           "y":0
+        },
+        {
+          "height":208,
+          "id":67,
+          "name":"tarasque_bounds",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":768,
+          "x":320,
+          "y":528
+        },
+        {
+          "height":144,
+          "id":68,
+          "name":"tarasque_bounds",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":1200,
+          "x":320,
+          "y":208
+        },
+        {
+          "height":864,
+          "id":69,
+          "name":"tarasque_bounds",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":176,
+          "x":1344,
+          "y":16
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1032,7 +1065,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":67,
+  "nextobjectid":70,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
