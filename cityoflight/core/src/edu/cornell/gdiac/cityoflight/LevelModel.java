@@ -489,14 +489,13 @@ public class LevelModel {
 //			} else if (layerName.equals("vision_properties")) {
 //				DEFINE THIS BEFORE CREATURES GET INITIALIZED
 //				System.out.println("loading vision");
-//
+
 //				lineOfSightJSON = objects;
 //				System.out.println(objects);
 //				for (CreatureModel c : creatures) {
 //				createLineofSight(lineOfSightJSON);
 //				}
 			} else if (layerName.equals(SNAIL_LAYER_NAME)) {
-				lights.clear();
 
 				//				System.out.println("loading creatures");
 
@@ -596,7 +595,7 @@ public class LevelModel {
 				}
 			} else if (layerName.equals(TARASQUE_LAYER_NAME)) {
 //				System.out.println("loading creatures");
-				lights.clear();
+
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
 
@@ -647,7 +646,7 @@ public class LevelModel {
 				}
 				//initialize creatures
 				for (int n = 0; n < numToCreature.size(); n++) {
-//						System.out.println(n);
+						System.out.println(n);
 
 					FilmStrip[] film = new FilmStrip[3];
 					JsonValue buildingJSON = numToCreature.get("" + (n + 1)).get("properties");
@@ -693,7 +692,7 @@ public class LevelModel {
 				}
 			} else if (layerName.equals(BLANCHE_LAYER_NAME) ) {
 //				System.out.println("loading creatures");
-				lights.clear();
+
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
 
@@ -1315,10 +1314,10 @@ public class LevelModel {
 		ConeSource[] lightArr = new ConeSource[3];
 		int type = 0;
 //		System.out.println(json);
-		for (int i = 0; i < json.size; i++) {
-			JsonValue obj = json.get(i);
+//		for (int i = 0; i < json.size; i++) {
+//			JsonValue obj = json.get(i);
 //			JsonValue light = obj.get("properties");
-			System.out.println(obj);
+//			System.out.println(obj);
 			float r = json.get("r").asFloat();
 			float g = json.get("g").asFloat();
 			float b = json.get("b").asFloat();
@@ -1341,8 +1340,9 @@ public class LevelModel {
 			f.maskBits = bitStringToComplement(json.getString("excludeBits"));
 			cone.setContactFilter(f);
 			lights.add(cone);
+			System.out.println(lights.size);
 		}
-	}
+//	}
 			//cone.setActive(false); // TURN ON LATER
 //			int index = 0;
 //			String name = obj.get("name").asString();
@@ -1405,9 +1405,9 @@ public class LevelModel {
 	 */
 	public void attachVision (CreatureModel creature, LightSource light){
 //		System.out.println(light.getX() + " " + light.getY());
-//		light.setPosition(creature.getX()+creature.getWidth()/2, creature.getY()+creature.getHeight()/2);
-//		light.setDirection(0);
-		light.attachToBody(creature.getBody(), 0, 0, light.getDirection());
+		light.setPosition(creature.getX()+creature.getWidth()/2, creature.getY()+creature.getHeight()/2);
+		light.setDirection(0);
+//		light.attachToBody(creature.getBody(), 0, 0, light.getDirection());
 
 		creature.setVision(light);
 	}
