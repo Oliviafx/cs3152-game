@@ -113,6 +113,10 @@ public class LevelModel {
 	/** The indicator for the radius of the "move in place" power */
 	private LightSource radiusOfPower;
 
+    private float tx, ty;
+    Affine2 oTran = new Affine2();
+    Affine2 wTran = new Affine2();
+
 	private float normal_r, normal_g, normal_b, normal_alp;
 
 	// TO FIX THE TIMESTEP
@@ -1366,8 +1370,6 @@ public class LevelModel {
 
 		Vector2 pos = annette.getPosition();
 		Vector2 scale = annette.getDrawScale();
-		Affine2 oTran = new Affine2();
-		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
 		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
@@ -1376,8 +1378,8 @@ public class LevelModel {
 //		float cameraYStart = 0;
 		float cameraXEnd = canvas.getWidth() * 0.62f / scale.x;
 		float cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
-		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
-		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+		tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+		ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
 
 		//System.out.println(pos.x + " " + pos.y);
@@ -1400,8 +1402,6 @@ public class LevelModel {
 //			System.out.println(annette.getX());
 
 		}
-
-
 
 		canvas.end();
 
@@ -1469,6 +1469,10 @@ public class LevelModel {
 		}
 
 	}
+
+	public float getTX(){return tx;}
+	public float getTY(){return ty;}
+	public Affine2 getoTran() {return oTran;}
 
 
 	/**

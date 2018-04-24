@@ -130,7 +130,7 @@ public class AIController{
                     // if dragon collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
 
-                        if (turnRight()) {
+//                        if (turnRight()) {
                             //System.out.println("dragon behavior: go in opposite direction");
                             if (creature.getXInput() > 0) {
                                 creature.setYInput(-creature.getXInput());
@@ -145,22 +145,22 @@ public class AIController{
                                 creature.setXInput(creature.getYInput());
                                 creature.setYInput(0);
                             }
-                        } else /* turn left */ {
-                            //System.out.println("dragon behavior: turns left");
-                            if (creature.getXInput() > 0) {
-                                creature.setYInput(creature.getXInput());
-                                creature.setXInput(0);
-                            } else if (creature.getXInput() < 0) {
-                                creature.setYInput(creature.getXInput());
-                                creature.setXInput(0);
-                            } else if (creature.getYInput() > 0) {
-                                creature.setXInput(-creature.getYInput());
-                                creature.setYInput(0);
-                            } else if (creature.getYInput() < 0) {
-                                creature.setXInput(-creature.getYInput());
-                                creature.setYInput(0);
-                            }
-                        }
+//                        } else /* turn left */ {
+//                            //System.out.println("dragon behavior: turns left");
+//                            if (creature.getXInput() > 0) {
+//                                creature.setYInput(creature.getXInput());
+//                                creature.setXInput(0);
+//                            } else if (creature.getXInput() < 0) {
+//                                creature.setYInput(creature.getXInput());
+//                                creature.setXInput(0);
+//                            } else if (creature.getYInput() > 0) {
+//                                creature.setXInput(-creature.getYInput());
+//                                creature.setYInput(0);
+//                            } else if (creature.getYInput() < 0) {
+//                                creature.setXInput(-creature.getYInput());
+//                                creature.setYInput(0);
+//                            }
+//                        }
 
                         creature.setStuck(false);
                         creature.setTurnCool(creature.getTurnLimit());
