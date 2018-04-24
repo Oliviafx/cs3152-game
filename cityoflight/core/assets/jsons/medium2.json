@@ -1,25 +1,25 @@
-{ "height":14,
+{ "height":8,
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":14,
+         "data":[28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 25, 25, 25, 28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 25, 25, 25, 28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 25, 25, 25, 28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 25, 25, 25, 28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 25, 25, 25, 28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 25, 25, 25, 28, 28, 28, 28, 25, 25, 25, 25, 28, 28, 28, 25, 25, 25],
+         "height":8,
          "name":"Base",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":28,
+         "width":14,
          "x":0,
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":14,
+         "data":[2684354580, 2684354581, 2684354581, 2684354581, 21, 0, 0, 3221225493, 2684354581, 2684354581, 2684354581, 21, 0, 0, 21, 0, 0, 0, 21, 0, 0, 3221225493, 0, 0, 0, 21, 0, 0, 21, 0, 0, 0, 21, 0, 0, 3221225493, 0, 0, 0, 21, 0, 0, 21, 0, 0, 0, 21, 0, 0, 3221225493, 0, 0, 0, 20, 1610612757, 1610612757, 21, 0, 0, 0, 21, 0, 0, 3221225493, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 21, 0, 0, 3221225493, 0, 0, 0, 2684354580, 2684354581, 2684354581, 21, 0, 0, 0, 21, 0, 0, 3221225493, 0, 0, 0, 21, 0, 0, 21, 0, 0, 0, 20, 1610612757, 1610612757, 1610612756, 0, 0, 0, 21, 0, 0],
+         "height":8,
          "name":"Outline",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":28,
+         "width":14,
          "x":0,
          "y":0
         }, 
@@ -34,7 +34,7 @@
                  "properties":
                     {
                      "a":0.3,
-                     "angle":8,
+                     "angle":4,
                      "b":0.5,
                      "distance":25,
                      "excludeBits":"0010",
@@ -62,7 +62,7 @@
                  "visible":true,
                  "width":0,
                  "x":597,
-                 "y":774
+                 "y":430
                 }, 
                 {
                  "height":0,
@@ -98,8 +98,8 @@
                  "type":"",
                  "visible":true,
                  "width":2,
-                 "x":1179,
-                 "y":272
+                 "x":129,
+                 "y":342
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -112,7 +112,7 @@
          "name":"Tarasque",
          "objects":[
                 {
-                 "gid":0,
+                 "gid":30,
                  "height":229,
                  "id":20,
                  "name":"tarasque1",
@@ -151,7 +151,7 @@
                  "visible":true,
                  "width":90,
                  "x":560,
-                 "y":832
+                 "y":488
                 }, 
                 {
                  "height":144,
@@ -162,7 +162,60 @@
                  "visible":true,
                  "width":90,
                  "x":560,
-                 "y":688
+                 "y":344
+                }, 
+                {
+                 "gid":42,
+                 "height":214,
+                 "id":21,
+                 "name":"tarasque2",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"tarasque",
+                     "texture2":"tarasque_down",
+                     "texture3":"tarasque_up",
+                     "type":2,
+                     "xinput":0,
+                     "yinput":300
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":90,
+                 "x":86,
+                 "y":502
+                }, 
+                {
+                 "height":139,
+                 "id":31,
+                 "name":"tarasque_box2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":87,
+                 "x":86,
+                 "y":288
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -175,7 +228,7 @@
          "name":"Buildings",
          "objects":[
                 {
-                 "gid":0,
+                 "gid":2,
                  "height":128,
                  "id":1,
                  "name":"building1",
@@ -206,7 +259,7 @@
                  "y":672
                 }, 
                 {
-                 "gid":0,
+                 "gid":16,
                  "height":128,
                  "id":2,
                  "name":"building2",
@@ -237,7 +290,7 @@
                  "y":32
                 }, 
                 {
-                 "gid":0,
+                 "gid":8,
                  "height":128,
                  "id":3,
                  "name":"building3",
@@ -268,7 +321,7 @@
                  "y":32
                 }, 
                 {
-                 "gid":0,
+                 "gid":4,
                  "height":128,
                  "id":4,
                  "name":"building4",
@@ -299,7 +352,7 @@
                  "y":352
                 }, 
                 {
-                 "gid":0,
+                 "gid":14,
                  "height":128,
                  "id":5,
                  "name":"building5",
@@ -330,7 +383,7 @@
                  "y":32
                 }, 
                 {
-                 "gid":0,
+                 "gid":14,
                  "height":128,
                  "id":6,
                  "name":"building6",
@@ -361,7 +414,7 @@
                  "y":160
                 }, 
                 {
-                 "gid":0,
+                 "gid":14,
                  "height":128,
                  "id":8,
                  "name":"building7",
@@ -392,7 +445,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":0,
+                 "gid":6,
                  "height":128,
                  "id":9,
                  "name":"building8",
@@ -423,7 +476,7 @@
                  "y":32
                 }, 
                 {
-                 "gid":0,
+                 "gid":8,
                  "height":128,
                  "id":10,
                  "name":"building9",
@@ -454,7 +507,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":0,
+                 "gid":14,
                  "height":128,
                  "id":13,
                  "name":"building10",
@@ -485,7 +538,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":0,
+                 "gid":14,
                  "height":128,
                  "id":14,
                  "name":"building11",
@@ -516,7 +569,7 @@
                  "y":416
                 }, 
                 {
-                 "gid":0,
+                 "gid":14,
                  "height":128,
                  "id":15,
                  "name":"building12",
@@ -547,7 +600,7 @@
                  "y":544
                 }, 
                 {
-                 "gid":0,
+                 "gid":14,
                  "height":128,
                  "id":16,
                  "name":"building13",
@@ -588,7 +641,7 @@
          "name":"Annette",
          "objects":[
                 {
-                 "gid":0,
+                 "gid":57,
                  "height":96,
                  "id":22,
                  "name":"annette",
@@ -599,7 +652,7 @@
                      "damping":10,
                      "debugcolor":"white",
                      "debugopacity":192,
-                     "density":16,
+                     "density":4,
                      "excludeBits":"0000",
                      "force":450,
                      "friction":0,
@@ -634,8 +687,8 @@
                  "type":"",
                  "visible":true,
                  "width":69,
-                 "x":32,
-                 "y":128
+                 "x":212,
+                 "y":216
                 }, 
                 {
                  "height":27,
@@ -645,8 +698,8 @@
                  "type":"",
                  "visible":true,
                  "width":44,
-                 "x":41,
-                 "y":101
+                 "x":221,
+                 "y":189
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -659,7 +712,7 @@
          "name":"Crate",
          "objects":[
                 {
-                 "gid":0,
+                 "gid":64,
                  "height":59,
                  "id":25,
                  "name":"crate",
@@ -726,15 +779,15 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":14,
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":8,
          "name":"Roofs",
          "offsetx":0,
          "offsety":-48,
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":28,
+         "width":14,
          "x":0,
          "y":0
         }, 
@@ -743,7 +796,7 @@
          "name":"Exit",
          "objects":[
                 {
-                 "gid":0,
+                 "gid":29,
                  "height":128,
                  "id":18,
                  "name":"exit",
@@ -759,8 +812,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":1680,
-                 "y":848
+                 "x":1108,
+                 "y":146
                 }, 
                 {
                  "height":16,
@@ -770,9 +823,11 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":1680,
-                 "y":832
+                 "x":1108,
+                 "y":130
                 }],
+         "offsetx":-534,
+         "offsety":-14,
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -838,7 +893,7 @@
          "name":"Bird",
          "objects":[
                 {
-                 "gid":1,
+                 "gid":74,
                  "height":47,
                  "id":27,
                  "name":"bird",
@@ -917,7 +972,7 @@
                  "visible":true,
                  "width":224,
                  "x":496,
-                 "y":0
+                 "y":-344
                 }, 
                 {
                  "height":896,
@@ -927,8 +982,8 @@
                  "type":"",
                  "visible":true,
                  "width":224,
-                 "x":1072,
-                 "y":0
+                 "x":30.6666666666667,
+                 "y":-17.3333333333334
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -945,209 +1000,209 @@
         {
          "columns":1,
          "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/bookstore.png",
+         "image":"..\/textures\/bookstore.png",
          "imageheight":256,
          "imagewidth":256,
          "margin":0,
          "name":"bookstore",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":256,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/cafe_purple.png",
+         "firstgid":3,
+         "image":"..\/textures\/cafe_purple.png",
          "imageheight":256,
          "imagewidth":256,
          "margin":0,
          "name":"cafe_purple",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":256,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/flowershop.png",
+         "firstgid":5,
+         "image":"..\/textures\/flowershop.png",
          "imageheight":256,
          "imagewidth":256,
          "margin":0,
          "name":"flowershop",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":256,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/building_short_left.png",
+         "firstgid":7,
+         "image":"..\/textures\/building_short_left.png",
          "imageheight":256,
          "imagewidth":128,
          "margin":0,
          "name":"building_short_left",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":128,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/building_short_nolight.png",
+         "firstgid":9,
+         "image":"..\/textures\/building_short_nolight.png",
          "imageheight":256,
          "imagewidth":128,
          "margin":0,
          "name":"building_short_nolight",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":128,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/building_short_right.png",
+         "firstgid":11,
+         "image":"..\/textures\/building_short_right.png",
          "imageheight":256,
          "imagewidth":128,
          "margin":0,
          "name":"building_short_right",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":128,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/building_short_side.png",
+         "firstgid":13,
+         "image":"..\/textures\/building_short_side.png",
          "imageheight":256,
          "imagewidth":128,
          "margin":0,
          "name":"building_short_side",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":128,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/bigger\/building_short.png",
+         "firstgid":15,
+         "image":"..\/textures\/building_short.png",
          "imageheight":256,
          "imagewidth":128,
          "margin":0,
          "name":"building_short",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":2,
          "tileheight":128,
          "tilewidth":128,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":3,
-         "firstgid":1,
-         "image":"..\/Art assets\/tiles\/floor tiles.png",
+         "firstgid":17,
+         "image":"..\/textures\/floor_tiles.png",
          "imageheight":256,
          "imagewidth":192,
          "margin":0,
          "name":"floor_tiles",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":12,
          "tileheight":64,
          "tilewidth":64,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":1,
-         "firstgid":1,
-         "image":"..\/Art assets\/building assets\/slice1.png",
+         "firstgid":29,
+         "image":"..\/textures\/lamppost.png",
          "imageheight":128,
          "imagewidth":64,
          "margin":0,
          "name":"lamppost",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":1,
          "tileheight":128,
          "tilewidth":64,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":12,
-         "firstgid":1,
-         "image":"..\/Art assets\/characters\/tarasque_down.png",
+         "firstgid":30,
+         "image":"..\/textures\/tarasque_down.png",
          "imageheight":229,
          "imagewidth":1080,
          "margin":0,
          "name":"tarasque_down",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":12,
          "tileheight":229,
          "tilewidth":90,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":12,
-         "firstgid":1,
-         "image":"..\/Art assets\/characters\/tarasque_up.png",
+         "firstgid":42,
+         "image":"..\/textures\/tarasque_up.png",
          "imageheight":214,
          "imagewidth":1080,
          "margin":0,
          "name":"tarasque_up",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":12,
          "tileheight":214,
          "tilewidth":90,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":10,
-         "firstgid":1,
-         "image":"..\/Art assets\/characters\/sideAnnette.png",
+         "firstgid":54,
+         "image":"..\/textures\/sideAnnette.png",
          "imageheight":128,
          "imagewidth":920,
          "margin":0,
          "name":"sideAnnette",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":10,
          "tileheight":128,
          "tilewidth":92,
          "transparentcolor":"#ff00ff"
         }, 
         {
          "columns":10,
-         "firstgid":1,
-         "image":"..\/Art assets\/characters\/crate.png",
+         "firstgid":64,
+         "image":"..\/textures\/crate.png",
          "imageheight":59,
          "imagewidth":640,
          "margin":0,
          "name":"crate",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":10,
          "tileheight":59,
          "tilewidth":64,
          "transparentcolor":"#ff00ff"
         }, 
         {
-         "columns":12,
-         "firstgid":1,
-         "image":"..\/Art assets\/characters\/bird.png",
+         "columns":6,
+         "firstgid":74,
+         "image":"..\/textures\/bird.png",
          "imageheight":64,
-         "imagewidth":1044,
+         "imagewidth":522,
          "margin":0,
          "name":"bird",
          "spacing":0,
-         "tilecount":0,
+         "tilecount":6,
          "tileheight":64,
          "tilewidth":87,
          "transparentcolor":"#ff00ff"
@@ -1155,5 +1210,5 @@
  "tilewidth":64,
  "type":"map",
  "version":1,
- "width":28
+ "width":14
 }
