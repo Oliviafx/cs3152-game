@@ -491,7 +491,7 @@ public class LevelModel {
 //				System.out.println("loading vision");
 
 				lineOfSightJSON = objects;
-				System.out.println(objects);
+//				System.out.println(objects);
 //				for (CreatureModel c : creatures) {
 					createLineofSight(lineOfSightJSON);
 //				}
@@ -530,7 +530,7 @@ public class LevelModel {
 
 				//initialize creatures
 				for (int j = 0; j < numToCreature.size(); j++) {
-					//System.out.println(j);
+					System.out.println(j);
 
 					FilmStrip[] film = new FilmStrip[3];
 					JsonValue buildingJSON = numToCreature.get("" + (j + 1)).get("properties");
@@ -545,7 +545,6 @@ public class LevelModel {
 
 					for (int f = 0; f < 3; f++) {
 						if (idToFilmStrip.containsKey(textName)) {
-							System.out.println(textName);
 							film[f] = idToFilmStrip.get(textures[f]);
 						} else {
 							TextureRegion texture = JsonAssetManager.getInstance().getEntry(textures[f], TextureRegion.class);
@@ -569,7 +568,6 @@ public class LevelModel {
 //					System.out.println("index = " + index);
 					CreatureModel creature = new CreatureModel();
 //					System.out.println(creature.getPosition().x + " " + creature.getPosition().y);
-                    System.out.println(film[0]==null);
 					creature.initialize(buildingJSON, boxJSON, film[0], film[1], film[2], pSize[1]);
 //					System.out.println(creature.getPosition().x*64 + " " + creature.getPosition().y*64);
 					creature.setDrawScale(scale);
@@ -1106,7 +1104,7 @@ public class LevelModel {
 	 */
 	private void createLineofSight(JsonValue json) {
 		ConeSource[] lightArr = new ConeSource[3];
-
+		int type = 0;
 		for(int i = 0; i< json.size; i++){
 			JsonValue obj = json.get(i);
 			JsonValue light = obj.get("properties");;
@@ -1134,21 +1132,29 @@ public class LevelModel {
 			//cone.setActive(false); // TURN ON LATER
 			int index = 0;
 			String name = obj.get("name").asString();
-			if(name.equals("dragon_vision"))
+			if(name.equals("dragon_vision")) {
 				index = 1;
-			else if (name.equals("lady_vision"))
+				type = 1;
+			}
+			else if (name.equals("lady_vision")) {
 				index = 2;
-
+				type = 2;
+			}
 //			System.out.println("index is: " + index);
 			lightArr[index] = cone;
 
 			}
 		for(int i = 0; i<lightArr.length;i++){
-			lights.add(lightArr[i]);
+			int t = 0;
+			while (t<type) {
+				lights.add(lightArr[i]);
+				t++;
+			}
+			System.out.println(lights.get(i));
 		}
         System.out.println("lightArr.length = "+lightArr.length);
         System.out.println("lights.size: " + lights.size);
-        System.out.println("lights 1 == null: "+lights.get(1)==null);
+        System.out.println("lights 0 == null: "+lights.get(0));
 
 	}
 
