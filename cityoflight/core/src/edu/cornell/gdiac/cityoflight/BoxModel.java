@@ -358,36 +358,65 @@ public class BoxModel extends BoxObstacle {
     }
 
 
-    public void initialize(JsonValue json, Vector2 annettepos, float xoff, float yoff) {
-        setName(json.name());
-        float width = json.get("width").asFloat();
-        float height = json.get("height").asFloat();
+    public void initialize(JsonValue level, Vector2 annettepos, float xoff, float yoff) {
+
+
+        JsonValue layers = level.get("layers");
+        //System.out.println("layers: " + layers);
+        JsonValue crateLayer = null;
+        JsonValue props = null;
+        JsonValue boxBound = null;
+        for(int i = 0; i< layers.size; i++){
+            JsonValue curLayer = layers.get(i);
+            if(curLayer.get("name").asString().equals("Crate")){
+                crateLayer = curLayer.get("objects");
+                for(int f =0; f<2;f++){
+                    JsonValue curLayer2 = crateLayer.get(f);
+                    if(curLayer2.get("name").asString().equals("crate")){
+                        props = curLayer2.get("properties");
+                        //System.out.println("crate init: " + props);
+
+                    }
+                    else{
+                        System.out.println("crate bounds init");
+                        boxBound = curLayer2;
+                    }
+                }
+            }
+        }
+
+
+        setName("box");
+        //System.out.println(boxBound);
+        float width = boxBound.get("width").asFloat()/64;
+//        System.out.println("drawScale.x " + drawScale.x);
+        float height = boxBound.get("height").asFloat()/64;
         setWidth(width);
         setHeight(height);
         setPosition(annettepos.x + xoff,annettepos.y + yoff);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        if (json.get("bodytype").asString().equals("static")) {
+        if (props.get("bodytype").asString().equals("static")) {
             setBodyType(BodyDef.BodyType.StaticBody);
         }
-        else if (json.get("bodytype").asString().equals("dynamic")) {
+        else if (props.get("bodytype").asString().equals("dynamic")) {
             setBodyType(BodyDef.BodyType.DynamicBody);
         }
         else { // kinematic
             setBodyType(BodyDef.BodyType.KinematicBody);
         }
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
-        setForce(json.get("force").asFloat());
-        setDamping(json.get("damping").asFloat());
-        setMaxSpeed(json.get("maxspeed").asFloat());
-        setStartFrame(json.get("startframe").asInt());
+        setDensity(props.get("density").asFloat());
+        setFriction(props.get("friction").asFloat());
+        setRestitution(props.get("restitution").asFloat());
+        setForce(props.get("force").asFloat());
+        setDamping(props.get("damping").asFloat());
+        setMaxSpeed(props.get("maxspeed").asFloat());
+        setStartFrame(props.get("startframe").asInt());
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort(props.get("collideBits").asString());
+        short excludeBits = LevelModel.bitStringToComplement(props.get("excludeBits").asString());
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -396,18 +425,18 @@ public class BoxModel extends BoxObstacle {
         // Reflection is best way to convert name to color
         Color debugColor;
         try {
-            String cname = json.get("debugcolor").asString().toUpperCase();
+            String cname = props.get("debugcolor").asString().toUpperCase();
             Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
             debugColor = new Color((Color)field.get(null));
         } catch (Exception e) {
             debugColor = null; // Not defined
         }
-        int opacity = json.get("debugopacity").asInt();
+        int opacity = props.get("debugopacity").asInt();
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
         // Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
+        String key = props.get("texture").asString();
         TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
         try {
             filmstrip = (FilmStrip)texture;
@@ -484,8 +513,8 @@ public class BoxModel extends BoxObstacle {
 
         // Apply force for movement
         if (getMovement().len2() > 0f) {
-            System.out.println("getmovement " + getMovement().x + " , " + getMovement().y);
-            System.out.println("in apply force of boxmodel");
+//            System.out.println("getmovement " + getMovement().x + " , " + getMovement().y);
+//            System.out.println("in apply force of boxmodel");
             forceCache.set(getMovement());
             body.applyForce(forceCache,getPosition(),true);
 
@@ -574,13 +603,13 @@ public class BoxModel extends BoxObstacle {
 
         /** (3/5/2018) might need to change the code below; copied from RocketModel */
 //        float offsety = mainBox.getRegionHeight()-origin.y;
-        canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1 * GameController.TEMP_SCALE,1 * GameController.TEMP_SCALE);
+        canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),2 * GameController.TEMP_SCALE,2 * GameController.TEMP_SCALE);
     }
 
     public void drawState(ObstacleCanvas canvas, Color color) {
         if (texture != null) {
             if (doesExist) {
-                canvas.draw(texture, color, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.x, getAngle(), 1 * GameController.TEMP_SCALE, 1 * GameController.TEMP_SCALE);
+                canvas.draw(texture, color, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.x, getAngle(), 2 * GameController.TEMP_SCALE, 2 * GameController.TEMP_SCALE);
             }
         }
     }

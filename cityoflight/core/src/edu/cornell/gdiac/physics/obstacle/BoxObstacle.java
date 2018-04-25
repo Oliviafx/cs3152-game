@@ -51,7 +51,7 @@ public class BoxObstacle extends SimpleObstacle {
 
 	public float getLowestY(){
 
-		return (dimension.y)/2 + body.getPosition().y;
+		return (dimension.y/64)/2 + body.getPosition().y;
 	}
 
 

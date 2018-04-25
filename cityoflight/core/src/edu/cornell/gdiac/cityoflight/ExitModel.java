@@ -45,30 +45,35 @@ public class ExitModel extends BoxObstacle {
 	 * The JSON value has been parsed and is part of a bigger level file.  However, 
 	 * this JSON value is limited to the exit subtree
 	 *
-	 * @param json	the JSON subtree defining the dude
+	 *
+	 *
 	 */
-	public void initialize(JsonValue json) {
-		setName(json.name());
-		float[] pos  = json.get("pos").asFloatArray();
-//		float radius = json.get("radius").asFloat();
-		float width = json.get("width").asFloat();
-		float height = json.get("height").asFloat();
-		setPosition(pos[0],pos[1]);
-//		setRadius(radius);
+	public void initialize(float[] pos, float width, float height, String debugColors, String textr, float[] pSize) {
+//
+//		"bodytype":    	"static",
+//				"density":  	  0.0,
+//				"friction":       0.0,
+//				"restitution":    0.0,
+//				"collideBits":	"0010",
+//				"excludeBits":	"0000",
 
-		setWidth(width);
-		setHeight(height);
+
+		setName("exit");
+		setPosition(pSize[0] - pos[0]/64 - 1,pos[1]/64 + 2);
+//		setRadius(radius);
+		setWidth(width/64);
+		setHeight(height/64);
 
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
-		setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-		setDensity(json.get("density").asFloat());
-		setFriction(json.get("friction").asFloat());
-		setRestitution(json.get("restitution").asFloat());
+		setBodyType(BodyDef.BodyType.StaticBody );
+		setDensity(0);
+		setFriction(0);
+		setRestitution(0);
 		
 		// Create the collision filter (used for light penetration)
-      	short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-      	short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+      	short collideBits = LevelModel.bitStringToShort("0010");
+      	short excludeBits = LevelModel.bitStringToComplement("0000");
       	Filter filter = new Filter();
       	filter.categoryBits = collideBits;
       	filter.maskBits = excludeBits;
@@ -77,19 +82,33 @@ public class ExitModel extends BoxObstacle {
 		// Reflection is best way to convert name to color
 		Color debugColor;
 		try {
-			String cname = json.get("debugcolor").asString().toUpperCase();
+			String cname = debugColors.toUpperCase();
 		    Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
 		    debugColor = new Color((Color)field.get(null));
 		} catch (Exception e) {
 			debugColor = null; // Not defined
 		}
-		int opacity = json.get("debugopacity").asInt();
-		debugColor.mul(opacity/255.0f);
+
+		debugColor.mul(192/255.0f);
 		setDebugColor(debugColor);
 		
 		// Now get the texture from the AssetManager singleton
-		String key = json.get("texture").asString();
+		String key = textr;
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
 		setTexture(texture);
+	}
+
+	/**
+	 * Draws the physics object.
+	 *
+	 * @param canvas Drawing context
+	 */
+	public void draw(ObstacleCanvas canvas) {
+
+		if (texture != null) {
+
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y+texture.getRegionHeight()/3, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
+//			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
+		}
 	}
 }
