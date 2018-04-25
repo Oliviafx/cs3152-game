@@ -1597,8 +1597,8 @@ public class LevelModel {
 //		float cameraXStart = 0;
 		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
 //		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth() * 1.74f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		float cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
