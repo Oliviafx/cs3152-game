@@ -205,7 +205,7 @@ public class AIController{
 
             case DISTRACT:
 
-                if (creature.getType() == 1){
+                if (creature.getType() == 1 || creature.getType() == 2){
                     cAngleCache.set(0,0); // snail does not move when distracted
 
                 }else if (creature.getType() == 3){
@@ -309,6 +309,7 @@ public class AIController{
                 } else if (isDistracted()) {
                     System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> distract");
+                    creature.setMovement(-1, -1);
                     state = FSMState.DISTRACT;
                 } else if (canSenseAnnette()){
                     System.out.print(creature.getName() + ": ");
@@ -552,7 +553,8 @@ public class AIController{
     }
 
     public boolean turnRight(){
-        return (Math.random() > 0.5);
+//        return (Math.random() > 0.5);
+        return (true);
     }
 
 }
