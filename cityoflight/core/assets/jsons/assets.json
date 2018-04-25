@@ -227,10 +227,6 @@
 				"first":	0
 			}
 		},
-		"dude": {
-			"file": "textures/creature.png",
-			"wrap": false
-		},
 		"box": {
 			"file": 	"textures/crate.png",
 			"wrap":  	false,
