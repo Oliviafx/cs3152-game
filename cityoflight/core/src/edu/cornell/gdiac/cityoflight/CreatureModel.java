@@ -93,7 +93,7 @@ public class CreatureModel extends BoxObstacle {
     /** constants for creature characteristics */
 
     private int LOU_TURN_LIMIT = 30; // as a snail, Lou turns pretty slowly.
-    private int DRAGON_TURN_LIMIT = 4; // the dragon should turn quick, otherwise it would seem like it's "bumping" into a wall for too long.
+    private int DRAGON_TURN_LIMIT = 30; // the dragon should turn quick, otherwise it would seem like it's "bumping" into a wall for too long.
     private int BLANCHE_TURN_LIMIT = 10;
 
     private int LOU_AGGRO_COUNTDOWN = 150;
@@ -106,7 +106,7 @@ public class CreatureModel extends BoxObstacle {
 
     private int CREATURE_START_FRAME = 0;
     private int CREATURE_WALK_COOL = 4;
-    private float CREATURE_DENSITY = 2.0f;
+    private float CREATURE_DENSITY = 6.0f;
     private float CREATURE_FRICTION = 0.0f;
     private float CREATURE_RESTITUTION = 0.0f;
     private float CREATURE_FORCE = 1.0f;
@@ -404,8 +404,6 @@ public class CreatureModel extends BoxObstacle {
 //        setRadius(radius);
         setWidth(width);
         setHeight(height);
-//        setWidth(height);
-//        setHeight(width);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
@@ -557,14 +555,14 @@ public class CreatureModel extends BoxObstacle {
         }
         else {
             if (texture != null) {
-                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y+texture.getRegionHeight()/6, 0, 0.75f * isReflected * 1.5f, 0.75f * 1.5f);
+                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y+texture.getRegionHeight()/6, 0, 0.75f * isReflected, 0.75f );
             }
         }
 
         if (texture != null && dirTexture != null) {
 
 //            System.out.println("creature position " + getX() + " " + getY());
-            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y+texture.getRegionHeight()/6,0,0.75f* isReflected * 1.5f,0.75f * 1.5f);
+            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y+texture.getRegionHeight()/6,0,0.75f* isReflected,0.75f );
         }
     }
 }
