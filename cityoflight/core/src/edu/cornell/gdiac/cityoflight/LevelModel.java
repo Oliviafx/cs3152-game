@@ -1624,8 +1624,6 @@ public class LevelModel {
 
 		}
 
-
-
 		canvas.end();
 
 		if (rayhandler != null) {

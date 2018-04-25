@@ -706,24 +706,20 @@ public class GameController implements Screen, ContactListener {
 			canvas.begin(level.getoTran());
 
 			//batcher.begin();
-//			System.out.println("annette_x = " + level.getAnnette().getX());
-//			System.out.println("annette_y = " + level.getAnnette().getY());
+			//System.out.println("annette_x = " + level.getAnnette().getX());
+			//System.out.println("annette_y = " + level.getAnnette().getY());
+
 			//System.out.println("annette_x = " + level.getAnnette().getX());
 			//System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("level.scale.x = " + level.scale.x);
 			//System.out.println("level.scale.y = " + level.scale.y);
 
-			canvas.draw(indicator_out,
-					(level.getAnnette().getX() * level.scale.x) - 200,
-					(level.getAnnette().getY() * level.scale.y) - 200);
-
 //			batcher.draw(indicator_out,
-//					(level.getAnnette().getX() * level.scale.x) - 200,
-//					(level.getAnnette().getY() * level.scale.y) - 200,
+//					(level.getTX()) - 200,
+//					(level.getTY()) - 200,
 //					400, 400);
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
-			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
-//			batcher.end();
+
+
 			canvas.draw(indicator_out,Color.FIREBRICK,150f,150f,
 					(level.getAnnette().getX() * level.scale.x),
 					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
@@ -735,6 +731,7 @@ public class GameController implements Screen, ContactListener {
 				indicator_loop.setFrame(next2);
 				animateCool = animateCOOLTIME;
 			}
+
 			canvas.begin(level.getoTran());
 //			batcher.begin();
 //			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
@@ -768,6 +765,7 @@ public class GameController implements Screen, ContactListener {
 				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
 			}
 //			batcher.begin();
+
 //			System.out.println("exclamation "+(level.getAnnette().getX()*level.scale.x) + " " + (level.getAnnette().getY()*level.scale.y));
 //			batcher.draw(indicator_seen,(level.getAnnette().getX() + canvas.getWidth()/2-20 ),
 //					(level.getAnnette().getY()  * level.scale.y), 50, 40);
