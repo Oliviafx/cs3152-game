@@ -115,6 +115,7 @@ public class LevelModel {
 
 	Affine2 oTran = new Affine2();
 	Affine2 wTran = new Affine2();
+	Matrix4 tempMAT = new Matrix4();
 
 	private float normal_r, normal_g, normal_b, normal_alp;
 
@@ -1626,12 +1627,16 @@ public class LevelModel {
 
 		canvas.end();
 
+
+
 		if (rayhandler != null) {
-//			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
+			//rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
 			raycamera.position.set(tx, ty, 0);
-//			raycamera.zoom = raycamera.zoom 2;
+			//raycamera.transform(tempMAT.setAsAffine(oTran));
+			//raycamera.zoom = 2;
 			raycamera.update();
 			rayhandler.setCombinedMatrix(raycamera);
+			//System.out.println ("rendering");
 			rayhandler.render();
 
 		}
