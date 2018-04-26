@@ -720,7 +720,7 @@ public class GameController implements Screen, ContactListener {
 //					400, 400);
 
 
-			canvas.draw(indicator_out,Color.FIREBRICK,150f,150f,
+			canvas.draw(indicator_out,Color.SLATE,150f,150f,
 					(level.getAnnette().getX() * level.scale.x),
 					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
 			canvas.end();
@@ -775,9 +775,9 @@ public class GameController implements Screen, ContactListener {
 			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
 //			batcher.end();
 			canvas.begin(level.oTran);
-			canvas.draw(indicator_seen,Color.WHITE,15f,15f,
-					(level.getAnnette().getX() * level.scale.x - 15),
-					(level.getAnnette().getY() * level.scale.y + 80), 0f, 1.0f, 1.0f);
+			canvas.draw(indicator_seen,Color.WHITE,30f,30f,
+					(level.getAnnette().getX() * level.scale.x),
+					(level.getAnnette().getY() * level.scale.y + 85), 0f, 1.0f, 1.0f);
 			canvas.end();
 		}
 	}
