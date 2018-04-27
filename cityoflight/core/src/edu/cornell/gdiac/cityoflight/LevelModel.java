@@ -1630,13 +1630,18 @@ public class LevelModel {
 
 
 		if (rayhandler != null) {
-			//rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
-			raycamera.position.set(tx, ty, 0);
+//			rayhandler.useCustomViewport(
+//					(int)(TRANSLATION*tx) + canvas.getWidth()/2,
+//					(int)(TRANSLATION*ty) + canvas.getHeight()/2,
+//					canvas.getWidth(), canvas.getHeight());
+			System.out.println("tx = " + tx);
+			System.out.println("ty = " + ty);
+
+			raycamera.position.set(tx, ty,0);
 			//raycamera.transform(tempMAT.setAsAffine(oTran));
 			//raycamera.zoom = 2;
 			raycamera.update();
 			rayhandler.setCombinedMatrix(raycamera);
-			//System.out.println ("rendering");
 			rayhandler.render();
 
 		}
