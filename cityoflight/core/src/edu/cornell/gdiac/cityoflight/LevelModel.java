@@ -74,9 +74,6 @@ public class LevelModel {
 	private Array<BackgroundModel> tiles = new Array<BackgroundModel>();
 
 
-
-	private IndicatorModel indicator;
-
 	/** The interior models */
 	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
 	/** The exterior models */
@@ -1532,9 +1529,6 @@ public class LevelModel {
 			}
 			goalDoor.update(dt);
 			box.update(dt);
-			if (indicator != null){
-			    indicator.update(dt);
-            }
             if (distraction!=null) {
 //				System.out.println(distraction.getX());
 //				System.out.println(distraction.getY());
@@ -1634,11 +1628,16 @@ public class LevelModel {
 //					(int)(TRANSLATION*tx) + canvas.getWidth()/2,
 //					(int)(TRANSLATION*ty) + canvas.getHeight()/2,
 //					canvas.getWidth(), canvas.getHeight());
-			System.out.println("tx = " + tx);
-			System.out.println("ty = " + ty);
+			//System.out.println("tx = " + tx);
+			//System.out.println("ty = " + ty);
 
-			raycamera.position.set(tx, ty,0);
-			//raycamera.transform(tempMAT.setAsAffine(oTran));
+
+			//raycamera.position.set(tx, ty,0);
+			//tempMAT.setAsAffine(oTran);
+			//tempMAT.mulLeft(canvas.getCamera().combined);
+			//raycamera.transform(tempMAT);
+
+			raycamera.translate(1.0f,5.0f);
 			//raycamera.zoom = 2;
 			raycamera.update();
 			rayhandler.setCombinedMatrix(raycamera);
