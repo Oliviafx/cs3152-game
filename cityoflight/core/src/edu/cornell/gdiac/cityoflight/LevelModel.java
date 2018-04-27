@@ -368,7 +368,7 @@ public class LevelModel {
 		background = null;
 	}
 
-	public void populate(JsonValue levelFormat) {
+	public void populate(JsonValue levelFormat, ObstacleCanvas canvas) {
 
 
 		background = new Texture(BACKGROUND_FILE);
@@ -414,14 +414,14 @@ public class LevelModel {
 			boolean gamma = levelFormat.get("lightingGamma").asBoolean();
 			boolean diffuse = levelFormat.get("lightingDiffuse").asBoolean();
 			int blur = levelFormat.get("lightingBlur").asInt();
-			initLighting(colors, gamma, diffuse, blur);
+			initLighting(colors, gamma, diffuse, blur, canvas);
 		} else {
 
 			float[] colors = {0.6f, 0.6f, 0.6f, 0.6f};
 			boolean gamma = true;
 			boolean diffuse = true;
 			int blur = 3;
-			initLighting(colors, gamma, diffuse, blur);
+			initLighting(colors, gamma, diffuse, blur, canvas);
 		}
 //		createPointLights(levelFormat.get("pointlights"));
 //		createConeLights(levelFormat.get("conelights"));
@@ -1246,9 +1246,9 @@ public class LevelModel {
 	 *
 	 *
 	 */
-	private void initLighting(float[] color, boolean gamma, boolean diffuse, int blur) {
+	private void initLighting(float[] color, boolean gamma, boolean diffuse, int blur, ObstacleCanvas canvas) {
 		raycamera = new OrthographicCamera(bounds.width,bounds.height);
-		raycamera.position.set(bounds.width/2.0f, bounds.height/2.0f, 0);
+//		raycamera.position.set(bounds.width/2.0f, bounds.height/2.0f, 0);
 		raycamera.update();
 
 		RayHandler.setGammaCorrection(gamma);
@@ -1613,7 +1613,7 @@ public class LevelModel {
 //		oTran.mul(wTran);
 
 		// Draw the sprites first (will be hidden by shadows)
-		canvas.begin(oTran);
+		canvas.begin();//oTran);
 		canvas.draw(background, Color.WHITE, 0, 0, canvas.getWidth() * 2, canvas.getHeight() * 2);
 		//canvas.draw(background, 0, 0);
 
@@ -1630,15 +1630,16 @@ public class LevelModel {
 
 		if (rayhandler != null) {
 //			rayhandler.useCustomViewport((int)(TRANSLATION*tx) + canvas.getWidth()/2, (int)(TRANSLATION*ty) + canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
-			raycamera.position.set(tx, ty, 0);
+//			raycamera.position.set(tx, ty, 0);
 //			raycamera.zoom = raycamera.zoom 2;
 			raycamera.update();
 			rayhandler.setCombinedMatrix(raycamera);
+
 			rayhandler.render();
 
 		}
 
-		canvas.begin(oTran);
+		canvas.begin();//oTran);
 
 		int n = objects.size();
 		for (int x=0; x<n; x++) // bubble sort outer loop
@@ -1684,7 +1685,7 @@ public class LevelModel {
 
 		// Draw debugging on top of everything.
 		if (debug) {
-			canvas.beginDebug(oTran);
+			canvas.beginDebug();//oTran);
 			for(Obstacle obj : objects) {
 				obj.drawDebug(canvas);
 			}
