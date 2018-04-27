@@ -336,7 +336,9 @@ public class GameController implements Screen, ContactListener {
 		// Reload the json each time
 
 		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/medium2.json"));
-		level.populate(levelFormat);
+		level.populate(levelFormat, canvas);
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
+		level.populate(levelFormat, canvas);
 		level.getWorld().setContactListener(this);
 	}
 
@@ -633,7 +635,7 @@ public class GameController implements Screen, ContactListener {
 		level.draw(canvas);
 
 		if (level.getAnnette().isWalkingInPlace()){
-			 drawWalkInPlace();
+			drawWalkInPlace();
 		}
 
 		for (AIController controller : AIcontrollers){
