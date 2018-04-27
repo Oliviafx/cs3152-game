@@ -92,13 +92,13 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private Table table;
 
     public void create () {
-//        stage = new Stage();
-//        Gdx.input.setInputProcessor(stage);
-//        table = new Table();
-//        table.setFillParent(true);
-//        stage.addActor(table);
-//
-//        table.setDebug(true); // This is optional, but enables debug lines for tables.
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
+
+        table.setDebug(true); // This is optional, but enables debug lines for tables.
 
         // Add widgets to the table here.
     }
@@ -124,8 +124,8 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             draw();
 
-//            stage.draw();
-//            stage.act();
+            stage.draw();
+            stage.act();
 
             if (isReady() && listener != null) {
                 listener.exitScreen(this, 1);
@@ -152,6 +152,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 //        System.out.println("show");
         // Useless if called in outside animation loop
         active = true;
+        create();
     }
     public void pause() {
         // TODO Auto-generated method stub

@@ -113,6 +113,9 @@ public class LevelModel {
 	/** The indicator for the radius of the "move in place" power */
 	private LightSource radiusOfPower;
 
+	Affine2 oTran = new Affine2();
+	Affine2 wTran = new Affine2();
+
 	private float normal_r, normal_g, normal_b, normal_alp;
 
 	// TO FIX THE TIMESTEP
@@ -1588,8 +1591,6 @@ public class LevelModel {
 
 		Vector2 pos = annette.getPosition();
 		Vector2 scale = annette.getDrawScale();
-		Affine2 oTran = new Affine2();
-		Affine2 wTran = new Affine2();
 
 		// Accounts for edges of screen
 		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
@@ -1693,6 +1694,7 @@ public class LevelModel {
 
 	}
 
+	public Affine2 getoTran(){return oTran;}
 
 	/**
 	 * Returns a string equivalent to the sequence of bits in s
