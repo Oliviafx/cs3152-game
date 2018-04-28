@@ -343,7 +343,7 @@ public class GameController implements Screen, ContactListener {
 		if (whichlevel == 1) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
 		}
-		level.populate(levelFormat);
+		level.populate(levelFormat, canvas);
 		level.getWorld().setContactListener(this);
 	}
 
@@ -711,18 +711,32 @@ public class GameController implements Screen, ContactListener {
 				}
 				animateCool = animateCOOLTIME;
 			}
-			batcher.begin();
-			System.out.println("annette_x = " + level.getAnnette().getX());
-			System.out.println("annette_y = " + level.getAnnette().getY());
+
+			canvas.begin(level.getoTran());
+
+			//batcher.begin();
+//			System.out.println("annette_x = " + level.getAnnette().getX());
+//			System.out.println("annette_y = " + level.getAnnette().getY());
+			//System.out.println("annette_x = " + level.getAnnette().getX());
+			//System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("level.scale.x = " + level.scale.x);
 			//System.out.println("level.scale.y = " + level.scale.y);
-			batcher.draw(indicator_out,
-					(level.getAnnette().getX()) - 200,
-					(level.getAnnette().getY()) - 200,
-					400, 400);
+
+			canvas.draw(indicator_out,
+					(level.getAnnette().getX() * level.scale.x) - 200,
+					(level.getAnnette().getY() * level.scale.y) - 200);
+
+//			batcher.draw(indicator_out,
+//					(level.getAnnette().getX() * level.scale.x) - 200,
+//					(level.getAnnette().getY() * level.scale.y) - 200,
+//					400, 400);
 			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
 			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
-			batcher.end();
+//			batcher.end();
+			canvas.draw(indicator_out,Color.FIREBRICK,150f,150f,
+					(level.getAnnette().getX() * level.scale.x),
+					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
+			canvas.end();
 
 		}else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
 			if (animateCool <= 0) {
@@ -730,12 +744,17 @@ public class GameController implements Screen, ContactListener {
 				indicator_loop.setFrame(next2);
 				animateCool = animateCOOLTIME;
 			}
-			batcher.begin();
-			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
-					(level.getAnnette().getY() / 64 * level.scale.y) - 200, 400, 400);
+			canvas.begin(level.getoTran());
+//			batcher.begin();
+//			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
+//					(level.getAnnette().getY() / 64 * level.scale.y) - 200, 400, 400);
 			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
 			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
-			batcher.end();
+//			batcher.end();
+			canvas.draw(indicator_loop,Color.GOLDENROD,150f,150f,
+					(level.getAnnette().getX() * level.scale.x),
+					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
+			canvas.end();
 		}
 
 		animateCool --;
@@ -757,14 +776,20 @@ public class GameController implements Screen, ContactListener {
 				seenhasAnimated = true;
 				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
 			}
-			batcher.begin();
-			batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) - 10,
-					(level.getAnnette().getY() / 64 * level.scale.y) + 30, 20, 20);
+//			batcher.begin();
+//			System.out.println("exclamation "+(level.getAnnette().getX()*level.scale.x) + " " + (level.getAnnette().getY()*level.scale.y));
+//			batcher.draw(indicator_seen,(level.getAnnette().getX() + canvas.getWidth()/2-20 ),
+//					(level.getAnnette().getY()  * level.scale.y), 50, 40);
 
 			// These numbers are just guess and check...
 			//batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
 			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
-			batcher.end();
+//			batcher.end();
+			canvas.begin(level.oTran);
+			canvas.draw(indicator_seen,Color.WHITE,15f,15f,
+					(level.getAnnette().getX() * level.scale.x - 15),
+					(level.getAnnette().getY() * level.scale.y + 80), 0f, 1.0f, 1.0f);
+			canvas.end();
 		}
 	}
 

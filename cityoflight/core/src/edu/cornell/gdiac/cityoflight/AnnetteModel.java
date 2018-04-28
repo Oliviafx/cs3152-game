@@ -83,7 +83,7 @@ public class AnnetteModel extends BoxObstacle {
     private PolygonShape annetteShape;
     private Fixture annetteFixture;
 
-    private static float SENSOR_SIZE = 0.4f;
+    private static float SENSOR_SIZE = 0.3f;
 
 
     /**
