@@ -1594,24 +1594,49 @@ public class LevelModel {
 		Vector2 scale = annette.getDrawScale();
 
 		// Accounts for edges of screen
+//		float ratio = (float)canvas.getWidth()/canvas.getHeight();
+		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
+//		System.out.println(getBounds().getWidth());
+//		System.out.println(getBounds().getHeight());
+//		System.out.println("ratio " + ratio);
+
 		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
-//		float cameraXStart = 0;
 		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
-//		float cameraYStart = 0;
-		float cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
+		float cameraXEnd = 0;
+		float cameraYEnd = 0;
+//		System.out.println(ratio);
+
+		if (ratio == (14.0f/8.0f)) {
+//			System.out.println("EASY");
+			cameraXEnd = canvas.getWidth() * 0.62f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		}
+		else if (ratio == (24.0f/14.0f)) {
+//			System.out.println("is medium2");
+			cameraXEnd = canvas.getWidth() * 1.42f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		}
+		else if (ratio == 1.0f) {
+//			System.out.println("is medium");
+			cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
+		}
+		else if (ratio == 2.0f) {
+			cameraXEnd = canvas.getWidth() * 1.74f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		}
+		else {
+			System.out.println("Not a valid window ratio.");
+		}
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
-//		//System.out.println(bounds.x + " " + bounds.y+" "+bounds.width+" "+bounds.height);
-
-		//System.out.println(pos.x + " " + pos.y);
 
 //		float tx = pos.x;
 //		float ty = pos.y;
 
-		oTran.setToTranslation(TRANSLATION*tx + canvas.getWidth()/2, TRANSLATION*ty + canvas.getHeight()/2);
+		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
-//		oTran.mul(wTran);
+		oTran.mul(wTran);
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin(oTran);

@@ -617,16 +617,16 @@ public class GameController implements Screen, ContactListener {
 
 		canvas.clear();
 
-		AnnetteModel annette = level.getAnnette();
-		Vector2 pos = annette.getPosition();
-		Vector2 scale = annette.getDrawScale();
-
-		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
-		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
-		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
-		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
-		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
+//		AnnetteModel annette = level.getAnnette();
+//		Vector2 pos = annette.getPosition();
+//		Vector2 scale = annette.getDrawScale();
+//
+//		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
+//		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
+//		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
+//		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
+//		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
+//		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
 
 		level.draw(canvas);
 
