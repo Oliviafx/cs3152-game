@@ -370,7 +370,7 @@ public class LevelModel {
 
 	public void populate(JsonValue levelFormat, ObstacleCanvas canvas) {
 
-
+		System.out.println(levelFormat==null);
 		background = new Texture(BACKGROUND_FILE);
 
 		int tileHeight = levelFormat.get("height").asInt();

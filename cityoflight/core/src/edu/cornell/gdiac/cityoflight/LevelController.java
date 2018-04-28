@@ -60,11 +60,16 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     }
 
     public boolean goLevelOne() {
-        return level1.isPressed();
+        return level1.isPressed() || startbutton.isPressed();
     }
-
+    public boolean goLevelTwo() {
+        return level2.isPressed();
+    }
+    public boolean goLevelThree() {
+        return level3.isPressed();
+    }
     public boolean isReady() {
-        return pressState == 2;
+        return menubutton.isPressed();
     }
 
     public void setCanvas(ObstacleCanvas canvas) {
@@ -109,7 +114,10 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private Skin buttonSkin; //** images are used as skins of the level1 **//
     private TextButton level1; //** the level1 - the only actor in program **//
     private String fontName = "fonts/Belladonna.ttf";
-
+    private TextButton level2;
+    private TextButton level3;
+    private TextButton menubutton;
+    private TextButton startbutton;
     public void create () {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -128,7 +136,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         style.font = font;
 
         level1 = new TextButton("", style);
-        level1.setPosition(86, 600-230);
+        level1.setPosition(98, 512-196);
         level1.setHeight(100);
         level1.setWidth(100);
         level1.addListener(new InputListener() {
@@ -141,8 +149,69 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 Gdx.app.log("my app", "Released");
             }
         });
+        level2 = new TextButton("", style);
+        level2.setPosition(244, 512-196);
+        level2.setHeight(100);
+        level2.setWidth(100);
+        level2.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Released");
+            }
+        });
+        level3 = new TextButton("", style);
+        level3.setPosition(395, 512-196);
+        level3.setHeight(100);
+        level3.setWidth(100);
+        level3.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Released");
+            }
+        });
+
+        menubutton = new TextButton("", style);
+        menubutton.setPosition(312, 28);
+        menubutton.setHeight(40);
+        menubutton.setWidth(70);
+        menubutton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Released");
+            }
+        });
+        startbutton = new TextButton("", style);
+        startbutton.setPosition(503, 28);
+        startbutton.setHeight(40);
+        startbutton.setWidth(70);
+        startbutton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Released");
+            }
+        });
 
         stage.addActor(level1);
+        stage.addActor(level2);
+        stage.addActor(level3);
+        stage.addActor(menubutton);
+        stage.addActor(startbutton);
     }
 
 //        table.setDebug(true); // This is optional, but enables debug lines for tables.
@@ -186,9 +255,10 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 stage.act();
             }
             if (isReady() && listener != null) {
+                System.out.println("heres");
                 listener.exitScreen(this, 1);
             }
-            if (goLevelOne() && listener != null) {
+            if ((goLevelOne() || goLevelTwo() || goLevelThree()) && listener != null) {
                 listener.exitScreen(this, 2);
             }
         }
@@ -209,8 +279,8 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         pressState = 0;
         active = false;
         batch.dispose();
-        buttonSkin.dispose();
-        buttonsAtlas.dispose();
+//        buttonSkin.dispose();
+//        buttonsAtlas.dispose();
         font.dispose();
 //        stage.dispose();
     }
