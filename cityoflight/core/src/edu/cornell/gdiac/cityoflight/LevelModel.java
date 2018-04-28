@@ -1622,8 +1622,9 @@ public class LevelModel {
 			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
 		}
 		else if (ratio == 2.0f) {
-			cameraXEnd = canvas.getWidth() * 1.74f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+//			System.out.println("hard");
+			cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
 		}
 		else {
 			System.out.println("Not a valid window ratio.");
