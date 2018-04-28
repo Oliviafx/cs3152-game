@@ -156,6 +156,12 @@ public class GameController implements Screen, ContactListener {
 	/** Exit code for going to the pause menu */
 	public static final int EXIT_PAUSE = 4;
 
+	/** Which level to load */
+	public int whichlevel;
+	public void setWhichlevel(int val) {
+		whichlevel = val;
+	}
+
 	/** Reference to the game canvas */
 	protected ObstacleCanvas canvas;
 	/** Listener that will update the player mode when we are done */
@@ -334,7 +340,9 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
+		if (whichlevel == 1) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
+		}
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}

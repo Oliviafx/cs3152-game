@@ -417,7 +417,6 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         if (stage != null) { stage.act(); }
 
         if (isReady() && listener != null) {
-
             listener.exitScreen(this, 2);
         }
         if (toLevelSelect() && listener != null) {
