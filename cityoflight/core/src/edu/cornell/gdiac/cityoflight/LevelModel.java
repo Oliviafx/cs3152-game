@@ -1029,7 +1029,7 @@ public class LevelModel {
 				goalDoor = new ExitModel();
 				float x = boundValues.get("x").asFloat()/64;
 				float y = boundValues.get("y").asFloat()/64;
-				float[] pos = {x,y};
+				float[] pos = {50,356};
 				float width = boundValues.get("width").asFloat();
 				float height = boundValues.get("height").asFloat();
 				String debugC = "yellow";
