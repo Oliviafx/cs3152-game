@@ -1300,24 +1300,24 @@
                  "y":834
                 }, 
                 {
-                 "height":108,
+                 "height":80,
                  "id":125,
                  "name":"tarasque_box1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":89,
+                 "width":40,
                  "x":411,
                  "y":368
                 }, 
                 {
-                 "height":113,
+                 "height":80,
                  "id":126,
                  "name":"tarasque_box2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":90,
+                 "width":40,
                  "x":894,
                  "y":622
                 }, 
@@ -1490,24 +1490,24 @@
                  "y":893
                 }, 
                 {
-                 "height":102,
+                 "height":70,
                  "id":123,
                  "name":"blanche_box1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":103,
+                 "width":40,
                  "x":515,
                  "y":258
                 }, 
                 {
-                 "height":102,
+                 "height":70,
                  "id":124,
                  "name":"blanche_box2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":103,
+                 "width":40,
                  "x":722,
                  "y":773
                 }, 
@@ -1686,7 +1686,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":103,
+                 "width":40,
                  "x":1409,
                  "y":296
                 }, 
@@ -1697,7 +1697,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":102,
+                 "width":40,
                  "x":2117,
                  "y":575
                 }, 
@@ -1807,7 +1807,7 @@
                      "damping":10,
                      "debugcolor":"white",
                      "debugopacity":192,
-                     "density":4,
+                     "density":16,
                      "excludeBits":"0000",
                      "force":450,
                      "friction":0,

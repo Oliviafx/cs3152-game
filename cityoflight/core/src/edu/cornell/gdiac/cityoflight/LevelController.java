@@ -141,12 +141,12 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         level1.setWidth(100);
         level1.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
                 return true;
             }
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+//                Gdx.app.log("my app", "Released");
             }
         });
         level2 = new TextButton("", style);
@@ -155,12 +155,12 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         level2.setWidth(100);
         level2.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
                 return true;
             }
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+//                Gdx.app.log("my app", "Released");
             }
         });
         level3 = new TextButton("", style);
@@ -169,12 +169,12 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         level3.setWidth(100);
         level3.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
                 return true;
             }
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+//                Gdx.app.log("my app", "Released");
             }
         });
 
@@ -184,12 +184,12 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         menubutton.setWidth(70);
         menubutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
                 return true;
             }
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+//                Gdx.app.log("my app", "Released");
             }
         });
         startbutton = new TextButton("", style);
@@ -198,12 +198,12 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         startbutton.setWidth(70);
         startbutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
                 return true;
             }
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+//                Gdx.app.log("my app", "Released");
             }
         });
 

@@ -348,7 +348,7 @@ public class GameController implements Screen, ContactListener {
 		if (whichlevel == 3) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/hard.json"));
 		}
-		level.populate(levelFormat, canvas);
+		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
 
@@ -631,21 +631,21 @@ public class GameController implements Screen, ContactListener {
 
 		canvas.clear();
 
-		AnnetteModel annette = level.getAnnette();
-		Vector2 pos = annette.getPosition();
-		Vector2 scale = annette.getDrawScale();
-
-		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
-		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
-		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
-		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
-		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
+//		AnnetteModel annette = level.getAnnette();
+//		Vector2 pos = annette.getPosition();
+//		Vector2 scale = annette.getDrawScale();
+//
+//		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
+//		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
+//		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
+//		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
+//		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
+//		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
 
 		level.draw(canvas);
 
 		if (level.getAnnette().isWalkingInPlace()){
-			drawWalkInPlace();
+			 drawWalkInPlace();
 		}
 
 		for (AIController controller : AIcontrollers){
@@ -720,25 +720,21 @@ public class GameController implements Screen, ContactListener {
 			canvas.begin(level.getoTran());
 
 			//batcher.begin();
-//			System.out.println("annette_x = " + level.getAnnette().getX());
-//			System.out.println("annette_y = " + level.getAnnette().getY());
+			//System.out.println("annette_x = " + level.getAnnette().getX());
+			//System.out.println("annette_y = " + level.getAnnette().getY());
+
 			//System.out.println("annette_x = " + level.getAnnette().getX());
 			//System.out.println("annette_y = " + level.getAnnette().getY());
 			//System.out.println("level.scale.x = " + level.scale.x);
 			//System.out.println("level.scale.y = " + level.scale.y);
 
-			canvas.draw(indicator_out,
-					(level.getAnnette().getX() * level.scale.x) - 200,
-					(level.getAnnette().getY() * level.scale.y) - 200);
-
 //			batcher.draw(indicator_out,
-//					(level.getAnnette().getX() * level.scale.x) - 200,
-//					(level.getAnnette().getY() * level.scale.y) - 200,
+//					(level.getTX()) - 200,
+//					(level.getTY()) - 200,
 //					400, 400);
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
-			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
-//			batcher.end();
-			canvas.draw(indicator_out,Color.FIREBRICK,150f,150f,
+
+
+			canvas.draw(indicator_out,Color.SLATE,150f,150f,
 					(level.getAnnette().getX() * level.scale.x),
 					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
 			canvas.end();
@@ -749,6 +745,7 @@ public class GameController implements Screen, ContactListener {
 				indicator_loop.setFrame(next2);
 				animateCool = animateCOOLTIME;
 			}
+
 			canvas.begin(level.getoTran());
 //			batcher.begin();
 //			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
@@ -782,6 +779,7 @@ public class GameController implements Screen, ContactListener {
 				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
 			}
 //			batcher.begin();
+
 //			System.out.println("exclamation "+(level.getAnnette().getX()*level.scale.x) + " " + (level.getAnnette().getY()*level.scale.y));
 //			batcher.draw(indicator_seen,(level.getAnnette().getX() + canvas.getWidth()/2-20 ),
 //					(level.getAnnette().getY()  * level.scale.y), 50, 40);
@@ -791,9 +789,9 @@ public class GameController implements Screen, ContactListener {
 			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
 //			batcher.end();
 			canvas.begin(level.oTran);
-			canvas.draw(indicator_seen,Color.WHITE,15f,15f,
-					(level.getAnnette().getX() * level.scale.x - 15),
-					(level.getAnnette().getY() * level.scale.y + 80), 0f, 1.0f, 1.0f);
+			canvas.draw(indicator_seen,Color.WHITE,30f,30f,
+					(level.getAnnette().getX() * level.scale.x),
+					(level.getAnnette().getY() * level.scale.y + 85), 0f, 1.0f, 1.0f);
 			canvas.end();
 		}
 	}

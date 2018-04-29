@@ -59,7 +59,7 @@ public class ExitModel extends BoxObstacle {
 
 
 		setName("exit");
-		setPosition(pSize[0] - pos[0]/64 - 1,pos[1]/64 + 2);
+		setPosition(pSize[0] - pos[0]/64 - 1,pSize[1] - pos[1]/64 - 1 );
 //		setRadius(radius);
 		setWidth(width/64);
 		setHeight(height/64);
