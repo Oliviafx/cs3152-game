@@ -371,7 +371,7 @@ public class LevelModel {
 
 	public void populate(JsonValue levelFormat) {
 
-
+		System.out.println(levelFormat==null);
 		background = new Texture(BACKGROUND_FILE);
 
 		int tileHeight = levelFormat.get("height").asInt();

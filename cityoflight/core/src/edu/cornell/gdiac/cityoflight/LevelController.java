@@ -2,6 +2,9 @@ package edu.cornell.gdiac.cityoflight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.Input;
@@ -18,10 +21,12 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
-import static com.badlogic.gdx.Gdx.*;
-
-public class LevelController implements Screen, ControllerListener, ContactListener, InputProcessor {
+public class LevelController implements Screen, ControllerListener, ContactListener, InputProcessor, ApplicationListener {
 
     private class LevelSelect extends Stage {
 
@@ -54,8 +59,17 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
     }
 
+    public boolean goLevelOne() {
+        return level1.isPressed() || startbutton.isPressed();
+    }
+    public boolean goLevelTwo() {
+        return level2.isPressed();
+    }
+    public boolean goLevelThree() {
+        return level3.isPressed();
+    }
     public boolean isReady() {
-        return pressState == 2;
+        return menubutton.isPressed();
     }
 
     public void setCanvas(ObstacleCanvas canvas) {
@@ -72,13 +86,17 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 //            canvas.draw(backButton, tint, 0, 0, backX, backY, 0, .65f, .6f);
         }
 //        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        stage.act(graphics.getDeltaTime());
-//        stage.draw();
+//        if (stage != null) {
+//            stage.act(graphics.getDeltaTime());
+//            stage.draw();
+//        }
             canvas.end();
         }
     }
     public void update(float delta) {
-//        create();
+        if (stage == null) {
+            create();
+        }
     }
 
     public void setActive(boolean val) {
@@ -90,18 +108,116 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
     private Stage stage;
     private Table table;
-
+    private SpriteBatch batch;
+    private BitmapFont font; //** same as that used in Tut 7 **//
+    private TextureAtlas buttonsAtlas; //** image of buttons **//
+    private Skin buttonSkin; //** images are used as skins of the level1 **//
+    private TextButton level1; //** the level1 - the only actor in program **//
+    private String fontName = "fonts/Belladonna.ttf";
+    private TextButton level2;
+    private TextButton level3;
+    private TextButton menubutton;
+    private TextButton startbutton;
     public void create () {
-//        stage = new Stage();
-//        Gdx.input.setInputProcessor(stage);
-//        table = new Table();
-//        table.setFillParent(true);
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        table = new Table();
+        table.setFillParent(true);
 //        stage.addActor(table);
-//
+//        buttonsAtlas = new TextureAtlas("buttons.pack"); //** level1 atlas image **//
+        buttonSkin = new Skin();
+//        buttonSkin.addRegions(buttonsAtlas); //** skins for on and off **//
+        font = new BitmapFont(false);
+        font.setColor(Color.CLEAR);
+        batch = new SpriteBatch();
+        TextButtonStyle style = new TextButtonStyle();
+//        style.up = buttonSkin.getDrawable("ButtonOff");
+//        style.down = buttonSkin.getDrawable("ButtonOn");
+        style.font = font;
+
+        level1 = new TextButton("", style);
+        level1.setPosition(98, 512-196);
+        level1.setHeight(100);
+        level1.setWidth(100);
+        level1.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
+        level2 = new TextButton("", style);
+        level2.setPosition(244, 512-196);
+        level2.setHeight(100);
+        level2.setWidth(100);
+        level2.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
+        level3 = new TextButton("", style);
+        level3.setPosition(395, 512-196);
+        level3.setHeight(100);
+        level3.setWidth(100);
+        level3.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
+
+        menubutton = new TextButton("", style);
+        menubutton.setPosition(312, 28);
+        menubutton.setHeight(40);
+        menubutton.setWidth(70);
+        menubutton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
+        startbutton = new TextButton("", style);
+        startbutton.setPosition(503, 28);
+        startbutton.setHeight(40);
+        startbutton.setWidth(70);
+        startbutton.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
+
+        stage.addActor(level1);
+        stage.addActor(level2);
+        stage.addActor(level3);
+        stage.addActor(menubutton);
+        stage.addActor(startbutton);
+    }
+
 //        table.setDebug(true); // This is optional, but enables debug lines for tables.
 
         // Add widgets to the table here.
-    }
+
 
     public void resize (int width, int height) {
         float sx = ((float)width)/800;
@@ -112,7 +228,17 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         }
     }
 
-//    public void render () {
+    public void render () {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        stage.act();
+
+//        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        stage.draw();
+        batch.end();
+    }
 //        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //        stage.act(graphics.getDeltaTime());
 //        stage.draw();
@@ -124,11 +250,16 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             draw();
 
-//            stage.draw();
-//            stage.act();
-
+            if (stage != null) {
+                stage.draw();
+                stage.act();
+            }
             if (isReady() && listener != null) {
+                System.out.println("heres");
                 listener.exitScreen(this, 1);
+            }
+            if ((goLevelOne() || goLevelTwo() || goLevelThree()) && listener != null) {
+                listener.exitScreen(this, 2);
             }
         }
     }
@@ -147,6 +278,11 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         }
         pressState = 0;
         active = false;
+        batch.dispose();
+//        buttonSkin.dispose();
+//        buttonsAtlas.dispose();
+        font.dispose();
+//        stage.dispose();
     }
     public void show() {
 //        System.out.println("show");
@@ -215,15 +351,15 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
     // PROCESSING PLAYER INPUT
     /**
-     * Called when the screen was touched or a mouse button was pressed.
+     * Called when the screen was touched or a mouse level1 was pressed.
      *
-     * This method checks to see if the play button is available and if the click
-     * is in the bounds of the play button.  If so, it signals the that the button
-     * has been pressed and is currently down. Any mouse button is accepted.
+     * This method checks to see if the play level1 is available and if the click
+     * is in the bounds of the play level1.  If so, it signals the that the level1
+     * has been pressed and is currently down. Any mouse level1 is accepted.
      *
      * @param screenX the x-coordinate of the mouse on the screen
      * @param screenY the y-coordinate of the mouse on the screen
-     * @param pointer the button or touch finger number
+     * @param pointer the level1 or touch finger number
      * @return whether to hand the event to other listeners.
      */
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -236,7 +372,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 //        screenY = heightY-screenY;
 //
 //         TODO: Fix scaling
-//         Play button is a circle.
+//         Play level1 is a circle.
 
         float radius = backButton.getWidth()*backButton.getHeight();
         float dist = (screenX-backX)*(screenX-backX)+(screenY-backX)*(screenY-backX);
@@ -253,14 +389,14 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     }
 
     /**
-     * Called when a finger was lifted or a mouse button was released.
+     * Called when a finger was lifted or a mouse level1 was released.
      *
-     * This method checks to see if the play button is currently pressed down. If so,
+     * This method checks to see if the play level1 is currently pressed down. If so,
      * it signals the that the player is ready to go.
      *
      * @param screenX the x-coordinate of the mouse on the screen
      * @param screenY the y-coordinate of the mouse on the screen
-     * @param pointer the button or touch finger number
+     * @param pointer the level1 or touch finger number
      * @return whether to hand the event to other listeners.
      */
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
@@ -272,14 +408,14 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     }
 
     /**
-     * Called when a button on the Controller was pressed.
+     * Called when a level1 on the Controller was pressed.
      *
      * The buttonCode is controller specific. This listener only supports the start
-     * button on an X-Box controller.  This outcome of this method is identical to
-     * pressing (but not releasing) the play button.
+     * level1 on an X-Box controller.  This outcome of this method is identical to
+     * pressing (but not releasing) the play level1.
      *
      * @param controller The game controller
-     * @param buttonCode The button pressed
+     * @param buttonCode The level1 pressed
      * @return whether to hand the event to other listeners.
      */
     public boolean buttonDown (Controller controller, int buttonCode) {
@@ -291,14 +427,14 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     }
 
     /**
-     * Called when a button on the Controller was released.
+     * Called when a level1 on the Controller was released.
      *
      * The buttonCode is controller specific. This listener only supports the start
-     * button on an X-Box controller.  This outcome of this method is identical to
-     * releasing the the play button after pressing it.
+     * level1 on an X-Box controller.  This outcome of this method is identical to
+     * releasing the the play level1 after pressing it.
      *
      * @param controller The game controller
-     * @param buttonCode The button pressed
+     * @param buttonCode The level1 pressed
      * @return whether to hand the event to other listeners.
      */
     public boolean buttonUp (Controller controller, int buttonCode) {
@@ -363,7 +499,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
      *
      * @param screenX the x-coordinate of the mouse on the screen
      * @param screenY the y-coordinate of the mouse on the screen
-     * @param pointer the button or touch finger number
+     * @param pointer the level1 or touch finger number
      * @return whether to hand the event to other listeners.
      */
     public boolean touchDragged(int screenX, int screenY, int pointer) {
