@@ -150,12 +150,12 @@ public class GDXRoot extends Game implements ScreenListener {
 			levels.setActive(true);
 		}
 
-		if (exitCode == GameController.EXIT_PAUSE) {
-			pause.setScreenListener(this);
-			pause.setCanvas(canvas);
-			pause.reset();
-			setScreen(pause);
-		}
+//		if (exitCode == GameController.EXIT_PAUSE) {
+//			pause.setScreenListener(this);
+//			pause.setCanvas(canvas);
+//			pause.reset();
+//			setScreen(pause);
+//		}
 //		else if (screen == loading) {
 //			System.out.println("here");
 //			controller.loadContent();
@@ -168,8 +168,27 @@ public class GDXRoot extends Game implements ScreenListener {
 //			loading = null;
 //		}
 		else if (exitCode == GameController.EXIT_PLAY) {
-			menu.dispose();
-			menu = null;
+			if (menu!=null) {
+				menu.dispose();
+				menu = null;
+			}
+			if (getScreen().equals(levels)) {
+				if (levels.goLevelOne()) {
+					controller.setWhichLevel(1);
+					System.out.println(controller.whichlevel);
+				}
+				else if (levels.goLevelTwo()) {
+					controller.setWhichLevel(2);
+					System.out.println(controller.whichlevel);
+				}
+				else if (levels.goLevelThree()) {
+					controller.setWhichLevel(3);
+					System.out.println(controller.whichlevel);
+				}
+			}
+			else if (controller.whichlevel == 0) {
+				controller.setWhichLevel(1);
+			}
 			controller.loadContent();
 			controller.setScreenListener(this);
 			controller.setCanvas(canvas);

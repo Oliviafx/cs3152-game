@@ -156,6 +156,12 @@ public class GameController implements Screen, ContactListener {
 	/** Exit code for going to the pause menu */
 	public static final int EXIT_PAUSE = 4;
 
+	/** Which level to load */
+	public int whichlevel;
+	public void setWhichLevel(int val) {
+		whichlevel = val;
+	}
+
 	/** Reference to the game canvas */
 	protected ObstacleCanvas canvas;
 	/** Listener that will update the player mode when we are done */
@@ -332,10 +338,16 @@ public class GameController implements Screen, ContactListener {
 		setFailure(false);
 		countdown = -1;
 		stopWalkInPlace = false;
-
 		// Reload the json each time
-
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/medium2.json"));
+		if (whichlevel == 1) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
+		}
+		if (whichlevel == 2) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/medium2.json"));
+		}
+		if (whichlevel == 3) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/hard.json"));
+		}
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}
@@ -370,7 +382,7 @@ public class GameController implements Screen, ContactListener {
 
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
-			listener.exitScreen(this, EXIT_QUIT);
+			listener.exitScreen(this, EXIT_MENU);
 			return false;
 		}
 		else if (input.didPause()) {
@@ -411,6 +423,8 @@ public class GameController implements Screen, ContactListener {
 
 		float xoff = 0;
 		float yoff = 0;
+
+//		sound.play("120bpm_music", "sounds/120bpm_music.wav", true, 0.75f);
 		bgm.play();
 
 		// creature AI.
