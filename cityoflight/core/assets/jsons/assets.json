@@ -74,6 +74,10 @@
 			"file": 	"textures/128_cafe_blue.png",
 			"wrap": 	true
 		},
+        "cafe_blue": {
+        "file": 	"textures/cafe_blue.png",
+        "wrap": 	true
+        },
 		"128_cafe_red": {
 			"file": 	"textures/128_cafe_red.png",
 			"wrap": 	true
@@ -94,6 +98,10 @@
 			"file": 	"textures/128_cafe_green.png",
 			"wrap": 	true
 		},
+        "128_cafe_green": {
+          "file": 	"textures/cafe_green.png",
+          "wrap": 	true
+        },
 		"128_flowershop": {
 			"file": 	"textures/128_flowershop.png",
 			"wrap": 	true
@@ -226,10 +234,6 @@
 				"cols":		15,
 				"first":	0
 			}
-		},
-		"dude": {
-			"file": "textures/creature.png",
-			"wrap": false
 		},
 		"box": {
 			"file": 	"textures/crate.png",

@@ -88,7 +88,7 @@ public class SoundController {
 	/** The default sound cooldown */
 	private static final int DEFAULT_COOL = 120;
 	/** The default sound length limit */
-	private static final int DEFAULT_LIMIT = 2155;
+	private static final int DEFAULT_LIMIT = 11340;
 	/** The default limit on sounds per frame */
 	private static final int DEFAULT_FRAME = 10;
 	
@@ -103,6 +103,8 @@ public class SoundController {
 	private ObjectMap<String,ActiveSound> actives;
 	/** Support class for garbage collection */
 	private Array<String> collection;
+
+	private Music bgm;
 	
 	
 	/** The number of animation frames before a key can be reused */
@@ -126,6 +128,7 @@ public class SoundController {
 		timeLimit = DEFAULT_LIMIT;
 		frameLimit = DEFAULT_FRAME;
 		current = 0;
+		bgm = null;
 	}
 
 	/**
@@ -334,6 +337,60 @@ public class SoundController {
 			sound.setLooping(id, true);
 		}
 		
+		actives.put(key,new ActiveSound(sound,id,loop));
+		current++;
+		return true;
+	}
+
+	/**
+	 * Plays the an instance of the given sound
+	 *
+	 * A sound is identified by its filename.  You can have multiple instances of the
+	 * same sound playing.  You use the key to identify a sound instance.  You can only
+	 * have one key playing at a time.  If a key is in use, the existing sound may
+	 * be garbage collected to allow you to reuse it, depending on the settings.
+	 *
+	 * However, it is also possible that the key use may fail.  In the latter case,
+	 * this method returns false.  In addition, if the sound is currently looping,
+	 * then this method will return true but will not stop and restart the sound.
+	 *
+	 *
+	 * @param key		The identifier for this sound instance
+	 * @param filename	The filename of the sound asset
+	 * @param loop		Whether to loop the sound
+	 * @param volume	The sound volume in the range [0,1]
+	 * @param pan		Panning (-1 left, +1 right)
+	 *
+	 * @return True if the sound was successfully played
+	 */
+	public boolean play(String key, String filename, boolean loop, float volume, float pan) {
+		// Get the sound for the file
+		if (!soundbank.containsKey(filename) || current >= frameLimit) {
+			return false;
+		}
+
+		// If there is a sound for this key, stop it
+		Sound sound = soundbank.get(filename);
+		if (actives.containsKey(key)) {
+			ActiveSound snd = actives.get(key);
+			if (!snd.loop && snd.lifespan > cooldown) {
+				// This is a workaround for the OS X sound bug
+				//snd.sound.stop(snd.id);
+				snd.sound.setVolume(snd.id, 0.0f);
+				snd.sound.setPan(snd.id, pan, volume);
+			} else {
+				return true;
+			}
+		}
+
+		// Play the new sound and add it
+		long id = sound.play(volume);
+		if (id == -1) {
+			return false;
+		} else if (loop) {
+			sound.setLooping(id, true);
+		}
+
 		actives.put(key,new ActiveSound(sound,id,loop));
 		current++;
 		return true;
