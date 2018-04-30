@@ -1608,13 +1608,13 @@ public class LevelModel {
 
 		if (ratio == (14.0f/8.0f)) {
 //			System.out.println("EASY");
-			cameraXEnd = canvas.getWidth() * 0.62f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
 		}
 		else if (ratio == (24.0f/14.0f)) {
 //			System.out.println("is medium2");
-			cameraXEnd = canvas.getWidth() * 1.42f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
 		}
 		else if (ratio == 1.0f) {
 //			System.out.println("is medium");
@@ -1623,8 +1623,8 @@ public class LevelModel {
 		}
 		else if (ratio == 2.0f) {
 //			System.out.println("hard");
-			cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
+			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
 		}
 		else {
 			System.out.println("Not a valid window ratio.");
@@ -1641,7 +1641,7 @@ public class LevelModel {
 
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin(oTran);
-		canvas.draw(background, Color.WHITE, 0, 0, canvas.getWidth() * 2, canvas.getHeight() * 2);
+		canvas.draw(background, Color.WHITE, 0, 0, canvas.getWidth() * 5, canvas.getHeight() * 5);
 		//canvas.draw(background, 0, 0);
 
 		//DRAWS BACKGROUND TILES HERE
