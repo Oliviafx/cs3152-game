@@ -340,7 +340,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 		// Reload the json each time
 		if (whichlevel == 1) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy_test.json"));
 		}
 		if (whichlevel == 2) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/medium2.json"));
