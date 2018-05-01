@@ -1409,9 +1409,9 @@ public class LevelModel {
 	 */
 	public void attachVision (CreatureModel creature, LightSource light){
 //		System.out.println(light.getX() + " " + light.getY());
-		light.setPosition(creature.getX()+creature.getWidth()/2, creature.getY()+creature.getHeight()/2);
-		light.setDirection(0);
-//		light.attachToBody(creature.getBody(), 0, 0, light.getDirection());
+//		light.setPosition(creature.getX()+creature.getWidth()/2, creature.getY()+creature.getHeight()/2);
+//		light.setDirection(0);
+		light.attachToBody(creature.getBody(), 0, 0, light.getDirection());
 
 		creature.setVision(light);
 	}
@@ -1629,12 +1629,12 @@ public class LevelModel {
 		else {
 			System.out.println("Not a valid window ratio.");
 		}
-		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
-		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
+//		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+//		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 
-//		float tx = pos.x;
-//		float ty = pos.y;
-
+		float tx = pos.x;
+		float ty = pos.y;
+//
 		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
 		oTran.mul(wTran);
