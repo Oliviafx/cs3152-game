@@ -18,6 +18,7 @@ package edu.cornell.gdiac.cityoflight;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -192,6 +193,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean upBox = false;
 	private boolean rightBox = false;
 	private boolean leftBox = false;
+
+	private boolean musicPlay = true;
 
 
 
@@ -380,8 +383,18 @@ public class GameController implements Screen, ContactListener {
 			reset();
 		}
 
+		if (input.didMute()) {
+			bgm.stop();
+			for (String s : sound.getCollection()) {
+				sound.stop(s);
+			}
+			if (musicPlay){	musicPlay = false; }
+			else { musicPlay = true; }
+		}
+
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
+			bgm.stop();
 			listener.exitScreen(this, EXIT_MENU);
 			return false;
 		}
@@ -431,7 +444,9 @@ public class GameController implements Screen, ContactListener {
 		float yoff = 0;
 
 //		sound.play("120bpm_music", "sounds/120bpm_music.wav", true, 0.75f);
-		bgm.play();
+		if (musicPlay) {
+			bgm.play();
+		}
 
 		// creature AI.
 		createAIControllers();
@@ -600,9 +615,12 @@ public class GameController implements Screen, ContactListener {
 		if(annette.isWalkingInPlace() && !annette.getBird()){
 			level.getRadiusOfPower().setActive(true);
 			level.darkenLights(level.getRayHandler());
+//			if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
+//				box.setX(box.getX() + input.getbHoriz());
+//				box.setY(box.getY() + input.getbVert());
+//			}
 			if (box.getDoesExist() && box.getPosition().sub(annette.getPosition()).len2() <= WALK_IN_PLACE_EFFECTIVE_RANGE ) {
-				box.setX(box.getX() + input.getbHoriz());
-				box.setY(box.getY() + input.getbVert());
+				box.setVelocity(input.getbHoriz(), input.getbVert());
 			}
 			annette.setMovement(0,0);
 

@@ -475,7 +475,7 @@
                  "name":"crate",
                  "properties":
                     {
-                     "bodytype":"static",
+                     "bodytype":"dynamic",
                      "collideBits":"0001",
                      "damping":10,
                      "debugcolor":"yellow",
