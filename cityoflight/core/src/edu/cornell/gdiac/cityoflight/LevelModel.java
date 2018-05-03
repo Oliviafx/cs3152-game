@@ -501,7 +501,7 @@ public class LevelModel {
 //				}
 			} else if (layerName.equals(SNAIL_LAYER_NAME)) {
 
-				//				System.out.println("loading creatures");
+								System.out.println("loading snail");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -598,7 +598,7 @@ public class LevelModel {
 					creatures.add(creature);
 				}
 			} else if (layerName.equals(TARASQUE_LAYER_NAME)) {
-//				System.out.println("loading creatures");
+				System.out.println("loading tarasque");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -608,7 +608,7 @@ public class LevelModel {
 				for (int j = 0; j < objects.size; j++) {
 //					System.out.println(j);
 					JsonValue obj = objects.get(j);
-//					System.out.println(obj.get("name"));
+					System.out.println(obj.get("name"));
 					if (obj.get("name").asString().contains("dragon")) {
 						lineOfSightJSON = obj.get("properties");
 //				System.out.println(objects);
@@ -695,7 +695,7 @@ public class LevelModel {
 					creatures.add(creature);
 				}
 			} else if (layerName.equals(BLANCHE_LAYER_NAME) ) {
-//				System.out.println("loading creatures");
+				System.out.println("loading blanche");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -705,7 +705,7 @@ public class LevelModel {
 				for (int j = 0; j < objects.size; j++) {
 //					System.out.println(j);
 					JsonValue obj = objects.get(j);
-//					System.out.println(obj.get("name"));
+					System.out.println(obj.get("name"));
 					if (obj.get("name").asString().contains("lady")) {
 						lineOfSightJSON = obj.get("properties");
 //				System.out.println(objects);
@@ -1248,7 +1248,9 @@ public class LevelModel {
 	 *
 	 */
 	private void initLighting(float[] color, boolean gamma, boolean diffuse, int blur) {
-		raycamera = new OrthographicCamera(Gdx.graphics.getWidth()/64, Gdx.graphics.getWidth()/64);//bounds.width,bounds.height);
+		System.out.println(bounds.width+" "+bounds.height);
+		System.out.println(Gdx.graphics.getWidth()/64+" "+ Gdx.graphics.getHeight()/64);
+		raycamera = new OrthographicCamera(Gdx.graphics.getWidth()/64, Gdx.graphics.getHeight()/64);//bounds.width,bounds.height);
 		raycamera.position.set(0,0,0);//bounds.width/2.0f, bounds.height/2.0f, 0);
 		raycamera.update();
 
