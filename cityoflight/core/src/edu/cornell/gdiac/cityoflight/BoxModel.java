@@ -98,6 +98,8 @@ public class BoxModel extends BoxObstacle {
     /** Time between animations of box shining*/
     private final int shineLimit = 100;
 
+    private Vector2 velocity;
+
     /**
      * Returns the directional movement of this character.
      *
@@ -341,6 +343,25 @@ public class BoxModel extends BoxObstacle {
      */
     public float getThrust() {
         return DEFAULT_THRUST;
+    }
+
+    public void setVelocity(float x, float y){
+        velocity = new Vector2(x, y);
+//        velocity = new Vector2(100f, 0);
+//        System.out.println("we are reaching here");
+
+        setLinearVelocity(velocity);
+
+        setAngularVelocity(0.0f);
+
+        // Apply force for movement
+        if (getMovement().len2() > 0f) {
+//            System.out.println("getmovement " + getMovement().x + " , " + getMovement().y);
+//            System.out.println("in apply force of boxmodel");
+            forceCache.set(getMovement());
+            body.applyForce(forceCache,getPosition(),true);
+
+        }
     }
 
     /**

@@ -64,6 +64,9 @@ public class InputController {
 	private boolean shiftPressed;
 	private boolean shiftPrevious;
 
+	private boolean mPressed;
+	private boolean mPrevious;
+
 	private float ANNETTE_DEFAULT_SPEED = 1.2f;
 
 	/** the arrow key (for movement) that was last pressed */
@@ -178,6 +181,8 @@ public class InputController {
 	public boolean didPause() {
 		return pausePressed && !pausePrevious;
 	}
+
+	public boolean didMute() { return mPressed && !mPrevious; }
 	
 	/**
 	 * Creates a new input controller
@@ -205,6 +210,7 @@ public class InputController {
 		exitPrevious = exitPressed;
 		pausePrevious = pausePressed;
 		shiftPrevious = shiftPressed;
+		mPrevious = mPressed;
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
 			readGamepad();
@@ -250,6 +256,7 @@ public class InputController {
 		xPressed = (secondary && xPressed) || (Gdx.input.isKeyPressed(Input.Keys.X));
 		pausePressed = (secondary && pausePressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
 		shiftPressed = (secondary && shiftPressed) || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)));
+		mPressed = (secondary && mPressed) || (Gdx.input.isKeyPressed(Input.Keys.M));
 		// Annette Directional controls
 		aHoriz = (secondary ? aHoriz : 0.0f);
 		aVert = (secondary ? aVert : 0.0f);
@@ -270,40 +277,48 @@ public class InputController {
 			cVert = (secondary ? cVert : 0.0f);
 
 			if (rightPressed && !leftPressed && !upPressed && !downPressed){
-				bHoriz -= 0.05f;
+//				bHoriz -= 0.05f;
+				bHoriz -= ANNETTE_DEFAULT_SPEED;
 				cHoriz -= 0.02f;
 				this.direction = AnnetteModel.Direction.RIGHT;
 			} else if (!rightPressed && leftPressed && !upPressed && !downPressed){
-				bHoriz += 0.05f;
+//				bHoriz += 0.05f;
+				bHoriz += ANNETTE_DEFAULT_SPEED;
 				cHoriz += 0.02f;
 				this.direction = AnnetteModel.Direction.LEFT;
 			} else if (!rightPressed && !leftPressed && upPressed && !downPressed){
-				bVert -= 0.05f;
+//				bVert -= 0.05f;
+				bVert -= ANNETTE_DEFAULT_SPEED;
 				cVert -= 0.02f;
 				this.direction = AnnetteModel.Direction.UP;
 			} else if (!rightPressed && !leftPressed && !upPressed && downPressed){
-				bVert += 0.05f;
+//				bVert += 0.05f;
+				bVert += ANNETTE_DEFAULT_SPEED;
 				cVert += 0.02f;
 				this.direction = AnnetteModel.Direction.DOWN;
 			} else {
 
 				if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && lastPressedKey == Input.Keys.RIGHT) {
-					bHoriz -= 0.05f;
+//					bHoriz -= 0.05f;
+					bHoriz -= ANNETTE_DEFAULT_SPEED;
 					cHoriz -= 0.02f;
 					this.direction = AnnetteModel.Direction.RIGHT;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && lastPressedKey == Input.Keys.LEFT) {
-					bHoriz += 0.05f;
+//					bHoriz += 0.05f;
+					bHoriz += ANNETTE_DEFAULT_SPEED;
 					cHoriz += 0.02f;
 					this.direction = AnnetteModel.Direction.LEFT;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.UP) && lastPressedKey == Input.Keys.UP) {
-					bVert -= 0.05f;
+//					bVert -= 0.05f;
+					bVert -= ANNETTE_DEFAULT_SPEED;
 					cVert -= 0.02f;
 					this.direction = AnnetteModel.Direction.UP;
 				}
 				if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastPressedKey == Input.Keys.DOWN) {
-					bVert += 0.05f;
+//					bVert += 0.05f;
+					bVert += ANNETTE_DEFAULT_SPEED;
 					cVert += 0.02f;
 					this.direction = AnnetteModel.Direction.DOWN;
 				}
