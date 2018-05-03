@@ -10,7 +10,7 @@
  * This class differs slightly from the labs in that the AssetManager is now a
  * singleton and is not constructed by this class.
  *
- * Author: Walker M. White
+ * Authors: Walker M. White, Katie Sadoff
  * Version: 3/2/2016
  */
 package edu.cornell.gdiac.cityoflight;

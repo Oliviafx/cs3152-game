@@ -371,7 +371,7 @@ public class LevelModel {
 
 	public void populate(JsonValue levelFormat) {
 
-		System.out.println(levelFormat==null);
+//		System.out.println(levelFormat==null);
 		background = new Texture(BACKGROUND_FILE);
 
 		int tileHeight = levelFormat.get("height").asInt();
@@ -439,7 +439,7 @@ public class LevelModel {
 		HashMap<Integer, String> idToTexture = new HashMap<Integer, String>();
 		for (int j = 0; j < idMap.size; j++) {
 			JsonValue obj = idMap.get(j);
-
+//			System.out.println(obj);
 			int id = obj.get("firstgid").asInt();
 			String tex = obj.get("name").asString();
 //			System.out.println(tex + " : " + id);
@@ -1248,8 +1248,8 @@ public class LevelModel {
 	 *
 	 */
 	private void initLighting(float[] color, boolean gamma, boolean diffuse, int blur) {
-		raycamera = new OrthographicCamera(bounds.width,bounds.height);
-		raycamera.position.set(bounds.width/2.0f, bounds.height/2.0f, 0);
+		raycamera = new OrthographicCamera(Gdx.graphics.getWidth()/64, Gdx.graphics.getWidth()/64);//bounds.width,bounds.height);
+		raycamera.position.set(0,0,0);//bounds.width/2.0f, bounds.height/2.0f, 0);
 		raycamera.update();
 
 		RayHandler.setGammaCorrection(gamma);
@@ -1344,7 +1344,7 @@ public class LevelModel {
 			f.maskBits = bitStringToComplement(json.getString("excludeBits"));
 			cone.setContactFilter(f);
 			lights.add(cone);
-			System.out.println(lights.size);
+//			System.out.println(lights.size);
 		}
 //	}
 			//cone.setActive(false); // TURN ON LATER
@@ -1408,10 +1408,10 @@ public class LevelModel {
 	 *
 	 */
 	public void attachVision (CreatureModel creature, LightSource light){
-//		System.out.println(light.getX() + " " + light.getY());
 //		light.setPosition(creature.getX()+creature.getWidth()/2, creature.getY()+creature.getHeight()/2);
 //		light.setDirection(0);
 		light.attachToBody(creature.getBody(), 0, 0, light.getDirection());
+//		System.out.println(light.getX() + " " + light.getY());
 
 		creature.setVision(light);
 	}
@@ -1629,12 +1629,12 @@ public class LevelModel {
 		else {
 			System.out.println("Not a valid window ratio.");
 		}
-//		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
-//		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
-
-		float tx = pos.x;
-		float ty = pos.y;
+		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
+		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //
+//		float tx = pos.x;
+//		float ty = pos.y;
+
 		oTran.setToTranslation(TRANSLATION*tx, TRANSLATION*ty);
 		wTran.setToTranslation(canvas.getWidth()/2,canvas.getHeight()/2);
 		oTran.mul(wTran);
