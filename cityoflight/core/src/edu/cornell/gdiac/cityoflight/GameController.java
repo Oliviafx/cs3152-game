@@ -386,6 +386,7 @@ public class GameController implements Screen, ContactListener {
 			return false;
 		}
 		else if (input.didPause()) {
+			System.out.println("helloooo");
 			listener.exitScreen(this, EXIT_PAUSE);
 			return false;
 		}
@@ -401,6 +402,11 @@ public class GameController implements Screen, ContactListener {
 	private Vector2 aAngleCache = new Vector2();
 	private Vector2 dAngleCache = new Vector2();
 
+
+	/** Update loop for pause menu */
+	public void updatePause(float delta) {
+
+	}
 
 	/**
 	 * The core gameplay loop of this world.
@@ -824,7 +830,7 @@ public class GameController implements Screen, ContactListener {
 				draw(delta);
 			}
 			else {
-				listener.exitScreen(this, EXIT_PAUSE);
+				updatePause(delta);
 			}
 
 		}

@@ -521,6 +521,10 @@ public class CreatureModel extends BoxObstacle {
         }
 
         super.update(dt);
+//        if (getVision() != null) {
+//            System.out.println("lights "+getVision().getX()+" "+getVision().getY());
+//            System.out.println("creature "+getX()+" "+getY());
+//        }
     }
 
     /**
