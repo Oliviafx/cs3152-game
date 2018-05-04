@@ -89,6 +89,8 @@ public class GameController implements Screen, ContactListener {
 
 	private boolean stopWalkInPlace = false;
 
+	private PauseMode pause;
+
 	/**
 	 * Preloads the assets for this controller.
 	 *
@@ -399,7 +401,6 @@ public class GameController implements Screen, ContactListener {
 			return false;
 		}
 		else if (input.didPause()) {
-			System.out.println("helloooo");
 			listener.exitScreen(this, EXIT_PAUSE);
 			return false;
 		}
@@ -418,6 +419,7 @@ public class GameController implements Screen, ContactListener {
 
 	/** Update loop for pause menu */
 	public void updatePause(float delta) {
+
 
 	}
 
