@@ -309,7 +309,7 @@ public class GameController implements Screen, ContactListener {
 		active = false;
 		countdown = -1;
 		sound = SoundController.getInstance();
-		bgm = Gdx.audio.newMusic(Gdx.files.internal("sounds/120bpm_music.wav"));
+		bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_music.wav"));
 		bgm.setLooping(true);
 
 		setComplete(false);
