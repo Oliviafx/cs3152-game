@@ -66,7 +66,10 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
     }
 
-    public void reset() {}
+    public void reset() {
+        pressState = 0;
+        quitState = 0;
+    }
 
     public void resize(int width, int height) {
         float sx = ((float)width)/STANDARD_WIDTH;
@@ -178,7 +181,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
         if (backToGame() && listener != null) {
 
-            listener.exitScreen(this, 1);
+            listener.exitScreen(this, 2);
         }
         if (toMenu() && listener != null) {
 
