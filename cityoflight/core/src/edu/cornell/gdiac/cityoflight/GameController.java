@@ -197,6 +197,7 @@ public class GameController implements Screen, ContactListener {
 	private boolean leftBox = false;
 
 	private boolean musicPlay = true;
+	private boolean soundPlay = true;
 
 
 
@@ -345,7 +346,7 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 		// Reload the json each time
 		if (whichlevel == 1) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy_test.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/easy.json"));
 		}
 		if (whichlevel == 2) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/medium2.json"));
@@ -392,6 +393,8 @@ public class GameController implements Screen, ContactListener {
 			}
 			if (musicPlay){	musicPlay = false; }
 			else { musicPlay = true; }
+			if (soundPlay){	soundPlay = false; }
+			else { soundPlay = true; }
 		}
 
 		// Now it is time to maybe switch screens.
@@ -445,7 +448,6 @@ public class GameController implements Screen, ContactListener {
 		float xoff = 0;
 		float yoff = 0;
 
-//		sound.play("120bpm_music", "sounds/120bpm_music.wav", true, 0.75f);
 		if (musicPlay) {
 			bgm.play();
 		}
@@ -464,7 +466,11 @@ public class GameController implements Screen, ContactListener {
 
 		//set walking in place
 		annette.setWalkingInPlace(InputController.getInstance().didHoldShift());
-		if (annette.isWalkingInPlace()) { sound.play("ambient_effect", "sounds/ambient_effect.wav", true, 0.1f); }
+		if (annette.isWalkingInPlace()) {
+			if (soundPlay) {
+				sound.play("ambient_effect", "sounds/ambient_effect.wav", true, 0.1f);
+			}
+		}
 		else { sound.stop("ambient_effect"); }
 		aAngleCache.scl(annette.getForce());
 		annette.setDirection(input.getDirection());
@@ -476,7 +482,9 @@ public class GameController implements Screen, ContactListener {
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
 			level.createDistraction(levelFormat);
-			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f);
+			if (soundPlay) {
+				sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f);
+			}
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
 
@@ -495,7 +503,9 @@ public class GameController implements Screen, ContactListener {
 
 		if (distraction != null) {
 			if (!distraction.getAlive() && distraction.isActive()) {
-				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
+				if (soundPlay) {
+					sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
+				}
 			}
 		}
 
@@ -557,11 +567,15 @@ public class GameController implements Screen, ContactListener {
 				box.setDoesExist(true);
 				box.setDeactivated(false);
 				box.setDeactivating(false);
-				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
+				if (soundPlay) {
+					sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
+				}
 			}
 			else {
-				sound.stop("no_box_effect");
-				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
+				if (soundPlay) {
+					sound.stop("no_box_effect");
+					sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
+				}
 			}
 		}
 		else if (annette.isSummoning() && box.getDoesExist()) {
@@ -574,8 +588,10 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 			else {
-				sound.stop("no_box_effect");
-				sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
+				if (soundPlay) {
+					sound.stop("no_box_effect");
+					sound.play("no_box_effect", "sounds/no_box_effect.wav", false, 0.75f);
+				}
 			}
 		}
 		box.applyForce();
@@ -592,8 +608,10 @@ public class GameController implements Screen, ContactListener {
 		if (box.getDoesExist() && !box.getDeactivated() && dist > BoxModel.OUTER_RADIUS){
 			box.setDeactivated(true);
 			box.deactivate();
-			sound.stop("box_deactivate_effect");
-			sound.play("box_deactivate_effect", "sounds/box_deactivate_effect.wav", false, 0.5f);
+			if (soundPlay) {
+				sound.stop("box_deactivate_effect");
+				sound.play("box_deactivate_effect", "sounds/box_deactivate_effect.wav", false, 0.5f);
+			}
 		}
 
 		// box is GONE
@@ -602,8 +620,10 @@ public class GameController implements Screen, ContactListener {
 			box.deactivatePhysics(level.getWorld());
 			box.dispose();
 			level.objects.remove(box);
-			sound.stop("box_gone_effect");
-			sound.play("box_gone_effect", "sounds/box_gone_effect.wav", false, 0.5f);
+			if (soundPlay) {
+				sound.stop("box_gone_effect");
+				sound.play("box_gone_effect", "sounds/box_gone_effect.wav", false, 0.5f);
+			}
 		}
 
 
@@ -942,13 +962,19 @@ public class GameController implements Screen, ContactListener {
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
 				setComplete(true);
-				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
+				if (soundPlay) {
+					sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
+				}
 			}
 
 			//collision with creature lose state
 			for (CreatureModel c : level.getCreature()){
 				if ((sf1.contains("center") && bd2 == c) || (sf2.contains("center") && bd1 == c)){
-					if (!isFailure()) { sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f); }
+					if (!isFailure()) {
+						if (soundPlay) {
+							sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f);
+						}
+					}
 					setFailure(true);
 				}
 			}
@@ -972,8 +998,6 @@ public class GameController implements Screen, ContactListener {
 				distraction.deactivatePhysics(level.getWorld());
 				distraction.dispose();
 				level.objects.remove(distraction);
-//				sound.stop("distraction_gone_effect");
-//				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f);
 			}
 
 			// check for distraction collisions with mazes
@@ -1060,8 +1084,10 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
-				sound.stop("box_effect");
-				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
+				if (soundPlay) {
+					sound.stop("box_effect");
+					sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
+				}
 			}
 
 		} catch (Exception e) {
