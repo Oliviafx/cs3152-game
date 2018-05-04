@@ -56,7 +56,7 @@ public class AIController{
      * Constants for creatures' specific characteristics and/or behavior
      */
     private float LouSenseDistance = 5.0f;
-    private float TarasqueSpeedGain = 3.0f;
+    private float TarasqueSpeedGain = 3.5f;
     private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
@@ -302,6 +302,7 @@ public class AIController{
 
                 if (canSeeAnnette()) {
                     recordLastSeen();
+                    turnVisionRed();
                     creature.setAggroCool(creature.getAggroLimit());
                     System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> chase");
@@ -346,6 +347,7 @@ public class AIController{
 
                 if (canSeeAnnette()) {
                     recordLastSeen();
+                    turnVisionRed();
                     creature.setAggroCool(creature.getAggroLimit());
                     System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> chase");
@@ -371,10 +373,12 @@ public class AIController{
                 }
 
                 if (!canSeeAnnette() && canSenseAnnette() && creature.getAggroCool() <= 0 ){
+                    turnVisionNormal();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("chase -> sense");
                     state = FSMState.SENSE;
                 }else if (!canSeeAnnette() && !canSenseAnnette() && creature.getAggroCool() <= 0 ) {
+                    turnVisionNormal();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("chase -> patrol");
                     state = FSMState.PATROL;
@@ -404,6 +408,14 @@ public class AIController{
                 light.contains(annette.getX()-annette.getWidth()/2, annette.getY()+annette.getHeight()/2)||
                 light.contains(annette.getX()+annette.getWidth()/2, annette.getY()-annette.getHeight()/2)||
                 light.contains(annette.getX()+annette.getWidth()/2, annette.getY()+annette.getHeight()/2));
+    }
+
+    public void turnVisionRed(){
+        creature.getVision().setColor(Color.RED);
+    }
+
+    public void turnVisionNormal(){
+        creature.getVision().setColor(Color.SKY);
     }
 
     /**

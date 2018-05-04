@@ -1348,6 +1348,7 @@ public class LevelModel {
 
 			ConeSource cone = new ConeSource(rayhandler, rays, Color.WHITE, dist, pos[0], pos[1], face, angle);
 			cone.setColor(color[0], color[1], color[2], color[3]);
+			cone.setColor(Color.SKY);
 			cone.setSoft(json.getBoolean("soft"));
 
 			// Create a filter to exclude see through items
