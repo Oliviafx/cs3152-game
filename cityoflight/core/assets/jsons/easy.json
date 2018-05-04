@@ -480,7 +480,7 @@
                      "damping":10,
                      "debugcolor":"yellow",
                      "debugopacity":192,
-                     "density":1,
+                     "density":1000,
                      "excludeBits":"0000",
                      "force":450,
                      "friction":0,
