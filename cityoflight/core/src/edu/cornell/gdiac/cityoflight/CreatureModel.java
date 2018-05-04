@@ -97,8 +97,8 @@ public class CreatureModel extends BoxObstacle {
     private int BLANCHE_TURN_LIMIT = 10;
 
     private int LOU_AGGRO_COUNTDOWN = 150;
-    private int DRAGON_AGGRO_COUNTDOWN = 30;
-    private int BLANCHE_AGGRO_COUNTDOWN = 150;
+    private int DRAGON_AGGRO_COUNTDOWN = 50;
+    private int BLANCHE_AGGRO_COUNTDOWN = 200;
 
     private float LOU_MAX_SPEED = 10.0f;
     private float DRAGON_MAX_SPEED = 30.0f;
