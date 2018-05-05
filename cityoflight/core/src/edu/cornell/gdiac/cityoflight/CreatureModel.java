@@ -18,7 +18,6 @@ package edu.cornell.gdiac.cityoflight;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 import edu.cornell.gdiac.physics.lights.LightSource;
 
@@ -114,6 +113,12 @@ public class CreatureModel extends BoxObstacle {
     private float CREATURE_FORCE = 1.0f;
     private float CREATURE_DAMPING = 1.0f;
     private String CREATURE_BODY_TYPE = "dynamic";
+
+    /**  The transparent color that Dame Blanche can spontaneously become. */
+    private Color BLANCHE_DRESS_OF_DOOM = new Color (1.0f, 1.0f, 1.0f, 0.2f);
+    private int DRESS_COOLDOWN_LIMIT = 300;
+    private int DRESS_DURATION = 150;
+    private int DRESS_COOLDOWN = DRESS_COOLDOWN_LIMIT;
 
     /**
      * Returns the directional movement of the creature.
@@ -564,14 +569,40 @@ public class CreatureModel extends BoxObstacle {
         }
         else {
             if (texture != null) {
-                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y+texture.getRegionHeight()/6, 0, 0.75f * isReflected, 0.75f );
+                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y+texture.getRegionHeight()/6,
+                        0, 0.75f * isReflected, 0.75f );
             }
         }
 
         if (texture != null && dirTexture != null) {
-
-//            System.out.println("creature position " + getX() + " " + getY());
-            canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y+texture.getRegionHeight()/6,0,0.75f* isReflected,0.75f );
+//          System.out.println("creature position " + getX() + " " + getY());
+            if (type != 3) {
+                canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6,
+                        0, 0.75f * isReflected, 0.75f);
+            }else{
+                if (DRESS_COOLDOWN <= 0) {
+                    dressOfDoom();
+                    canvas.draw(dirTexture, BLANCHE_DRESS_OF_DOOM,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y+texture.getRegionHeight()/6,
+                            0,0.75f* isReflected,0.75f );
+                    if (DRESS_COOLDOWN < -DRESS_DURATION - 100) {
+                        DRESS_COOLDOWN = DRESS_COOLDOWN_LIMIT;
+                        enddressOfDoom();
+                    }
+                } else{
+                    canvas.draw(dirTexture,Color.WHITE,origin.x,origin.y,(getX() + xOffset)* drawScale.x,getY()* drawScale.y+texture.getRegionHeight()/6,
+                            0,0.75f* isReflected,0.75f );
+                }
+                DRESS_COOLDOWN --;
+            }
         }
+    }
+
+    public void dressOfDoom(){
+        BLANCHE_DRESS_OF_DOOM.a = Math.max(1.0f - (-(float)DRESS_COOLDOWN / (float)DRESS_DURATION), 0.05f);
+        System.out.println("a = " + BLANCHE_DRESS_OF_DOOM.a);
+        getVision().setColor(getVision().getColor().r, getVision().getColor().g, getVision().getColor().b, BLANCHE_DRESS_OF_DOOM.a);
+    }
+    public void enddressOfDoom(){
+        getVision().setColor(getVision().getColor().r, getVision().getColor().g, getVision().getColor().b, 1);
     }
 }

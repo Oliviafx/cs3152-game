@@ -271,6 +271,7 @@ public class AIController{
                     System.out.println("patrol -> chase");
                     state = FSMState.CHASE;
                 } else if (isDistracted()) {
+                    turnVisionGreen();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> distract");
                     creature.setMovement(-1, -1);
@@ -294,6 +295,7 @@ public class AIController{
                     System.out.println("sense -> chase");
                     state = FSMState.CHASE;
                 } else if (isDistracted()){
+                    turnVisionGreen();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("sense -> distract");
                     state = FSMState.DISTRACT;
@@ -321,6 +323,7 @@ public class AIController{
                     System.out.println("distract -> sense");
                     state = FSMState.SENSE;
                 } else if (!isDistracted()) {
+                    turnVisionNormal();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> patrol");
                     state = FSMState.PATROL;
@@ -454,6 +457,10 @@ public class AIController{
 
     public void turnVisionRed(){
         creature.getVision().setColor(Color.RED);
+    }
+
+    public void turnVisionGreen(){
+        creature.getVision().setColor(Color.GREEN);
     }
 
     public void turnVisionNormal(){
