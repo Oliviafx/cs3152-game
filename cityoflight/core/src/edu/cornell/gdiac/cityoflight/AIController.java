@@ -60,6 +60,12 @@ public class AIController{
     private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
+    private int TURN_BACK   = 1;
+    private int TURN_RIGHT  = 2;
+    private int TURN_LEFT   = 3;
+    private int TURN_RANDOM = 4;
+
+
     /**
      * Creates an AIController for the creature with the given id.
      *
@@ -118,52 +124,15 @@ public class AIController{
 
                     // if snail collides with anything
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        //System.out.println("snail behavior: go other way around");
-                        creature.setXInput(-creature.getXInput());
-                        creature.setYInput(-creature.getYInput());
-                        creature.setStuck(false);
-                        creature.setTurnCool(creature.getTurnLimit());
+                        determineDirection(creature.getTurnBehavior());
                     }
 
                 } else if (creature.getType() == 2){
 
                     // if dragon collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
+                        determineDirection(creature.getTurnBehavior());
 
-//                        if (turnRight()) {
-                            //System.out.println("dragon behavior: go in opposite direction");
-                            if (creature.getXInput() > 0) {
-                                creature.setYInput(-creature.getXInput());
-                                creature.setXInput(0);
-                            } else if (creature.getXInput() < 0) {
-                                creature.setYInput(-creature.getXInput());
-                                creature.setXInput(0);
-                            } else if (creature.getYInput() > 0) {
-                                creature.setXInput(creature.getYInput());
-                                creature.setYInput(0);
-                            } else if (creature.getYInput() < 0) {
-                                creature.setXInput(creature.getYInput());
-                                creature.setYInput(0);
-                            }
-//                        } else /* turn left */ {
-//                            //System.out.println("dragon behavior: turns left");
-//                            if (creature.getXInput() > 0) {
-//                                creature.setYInput(creature.getXInput());
-//                                creature.setXInput(0);
-//                            } else if (creature.getXInput() < 0) {
-//                                creature.setYInput(creature.getXInput());
-//                                creature.setXInput(0);
-//                            } else if (creature.getYInput() > 0) {
-//                                creature.setXInput(-creature.getYInput());
-//                                creature.setYInput(0);
-//                            } else if (creature.getYInput() < 0) {
-//                                creature.setXInput(-creature.getYInput());
-//                                creature.setYInput(0);
-//                            }
-//                        }
-
-                        creature.setStuck(false);
-                        creature.setTurnCool(creature.getTurnLimit());
                     }
 
                 } else if (creature.getType() == 3){
@@ -171,11 +140,7 @@ public class AIController{
 
                     // if blanche collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
-                        //System.out.println("blanche behavior: go in opposite direction");
-                        creature.setXInput(-creature.getXInput());
-                        creature.setYInput(-creature.getYInput());
-                        creature.setStuck(false);
-                        creature.setTurnCool(creature.getTurnLimit());
+                        determineDirection(creature.getTurnBehavior());
                     }
                 }
 
@@ -193,10 +158,7 @@ public class AIController{
                     // if snail collides with wall
                     if (creature.getStuck() && creature.getTurnCool() <= 0) {
                         //System.out.println("snail behavior: change direction");
-                        creature.setXInput(-creature.getXInput());
-                        creature.setYInput(-creature.getYInput());
-                        creature.setStuck(false);
-                        creature.setTurnCool(creature.getTurnLimit());
+                        determineDirection(creature.getTurnBehavior());
                     }
                 }
 
@@ -212,7 +174,8 @@ public class AIController{
 
                     if (creature.getTurnCool() <= 0) {
 
-                        cAngleCache.set(getNextDistractMovement().x * BlancheCurrentSpeedGain, getNextDistractMovement().y * BlancheCurrentSpeedGain);
+                        cAngleCache.set(getNextDistractMovement().x * BlancheCurrentSpeedGain,
+                                getNextDistractMovement().y * BlancheCurrentSpeedGain);
                         creature.setTurnCool(creature.getTurnLimit());
 
                         if (BlancheCurrentSpeedGain > 1.0) {
@@ -325,6 +288,7 @@ public class AIController{
 
                 if (canSeeAnnette()) {
                     recordLastSeen();
+                    turnVisionRed();
                     creature.setAggroCool(creature.getAggroLimit());
                     System.out.print(creature.getName() + ": ");
                     System.out.println("sense -> chase");
@@ -394,6 +358,84 @@ public class AIController{
                 break;
         }
     }
+
+    /**
+     * This function determines what a creature should do whenever it collides with terrain.
+     * @param path
+     * @return
+     */
+    public void determineDirection(int path){
+        if (path == TURN_BACK){
+            creature.setXInput(-creature.getXInput());
+            creature.setYInput(-creature.getYInput());
+        } else if (path == TURN_LEFT){
+            if (creature.getXInput() > 0) {
+                creature.setYInput(creature.getXInput());
+                creature.setXInput(0);
+            } else if (creature.getXInput() < 0) {
+                creature.setYInput(creature.getXInput());
+                creature.setXInput(0);
+            } else if (creature.getYInput() > 0) {
+                creature.setXInput(-creature.getYInput());
+                creature.setYInput(0);
+            } else if (creature.getYInput() < 0) {
+                creature.setXInput(-creature.getYInput());
+                creature.setYInput(0);
+            }
+        } else if (path == TURN_RIGHT){
+            if (creature.getXInput() > 0) {
+                creature.setYInput(-creature.getXInput());
+                creature.setXInput(0);
+            } else if (creature.getXInput() < 0) {
+                creature.setYInput(-creature.getXInput());
+                creature.setXInput(0);
+            } else if (creature.getYInput() > 0) {
+                creature.setXInput(creature.getYInput());
+                creature.setYInput(0);
+            } else if (creature.getYInput() < 0) {
+                creature.setXInput(creature.getYInput());
+                creature.setYInput(0);
+            }
+        } else {
+            double randTemp = Math.random();
+            if (randTemp <= 0.33){
+                creature.setXInput(-creature.getXInput());
+                creature.setYInput(-creature.getYInput());
+            } else if (randTemp >= 0.66) {
+                if (creature.getXInput() > 0) {
+                    creature.setYInput(-creature.getXInput());
+                    creature.setXInput(0);
+                } else if (creature.getXInput() < 0) {
+                    creature.setYInput(-creature.getXInput());
+                    creature.setXInput(0);
+                } else if (creature.getYInput() > 0) {
+                    creature.setXInput(creature.getYInput());
+                    creature.setYInput(0);
+                } else if (creature.getYInput() < 0) {
+                    creature.setXInput(creature.getYInput());
+
+                }
+            } else {
+                if (creature.getXInput() > 0) {
+                    creature.setYInput(creature.getXInput());
+                    creature.setXInput(0);
+                } else if (creature.getXInput() < 0) {
+                    creature.setYInput(creature.getXInput());
+                    creature.setXInput(0);
+                } else if (creature.getYInput() > 0) {
+                    creature.setXInput(-creature.getYInput());
+                    creature.setYInput(0);
+                } else if (creature.getYInput() < 0) {
+                    creature.setXInput(-creature.getYInput());
+                    creature.setYInput(0);
+                }
+            }
+        }
+
+        creature.setStuck(false);
+        creature.setTurnCool(creature.getTurnLimit());
+    }
+
 
     /**
      * Checks whether Annette gets seen by this creature.

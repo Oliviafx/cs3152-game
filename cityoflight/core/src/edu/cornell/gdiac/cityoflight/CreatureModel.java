@@ -89,6 +89,8 @@ public class CreatureModel extends BoxObstacle {
     private int aggroLimit;
     /** refers to the vision of the creature */
     private LightSource vision = null;
+    /** refers to how to creature behaves upon colliding. See AIController for more details. */
+    private int turnBehavior = 1;
 
     /** constants for creature characteristics */
 
@@ -371,6 +373,9 @@ public class CreatureModel extends BoxObstacle {
 
     public LightSource getVision() { return vision; }
     public void setVision(LightSource l){ vision = l; }
+
+    public void setTurnBehavoir(int value){turnBehavior = value;}
+    public int getTurnBehavior(){return turnBehavior;}
 
 
     /**
