@@ -57,7 +57,7 @@ public class AIController{
      */
     private float LouSenseDistance = 5.0f;
     private float TarasqueSpeedGain = 3.5f;
-    private float BlancheMaxSpeedGain = 3.0f;
+    private float BlancheMaxSpeedGain = 3.5f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
     private int TURN_BACK   = 1;
@@ -214,9 +214,15 @@ public class AIController{
                             cAngleCache.set(getNextMovement().x * BlancheCurrentSpeedGain, getNextMovement().y * BlancheCurrentSpeedGain);
                         creature.setTurnCool(creature.getTurnLimit());
                         if (BlancheCurrentSpeedGain > 1.0) {
-                            BlancheCurrentSpeedGain -= 0.1;
+                            BlancheCurrentSpeedGain -= 0.05;
                             //System.out.println("current speed gain = " + BlancheCurrentSpeedGain);
                         }
+                    }
+
+                    if (creature.getStuckBox()){
+                        level.getBox().deactivate();
+                    }else{
+                        level.getBox().reactivate();
                     }
                 }
                 break;

@@ -76,6 +76,8 @@ public class CreatureModel extends BoxObstacle {
     private float yinput;
     /** Whether a creature can no longer go in its intended direction and should change routes. */
     private boolean isStuck = false;
+    /** Whether a creature is, specifically, colliding with a box. */
+    private boolean isStuckBox = false;
     /** Whether a creature is distracted */
     private boolean isDistracted = false;
     /** How many frames until the creature can turn again */
@@ -265,6 +267,9 @@ public class CreatureModel extends BoxObstacle {
      * @param value	whether the monster can advance on its route
      */
     public void setStuck(boolean value){ isStuck = value; }
+
+    public boolean getStuckBox(){ return isStuckBox; }
+    public void setStuckBox(boolean value){isStuckBox = value;}
 
     /**
      * Returns whether the monster is distracted.
