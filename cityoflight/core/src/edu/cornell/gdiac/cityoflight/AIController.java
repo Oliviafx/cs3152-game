@@ -57,7 +57,7 @@ public class AIController{
      */
     private float LouSenseDistance = 5.0f;
     private float TarasqueSpeedGain = 3.5f;
-    private float BlancheMaxSpeedGain = 2.0f;
+    private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
     private int TURN_BACK   = 1;
