@@ -604,7 +604,7 @@ public class CreatureModel extends BoxObstacle {
 
     public void dressOfDoom(){
         BLANCHE_DRESS_OF_DOOM.a = Math.max(1.0f - (-(float)DRESS_COOLDOWN / (float)DRESS_DURATION), 0.05f);
-        System.out.println("a = " + BLANCHE_DRESS_OF_DOOM.a);
+        //System.out.println("a = " + BLANCHE_DRESS_OF_DOOM.a);
         getVision().setColor(getVision().getColor().r, getVision().getColor().g, getVision().getColor().b, BLANCHE_DRESS_OF_DOOM.a);
     }
     public void enddressOfDoom(){
