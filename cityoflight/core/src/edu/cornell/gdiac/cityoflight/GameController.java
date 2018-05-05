@@ -1059,6 +1059,7 @@ public class GameController implements Screen, ContactListener {
 				}
 				if ((bd1 == c && bd2 == box) || (bd1 == box && bd2 == c)) {
 					c.setStuck(true);
+					c.setStuckBox(true);
 				}
 			}
 
