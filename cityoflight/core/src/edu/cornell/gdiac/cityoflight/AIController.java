@@ -65,6 +65,8 @@ public class AIController{
     private int TURN_LEFT   = 3;
     private int TURN_RANDOM = 4;
 
+    boolean forceDeactivete = false;
+
 
     /**
      * Creates an AIController for the creature with the given id.
@@ -219,10 +221,14 @@ public class AIController{
                         }
                     }
 
-                    if (creature.getStuckBox()){
+                    if (creature.getStuckBox()) {
                         level.getBox().deactivate();
+                        forceDeactivete = true;
                     }else{
-                        level.getBox().reactivate();
+                        if (forceDeactivete){
+                            level.getBox().reactivate();
+                            forceDeactivete = false;
+                        }
                     }
                 }
                 break;
