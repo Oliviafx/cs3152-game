@@ -148,11 +148,11 @@
   <object id="91" name="box5" x="256.394" y="36.7167" width="124.463" height="91.4805"/>
   <object id="93" name="box6" x="127.575" y="34.2274" width="125.708" height="94.5921"/>
   <object id="94" name="box7" x="1.24463" y="39.2059" width="125.086" height="89.6135"/>
-  <object id="95" name="box8" x="3.28601" y="228.707" width="121.583" height="90.0368"/>
-  <object id="96" name="box9" x="128.812" y="229.364" width="122.897" height="89.3796"/>
-  <object id="97" name="box10" x="320.715" y="226.735" width="122.897" height="91.3512"/>
-  <object id="98" name="box11" x="448.87" y="226.735" width="124.211" height="92.6656"/>
-  <object id="99" name="box12" x="640.511" y="230.086" width="123.806" height="87.6251"/>
+  <object id="95" name="box8" x="3.28601" y="236.843" width="121.583" height="82.9003"/>
+  <object id="96" name="box9" x="128.812" y="238.284" width="122.897" height="82.38"/>
+  <object id="97" name="box10" x="320.715" y="235.656" width="122.897" height="82.4306"/>
+  <object id="98" name="box11" x="448.87" y="238.056" width="124.211" height="81.3449"/>
+  <object id="99" name="box12" x="640.511" y="236.879" width="123.806" height="80.8326"/>
   <object id="100" name="box13" x="832.298" y="232.639" width="62.9175" height="86.2203"/>
   <object id="101" name="box14" x="768.915" y="297.001" width="61.6306" height="85.1089"/>
   <object id="102" name="box15" x="576.275" y="296.405" width="61.8531" height="85.737"/>
@@ -214,9 +214,9 @@
     <property name="yinput" type="float" value="0"/>
    </properties>
   </object>
-  <object id="74" name="tarasque_box1" x="788.38" y="178.706" width="40" height="121.832"/>
-  <object id="75" name="tarasque_box2" x="600.29" y="178.572" width="40" height="123.326"/>
-  <object id="86" name="tarasque_box3" x="79" y="303.71" width="30.4458" height="83.9871"/>
+  <object id="74" name="tarasque_box1" x="788.38" y="178.706" width="40" height="102.964"/>
+  <object id="75" name="tarasque_box2" x="600.29" y="178.572" width="40" height="100.684"/>
+  <object id="86" name="tarasque_box3" x="79" y="303.71" width="30.4458" height="77.99"/>
   <object id="108" name="dragon_vision1" x="101.091" y="162.067">
    <properties>
     <property name="a" type="float" value="0.3"/>
@@ -268,7 +268,7 @@
     <property name="damping" type="float" value="10"/>
     <property name="debugcolor" value="white"/>
     <property name="debugopacity" type="int" value="192"/>
-    <property name="density" type="float" value="4"/>
+    <property name="density" type="float" value="16"/>
     <property name="excludeBits" value="0000"/>
     <property name="force" type="float" value="450"/>
     <property name="friction" type="float" value="0"/>
