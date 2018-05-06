@@ -246,8 +246,14 @@
 			}
 		},
 		"goal": {
-			"file": "textures/lamppost.png",
-			"wrap": false
+			"file": "textures/sigil.png",
+			"wrap": false,
+			"strip": {
+				"size": 30,
+				"rows": 1,
+				"cols": 30,
+				"first": 0
+			}
 		},
 		"distraction": {
 			"file": "textures/bird.png",

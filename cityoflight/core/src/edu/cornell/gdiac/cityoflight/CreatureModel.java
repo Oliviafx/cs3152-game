@@ -413,6 +413,14 @@ public class CreatureModel extends BoxObstacle {
 //        float radius = json.get("radius").asFloat();
         float width = bounds.get("width").asFloat() / 64;
         float height = bounds.get("height").asFloat() / 64;
+        //)
+        try{
+            setTurnBehavoir(json.get("turn").asInt());
+        }
+        catch (Exception e){
+            System.out.println("turn behavior not loaded");
+
+        }
 
         setPosition(pos[0],pos[1]);
 

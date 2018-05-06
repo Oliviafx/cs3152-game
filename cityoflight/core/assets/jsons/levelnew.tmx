@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="14" height="8" tilewidth="64" tileheight="64" infinite="0" nextobjectid="113">
+ <tileset firstgid="1" name="floor_tiles" tilewidth="64" tileheight="64" tilecount="12" columns="3">
+  <image source="../textures/floor_tiles.png" width="192" height="256"/>
+ </tileset>
+ <tileset firstgid="13" name="build1" tilewidth="125" tileheight="64" tilecount="2" columns="1">
+  <image source="../Art assets/building assets/128_bookstore.png" width="128" height="128"/>
+  <tile id="0">
+   <objectgroup draworder="index">
+    <object id="5" x="0" y="64" width="125"/>
+    <object id="9" x="0" y="24" width="125" height="40"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <tileset firstgid="15" name="64_building_short" tilewidth="64" tileheight="128" tilecount="1" columns="1">
+  <image source="../Art assets/building assets/64_building_short.png" width="64" height="128"/>
+ </tileset>
+ <tileset firstgid="16" name="Tarasque" tilewidth="64" tileheight="128" tilecount="16" columns="16">
+  <image source="../textures/tarasque_up.png" width="1080" height="214"/>
+ </tileset>
+ <tileset firstgid="32" name="tarasq" tilewidth="64" tileheight="160" tilecount="16" columns="16">
+  <image source="../textures/tarasque_up.png" width="1080" height="214"/>
+ </tileset>
+ <tileset firstgid="48" name="tarasqueside" tilewidth="160" tileheight="80" tilecount="37" columns="37">
+  <image source="../textures/tarasque_side.png" width="6030" height="128"/>
+ </tileset>
+ <tileset firstgid="85" name="tarasque_side" tilewidth="215" tileheight="128" tilecount="28" columns="28">
+  <image source="../textures/tarasque_side.png" width="6030" height="128"/>
+ </tileset>
+ <layer name="Base" width="14" height="8">
+  <data encoding="csv">
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12,
+12,12,12,12,12,12,12,12,12,12,12,12,12,12
+</data>
+ </layer>
+ <objectgroup name="vision_properties"/>
+ <objectgroup name="Buildings">
+  <object id="11" name="building1" gid="14" x="768" y="128" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="87" name="box1" x="769.183" y="40.4506" width="122.596" height="87.1243"/>
+  <object id="21" name="building2" gid="14" x="640" y="128" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="88" name="box2" x="640.363" y="42.9398" width="124.463" height="85.2573"/>
+  <object id="22" name="building3" gid="14" x="512" y="128" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="23" name="building4" gid="14" x="384" y="128" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="24" name="building5" gid="14" x="256" y="128" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="25" name="building6" gid="14" x="128" y="128" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="26" name="building7" gid="14" x="0" y="128" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="27" name="building8" gid="14" x="0" y="320" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="28" name="building9" gid="14" x="128" y="320" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="29" name="building10" gid="14" x="320" y="320" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="30" name="building11" gid="14" x="448" y="320" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="31" name="building12" gid="14" x="640" y="320" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="32" name="building13" gid="15" x="832" y="320" width="64" height="128">
+   <properties>
+    <property name="texture" value="64_building_short_left"/>
+   </properties>
+  </object>
+  <object id="35" name="building14" gid="15" x="768" y="384" width="64" height="128">
+   <properties>
+    <property name="texture" value="64_building_short_left"/>
+   </properties>
+  </object>
+  <object id="36" name="building15" gid="15" x="576" y="384" width="64" height="128">
+   <properties>
+    <property name="texture" value="64_building_short_left"/>
+   </properties>
+  </object>
+  <object id="37" name="building16" gid="14" x="448" y="384" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="38" name="building17" gid="14" x="128" y="448" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="39" name="building18" gid="14" x="256" y="448" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="40" name="building19" gid="14" x="384" y="448" width="125" height="64">
+   <properties>
+    <property name="texture" value="128_bookstore"/>
+   </properties>
+  </object>
+  <object id="41" name="building20" gid="15" x="0" y="448" width="64" height="128">
+   <properties>
+    <property name="texture" value="64_building_short_left"/>
+   </properties>
+  </object>
+  <object id="89" name="box3" x="512.166" y="37.9613" width="123.841" height="90.2359"/>
+  <object id="90" name="box4" x="385.836" y="36.7167" width="123.841" height="90.2359"/>
+  <object id="91" name="box5" x="256.394" y="36.7167" width="124.463" height="91.4805"/>
+  <object id="93" name="box6" x="127.575" y="34.2274" width="125.708" height="94.5921"/>
+  <object id="94" name="box7" x="1.24463" y="39.2059" width="125.086" height="89.6135"/>
+  <object id="95" name="box8" x="3.28601" y="228.707" width="121.583" height="90.0368"/>
+  <object id="96" name="box9" x="128.812" y="229.364" width="122.897" height="89.3796"/>
+  <object id="97" name="box10" x="320.715" y="226.735" width="122.897" height="91.3512"/>
+  <object id="98" name="box11" x="448.87" y="226.735" width="124.211" height="92.6656"/>
+  <object id="99" name="box12" x="640.511" y="230.086" width="123.806" height="87.6251"/>
+  <object id="100" name="box13" x="832.298" y="232.639" width="62.9175" height="86.2203"/>
+  <object id="101" name="box14" x="768.915" y="297.001" width="61.6306" height="85.1089"/>
+  <object id="102" name="box15" x="576.275" y="296.405" width="61.8531" height="85.737"/>
+  <object id="103" name="box16" x="448.457" y="302.271" width="124.054" height="83.2848"/>
+  <object id="104" name="box17" x="129.037" y="364.946" width="124.288" height="82.3306"/>
+  <object id="105" name="box18" x="257.535" y="366.117" width="121.111" height="82.1327"/>
+  <object id="106" name="box19" x="384.214" y="367.509" width="123.895" height="80.0445"/>
+  <object id="107" name="box20" x="3.44471" y="370.574" width="59.938" height="75.8603"/>
+ </objectgroup>
+ <objectgroup name="Tarasque">
+  <object id="68" name="tarasque1" gid="32" x="568.424" y="289.56" width="64" height="160">
+   <properties>
+    <property name="bodytype" value="dynamic"/>
+    <property name="collideBits" value="0001"/>
+    <property name="debugcolor" value="white"/>
+    <property name="debugopacity" type="int" value="192"/>
+    <property name="excludeBits" value="0000"/>
+    <property name="startframe" type="int" value="0"/>
+    <property name="texture" value="tarasque"/>
+    <property name="texture2" value="tarasque_down"/>
+    <property name="texture3" value="tarasque_up"/>
+    <property name="turn" type="int" value="1"/>
+    <property name="type" type="int" value="2"/>
+    <property name="xinput" type="float" value="0"/>
+    <property name="yinput" type="float" value="-300"/>
+   </properties>
+  </object>
+  <object id="72" name="tarasque2" gid="32" x="759.001" y="285.47" width="64" height="160">
+   <properties>
+    <property name="bodytype" value="dynamic"/>
+    <property name="collideBits" value="0001"/>
+    <property name="debugcolor" value="white"/>
+    <property name="debugopacity" type="int" value="192"/>
+    <property name="excludeBits" value="0000"/>
+    <property name="startframe" type="int" value="0"/>
+    <property name="texture" value="tarasque"/>
+    <property name="texture2" value="tarasque_down"/>
+    <property name="texture3" value="tarasque_up"/>
+    <property name="turn" type="int" value="1"/>
+    <property name="type" type="int" value="2"/>
+    <property name="xinput" type="float" value="0"/>
+    <property name="yinput" type="float" value="-300"/>
+   </properties>
+  </object>
+  <object id="79" name="tarasque3" gid="85" x="-2.90408" y="376.83" width="215" height="128">
+   <properties>
+    <property name="bodytype" value="dynamic"/>
+    <property name="collideBits" value="0001"/>
+    <property name="debugcolor" value="white"/>
+    <property name="debugopacity" type="int" value="192"/>
+    <property name="excludeBits" value="0000"/>
+    <property name="startframe" type="int" value="0"/>
+    <property name="texture" value="tarasque"/>
+    <property name="texture2" value="tarasque_down"/>
+    <property name="texture3" value="tarasque_up"/>
+    <property name="turn" type="int" value="1"/>
+    <property name="type" type="int" value="2"/>
+    <property name="xinput" type="float" value="300"/>
+    <property name="yinput" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="74" name="tarasque_box1" x="788.38" y="178.706" width="40" height="121.832"/>
+  <object id="75" name="tarasque_box2" x="600.29" y="178.572" width="40" height="123.326"/>
+  <object id="86" name="tarasque_box3" x="79" y="303.71" width="30.4458" height="83.9871"/>
+  <object id="108" name="dragon_vision1" x="101.091" y="162.067">
+   <properties>
+    <property name="a" type="float" value="0.3"/>
+    <property name="angle" type="int" value="4"/>
+    <property name="b" type="float" value="0.5"/>
+    <property name="distance" type="int" value="25"/>
+    <property name="excludeBits" value="0010"/>
+    <property name="facing" type="int" value="90"/>
+    <property name="g" type="float" value="0.2"/>
+    <property name="r" type="float" value="0.2"/>
+    <property name="rays" type="int" value="512"/>
+    <property name="soft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="109" name="dragon_vision2" x="111.71" y="173.344">
+   <properties>
+    <property name="a" type="float" value="0.3"/>
+    <property name="angle" type="int" value="4"/>
+    <property name="b" type="float" value="0.5"/>
+    <property name="distance" type="int" value="25"/>
+    <property name="excludeBits" value="0010"/>
+    <property name="facing" type="int" value="90"/>
+    <property name="g" type="float" value="0.2"/>
+    <property name="r" type="float" value="0.2"/>
+    <property name="rays" type="int" value="512"/>
+    <property name="soft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="110" name="dragon_vision3" x="111.71" y="173.344">
+   <properties>
+    <property name="a" type="float" value="0.3"/>
+    <property name="angle" type="int" value="4"/>
+    <property name="b" type="float" value="0.5"/>
+    <property name="distance" type="int" value="25"/>
+    <property name="excludeBits" value="0010"/>
+    <property name="facing" type="int" value="90"/>
+    <property name="g" type="float" value="0.2"/>
+    <property name="r" type="float" value="0.2"/>
+    <property name="rays" type="int" value="512"/>
+    <property name="soft" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Annette">
+  <object id="63" name="annette" x="667.738" y="130.869" width="69" height="96">
+   <properties>
+    <property name="bodytype" value="dynamic"/>
+    <property name="collideBits" value="0010"/>
+    <property name="damping" type="float" value="10"/>
+    <property name="debugcolor" value="white"/>
+    <property name="debugopacity" type="int" value="192"/>
+    <property name="density" type="float" value="4"/>
+    <property name="excludeBits" value="0000"/>
+    <property name="force" type="float" value="450"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="maxspeed" type="float" value="20"/>
+    <property name="restitution" type="float" value="0"/>
+    <property name="startframe" type="int" value="3"/>
+    <property name="texture" value="annette"/>
+    <property name="texture2" value="annetteDown"/>
+    <property name="texture3" value="annetteUp"/>
+    <property name="walklimit" value="4"/>
+   </properties>
+  </object>
+  <object id="66" name="annette_box" x="681.862" y="196.218" width="39.1176" height="30.2355"/>
+ </objectgroup>
+ <objectgroup name="Crate">
+  <object id="59" name="crate" x="128" y="63" width="64" height="59">
+   <properties>
+    <property name="bodytype" value="dynamic"/>
+    <property name="collideBits" value="0001"/>
+    <property name="damping" type="float" value="10"/>
+    <property name="debugcolor" value="yellow"/>
+    <property name="debugopacity" type="int" value="192"/>
+    <property name="density" type="float" value="1000"/>
+    <property name="excludeBits" value="0000"/>
+    <property name="force" type="float" value="450"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="maxspeed" type="float" value="10"/>
+    <property name="restitution" type="float" value="0"/>
+    <property name="sound" value="box_noise"/>
+    <property name="startframe" type="int" value="0"/>
+    <property name="texture" value="box"/>
+    <property name="texture2" value=""/>
+    <property name="texture3" value=""/>
+   </properties>
+  </object>
+  <object id="60" name="crate_box" x="192" y="128" width="64" height="59" rotation="180"/>
+ </objectgroup>
+ <layer name="Roofs" width="14" height="8">
+  <data encoding="csv">
+13,0,13,0,13,0,13,0,13,0,13,0,13,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,0,13,0,0,13,0,13,0,0,13,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,13,0,13,0,13,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="Exit">
+  <object id="51" name="exit" x="714.1" y="387.871" width="42.3434" height="27.1756">
+   <properties>
+    <property name="texture" value="goal"/>
+   </properties>
+  </object>
+  <object id="52" name="exit_box" x="705.838" y="370.566" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="box_Boundaries">
+  <object id="82" name="boundary1" x="-4.04204" y="-42.4414" width="897.332" height="42.4414"/>
+  <object id="83" name="boundary2" x="899.353" y="10.1051" width="44.4624" height="501.213"/>
+  <object id="84" name="boundary3" x="2.14316" y="516.502" width="893.699" height="42.8633"/>
+  <object id="85" name="boundary4" x="-51.4359" y="6.42949" width="53.5791" height="507.93"/>
+ </objectgroup>
+ <objectgroup name="Bird">
+  <object id="45" name="bird" x="128" y="63">
+   <properties>
+    <property name="bodytype" value="dynamic"/>
+    <property name="collideBits" value="1000"/>
+    <property name="damping" type="float" value="10"/>
+    <property name="debugcolor" value="white"/>
+    <property name="debugopacity" type="int" value="192"/>
+    <property name="density" type="float" value="1"/>
+    <property name="excludeBits" value="0011"/>
+    <property name="force" type="float" value="450"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="maxspeed" type="float" value="10"/>
+    <property name="restitution" type="float" value="0"/>
+    <property name="startframe" type="int" value="0"/>
+    <property name="texture" value="distraction"/>
+    <property name="texture2" value=""/>
+    <property name="texture3" value=""/>
+    <property name="walklimit" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="50" name="bird_box" x="64" y="47" width="64" height="47"/>
+ </objectgroup>
+</map>
