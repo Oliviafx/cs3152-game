@@ -84,6 +84,7 @@ public class AnnetteModel extends BoxObstacle {
     private Fixture annetteFixture;
 
     private static float SENSOR_SIZE = 0.3f;
+    private static float SENSOR_OFFSET = 0.5f;
 
 
     /**
@@ -384,7 +385,7 @@ public class AnnetteModel extends BoxObstacle {
         if (!super.activatePhysics(world)) {
             return false;
         }
-        Vector2 sensorCenterD = new Vector2(0, -((getHeight()/2) + 0.5f));
+        Vector2 sensorCenterD = new Vector2(0, -((getHeight()/2) + SENSOR_SIZE));
         FixtureDef sensorDefD = new FixtureDef();
         sensorDefD.isSensor = true;
         sensorShapeD = new PolygonShape();
@@ -393,7 +394,7 @@ public class AnnetteModel extends BoxObstacle {
         sensorFixtureD = body.createFixture(sensorDefD);
         sensorFixtureD.setUserData("annetteDown");
 
-        Vector2 sensorCenterU = new Vector2(0, ((getHeight()/2) + 0.5f));
+        Vector2 sensorCenterU = new Vector2(0, ((getHeight()/2) + SENSOR_SIZE));
         FixtureDef sensorDefU = new FixtureDef();
         sensorDefU.isSensor = true;
         sensorShapeU = new PolygonShape();
@@ -402,7 +403,7 @@ public class AnnetteModel extends BoxObstacle {
         sensorFixtureU = body.createFixture(sensorDefU);
         sensorFixtureU.setUserData("annetteUp");
 
-        Vector2 sensorCenterR = new Vector2(getWidth() / 2 + 0.5f, 0);
+        Vector2 sensorCenterR = new Vector2(getWidth() / 2 + SENSOR_SIZE, 0);
         FixtureDef sensorDefR = new FixtureDef();
         sensorDefR.isSensor = true;
         sensorShapeR = new PolygonShape();
@@ -411,7 +412,7 @@ public class AnnetteModel extends BoxObstacle {
         sensorFixtureR = body.createFixture(sensorDefR);
         sensorFixtureR.setUserData("annetteRight");
 
-        Vector2 sensorCenterL = new Vector2(-(getWidth() / 2 + 0.5f), 0);
+        Vector2 sensorCenterL = new Vector2(-(getWidth() / 2 + SENSOR_SIZE), 0);
         FixtureDef sensorDefL = new FixtureDef();
         sensorDefL.isSensor = true;
         sensorShapeL = new PolygonShape();
