@@ -1614,33 +1614,35 @@ public class LevelModel {
 
 		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
 		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
-		float cameraXEnd = 0;
-		float cameraYEnd = 0;
+//		float cameraXEnd = 0;
+//		float cameraYEnd = 0;
+		float cameraXEnd = canvas.getWidth() * 2f / scale.x;
+		float cameraYEnd = canvas.getHeight() * 2f / scale.y;
 //		System.out.println(ratio);
-
-		if (ratio == (14.0f/8.0f)) {
-//			System.out.println("EASY");
-			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
-			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
-		}
-		else if (ratio == (24.0f/14.0f)) {
-//			System.out.println("is medium2");
-			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
-		}
-		else if (ratio == 1.0f) {
-//			System.out.println("is medium");
-			cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
-		}
-		else if (ratio == 2.0f) {
-//			System.out.println("hard");
-			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
-		}
-		else {
-			System.out.println("Not a valid window ratio.");
-		}
+//
+//		if (ratio == (14.0f/8.0f)) {
+////			System.out.println("EASY");
+//			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
+//		}
+//		else if (ratio == (24.0f/14.0f)) {
+////			System.out.println("is medium2");
+//			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
+//		}
+//		else if (ratio == 1.0f) {
+////			System.out.println("is medium");
+//			cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
+//		}
+//		else if (ratio == 2.0f) {
+////			System.out.println("hard");
+//			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
+//		}
+//		else {
+//			System.out.println("Not a valid window ratio.");
+//		}
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //
