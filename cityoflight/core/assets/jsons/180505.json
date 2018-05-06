@@ -1322,7 +1322,7 @@
                      "damping":10,
                      "debugcolor":"white",
                      "debugopacity":192,
-                     "density":4,
+                     "density":10,
                      "excludeBits":"0000",
                      "force":450,
                      "friction":0,
@@ -1388,12 +1388,12 @@
                  "name":"crate",
                  "properties":
                     {
-                     "bodytype":"static",
+                     "bodytype":"dynamic",
                      "collideBits":"0001",
                      "damping":10,
                      "debugcolor":"yellow",
                      "debugopacity":192,
-                     "density":1,
+                     "density":1000,
                      "excludeBits":"0000",
                      "force":450,
                      "friction":0,
