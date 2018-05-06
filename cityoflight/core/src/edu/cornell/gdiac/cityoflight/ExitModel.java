@@ -28,6 +28,17 @@ import edu.cornell.gdiac.physics.obstacle.*;
  */
 public class ExitModel extends BoxObstacle {
 
+	private boolean animate = true;
+	private int boxCool = 0;
+	private int shineLimitCountdown = 0;
+	private FilmStrip filmstrip;
+	private int startFrame = 1;
+
+	/** Time between box frames*/
+	private final int boxLimit = 5;
+	/** Time between animations of box shining*/
+	private final int shineLimit = 1;
+
 	/**
 	 * Create a new ExitModel with degenerate settings
 	 */	
@@ -35,6 +46,37 @@ public class ExitModel extends BoxObstacle {
 		super(0,0,1,1);
 //		super(0,0,1);
 		setSensor(true);
+	}
+
+	public void update(float dt) {
+		// Animate if necessary
+		if(shineLimitCountdown==0)
+			animate = true;
+
+		if (animate && boxCool == 0) {
+			if (filmstrip != null) {
+				int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
+				if(next < filmstrip.getFrame()) {
+					animate = false;
+					shineLimitCountdown = shineLimit;
+				}
+				else
+					filmstrip.setFrame(next);
+			}
+			boxCool = boxLimit;
+		}
+
+		else if (boxCool > 0) {
+			boxCool--;
+		} else if (!animate) {
+			if (filmstrip != null) {
+				filmstrip.setFrame(startFrame);
+			}
+			shineLimitCountdown--;
+			boxCool = 0;
+		}
+
+		super.update(dt);
 	}
 
 
@@ -59,7 +101,8 @@ public class ExitModel extends BoxObstacle {
 
 
 		setName("exit");
-		setPosition(pSize[0] - pos[0]/64 - 1,pSize[1] - pos[1]/64 - 1 );
+
+		setPosition(pos[0]/64 ,pSize[1] - pos[1]/64  );
 //		setRadius(radius);
 		setWidth(width/64);
 		setHeight(height/64);
@@ -93,8 +136,12 @@ public class ExitModel extends BoxObstacle {
 		setDebugColor(debugColor);
 		
 		// Now get the texture from the AssetManager singleton
-		String key = textr;
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry(textr, TextureRegion.class);
+		try {
+			filmstrip = (FilmStrip)texture;
+		} catch (Exception e) {
+			filmstrip = null;
+		}
 		setTexture(texture);
 	}
 
@@ -106,8 +153,9 @@ public class ExitModel extends BoxObstacle {
 	public void draw(ObstacleCanvas canvas) {
 
 		if (texture != null) {
+			//System.out.println(getY());
 
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y+texture.getRegionHeight()/3, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
 //			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y, getAngle(),GameController.TEMP_SCALE * 2, GameController.TEMP_SCALE  * 2);
 		}
 	}

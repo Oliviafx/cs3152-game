@@ -463,7 +463,7 @@ public class LevelModel {
 					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
 //					setPosition(pos[0]+ size[0]/2,height - (pos[1]-size[1]/2));
-					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64 - 1};
+					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64 +1};
 					float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
@@ -842,7 +842,7 @@ public class LevelModel {
 				for (int j = 0; j < objects.size; j++) {
 					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64};
+					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 - 1};
 					float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
@@ -939,7 +939,7 @@ public class LevelModel {
 
                     // BUILDINGS
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 1.75f};
+					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 0.6f};
 					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
 					float[] pad = { 0.1f, 0.1f};
 					String debugColor = "red";
@@ -969,7 +969,7 @@ public class LevelModel {
 
 			}
 			else if(layerName.equals("Base")){
-//				System.out.println("loading background");
+				System.out.println("loading background");
 
 
 				int[] data = layer.get("data").asIntArray();
@@ -992,11 +992,12 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-//					System.out.println(texName);
+					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
 
 					// IMPORTANT PROBLEM: TEXTURE IS NULL
 					if(texture != null) {
+
 //						System.out.println(texture.getRegionHeight());
 						TextureRegion[][] textures = texture.split(64, 64);
 //						System.out.println(f % textures.length + " " + f / textures.length);
@@ -1031,12 +1032,14 @@ public class LevelModel {
 				}
 				//check ids equal to specific objects
 				goalDoor = new ExitModel();
-				float x = boundValues.get("x").asFloat()/64;
-				float y = boundValues.get("y").asFloat()/64;
-				float[] pos = {50,356};
+				float x = boundValues.get("x").asFloat();
+				System.out.println();
+				float y = (boundValues.get("y").asFloat());
+				float[] pos = {x,y};
 				float width = boundValues.get("width").asFloat();
 				float height = boundValues.get("height").asFloat();
 				String debugC = "yellow";
+				System.out.println("psize" +pSize[0] + "  " + pSize[1]);
 				String tex = exitValues.get("texture").asString();
 				goalDoor.initialize(pos,width,height,debugC, tex, pSize);
 				goalDoor.setDrawScale(scale);
