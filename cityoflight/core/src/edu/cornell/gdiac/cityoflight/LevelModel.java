@@ -1622,43 +1622,44 @@ public class LevelModel {
 		Vector2 scale = annette.getDrawScale();
 
 		// Accounts for edges of screen
-//		float ratio = (float)canvas.getWidth()/canvas.getHeight();
-		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
-//		System.out.println(getBounds().getWidth());
-//		System.out.println(getBounds().getHeight());
-//		System.out.println("ratio " + ratio);
+//		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
 
-		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
-		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
+		float cameraXStart = canvas.getWidth() * 2.52f/(5.0f * scale.x);
+		float cameraYStart = canvas.getHeight() * 3.15f/(5.0f * scale.y);
 //		float cameraXEnd = 0;
 //		float cameraYEnd = 0;
 		float cameraXEnd = canvas.getWidth() * 2f / scale.x;
 		float cameraYEnd = canvas.getHeight() * 2f / scale.y;
 //		System.out.println(ratio);
-//
-//		if (ratio == (14.0f/8.0f)) {
-////			System.out.println("EASY");
-//			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
-//		}
-//		else if (ratio == (24.0f/14.0f)) {
-////			System.out.println("is medium2");
-//			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
-//		}
-//		else if (ratio == 1.0f) {
-////			System.out.println("is medium");
-//			cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
-//		}
-//		else if (ratio == 2.0f) {
-////			System.out.println("hard");
-//			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
-//		}
-//		else {
-//			System.out.println("Not a valid window ratio.");
-//		}
+
+		if (bounds.getWidth() == 14.0f && bounds.getHeight() == 8.0f) {
+			System.out.println("14x8");
+			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
+		}
+		else if (bounds.getWidth() == 24.0f && bounds.getHeight() == 14.0f) {
+			System.out.println("24x14");
+			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
+		}
+		else if (bounds.getWidth() == 36.0f && bounds.getHeight() == 18.0f) {
+			System.out.println("36x18");
+			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
+		}
+		else if (bounds.getWidth() == 21.0f && bounds.getHeight() == 12.0f) {
+			System.out.println("21x12");
+			cameraXEnd = canvas.getWidth() * 1.0f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		}
+		else if (bounds.getWidth() == 28.0f && bounds.getHeight() == 16.0f) {
+			System.out.println("28x16");
+			cameraXEnd = canvas.getWidth() * 1.20f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.6f / scale.y;
+		}
+		else {
+			System.out.println("Not a valid window ratio.");
+		}
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //
