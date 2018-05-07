@@ -179,6 +179,7 @@ public class GameController implements Screen, ContactListener {
 	private SoundController sound;
 
 	private Music bgm;
+	private Music det_bgm;
 
 	/** Whether or not this is an active controller */
 	private boolean active;
@@ -197,11 +198,16 @@ public class GameController implements Screen, ContactListener {
 	private boolean leftBox = false;
 
 	private boolean musicPlay = true;
+	private boolean detectedPlay = false;
 	private boolean soundPlay = true;
 
 
 	public Music getBGM() {
 		return bgm;
+	}
+
+	public Music getDet_bgm() {
+		return det_bgm;
 	}
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -313,8 +319,11 @@ public class GameController implements Screen, ContactListener {
 		countdown = -1;
 		sound = SoundController.getInstance();
 		bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_music.wav"));
+		det_bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_detected_music.wav"));
 		bgm.setLooping(true);
 		bgm.setVolume(0.6f);
+		det_bgm.setLooping(true);
+		det_bgm.setVolume(0.0f);
 
 		setComplete(false);
 		setFailure(false);
@@ -388,6 +397,7 @@ public class GameController implements Screen, ContactListener {
 
 		if (input.didMute()) {
 			bgm.stop();
+			det_bgm.stop();
 			for (String s : sound.getCollection()) {
 				sound.stop(s);
 			}
@@ -401,6 +411,7 @@ public class GameController implements Screen, ContactListener {
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
 			bgm.stop();
+			det_bgm.stop();
 			listener.exitScreen(this, EXIT_MENU);
 			return false;
 		}
@@ -451,12 +462,24 @@ public class GameController implements Screen, ContactListener {
 
 		if (!musicPlay) {
 			bgm.pause();
+			det_bgm.pause();
 			System.out.println("pause music");
 		}
 		else {
 			if (!bgm.isPlaying()) {
 				bgm.play();
+				det_bgm.play();
 				System.out.println("wasn't playing, is now playing");
+			}
+			if (detectedPlay) {
+//				System.out.println("detected music");
+				bgm.setVolume(0.0f);
+				det_bgm.setVolume(0.6f);
+			}
+			else {
+//				System.out.println("normal music");
+				bgm.setVolume(0.6f);
+				det_bgm.setVolume(0.0f);
 			}
 		}
 
@@ -678,12 +701,14 @@ public class GameController implements Screen, ContactListener {
 
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
+				detectedPlay = true;
 				drawisSeen();
 			}
 		}
 
 		if (noOneSeesMe()){
 			//System.out.println("in seen reset");
+			detectedPlay = false;
 			seenhasAnimated = false;
 			if (indicator_seen != null){
 				indicator_seen.setFrame(0);
