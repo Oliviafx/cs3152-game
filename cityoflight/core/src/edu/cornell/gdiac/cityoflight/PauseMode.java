@@ -77,12 +77,12 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     }
 
     public void reset() {
-//        pressState = 0;
-//        quitState = 0;
+        pressState = 0;
+        quitState = 0;
 //        dispose();
-        if (stage != null) {
-            stage.dispose();
-        }
+//        if (stage != null) {
+//            stage.dispose();
+//        }
     }
 
     public void resize(int width, int height) {
@@ -91,10 +91,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         scale = (sx < sy ? sx : sy);
 
         this.width = (int)(.66f*width);
-        playY = (int)(.25f*height);
-        playX = width/2 - 200;
-        quitY = (int)(.25f*height);
-        quitX = width/2+200;
+
         heightY = height;
     }
 
@@ -144,11 +141,11 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     }
 
     private boolean backToGame() {
-        return playbutton.isPressed();
+        return pressState == 2;//playbutton.isPressed();
     }
 
     private boolean toMenu() {
-        return quitbutton.isPressed();
+        return quitState == 2; //quitbutton.isPressed() ||
     }
 
 
@@ -212,30 +209,34 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
     public void update() {
         if (stage == null) {
-            create();
+//            create();
         }
-//        if (playButton == null) {
-//            playButton = new Texture(PLAY_BTN_FILE);
-//            playButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-////            System.out.println("play not null");
-//        }
-//        if (quitButton == null) {
-//            quitButton = new Texture(QUIT_BTN_FILE);
-//            quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-////            System.out.println("quit not null");
-////            create();
-//        }
+        if (playButton == null) {
+            playButton = new Texture(PLAY_BTN_FILE);
+            playButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            playY =  62+playButton.getHeight();//(int)(.25f*height) - 50;
+            playX = 147+playButton.getWidth();//width/2 - 200;
+//            System.out.println("play not null");
+        }
+        if (quitButton == null) {
+            quitButton = new Texture(QUIT_BTN_FILE);
+            quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            quitY =  62+quitButton.getHeight();//(int)(.25f*height) - 50;
+            quitX = 502+quitButton.getWidth();//width/2+200;
+//            System.out.println("quit not null");
+//            create();
+        }
     }
 
     public void draw() {
         canvas.begin();
         canvas.draw(background, Color.WHITE, 0, 0, 0 ,0, 0, 1f, 1f);
         Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
-//        canvas.draw(playButton, tint, playButton.getWidth()/2, playButton.getHeight()/2,
-//                playX, playY, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-//        Color tint2 = (quitState == 1 ? Color.GRAY: Color.WHITE);
-//        canvas.draw(quitButton, tint2, quitButton.getWidth()/2, quitButton.getHeight()/2,
-//                quitX, quitY, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        canvas.draw(playButton, tint, playButton.getWidth(), playButton.getHeight(),
+                playX, playY, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        Color tint2 = (quitState == 1 ? Color.GRAY: Color.WHITE);
+        canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
+                quitX, quitY, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
         canvas.end();
     }
 
@@ -252,7 +253,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         update();
         draw();
 //            stage.draw();
-            stage.act();
+//            stage.act();
 
         if (backToGame() && listener != null) {
 
@@ -306,11 +307,15 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         float radius = BUTTON_SCALE*scale*playButton.getWidth();
         float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
         if (dist < radius*radius) {
+//        if ((screenX > playX && screenX < playX+playButton.getWidth()) && (screenY > playY && screenY < playY+playButton.getHeight())) {
             pressState = 1;
+
         }
 
         float dist2 = (screenX-quitX)*(screenX-quitX)+(screenY-(quitY))*(screenY-quitY);
         if (dist2 < radius*radius) {
+//        if ((screenX > quitX && screenX < quitX+quitButton.getWidth()) && (screenY > quitY && screenY < quitY+quitButton.getHeight())) {
+
             quitState = 1;
         }
         return false;
