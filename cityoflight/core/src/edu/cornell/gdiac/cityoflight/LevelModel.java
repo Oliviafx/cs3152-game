@@ -418,7 +418,7 @@ public class LevelModel {
 			initLighting(colors, gamma, diffuse, blur);
 		} else {
 
-			float[] colors = {0.6f, 0.6f, 0.6f, 0.6f};
+			float[] colors = {0.7f, 0.75f, 0.75f, 0.7f};
 			boolean gamma = true;
 			boolean diffuse = true;
 			int blur = 3;
@@ -939,14 +939,23 @@ public class LevelModel {
 
                     // BUILDINGS
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 1.75f};;
-					if(textName.contains("128") || textName.contains("64"))
-					{
-						pos[1] = boxJSON.get("y").asFloat()/64 + 0.6f;
-					}
-					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
+					float[] pos = {numToBuilding.get((j+1) + "").get("x").asFloat()/64,numToBuilding.get((j+1) + "").get("y").asFloat()/64+ 1.75f};
+					float[] size = {1f,1f};
 					float[] pad = { 0.1f, 0.1f};
 					String debugColor = "red";
+
+					if(boxJSON != null){
+						pos[0] = boxJSON.get("x").asFloat()/64;
+						pos[1] = boxJSON.get("y").asFloat()/64 + 1.75f;
+						if(textName.contains("128") || textName.contains("64"))
+						{
+							pos[1] = boxJSON.get("y").asFloat()/64 + 0.6f;
+						}
+						size[0 ] = boxJSON.get("width").asFloat()/64;
+						size[1] = boxJSON.get("height").asFloat()/64;
+
+					}
+
 
 					if(film!= null) {
 

@@ -142,7 +142,7 @@
   <object id="90" name="box4" x="386" y="40" width="123.841" height="90.2359"/>
   <object id="91" name="box5" x="256.394" y="40" width="124.463" height="91.4805"/>
   <object id="93" name="box6" x="127.575" y="40" width="125.708" height="94.5921"/>
-  <object id="94" name="box7" x="1.24463" y="39.2059" width="125.086" height="89.6135"/>
+  <object id="94" name="box7" x="1.24463" y="40" width="125.086" height="89.6135"/>
   <object id="95" name="box8" x="3.28601" y="236.843" width="121.583" height="82.9003"/>
   <object id="96" name="box9" x="128.812" y="238.284" width="122.897" height="82.38"/>
   <object id="97" name="box10" x="320.715" y="235.656" width="122.897" height="82.4306"/>
