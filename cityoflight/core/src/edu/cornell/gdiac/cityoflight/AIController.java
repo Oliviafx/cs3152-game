@@ -283,6 +283,7 @@ public class AIController{
                     System.out.println("patrol -> chase");
                     state = FSMState.CHASE;
                 } else if (isDistracted()) {
+                    System.out.println("is distracted");
                     turnVisionGreen();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> distract");
@@ -605,13 +606,17 @@ public class AIController{
         //System.out.println("testing for distraction");
         try {
             DistractionModel distraction = level.getDistraction();
-            if (light.contains(distraction.getX(), distraction.getY()) && creature.getType() != 2){
-                //System.out.println("distracted = true");
-                lastseendistraction = distraction.getPosition();
-                //System.out.println("distractionposition = " + lastseendistraction);
-                creature.setDistracted(true);
-            }else{
+            if (!distraction.getAlive()) {
                 creature.setDistracted(false);
+            } else {
+                if (light.contains(distraction.getX(), distraction.getY()) && creature.getType() != 2) {
+//                    System.out.println("distracted = true");
+                    lastseendistraction = distraction.getPosition();
+                    //System.out.println("distractionposition = " + lastseendistraction);
+                    creature.setDistracted(true);
+                } else {
+                    creature.setDistracted(false);
+                }
             }
         } catch (NullPointerException e){
             //System.out.println("distraction is null");
