@@ -405,7 +405,7 @@ public class GameController implements Screen, ContactListener {
 			else { musicPlay = true; }
 			if (soundPlay){	soundPlay = false; }
 			else { soundPlay = true; }
-			System.out.println("muted");
+//			System.out.println("muted");
 		}
 
 		// Now it is time to maybe switch screens.
@@ -463,7 +463,7 @@ public class GameController implements Screen, ContactListener {
 		if (!musicPlay) {
 			bgm.pause();
 			det_bgm.pause();
-			System.out.println("pause music");
+//			System.out.println("pause music");
 		}
 		else {
 			if (!bgm.isPlaying()) {
@@ -681,18 +681,6 @@ public class GameController implements Screen, ContactListener {
 	public void draw(float delta) {
 
 		canvas.clear();
-
-//		AnnetteModel annette = level.getAnnette();
-//		Vector2 pos = annette.getPosition();
-//		Vector2 scale = annette.getDrawScale();
-//
-//		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
-//		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
-//		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
-//		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
-//		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
-//		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
-
 		level.draw(canvas);
 
 		if (level.getAnnette().isWalkingInPlace()){
@@ -1079,10 +1067,6 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
-//				if (soundPlay) {
-//					sound.stop("box_effect");
-//					sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
-//				}
 				sound.stop("box_effect");
 				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f, soundPlay);
 			}
