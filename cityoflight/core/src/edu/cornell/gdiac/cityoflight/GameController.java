@@ -200,6 +200,9 @@ public class GameController implements Screen, ContactListener {
 	private boolean soundPlay = true;
 
 
+	public Music getBGM() {
+		return bgm;
+	}
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
