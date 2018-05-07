@@ -46,13 +46,13 @@
     <property name="texture" value="128_bookstore"/>
    </properties>
   </object>
-  <object id="87" name="box1" x="769.183" y="40.4506" width="122.596" height="87.1243"/>
+  <object id="87" name="box1" x="769.183" y="40" width="122.596" height="87.1243"/>
   <object id="21" name="building2" gid="14" x="640" y="128" width="125" height="64">
    <properties>
     <property name="texture" value="128_bookstore"/>
    </properties>
   </object>
-  <object id="88" name="box2" x="640.363" y="42.9398" width="124.463" height="85.2573"/>
+  <object id="88" name="box2" x="641" y="40" width="124.463" height="85.2573"/>
   <object id="22" name="building3" gid="14" x="512" y="128" width="125" height="64">
    <properties>
     <property name="texture" value="128_bookstore"/>
@@ -123,7 +123,7 @@
     <property name="texture" value="128_bookstore"/>
    </properties>
   </object>
-  <object id="38" name="building17" gid="14" x="128" y="448" width="125" height="64">
+  <object id="38" name="building17" gid="14" x="0" y="448" width="125" height="64">
    <properties>
     <property name="texture" value="128_bookstore"/>
    </properties>
@@ -138,15 +138,10 @@
     <property name="texture" value="128_bookstore"/>
    </properties>
   </object>
-  <object id="41" name="building20" gid="15" x="0" y="448" width="64" height="128">
-   <properties>
-    <property name="texture" value="64_building_short_left"/>
-   </properties>
-  </object>
-  <object id="89" name="box3" x="512.166" y="37.9613" width="123.841" height="90.2359"/>
-  <object id="90" name="box4" x="385.836" y="36.7167" width="123.841" height="90.2359"/>
-  <object id="91" name="box5" x="256.394" y="36.7167" width="124.463" height="91.4805"/>
-  <object id="93" name="box6" x="127.575" y="34.2274" width="125.708" height="94.5921"/>
+  <object id="89" name="box3" x="512" y="41" width="123.841" height="90.2359"/>
+  <object id="90" name="box4" x="386" y="40" width="123.841" height="90.2359"/>
+  <object id="91" name="box5" x="256.394" y="40" width="124.463" height="91.4805"/>
+  <object id="93" name="box6" x="127.575" y="40" width="125.708" height="94.5921"/>
   <object id="94" name="box7" x="1.24463" y="39.2059" width="125.086" height="89.6135"/>
   <object id="95" name="box8" x="3.28601" y="236.843" width="121.583" height="82.9003"/>
   <object id="96" name="box9" x="128.812" y="238.284" width="122.897" height="82.38"/>
@@ -157,10 +152,9 @@
   <object id="101" name="box14" x="768.915" y="297.001" width="61.6306" height="85.1089"/>
   <object id="102" name="box15" x="576.275" y="296.405" width="61.8531" height="85.737"/>
   <object id="103" name="box16" x="448.457" y="302.271" width="124.054" height="83.2848"/>
-  <object id="104" name="box17" x="129.037" y="364.946" width="124.288" height="82.3306"/>
-  <object id="105" name="box18" x="257.535" y="366.117" width="121.111" height="82.1327"/>
+  <object id="104" name="box17" x="0" y="365.442" width="124.288" height="82.5579"/>
+  <object id="105" name="box18" x="257.535" y="366.117" width="121.111" height="82"/>
   <object id="106" name="box19" x="384.214" y="367.509" width="123.895" height="80.0445"/>
-  <object id="107" name="box20" x="3.44471" y="370.574" width="59.938" height="75.8603"/>
  </objectgroup>
  <objectgroup name="Tarasque">
   <object id="68" name="tarasque1" gid="32" x="568.424" y="289.56" width="64" height="160">
@@ -312,8 +306,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 13,0,13,0,0,13,0,13,0,0,13,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,13,0,13,0,13,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,13,0,0,0,0,0,0,
+13,0,0,0,13,0,13,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
