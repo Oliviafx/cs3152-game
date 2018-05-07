@@ -463,7 +463,7 @@ public class LevelModel {
 					JsonValue obj = objects.get(j);
 					InteriorModel obj2 = new InteriorModel();
 //					setPosition(pos[0]+ size[0]/2,height - (pos[1]-size[1]/2));
-					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64 +1};
+					float[] pos = {obj.get("x").asFloat() / 64, obj.get("y").asFloat() / 64 + obj.get("height").asFloat()/64 - 1};
 					float[] size = {obj.get("width").asFloat() / 64, obj.get("height").asFloat() / 64};
 					float[] pad = {0.1f, 0.1f};
 					String debugColor = "red";
@@ -939,7 +939,11 @@ public class LevelModel {
 
                     // BUILDINGS
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 0.6f};
+					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 1.75f};;
+					if(textName.contains("128") || textName.contains("64"))
+					{
+						pos[1] = boxJSON.get("y").asFloat()/64 + 0.6f;
+					}
 					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
 					float[] pad = { 0.1f, 0.1f};
 					String debugColor = "red";
