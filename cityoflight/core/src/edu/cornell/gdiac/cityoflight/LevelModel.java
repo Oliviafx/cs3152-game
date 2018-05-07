@@ -500,7 +500,7 @@ public class LevelModel {
 //				createLineofSight(lineOfSightJSON);
 //				}
 			}  else if (layerName.equals(TARASQUE_LAYER_NAME)) {
-				System.out.println("loading tarasque");
+//				System.out.println("loading tarasque");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -510,7 +510,7 @@ public class LevelModel {
 				for (int j = 0; j < objects.size; j++) {
 //					System.out.println(j);
 					JsonValue obj = objects.get(j);
-					System.out.println(obj.get("name"));
+//					System.out.println(obj.get("name"));
 					if (obj.get("name").asString().contains("dragon")) {
 						lineOfSightJSON = obj.get("properties");
 //				System.out.println(objects);
@@ -591,7 +591,7 @@ public class LevelModel {
 //					System.out.println(lights.size + ": lights size");
 //					System.out.println(lights.get(index) + ": lights");
 //					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
-					System.out.println(name + " added to creatures");
+//					System.out.println(name + " added to creatures");
 					creatures.add(creature);
 //					attachVision(creature, lights.get(n));
 
@@ -599,7 +599,7 @@ public class LevelModel {
 				}
 			} else if (layerName.equals(SNAIL_LAYER_NAME)) {
 
-				System.out.println("loading snail");
+//				System.out.println("loading snail");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -687,18 +687,18 @@ public class LevelModel {
 //					System.out.println(creature.getPosition().x*64 + " " + creature.getPosition().y*64);
 					creature.setDrawScale(scale);
 					activate(creature);
-					System.out.println(lights.size + ": lights size");
-					System.out.println(n+ " : index");
+//					System.out.println(lights.size + ": lights size");
+//					System.out.println(n+ " : index");
 //					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
 
-					System.out.println(name + " added to creatures");
+//					System.out.println(name + " added to creatures");
 					creatures.add(creature);
 //					attachVision(creature, lights.get(n));
 
 
 				}
 			}else if (layerName.equals(BLANCHE_LAYER_NAME) ) {
-				System.out.println("loading blanche");
+//				System.out.println("loading blanche");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -708,7 +708,7 @@ public class LevelModel {
 				for (int j = 0; j < objects.size; j++) {
 //					System.out.println(j);
 					JsonValue obj = objects.get(j);
-					System.out.println(obj.get("name"));
+//					System.out.println(obj.get("name"));
 					if (obj.get("name").asString().contains("lady")) {
 						lineOfSightJSON = obj.get("properties");
 //				System.out.println(objects);
@@ -789,7 +789,7 @@ public class LevelModel {
 //					System.out.println(lights.size + ": lights size");
 //					System.out.println(lights.get(index) + ": lights");
 //					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
-					System.out.println(name + " added to creatures");
+//					System.out.println(name + " added to creatures");
 					creatures.add(creature);
 //					attachVision(creature, lights.get(n));
 
@@ -973,7 +973,7 @@ public class LevelModel {
 
 			}
 			else if(layerName.equals("Base")){
-				System.out.println("loading background");
+//				System.out.println("loading background");
 
 
 				int[] data = layer.get("data").asIntArray();
@@ -996,7 +996,7 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-					System.out.println(texName);
+//					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
 
 					// IMPORTANT PROBLEM: TEXTURE IS NULL
@@ -1264,8 +1264,8 @@ public class LevelModel {
 	 *
 	 */
 	private void initLighting(float[] color, boolean gamma, boolean diffuse, int blur) {
-		System.out.println(bounds.width+" "+bounds.height);
-		System.out.println(Gdx.graphics.getWidth()/64+" "+ Gdx.graphics.getHeight()/64);
+//		System.out.println(bounds.width+" "+bounds.height);
+//		System.out.println(Gdx.graphics.getWidth()/64+" "+ Gdx.graphics.getHeight()/64);
 		raycamera = new OrthographicCamera(Gdx.graphics.getWidth()/64, Gdx.graphics.getHeight()/64);//bounds.width,bounds.height);
 		raycamera.position.set(0,0,0);//bounds.width/2.0f, bounds.height/2.0f, 0);
 		raycamera.update();
@@ -1335,7 +1335,6 @@ public class LevelModel {
 	private void createLineofSight(JsonValue json) {
 		ConeSource[] lightArr = new ConeSource[3];
 		int type = 0;
-		System.out.println(json);
 //		for (int i = 0; i < json.size; i++) {
 //			JsonValue obj = json.get(i);
 //			JsonValue light = obj.get("properties");
