@@ -29,9 +29,9 @@ import edu.cornell.gdiac.util.ScreenListener;
 public class PauseMode implements Screen, ControllerListener, ContactListener, InputProcessor {
 
 
-    private static final String BACKGROUND_FILE = "textures/pause_screen.png";
-    private static final String PLAY_BTN_FILE = "textures/resume.png";
-    private static final String QUIT_BTN_FILE = "textures/quit.png";
+    private static final String BACKGROUND_FILE = "textures/pause assets/pause_bg.png";
+    private static final String PLAY_BTN_FILE = "textures/pause assets/resume_button.png";
+    private static final String QUIT_BTN_FILE = "textures/pause assets/quit_button.png";
     /** Standard window size (for scaling) */
     private static int STANDARD_WIDTH  = 1792;
     /** Standard window height (for scaling) */
