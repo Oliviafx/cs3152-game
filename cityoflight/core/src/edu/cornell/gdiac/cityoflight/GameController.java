@@ -377,6 +377,9 @@ public class GameController implements Screen, ContactListener {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2.json"));
 		}
 		if (whichlevel == 3) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level3.json"));
+		}
+		if (whichlevel == 4) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level4.json"));
 		}
 		level.populate(levelFormat);
