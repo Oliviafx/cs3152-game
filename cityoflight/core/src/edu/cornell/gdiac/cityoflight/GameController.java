@@ -95,6 +95,8 @@ public class GameController implements Screen, ContactListener {
 	/** The text to show on a winning/losing screen */
 	private boolean hasChosenText = false;
 	private String chosentext;
+	private boolean hasChoseScreen = false;
+	private String chosenscreenkey;
 
 	TextureRegion lose_screen, win_screen;
 
@@ -404,6 +406,7 @@ public class GameController implements Screen, ContactListener {
 		win_transition_hasAnimated = false;
 		win_transition_second_part = false;
 		hasChosenText = false;
+		hasChoseScreen = false;
 	}
 
 	/**
@@ -807,7 +810,12 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	public void drawLoseScreen(){
-		TextureRegion lose_screen = JsonAssetManager.getInstance().getEntry("lose_screen", TextureRegion.class);
+		if (!hasChoseScreen) {
+			int random = (int) (Math.random() * 3 + 1);
+			chosenscreenkey = "lose_screen0" + Integer.toString(random);
+			hasChoseScreen = true;
+		}
+		TextureRegion lose_screen = JsonAssetManager.getInstance().getEntry(chosenscreenkey, TextureRegion.class);
 		canvas.begin();
 		canvas.draw(lose_screen,0,0);
 		canvas.end();
@@ -837,7 +845,12 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	public void drawWinScreen(){
-		TextureRegion win_screen = JsonAssetManager.getInstance().getEntry("win_screen", TextureRegion.class);
+		if (! hasChoseScreen) {
+			int random = (int) (Math.random() * 3 + 1);
+			chosenscreenkey = "win_screen0" + Integer.toString(random);
+			hasChoseScreen = true;
+		}
+		TextureRegion win_screen = JsonAssetManager.getInstance().getEntry(chosenscreenkey, TextureRegion.class);
 		canvas.begin();
 		canvas.draw(win_screen,0,0);
 		canvas.end();

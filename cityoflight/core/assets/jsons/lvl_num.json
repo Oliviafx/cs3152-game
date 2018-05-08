@@ -2,7 +2,7 @@
   "infinite":false,
   "layers":[
     {
-      "data":[21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
+      "data":[150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 151, 151, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 138, 139, 152, 152, 22, 22, 152, 152, 152, 152, 152, 152, 152, 152, 141, 142, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 152, 151, 151, 152, 152, 152, 152, 152, 152, 152, 152, 152, 151, 151, 151, 151, 151, 152, 152, 152, 152, 152, 152, 152, 150, 150, 150, 150, 150, 150, 150, 152, 152, 152, 152, 152, 152, 152, 150, 150, 150, 150, 150, 150, 150],
       "height":8,
       "name":"Base",
       "opacity":1,
@@ -13,7 +13,7 @@
       "y":0
     },
     {
-      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 26, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 19, 0, 0, 0, 0, 0, 26, 26, 26, 26, 26, 26, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 26, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 26, 26, 26, 26, 26, 26, 19, 0, 0, 0, 0, 0, 0, 0],
       "height":8,
       "name":"Outline",
       "opacity":1,
@@ -615,6 +615,130 @@
           "width":64,
           "x":640,
           "y":176
+        },
+        {
+          "gid":147,
+          "height":64,
+          "id":70,
+          "name":"building20",
+          "properties":
+          {
+            "texture":"128_cafe_red"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":128,
+          "x":256,
+          "y":448
+        },
+        {
+          "gid":149,
+          "height":64,
+          "id":71,
+          "name":"building21",
+          "properties":
+          {
+            "texture":"128_cafe_blue"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":128,
+          "x":128,
+          "y":448
+        },
+        {
+          "gid":8,
+          "height":64,
+          "id":72,
+          "name":"building22",
+          "properties":
+          {
+            "texture":"64_building_short"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":64,
+          "y":448
+        },
+        {
+          "gid":2,
+          "height":64,
+          "id":73,
+          "name":"building23",
+          "properties":
+          {
+            "texture":"64_building_short_left"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":0,
+          "y":448
+        },
+        {
+          "height":80,
+          "id":74,
+          "name":"box20",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":128,
+          "x":256,
+          "y":368
+        },
+        {
+          "height":80,
+          "id":75,
+          "name":"box21",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":128,
+          "x":128,
+          "y":368
+        },
+        {
+          "height":80,
+          "id":76,
+          "name":"box22",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":64,
+          "y":368
+        },
+        {
+          "height":80,
+          "id":77,
+          "name":"box23",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":0,
+          "y":368
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -628,7 +752,7 @@
       "objects":[
         {
           "gid":116,
-          "height":85.33,
+          "height":96,
           "id":68,
           "name":"blanche1",
           "properties":
@@ -642,7 +766,7 @@
             "texture":"blanche",
             "texture2":"blanche_down",
             "texture3":"blanche_up",
-            "turn":1,
+            "turn":2,
             "type":3,
             "xinput":-180,
             "yinput":0
@@ -666,9 +790,9 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":78.66,
+          "width":88.5,
           "x":11,
-          "y":267
+          "y":281
         },
         {
           "height":28,
@@ -679,7 +803,7 @@
           "visible":true,
           "width":15,
           "x":46,
-          "y":233
+          "y":247
         },
         {
           "height":0,
@@ -716,7 +840,7 @@
           "visible":true,
           "width":0,
           "x":42,
-          "y":245
+          "y":259
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -965,8 +1089,8 @@
           "type":"",
           "visible":true,
           "width":46,
-          "x":13,
-          "y":353
+          "x":15,
+          "y":345
         },
         {
           "height":15,
@@ -976,8 +1100,8 @@
           "type":"",
           "visible":true,
           "width":28,
-          "x":20,
-          "y":337
+          "x":22,
+          "y":329
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1057,7 +1181,7 @@
       "y":0
     },
     {
-      "data":[7, 9, 0, 3, 0, 0, 0, 0, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 11, 0, 0, 7, 7, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "data":[7, 9, 0, 3, 0, 0, 0, 0, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 11, 0, 0, 7, 7, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 148, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       "height":8,
       "name":"Roofs",
       "opacity":1,
@@ -1088,8 +1212,8 @@
           "type":"",
           "visible":true,
           "width":128,
-          "x":752,
-          "y":256
+          "x":808,
+          "y":231
         },
         {
           "ellipse":true,
@@ -1100,8 +1224,8 @@
           "type":"",
           "visible":true,
           "width":80,
-          "x":777,
-          "y":153
+          "x":833,
+          "y":128
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1202,8 +1326,8 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":32,
-          "x":864,
+          "width":7,
+          "x":889,
           "y":0
         },
         {
@@ -1230,11 +1354,11 @@
         }],
       "opacity":1,
       "type":"objectgroup",
-      "visible":true,
+      "visible":false,
       "x":0,
       "y":0
     }],
-  "nextobjectid":69,
+  "nextobjectid":78,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
@@ -1448,6 +1572,104 @@
       "tilecount":16,
       "tileheight":128,
       "tilewidth":118,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":3,
+      "firstgid":132,
+      "image":"..\/Art assets\/tiles\/floor tiles.png",
+      "imageheight":256,
+      "imagewidth":192,
+      "margin":0,
+      "name":"floor_tiles",
+      "spacing":0,
+      "tilecount":12,
+      "tileheight":64,
+      "tilewidth":64,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":144,
+      "image":"..\/Art assets\/building assets\/128_cafe_green.png",
+      "imageheight":128,
+      "imagewidth":128,
+      "margin":0,
+      "name":"128_cafe_green",
+      "spacing":0,
+      "tilecount":2,
+      "tileheight":64,
+      "tilewidth":128,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":146,
+      "image":"..\/Art assets\/building assets\/128_cafe_red.png",
+      "imageheight":128,
+      "imagewidth":128,
+      "margin":0,
+      "name":"128_cafe_red",
+      "spacing":0,
+      "tilecount":2,
+      "tileheight":64,
+      "tilewidth":128,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":148,
+      "image":"..\/Art assets\/building assets\/128_cafe_purple.png",
+      "imageheight":128,
+      "imagewidth":128,
+      "margin":0,
+      "name":"128_cafe_purple",
+      "spacing":0,
+      "tilecount":2,
+      "tileheight":64,
+      "tilewidth":128,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":150,
+      "image":"..\/Art assets\/tiles\/blacktile.png",
+      "imageheight":64,
+      "imagewidth":64,
+      "margin":0,
+      "name":"blacktile",
+      "spacing":0,
+      "tilecount":1,
+      "tileheight":64,
+      "tilewidth":64,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":151,
+      "image":"..\/Art assets\/tiles\/bluetile.png",
+      "imageheight":64,
+      "imagewidth":64,
+      "margin":0,
+      "name":"bluetile",
+      "spacing":0,
+      "tilecount":1,
+      "tileheight":64,
+      "tilewidth":64,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":152,
+      "image":"..\/Art assets\/tiles\/sidewalk.png",
+      "imageheight":64,
+      "imagewidth":64,
+      "margin":0,
+      "name":"sidewalk",
+      "spacing":0,
+      "tilecount":1,
+      "tileheight":64,
+      "tilewidth":64,
       "transparentcolor":"#ff00ff"
     }],
   "tilewidth":64,
