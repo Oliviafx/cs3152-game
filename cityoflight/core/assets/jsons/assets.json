@@ -330,7 +330,7 @@
 			}
 		},
 		"indicator_out" : {
-			"file" : "textures/indicator_out.png",
+			"file" : "pip/indicators/indicator_out.png",
 			"wrap" : false,
 			"strip": {
 				"size": 15,
@@ -340,7 +340,7 @@
 			}
 		},
 		"indicator_loop" : {
-			"file" : "textures/indicator_loop.png",
+			"file" : "pip/indicators/indicator_loop.png",
 			"wrap" : false,
 			"strip": {
 				"size": 14,
@@ -350,7 +350,7 @@
 			}
 		},
 		"indicator_seen" : {
-			"file" : "textures/isseen.png",
+			"file" : "pip/indicators/indicator_seen.png",
 			"wrap" : false,
 			"strip": {
 				"size": 15,
@@ -359,8 +359,32 @@
 				"first": 1
 			}
 		},
+		"win_screen01" : {
+			"file" : "pip/screens/win01.png",
+			"wrap" : false
+		},
+		"win_screen02" : {
+			"file" : "pip/screens/win02.png",
+			"wrap" : false
+		},
+		"win_screen03" : {
+			"file" : "pip/screens/win03.png",
+			"wrap" : false
+		},
+		"lose_screen01" : {
+			"file" : "pip/screens/lose01.png",
+			"wrap" : false
+		},
+		"lose_screen02" : {
+			"file" : "pip/screens/lose02.png",
+			"wrap" : false
+		},
+		"lose_screen03" : {
+			"file" : "pip/screens/lose03.png",
+			"wrap" : false
+		},
 		"general_transition" : {
-			"file" : "transitions/general_transition_medium.png",
+			"file" : "pip/transitions/general_transition_medium.png",
 			"wrap" : false,
 			"strip": {
 				"size": 36,
@@ -368,40 +392,6 @@
 				"cols": 36,
 				"first": 1
 			}
-		},
-		"win_transition" : {
-			"file" : "transitions/win_transition_20%.png",
-			"wrap" : false,
-			"strip": {
-				"size": 35,
-				"rows": 1,
-				"cols": 35,
-				"first": 1
-			}
-		},
-		"win_screen01" : {
-			"file" : "transitions/win01.png",
-			"wrap" : false
-		},
-		"win_screen02" : {
-			"file" : "transitions/win02.png",
-			"wrap" : false
-		},
-		"win_screen03" : {
-			"file" : "transitions/win03.png",
-			"wrap" : false
-		},
-		"lose_screen01" : {
-			"file" : "transitions/lose01.png",
-			"wrap" : false
-		},
-		"lose_screen02" : {
-			"file" : "transitions/lose02.png",
-			"wrap" : false
-		},
-		"lose_screen03" : {
-			"file" : "transitions/lose03.png",
-			"wrap" : false
 		}
 	},
 	"fonts": {
