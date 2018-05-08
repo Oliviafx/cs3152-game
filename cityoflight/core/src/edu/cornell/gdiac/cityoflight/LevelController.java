@@ -68,6 +68,15 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     public boolean goLevelThree() {
         return level3.isPressed();
     }
+    public boolean goLevelFour() {
+        return level4.isPressed();
+    }
+    public boolean goLevelFive() {
+        return level5.isPressed();
+    }
+    public boolean goLevelSix() {
+        return level6.isPressed();
+    }
     public boolean isReady() {
         return menubutton.isPressed();
     }
@@ -116,6 +125,9 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private String fontName = "fonts/Belladonna.ttf";
     private TextButton level2;
     private TextButton level3;
+    private TextButton level4;
+    private TextButton level5;
+    private TextButton level6;
     private TextButton menubutton;
     private TextButton startbutton;
     public void create () {
@@ -177,7 +189,49 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 //                Gdx.app.log("my app", "Released");
             }
         });
+        level4 = new TextButton("", style);
+        level4.setPosition(542, 512-196);
+        level4.setHeight(100);
+        level4.setWidth(100);
+        level4.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
 
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
+        level5 = new TextButton("", style);
+        level5.setPosition(695, 512-196);
+        level5.setHeight(100);
+        level5.setWidth(100);
+        level5.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
+
+        level6 = new TextButton("", style);
+        level6.setPosition(98, 512-306);
+        level6.setHeight(100);
+        level6.setWidth(100);
+        level6.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//                Gdx.app.log("my app", "Released");
+            }
+        });
         menubutton = new TextButton("", style);
         menubutton.setPosition(312, 28);
         menubutton.setHeight(40);
@@ -210,6 +264,9 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         stage.addActor(level1);
         stage.addActor(level2);
         stage.addActor(level3);
+        stage.addActor(level4);
+        stage.addActor(level5);
+        stage.addActor(level6);
         stage.addActor(menubutton);
         stage.addActor(startbutton);
     }

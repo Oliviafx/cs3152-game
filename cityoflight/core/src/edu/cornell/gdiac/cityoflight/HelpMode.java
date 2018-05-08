@@ -24,8 +24,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
 
+import javax.xml.soap.Text;
+
 public class HelpMode implements Screen, ControllerListener, ContactListener, InputProcessor, ApplicationListener {
-    private static final String BACKGROUND_FILE = "textures/help/help_ui_top menu.png";
+    private static final String BACKGROUND_FILE = "help/help_ui_top_menu.png";
+    private static final String CONTROLS_FILE = "help/help_ui_controls.png";
+    private static final String CREATURE_SELECTION_FILE = "help/help_ui_top menu (hover).png";
+    private static final String BACK_FILE = "textures/menu assets/help.png";
+
 //    private static final String PLAY_BTN_FILE = "textures/resume.png";
 //    private static final String QUIT_BTN_FILE = "textures/quit.png";
     /** Standard window size (for scaling) */
@@ -38,10 +44,11 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 
     private Texture background;
 //    private Texture playButton;
-//    private Texture quitButton;
-    private Texture exitButton;
+    private Texture quitButton;
+//    private Texture exitButton;
     private int controlState;
     private int creatureState;
+    private int quitState;
 
     /** Scaling factor for when the student changes the resolution. */
     private float scale;
@@ -65,8 +72,11 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         background = new Texture(BACKGROUND_FILE);
         controlState = 0;
         creatureState = 0;
+        quitState = 0;
+//        exitButton = null;
 //        playButton = null;
-//        quitButton = null;
+        quitButton = new Texture(BACK_FILE);
+        quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         active = false;
 
 
@@ -140,12 +150,16 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         // Useless if called in outside animation loop
     }
 
-    private boolean backToGame() {
+    private boolean backToHelp() {
+        return quitState == 2;
+    }
+
+    private boolean toControls() {
 //        boolean val = (playbutton != null) ? playbutton.isPressed() : false;
         return controlState == 2;// || val;
     }
 
-    private boolean toMenu() {
+    private boolean toCreatures() {
 //        boolean val = (quitbutton != null) ? quitbutton.isPressed() : false;
         return creatureState == 2;// || val;
     }
@@ -213,6 +227,11 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //        if (stage == null) {
 //            create();
 //        }
+        if (quitButton != null && toControls()) {
+            System.out.println("quit button");
+            quitButton = new Texture(BACK_FILE);
+            quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
 //        if (playButton == null) {
 //            playButton = new Texture(PLAY_BTN_FILE);
 //            playButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -232,7 +251,22 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 
     public void draw() {
         canvas.begin();
-        canvas.draw(background, Color.WHITE, 0, 0, 0 ,0, 0, 1f, 1f);
+        if (!toControls() && !toCreatures()) {
+            canvas.draw(background, Color.WHITE, 0, 0, 0, 0, 0, 1f, 1f);
+        }
+        else if (toControls()) {
+            System.out.println(quitButton == null);
+            canvas.draw(new Texture(CONTROLS_FILE), Color.WHITE, 0, 0, 0, 0, 0, 1f, 1f);
+            if (quitButton != null) {
+//                System.out.println("here");
+                Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
+                canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
+                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+            }
+        }
+        else if (toCreatures()) {
+            canvas.draw(new Texture(CREATURE_SELECTION_FILE), Color.WHITE, 0, 0, 0, 0, 0, 1f, 1f);
+        }
         Color tint = (controlState == 1 ? Color.GRAY: Color.WHITE);
 //        canvas.draw(playButton, tint, playButton.getWidth(), playButton.getHeight(),
 //                controlX +playButton.getWidth(), controlY +playButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
@@ -267,15 +301,15 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         draw();
 //            stage.draw();
 //            stage.act();
-        System.out.println(creatureState+" creature state");
-        System.out.println(controlState+" control state");
-        if (backToGame() && listener != null) {
-
-            listener.exitScreen(this, 2);
+//        System.out.println(creatureState+" creature state");
+//        System.out.println(controlState+" control state");
+        if (toControls() && listener != null) {
+            System.out.println("here");
+//            listener.exitScreen(this, 6);
         }
-        if (toMenu() && listener != null) {
+        if (toCreatures() && listener != null) {
 
-            listener.exitScreen(this, 1);
+//            listener.exitScreen(this, 7);
         }
     }
 
@@ -322,7 +356,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         float dist = (screenX- controlX)*(screenX- controlX)+(screenY- controlY)*(screenY- controlY);
 //        if (dist < radius*radius) {
         if ((screenX > controlX && screenX < controlX +300) && (screenY > controlY && screenY < controlY +30)) {
-            controlState = 1;
+            creatureState = 1;
 
         }
 
@@ -330,7 +364,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //        if (dist2 < radius*radius) {
         if ((screenX > creatureX && screenX < creatureX +330) && (screenY > creatureY && screenY < creatureY +30)) {
 
-            creatureState = 1;
+            controlState = 1;
         }
         return false;
     }
