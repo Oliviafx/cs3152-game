@@ -2,7 +2,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[7, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 12, 10, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 9, 9, 7, 8, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 9, 9, 10, 11, 9, 7, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 10, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9],
+         "data":[7, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 12, 10, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 11, 9, 7, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 10, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9],
          "height":8,
          "name":"Base",
          "opacity":1,
@@ -42,7 +42,7 @@
                      "texture":"tarasque",
                      "texture2":"tarasque_down",
                      "texture3":"tarasque_up",
-                     "turn":1,
+                     "turn":3,
                      "type":2,
                      "xinput":0,
                      "yinput":-300
@@ -67,8 +67,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":439,
-                 "y":302
+                 "x":428,
+                 "y":303
                 }, 
                 {
                  "height":102.964,
@@ -78,8 +78,8 @@
                  "type":"",
                  "visible":true,
                  "width":40,
-                 "x":467,
-                 "y":188
+                 "x":449,
+                 "y":186
                 }, 
                 {
                  "height":0,
@@ -121,17 +121,6 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":8,
-         "name":"Tutorial",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":14,
          "x":0,
          "y":0
         }, 
@@ -1037,7 +1026,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":164,
+ "nextobjectid":160,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.5",
@@ -1250,58 +1239,6 @@
          "tilecount":2,
          "tileheight":64,
          "tilewidth":128
-        }, 
-        {
-         "columns":1,
-         "firstgid":124,
-         "image":"..\/tutorial\/tutorial_box.png",
-         "imageheight":80,
-         "imagewidth":80,
-         "margin":0,
-         "name":"box1",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":80,
-         "tilewidth":80
-        }, 
-        {
-         "columns":1,
-         "firstgid":125,
-         "image":"..\/tutorial\/tutorial_box.png",
-         "imageheight":80,
-         "imagewidth":80,
-         "margin":0,
-         "name":"box2",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":80,
-         "tilewidth":80
-        }, 
-        {
-         "columns":1,
-         "firstgid":126,
-         "image":"..\/tutorial\/tutorial_spacebar.png",
-         "imageheight":16,
-         "imagewidth":50,
-         "margin":0,
-         "name":"tutorial_spacebar",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":16,
-         "tilewidth":50
-        }, 
-        {
-         "columns":1,
-         "firstgid":127,
-         "image":"..\/tutorial\/box_outline.png",
-         "imageheight":80,
-         "imagewidth":80,
-         "margin":0,
-         "name":"box_outline",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":80,
-         "tilewidth":80
         }],
  "tilewidth":64,
  "type":"map",
