@@ -1205,6 +1205,7 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
+					level.objects.remove(distraction);
 				}
 			}
 
