@@ -27,35 +27,44 @@
  <tileset firstgid="85" name="tarasque_side" tilewidth="215" tileheight="128" tilecount="28" columns="28">
   <image source="../textures/tarasque_side.png" width="6030" height="128"/>
  </tileset>
- <tileset firstgid="113" name="128_cafe_red" tilewidth="128" tileheight="64" tilecount="2" columns="1">
+ <tileset firstgid="113" name="128_cafe_red" tilewidth="128" tileheight="64" tilecount="1" columns="1">
   <image source="../textures/128_cafe_red.png" width="128" height="127"/>
  </tileset>
- <tileset firstgid="115" name="128_cafe_purple" tilewidth="128" tileheight="64" tilecount="2" columns="1">
+ <tileset firstgid="114" name="128_cafe_purple" tilewidth="128" tileheight="64" tilecount="2" columns="1">
   <image source="../textures/128_cafe_purple.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="117" name="128_flowershop" tilewidth="128" tileheight="64" tilecount="2" columns="1">
+ <tileset firstgid="116" name="128_flowershop" tilewidth="128" tileheight="64" tilecount="2" columns="1">
   <image source="../textures/128_flowershop.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="119" name="64_building_short_side" tilewidth="64" tileheight="64" tilecount="2" columns="1">
+ <tileset firstgid="118" name="64_building_short_side" tilewidth="64" tileheight="64" tilecount="2" columns="1">
   <image source="../textures/64_building_short_side.png" width="64" height="128"/>
  </tileset>
- <tileset firstgid="121" name="128_cafe_blue" tilewidth="128" tileheight="64" tilecount="2" columns="1">
+ <tileset firstgid="120" name="128_cafe_blue" tilewidth="128" tileheight="64" tilecount="2" columns="1">
   <image source="../textures/128_cafe_blue.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="123" name="128_cafe_green" tilewidth="128" tileheight="64" tilecount="2" columns="1">
+ <tileset firstgid="122" name="128_cafe_green" tilewidth="128" tileheight="64" tilecount="2" columns="1">
   <image source="../textures/128_cafe_green.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="125" name="outline1" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="124" name="outline1" tilewidth="64" tileheight="64" tilecount="1" columns="1">
   <image source="../tutorial/tutorial_box.png" width="80" height="80"/>
  </tileset>
- <tileset firstgid="126" name="box2" tilewidth="80" tileheight="80" tilecount="1" columns="1">
+ <tileset firstgid="125" name="box2" tilewidth="80" tileheight="80" tilecount="1" columns="1">
   <image source="../tutorial/tutorial_box.png" width="80" height="80"/>
  </tileset>
- <tileset firstgid="127" name="tutorial_spacebar" tilewidth="50" tileheight="16" tilecount="1" columns="1">
+ <tileset firstgid="126" name="tutorial_spacebar" tilewidth="50" tileheight="16" tilecount="1" columns="1">
   <image source="../tutorial/tutorial_spacebar.png" width="50" height="16"/>
  </tileset>
- <tileset firstgid="128" name="birdoutline" tilewidth="64" tileheight="45" tilecount="1" columns="1">
+ <tileset firstgid="127" name="birdoutline" tilewidth="64" tileheight="45" tilecount="1" columns="1">
   <image source="../tutorial/birdoutline.png" width="64" height="45"/>
+ </tileset>
+ <tileset firstgid="128" name="tar_outline" tilewidth="70" tileheight="136" tilecount="1" columns="1">
+  <image source="../tutorial/tar_outline.png" width="70" height="136"/>
+ </tileset>
+ <tileset firstgid="129" name="outline_annette_left" tilewidth="49" tileheight="80" tilecount="1" columns="1">
+  <image source="../tutorial/outline_annette_left.png" width="49" height="80"/>
+ </tileset>
+ <tileset firstgid="130" name="blanche_outline" tilewidth="113" tileheight="162" tilecount="1" columns="1">
+  <image source="../tutorial/blanche_outline.png" width="113" height="162"/>
  </tileset>
  <layer name="Base" width="14" height="8">
   <data encoding="csv">
@@ -158,7 +167,7 @@
     <property name="soft" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="176" name="blanche3" gid="32" x="400" y="511" width="64" height="160">
+  <object id="176" name="blanche3" gid="32" x="447" y="511" width="64" height="160">
    <properties>
     <property name="bodytype" value="dynamic"/>
     <property name="collideBits" value="0001"/>
@@ -175,8 +184,8 @@
     <property name="yinput" type="float" value="180"/>
    </properties>
   </object>
-  <object id="177" name="blanche_box3" x="400" y="399" width="24" height="50"/>
-  <object id="178" name="lady_vision3" x="400" y="383" width="45" height="38">
+  <object id="177" name="blanche_box3" x="447" y="399" width="24" height="50"/>
+  <object id="178" name="lady_vision3" x="447" y="383" width="45" height="38">
    <properties>
     <property name="a" type="float" value="0.3"/>
     <property name="angle" type="int" value="20"/>
@@ -233,27 +242,27 @@
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="118" name="building4" gid="116" x="128" y="256.067" width="128" height="64">
+  <object id="118" name="building4" gid="115" x="128" y="256.067" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
   </object>
-  <object id="119" name="building5" gid="118" x="0" y="256.067" width="128" height="64">
+  <object id="119" name="building5" gid="117" x="0" y="256.067" width="128" height="64">
    <properties>
     <property name="texture" value="128_flowershop"/>
    </properties>
   </object>
-  <object id="129" name="building6" gid="124" x="768" y="320" width="128" height="64">
+  <object id="129" name="building6" gid="123" x="768" y="320" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_green"/>
    </properties>
   </object>
-  <object id="130" name="building7" gid="116" x="704" y="128" width="128" height="64">
+  <object id="130" name="building7" gid="115" x="704" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
   </object>
-  <object id="131" name="building8" gid="120" x="832" y="128" width="64" height="64">
+  <object id="131" name="building8" gid="119" x="832" y="128" width="64" height="64">
    <properties>
     <property name="texture" value="64_building_short_side"/>
    </properties>
@@ -284,7 +293,7 @@
   <object id="187" name="box9" x="256" y="96" width="64" height="39"/>
   <object id="188" name="box10" x="256" y="58" width="64" height="39"/>
   <object id="189" name="box11" x="256" y="36" width="64" height="58"/>
-  <object id="192" name="building12" gid="116" x="129" y="215.067" width="128" height="64">
+  <object id="192" name="building12" gid="115" x="129" y="215.067" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
@@ -293,10 +302,10 @@
  </objectgroup>
  <layer name="Roofs" width="14" height="8">
   <data encoding="csv">
-0,0,115,0,0,121,119,0,0,0,0,113,0,119,
-0,0,115,0,0,121,0,0,0,0,0,0,0,0,
-123,0,115,0,0,121,0,13,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,115,0,0,0,0,0,
+0,0,114,0,0,120,118,0,0,0,0,113,0,118,
+0,0,114,0,0,120,0,0,0,0,0,0,0,0,
+122,0,114,0,0,120,0,13,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,114,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -310,9 +319,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,128,0,0,0,0,
+0,0,0,0,0,0,0,0,0,127,129,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,130,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup name="Exit">

@@ -83,7 +83,7 @@
                  "type":"",
                  "visible":true,
                  "width":39.1176,
-                 "x":42.1239999999999,
+                 "x":42.124,
                  "y":106
                 }],
          "opacity":1,
@@ -321,7 +321,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":400,
+                 "x":447,
                  "y":511
                 }, 
                 {
@@ -332,7 +332,7 @@
                  "type":"",
                  "visible":true,
                  "width":24,
-                 "x":400,
+                 "x":447,
                  "y":399
                 }, 
                 {
@@ -369,7 +369,7 @@
                  "type":"",
                  "visible":true,
                  "width":45,
-                 "x":400,
+                 "x":447,
                  "y":383
                 }],
          "opacity":1,
@@ -673,18 +673,18 @@
                  "y":139
                 }, 
                 {
-                 "height":80.707,
+                 "height":90.707,
                  "id":134,
                  "name":"box4",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":125.298329355609,
-                 "x":128.707807705421,
-                 "y":176
+                 "width":125.298,
+                 "x":128.708,
+                 "y":166
                 }, 
                 {
-                 "height":79,
+                 "height":86,
                  "id":135,
                  "name":"box5",
                  "rotation":0,
@@ -692,10 +692,10 @@
                  "visible":true,
                  "width":125.298,
                  "x":0,
-                 "y":176
+                 "y":169
                 }, 
                 {
-                 "height":80.38,
+                 "height":87.38,
                  "id":155,
                  "name":"box6",
                  "rotation":0,
@@ -703,10 +703,10 @@
                  "visible":true,
                  "width":126,
                  "x":769,
-                 "y":240
+                 "y":233
                 }, 
                 {
-                 "height":80.38,
+                 "height":87.38,
                  "id":156,
                  "name":"box7",
                  "rotation":0,
@@ -714,10 +714,10 @@
                  "visible":true,
                  "width":126,
                  "x":706,
-                 "y":48
+                 "y":41
                 }, 
                 {
-                 "height":80.38,
+                 "height":87.38,
                  "id":157,
                  "name":"box8",
                  "rotation":0,
@@ -725,10 +725,10 @@
                  "visible":true,
                  "width":64,
                  "x":831,
-                 "y":48
+                 "y":41
                 }, 
                 {
-                 "height":80.447,
+                 "height":89.447,
                  "id":159,
                  "name":"box3",
                  "rotation":0,
@@ -736,10 +736,10 @@
                  "visible":true,
                  "width":65,
                  "x":255,
-                 "y":176
+                 "y":167
                 }, 
                 {
-                 "height":80.38,
+                 "height":87.38,
                  "id":165,
                  "name":"box2",
                  "rotation":0,
@@ -747,10 +747,10 @@
                  "visible":true,
                  "width":129,
                  "x":320,
-                 "y":176
+                 "y":169
                 }, 
                 {
-                 "height":80.38,
+                 "height":87.38,
                  "id":166,
                  "name":"box1",
                  "rotation":0,
@@ -758,7 +758,7 @@
                  "visible":true,
                  "width":128,
                  "x":448,
-                 "y":176
+                 "y":169
                 }, 
                 {
                  "height":39,
@@ -772,7 +772,7 @@
                  "y":96
                 }, 
                 {
-                 "height":80,
+                 "height":39,
                  "id":188,
                  "name":"box10",
                  "rotation":0,
@@ -780,10 +780,10 @@
                  "visible":true,
                  "width":64,
                  "x":256,
-                 "y":112
+                 "y":58
                 }, 
                 {
-                 "height":80,
+                 "height":58,
                  "id":189,
                  "name":"box11",
                  "rotation":0,
@@ -791,7 +791,7 @@
                  "visible":true,
                  "width":64,
                  "x":256,
-                 "y":48
+                 "y":36
                 }, 
                 {
                  "gid":115,
@@ -814,7 +814,7 @@
                  "y":215.067
                 }, 
                 {
-                 "height":80,
+                 "height":112.707,
                  "id":193,
                  "name":"box12",
                  "rotation":0,
@@ -822,7 +822,7 @@
                  "visible":true,
                  "width":125.298,
                  "x":129.708,
-                 "y":112
+                 "y":103
                 }],
          "opacity":1,
          "properties":
@@ -850,7 +850,7 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
          "name":"Tutorial",
          "opacity":1,
@@ -1027,7 +1027,7 @@
  "nextobjectid":194,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.1.3",
+ "tiledversion":"1.1.5",
  "tileheight":64,
  "tilesets":[
         {
@@ -1289,6 +1289,45 @@
          "tilecount":1,
          "tileheight":45,
          "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":128,
+         "image":"..\/tutorial\/tar_outline.png",
+         "imageheight":136,
+         "imagewidth":70,
+         "margin":0,
+         "name":"tar_outline",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":136,
+         "tilewidth":70
+        }, 
+        {
+         "columns":1,
+         "firstgid":129,
+         "image":"..\/tutorial\/outline_annette_left.png",
+         "imageheight":80,
+         "imagewidth":49,
+         "margin":0,
+         "name":"outline_annette_left",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":80,
+         "tilewidth":49
+        }, 
+        {
+         "columns":1,
+         "firstgid":130,
+         "image":"..\/tutorial\/blanche_outline.png",
+         "imageheight":162,
+         "imagewidth":113,
+         "margin":0,
+         "name":"blanche_outline",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":162,
+         "tilewidth":113
         }],
  "tilewidth":64,
  "type":"map",
