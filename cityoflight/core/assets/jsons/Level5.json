@@ -73,7 +73,7 @@
                  "visible":true,
                  "width":69,
                  "x":15,
-                 "y":208
+                 "y":177
                 }, 
                 {
                  "height":16.5845,
@@ -84,7 +84,7 @@
                  "visible":true,
                  "width":39.1176,
                  "x":29.1239999999999,
-                 "y":287
+                 "y":256
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -167,7 +167,7 @@
          "name":"Buildings",
          "objects":[
                 {
-                 "gid":121,
+                 "gid":122,
                  "height":64,
                  "id":223,
                  "name":"building1",
@@ -187,7 +187,7 @@
                  "y":384
                 }, 
                 {
-                 "gid":147,
+                 "gid":148,
                  "height":64,
                  "id":224,
                  "name":"building2",
@@ -207,7 +207,7 @@
                  "y":387
                 }, 
                 {
-                 "gid":115,
+                 "gid":116,
                  "height":64,
                  "id":225,
                  "name":"building3",
@@ -227,7 +227,7 @@
                  "y":384
                 }, 
                 {
-                 "gid":117,
+                 "gid":118,
                  "height":64,
                  "id":226,
                  "name":"building4",
@@ -267,7 +267,7 @@
                  "y":384
                 }, 
                 {
-                 "gid":119,
+                 "gid":120,
                  "height":64,
                  "id":229,
                  "name":"building6",
@@ -287,7 +287,7 @@
                  "y":384
                 }, 
                 {
-                 "height":80,
+                 "height":89,
                  "id":233,
                  "name":"box6",
                  "rotation":0,
@@ -295,10 +295,10 @@
                  "visible":true,
                  "width":64,
                  "x":0,
-                 "y":304
+                 "y":295
                 }, 
                 {
-                 "height":80,
+                 "height":89,
                  "id":234,
                  "name":"box1",
                  "rotation":0,
@@ -306,10 +306,10 @@
                  "visible":true,
                  "width":128,
                  "x":64,
-                 "y":304
+                 "y":295
                 }, 
                 {
-                 "height":80,
+                 "height":89,
                  "id":235,
                  "name":"box2",
                  "rotation":0,
@@ -317,10 +317,10 @@
                  "visible":true,
                  "width":128,
                  "x":192,
-                 "y":304
+                 "y":295
                 }, 
                 {
-                 "height":80,
+                 "height":89,
                  "id":236,
                  "name":"box3",
                  "rotation":0,
@@ -328,10 +328,10 @@
                  "visible":true,
                  "width":128,
                  "x":320,
-                 "y":304
+                 "y":295
                 }, 
                 {
-                 "height":80,
+                 "height":89,
                  "id":237,
                  "name":"box4",
                  "rotation":0,
@@ -339,10 +339,10 @@
                  "visible":true,
                  "width":128,
                  "x":448,
-                 "y":304
+                 "y":295
                 }, 
                 {
-                 "height":80,
+                 "height":89,
                  "id":238,
                  "name":"box5",
                  "rotation":0,
@@ -350,7 +350,7 @@
                  "visible":true,
                  "width":64,
                  "x":576,
-                 "y":304
+                 "y":295
                 }],
          "opacity":1,
          "properties":
@@ -367,7 +367,7 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 114, 0, 113, 0, 122, 0, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 119, 115, 0, 113, 0, 123, 0, 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
          "name":"Roofs",
          "opacity":1,
@@ -617,7 +617,7 @@
                  "visible":true,
                  "width":64,
                  "x":549.909,
-                 "y":257.933
+                 "y":284.933
                 }, 
                 {
                  "height":102.964,
@@ -628,7 +628,7 @@
                  "visible":true,
                  "width":40,
                  "x":570.909,
-                 "y":140.933
+                 "y":167.933
                 }, 
                 {
                  "height":0,
@@ -665,7 +665,7 @@
                  "visible":true,
                  "width":0,
                  "x":223,
-                 "y":117
+                 "y":144
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -678,7 +678,7 @@
          "name":"Snail",
          "objects":[
                 {
-                 "gid":128,
+                 "gid":129,
                  "height":128,
                  "id":203,
                  "name":"snail1",
@@ -696,7 +696,7 @@
                      "turn":1,
                      "type":1,
                      "xinput":0,
-                     "yinput":180
+                     "yinput":160
                     },
                  "propertytypes":
                     {
@@ -719,7 +719,7 @@
                  "visible":true,
                  "width":64,
                  "x":210,
-                 "y":286
+                 "y":264
                 }, 
                 {
                  "height":75,
@@ -730,7 +730,7 @@
                  "visible":true,
                  "width":59,
                  "x":213,
-                 "y":209
+                 "y":187
                 }, 
                 {
                  "height":12,
@@ -767,10 +767,10 @@
                  "visible":true,
                  "width":2,
                  "x":295,
-                 "y":222
+                 "y":200
                 }, 
                 {
-                 "gid":128,
+                 "gid":129,
                  "height":128,
                  "id":207,
                  "name":"snail2",
@@ -788,7 +788,7 @@
                      "turn":1,
                      "type":1,
                      "xinput":0,
-                     "yinput":125
+                     "yinput":160
                     },
                  "propertytypes":
                     {
@@ -862,7 +862,7 @@
                  "y":146
                 }, 
                 {
-                 "gid":128,
+                 "gid":129,
                  "height":128,
                  "id":210,
                  "name":"snail3",
@@ -880,7 +880,7 @@
                      "turn":1,
                      "type":1,
                      "xinput":0,
-                     "yinput":125
+                     "yinput":160
                     },
                  "propertytypes":
                     {
@@ -1126,7 +1126,7 @@
  "nextobjectid":239,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.1.3",
+ "tiledversion":"1.1.5",
  "tileheight":64,
  "tilesets":[
         {
@@ -1268,13 +1268,13 @@
          "margin":0,
          "name":"128_cafe_red",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":2,
          "tileheight":64,
          "tilewidth":128
         }, 
         {
          "columns":1,
-         "firstgid":114,
+         "firstgid":115,
          "image":"..\/textures\/128_cafe_purple.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1287,7 +1287,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":116,
+         "firstgid":117,
          "image":"..\/textures\/128_flowershop.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1300,7 +1300,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":118,
+         "firstgid":119,
          "image":"..\/textures\/64_building_short_side.png",
          "imageheight":128,
          "imagewidth":64,
@@ -1313,7 +1313,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":120,
+         "firstgid":121,
          "image":"..\/textures\/128_cafe_blue.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1326,7 +1326,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":122,
+         "firstgid":123,
          "image":"..\/textures\/128_cafe_green.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1339,7 +1339,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":124,
+         "firstgid":125,
          "image":"..\/tutorial\/tutorial_box.png",
          "imageheight":80,
          "imagewidth":80,
@@ -1352,7 +1352,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":125,
+         "firstgid":126,
          "image":"..\/tutorial\/tutorial_box.png",
          "imageheight":80,
          "imagewidth":80,
@@ -1365,7 +1365,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":126,
+         "firstgid":127,
          "image":"..\/tutorial\/tutorial_spacebar.png",
          "imageheight":16,
          "imagewidth":50,
@@ -1378,7 +1378,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":127,
+         "firstgid":128,
          "image":"..\/tutorial\/birdoutline.png",
          "imageheight":45,
          "imagewidth":64,
@@ -1391,7 +1391,7 @@
         }, 
         {
          "columns":18,
-         "firstgid":128,
+         "firstgid":129,
          "image":"..\/textures\/snail_up.png",
          "imageheight":128,
          "imagewidth":1200,
@@ -1404,7 +1404,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":146,
+         "firstgid":147,
          "image":"..\/textures\/128_cafe_red.png",
          "imageheight":127,
          "imagewidth":128,
