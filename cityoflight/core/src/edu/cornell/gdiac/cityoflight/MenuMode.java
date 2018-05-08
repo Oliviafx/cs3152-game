@@ -169,6 +169,11 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
     private Game parent;
 
+    private GameController gameController;
+    public void setGameController(GameController val) {
+        gameController = val;
+    }
+
     /** Background texture for start-up */
     private Texture background;
     /** Standard window size (for scaling) */
