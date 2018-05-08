@@ -57,6 +57,12 @@
  <tileset firstgid="127" name="box_outline" tilewidth="80" tileheight="80" tilecount="1" columns="1">
   <image source="../tutorial/box_outline.png" width="80" height="80"/>
  </tileset>
+ <tileset firstgid="128" name="tar_outline" tilewidth="70" tileheight="126" tilecount="1" columns="1">
+  <image source="../tutorial/tar_outline.png" width="70" height="136"/>
+ </tileset>
+ <tileset firstgid="129" name="outline_annette" tilewidth="49" tileheight="80" tilecount="1" columns="1">
+  <image source="../tutorial/outline_annette.png" width="49" height="80"/>
+ </tileset>
  <layer name="Base" width="14" height="8">
   <data encoding="csv">
 7,8,12,12,12,12,12,12,12,12,12,12,9,9,
@@ -88,7 +94,7 @@
     <property name="yinput" type="float" value="-300"/>
    </properties>
   </object>
-  <object id="74" name="tarasque_box1" x="467" y="188" width="40" height="102.964"/>
+  <object id="74" name="tarasque_box1" x="467" y="188" width="40" height="86"/>
   <object id="108" name="dragon_vision1" x="101.091" y="162.067">
    <properties>
     <property name="a" type="float" value="0.3"/>
@@ -109,9 +115,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,127,0,0,0,0,0,0,
+0,0,0,0,0,0,129,127,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,128,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
@@ -166,27 +172,27 @@
   <properties>
    <property name="texture" value=""/>
   </properties>
-  <object id="116" name="building1" gid="114" x="448" y="448" width="128" height="64">
+  <object id="116" name="building1" gid="114" x="450" y="510" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_red"/>
    </properties>
   </object>
-  <object id="114" name="building2" gid="14" x="320" y="448" width="125" height="64">
+  <object id="114" name="building2" gid="14" x="322" y="510" width="125" height="64">
    <properties>
     <property name="texture" value="128_bookstore"/>
    </properties>
   </object>
-  <object id="117" name="building3" gid="15" x="256" y="448" width="64" height="128">
+  <object id="117" name="building3" gid="15" x="258" y="510" width="64" height="128">
    <properties>
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="118" name="building4" gid="115" x="128" y="448" width="128" height="64">
+  <object id="118" name="building4" gid="115" x="130" y="510" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
   </object>
-  <object id="119" name="building5" gid="117" x="0" y="448" width="128" height="64">
+  <object id="119" name="building5" gid="117" x="2" y="510" width="128" height="64">
    <properties>
     <property name="texture" value="128_flowershop"/>
    </properties>
@@ -196,17 +202,17 @@
     <property name="texture" value="128_flowershop"/>
    </properties>
   </object>
-  <object id="121" name="building7" gid="15" x="576" y="448" width="64" height="128">
+  <object id="121" name="building7" gid="15" x="578" y="510" width="64" height="128">
    <properties>
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="122" name="building8" gid="15" x="640" y="448" width="64" height="128">
+  <object id="122" name="building8" gid="15" x="642" y="510" width="64" height="128">
    <properties>
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="123" name="building9" gid="119" x="704" y="448" width="64" height="64">
+  <object id="123" name="building9" gid="119" x="706" y="510" width="64" height="64">
    <properties>
     <property name="texture" value="64_building_short_side"/>
    </properties>
@@ -226,7 +232,7 @@
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="127" name="building13" gid="121" x="768" y="448" width="128" height="64">
+  <object id="127" name="building13" gid="121" x="770" y="510" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_blue"/>
    </properties>
@@ -256,14 +262,14 @@
     <property name="texture" value="128_cafe_green"/>
    </properties>
   </object>
-  <object id="134" name="box4" x="128.708" y="361.26" width="125.298" height="87.38"/>
-  <object id="135" name="box5" x="0" y="361" width="125.298" height="87.38"/>
-  <object id="138" name="box2" x="321" y="361" width="125.298" height="87.38"/>
-  <object id="139" name="box1" x="448" y="361" width="128.298" height="87.38"/>
-  <object id="141" name="box7" x="577" y="361" width="63" height="87.38"/>
-  <object id="142" name="box8" x="641" y="361" width="63" height="87.38"/>
-  <object id="143" name="box9" x="705" y="361" width="63" height="87.38"/>
-  <object id="144" name="box13" x="770" y="362" width="126" height="87.38"/>
+  <object id="134" name="box4" x="130.708" y="423.26" width="125.298" height="87.38"/>
+  <object id="135" name="box5" x="2" y="423" width="125.298" height="87.38"/>
+  <object id="138" name="box2" x="323" y="423" width="125.298" height="87.38"/>
+  <object id="139" name="box1" x="450" y="423" width="128.298" height="87.38"/>
+  <object id="141" name="box7" x="579" y="423" width="63" height="87.38"/>
+  <object id="142" name="box8" x="643" y="423" width="63" height="87.38"/>
+  <object id="143" name="box9" x="707" y="423" width="63" height="87.38"/>
+  <object id="144" name="box13" x="772" y="424" width="126" height="87.38"/>
   <object id="148" name="box14" x="2" y="41" width="126" height="87.38"/>
   <object id="149" name="box15" x="130" y="41" width="126" height="87.38"/>
   <object id="150" name="box12" x="257" y="32" width="64" height="97"/>
@@ -274,7 +280,7 @@
   <object id="156" name="box16" x="706" y="41" width="126" height="87.38"/>
   <object id="157" name="box17" x="819" y="41" width="126" height="87.38"/>
   <object id="158" name="box18" x="129" y="41" width="126" height="87.38"/>
-  <object id="159" name="box3" x="255" y="361" width="65" height="87.38"/>
+  <object id="159" name="box3" x="257" y="423" width="65" height="87.38"/>
  </objectgroup>
  <layer name="Roofs" width="14" height="8">
   <data encoding="csv">
