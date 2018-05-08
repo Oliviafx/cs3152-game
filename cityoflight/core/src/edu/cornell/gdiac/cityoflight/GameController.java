@@ -796,13 +796,13 @@ public class GameController implements Screen, ContactListener {
 				encouragement = "Don't worry, it's mime over matter.";
 				break;
 			case 3:
-				encouragement = "Cmon, we know you can do it!";
+				encouragement = "C'mon, you can do it!";
 				break;
 			case 4:
-				encouragement =  "Even my grandma beat this level.";
+				encouragement = "Even my grandma beat this level.";
 				break;
 			case 5:
-				encouragement = "Ooooooh sooooo close :(";
+				encouragement = "Walker frowns upon your failure.";
 				break;
 		}
 		return encouragement;
@@ -820,7 +820,7 @@ public class GameController implements Screen, ContactListener {
 		String encouragement = "Should never get here";
 		switch(random){
 			case 1:
-				encouragement = "Piece of cake!";
+				encouragement = "You reached en/light/enment.";
 				break;
 			case 2:
 				encouragement = "Ready for a real challenge?";
