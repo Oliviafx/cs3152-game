@@ -445,7 +445,12 @@ public class GameController implements Screen, ContactListener {
 			countdown--;
 		} else if (countdown == 0) {
 			if (complete) {
-				whichlevel++;
+				if (whichlevel < 6) {
+					whichlevel++;
+				}
+				else {
+					whichlevel = 1;
+				}
 			}
 			reset();
 
