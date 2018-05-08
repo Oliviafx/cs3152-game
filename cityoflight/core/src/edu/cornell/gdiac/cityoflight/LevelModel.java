@@ -1657,7 +1657,7 @@ public class LevelModel {
 			cameraYEnd = canvas.getHeight() * 1.6f / scale.y;
 		}
 		else {
-			System.out.println("Not a valid window ratio.");
+//			System.out.println("Not a valid window ratio.");
 		}
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);

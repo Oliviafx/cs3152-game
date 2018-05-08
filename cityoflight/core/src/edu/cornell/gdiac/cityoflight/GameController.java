@@ -535,7 +535,7 @@ public class GameController implements Screen, ContactListener {
 		if (distraction != null) {
 			if (!distraction.getAlive() && distraction.isActive()) {
 				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f, soundPlay);
-				level.objects.remove(distraction);
+//				level.objects.remove(distraction);
 			}
 		}
 
