@@ -16,21 +16,16 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import edu.cornell.gdiac.physics.lights.LightSource;
+import com.sun.javafx.scene.control.behavior.ColorPickerBehavior;
 import edu.cornell.gdiac.util.*;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import edu.cornell.gdiac.physics.obstacle.*;
-import javafx.scene.transform.Affine;
 
 /**
  * Gameplay controller for the game.
@@ -65,6 +60,7 @@ public class GameController implements Screen, ContactListener {
 
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
+	protected BitmapFont textFont;
 
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
@@ -86,6 +82,21 @@ public class GameController implements Screen, ContactListener {
 	private FilmStrip indicator_seen;
 	private boolean seenhasAnimated = false;
 
+	private FilmStrip general_transition;
+	private boolean general_transition_hasAnimated = false;
+	private int GENERAL_TRANSITION_SECOND = 21;
+	private boolean general_transition_second_part;
+
+	private FilmStrip win_transition;
+	private boolean win_transition_hasAnimated = false;
+	private int WIN_TRANSITION_SECOND = 15;
+	private boolean win_transition_second_part;
+
+	/** The text to show on a winning/losing screen */
+	private boolean hasChosenText = false;
+	private String chosentext;
+
+	TextureRegion lose_screen, win_screen;
 
 	private boolean stopWalkInPlace = false;
 
@@ -129,6 +140,7 @@ public class GameController implements Screen, ContactListener {
 
 		JsonAssetManager.getInstance().allocateDirectory();
 		displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
+		textFont = JsonAssetManager.getInstance().getEntry("text", BitmapFont.class);
 		assetState = AssetState.COMPLETE;
 	}
 
@@ -365,6 +377,12 @@ public class GameController implements Screen, ContactListener {
 		}
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
+
+		general_transition_hasAnimated = false;
+		general_transition_second_part = false;
+		win_transition_hasAnimated = false;
+		win_transition_second_part = false;
+		hasChosenText = false;
 	}
 
 	/**
@@ -717,18 +735,39 @@ public class GameController implements Screen, ContactListener {
 
 		// Final message
 		if (complete && !failed) {
-			displayFont.setColor(Color.GOLDENROD);
-			canvas.begin(); // DO NOT SCALE
-//			canvas.drawTextCentered("Cleared.", displayFont, tx - canvas.getWidth()/2, ty - canvas.getHeight()/2);
-			canvas.drawTextCentered("Cleared.", displayFont);
-			canvas.end();
+			if (general_transition_second_part) {
+				drawWinScreen();
+				textFont.setColor(Color.WHITE);
+				if (!hasChosenText){
+					chosentext = chooseWinningText();
+					hasChosenText = true;
+				}
+				canvas.begin(); // DO NOT SCALE
+				canvas.drawText(chosentext, textFont, 110 ,200);
+				canvas.end();
+//				displayFont.setColor(Color.GOLDENROD);
+//				canvas.begin(); // DO NOT SCALE
+//				canvas.drawTextCentered("Purified.", displayFont);
+//				canvas.end();
+			}
+			drawGeneralTransition();
 		} else if (failed) {
-
-			displayFont.setColor(Color.FIREBRICK);
-			canvas.begin(); // DO NOT SCALE
-//			canvas.drawTextCentered("Defeated.", displayFont, tx - canvas.getWidth()/2,ty - canvas.getHeight()/2);
-			canvas.drawTextCentered("Defeated.", displayFont);
-			canvas.end();
+			if (general_transition_second_part) {
+				drawLoseScreen();
+				textFont.setColor(Color.WHITE);
+				if (!hasChosenText){
+					chosentext = chooseLosingText();
+					hasChosenText = true;
+				}
+				canvas.begin(); // DO NOT SCALE
+				canvas.drawText(chosentext, textFont, 110 ,200);
+				canvas.end();
+//				displayFont.setColor(Color.FIREBRICK);
+//				canvas.begin(); // DO NOT SCALE
+//				canvas.drawTextCentered("Defeated.", displayFont);
+//				canvas.end();
+			}
+			drawGeneralTransition();
 		}
 	}
 
@@ -740,6 +779,66 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 		return !isbeingseen;
+	}
+
+	public void drawLoseScreen(){
+		TextureRegion lose_screen = JsonAssetManager.getInstance().getEntry("lose_screen", TextureRegion.class);
+		canvas.begin();
+		canvas.draw(lose_screen,0,0);
+		canvas.end();
+	}
+
+	public String chooseLosingText(){
+		int random = (int)(Math.random() * 5 + 1);
+		String encouragement = "Should never get here";
+		switch(random){
+			case 1:
+				encouragement = "Try to think outside the box.";
+				break;
+			case 2:
+				encouragement = "Don't worry, it's mime over matter.";
+				break;
+			case 3:
+				encouragement = "Cmon, we know you can do it!";
+				break;
+			case 4:
+				encouragement =  "Even my grandma beat this level.";
+				break;
+			case 5:
+				encouragement = "Ooooooh sooooo close :(";
+				break;
+		}
+		return encouragement;
+	}
+
+	public void drawWinScreen(){
+		TextureRegion win_screen = JsonAssetManager.getInstance().getEntry("win_screen", TextureRegion.class);
+		canvas.begin();
+		canvas.draw(win_screen,0,0);
+		canvas.end();
+	}
+
+	public String chooseWinningText(){
+		int random = (int)(Math.random() * 5 + 1);
+		String encouragement = "Should never get here";
+		switch(random){
+			case 1:
+				encouragement = "Piece of cake!";
+				break;
+			case 2:
+				encouragement = "Ready for a real challenge?";
+				break;
+			case 3:
+				encouragement = "You have dispelled the creatures!";
+				break;
+			case 4:
+				encouragement =  "City of Light is safe... for now.";
+				break;
+			case 5:
+				encouragement = "And Annette emerges victorious!";
+				break;
+		}
+		return encouragement;
 	}
 
 	public void drawWalkInPlace(){
@@ -826,10 +925,83 @@ public class GameController implements Screen, ContactListener {
 			//batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
 			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
 //			batcher.end();
+			
 			canvas.begin(level.oTran);
 			canvas.draw(indicator_seen,Color.WHITE,30f,30f,
 					(level.getAnnette().getX() * level.scale.x),
 					(level.getAnnette().getY() * level.scale.y + 85), 0f, 1.0f, 1.0f);
+			canvas.end();
+		}
+	}
+
+	public void drawGeneralTransition(){
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("general_transition", TextureRegion.class);
+		try {
+			general_transition = (FilmStrip) texture;
+		} catch (Exception e) {
+			general_transition = null;
+		}
+
+		//System.out.println("general_transition = " + general_transition);
+
+		if (general_transition != null) {
+			//System.out.println("winhasAnimated = " + general_transition_hasAnimated);
+			int current_frame;
+
+			if (general_transition_hasAnimated){
+				current_frame = 0;
+				general_transition.setFrame(current_frame);
+			} else {
+				current_frame = (general_transition.getFrame() + 1);
+				if (current_frame >= GENERAL_TRANSITION_SECOND){general_transition_second_part = true;}
+				if (current_frame < 35) {
+					general_transition.setFrame(current_frame);
+				} else {
+					general_transition_hasAnimated = true;
+				}
+			}
+
+			general_transition.setFrame(current_frame);
+				canvas.begin();
+				System.out.println("drawing:  " + current_frame);
+				canvas.draw(general_transition, Color.WHITE, 224, 128f,
+						canvas.getWidth()/2, canvas.getHeight()/2, 0f, 2f, 2f);
+				canvas.end();
+		}
+	}
+
+	public void drawWinTransition(){
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("win_transition", TextureRegion.class);
+		try {
+			win_transition = (FilmStrip) texture;
+		} catch (Exception e) {
+			win_transition = null;
+		}
+
+		//System.out.println("general_transition = " + win_transition);
+
+		if (win_transition != null) {
+			//System.out.println("winhasAnimated = " + win_transition_hasAnimated);
+			int current_frame;
+
+			if (win_transition_hasAnimated){
+				current_frame = 0;
+				win_transition.setFrame(current_frame);
+			} else {
+				current_frame = (win_transition.getFrame() + 1);
+				if (current_frame >= WIN_TRANSITION_SECOND){win_transition_second_part = true;}
+				if (current_frame < 34) {
+					win_transition.setFrame(current_frame);
+				} else {
+					win_transition_hasAnimated = true;
+				}
+			}
+
+			win_transition.setFrame(current_frame);
+			canvas.begin(level.oTran);
+			//System.out.println("drawing:  " + current_frame);
+			canvas.draw(win_transition, Color.WHITE, 179, 179,
+					level.getExit().getX() * 64, level.getExit().getY() * 64, 0f, 5f, 5f);
 			canvas.end();
 		}
 	}
