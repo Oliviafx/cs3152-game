@@ -61,6 +61,10 @@
 			"file": 	"textures/building_short_side.png",
 			"wrap":		false
 		},
+		"building_right": {
+			"file": 	"textures/building_right.png",
+			"wrap":		false
+		},
 		
 		"128_bookstore": {
 			"file": 	"textures/128_bookstore.png",
@@ -112,6 +116,10 @@
 		},
 		"floor_tiles": {
 			"file": 	"textures/floor_tiles.png",
+			"wrap":  	true
+		},
+		"tiles": {
+			"file": 	"textures/tiles.png",
 			"wrap":  	true
 		},
     	"annette": {

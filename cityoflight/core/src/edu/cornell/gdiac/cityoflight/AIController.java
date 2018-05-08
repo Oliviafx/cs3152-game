@@ -147,7 +147,7 @@ public class AIController{
                     }
                 }
 
-                cAngleCache.set(creature.getXInput(),creature.getYInput());
+                cAngleCache.set(creature.getXInput(), creature.getYInput());
                 //System.out.println("movement = " + currentcreature.getMovement());
                 break;
 
@@ -165,7 +165,8 @@ public class AIController{
                     }
                 }
 
-                cAngleCache.set(creature.getXInput(),creature.getYInput());
+                cAngleCache.set(creature.getXInput(), creature.getYInput());
+
                 break;
 
             case DISTRACT:
@@ -251,10 +252,13 @@ public class AIController{
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
 
             creature.setMovement(cAngleCache.x , cAngleCache.y );
-//            creature.setMovement(0, 0);
+//          creature.setMovement(0, 0);
 
         } else {
-            creature.setMovement(cAngleCache.x,cAngleCache.y);
+
+            if (creature.getTurnBehavior() != 0) {
+                creature.setMovement(cAngleCache.x, cAngleCache.y);
+            }
         }
 
         creature.applyForce(level.getAnnette().isWalkingInPlace());
