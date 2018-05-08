@@ -42,7 +42,7 @@
                      "texture":"tarasque",
                      "texture2":"tarasque_down",
                      "texture3":"tarasque_up",
-                     "turn":0,
+                     "turn":3,
                      "type":2,
                      "xinput":0,
                      "yinput":-300
