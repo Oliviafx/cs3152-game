@@ -426,6 +426,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
             showExit = false;
         }
         if (toTarasque() && listener != null) {
+            snailState = 0;
             tarasqueState = 0;
             creatureState = 0;
             controlState = 0;
