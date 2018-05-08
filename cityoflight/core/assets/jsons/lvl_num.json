@@ -1,25 +1,25 @@
-{ "height":12,
+{ "height":8,
   "infinite":false,
   "layers":[
     {
-      "data":[102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 102, 102, 103, 103, 103, 103, 102, 103, 103, 103, 103, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 102, 102, 103, 103, 103, 103, 102, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 102, 103, 103, 103, 103, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 102, 103, 103, 103, 103, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 102, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 102, 102, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 103, 102, 102, 102, 102, 102, 102, 102, 102],
-      "height":12,
+      "data":[21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21],
+      "height":8,
       "name":"Base",
       "opacity":1,
       "type":"tilelayer",
       "visible":true,
-      "width":21,
+      "width":14,
       "x":0,
       "y":0
     },
     {
-      "data":[96, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 97, 101, 101, 101, 101, 101, 101, 97, 0, 0, 0, 0, 0, 0, 0, 96, 101, 101, 97, 0, 0, 104, 0, 0, 0, 0, 0, 0, 104, 0, 0, 96, 101, 101, 97, 0, 98, 0, 0, 104, 0, 0, 104, 107, 107, 107, 107, 107, 107, 100, 0, 0, 98, 0, 0, 104, 0, 99, 107, 107, 100, 0, 0, 104, 98, 0, 0, 0, 0, 0, 0, 0, 0, 98, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 104, 98, 96, 101, 101, 101, 101, 101, 101, 101, 0, 0, 0, 104, 0, 96, 101, 101, 97, 0, 0, 104, 98, 98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 104, 0, 98, 0, 0, 104, 0, 0, 104, 98, 99, 107, 107, 107, 107, 107, 107, 107, 0, 0, 0, 104, 0, 99, 107, 107, 100, 0, 0, 104, 98, 0, 0, 0, 0, 0, 0, 0, 104, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 104, 98, 96, 101, 101, 101, 101, 101, 101, 101, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 104, 98, 98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 104, 99, 98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 104, 107, 107, 107, 107, 107, 107, 107, 100],
-      "height":12,
+      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 26, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 19, 0, 0, 0, 0, 0, 26, 26, 26, 26, 26, 26, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "height":8,
       "name":"Outline",
       "opacity":1,
       "type":"tilelayer",
       "visible":true,
-      "width":21,
+      "width":14,
       "x":0,
       "y":0
     },
@@ -28,13 +28,13 @@
       "name":"Buildings",
       "objects":[
         {
-          "gid":145,
-          "height":128,
-          "id":89,
+          "gid":4,
+          "height":64,
+          "id":5,
           "name":"building1",
           "properties":
           {
-            "texture":"building_left"
+            "texture":"64_building_short_nolight"
           },
           "propertytypes":
           {
@@ -43,29 +43,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":128,
-          "y":704
+          "width":64,
+          "x":192,
+          "y":128
         },
         {
-          "height":128,
-          "id":38,
+          "height":80,
+          "id":36,
           "name":"box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":128,
-          "y":576
+          "width":64,
+          "x":192,
+          "y":48
         },
         {
-          "gid":141,
-          "height":128,
-          "id":90,
+          "gid":8,
+          "height":64,
+          "id":6,
           "name":"building2",
           "properties":
           {
-            "texture":"building_both"
+            "texture":"64_building_short"
           },
           "propertytypes":
           {
@@ -74,29 +74,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
+          "width":64,
           "x":0,
-          "y":192
+          "y":128
         },
         {
-          "height":128,
-          "id":39,
+          "height":80,
+          "id":37,
           "name":"box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
+          "width":64,
           "x":0,
-          "y":64
+          "y":48
         },
         {
-          "gid":3,
-          "height":128,
-          "id":8,
+          "gid":10,
+          "height":64,
+          "id":7,
           "name":"building3",
           "properties":
           {
-            "texture":"bookstore"
+            "texture":"128_bookstore"
           },
           "propertytypes":
           {
@@ -105,29 +105,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":256,
-          "x":128,
-          "y":192
+          "width":128,
+          "x":64,
+          "y":128
         },
         {
-          "height":128,
-          "id":40,
+          "height":80,
+          "id":38,
           "name":"box3",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":256,
-          "x":128,
-          "y":64
+          "width":128,
+          "x":64,
+          "y":48
         },
         {
-          "gid":15,
-          "height":128,
-          "id":9,
+          "gid":12,
+          "height":64,
+          "id":10,
           "name":"building4",
           "properties":
           {
-            "texture":"cafe_blue"
+            "texture":"128_cafe_blue"
           },
           "propertytypes":
           {
@@ -136,29 +136,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":256,
-          "x":128,
-          "y":448
+          "width":128,
+          "x":192,
+          "y":256
         },
         {
-          "height":128,
-          "id":41,
+          "height":80,
+          "id":39,
           "name":"box4",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":256,
-          "x":128,
-          "y":320
+          "width":128,
+          "x":192,
+          "y":176
         },
         {
-          "gid":145,
-          "height":128,
-          "id":85,
+          "gid":2,
+          "height":64,
+          "id":11,
           "name":"building5",
           "properties":
           {
-            "texture":"building_left"
+            "texture":"64_building_short_left"
           },
           "propertytypes":
           {
@@ -167,29 +167,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":384,
-          "y":448
+          "width":64,
+          "x":128,
+          "y":256
         },
         {
-          "height":128,
-          "id":42,
+          "height":80,
+          "id":40,
           "name":"box5",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":384,
-          "y":320
+          "width":64,
+          "x":128,
+          "y":176
         },
         {
-          "gid":23,
-          "height":128,
-          "id":11,
+          "gid":6,
+          "height":64,
+          "id":12,
           "name":"building6",
           "properties":
           {
-            "texture":"flowershop"
+            "texture":"64_building_short_right"
           },
           "propertytypes":
           {
@@ -198,29 +198,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":256,
-          "x":256,
-          "y":704
+          "width":64,
+          "x":64,
+          "y":256
         },
         {
-          "height":128,
-          "id":43,
+          "height":80,
+          "id":41,
           "name":"box6",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":256,
-          "x":256,
-          "y":576
+          "width":64,
+          "x":64,
+          "y":176
         },
         {
-          "gid":109,
-          "height":128,
-          "id":74,
+          "gid":8,
+          "height":64,
+          "id":13,
           "name":"building7",
           "properties":
           {
-            "texture":"building_right"
+            "texture":"64_building_short"
           },
           "propertytypes":
           {
@@ -229,29 +229,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":512,
-          "y":704
+          "width":64,
+          "x":192,
+          "y":384
         },
         {
-          "height":128,
-          "id":44,
+          "height":80,
+          "id":42,
           "name":"box7",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":512,
-          "y":576
+          "width":64,
+          "x":192,
+          "y":304
         },
         {
-          "gid":143,
-          "height":128,
-          "id":91,
+          "gid":4,
+          "height":64,
+          "id":14,
           "name":"building8",
           "properties":
           {
-            "texture":"building_nolight"
+            "texture":"64_building_short_nolight"
           },
           "propertytypes":
           {
@@ -260,29 +260,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":640,
-          "y":512
+          "width":64,
+          "x":256,
+          "y":384
         },
         {
-          "height":128,
-          "id":45,
+          "height":80,
+          "id":43,
           "name":"box8",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":640,
-          "y":256
+          "width":64,
+          "x":256,
+          "y":304
         },
         {
-          "gid":143,
-          "height":128,
-          "id":92,
+          "gid":2,
+          "height":64,
+          "id":15,
           "name":"building9",
           "properties":
           {
-            "texture":"building_nolight"
+            "texture":"64_building_short_left"
           },
           "propertytypes":
           {
@@ -291,29 +291,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":640,
+          "width":64,
+          "x":320,
           "y":384
         },
         {
-          "height":128,
-          "id":46,
+          "height":80,
+          "id":44,
           "name":"box9",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":640,
-          "y":128
+          "width":64,
+          "x":320,
+          "y":304
         },
         {
-          "gid":143,
-          "height":128,
-          "id":93,
+          "gid":14,
+          "height":64,
+          "id":16,
           "name":"building10",
           "properties":
           {
-            "texture":"building_nolight"
+            "texture":"128_flowershop"
           },
           "propertytypes":
           {
@@ -323,28 +323,28 @@
           "type":"",
           "visible":true,
           "width":128,
-          "x":640,
-          "y":256
+          "x":64,
+          "y":384
         },
         {
-          "height":128,
-          "id":47,
+          "height":80,
+          "id":45,
           "name":"box10",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":128,
-          "x":640,
-          "y":384
+          "x":64,
+          "y":304
         },
         {
-          "gid":141,
-          "height":128,
-          "id":87,
+          "gid":10,
+          "height":64,
+          "id":18,
           "name":"building11",
           "properties":
           {
-            "texture":"building_both"
+            "texture":"128_bookstore"
           },
           "propertytypes":
           {
@@ -354,28 +354,28 @@
           "type":"",
           "visible":true,
           "width":128,
-          "x":640,
-          "y":640
+          "x":384,
+          "y":320
         },
         {
-          "height":128,
-          "id":48,
+          "height":80,
+          "id":46,
           "name":"box11",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":128,
-          "x":640,
-          "y":512
+          "x":384,
+          "y":240
         },
         {
-          "gid":143,
-          "height":128,
-          "id":88,
+          "gid":8,
+          "height":64,
+          "id":19,
           "name":"building12",
           "properties":
           {
-            "texture":"building_nolight"
+            "texture":"64_building_short"
           },
           "propertytypes":
           {
@@ -384,29 +384,29 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":960,
-          "y":192
+          "width":64,
+          "x":384,
+          "y":256
         },
         {
-          "height":128,
-          "id":49,
+          "height":80,
+          "id":47,
           "name":"box12",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":960,
-          "y":64
+          "width":64,
+          "x":384,
+          "y":176
         },
         {
-          "gid":109,
-          "height":128,
-          "id":75,
+          "gid":8,
+          "height":64,
+          "id":20,
           "name":"building13",
           "properties":
           {
-            "texture":"building_right"
+            "texture":"64_building_short"
           },
           "propertytypes":
           {
@@ -415,20 +415,308 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":960,
-          "y":448
+          "width":64,
+          "x":448,
+          "y":256
         },
         {
-          "height":128,
-          "id":50,
+          "height":80,
+          "id":48,
           "name":"box13",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":128,
-          "x":960,
-          "y":320
+          "width":64,
+          "x":448,
+          "y":176
+        },
+        {
+          "gid":2,
+          "height":64,
+          "id":21,
+          "name":"building14",
+          "properties":
+          {
+            "texture":"64_building_short"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":192
+        },
+        {
+          "height":80,
+          "id":49,
+          "name":"box14",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":112
+        },
+        {
+          "gid":2,
+          "height":64,
+          "id":23,
+          "name":"building15",
+          "properties":
+          {
+            "texture":"64_building_short"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":448,
+          "y":192
+        },
+        {
+          "height":80,
+          "id":50,
+          "name":"box15",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":448,
+          "y":112
+        },
+        {
+          "gid":2,
+          "height":64,
+          "id":24,
+          "name":"building16",
+          "properties":
+          {
+            "texture":"64_building_short_left"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":576,
+          "y":128
+        },
+        {
+          "height":80,
+          "id":51,
+          "name":"box16",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":576,
+          "y":48
+        },
+        {
+          "gid":8,
+          "height":64,
+          "id":25,
+          "name":"building17",
+          "properties":
+          {
+            "texture":"64_building_short"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":640,
+          "y":128
+        },
+        {
+          "height":80,
+          "id":52,
+          "name":"box17",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":640,
+          "y":48
+        },
+        {
+          "gid":2,
+          "height":64,
+          "id":27,
+          "name":"building18",
+          "properties":
+          {
+            "texture":"64_building_short_left"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":576,
+          "y":256
+        },
+        {
+          "height":80,
+          "id":53,
+          "name":"box18",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":576,
+          "y":176
+        },
+        {
+          "gid":4,
+          "height":64,
+          "id":28,
+          "name":"building19",
+          "properties":
+          {
+            "texture":"64_building_short_nolight"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":640,
+          "y":256
+        },
+        {
+          "height":80,
+          "id":54,
+          "name":"box19",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":640,
+          "y":176
+        }],
+      "opacity":1,
+      "type":"objectgroup",
+      "visible":true,
+      "x":0,
+      "y":0
+    },
+    {
+      "draworder":"topdown",
+      "name":"Blanche",
+      "objects":[
+        {
+          "gid":116,
+          "height":85.33,
+          "id":68,
+          "name":"blanche1",
+          "properties":
+          {
+            "bodytype":"dynamic",
+            "collideBits":"0001",
+            "debugcolor":"white",
+            "debugopacity":192,
+            "excludeBits":"0000",
+            "startframe":0,
+            "texture":"blanche",
+            "texture2":"blanche_down",
+            "texture3":"blanche_up",
+            "turn":1,
+            "type":3,
+            "xinput":-180,
+            "yinput":0
+          },
+          "propertytypes":
+          {
+            "bodytype":"string",
+            "collideBits":"string",
+            "debugcolor":"string",
+            "debugopacity":"int",
+            "excludeBits":"string",
+            "startframe":"int",
+            "texture":"string",
+            "texture2":"string",
+            "texture3":"string",
+            "turn":"int",
+            "type":"int",
+            "xinput":"float",
+            "yinput":"float"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":78.66,
+          "x":11,
+          "y":267
+        },
+        {
+          "height":28,
+          "id":59,
+          "name":"blanche_box1",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":15,
+          "x":46,
+          "y":233
+        },
+        {
+          "height":0,
+          "id":65,
+          "name":"lady_vision1",
+          "properties":
+          {
+            "a":0.3,
+            "angle":20,
+            "b":0.5,
+            "distance":10,
+            "excludeBits":"0010",
+            "facing":90,
+            "g":0.2,
+            "r":0.2,
+            "rays":512,
+            "soft":false
+          },
+          "propertytypes":
+          {
+            "a":"float",
+            "angle":"int",
+            "b":"float",
+            "distance":"int",
+            "excludeBits":"string",
+            "facing":"int",
+            "g":"float",
+            "r":"float",
+            "rays":"int",
+            "soft":"bool"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":0,
+          "x":42,
+          "y":245
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -441,9 +729,9 @@
       "name":"Snail",
       "objects":[
         {
-          "gid":56,
-          "height":112,
-          "id":27,
+          "gid":82,
+          "height":64,
+          "id":31,
           "name":"snail1",
           "properties":
           {
@@ -478,14 +766,14 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":176,
-          "x":784,
-          "y":288
+          "width":101.5,
+          "x":515,
+          "y":155
         },
         {
-          "gid":56,
-          "height":112,
-          "id":28,
+          "gid":82,
+          "height":64,
+          "id":33,
           "name":"snail2",
           "properties":
           {
@@ -520,35 +808,35 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":176,
-          "x":784,
-          "y":560
+          "width":101.5,
+          "x":643,
+          "y":297
         },
         {
-          "height":80,
-          "id":51,
+          "height":64,
+          "id":63,
           "name":"snail_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":80,
-          "x":826,
-          "y":199
+          "width":40,
+          "x":544,
+          "y":93
         },
         {
-          "height":80,
-          "id":52,
+          "height":64,
+          "id":64,
           "name":"snail_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":80,
-          "x":826,
-          "y":471
+          "width":41,
+          "x":672,
+          "y":235
         },
         {
           "height":0,
-          "id":59,
+          "id":66,
           "name":"snail_vision1",
           "properties":
           {
@@ -580,12 +868,12 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":857,
-          "y":235
+          "x":557,
+          "y":126
         },
         {
           "height":0,
-          "id":60,
+          "id":67,
           "name":"snail_vision2",
           "properties":
           {
@@ -617,108 +905,8 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":861,
-          "y":518
-        }],
-      "opacity":1,
-      "type":"objectgroup",
-      "visible":true,
-      "x":0,
-      "y":0
-    },
-    {
-      "draworder":"topdown",
-      "name":"Blanche",
-      "objects":[
-        {
-          "gid":68,
-          "height":128,
-          "id":33,
-          "name":"blanche1",
-          "properties":
-          {
-            "bodytype":"dynamic",
-            "collideBits":"0001",
-            "debugcolor":"white",
-            "debugopacity":192,
-            "excludeBits":"0000",
-            "startframe":0,
-            "texture":"blanche",
-            "texture2":"blanche_down",
-            "texture3":"blanche_up",
-            "type":3,
-            "xinput":-180,
-            "yinput":0
-          },
-          "propertytypes":
-          {
-            "bodytype":"string",
-            "collideBits":"string",
-            "debugcolor":"string",
-            "debugopacity":"int",
-            "excludeBits":"string",
-            "startframe":"int",
-            "texture":"string",
-            "texture2":"string",
-            "texture3":"string",
-            "type":"int",
-            "xinput":"float",
-            "yinput":"float"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":118,
-          "x":21,
-          "y":446
-        },
-        {
-          "height":32,
-          "id":54,
-          "name":"blanche_box1",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":96,
-          "x":21,
-          "y":396
-        },
-        {
-          "height":0,
-          "id":58,
-          "name":"lady_vision1",
-          "properties":
-          {
-            "a":0.3,
-            "angle":20,
-            "b":0.5,
-            "distance":10,
-            "excludeBits":"0010",
-            "facing":90,
-            "g":0.2,
-            "r":0.2,
-            "rays":512,
-            "soft":false
-          },
-          "propertytypes":
-          {
-            "a":"float",
-            "angle":"int",
-            "b":"float",
-            "distance":"int",
-            "excludeBits":"string",
-            "facing":"int",
-            "g":"float",
-            "r":"float",
-            "rays":"int",
-            "soft":"bool"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":0,
-          "x":77,
-          "y":409
+          "x":681,
+          "y":275
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -731,9 +919,9 @@
       "name":"Annette",
       "objects":[
         {
-          "gid":49,
-          "height":96,
-          "id":34,
+          "gid":60,
+          "height":64,
+          "id":29,
           "name":"annette",
           "properties":
           {
@@ -776,20 +964,20 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":69,
-          "x":16,
-          "y":693
+          "width":46,
+          "x":13,
+          "y":353
         },
         {
-          "height":24,
-          "id":55,
+          "height":15,
+          "id":60,
           "name":"annette_box",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":42,
-          "x":27,
-          "y":669
+          "width":28,
+          "x":20,
+          "y":337
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -802,18 +990,18 @@
       "name":"Crate",
       "objects":[
         {
-          "gid":36,
-          "height":59,
-          "id":36,
+          "gid":106,
+          "height":39.33,
+          "id":35,
           "name":"crate",
           "properties":
           {
-            "bodytype":"static",
+            "bodytype":"dynamic",
             "collideBits":"0001",
             "damping":10,
             "debugcolor":"yellow",
             "debugopacity":192,
-            "density":1,
+            "density":1000,
             "excludeBits":"0000",
             "force":450,
             "friction":0,
@@ -847,20 +1035,20 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":64,
-          "x":68,
-          "y":693
+          "width":42.67,
+          "x":54,
+          "y":381
         },
         {
-          "height":59,
-          "id":56,
+          "height":39,
+          "id":62,
           "name":"crate_box",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":64,
-          "x":68,
-          "y":634
+          "width":42,
+          "x":54,
+          "y":342
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -869,13 +1057,13 @@
       "y":0
     },
     {
-      "data":[140, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 0, 22, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      "height":12,
+      "data":[7, 9, 0, 3, 0, 0, 0, 0, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 11, 0, 0, 7, 7, 0, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "height":8,
       "name":"Roofs",
       "opacity":1,
       "type":"tilelayer",
       "visible":true,
-      "width":21,
+      "width":14,
       "x":0,
       "y":0
     },
@@ -884,9 +1072,9 @@
       "name":"Exit",
       "objects":[
         {
-          "gid":110,
-          "height":163,
-          "id":81,
+          "gid":27,
+          "height":128,
+          "id":8,
           "name":"exit",
           "properties":
           {
@@ -899,21 +1087,21 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":163,
-          "x":1149,
-          "y":352
+          "width":128,
+          "x":752,
+          "y":256
         },
         {
           "ellipse":true,
-          "height":96,
-          "id":82,
+          "height":80,
+          "id":57,
           "name":"exit_box",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":96,
-          "x":1184,
-          "y":224
+          "width":80,
+          "x":777,
+          "y":153
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -926,9 +1114,9 @@
       "name":"Bird",
       "objects":[
         {
-          "gid":24,
-          "height":47,
-          "id":37,
+          "gid":94,
+          "height":32,
+          "id":34,
           "name":"bird",
           "properties":
           {
@@ -971,20 +1159,20 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":64,
-          "x":68,
-          "y":645
+          "width":43.5,
+          "x":49,
+          "y":348
         },
         {
-          "height":36,
-          "id":57,
+          "height":24,
+          "id":61,
           "name":"bird_box",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":59,
-          "x":68,
-          "y":608
+          "width":40,
+          "x":50,
+          "y":324
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -997,48 +1185,48 @@
       "name":"box_Boundaries",
       "objects":[
         {
-          "height":768,
-          "id":2,
+          "height":64,
+          "id":1,
           "name":"boundary1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":16,
+          "width":896,
           "x":0,
           "y":0
         },
         {
-          "height":32,
-          "id":3,
+          "height":512,
+          "id":2,
           "name":"boundary2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":1344,
-          "x":0,
+          "width":32,
+          "x":864,
           "y":0
         },
         {
-          "height":768,
-          "id":4,
+          "height":128,
+          "id":3,
           "name":"boundary3",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":32,
-          "x":1312,
-          "y":0
+          "width":896,
+          "x":0,
+          "y":384
         },
         {
-          "height":64,
-          "id":5,
+          "height":512,
+          "id":4,
           "name":"boundary4",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":1344,
+          "width":7,
           "x":0,
-          "y":704
+          "y":0
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1046,7 +1234,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":98,
+  "nextobjectid":69,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
@@ -1055,174 +1243,174 @@
     {
       "columns":1,
       "firstgid":1,
-      "image":"..\/Art assets\/building assets\/slice1.png",
+      "image":"..\/Art assets\/building assets\/64_building_short_left.png",
       "imageheight":128,
       "imagewidth":64,
       "margin":0,
-      "name":"lamppost",
+      "name":"64_building_short_left",
       "spacing":0,
-      "tilecount":1,
-      "tileheight":128,
+      "tilecount":2,
+      "tileheight":64,
       "tilewidth":64,
       "transparentcolor":"#ff00ff"
     },
     {
       "columns":1,
-      "firstgid":2,
-      "image":"..\/Art assets\/building assets\/bigger\/bookstore.png",
-      "imageheight":256,
-      "imagewidth":256,
+      "firstgid":3,
+      "image":"..\/Art assets\/building assets\/64_building_short_nolight.png",
+      "imageheight":128,
+      "imagewidth":64,
       "margin":0,
-      "name":"bookstore",
+      "name":"64_building_short_nolight",
       "spacing":0,
       "tilecount":2,
-      "tileheight":128,
-      "tilewidth":256,
+      "tileheight":64,
+      "tilewidth":64,
       "transparentcolor":"#ff00ff"
     },
     {
       "columns":1,
-      "firstgid":4,
-      "image":"..\/Art assets\/building assets\/bigger\/building_short_left.png",
-      "imageheight":256,
-      "imagewidth":128,
+      "firstgid":5,
+      "image":"..\/Art assets\/building assets\/64_building_short_right.png",
+      "imageheight":128,
+      "imagewidth":64,
       "margin":0,
-      "name":"building_short_left",
+      "name":"64_building_short_right",
       "spacing":0,
       "tilecount":2,
-      "tileheight":128,
+      "tileheight":64,
+      "tilewidth":64,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":7,
+      "image":"..\/Art assets\/building assets\/64_building_short.png",
+      "imageheight":128,
+      "imagewidth":64,
+      "margin":0,
+      "name":"64_building_short",
+      "spacing":0,
+      "tilecount":2,
+      "tileheight":64,
+      "tilewidth":64,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":1,
+      "firstgid":9,
+      "image":"..\/Art assets\/building assets\/128_bookstore.png",
+      "imageheight":128,
+      "imagewidth":128,
+      "margin":0,
+      "name":"128_bookstore",
+      "spacing":0,
+      "tilecount":2,
+      "tileheight":64,
       "tilewidth":128,
       "transparentcolor":"#ff00ff"
     },
     {
       "columns":1,
-      "firstgid":6,
-      "image":"..\/Art assets\/building assets\/bigger\/building_short_nolight.png",
-      "imageheight":256,
+      "firstgid":11,
+      "image":"..\/Art assets\/building assets\/128_cafe_blue.png",
+      "imageheight":128,
       "imagewidth":128,
       "margin":0,
-      "name":"building_short_nolight",
+      "name":"128_cafe_bue",
       "spacing":0,
       "tilecount":2,
-      "tileheight":128,
+      "tileheight":64,
       "tilewidth":128,
       "transparentcolor":"#ff00ff"
     },
     {
       "columns":1,
-      "firstgid":8,
-      "image":"..\/Art assets\/building assets\/bigger\/building_short_right.png",
-      "imageheight":256,
+      "firstgid":13,
+      "image":"..\/Art assets\/building assets\/128_flowershop.png",
+      "imageheight":128,
       "imagewidth":128,
       "margin":0,
-      "name":"building_short_right",
+      "name":"128_flowershop",
       "spacing":0,
       "tilecount":2,
-      "tileheight":128,
+      "tileheight":64,
       "tilewidth":128,
       "transparentcolor":"#ff00ff"
     },
     {
-      "columns":1,
-      "firstgid":10,
-      "image":"..\/Art assets\/building assets\/bigger\/building_short_side.png",
+      "columns":3,
+      "firstgid":15,
+      "image":"..\/Art assets\/tiles\/tiles.png",
       "imageheight":256,
-      "imagewidth":128,
+      "imagewidth":192,
       "margin":0,
-      "name":"building_short_side",
+      "name":"tiles",
       "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":128,
+      "tilecount":12,
+      "tileheight":64,
+      "tilewidth":64,
       "transparentcolor":"#ff00ff"
     },
     {
-      "columns":1,
-      "firstgid":12,
-      "image":"..\/Art assets\/building assets\/bigger\/building_short.png",
-      "imageheight":256,
-      "imagewidth":128,
+      "columns":30,
+      "firstgid":27,
+      "image":"..\/Art assets\/characters\/sigil.png",
+      "imageheight":163,
+      "imagewidth":4890,
       "margin":0,
-      "name":"building_short",
+      "name":"sigil",
       "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":128,
+      "tilecount":30,
+      "tileheight":163,
+      "tilewidth":163,
       "transparentcolor":"#ff00ff"
     },
     {
-      "columns":1,
-      "firstgid":14,
-      "image":"..\/Art assets\/building assets\/bigger\/cafe_blue.png",
-      "imageheight":256,
-      "imagewidth":256,
+      "columns":10,
+      "firstgid":57,
+      "image":"..\/Art assets\/characters\/sideAnnette.png",
+      "imageheight":128,
+      "imagewidth":920,
       "margin":0,
-      "name":"cafe_blue",
+      "name":"sideAnnette",
       "spacing":0,
-      "tilecount":2,
+      "tilecount":10,
       "tileheight":128,
-      "tilewidth":256,
+      "tilewidth":92,
       "transparentcolor":"#ff00ff"
     },
     {
-      "columns":1,
-      "firstgid":16,
-      "image":"..\/Art assets\/building assets\/bigger\/cafe_green.png",
-      "imageheight":256,
-      "imagewidth":256,
+      "columns":15,
+      "firstgid":67,
+      "image":"..\/Art assets\/characters\/blanche_up.png",
+      "imageheight":128,
+      "imagewidth":1545,
       "margin":0,
-      "name":"cafe_green",
+      "name":"blanche_up",
       "spacing":0,
-      "tilecount":2,
+      "tilecount":15,
       "tileheight":128,
-      "tilewidth":256,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":1,
-      "firstgid":18,
-      "image":"..\/Art assets\/building assets\/bigger\/cafe_purple.png",
-      "imageheight":256,
-      "imagewidth":256,
-      "margin":0,
-      "name":"cafe_purple",
-      "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":256,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":1,
-      "firstgid":20,
-      "image":"..\/Art assets\/building assets\/bigger\/cafe_red.png",
-      "imageheight":256,
-      "imagewidth":256,
-      "margin":0,
-      "name":"cafe_red",
-      "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":256,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":1,
-      "firstgid":22,
-      "image":"..\/Art assets\/building assets\/bigger\/flowershop.png",
-      "imageheight":256,
-      "imagewidth":256,
-      "margin":0,
-      "name":"flowershop",
-      "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":256,
+      "tilewidth":103,
       "transparentcolor":"#ff00ff"
     },
     {
       "columns":12,
-      "firstgid":24,
+      "firstgid":82,
+      "image":"..\/Art assets\/characters\/SnailSide.png",
+      "imageheight":128,
+      "imagewidth":2436,
+      "margin":0,
+      "name":"SnailSide",
+      "spacing":0,
+      "tilecount":12,
+      "tileheight":128,
+      "tilewidth":203,
+      "transparentcolor":"#ff00ff"
+    },
+    {
+      "columns":12,
+      "firstgid":94,
       "image":"..\/Art assets\/characters\/bird.png",
       "imageheight":64,
       "imagewidth":1044,
@@ -1236,7 +1424,7 @@
     },
     {
       "columns":10,
-      "firstgid":36,
+      "firstgid":106,
       "image":"..\/Art assets\/characters\/crate.png",
       "imageheight":59,
       "imagewidth":640,
@@ -1249,36 +1437,8 @@
       "transparentcolor":"#ff00ff"
     },
     {
-      "columns":10,
-      "firstgid":46,
-      "image":"..\/Art assets\/characters\/sideAnnette.png",
-      "imageheight":128,
-      "imagewidth":920,
-      "margin":0,
-      "name":"sideAnnette",
-      "spacing":0,
-      "tilecount":10,
-      "tileheight":128,
-      "tilewidth":92,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":12,
-      "firstgid":56,
-      "image":"..\/Art assets\/characters\/SnailSide.png",
-      "imageheight":128,
-      "imagewidth":2436,
-      "margin":0,
-      "name":"SnailSide",
-      "spacing":0,
-      "tilecount":12,
-      "tileheight":128,
-      "tilewidth":203,
-      "transparentcolor":"#ff00ff"
-    },
-    {
       "columns":16,
-      "firstgid":68,
+      "firstgid":116,
       "image":"..\/Art assets\/characters\/blanche_side.png",
       "imageheight":128,
       "imagewidth":1888,
@@ -1289,107 +1449,9 @@
       "tileheight":128,
       "tilewidth":118,
       "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":12,
-      "firstgid":84,
-      "image":"..\/Art assets\/characters\/tarasque_up.png",
-      "imageheight":214,
-      "imagewidth":1080,
-      "margin":0,
-      "name":"tarasque_up",
-      "spacing":0,
-      "tilecount":12,
-      "tileheight":214,
-      "tilewidth":90,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":3,
-      "firstgid":96,
-      "image":"..\/Art assets\/tiles\/tiles.png",
-      "imageheight":256,
-      "imagewidth":192,
-      "margin":0,
-      "name":"tiles",
-      "spacing":0,
-      "tilecount":12,
-      "tileheight":64,
-      "tilewidth":64,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":1,
-      "firstgid":108,
-      "image":"..\/Art assets\/building assets\/bigger\/building_right.png",
-      "imageheight":256,
-      "imagewidth":128,
-      "margin":0,
-      "name":"building_right",
-      "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":128,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":30,
-      "firstgid":110,
-      "image":"..\/Art assets\/characters\/sigil.png",
-      "imageheight":163,
-      "imagewidth":4890,
-      "margin":0,
-      "name":"sigil",
-      "spacing":0,
-      "tilecount":30,
-      "tileheight":163,
-      "tilewidth":163,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":1,
-      "firstgid":140,
-      "image":"..\/Art assets\/building assets\/bigger\/building_both.png",
-      "imageheight":256,
-      "imagewidth":128,
-      "margin":0,
-      "name":"building_both",
-      "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":128,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":1,
-      "firstgid":142,
-      "image":"..\/Art assets\/building assets\/bigger\/building_nolight.png",
-      "imageheight":256,
-      "imagewidth":128,
-      "margin":0,
-      "name":"building_nolight",
-      "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":128,
-      "transparentcolor":"#ff00ff"
-    },
-    {
-      "columns":1,
-      "firstgid":144,
-      "image":"..\/Art assets\/building assets\/bigger\/building_left.png",
-      "imageheight":256,
-      "imagewidth":128,
-      "margin":0,
-      "name":"building_left",
-      "spacing":0,
-      "tilecount":2,
-      "tileheight":128,
-      "tilewidth":128,
-      "transparentcolor":"#ff00ff"
     }],
   "tilewidth":64,
   "type":"map",
   "version":1,
-  "width":21
+  "width":14
 }
