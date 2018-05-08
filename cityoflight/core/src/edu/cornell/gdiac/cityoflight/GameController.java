@@ -444,7 +444,11 @@ public class GameController implements Screen, ContactListener {
 		else if (countdown > 0) {
 			countdown--;
 		} else if (countdown == 0) {
+			if (complete) {
+				whichlevel++;
+			}
 			reset();
+
 		}
 
 		return true;
@@ -597,6 +601,8 @@ public class GameController implements Screen, ContactListener {
 					break;
 				}
 			}
+			// TODO: REMOVE THIS LINE!
+			canBox = true;
 			if (canBox) {
 				try {
 
