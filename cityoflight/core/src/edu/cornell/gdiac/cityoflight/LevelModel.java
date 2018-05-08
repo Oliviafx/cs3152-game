@@ -72,6 +72,7 @@ public class LevelModel {
 	private DistractionModel distraction;
 	/**Reference to background tiles*/
 	private Array<BackgroundModel> tiles = new Array<BackgroundModel>();
+	private Array<BackgroundModel> outlineTiles = new Array<BackgroundModel>();
 	private Array<BackgroundModel> tutorialTiles = new Array<BackgroundModel>();
 
 
@@ -431,6 +432,7 @@ public class LevelModel {
 
 		JsonValue idMap = levelFormat.get("tilesets");
 		tiles = new Array<BackgroundModel>();
+		outlineTiles = new Array<BackgroundModel>();
 		tutorialTiles = new Array<BackgroundModel>();
 
 		//loop through layers to find specified objects and initialize
@@ -952,7 +954,7 @@ public class LevelModel {
 						pos[1] = boxJSON.get("y").asFloat()/64 + 1.75f;
 						if(textName.contains("128") || textName.contains("64"))
 						{
-							pos[1] = boxJSON.get("y").asFloat()/64 + 0.6f;
+							pos[1] = boxJSON.get("y").asFloat()/64 + 0.3f;
 						}
 						size[0 ] = boxJSON.get("width").asFloat()/64;
 						size[1] = boxJSON.get("height").asFloat()/64;
@@ -982,7 +984,37 @@ public class LevelModel {
 				int height = layer.get("height").asInt();
 				int width = layer.get("width").asInt();
 
+				for(int j = 0; j < height*width; j++){
+					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
+//                    System.out.println("width: " + width + ", height: " + height);
+					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
+					int newy = height - (j / width);//(j%width);
+//					System.out.println("newx "+ newx + " new y " + newy);
 
+
+					int f = 0;
+					while(f<data[j] && !idToTexture.containsKey(data[j] - f)){
+
+						f++;
+					}
+					//System.out.println(data[j] + " : "+ (data[j] - f));
+					String texName = idToTexture.get(data[j] - f);
+//					System.out.println(texName);
+					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
+
+					// IMPORTANT PROBLEM: TEXTURE IS NULL
+					if(texture != null) {
+
+//						System.out.println(texture.getRegionHeight());
+						TextureRegion[][] textures = texture.split(64, 64);
+//						System.out.println(f % textures.length + " " + f / textures.length);
+						TextureRegion texNew = textures[f / textures[0].length][f % textures[0].length];
+						outlineTiles.add(new BackgroundModel(newx, newy, texNew));
+					}
+
+
+
+				}
 			}
 			else if (layerName.equals("Tutorial")){
 
@@ -1527,6 +1559,7 @@ public class LevelModel {
 		background = null;
 
 		tiles.clear();
+		outlineTiles.clear();
 		tutorialTiles.clear();
 
 //		if (distraction != null) {
@@ -1727,6 +1760,9 @@ public class LevelModel {
 		for(int i =0;i< tutorialTiles.size; i++){
 			tutorialTiles.get(i).draw(canvas);
 
+		}
+		for(int i=0; i< outlineTiles.size; i++) {
+			outlineTiles.get(i).draw(canvas);
 		}
 
 

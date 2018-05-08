@@ -171,7 +171,12 @@ public class GameController implements Screen, ContactListener {
 	public static final int EXIT_LEVEL = 3;
 	/** Exit code for going to the pause menu */
 	public static final int EXIT_PAUSE = 4;
-
+	/** Exit code for going to the help menu */
+	public static final int EXIT_HELP = 5;
+	/** Exit code for going to the control menu screen*/
+	public static final int EXIT_CONTROLS = 6;
+	/** Exit code for going to the control menu screen*/
+	public static final int EXIT_CREATURES = 7;
 	/** Which level to load */
 	public int whichlevel;
 	public void setWhichLevel(int val) {
@@ -374,13 +379,19 @@ public class GameController implements Screen, ContactListener {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1.json"));
 		}
 		if (whichlevel == 2) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level5.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2.json"));
 		}
 		if (whichlevel == 3) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level3.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level4.json"));
 		}
 		if (whichlevel == 4) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level4.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/lvl_num.json"));
+		}
+		if (whichlevel == 5) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level3.json"));
+		}
+		if (whichlevel == 6) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level5.json"));
 		}
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
