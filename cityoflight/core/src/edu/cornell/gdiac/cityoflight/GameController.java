@@ -90,6 +90,7 @@ public class GameController implements Screen, ContactListener {
 	private boolean stopWalkInPlace = false;
 
 	private PauseMode pause;
+	private MenuMode menu;
 
 	/**
 	 * Preloads the assets for this controller.
@@ -201,6 +202,9 @@ public class GameController implements Screen, ContactListener {
 	private boolean detectedPlay = false;
 	private boolean soundPlay = true;
 
+	public void setMenu(MenuMode val) {
+		menu = val;
+	}
 
 	public Music getBGM() {
 		return bgm;

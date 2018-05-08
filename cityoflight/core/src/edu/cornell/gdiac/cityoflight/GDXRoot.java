@@ -175,10 +175,10 @@ public class GDXRoot extends Game implements ScreenListener {
 //			loading = null;
 //		}
 		else if (exitCode == GameController.EXIT_PLAY) {
-			if (menu!=null) {
-				menu.dispose();
-				menu = null;
-			}
+//			if (menu!=null) {
+//				menu.dispose();
+//				menu = null;
+//			}
 			if (getScreen().equals(levels)) {
 				if (levels.goLevelOne()) {
 					controller.setWhichLevel(1);
@@ -207,6 +207,7 @@ public class GDXRoot extends Game implements ScreenListener {
 				loading.dispose();
 				loading = null;
 			}
+			controller.setMenu(menu);
 		}
 
 		else if (exitCode == GameController.EXIT_QUIT) {
