@@ -1,12 +1,10 @@
 package edu.cornell.gdiac.cityoflight;
 
-import java.util.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.controllers.*;
 import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,8 +12,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Array;
-import edu.cornell.gdiac.physics.obstacle.Obstacle;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -123,22 +119,22 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private static final String PLAY_BTN_FILE = "textures/menu assets/start_game.png";
     private static final String LEVEL_BTN_FILE = "textures/menu assets/level_select.png";
     private static final String TITLE_FILE ="textures/menu assets/title.png";
-    private static final String SETTINGS_FILE ="textures/menu assets/setting.png";
+    private static final String HELP_FILE ="textures/menu assets/help.png";
     private static final String QUIT_FILE ="textures/menu assets/quit.png";
     private static final String LEVEL_HOVER_FILE ="textures/menu assets/level_select_hover.png";
     private static final String PLAY_HOVER ="textures/menu assets/start_game_hover.png";
-    private static final String SETTINGS_HOVER ="textures/menu assets/setting_hover.png";
+    private static final String HELP_HOVER ="textures/menu assets/help_hover.png";
     private static final String QUIT_HOVER ="textures/menu assets/quit_hover.png";
 
 
 
     private Texture title;
-    private Texture settingsButton;
+    private Texture helpButton;
     private Texture quitButton;
 
     private Texture playHover;
     private Texture levelHover;
-    private Texture settingsHover;
+    private Texture helpHover;
     private Texture quitHover;
 
     private MyActor play;
@@ -160,7 +156,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     /** The current state of the play button */
     private int pressState;
     private int levelState;
-    private int settingsState;
+    private int helpState;
     private int quitState;
     /** Support for the X-Box start button in place of play button */
     private int   startButton;
@@ -168,6 +164,11 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private boolean active;
 
     private Game parent;
+
+    private GameController gameController;
+    public void setGameController(GameController val) {
+        gameController = val;
+    }
 
     /** Background texture for start-up */
     private Texture background;
@@ -188,8 +189,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private float playY;
     private float levelX;
     private float levelY;
-    private float settingsX;
-    private float settingsY;
+    private float helpX;
+    private float helpY;
     private float quitX;
     private float quitY;
 
@@ -211,11 +212,11 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         pressState = 0;
         levelState = 0;
-        settingsState = 0;
+        helpState = 0;
         quitState = 0;
         playButton = null;
         levelButton = null;
-        settingsButton = null;
+        helpButton = null;
         quitButton = null;
         active = false;
         this.parent = parent;
@@ -225,18 +226,18 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         playY = 300;
         levelX = 600;
         levelY = 250;
-        settingsX = 600;
-        settingsY = 200;
+        helpX = 600;
+        helpY = 200;
         quitX = 600;
         quitY = 150;
 
 
 //        level = new MyActor(levelX, levelY, new MyListener());
-//        setting = new MyActor(settingsX,settingsY,new MyListener());
+//        setting = new MyActor(helpX,helpY,new MyListener());
 //        quit = new MyActor(quitX,quitY,new MyListener());
 //
 //        level.setPosition(levelX, levelY);
-//        setting.setPosition(settingsX, settingsY);
+//        setting.setPosition(helpX, helpY);
 //        quit.setPosition(quitX, quitY);
 
 //        level.addListener(new MyListener());
@@ -308,8 +309,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         return levelState == 2;
     }
 
-    public boolean toSettings() {
-        return settingsState == 2;
+    public boolean toHelp() {
+        return helpState == 2;
     }
 
     public boolean didQuit() {
@@ -332,9 +333,9 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             levelButton.dispose();
             levelButton = null;
         }
-        if (settingsButton != null) {
-            settingsButton.dispose();
-            settingsButton = null;
+        if (helpButton != null) {
+            helpButton.dispose();
+            helpButton = null;
         }
         if (quitButton != null) {
             quitButton.dispose();
@@ -424,8 +425,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             listener.exitScreen(this, 3);
         }
 
-        if (toSettings() && listener != null) {
-            settingsState = 0;
+        if (toHelp() && listener != null) {
+            listener.exitScreen(this, 5);
         }
 
         if (didQuit()) {
@@ -468,15 +469,15 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             levelHover.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 //            create();
         }
-        if (settingsButton == null) {
-            settingsButton = new Texture(SETTINGS_FILE);
+        if (helpButton == null) {
+            helpButton = new Texture(HELP_FILE);
             levelButton.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-//            setting.setWidth(settingsButton.getWidth());
-//            setting.setHeight(settingsButton.getHeight());
+//            setting.setWidth(helpButton.getWidth());
+//            setting.setHeight(helpButton.getHeight());
         }
-        if (settingsHover == null) {
-            settingsHover = new Texture(SETTINGS_HOVER);
-            settingsHover.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        if (helpHover == null) {
+            helpHover = new Texture(HELP_HOVER);
+            helpHover.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 //            create();
         }
         if (quitButton == null) {
@@ -518,12 +519,12 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
                         levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
             } //        Color tint2 = (levelState == 1 ? Color.GRAY: Color.WHITE);
 //            if (hoversetting) {
-            if (settingsState == 1) {
-                drawcanvas.draw(settingsHover, Color.WHITE, settingsButton.getWidth() / 2, settingsButton.getHeight() / 2,
-                        settingsX-settingsButton.getWidth()/3, settingsY-settingsButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+            if (helpState == 1) {
+                drawcanvas.draw(helpHover, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
+                        helpX - helpButton.getWidth()/2, helpY - helpButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
             } else {
-                drawcanvas.draw(settingsButton, Color.WHITE, settingsButton.getWidth() / 2, settingsButton.getHeight() / 2,
-                        settingsX, settingsY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                drawcanvas.draw(helpButton, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
+                        helpX, helpY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
             }
 //            if (hoverquit) {
             if (quitState == 1) {
@@ -563,7 +564,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         if (levelButton == null || levelState == 2) {
             return true;
         }
-        if (settingsButton == null || settingsState == 2) {
+        if (helpButton == null || helpState == 2) {
             return true;
         }
         if (quitButton == null || quitState == 2) {
@@ -587,13 +588,13 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             levelState = 1;
         }
 
-        float dist3 = (screenX-settingsX)*(screenX-settingsX)+(screenY-settingsY)*(screenY-settingsY);
-        if (dist3 < settingsButton.getWidth()*settingsButton.getHeight() && screenY < levelY - levelButton.getHeight()
-                && screenY >= settingsY) {
-            settingsState = 1;
+        float dist3 = (screenX- helpX)*(screenX- helpX)+(screenY- helpY)*(screenY- helpY);
+        if (dist3 < helpButton.getWidth()* helpButton.getHeight() && screenY < levelY - levelButton.getHeight()
+                && screenY >= helpY) {
+            helpState = 1;
         }
         float dist4 = (screenX-quitX)*(screenX-quitX)+(screenY-quitY)*(screenY-quitY);
-        if (dist4 < quitButton.getHeight()*quitButton.getWidth() && screenY < settingsY - settingsButton.getHeight()) {
+        if (dist4 < quitButton.getHeight()*quitButton.getWidth() && screenY < helpY - helpButton.getHeight()) {
             quitState = 1;
         }
         return false;
@@ -620,8 +621,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             levelState = 2;
             return false;
         }
-        if (settingsState == 1) {
-            settingsState = 2;
+        if (helpState == 1) {
+            helpState = 2;
             return false;
         }
         if (quitState == 1) {
