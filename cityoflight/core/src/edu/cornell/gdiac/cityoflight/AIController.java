@@ -60,7 +60,6 @@ public class AIController{
     private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
-    private int NO_MOVE = 0;
     private int TURN_BACK   = 1;
     private int TURN_RIGHT  = 2;
     private int TURN_LEFT   = 3;
@@ -255,10 +254,7 @@ public class AIController{
 //          creature.setMovement(0, 0);
 
         } else {
-
-            if (creature.getTurnBehavior() != 0) {
                 creature.setMovement(cAngleCache.x, cAngleCache.y);
-            }
         }
 
         creature.applyForce(level.getAnnette().isWalkingInPlace());
