@@ -26,7 +26,7 @@ public class DistractionModel extends WheelObstacle {
     private static final float HOFFSET = .25f;
     private static final float VOFFSET = .25f;
 
-    private static final int BIRD_LIFE = 360;
+    private static final int BIRD_LIFE = 200;
     private static final float BIRD_RADIUS = .25f;
 
 
@@ -363,32 +363,32 @@ public class DistractionModel extends WheelObstacle {
                 life -= 1;
                 super.update(dt);
             }
-            else {
-                if (alive && direction != null) {
-                    switch (direction) {
-                        case RIGHT:
-                            this.getBody().setLinearVelocity(BIRD_STEP, 0);
-                            break;
-                        case LEFT:
-                            this.getBody().setLinearVelocity(-BIRD_STEP, 0);
-
-                            break;
-                        case UP:
-                            this.getBody().setLinearVelocity(0, BIRD_STEP);
-                            break;
-                        case DOWN:
-                            this.getBody().setLinearVelocity(0, -BIRD_STEP);
-                            break;
-                    }
-                    if (filmStrip != null) {
-                        int next = (filmStrip.getFrame() + 1) % filmStrip.getSize();
-                        filmStrip.setFrame(next);
-                    }
-
-                }
+//            else {
+//                if (alive && direction != null) {
+//                    switch (direction) {
+//                        case RIGHT:
+//                            this.getBody().setLinearVelocity(BIRD_STEP, 0);
+//                            break;
+//                        case LEFT:
+//                            this.getBody().setLinearVelocity(-BIRD_STEP, 0);
+//
+//                            break;
+//                        case UP:
+//                            this.getBody().setLinearVelocity(0, BIRD_STEP);
+//                            break;
+//                        case DOWN:
+//                            this.getBody().setLinearVelocity(0, -BIRD_STEP);
+//                            break;
+//                    }
+//                    if (filmStrip != null) {
+//                        int next = (filmStrip.getFrame() + 1) % filmStrip.getSize();
+//                        filmStrip.setFrame(next);
+//                    }
+//
+//                }
                 life -= 1;
                 super.update(dt);
-            }
+//            }
         } else {
             setAlive(false);
         }
