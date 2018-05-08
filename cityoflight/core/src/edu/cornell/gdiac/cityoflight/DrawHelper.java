@@ -9,6 +9,17 @@ import edu.cornell.gdiac.util.JsonAssetManager;
 
 public class DrawHelper {
 
+    /** filmstrip for walk in place circle to animate out */
+    private FilmStrip indicator_out;
+    /** filmstrip for walk in place circle to loop */
+    private FilmStrip indicator_loop;
+    /** walk in place circle has animated out already */
+    private boolean walkhasAnimated = false;
+    /** constant cooldown time */
+    private int animateCOOLTIME = 2;
+    /** keep track of cooldowns */
+    private int animateCool = animateCOOLTIME;
+
     /** Filmstrip for the general menu transitions */
     private FilmStrip general_transition;
     /** number of frames in the transition */
@@ -27,10 +38,14 @@ public class DrawHelper {
     /** Whether chosenScreenKey and chosenText has been chosen */
     private boolean hasChosenScreenandText = false;
 
+    /** getters and setters start here */
+    public void setWalkHasAnimatedFalse(){walkhasAnimated = false;}
+    public FilmStrip getIndicator_out(){return indicator_out;}
 
     public boolean get_general_transition_second_part() {
         return general_transition_second_part;
     }
+    /** getters and setters end here */
 
     public DrawHelper(){
     }
@@ -42,6 +57,56 @@ public class DrawHelper {
         general_transition_hasAnimated = false;
         general_transition_second_part = false;
         hasChosenScreenandText = false;
+    }
+
+    public void drawWalkInPlace(ObstacleCanvas canvas, LevelModel level){
+
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_out", TextureRegion.class);
+        TextureRegion texture2 = JsonAssetManager.getInstance().getEntry("indicator_loop", TextureRegion.class);
+
+        try {
+            indicator_out = (FilmStrip)texture;
+            indicator_loop = (FilmStrip)texture2;
+        } catch (Exception e) {
+            indicator_out = null;
+            indicator_loop = null;
+        }
+
+        if(walkhasAnimated == false && indicator_out != null){
+            if (animateCool <= 0) {
+                int next = (indicator_out.getFrame() + 1);
+                if (next < indicator_out.getSize()) {
+                    indicator_out.setFrame(next);
+                } else {
+                    indicator_out.setFrame(0);
+                    walkhasAnimated = true;
+                    //System.out.println("set animated to : " + walkhasAnimated);
+                }
+                animateCool = animateCOOLTIME;
+            }
+
+            canvas.begin(level.getoTran());
+
+            canvas.draw(indicator_out,Color.SLATE,150f,150f,
+                    (level.getAnnette().getX() * level.scale.x),
+                    (level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
+            canvas.end();
+
+        }else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
+            if (animateCool <= 0) {
+                int next2 = (indicator_loop.getFrame() + 1) % indicator_loop.getSize();
+                indicator_loop.setFrame(next2);
+                animateCool = animateCOOLTIME;
+            }
+
+            canvas.begin(level.getoTran());
+            canvas.draw(indicator_loop,Color.WHITE,150f,150f,
+                    (level.getAnnette().getX() * level.scale.x),
+                    (level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
+            canvas.end();
+        }
+
+        animateCool --;
     }
 
     /**
