@@ -57,6 +57,12 @@
  <tileset firstgid="127" name="box_outline" tilewidth="80" tileheight="80" tilecount="1" columns="1">
   <image source="../tutorial/box_outline.png" width="80" height="80"/>
  </tileset>
+ <tileset firstgid="128" name="tar_outline" tilewidth="70" tileheight="126" tilecount="1" columns="1">
+  <image source="../tutorial/tar_outline.png" width="70" height="136"/>
+ </tileset>
+ <tileset firstgid="129" name="outline_annette" tilewidth="49" tileheight="80" tilecount="1" columns="1">
+  <image source="../tutorial/outline_annette.png" width="49" height="80"/>
+ </tileset>
  <layer name="Base" width="14" height="8">
   <data encoding="csv">
 7,8,12,12,12,12,12,12,12,12,12,12,9,9,
@@ -109,9 +115,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,127,0,0,0,0,0,0,
+0,0,0,0,0,0,129,127,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,128,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
