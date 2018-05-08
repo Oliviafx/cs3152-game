@@ -75,14 +75,6 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
-	private FilmStrip indicator_seen;
-	private boolean seenhasAnimated = false;
-
-	private FilmStrip win_transition;
-	private boolean win_transition_hasAnimated = false;
-	private int WIN_TRANSITION_SECOND = 15;
-	private boolean win_transition_second_part;
-
 	private PauseMode pause;
 	private MenuMode menu;
 
@@ -383,7 +375,6 @@ public class GameController implements Screen, ContactListener {
 		level.getWorld().setContactListener(this);
 
 		drawHelper.reset();
-		win_transition_second_part = false;
 	}
 
 	/**
@@ -701,8 +692,6 @@ public class GameController implements Screen, ContactListener {
 		sound.update();
 	}
 
-
-
 	/**
 	 * Draw the physics objects to the canvas
 	 *
@@ -725,16 +714,16 @@ public class GameController implements Screen, ContactListener {
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
 				detectedPlay = true;
-				drawisSeen();
+				drawHelper.drawisSeen(canvas,level);
 			}
 		}
 
 		if (noOneSeesMe()){
 			//System.out.println("in seen reset");
 			detectedPlay = false;
-			seenhasAnimated = false;
-			if (indicator_seen != null){
-				indicator_seen.setFrame(0);
+			drawHelper.setSeenHasAnimatedFalse();
+			if (drawHelper.getIndicator_seen() != null){
+				drawHelper.getIndicator_seen().setFrame(0);
 			}
 		}
 
@@ -760,77 +749,6 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 		return !isbeingseen;
-	}
-
-	public void drawisSeen() {
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_seen", TextureRegion.class);
-		try {
-			indicator_seen = (FilmStrip) texture;
-		} catch (Exception e) {
-			indicator_seen = null;
-		}
-
-		if (indicator_seen != null) {
-			int next = (indicator_seen.getFrame() + 1);
-			if (next < indicator_seen.getSize() && !seenhasAnimated) {
-				indicator_seen.setFrame(next);
-			}else{
-				seenhasAnimated = true;
-				//System.out.println ("set seenhasAnimated to : " + seenhasAnimated);
-			}
-//			batcher.begin();
-
-//			System.out.println("exclamation "+(level.getAnnette().getX()*level.scale.x) + " " + (level.getAnnette().getY()*level.scale.y));
-//			batcher.draw(indicator_seen,(level.getAnnette().getX() + canvas.getWidth()/2-20 ),
-//					(level.getAnnette().getY()  * level.scale.y), 50, 40);
-
-			// These numbers are just guess and check...
-			//batcher.draw(indicator_seen, (level.getAnnette().getX() / 64 * level.scale.x) + 380,
-			//		(level.getAnnette().getY() / 64 * level.scale.y) + 350, 40, 40);
-//			batcher.end();
-			
-			canvas.begin(level.oTran);
-			canvas.draw(indicator_seen,Color.WHITE,30f,30f,
-					(level.getAnnette().getX() * level.scale.x),
-					(level.getAnnette().getY() * level.scale.y + 85), 0f, 1.0f, 1.0f);
-			canvas.end();
-		}
-	}
-
-	public void drawWinTransition(){
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("win_transition", TextureRegion.class);
-		try {
-			win_transition = (FilmStrip) texture;
-		} catch (Exception e) {
-			win_transition = null;
-		}
-
-		//System.out.println("general_transition = " + win_transition);
-
-		if (win_transition != null) {
-			//System.out.println("winhasAnimated = " + win_transition_hasAnimated);
-			int current_frame;
-
-			if (win_transition_hasAnimated){
-				current_frame = 0;
-				win_transition.setFrame(current_frame);
-			} else {
-				current_frame = (win_transition.getFrame() + 1);
-				if (current_frame >= WIN_TRANSITION_SECOND){win_transition_second_part = true;}
-				if (current_frame < 34) {
-					win_transition.setFrame(current_frame);
-				} else {
-					win_transition_hasAnimated = true;
-				}
-			}
-
-			win_transition.setFrame(current_frame);
-			canvas.begin(level.oTran);
-			//System.out.println("drawing:  " + current_frame);
-			canvas.draw(win_transition, Color.WHITE, 179, 179,
-					level.getExit().getX() * 64, level.getExit().getY() * 64, 0f, 5f, 5f);
-			canvas.end();
-		}
 	}
 
 	/**

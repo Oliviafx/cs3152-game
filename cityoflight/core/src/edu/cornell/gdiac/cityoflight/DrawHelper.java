@@ -7,6 +7,8 @@ import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
+import java.util.logging.Level;
+
 public class DrawHelper {
 
     /** filmstrip for walk in place circle to animate out */
@@ -20,6 +22,11 @@ public class DrawHelper {
     /** keep track of cooldowns */
     private int animateCool = animateCOOLTIME;
 
+    /** filmstrip for exclamation to animate when seen */
+    private FilmStrip indicator_seen;
+    /** exclamation mark has animated out already */
+    private boolean seenhasAnimated = false;
+
     /** Filmstrip for the general menu transitions */
     private FilmStrip general_transition;
     /** number of frames in the transition */
@@ -31,6 +38,29 @@ public class DrawHelper {
     /** did the transition go through yet? */
     private boolean general_transition_hasAnimated = false;
 
+    /** Filmstrip for the win transition */
+    private FilmStrip win_transition;
+    /** number of frames in the transition */
+    int WIN_TRANSITION_FRAME_NUM = 36;
+    /** the start frame of the second part of the transition */
+    private int WIN_TRANSITION_SECOND_PART = 15;
+    /** did the transition reach the second part yet? */
+    private boolean win_transition_second_part;
+    /** did the transition go through yet? */
+    private boolean win_transition_hasAnimated = false;
+
+    /** Filmstrip for the lose transition */
+    private FilmStrip lose_transition;
+    /** number of frames in the transition */
+    int LOSE_TRANSITION_FRAME_NUM = 36;
+    /** the start frame of the second part of the transition */
+    private int LOSE_TRANSITION_SECOND_PART = 15;
+    /** did the transition reach the second part yet? */
+    private boolean lose_transition_second_part;
+    /** did the transition go through yet? */
+    private boolean lose_transition_hasAnimated = false;
+
+
     /** The screen to show on a winning/losing screen */
     private String chosenScreenKey;
     /** The text to show on a winning/losing screen */
@@ -41,6 +71,8 @@ public class DrawHelper {
     /** getters and setters start here */
     public void setWalkHasAnimatedFalse(){walkhasAnimated = false;}
     public FilmStrip getIndicator_out(){return indicator_out;}
+    public void setSeenHasAnimatedFalse(){seenhasAnimated = false;}
+    public FilmStrip getIndicator_seen(){return indicator_seen;}
 
     public boolean get_general_transition_second_part() {
         return general_transition_second_part;
@@ -57,8 +89,15 @@ public class DrawHelper {
         general_transition_hasAnimated = false;
         general_transition_second_part = false;
         hasChosenScreenandText = false;
+        win_transition_second_part = false;
+        lose_transition_second_part = false;
     }
 
+    /**
+     * draw the walk in place indicators.
+     * @param canvas
+     * @param level
+     */
     public void drawWalkInPlace(ObstacleCanvas canvas, LevelModel level){
 
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_out", TextureRegion.class);
@@ -109,6 +148,30 @@ public class DrawHelper {
         animateCool --;
     }
 
+    public void drawisSeen(ObstacleCanvas canvas, LevelModel level) {
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_seen", TextureRegion.class);
+        try {
+            indicator_seen = (FilmStrip) texture;
+        } catch (Exception e) {
+            indicator_seen = null;
+        }
+
+        if (indicator_seen != null) {
+            int next = (indicator_seen.getFrame() + 1);
+            if (next < indicator_seen.getSize() && !seenhasAnimated) {
+                indicator_seen.setFrame(next);
+            }else{
+                seenhasAnimated = true;
+            }
+
+            canvas.begin(level.oTran);
+            canvas.draw(indicator_seen,Color.WHITE,30f,30f,
+                    (level.getAnnette().getX() * level.scale.x),
+                    (level.getAnnette().getY() * level.scale.y + 85), 0f, 1.0f, 1.0f);
+            canvas.end();
+        }
+    }
+
     /**
      * draw the general transition.
      */
@@ -140,6 +203,44 @@ public class DrawHelper {
             canvas.begin();
             canvas.draw(general_transition, Color.WHITE, 224, 128f,
                     canvas.getWidth()/2, canvas.getHeight()/2, 0f, 2f, 2f);
+            canvas.end();
+        }
+    }
+
+    /**
+     * draw the win transition.
+     */
+    public void drawWinTransition(ObstacleCanvas canvas, LevelModel level){
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry("win_transition", TextureRegion.class);
+        try {
+            win_transition = (FilmStrip) texture;
+        } catch (Exception e) {
+            win_transition = null;
+        }
+
+        //System.out.println("general_transition = " + win_transition);
+
+        if (win_transition != null) {
+            //System.out.println("winhasAnimated = " + win_transition_hasAnimated);
+            int current_frame;
+
+            if (win_transition_hasAnimated){
+                current_frame = 0;
+                win_transition.setFrame(current_frame);
+            } else {
+                current_frame = (win_transition.getFrame() + 1);
+                if (current_frame >= WIN_TRANSITION_SECOND_PART){win_transition_second_part = true;}
+                if (current_frame < 34) {
+                    win_transition.setFrame(current_frame);
+                } else {
+                    win_transition_hasAnimated = true;
+                }
+            }
+
+            win_transition.setFrame(current_frame);
+            canvas.begin(level.oTran);
+            canvas.draw(win_transition, Color.WHITE, 179, 179,
+                    level.getExit().getX() * 64, level.getExit().getY() * 64, 0f, 5f, 5f);
             canvas.end();
         }
     }
