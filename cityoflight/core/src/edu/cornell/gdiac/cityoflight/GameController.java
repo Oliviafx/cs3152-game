@@ -75,13 +75,6 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
-
-	private FilmStrip indicator_out;
-	private FilmStrip indicator_loop;
-	private boolean walkhasAnimated = false;
-	private int animateCOOLTIME = 2;
-	private int animateCool = animateCOOLTIME;
-
 	private FilmStrip indicator_seen;
 	private boolean seenhasAnimated = false;
 
@@ -696,9 +689,9 @@ public class GameController implements Screen, ContactListener {
 		} else{
 			level.getRadiusOfPower().setActive(false);
 			level.brightenLights(level.getRayHandler());
-			walkhasAnimated = false;
-			if (indicator_out != null){
-				indicator_out.setFrame(0);
+			drawHelper.setWalkHasAnimatedFalse();
+			if (drawHelper.getIndicator_out() != null){
+				drawHelper.getIndicator_out().setFrame(0);
 			}
 			annette.setMovement(aAngleCache.x,aAngleCache.y);
 		}
@@ -726,7 +719,7 @@ public class GameController implements Screen, ContactListener {
 		level.draw(canvas);
 
 		if (level.getAnnette().isWalkingInPlace()){
-			 drawWalkInPlace();
+			 drawHelper.drawWalkInPlace(canvas,level);
 		}
 
 		for (AIController controller : AIcontrollers){
@@ -767,58 +760,6 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 		return !isbeingseen;
-	}
-
-	public void drawWalkInPlace(){
-
-		//System.out.println ("start drawing");
-
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("indicator_out", TextureRegion.class);
-		TextureRegion texture2 = JsonAssetManager.getInstance().getEntry("indicator_loop", TextureRegion.class);
-
-		try {
-			indicator_out = (FilmStrip)texture;
-			indicator_loop = (FilmStrip)texture2;
-		} catch (Exception e) {
-			indicator_out = null;
-			indicator_loop = null;
-		}
-
-		if(walkhasAnimated == false && indicator_out != null){
-			if (animateCool <= 0) {
-				int next = (indicator_out.getFrame() + 1);
-				if (next < indicator_out.getSize()) {
-					indicator_out.setFrame(next);
-				} else {
-					indicator_out.setFrame(0);
-					walkhasAnimated = true;
-					//System.out.println("set animated to : " + walkhasAnimated);
-				}
-				animateCool = animateCOOLTIME;
-			}
-
-			canvas.begin(level.getoTran());
-
-			canvas.draw(indicator_out,Color.SLATE,150f,150f,
-					(level.getAnnette().getX() * level.scale.x),
-					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
-			canvas.end();
-
-		}else if (walkhasAnimated == true && indicator_loop != null && animateCool <= 0){
-			if (animateCool <= 0) {
-				int next2 = (indicator_loop.getFrame() + 1) % indicator_loop.getSize();
-				indicator_loop.setFrame(next2);
-				animateCool = animateCOOLTIME;
-			}
-
-			canvas.begin(level.getoTran());
-			canvas.draw(indicator_loop,Color.WHITE,150f,150f,
-					(level.getAnnette().getX() * level.scale.x),
-					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
-			canvas.end();
-		}
-
-		animateCool --;
 	}
 
 	public void drawisSeen() {
