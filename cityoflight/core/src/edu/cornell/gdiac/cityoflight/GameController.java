@@ -355,10 +355,10 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 		// Reload the json each time
 		if (whichlevel == 1) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/180505.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1.json"));
 		}
 		if (whichlevel == 2) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/180505_2.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/katie_test.json"));
 		}
 		if (whichlevel == 3) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2.json"));
@@ -489,6 +489,10 @@ public class GameController implements Screen, ContactListener {
 		for (AIController controller : AIcontrollers){
 			controller.chooseAction();
 			controller.doAction();
+
+			if (controller.isDistracted()) {
+				distraction.setSeen(true);
+			}
 		}
 
 
@@ -521,7 +525,7 @@ public class GameController implements Screen, ContactListener {
 				angle = (float)Math.PI*(angle-90.0f)/180.0f;
 
 			}
-			if (distraction != null) {
+			if (distraction != null && !distraction.isSeen()) {
 
 				dAngleCache.scl(distraction.getForce());
 				distraction.setMovement(dAngleCache.x,dAngleCache.y);
@@ -531,16 +535,17 @@ public class GameController implements Screen, ContactListener {
 		if (distraction != null) {
 			if (!distraction.getAlive() && distraction.isActive()) {
 				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f, soundPlay);
+				level.objects.remove(distraction);
 			}
 		}
 
 		// creature AI.
-		createAIControllers();
-
-		for (AIController controller : AIcontrollers){
-			controller.chooseAction();
-			controller.doAction();
-		}
+//		createAIControllers();
+//
+//		for (AIController controller : AIcontrollers){
+//			controller.chooseAction();
+//			controller.doAction();
+//		}
 
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {

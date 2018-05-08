@@ -54,6 +54,15 @@ public class DistractionModel extends WheelObstacle {
      * Whether the bird is currently active.
      */
     private boolean alive;
+    private boolean seen;
+
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
 
     /**
      * The bird's max speed
@@ -307,7 +316,7 @@ public class DistractionModel extends WheelObstacle {
 
     public void draw(ObstacleCanvas canvas) {
         if ((birdsprite != null) && alive) {
-            Color color = Color.GRAY;
+            Color color = Color.BLUE;
             alpha = (int)((1-((float)life/BIRD_LIFE))*255);
             color.a = alpha;
 //            canvas.draw(birdsprite, color, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
@@ -328,31 +337,58 @@ public class DistractionModel extends WheelObstacle {
 
     public void update(float dt) {
         if (life > 0) {
+            if (!seen) {
+                if (alive && direction != null) {
+                    switch (direction) {
+                        case RIGHT:
+                            this.getBody().setLinearVelocity(BIRD_STEP, 0);
+                            break;
+                        case LEFT:
+                            this.getBody().setLinearVelocity(-BIRD_STEP, 0);
 
-            if (alive && direction != null) {
-                switch (direction) {
-                    case RIGHT:
-                        this.getBody().setLinearVelocity(BIRD_STEP, 0);
-                        break;
-                    case LEFT:
-                        this.getBody().setLinearVelocity(-BIRD_STEP, 0);
+                            break;
+                        case UP:
+                            this.getBody().setLinearVelocity(0, BIRD_STEP);
+                            break;
+                        case DOWN:
+                            this.getBody().setLinearVelocity(0, -BIRD_STEP);
+                            break;
+                    }
+                    if (filmStrip != null) {
+                        int next = (filmStrip.getFrame() + 1) % filmStrip.getSize();
+                        filmStrip.setFrame(next);
+                    }
 
-                        break;
-                    case UP:
-                        this.getBody().setLinearVelocity(0, BIRD_STEP);
-                        break;
-                    case DOWN:
-                        this.getBody().setLinearVelocity(0, -BIRD_STEP);
-                        break;
                 }
-                if (filmStrip != null ) {
-                    int next = (filmStrip.getFrame()+1) % filmStrip.getSize();
-                    filmStrip.setFrame(next);
-                }
-
+                life -= 1;
+                super.update(dt);
             }
-            life -= 1;
-            super.update(dt);
+            else {
+                if (alive && direction != null) {
+                    switch (direction) {
+                        case RIGHT:
+                            this.getBody().setLinearVelocity(0, 0);
+                            break;
+                        case LEFT:
+                            this.getBody().setLinearVelocity(-0, 0);
+
+                            break;
+                        case UP:
+                            this.getBody().setLinearVelocity(0, 0);
+                            break;
+                        case DOWN:
+                            this.getBody().setLinearVelocity(0, -0);
+                            break;
+                    }
+                    if (filmStrip != null) {
+                        int next = (filmStrip.getFrame() + 1) % filmStrip.getSize();
+                        filmStrip.setFrame(next);
+                    }
+
+                }
+                life -= 1;
+                super.update(dt);
+            }
         } else {
             setAlive(false);
         }
