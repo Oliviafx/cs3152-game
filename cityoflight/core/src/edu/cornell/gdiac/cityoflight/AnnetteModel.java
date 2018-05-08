@@ -57,6 +57,8 @@ public class AnnetteModel extends BoxObstacle {
     private FilmStrip upfilmstrip;
     private FilmStrip downfilmstrip;
 
+    private TextureRegion shadow;
+
 
     /** The current animation frame of the avatar */
     private int startFrame;
@@ -368,6 +370,10 @@ public class AnnetteModel extends BoxObstacle {
             upfilmstrip = null;
         }
 
+        String key4 = "shadow";
+        shadow = JsonAssetManager.getInstance().getEntry(key4, TextureRegion.class);
+
+
 
     }
 
@@ -546,7 +552,8 @@ public class AnnetteModel extends BoxObstacle {
 
         if (texture != null) {
 //            System.out.println("annette x " + getX() * drawScale.x + " annette y " + getY() * drawScale.y);
-            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/4, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, Math.abs(flipped));
+            canvas.draw(shadow, Color.WHITE, origin.x - shadow.getRegionWidth()/4, origin.y - dirTexture.getRegionHeight()/8, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, Math.abs(flipped));
+            canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y - dirTexture.getRegionHeight()/8, getX() * drawScale.x, getY() * drawScale.y, getAngle(), flipped, Math.abs(flipped));
         }
         else{
 //            System.out.println("can't find annette texture");

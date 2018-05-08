@@ -179,6 +179,7 @@ public class GameController implements Screen, ContactListener {
 	private SoundController sound;
 
 	private Music bgm;
+	private Music det_bgm;
 
 	/** Whether or not this is an active controller */
 	private boolean active;
@@ -197,11 +198,16 @@ public class GameController implements Screen, ContactListener {
 	private boolean leftBox = false;
 
 	private boolean musicPlay = true;
+	private boolean detectedPlay = false;
 	private boolean soundPlay = true;
 
 
 	public Music getBGM() {
 		return bgm;
+	}
+
+	public Music getDet_bgm() {
+		return det_bgm;
 	}
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -313,8 +319,11 @@ public class GameController implements Screen, ContactListener {
 		countdown = -1;
 		sound = SoundController.getInstance();
 		bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_music.wav"));
+		det_bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_detected_music.wav"));
 		bgm.setLooping(true);
 		bgm.setVolume(0.6f);
+		det_bgm.setLooping(true);
+		det_bgm.setVolume(0.0f);
 
 		setComplete(false);
 		setFailure(false);
@@ -352,7 +361,7 @@ public class GameController implements Screen, ContactListener {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/katie_test.json"));
 		}
 		if (whichlevel == 3) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Emmalevel.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1.json"));
 		}
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
@@ -388,6 +397,7 @@ public class GameController implements Screen, ContactListener {
 
 		if (input.didMute()) {
 			bgm.stop();
+			det_bgm.stop();
 			for (String s : sound.getCollection()) {
 				sound.stop(s);
 			}
@@ -395,12 +405,13 @@ public class GameController implements Screen, ContactListener {
 			else { musicPlay = true; }
 			if (soundPlay){	soundPlay = false; }
 			else { soundPlay = true; }
-			System.out.println("muted");
+//			System.out.println("muted");
 		}
 
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
 			bgm.stop();
+			det_bgm.stop();
 			listener.exitScreen(this, EXIT_MENU);
 			return false;
 		}
@@ -451,12 +462,24 @@ public class GameController implements Screen, ContactListener {
 
 		if (!musicPlay) {
 			bgm.pause();
-			System.out.println("pause music");
+			det_bgm.pause();
+//			System.out.println("pause music");
 		}
 		else {
 			if (!bgm.isPlaying()) {
 				bgm.play();
+				det_bgm.play();
 				System.out.println("wasn't playing, is now playing");
+			}
+			if (detectedPlay) {
+//				System.out.println("detected music");
+				bgm.setVolume(0.0f);
+				det_bgm.setVolume(0.6f);
+			}
+			else {
+//				System.out.println("normal music");
+				bgm.setVolume(0.6f);
+				det_bgm.setVolume(0.0f);
 			}
 		}
 
@@ -664,18 +687,6 @@ public class GameController implements Screen, ContactListener {
 	public void draw(float delta) {
 
 		canvas.clear();
-
-//		AnnetteModel annette = level.getAnnette();
-//		Vector2 pos = annette.getPosition();
-//		Vector2 scale = annette.getDrawScale();
-//
-//		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
-//		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
-//		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
-//		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
-//		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
-//		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
-
 		level.draw(canvas);
 
 		if (level.getAnnette().isWalkingInPlace()){
@@ -684,12 +695,14 @@ public class GameController implements Screen, ContactListener {
 
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
+				detectedPlay = true;
 				drawisSeen();
 			}
 		}
 
 		if (noOneSeesMe()){
 			//System.out.println("in seen reset");
+			detectedPlay = false;
 			seenhasAnimated = false;
 			if (indicator_seen != null){
 				indicator_seen.setFrame(0);
@@ -1060,10 +1073,6 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
-//				if (soundPlay) {
-//					sound.stop("box_effect");
-//					sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
-//				}
 				sound.stop("box_effect");
 				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f, soundPlay);
 			}
