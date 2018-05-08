@@ -65,6 +65,18 @@
 			"file": 	"textures/building_right.png",
 			"wrap":		false
 		},
+		"building_left": {
+			"file": 	"textures/building_left.png",
+			"wrap":		false
+		},
+		"building_both": {
+			"file": 	"textures/building_both.png",
+			"wrap":		false
+		},
+		"building_nolight": {
+			"file": 	"textures/building_nolight.png",
+			"wrap":		false
+		},
 		
 		"128_bookstore": {
 			"file": 	"textures/128_bookstore.png",
