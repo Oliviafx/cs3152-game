@@ -157,6 +157,7 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 
 		if (exitCode == GameController.EXIT_PAUSE) {
+
 			pause.setScreenListener(this);
 			pause.setCanvas(canvas);
 			pause.reset();
@@ -197,6 +198,9 @@ public class GDXRoot extends Game implements ScreenListener {
 			controller.setCanvas(canvas);
 			if (!getScreen().equals(pause)) {
 				controller.reset();
+			}
+			else {
+				pause.reset();
 			}
 			setScreen(controller);
 			if (loading !=null) {
