@@ -162,6 +162,7 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 
 		if (exitCode == GameController.EXIT_HELP) {
+			System.out.println("here");
 			menu.dispose();
 			menu = null;
 			help = new HelpMode(canvas);
