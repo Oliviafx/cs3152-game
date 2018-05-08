@@ -418,7 +418,7 @@ public class LevelModel {
 			initLighting(colors, gamma, diffuse, blur);
 		} else {
 
-			float[] colors = {0.6f, 0.6f, 0.6f, 0.6f};
+			float[] colors = {0.7f, 0.75f, 0.75f, 0.7f};
 			boolean gamma = true;
 			boolean diffuse = true;
 			int blur = 3;
@@ -500,7 +500,7 @@ public class LevelModel {
 //				createLineofSight(lineOfSightJSON);
 //				}
 			}  else if (layerName.equals(TARASQUE_LAYER_NAME)) {
-				System.out.println("loading tarasque");
+//				System.out.println("loading tarasque");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -510,7 +510,7 @@ public class LevelModel {
 				for (int j = 0; j < objects.size; j++) {
 //					System.out.println(j);
 					JsonValue obj = objects.get(j);
-					System.out.println(obj.get("name"));
+//					System.out.println(obj.get("name"));
 					if (obj.get("name").asString().contains("dragon")) {
 						lineOfSightJSON = obj.get("properties");
 //				System.out.println(objects);
@@ -591,7 +591,7 @@ public class LevelModel {
 //					System.out.println(lights.size + ": lights size");
 //					System.out.println(lights.get(index) + ": lights");
 //					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
-					System.out.println(name + " added to creatures");
+//					System.out.println(name + " added to creatures");
 					creatures.add(creature);
 //					attachVision(creature, lights.get(n));
 
@@ -599,7 +599,7 @@ public class LevelModel {
 				}
 			} else if (layerName.equals(SNAIL_LAYER_NAME)) {
 
-				System.out.println("loading snail");
+//				System.out.println("loading snail");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -687,18 +687,18 @@ public class LevelModel {
 //					System.out.println(creature.getPosition().x*64 + " " + creature.getPosition().y*64);
 					creature.setDrawScale(scale);
 					activate(creature);
-					System.out.println(lights.size + ": lights size");
-					System.out.println(n+ " : index");
+//					System.out.println(lights.size + ": lights size");
+//					System.out.println(n+ " : index");
 //					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
 
-					System.out.println(name + " added to creatures");
+//					System.out.println(name + " added to creatures");
 					creatures.add(creature);
 //					attachVision(creature, lights.get(n));
 
 
 				}
 			}else if (layerName.equals(BLANCHE_LAYER_NAME) ) {
-				System.out.println("loading blanche");
+//				System.out.println("loading blanche");
 
 				HashMap<String, JsonValue> numToCreature = new HashMap<String, JsonValue>();
 				HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
@@ -708,7 +708,7 @@ public class LevelModel {
 				for (int j = 0; j < objects.size; j++) {
 //					System.out.println(j);
 					JsonValue obj = objects.get(j);
-					System.out.println(obj.get("name"));
+//					System.out.println(obj.get("name"));
 					if (obj.get("name").asString().contains("lady")) {
 						lineOfSightJSON = obj.get("properties");
 //				System.out.println(objects);
@@ -789,7 +789,7 @@ public class LevelModel {
 //					System.out.println(lights.size + ": lights size");
 //					System.out.println(lights.get(index) + ": lights");
 //					System.out.println("lights "+lights.get(index).getX() + " "+lights.get(index).getY());
-					System.out.println(name + " added to creatures");
+//					System.out.println(name + " added to creatures");
 					creatures.add(creature);
 //					attachVision(creature, lights.get(n));
 
@@ -939,14 +939,23 @@ public class LevelModel {
 
                     // BUILDINGS
 					InteriorModel obj2 = new InteriorModel();
-					float[] pos = {boxJSON.get("x").asFloat()/64,boxJSON.get("y").asFloat()/64 + 1.75f};;
-					if(textName.contains("128") || textName.contains("64"))
-					{
-						pos[1] = boxJSON.get("y").asFloat()/64 + 0.6f;
-					}
-					float[] size = {boxJSON.get("width").asFloat()/64,boxJSON.get("height").asFloat()/64};
+					float[] pos = {numToBuilding.get((j+1) + "").get("x").asFloat()/64,numToBuilding.get((j+1) + "").get("y").asFloat()/64+ 1.75f};
+					float[] size = {1f,1f};
 					float[] pad = { 0.1f, 0.1f};
 					String debugColor = "red";
+
+					if(boxJSON != null){
+						pos[0] = boxJSON.get("x").asFloat()/64;
+						pos[1] = boxJSON.get("y").asFloat()/64 + 1.75f;
+						if(textName.contains("128") || textName.contains("64"))
+						{
+							pos[1] = boxJSON.get("y").asFloat()/64 + 0.6f;
+						}
+						size[0 ] = boxJSON.get("width").asFloat()/64;
+						size[1] = boxJSON.get("height").asFloat()/64;
+
+					}
+
 
 					if(film!= null) {
 
@@ -973,7 +982,7 @@ public class LevelModel {
 
 			}
 			else if(layerName.equals("Base")){
-				System.out.println("loading background");
+//				System.out.println("loading background");
 
 
 				int[] data = layer.get("data").asIntArray();
@@ -996,7 +1005,7 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-					System.out.println(texName);
+//					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
 
 					// IMPORTANT PROBLEM: TEXTURE IS NULL
@@ -1264,8 +1273,8 @@ public class LevelModel {
 	 *
 	 */
 	private void initLighting(float[] color, boolean gamma, boolean diffuse, int blur) {
-		System.out.println(bounds.width+" "+bounds.height);
-		System.out.println(Gdx.graphics.getWidth()/64+" "+ Gdx.graphics.getHeight()/64);
+//		System.out.println(bounds.width+" "+bounds.height);
+//		System.out.println(Gdx.graphics.getWidth()/64+" "+ Gdx.graphics.getHeight()/64);
 		raycamera = new OrthographicCamera(Gdx.graphics.getWidth()/64, Gdx.graphics.getHeight()/64);//bounds.width,bounds.height);
 		raycamera.position.set(0,0,0);//bounds.width/2.0f, bounds.height/2.0f, 0);
 		raycamera.update();
@@ -1335,7 +1344,6 @@ public class LevelModel {
 	private void createLineofSight(JsonValue json) {
 		ConeSource[] lightArr = new ConeSource[3];
 		int type = 0;
-		System.out.println(json);
 //		for (int i = 0; i < json.size; i++) {
 //			JsonValue obj = json.get(i);
 //			JsonValue light = obj.get("properties");
@@ -1613,43 +1621,44 @@ public class LevelModel {
 		Vector2 scale = annette.getDrawScale();
 
 		// Accounts for edges of screen
-//		float ratio = (float)canvas.getWidth()/canvas.getHeight();
-		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
-//		System.out.println(getBounds().getWidth());
-//		System.out.println(getBounds().getHeight());
-//		System.out.println("ratio " + ratio);
+//		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
 
-		float cameraXStart = canvas.getWidth() * 2.5f/(5.0f * scale.x);
-		float cameraYStart = canvas.getHeight() * 3.05f/(5.0f * scale.y);
+		float cameraXStart = canvas.getWidth() * 2.52f/(5.0f * scale.x);
+		float cameraYStart = canvas.getHeight() * 3.15f/(5.0f * scale.y);
 //		float cameraXEnd = 0;
 //		float cameraYEnd = 0;
 		float cameraXEnd = canvas.getWidth() * 2f / scale.x;
 		float cameraYEnd = canvas.getHeight() * 2f / scale.y;
 //		System.out.println(ratio);
-//
-//		if (ratio == (14.0f/8.0f)) {
-////			System.out.println("EASY");
-//			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
-//		}
-//		else if (ratio == (24.0f/14.0f)) {
-////			System.out.println("is medium2");
-//			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
-//		}
-//		else if (ratio == 1.0f) {
-////			System.out.println("is medium");
-//			cameraXEnd = canvas.getWidth() * 2.38f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 1.53f / scale.y;
-//		}
-//		else if (ratio == 2.0f) {
-////			System.out.println("hard");
-//			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
-//			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
-//		}
-//		else {
+
+		if (bounds.getWidth() == 14.0f && bounds.getHeight() == 8.0f) {
+//			System.out.println("14x8");
+			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
+		}
+		else if (bounds.getWidth() == 24.0f && bounds.getHeight() == 14.0f) {
+			System.out.println("24x14");
+			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
+		}
+		else if (bounds.getWidth() == 36.0f && bounds.getHeight() == 18.0f) {
+			System.out.println("36x18");
+			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
+		}
+		else if (bounds.getWidth() == 21.0f && bounds.getHeight() == 12.0f) {
+			System.out.println("21x12");
+			cameraXEnd = canvas.getWidth() * 1.0f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+		}
+		else if (bounds.getWidth() == 28.0f && bounds.getHeight() == 16.0f) {
+			System.out.println("28x16");
+			cameraXEnd = canvas.getWidth() * 1.20f / scale.x;
+			cameraYEnd = canvas.getHeight() * 1.6f / scale.y;
+		}
+		else {
 //			System.out.println("Not a valid window ratio.");
-//		}
+		}
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //

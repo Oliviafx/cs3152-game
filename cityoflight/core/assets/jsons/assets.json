@@ -2,113 +2,113 @@
     "textures": {
     	"earth": {
     		"file":		"textures/tile.png",
-    		"wrap":		true
+    		"wrap":		false
     	},
 		"transparent": {
 			"file":		"textures/transparent.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"64_street": {
 			"file":		"textures/64_street.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"64_sidewalk": {
 			"file":		"textures/64_sidewalk.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"64_building_short": {
 			"file":		"textures/64_building_short.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"building_short": {
 			"file":		"textures/building_short.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"64_building_short_left": {
 			"file":		"textures/64_building_short_left.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"building_short_left": {
 			"file":		"textures/building_short_left.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"64_building_short_nolight": {
 			"file":		"textures/64_building_short_nolight.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"building_short_nolight": {
 			"file":		"textures/building_short_nolight.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"64_building_short_right": {
 			"file":		"textures/64_building_short_right.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"building_short_right": {
 			"file":		"textures/building_short_right.png",
-			"wrap":		true
+			"wrap":		false
 		},
 		"64_building_tall": {
 			"file": 	"textures/64_building_tall.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 
 		"64_building_short_side": {
 			"file": 	"textures/64_building_short_side.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"building_short_side": {
 			"file": 	"textures/building_short_side.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		
 		"128_bookstore": {
 			"file": 	"textures/128_bookstore.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"bookstore": {
 			"file": 	"textures/bookstore.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"128_cafe_blue": {
 			"file": 	"textures/128_cafe_blue.png",
-			"wrap": 	true
+			"wrap":		false
 		},
         "cafe_blue": {
         "file": 	"textures/cafe_blue.png",
-        "wrap": 	true
+        "wrap":		false
         },
 		"128_cafe_red": {
 			"file": 	"textures/128_cafe_red.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"cafe_red": {
 			"file": 	"textures/cafe_red.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"128_cafe_purple": {
 			"file": 	"textures/128_cafe_purple.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"cafe_purple": {
 			"file": 	"textures/cafe_purple.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"128_cafe_green": {
 			"file": 	"textures/128_cafe_green.png",
-			"wrap": 	true
+			"wrap":		false
 		},
-        "128_cafe_green": {
-          "file": 	"textures/cafe_green.png",
-          "wrap": 	true
-        },
+		"shadow": {
+			"file": 	"textures/shadow.png",
+			"wrap":		false
+		},
 		"128_flowershop": {
 			"file": 	"textures/128_flowershop.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"flowershop": {
 			"file": 	"textures/flowershop.png",
-			"wrap": 	true
+			"wrap":		false
 		},
 		"floor_tiles": {
 			"file": 	"textures/floor_tiles.png",
