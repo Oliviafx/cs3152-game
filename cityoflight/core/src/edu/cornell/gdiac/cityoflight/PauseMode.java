@@ -276,7 +276,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         }
         if (toMenu() && listener != null) {
 
-            listener.exitScreen(this, 1);
+            listener.exitScreen(this, 3);
         }
     }
 
