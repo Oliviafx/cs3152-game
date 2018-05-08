@@ -146,6 +146,22 @@
 			"file": 	"textures/tiles.png",
 			"wrap":  	true
 		},
+		"tiles2": {
+			"file": 	"textures/tiles2.png",
+			"wrap":  	true
+		},
+		"bluetile": {
+			"file": 	"textures/bluetile.png",
+			"wrap":  	true
+		},
+		"blacktile": {
+			"file": 	"textures/blacktile.png",
+			"wrap":  	true
+		},
+		"sidewalk": {
+			"file": 	"textures/sidewalk.png",
+			"wrap":  	true
+		},
 		"box_outline": {
 			"file": 	"tutorial/box_outline.png",
 			"wrap":  	true
