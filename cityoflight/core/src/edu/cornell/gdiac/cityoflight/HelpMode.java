@@ -25,9 +25,9 @@ import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
 
 public class HelpMode implements Screen, ControllerListener, ContactListener, InputProcessor, ApplicationListener {
-    private static final String BACKGROUND_FILE = "textures/pause_screen.png";
-    private static final String PLAY_BTN_FILE = "textures/resume.png";
-    private static final String QUIT_BTN_FILE = "textures/quit.png";
+    private static final String BACKGROUND_FILE = "textures/help/help_ui_top menu.png";
+//    private static final String PLAY_BTN_FILE = "textures/resume.png";
+//    private static final String QUIT_BTN_FILE = "textures/quit.png";
     /** Standard window size (for scaling) */
     private static int STANDARD_WIDTH  = 1792;
     /** Standard window height (for scaling) */
@@ -37,11 +37,11 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private static float BUTTON_SCALE  = 0.75f;
 
     private Texture background;
-    private Texture playButton;
-    private Texture quitButton;
+//    private Texture playButton;
+//    private Texture quitButton;
     private Texture exitButton;
-    private int pressState;
-    private int quitState;
+    private int controlState;
+    private int creatureState;
 
     /** Scaling factor for when the student changes the resolution. */
     private float scale;
@@ -49,10 +49,10 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private float width;
 
     private int heightY;
-    private float playX;
-    private float playY;
-    private float quitX;
-    private float quitY;
+    private float controlX;
+    private float controlY;
+    private float creatureX;
+    private float creatureY;
 
     private boolean active;
 
@@ -63,18 +63,18 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     public HelpMode(ObstacleCanvas drawcanvas) {
         canvas = drawcanvas;
         background = new Texture(BACKGROUND_FILE);
-        pressState = 0;
-        quitState = 0;
-        playButton = null;
-        quitButton = null;
+        controlState = 0;
+        creatureState = 0;
+//        playButton = null;
+//        quitButton = null;
         active = false;
 
 
     }
 
     public void reset() {
-        pressState = 0;
-        quitState = 0;
+        controlState = 0;
+        creatureState = 0;
 //        dispose();
 //        if (stage != null) {
 //            playbutton = null;
@@ -142,12 +142,12 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 
     private boolean backToGame() {
 //        boolean val = (playbutton != null) ? playbutton.isPressed() : false;
-        return pressState == 2;// || val;
+        return controlState == 2;// || val;
     }
 
     private boolean toMenu() {
 //        boolean val = (quitbutton != null) ? quitbutton.isPressed() : false;
-        return quitState == 2;// || val;
+        return creatureState == 2;// || val;
     }
 
 
@@ -213,32 +213,32 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //        if (stage == null) {
 //            create();
 //        }
-        if (playButton == null) {
-            playButton = new Texture(PLAY_BTN_FILE);
-            playButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-            playY =  62;//+playButton.getHeight();//(int)(.25f*height) - 50;
-            playX = 147;//+playButton.getWidth();//width/2 - 200;
+//        if (playButton == null) {
+//            playButton = new Texture(PLAY_BTN_FILE);
+//            playButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            controlY =  218;//+playButton.getHeight();//(int)(.25f*height) - 50;
+            controlX = 65;//+playButton.getWidth();//width/2 - 200;
 //            System.out.println("play not null");
-        }
-        if (quitButton == null) {
-            quitButton = new Texture(QUIT_BTN_FILE);
-            quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-            quitY =  60;//+quitButton.getHeight();//(int)(.25f*height) - 50;
-            quitX = 500;//+quitButton.getWidth();//width/2+200;
+//        }
+//        if (quitButton == null) {
+//            quitButton = new Texture(QUIT_BTN_FILE);
+//            quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            creatureY =  293;//+quitButton.getHeight();//(int)(.25f*height) - 50;
+            creatureX = 67;//+quitButton.getWidth();//width/2+200;
 //            System.out.println("quit not null");
 //            create();
-        }
+//        }
     }
 
     public void draw() {
         canvas.begin();
         canvas.draw(background, Color.WHITE, 0, 0, 0 ,0, 0, 1f, 1f);
-        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
-        canvas.draw(playButton, tint, playButton.getWidth(), playButton.getHeight(),
-                playX+playButton.getWidth(), playY+playButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-        Color tint2 = (quitState == 1 ? Color.GRAY: Color.WHITE);
-        canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                quitX+quitButton.getWidth(), quitY+quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        Color tint = (controlState == 1 ? Color.GRAY: Color.WHITE);
+//        canvas.draw(playButton, tint, playButton.getWidth(), playButton.getHeight(),
+//                controlX +playButton.getWidth(), controlY +playButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//        Color tint2 = (creatureState == 1 ? Color.GRAY: Color.WHITE);
+//        canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
+//                creatureX +quitButton.getWidth(), creatureY +quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
         canvas.end();
     }
 
@@ -267,7 +267,8 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         draw();
 //            stage.draw();
 //            stage.act();
-
+        System.out.println(creatureState+" creature state");
+        System.out.println(controlState+" control state");
         if (backToGame() && listener != null) {
 
             listener.exitScreen(this, 2);
@@ -304,11 +305,11 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //        for (Actor ma : stage.getActors()) {
 //            ((MyActor)ma).touchDown(event, (float)screenX, (float)screenY, pointer, button);
 //        }
-        if (playButton == null || pressState == 2) {
+        if (/**playButton == null || */controlState == 2) {
             return true;
         }
 
-        if (quitButton == null || quitState == 2) {
+        if (/**quitButton == null || */creatureState == 2) {
             return true;
         }
 
@@ -317,19 +318,19 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 
         // TODO: Fix scaling
         // Play button is a circle.
-        float radius = BUTTON_SCALE*scale*playButton.getWidth();
-        float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
+//        float radius = BUTTON_SCALE*scale*playButton.getWidth();
+        float dist = (screenX- controlX)*(screenX- controlX)+(screenY- controlY)*(screenY- controlY);
 //        if (dist < radius*radius) {
-        if ((screenX > playX && screenX < playX+playButton.getWidth()) && (screenY > playY && screenY < playY+playButton.getHeight())) {
-            pressState = 1;
+        if ((screenX > controlX && screenX < controlX +300) && (screenY > controlY && screenY < controlY +30)) {
+            controlState = 1;
 
         }
 
-        float dist2 = (screenX-quitX)*(screenX-quitX)+(screenY-(quitY))*(screenY-quitY);
+        float dist2 = (screenX- creatureX)*(screenX- creatureX)+(screenY-(creatureY))*(screenY- creatureY);
 //        if (dist2 < radius*radius) {
-        if ((screenX > quitX && screenX < quitX+quitButton.getWidth()) && (screenY > quitY && screenY < quitY+quitButton.getHeight())) {
+        if ((screenX > creatureX && screenX < creatureX +330) && (screenY > creatureY && screenY < creatureY +30)) {
 
-            quitState = 1;
+            creatureState = 1;
         }
         return false;
     }
@@ -347,12 +348,12 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
      */
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-        if (pressState == 1) {
-            pressState = 2;
+        if (controlState == 1) {
+            controlState = 2;
             return false;
         }
-        if (quitState == 1) {
-            quitState = 2;
+        if (creatureState == 1) {
+            creatureState = 2;
             return false;
         }
         return true;
@@ -370,8 +371,8 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
      * @return whether to hand the event to other listeners.
      */
     public boolean buttonDown (Controller controller, int buttonCode) {
-//        if (buttonCode == startButton && pressState == 0) {
-//            pressState = 1;
+//        if (buttonCode == startButton && controlState == 0) {
+//            controlState = 1;
 //            return false;
 //        }
         return true;
@@ -389,8 +390,8 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
      * @return whether to hand the event to other listeners.
      */
     public boolean buttonUp (Controller controller, int buttonCode) {
-//        if (pressState == 1 && buttonCode == startButton) {
-//            pressState = 2;
+//        if (controlState == 1 && buttonCode == startButton) {
+//            controlState = 2;
 //            return false;
 //        }
         return true;
@@ -428,7 +429,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
      */
     public boolean keyUp(int keycode) {
         if (keycode == Input.Keys.N || keycode == Input.Keys.P) {
-//			pressState = 2;
+//			controlState = 2;
             return false;
         }
         return true;
