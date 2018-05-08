@@ -924,6 +924,7 @@ public class LevelModel {
 					TextureRegion film = null;
 					JsonValue buildingJSON = numToBuilding.get((j+1) + "").get("properties");
 					JsonValue boxJSON = numToBox.get((j+1) +"");
+					
 					String textName = buildingJSON.get("texture").asString();
 
 
