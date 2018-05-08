@@ -26,7 +26,7 @@ public class DistractionModel extends WheelObstacle {
     private static final float HOFFSET = .25f;
     private static final float VOFFSET = .25f;
 
-    private static final int BIRD_LIFE = 100;
+    private static final int BIRD_LIFE = 360;
     private static final float BIRD_RADIUS = .25f;
 
 
@@ -367,17 +367,17 @@ public class DistractionModel extends WheelObstacle {
                 if (alive && direction != null) {
                     switch (direction) {
                         case RIGHT:
-                            this.getBody().setLinearVelocity(0, 0);
+                            this.getBody().setLinearVelocity(BIRD_STEP, 0);
                             break;
                         case LEFT:
-                            this.getBody().setLinearVelocity(-0, 0);
+                            this.getBody().setLinearVelocity(-BIRD_STEP, 0);
 
                             break;
                         case UP:
-                            this.getBody().setLinearVelocity(0, 0);
+                            this.getBody().setLinearVelocity(0, BIRD_STEP);
                             break;
                         case DOWN:
-                            this.getBody().setLinearVelocity(0, -0);
+                            this.getBody().setLinearVelocity(0, -BIRD_STEP);
                             break;
                     }
                     if (filmStrip != null) {
