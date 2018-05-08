@@ -384,7 +384,7 @@ public class CreatureModel extends BoxObstacle {
     public LightSource getVision() { return vision; }
     public void setVision(LightSource l){ vision = l; }
 
-    public void setTurnBehavoir(int value){turnBehavior = value;}
+    public void setTurnBehavior(int value){turnBehavior = value;}
     public int getTurnBehavior(){return turnBehavior;}
 
 
@@ -415,7 +415,7 @@ public class CreatureModel extends BoxObstacle {
         float height = bounds.get("height").asFloat() / 64;
         //)
         try{
-            setTurnBehavoir(json.get("turn").asInt());
+            setTurnBehavior(json.get("turn").asInt());
         }
         catch (Exception e){
             System.out.println("turn behavior not loaded");
