@@ -31,6 +31,13 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private static final String CONTROLS_FILE = "help/help_ui_controls.png";
     private static final String CREATURE_SELECTION_FILE = "help/help_ui_top menu (hover).png";
     private static final String BACK_FILE = "textures/menu assets/help.png";
+    private static final String LOU_CARCOLH_FILE = "help/help_ui_lou carcolh.png";
+    private static final String TARASQUE_FILE = "help/help_ui_tarasque.png";
+    private static final String DAME_BLANCHE_FILE = "help/help_ui_dame blanche.png";
+    private static final String MENU_FILE = "textures/level select assets/menu_button.png";
+
+
+
 
 //    private static final String PLAY_BTN_FILE = "textures/resume.png";
 //    private static final String QUIT_BTN_FILE = "textures/quit.png";
@@ -49,6 +56,9 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private int controlState;
     private int creatureState;
     private int quitState;
+    private int snailState;
+    private int tarasqueState;
+    private int ladyState;
 
     /** Scaling factor for when the student changes the resolution. */
     private float scale;
@@ -61,6 +71,13 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private float creatureX;
     private float creatureY;
 
+
+    private boolean showControls;
+    private boolean showCreatureSelect;
+    private boolean showHelp;
+    private boolean showSnail;
+    private boolean showTarasque;
+    private boolean showLady;
     private boolean active;
 
     private ObstacleCanvas canvas;
@@ -73,11 +90,21 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         controlState = 0;
         creatureState = 0;
         quitState = 0;
+        snailState = 0;
+        tarasqueState = 0;
+        ladyState = 0;
+
 //        exitButton = null;
 //        playButton = null;
         quitButton = new Texture(BACK_FILE);
         quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         active = false;
+        showControls = false;
+        showCreatureSelect = false;
+        showHelp = true;
+        showLady = false;
+        showSnail = false;
+        showTarasque = false;
 
 
     }
@@ -148,6 +175,16 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
      */
     public void hide() {
         // Useless if called in outside animation loop
+    }
+
+    private boolean toSnail() {
+        return snailState == 2;
+    }
+    private boolean toTarasque() {
+        return tarasqueState == 2;
+    }
+    private boolean toLady() {
+        return ladyState == 2;
     }
 
     private boolean backToHelp() {
@@ -228,7 +265,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //            create();
 //        }
         if (quitButton != null && toControls()) {
-            System.out.println("quit button");
+//            System.out.println("quit button");
             quitButton = new Texture(BACK_FILE);
             quitButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
@@ -251,21 +288,48 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 
     public void draw() {
         canvas.begin();
-        if (!toControls() && !toCreatures()) {
+        if (!showControls && !showCreatureSelect && showHelp) {
             canvas.draw(background, Color.WHITE, 0, 0, 0, 0, 0, 1f, 1f);
         }
-        else if (toControls()) {
-            System.out.println(quitButton == null);
+        else if (showControls) {
+//            System.out.println(quitButton == null);
             canvas.draw(new Texture(CONTROLS_FILE), Color.WHITE, 0, 0, 0, 0, 0, 1f, 1f);
             if (quitButton != null) {
 //                System.out.println("here");
                 Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
                 canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
             }
         }
-        else if (toCreatures()) {
+        else if (showCreatureSelect) {
             canvas.draw(new Texture(CREATURE_SELECTION_FILE), Color.WHITE, 0, 0, 0, 0, 0, 1f, 1f);
+        }
+        else if (showSnail) {
+            canvas.draw(new Texture(LOU_CARCOLH_FILE), Color.WHITE, 0,0,0,0,0,1,1);
+            if (quitButton != null) {
+//                System.out.println("here");
+                Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
+                canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
+                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+            }
+        }
+        else if (showTarasque) {
+            canvas.draw(new Texture(TARASQUE_FILE), Color.WHITE, 0,0,0,0,0,1,1);
+            if (quitButton != null) {
+//                System.out.println("here");
+                Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
+                canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
+                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+            }
+        }
+        else if (showLady) {
+            canvas.draw(new Texture(DAME_BLANCHE_FILE), Color.WHITE, 0,0,0,0,0,1,1);
+            if (quitButton != null) {
+//                System.out.println("here");
+                Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
+                canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
+                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+            }
         }
         Color tint = (controlState == 1 ? Color.GRAY: Color.WHITE);
 //        canvas.draw(playButton, tint, playButton.getWidth(), playButton.getHeight(),
@@ -301,15 +365,54 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         draw();
 //            stage.draw();
 //            stage.act();
-//        System.out.println(creatureState+" creature state");
-//        System.out.println(controlState+" control state");
+//        System.out.println(quitState+ " quit state");
         if (toControls() && listener != null) {
-            System.out.println("here");
+            showHelp = false;
+            showControls = true;
+            controlState = 0;
 //            listener.exitScreen(this, 6);
         }
         if (toCreatures() && listener != null) {
-
+            showHelp = false;
+            showCreatureSelect = true;
+            creatureState = 0;
 //            listener.exitScreen(this, 7);
+        }
+        if (backToHelp() && listener != null) {
+//            System.out.println("here");
+            creatureState = 0;
+            controlState = 0;
+            quitState = 0;
+            showControls=false;
+            showCreatureSelect=false;
+            showHelp = true;
+        }
+        if (toSnail() && listener != null) {
+            snailState = 0;
+            creatureState = 0;
+            controlState = 0;
+            quitState = 0;
+            showSnail = true;
+            showCreatureSelect = false;
+            showHelp = false;
+        }
+        if (toTarasque() && listener != null) {
+            tarasqueState = 0;
+            creatureState = 0;
+            controlState = 0;
+            quitState = 0;
+            showTarasque = true;
+            showCreatureSelect = false;
+            showHelp = false;
+        }
+        if (toLady() && listener != null) {
+            ladyState = 0;
+            creatureState = 0;
+            controlState = 0;
+            quitState = 0;
+            showLady = true;
+            showCreatureSelect = false;
+            showHelp = false;
         }
     }
 
@@ -347,6 +450,18 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
             return true;
         }
 
+        if (quitButton == null || quitState == 2) {
+            return true;
+        }
+        if (snailState == 2) {
+            return true;
+        }
+        if (tarasqueState == 2) {
+            return true;
+        }
+        if (ladyState == 2) {
+            return true;
+        }
         // Flip to match graphics coordinates
         screenY = heightY-screenY;
 
@@ -366,7 +481,26 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 
             controlState = 1;
         }
-        return false;
+
+//        System.out.println("screenX "+screenX);
+//        System.out.println("screenY "+screenY);
+//        System.out.println("creatureX "+creatureX);
+//        System.out.println("creature Y "+creatureY);
+        if ((screenX > creatureX && screenX < creatureX +quitButton.getWidth()) && (screenY > creatureY-270 && screenY < creatureY +quitButton.getHeight()-270)) {
+            quitState = 1;
+        }
+
+        if ((screenX > 588 && screenX < 682)  && (screenY > 512-223 && screenY < 512-200)) {
+            snailState = 1;
+        }
+
+        if ((screenX > 591 && screenX <700) && (screenY > 512-279 && screenY < 512-259)) {
+            tarasqueState = 1;
+        }
+        if ((screenX > 590 && screenX < 705) && (screenY > 512-339 && screenY < 512-319)) {
+            ladyState = 1;
+        }
+            return false;
     }
 
     /**
@@ -389,6 +523,18 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         if (creatureState == 1) {
             creatureState = 2;
             return false;
+        }
+        if (quitState == 1) {
+            quitState = 2;
+        }
+        if (snailState == 1) {
+            snailState = 2;
+        }
+        if (tarasqueState == 1) {
+            tarasqueState = 2;
+        }
+        if (ladyState == 1) {
+            ladyState = 2;
         }
         return true;
     }

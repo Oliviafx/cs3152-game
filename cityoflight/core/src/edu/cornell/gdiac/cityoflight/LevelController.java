@@ -34,7 +34,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private Texture background;
     private Texture backButton;
     private ObstacleCanvas canvas;
-    private static final String LEVEL_BACKGROUND_FILE = "textures/level select assets/UI.png";
+    private static final String LEVEL_BACKGROUND_FILE = "textures/level select assets/level_select.png";
     private static final String BACK_FILE = "textures/level select assets/menu_button.png";
 
     private ScreenListener listener;
@@ -312,10 +312,10 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 stage.act();
             }
             if (isReady() && listener != null) {
-                System.out.println("heres");
                 listener.exitScreen(this, 1);
             }
-            if ((goLevelOne() || goLevelTwo() || goLevelThree()) && listener != null) {
+            if ((goLevelOne() || goLevelTwo() || goLevelThree() || goLevelFour() || goLevelFive() || goLevelSix())
+                    && listener != null) {
                 listener.exitScreen(this, 2);
             }
         }
