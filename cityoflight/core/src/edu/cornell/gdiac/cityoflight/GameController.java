@@ -749,22 +749,22 @@ public class GameController implements Screen, ContactListener {
 			}
 			drawGeneralTransition();
 		} else if (failed) {
-//			if (general_transition_second_part) {
-//				drawLoseScreen();
-//				textFont.setColor(Color.WHITE);
-//				if (!hasChosenText){
-//					chosentext = chooseLosingText();
-//					hasChosenText = true;
-//				}
-//				canvas.begin(); // DO NOT SCALE
-//				canvas.drawText(chosentext, textFont, 110 ,200);
-//				canvas.end();
-				displayFont.setColor(Color.FIREBRICK);
+			if (general_transition_second_part) {
+				drawLoseScreen();
+				textFont.setColor(Color.WHITE);
+				if (!hasChosenText){
+					chosentext = chooseLosingText();
+					hasChosenText = true;
+				}
 				canvas.begin(); // DO NOT SCALE
-				canvas.drawTextCentered("Defeated.", displayFont);
+				canvas.drawText(chosentext, textFont, 110 ,200);
 				canvas.end();
-			//}
-//			//drawGeneralTransition();
+//				displayFont.setColor(Color.FIREBRICK);
+//				canvas.begin(); // DO NOT SCALE
+//				canvas.drawTextCentered("Defeated.", displayFont);
+//				canvas.end();
+			}
+			drawGeneralTransition();
 		}
 	}
 
