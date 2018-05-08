@@ -363,12 +363,28 @@
 				"first": 1
 			}
 		},
-		"win_screen" : {
-			"file" : "transitions/win_screen.png",
+		"win_screen01" : {
+			"file" : "transitions/win01.png",
 			"wrap" : false
 		},
-		"lose_screen" : {
-			"file" : "transitions/lose_screen.png",
+		"win_screen02" : {
+			"file" : "transitions/win02.png",
+			"wrap" : false
+		},
+		"win_screen03" : {
+			"file" : "transitions/win03.png",
+			"wrap" : false
+		},
+		"lose_screen01" : {
+			"file" : "transitions/lose01.png",
+			"wrap" : false
+		},
+		"lose_screen02" : {
+			"file" : "transitions/lose02.png",
+			"wrap" : false
+		},
+		"lose_screen03" : {
+			"file" : "transitions/lose03.png",
 			"wrap" : false
 		}
 	},
