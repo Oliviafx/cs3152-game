@@ -24,6 +24,18 @@
 			"file":		"textures/building_short.png",
 			"wrap":		false
 		},
+		"tar_outline": {
+			"file":		"tutorial/tar_outline.png",
+			"wrap":		false
+		},
+		"outline_annette_left": {
+			"file":		"tutorial/outline_annette_left.png",
+			"wrap":		false
+		},
+		"blanche_outline": {
+			"file":		"tutorial/blanche_outline.png",
+			"wrap":		false
+		},
 		"64_building_short_left": {
 			"file":		"textures/64_building_short_left.png",
 			"wrap":		false
