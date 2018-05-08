@@ -57,6 +57,9 @@ public class GameController implements Screen, ContactListener {
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
 
+	/** The DrawHelper to help with drawing transitions, screens, and indicators. */
+	private DrawHelper drawHelper;
+
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
 	protected BitmapFont textFont;
@@ -86,24 +89,6 @@ public class GameController implements Screen, ContactListener {
 	private boolean win_transition_hasAnimated = false;
 	private int WIN_TRANSITION_SECOND = 15;
 	private boolean win_transition_second_part;
-
-	/** Filmstrip for the general menu transitions */
-	private FilmStrip general_transition;
-	/** number of frames in the transition */
-	int GENERAL_TRANSITION_FRAME_NUM = 36;
-	/** the start frame of the second part of the transition */
-	private int GENERAL_TRANSITION_SECOND_PART = 21;
-	/** did the transition reach the second part yet? */
-	private boolean general_transition_second_part;
-	/** did the transition go through yet? */
-	private boolean general_transition_hasAnimated = false;
-
-	/** The screen to show on a winning/losing screen */
-	private String chosenScreenKey;
-	/** The text to show on a winning/losing screen */
-	private String chosenText;
-	/** Whether chosenScreenKey and chosenText has been chosen */
-	private boolean hasChosenScreenandText = false;
 
 	private PauseMode pause;
 	private MenuMode menu;
@@ -350,6 +335,7 @@ public class GameController implements Screen, ContactListener {
 		bgm.setVolume(0.6f);
 		det_bgm.setLooping(true);
 		det_bgm.setVolume(0.0f);
+		drawHelper = new DrawHelper();
 
 		setComplete(false);
 		setFailure(false);
@@ -403,11 +389,8 @@ public class GameController implements Screen, ContactListener {
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 
-		general_transition_hasAnimated = false;
-		general_transition_second_part = false;
-		win_transition_hasAnimated = false;
+		drawHelper.reset();
 		win_transition_second_part = false;
-		hasChosenScreenandText = false;
 	}
 
 	/**
@@ -764,15 +747,15 @@ public class GameController implements Screen, ContactListener {
 
 		// Final message
 		if (complete && !failed) {
-			if (general_transition_second_part) {
-				drawEndScreen(1);
+			if (drawHelper.get_general_transition_second_part()) {
+				drawHelper.drawEndScreen(canvas, textFont,1);
 			}
-			drawGeneralTransition();
+			drawHelper.drawGeneralTransition(canvas);
 		} else if (failed) {
-			if (general_transition_second_part) {
-				drawEndScreen(0);
+			if (drawHelper.get_general_transition_second_part()) {
+				drawHelper.drawEndScreen(canvas,textFont,0);
 			}
-			drawGeneralTransition();
+			drawHelper.drawGeneralTransition(canvas);
 		}
 	}
 
@@ -829,12 +812,6 @@ public class GameController implements Screen, ContactListener {
 			}
 
 			canvas.begin(level.getoTran());
-//			batcher.begin();
-//			batcher.draw(indicator_loop,(level.getAnnette().getX() / 64  * level.scale.x) - 200,
-//					(level.getAnnette().getY() / 64 * level.scale.y) - 200, 400, 400);
-			//batcher.draw(indicator_loop,(level.getAnnette().getX() / 64 * level.scale.x + 100),
-			//		(level.getAnnette().getY() / 64 * level.scale.y), 600, 600);
-//			batcher.end();
 			canvas.draw(indicator_loop,Color.WHITE,150f,150f,
 					(level.getAnnette().getX() * level.scale.x),
 					(level.getAnnette().getY() * level.scale.y), 0f, 1.8f, 1.8f);
@@ -1228,144 +1205,5 @@ public class GameController implements Screen, ContactListener {
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
 	public void preSolve(Contact contact, Manifold oldManifold) {}
-
-	public void drawGeneralTransition(){
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("general_transition", TextureRegion.class);
-		try {
-			general_transition = (FilmStrip) texture;
-		} catch (Exception e) {
-			general_transition = null;
-		}
-
-		if (general_transition != null) {
-			int next;
-
-			if (general_transition_hasAnimated){
-				next = 0;
-				general_transition.setFrame(next);
-			} else {
-				next = (general_transition.getFrame() + 1);
-				if (next >= GENERAL_TRANSITION_SECOND_PART){general_transition_second_part = true;}
-				if (next < GENERAL_TRANSITION_FRAME_NUM - 1) {
-					general_transition.setFrame(next);
-				} else {
-					general_transition_hasAnimated = true;
-				}
-			}
-
-			general_transition.setFrame(next);
-			canvas.begin();
-			//System.out.println("drawing:  " + current_frame);
-			canvas.draw(general_transition, Color.WHITE, 224, 128f,
-					canvas.getWidth()/2, canvas.getHeight()/2, 0f, 2f, 2f);
-			canvas.end();
-		}
-	}
-
-	/**
-	 * draw the win / lose screen
-	 * @param didWin 1 for win, 0 for lose.
-	 */
-	public void drawEndScreen(int didWin){
-		if (! hasChosenScreenandText) {
-			// decide the winning screen to display.
-			int random = (int) (Math.random() * 3 + 1);
-			chosenScreenKey = ((didWin == 1) ? ("win_screen0" + Integer.toString(random)):
-					                          ("lose_screen0" + Integer.toString(random)));
-			// decide the text to display.
-			chosenText = chooseEndText(didWin);
-			hasChosenScreenandText = true;
-		}
-
-		TextureRegion end_screen = JsonAssetManager.getInstance().getEntry(chosenScreenKey, TextureRegion.class);
-		textFont.setColor(Color.WHITE);
-		canvas.begin();
-		canvas.draw(end_screen,0,0);
-		canvas.drawText(chosenText, textFont, 110 ,200);
-		canvas.end();
-	}
-
-	/**
-	 * A helper function to determine what text to show up in a win/lose screen.
-	 * @param didWin 1 for win, 0 for lose.
-	 * @return
-	 */
-	public String chooseEndText(int didWin){
-		int end_text_num = (int)(Math.random() * 10 + 1) - 1; //can use a random number if we just want random text.
-		String encouragement;
-
-		if (didWin == 1) {
-			switch (end_text_num) {
-				case 0:
-					encouragement = "Enlightenment.";
-					break;
-				case 1:
-					encouragement = "Now are you ready for a real challenge?";
-					break;
-				case 2:
-					encouragement = "The creatures shall face banishment!";
-					break;
-				case 3:
-					encouragement = "City of Light is safe... for now.";
-					break;
-				case 4:
-					encouragement = "And Annette emerges victorious!";
-					break;
-				case 5:
-					encouragement = "The light leads the path to victory.";
-					break;
-				case 6:
-					encouragement = "You did stunningly well.";
-					break;
-				case 7:
-					encouragement = "Ah, I see we have a smart player.";
-					break;
-				case 8:
-					encouragement = "And the mime once again does it!";
-					break;
-				case 9:
-					encouragement = "Cleansed by the Sigil of Power!";
-					break;
-				default:
-					encouragement = "Should never get here";
-			}
-		} else {
-			switch(end_text_num){
-				case 0:
-					encouragement = "Try to think outside the box...";
-					break;
-				case 1:
-					encouragement = "Cheer up, mime over matter!";
-					break;
-				case 2:
-					encouragement = "C'mon, you can do it!";
-					break;
-				case 3:
-					encouragement = "Even my grandma beat this level.";
-					break;
-				case 4:
-					encouragement = "The City of Light needs your help.";
-					break;
-				case 5:
-					encouragement = "The streets grow a little bit darker.";
-					break;
-				case 6:
-					encouragement = "Shadows seep onto the streets... ";
-					break;
-				case 7:
-					encouragement = "May the light guide you.";
-					break;
-				case 8:
-					encouragement = "Perhaps I overestimated you.";
-					break;
-				case 9:
-					encouragement = "Failure is the best teacher.";
-					break;
-				default:
-					encouragement = "Should never get here";
-			}
-		}
-		return encouragement;
-	}
 
 }
