@@ -157,6 +157,7 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 
 		if (exitCode == GameController.EXIT_PAUSE) {
+
 			pause.setScreenListener(this);
 			pause.setCanvas(canvas);
 			pause.reset();
@@ -174,22 +175,19 @@ public class GDXRoot extends Game implements ScreenListener {
 //			loading = null;
 //		}
 		else if (exitCode == GameController.EXIT_PLAY) {
-			if (menu!=null) {
-				menu.dispose();
-				menu = null;
-			}
+//			if (menu!=null) {
+//				menu.dispose();
+//				menu = null;
+//			}
 			if (getScreen().equals(levels)) {
 				if (levels.goLevelOne()) {
 					controller.setWhichLevel(1);
-					System.out.println(controller.whichlevel);
 				}
 				else if (levels.goLevelTwo()) {
 					controller.setWhichLevel(2);
-					System.out.println(controller.whichlevel);
 				}
 				else if (levels.goLevelThree()) {
 					controller.setWhichLevel(3);
-					System.out.println(controller.whichlevel);
 				}
 			}
 			else if (controller.whichlevel == 0) {
@@ -201,11 +199,15 @@ public class GDXRoot extends Game implements ScreenListener {
 			if (!getScreen().equals(pause)) {
 				controller.reset();
 			}
+			else {
+				pause.reset();
+			}
 			setScreen(controller);
 			if (loading !=null) {
 				loading.dispose();
 				loading = null;
 			}
+			controller.setMenu(menu);
 		}
 
 		else if (exitCode == GameController.EXIT_QUIT) {

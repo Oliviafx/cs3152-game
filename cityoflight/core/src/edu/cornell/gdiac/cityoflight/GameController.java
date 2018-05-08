@@ -101,6 +101,7 @@ public class GameController implements Screen, ContactListener {
 	private boolean stopWalkInPlace = false;
 
 	private PauseMode pause;
+	private MenuMode menu;
 
 	/**
 	 * Preloads the assets for this controller.
@@ -213,6 +214,9 @@ public class GameController implements Screen, ContactListener {
 	private boolean detectedPlay = false;
 	private boolean soundPlay = true;
 
+	public void setMenu(MenuMode val) {
+		menu = val;
+	}
 
 	public Music getBGM() {
 		return bgm;
@@ -367,13 +371,13 @@ public class GameController implements Screen, ContactListener {
 		stopWalkInPlace = false;
 		// Reload the json each time
 		if (whichlevel == 1) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/180505.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1.json"));
 		}
 		if (whichlevel == 2) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/180505_2.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/katie_test.json"));
 		}
 		if (whichlevel == 3) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Emmalevel.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2.json"));
 		}
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
@@ -423,7 +427,7 @@ public class GameController implements Screen, ContactListener {
 			else { musicPlay = true; }
 			if (soundPlay){	soundPlay = false; }
 			else { soundPlay = true; }
-			System.out.println("muted");
+//			System.out.println("muted");
 		}
 
 		// Now it is time to maybe switch screens.
@@ -481,7 +485,7 @@ public class GameController implements Screen, ContactListener {
 		if (!musicPlay) {
 			bgm.pause();
 			det_bgm.pause();
-			System.out.println("pause music");
+//			System.out.println("pause music");
 		}
 		else {
 			if (!bgm.isPlaying()) {
@@ -507,6 +511,10 @@ public class GameController implements Screen, ContactListener {
 		for (AIController controller : AIcontrollers){
 			controller.chooseAction();
 			controller.doAction();
+
+			if (controller.isDistracted()) {
+				distraction.setSeen(true);
+			}
 		}
 
 
@@ -539,7 +547,7 @@ public class GameController implements Screen, ContactListener {
 				angle = (float)Math.PI*(angle-90.0f)/180.0f;
 
 			}
-			if (distraction != null) {
+			if (distraction != null && !distraction.isSeen()) {
 
 				dAngleCache.scl(distraction.getForce());
 				distraction.setMovement(dAngleCache.x,dAngleCache.y);
@@ -549,16 +557,17 @@ public class GameController implements Screen, ContactListener {
 		if (distraction != null) {
 			if (!distraction.getAlive() && distraction.isActive()) {
 				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f, soundPlay);
+//				level.objects.remove(distraction);
 			}
 		}
 
 		// creature AI.
-		createAIControllers();
-
-		for (AIController controller : AIcontrollers){
-			controller.chooseAction();
-			controller.doAction();
-		}
+//		createAIControllers();
+//
+//		for (AIController controller : AIcontrollers){
+//			controller.chooseAction();
+//			controller.doAction();
+//		}
 
 		box.setDrawScale(level.scale);
 		if (annette.isSummoning() && !box.getDoesExist()) {
@@ -699,18 +708,6 @@ public class GameController implements Screen, ContactListener {
 	public void draw(float delta) {
 
 		canvas.clear();
-
-//		AnnetteModel annette = level.getAnnette();
-//		Vector2 pos = annette.getPosition();
-//		Vector2 scale = annette.getDrawScale();
-//
-//		float cameraXStart = canvas.getWidth() * 1.25f/(5.0f * scale.x);
-//		float cameraYStart = canvas.getHeight() * 1.25f/(5.0f * scale.y);
-//		float cameraXEnd = canvas.getWidth() * 0.75f / scale.x;
-//		float cameraYEnd = canvas.getHeight() * 0.75f / scale.y;
-//		float tx = pos.x <= cameraXStart ? cameraXStart * scale.x : (pos.x >= cameraXEnd ? cameraXEnd * scale.x : pos.x * scale.x);
-//		float ty = pos.y <= cameraYStart ? cameraYStart * scale.y : (pos.y >= cameraYEnd ? cameraYEnd * scale.y : pos.y * scale.y);
-
 		level.draw(canvas);
 
 		if (level.getAnnette().isWalkingInPlace()){
@@ -1251,10 +1248,6 @@ public class GameController implements Screen, ContactListener {
 				box.setDeactivating(false);
 				box.reactivate();
 				level.setAlpha(255);
-//				if (soundPlay) {
-//					sound.stop("box_effect");
-//					sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f);
-//				}
 				sound.stop("box_effect");
 				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f, soundPlay);
 			}
