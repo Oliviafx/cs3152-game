@@ -57,6 +57,8 @@ public class AnnetteModel extends BoxObstacle {
     private FilmStrip upfilmstrip;
     private FilmStrip downfilmstrip;
 
+    private FilmStrip sideboxfilmstrip;
+
     private TextureRegion shadow;
 
 
@@ -372,6 +374,14 @@ public class AnnetteModel extends BoxObstacle {
 
         String key4 = "shadow";
         shadow = JsonAssetManager.getInstance().getEntry(key4, TextureRegion.class);
+
+        String key5 = "annette_box_side";
+        TextureRegion texture5 = JsonAssetManager.getInstance().getEntry(key5, TextureRegion.class);
+        try {
+            sideboxfilmstrip = (FilmStrip)texture5;
+        } catch (Exception e) {
+            sideboxfilmstrip = null;
+        }
 
 
 
