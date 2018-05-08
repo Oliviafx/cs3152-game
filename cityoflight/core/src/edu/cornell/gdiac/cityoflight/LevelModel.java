@@ -72,6 +72,7 @@ public class LevelModel {
 	private DistractionModel distraction;
 	/**Reference to background tiles*/
 	private Array<BackgroundModel> tiles = new Array<BackgroundModel>();
+	private Array<BackgroundModel> tutorialTiles = new Array<BackgroundModel>();
 
 
 
@@ -430,6 +431,7 @@ public class LevelModel {
 
 		JsonValue idMap = levelFormat.get("tilesets");
 		tiles = new Array<BackgroundModel>();
+		tutorialTiles = new Array<BackgroundModel>();
 
 		//loop through layers to find specified objects and initialize
 		JsonValue layers = levelFormat.get("layers");
@@ -981,6 +983,45 @@ public class LevelModel {
 
 
 			}
+			else if (layerName.equals("Tutorial")){
+
+				System.out.println("loading tutorial data");
+
+
+				int[] data = layer.get("data").asIntArray();
+				int height = layer.get("height").asInt();
+				int width = layer.get("width").asInt();
+
+
+				for(int j = 0; j < height*width; j++){
+					//dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
+//                    System.out.println("width: " + width + ", height: " + height);
+					int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
+					int newy = height - (j / width);//(j%width);
+//					System.out.println("newx "+ newx + " new y " + newy);
+
+
+					int f = 0;
+					while(f<data[j] && !idToTexture.containsKey(data[j] - f)){
+
+						f++;
+					}
+					//System.out.println(data[j] + " : "+ (data[j] - f));
+					String texName = idToTexture.get(data[j] - f);
+					System.out.println(texName);
+					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
+
+					// IMPORTANT PROBLEM: TEXTURE IS NULL
+					if(texture != null) {
+
+						tutorialTiles.add(new BackgroundModel(newx, newy, texture));
+					}
+
+
+
+				}
+
+			}
 			else if(layerName.equals("Base")){
 //				System.out.println("loading background");
 
@@ -1485,6 +1526,7 @@ public class LevelModel {
 		background = null;
 
 		tiles.clear();
+		tutorialTiles.clear();
 
 //		if (distraction != null) {
 //			distraction.setAlive(false);
@@ -1674,12 +1716,19 @@ public class LevelModel {
 		canvas.draw(background, Color.WHITE, 0, 0, canvas.getWidth() * 5, canvas.getHeight() * 5);
 		//canvas.draw(background, 0, 0);
 
+
 		//DRAWS BACKGROUND TILES HERE
 		for(int i =0;i< tiles.size; i++){
 			tiles.get(i).draw(canvas);
 //			System.out.println(annette.getX());
 
 		}
+		for(int i =0;i< tutorialTiles.size; i++){
+			tutorialTiles.get(i).draw(canvas);
+
+		}
+
+
 
 		canvas.end();
 
