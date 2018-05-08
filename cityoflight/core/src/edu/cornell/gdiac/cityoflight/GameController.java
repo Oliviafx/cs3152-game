@@ -171,7 +171,12 @@ public class GameController implements Screen, ContactListener {
 	public static final int EXIT_LEVEL = 3;
 	/** Exit code for going to the pause menu */
 	public static final int EXIT_PAUSE = 4;
-
+	/** Exit code for going to the help menu */
+	public static final int EXIT_HELP = 5;
+	/** Exit code for going to the control menu screen*/
+	public static final int EXIT_CONTROLS = 6;
+	/** Exit code for going to the control menu screen*/
+	public static final int EXIT_CREATURES = 7;
 	/** Which level to load */
 	public int whichlevel;
 	public void setWhichLevel(int val) {
