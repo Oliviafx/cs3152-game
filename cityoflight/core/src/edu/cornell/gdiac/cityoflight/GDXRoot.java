@@ -43,6 +43,9 @@ public class GDXRoot extends Game implements ScreenListener {
 	private LevelController levels;
 	/** Player mode for the pause screen (CONTROLLER CLASS) */
 	private PauseMode pause;
+	/** Player mode for the help screen (CONTROLLER CLASS) */
+	private HelpMode help;
+
 	/** List of all WorldControllers */
 //	private WorldController[] controllers;
 
@@ -63,6 +66,7 @@ public class GDXRoot extends Game implements ScreenListener {
 //		menu = new MenuMode(canvas, this);
 //		levels = new LevelController(canvas);
 		pause = new PauseMode(canvas);
+		help = new HelpMode(canvas);
 		// Initialize the three game worlds
 		controller = new GameController();
 		controller.preLoadContent();
@@ -87,6 +91,7 @@ public class GDXRoot extends Game implements ScreenListener {
 		menu = null;
 		levels = null;
 		pause = null;
+		help = null;
 		// Unload all of the resources
 		super.dispose();
 	}
@@ -154,6 +159,17 @@ public class GDXRoot extends Game implements ScreenListener {
 			levels.reset(canvas);
 			setScreen(levels);
 			levels.setActive(true);
+		}
+
+		if (exitCode == GameController.EXIT_HELP) {
+			menu.dispose();
+			menu = null;
+			help = new HelpMode(canvas);
+			help.setScreenListener(this);
+			help.setCanvas(canvas);
+			help.reset();
+			setScreen(help);
+//			help.setActive(true);
 		}
 
 		if (exitCode == GameController.EXIT_PAUSE) {
