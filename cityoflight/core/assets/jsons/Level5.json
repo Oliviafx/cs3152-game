@@ -2,7 +2,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[7, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 12, 10, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 9, 9, 7, 8, 9, 9, 9, 9, 9, 9, 9, 12, 12, 12, 9, 9, 10, 11, 9, 7, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 10, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9],
+         "data":[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 9, 9, 9, 9, 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 9, 9, 10, 11, 10, 11, 10, 11, 10, 11, 10, 11, 10, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 7, 8, 7, 8, 12, 12, 12, 12, 12, 9, 10, 11, 9, 12, 10, 11, 10, 11, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 11, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
          "height":8,
          "name":"Base",
          "opacity":1,
@@ -19,119 +19,6 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "name":"Tarasque",
-         "objects":[
-                {
-                 "gid":32,
-                 "height":160,
-                 "id":68,
-                 "name":"tarasque1",
-                 "properties":
-                    {
-                     "bodytype":"dynamic",
-                     "collideBits":"0001",
-                     "debugcolor":"white",
-                     "debugopacity":192,
-                     "excludeBits":"0000",
-                     "startframe":0,
-                     "texture":"tarasque",
-                     "texture2":"tarasque_down",
-                     "texture3":"tarasque_up",
-                     "turn":1,
-                     "type":2,
-                     "xinput":0,
-                     "yinput":-300
-                    },
-                 "propertytypes":
-                    {
-                     "bodytype":"string",
-                     "collideBits":"string",
-                     "debugcolor":"string",
-                     "debugopacity":"int",
-                     "excludeBits":"string",
-                     "startframe":"int",
-                     "texture":"string",
-                     "texture2":"string",
-                     "texture3":"string",
-                     "turn":"int",
-                     "type":"int",
-                     "xinput":"float",
-                     "yinput":"float"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":439,
-                 "y":302
-                }, 
-                {
-                 "height":102.964,
-                 "id":74,
-                 "name":"tarasque_box1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":40,
-                 "x":467,
-                 "y":188
-                }, 
-                {
-                 "height":0,
-                 "id":108,
-                 "name":"dragon_vision1",
-                 "properties":
-                    {
-                     "a":0.3,
-                     "angle":4,
-                     "b":0.5,
-                     "distance":25,
-                     "excludeBits":"0010",
-                     "facing":90,
-                     "g":0.2,
-                     "r":0.2,
-                     "rays":512,
-                     "soft":false
-                    },
-                 "propertytypes":
-                    {
-                     "a":"float",
-                     "angle":"int",
-                     "b":"float",
-                     "distance":"int",
-                     "excludeBits":"string",
-                     "facing":"int",
-                     "g":"float",
-                     "r":"float",
-                     "rays":"int",
-                     "soft":"bool"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":101.091,
-                 "y":162.067
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":8,
-         "name":"Tutorial",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":14,
          "x":0,
          "y":0
         }, 
@@ -185,19 +72,19 @@
                  "type":"",
                  "visible":true,
                  "width":69,
-                 "x":110,
-                 "y":175
+                 "x":15,
+                 "y":208
                 }, 
                 {
-                 "height":30.2355,
+                 "height":16.5845,
                  "id":66,
                  "name":"annette_box",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":39.1176,
-                 "x":124.124,
-                 "y":240.349
+                 "x":29.1239999999999,
+                 "y":287
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -280,10 +167,30 @@
          "name":"Buildings",
          "objects":[
                 {
-                 "gid":114,
+                 "gid":121,
                  "height":64,
-                 "id":116,
+                 "id":223,
                  "name":"building1",
+                 "properties":
+                    {
+                     "texture":"128_cafe_blue"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":64,
+                 "y":384
+                }, 
+                {
+                 "gid":147,
+                 "height":64,
+                 "id":224,
+                 "name":"building2",
                  "properties":
                     {
                      "texture":"128_cafe_red"
@@ -296,37 +203,17 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":448,
-                 "y":448
+                 "x":192,
+                 "y":387
                 }, 
                 {
-                 "gid":14,
+                 "gid":115,
                  "height":64,
-                 "id":114,
-                 "name":"building2",
-                 "properties":
-                    {
-                     "texture":"128_bookstore"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":125,
-                 "x":320,
-                 "y":448
-                }, 
-                {
-                 "gid":15,
-                 "height":128,
-                 "id":117,
+                 "id":225,
                  "name":"building3",
                  "properties":
                     {
-                     "texture":"64_building_short"
+                     "texture":"128_cafe_purple"
                     },
                  "propertytypes":
                     {
@@ -335,18 +222,18 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":64,
-                 "x":256,
-                 "y":448
+                 "width":128,
+                 "x":320,
+                 "y":384
                 }, 
                 {
-                 "gid":115,
+                 "gid":117,
                  "height":64,
-                 "id":118,
+                 "id":226,
                  "name":"building4",
                  "properties":
                     {
-                     "texture":"128_cafe_purple"
+                     "texture":"128_flowershop"
                     },
                  "propertytypes":
                     {
@@ -356,17 +243,17 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":128,
-                 "y":448
+                 "x":448,
+                 "y":384
                 }, 
                 {
-                 "gid":117,
-                 "height":64,
-                 "id":119,
+                 "gid":15,
+                 "height":128,
+                 "id":227,
                  "name":"building5",
                  "properties":
                     {
-                     "texture":"128_flowershop"
+                     "texture":"64_building_short"
                     },
                  "propertytypes":
                     {
@@ -375,77 +262,17 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":128,
-                 "x":0,
-                 "y":448
+                 "width":64,
+                 "x":576,
+                 "y":384
                 }, 
                 {
-                 "gid":117,
+                 "gid":119,
                  "height":64,
-                 "id":120,
+                 "id":229,
                  "name":"building6",
                  "properties":
                     {
-                     "texture":"128_flowershop"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128,
-                 "x":448,
-                 "y":128
-                }, 
-                {
-                 "gid":15,
-                 "height":128,
-                 "id":121,
-                 "name":"building7",
-                 "properties":
-                    {
-                     "texture":"64_building_short"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":576,
-                 "y":448
-                }, 
-                {
-                 "gid":15,
-                 "height":128,
-                 "id":122,
-                 "name":"building8",
-                 "properties":
-                    {
-                     "texture":"64_building_short"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":640,
-                 "y":448
-                }, 
-                {
-                 "gid":119,
-                 "height":64,
-                 "id":123,
-                 "name":"building9",
-                 "properties":
-                    {
                      "texture":"64_building_short_side"
                     },
                  "propertytypes":
@@ -456,397 +283,74 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":704,
-                 "y":448
-                }, 
-                {
-                 "gid":119,
-                 "height":64,
-                 "id":124,
-                 "name":"building10",
-                 "properties":
-                    {
-                     "texture":"64_building_short_side"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":384,
-                 "y":128
-                }, 
-                {
-                 "gid":119,
-                 "height":64,
-                 "id":125,
-                 "name":"building11",
-                 "properties":
-                    {
-                     "texture":"64_building_short_side"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":320,
-                 "y":128
-                }, 
-                {
-                 "gid":15,
-                 "height":128,
-                 "id":126,
-                 "name":"building12",
-                 "properties":
-                    {
-                     "texture":"64_building_short"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":256,
-                 "y":128
-                }, 
-                {
-                 "gid":121,
-                 "height":64,
-                 "id":127,
-                 "name":"building13",
-                 "properties":
-                    {
-                     "texture":"128_cafe_blue"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128,
-                 "x":768,
-                 "y":448
-                }, 
-                {
-                 "gid":121,
-                 "height":64,
-                 "id":128,
-                 "name":"building14",
-                 "properties":
-                    {
-                     "texture":"128_cafe_blue"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128,
                  "x":0,
-                 "y":128
-                }, 
-                {
-                 "gid":123,
-                 "height":64,
-                 "id":129,
-                 "name":"building15",
-                 "properties":
-                    {
-                     "texture":"128_cafe_green"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128,
-                 "x":576,
-                 "y":128
-                }, 
-                {
-                 "gid":115,
-                 "height":64,
-                 "id":130,
-                 "name":"building16",
-                 "properties":
-                    {
-                     "texture":"128_cafe_purple"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128,
-                 "x":704,
-                 "y":128
-                }, 
-                {
-                 "gid":119,
-                 "height":64,
-                 "id":131,
-                 "name":"building17",
-                 "properties":
-                    {
-                     "texture":"64_building_short_side"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":832,
-                 "y":128
-                }, 
-                {
-                 "gid":123,
-                 "height":64,
-                 "id":132,
-                 "name":"building18",
-                 "properties":
-                    {
-                     "texture":"128_cafe_green"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128,
-                 "x":128,
-                 "y":128
-                }, 
-                {
-                 "height":80.64,
-                 "id":134,
-                 "name":"box4",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":125.298,
-                 "x":128.708,
-                 "y":361.26
-                }, 
-                {
-                 "height":80.38,
-                 "id":135,
-                 "name":"box5",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":125.298,
-                 "x":0,
-                 "y":368
-                }, 
-                {
-                 "height":80.38,
-                 "id":138,
-                 "name":"box2",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":125.298,
-                 "x":321,
-                 "y":368
-                }, 
-                {
-                 "height":80.38,
-                 "id":139,
-                 "name":"box1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":128.298,
-                 "x":448,
-                 "y":368
-                }, 
-                {
-                 "height":80.38,
-                 "id":141,
-                 "name":"box7",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":63,
-                 "x":577,
-                 "y":368
-                }, 
-                {
-                 "height":80.38,
-                 "id":142,
-                 "name":"box8",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":63,
-                 "x":641,
-                 "y":368
-                }, 
-                {
-                 "height":80.38,
-                 "id":143,
-                 "name":"box9",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":63,
-                 "x":705,
-                 "y":368
-                }, 
-                {
-                 "height":81.38,
-                 "id":144,
-                 "name":"box13",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":126,
-                 "x":770,
-                 "y":368
-                }, 
-                {
-                 "height":80.38,
-                 "id":148,
-                 "name":"box14",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":126,
-                 "x":2,
-                 "y":48
-                }, 
-                {
-                 "height":80.38,
-                 "id":149,
-                 "name":"box15",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":126,
-                 "x":130,
-                 "y":48
-                }, 
-                {
-                 "height":81,
-                 "id":150,
-                 "name":"box12",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":257,
-                 "y":48
+                 "y":384
                 }, 
                 {
                  "height":80,
-                 "id":151,
-                 "name":"box11",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":65,
-                 "x":320,
-                 "y":48
-                }, 
-                {
-                 "height":80,
-                 "id":152,
-                 "name":"box10",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":384,
-                 "y":48
-                }, 
-                {
-                 "height":80.38,
-                 "id":154,
+                 "id":233,
                  "name":"box6",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":126,
-                 "x":448,
-                 "y":48
+                 "width":64,
+                 "x":0,
+                 "y":304
                 }, 
                 {
-                 "height":80.38,
-                 "id":155,
-                 "name":"box15",
+                 "height":80,
+                 "id":234,
+                 "name":"box1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":126,
-                 "x":578,
-                 "y":48
+                 "width":128,
+                 "x":64,
+                 "y":304
                 }, 
                 {
-                 "height":80.38,
-                 "id":156,
-                 "name":"box16",
+                 "height":80,
+                 "id":235,
+                 "name":"box2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":126,
-                 "x":706,
-                 "y":48
+                 "width":128,
+                 "x":192,
+                 "y":304
                 }, 
                 {
-                 "height":80.38,
-                 "id":157,
-                 "name":"box17",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":126,
-                 "x":819,
-                 "y":48
-                }, 
-                {
-                 "height":80.38,
-                 "id":158,
-                 "name":"box18",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":126,
-                 "x":129,
-                 "y":48
-                }, 
-                {
-                 "height":80.38,
-                 "id":159,
+                 "height":80,
+                 "id":236,
                  "name":"box3",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":65,
-                 "x":255,
-                 "y":368
+                 "width":128,
+                 "x":320,
+                 "y":304
+                }, 
+                {
+                 "height":80,
+                 "id":237,
+                 "name":"box4",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":448,
+                 "y":304
+                }, 
+                {
+                 "height":80,
+                 "id":238,
+                 "name":"box5",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":576,
+                 "y":304
                 }],
          "opacity":1,
          "properties":
@@ -863,13 +367,595 @@
          "y":0
         }, 
         {
-         "data":[113, 0, 122, 0, 0, 13, 0, 116, 0, 113, 0, 13, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 116, 0, 114, 0, 0, 13, 13, 113, 0, 122, 0, 118, 118, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 114, 0, 113, 0, 122, 0, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
          "name":"Roofs",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
          "width":14,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"Blanche",
+         "objects":[
+                {
+                 "gid":32,
+                 "height":160,
+                 "id":230,
+                 "name":"blanche1",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"blanche",
+                     "texture2":"blanche_down",
+                     "texture3":"blanche_up",
+                     "turn":2,
+                     "type":3,
+                     "xinput":-180,
+                     "yinput":0
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":780,
+                 "y":512
+                }, 
+                {
+                 "height":50,
+                 "id":231,
+                 "name":"blanche_box1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":24,
+                 "x":802,
+                 "y":400
+                }, 
+                {
+                 "height":38,
+                 "id":232,
+                 "name":"lady_vision1",
+                 "properties":
+                    {
+                     "a":0.3,
+                     "angle":20,
+                     "b":0.5,
+                     "distance":10,
+                     "excludeBits":"0010",
+                     "facing":90,
+                     "g":0.2,
+                     "r":0.2,
+                     "rays":512,
+                     "soft":false
+                    },
+                 "propertytypes":
+                    {
+                     "a":"float",
+                     "angle":"int",
+                     "b":"float",
+                     "distance":"int",
+                     "excludeBits":"string",
+                     "facing":"int",
+                     "g":"float",
+                     "r":"float",
+                     "rays":"int",
+                     "soft":"bool"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":45,
+                 "x":704,
+                 "y":384
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"Tarasque",
+         "objects":[
+                {
+                 "gid":32,
+                 "height":160,
+                 "id":214,
+                 "name":"tarasque1",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"tarasque",
+                     "texture2":"tarasque_down",
+                     "texture3":"tarasque_up",
+                     "turn":1,
+                     "type":2,
+                     "xinput":0,
+                     "yinput":300
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":465,
+                 "y":171
+                }, 
+                {
+                 "height":102.964,
+                 "id":215,
+                 "name":"tarasque_box1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":470.91,
+                 "y":64.933
+                }, 
+                {
+                 "height":0,
+                 "id":216,
+                 "name":"dragon_vision1",
+                 "properties":
+                    {
+                     "a":0.3,
+                     "angle":4,
+                     "b":0.5,
+                     "distance":25,
+                     "excludeBits":"0010",
+                     "facing":90,
+                     "g":0.2,
+                     "r":0.2,
+                     "rays":512,
+                     "soft":false
+                    },
+                 "propertytypes":
+                    {
+                     "a":"float",
+                     "angle":"int",
+                     "b":"float",
+                     "distance":"int",
+                     "excludeBits":"string",
+                     "facing":"int",
+                     "g":"float",
+                     "r":"float",
+                     "rays":"int",
+                     "soft":"bool"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":166,
+                 "y":41
+                }, 
+                {
+                 "gid":32,
+                 "height":160,
+                 "id":217,
+                 "name":"tarasque2",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"tarasque",
+                     "texture2":"tarasque_down",
+                     "texture3":"tarasque_up",
+                     "turn":1,
+                     "type":2,
+                     "xinput":0,
+                     "yinput":300
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":549.909,
+                 "y":257.933
+                }, 
+                {
+                 "height":102.964,
+                 "id":218,
+                 "name":"tarasque_box2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":570.909,
+                 "y":140.933
+                }, 
+                {
+                 "height":0,
+                 "id":219,
+                 "name":"dragon_vision2",
+                 "properties":
+                    {
+                     "a":0.3,
+                     "angle":4,
+                     "b":0.5,
+                     "distance":25,
+                     "excludeBits":"0010",
+                     "facing":90,
+                     "g":0.2,
+                     "r":0.2,
+                     "rays":512,
+                     "soft":false
+                    },
+                 "propertytypes":
+                    {
+                     "a":"float",
+                     "angle":"int",
+                     "b":"float",
+                     "distance":"int",
+                     "excludeBits":"string",
+                     "facing":"int",
+                     "g":"float",
+                     "r":"float",
+                     "rays":"int",
+                     "soft":"bool"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":223,
+                 "y":117
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"Snail",
+         "objects":[
+                {
+                 "gid":128,
+                 "height":128,
+                 "id":203,
+                 "name":"snail1",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"snail",
+                     "texture2":"snail_down",
+                     "texture3":"snail_up",
+                     "turn":1,
+                     "type":1,
+                     "xinput":0,
+                     "yinput":180
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":210,
+                 "y":286
+                }, 
+                {
+                 "height":75,
+                 "id":204,
+                 "name":"snail_box1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":59,
+                 "x":213,
+                 "y":209
+                }, 
+                {
+                 "height":12,
+                 "id":205,
+                 "name":"snail_vision1",
+                 "properties":
+                    {
+                     "a":0.3,
+                     "angle":85,
+                     "b":0.5,
+                     "distance":4,
+                     "excludeBits":"0010",
+                     "facing":90,
+                     "g":0.2,
+                     "r":0.2,
+                     "rays":512,
+                     "soft":false
+                    },
+                 "propertytypes":
+                    {
+                     "a":"float",
+                     "angle":"int",
+                     "b":"float",
+                     "distance":"int",
+                     "excludeBits":"string",
+                     "facing":"int",
+                     "g":"float",
+                     "r":"float",
+                     "rays":"int",
+                     "soft":"bool"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2,
+                 "x":295,
+                 "y":222
+                }, 
+                {
+                 "gid":128,
+                 "height":128,
+                 "id":207,
+                 "name":"snail2",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"snail",
+                     "texture2":"snail_down",
+                     "texture3":"snail_up",
+                     "turn":1,
+                     "type":1,
+                     "xinput":0,
+                     "yinput":125
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":285,
+                 "y":210
+                }, 
+                {
+                 "height":75,
+                 "id":208,
+                 "name":"snail_box2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":59,
+                 "x":288,
+                 "y":133
+                }, 
+                {
+                 "height":12,
+                 "id":209,
+                 "name":"snail_vision2",
+                 "properties":
+                    {
+                     "a":0.3,
+                     "angle":85,
+                     "b":0.5,
+                     "distance":4,
+                     "excludeBits":"0010",
+                     "facing":90,
+                     "g":0.2,
+                     "r":0.2,
+                     "rays":512,
+                     "soft":false
+                    },
+                 "propertytypes":
+                    {
+                     "a":"float",
+                     "angle":"int",
+                     "b":"float",
+                     "distance":"int",
+                     "excludeBits":"string",
+                     "facing":"int",
+                     "g":"float",
+                     "r":"float",
+                     "rays":"int",
+                     "soft":"bool"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2,
+                 "x":370,
+                 "y":146
+                }, 
+                {
+                 "gid":128,
+                 "height":128,
+                 "id":210,
+                 "name":"snail3",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"snail",
+                     "texture2":"snail_down",
+                     "texture3":"snail_up",
+                     "turn":1,
+                     "type":1,
+                     "xinput":0,
+                     "yinput":125
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":368,
+                 "y":138
+                }, 
+                {
+                 "height":75,
+                 "id":211,
+                 "name":"snail_box3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":59,
+                 "x":371,
+                 "y":61
+                }, 
+                {
+                 "height":12,
+                 "id":212,
+                 "name":"snail_vision3",
+                 "properties":
+                    {
+                     "a":0.3,
+                     "angle":85,
+                     "b":0.5,
+                     "distance":4,
+                     "excludeBits":"0010",
+                     "facing":90,
+                     "g":0.2,
+                     "r":0.2,
+                     "rays":512,
+                     "soft":false
+                    },
+                 "propertytypes":
+                    {
+                     "a":"float",
+                     "angle":"int",
+                     "b":"float",
+                     "distance":"int",
+                     "excludeBits":"string",
+                     "facing":"int",
+                     "g":"float",
+                     "r":"float",
+                     "rays":"int",
+                     "soft":"bool"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2,
+                 "x":453,
+                 "y":74
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -893,8 +979,8 @@
                  "type":"",
                  "visible":true,
                  "width":42.3434,
-                 "x":806,
-                 "y":189
+                 "x":105,
+                 "y":380
                 }, 
                 {
                  "height":64,
@@ -904,8 +990,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":765,
-                 "y":196
+                 "x":64,
+                 "y":387
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -940,7 +1026,7 @@
                  "y":10.1051
                 }, 
                 {
-                 "height":111.3653,
+                 "height":42.8633,
                  "id":84,
                  "name":"boundary3",
                  "rotation":0,
@@ -948,7 +1034,7 @@
                  "visible":true,
                  "width":893.699,
                  "x":2.14316,
-                 "y":448
+                 "y":516.502
                 }, 
                 {
                  "height":507.93,
@@ -1037,7 +1123,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":164,
+ "nextobjectid":239,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.3",
@@ -1258,11 +1344,11 @@
          "imageheight":80,
          "imagewidth":80,
          "margin":0,
-         "name":"box1",
+         "name":"outline1",
          "spacing":0,
          "tilecount":1,
-         "tileheight":80,
-         "tilewidth":80
+         "tileheight":64,
+         "tilewidth":64
         }, 
         {
          "columns":1,
@@ -1293,15 +1379,41 @@
         {
          "columns":1,
          "firstgid":127,
-         "image":"..\/tutorial\/box_outline.png",
-         "imageheight":80,
-         "imagewidth":80,
+         "image":"..\/tutorial\/birdoutline.png",
+         "imageheight":45,
+         "imagewidth":64,
          "margin":0,
-         "name":"box_outline",
+         "name":"birdoutline",
          "spacing":0,
          "tilecount":1,
-         "tileheight":80,
-         "tilewidth":80
+         "tileheight":45,
+         "tilewidth":64
+        }, 
+        {
+         "columns":18,
+         "firstgid":128,
+         "image":"..\/textures\/snail_up.png",
+         "imageheight":128,
+         "imagewidth":1200,
+         "margin":0,
+         "name":"snail_up",
+         "spacing":0,
+         "tilecount":18,
+         "tileheight":128,
+         "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":146,
+         "image":"..\/textures\/128_cafe_red.png",
+         "imageheight":127,
+         "imagewidth":128,
+         "margin":0,
+         "name":"128_cafe_red",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":128
         }],
  "tilewidth":64,
  "type":"map",

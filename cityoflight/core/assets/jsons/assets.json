@@ -134,6 +134,22 @@
 			"file": 	"textures/tiles.png",
 			"wrap":  	true
 		},
+		"box_outline": {
+			"file": 	"tutorial/box_outline.png",
+			"wrap":  	true
+		},
+		"shiftcombo": {
+			"file": 	"tutorial/shiftcombo.png",
+			"wrap":  	true
+		},
+		"outline_annette": {
+			"file": 	"tutorial/outline_annette.png",
+			"wrap":  	true
+		},
+		"birdoutline": {
+			"file": 	"tutorial/birdoutline.png",
+			"wrap":  	true
+		},
     	"annette": {
     		"file": 	"textures/sideAnnette.png",
     		"wrap":  	false,
