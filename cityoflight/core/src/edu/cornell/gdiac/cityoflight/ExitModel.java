@@ -48,6 +48,10 @@ public class ExitModel extends BoxObstacle {
 		setSensor(true);
 	}
 
+	public float getLowestY(){
+		return 10000;
+	}
+
 	public void update(float dt) {
 		// Animate if necessary
 		if(shineLimitCountdown==0)
