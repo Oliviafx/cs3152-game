@@ -294,12 +294,44 @@
 				"cols": 15,
 				"first": 1
 			}
+		},
+		"general_transition" : {
+			"file" : "transitions/general_transition_medium.png",
+			"wrap" : false,
+			"strip": {
+				"size": 36,
+				"rows": 1,
+				"cols": 36,
+				"first": 1
+			}
+		},
+		"win_transition" : {
+			"file" : "transitions/win_transition_20%.png",
+			"wrap" : false,
+			"strip": {
+				"size": 35,
+				"rows": 1,
+				"cols": 35,
+				"first": 1
+			}
+		},
+		"win_screen" : {
+			"file" : "transitions/win_screen.png",
+			"wrap" : false
+		},
+		"lose_screen" : {
+			"file" : "transitions/lose_screen.png",
+			"wrap" : false
 		}
 	},
 	"fonts": {
 		"display": {
 			"file": "fonts/Belladona.ttf",
 			"size": 64
+		},
+		"text":{
+			"file": "fonts/Oswald-Light.ttf",
+			"size": 32
 		}
 	},
 	"sounds": {

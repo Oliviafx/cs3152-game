@@ -60,6 +60,7 @@ public class AIController{
     private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 
+    private int NO_MOVE = 0;
     private int TURN_BACK   = 1;
     private int TURN_RIGHT  = 2;
     private int TURN_LEFT   = 3;
