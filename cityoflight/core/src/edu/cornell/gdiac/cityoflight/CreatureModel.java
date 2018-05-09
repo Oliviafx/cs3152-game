@@ -88,6 +88,10 @@ public class CreatureModel extends BoxObstacle {
     private int aggroCool = 0;
     /** The standard number of frames to wait until the creature will drop aggro */
     private int aggroLimit;
+    /** How many frames until the creature will recover from being distracted */
+    private int distractCool = 0;
+    /** The standard number of frames to wait until the creature stop being distracted */
+    private int distractLimit;
     /** refers to the vision of the creature */
     private LightSource vision = null;
     /** refers to how to creature behaves upon colliding. See AIController for more details. */
@@ -102,6 +106,9 @@ public class CreatureModel extends BoxObstacle {
     private int LOU_AGGRO_COUNTDOWN = 150;
     private int DRAGON_AGGRO_COUNTDOWN = 50;
     private int BLANCHE_AGGRO_COUNTDOWN = 200;
+
+    private int LOU_DISTRACT_COUNTDOWN = 30;
+    private int BLANCHE_DISTRACT_COUNTDOWN = 100;
 
     private float LOU_MAX_SPEED = 10.0f;
     private float DRAGON_MAX_SPEED = 30.0f;
@@ -334,6 +341,14 @@ public class CreatureModel extends BoxObstacle {
      */
     public int getAggroLimit(){ return aggroLimit; }
 
+    public void setDistractCool(int value){ distractCool = value; }
+
+    public int getDistractCool(){ return distractCool; }
+
+    public void setDistractLimit(int value){distractLimit = value; }
+
+    public int getDistractLimit(){return distractLimit;}
+
     /**
      * Sets the cooldown limit between successive turns
      *
@@ -477,6 +492,7 @@ public class CreatureModel extends BoxObstacle {
         if (type == 1){
             turnLimit = LOU_TURN_LIMIT;
             aggroLimit = LOU_AGGRO_COUNTDOWN;
+            distractLimit = LOU_DISTRACT_COUNTDOWN;
             setMaxSpeed(LOU_MAX_SPEED);
         }else if (type == 2){
             turnLimit = DRAGON_TURN_LIMIT;
@@ -485,6 +501,7 @@ public class CreatureModel extends BoxObstacle {
         }else if (type == 3){
             turnLimit = BLANCHE_TURN_LIMIT;
             aggroLimit = BLANCHE_AGGRO_COUNTDOWN;
+            distractLimit = BLANCHE_DISTRACT_COUNTDOWN;
             setMaxSpeed(BLANCHE_MAX_SPEED);
         }else{
             System.out.println ("wrong type of creature. should never get here");
