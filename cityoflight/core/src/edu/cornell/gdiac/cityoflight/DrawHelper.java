@@ -53,18 +53,6 @@ public class DrawHelper {
     /** a white with transparency 80% */
     private Color LITTLE_TRANSPARENT_COLOR = new Color(1.0f,1.0f,1.0f,0.8f);
 
-    /** Filmstrip for the lose transition */
-    private FilmStrip lose_transition;
-    /** number of frames in the transition */
-    int LOSE_TRANSITION_FRAME_NUM = 36;
-    /** the start frame of the second part of the transition */
-    private int LOSE_TRANSITION_SECOND_PART = 15;
-    /** did the transition reach the second part yet? */
-    private boolean lose_transition_second_part;
-    /** did the transition go through yet? */
-    private boolean lose_transition_hasAnimated = false;
-
-
     /** The screen to show on a winning/losing screen */
     private String chosenScreenKey;
     /** The text to show on a winning/losing screen */
@@ -99,7 +87,6 @@ public class DrawHelper {
         win_transition_hasAnimated = false;
         win_transition_second_part = false;
         hasChosenScreenandText = false;
-        lose_transition_second_part = false;
     }
 
     /**
