@@ -375,6 +375,7 @@ public class GameController implements Screen, ContactListener {
 		level.getWorld().setContactListener(this);
 
 		drawHelper.reset();
+		level.setGetAchievement(true);
 	}
 
 	/**
@@ -731,6 +732,7 @@ public class GameController implements Screen, ContactListener {
 		if (complete && !failed) {
 			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas, textFont,1);
+				drawHelper.drawAchievement(canvas,level.didGetAchievement(),level.getAchievementType());
 			}
 			//drawHelper.drawGeneralTransition(canvas);
 			drawHelper.drawLevelTransition(canvas,level,1);
@@ -748,6 +750,7 @@ public class GameController implements Screen, ContactListener {
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
 				isbeingseen = true;
+				level.setGetAchievement(false);
 			}
 		}
 		return !isbeingseen;
