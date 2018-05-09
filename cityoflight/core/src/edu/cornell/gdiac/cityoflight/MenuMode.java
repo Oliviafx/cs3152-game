@@ -13,11 +13,12 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
+import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.ScreenListener;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 public class MenuMode implements Screen, ControllerListener, ContactListener, InputProcessor {
-    //
+
     public class MyActor extends Actor {
         public float x;
         public float y;
@@ -163,6 +164,10 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     /** Whether or not this player mode is still active */
     private boolean active;
 
+    private DrawHelper drawHelper;
+    private static final String TRANSITION_FILE = "pip/transitions/general_transition_medium.png";
+    public FilmStrip transition_strip;
+
     private Game parent;
 
     private GameController gameController;
@@ -231,6 +236,9 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         quitX = 600;
         quitY = 150;
 
+        drawHelper = new DrawHelper();
+        transition_strip = new FilmStrip((new Texture(TRANSITION_FILE)), 1, 36);
+        System.out.println("transition_strip = " + transition_strip);
 
 //        level = new MyActor(levelX, levelY, new MyListener());
 //        setting = new MyActor(helpX,helpY,new MyListener());
@@ -498,43 +506,48 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
     public void draw() {
         if (drawcanvas != null) {
-            drawcanvas.begin();
-            drawcanvas.draw(background, 0, 0);
-            drawcanvas.draw(title, 480, 350);
+            if (drawHelper.get_general_transition_second_part()) {
+                drawcanvas.begin();
+                drawcanvas.draw(background, 0, 0);
+                drawcanvas.draw(title, 480, 350);
 //        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
 //            if (getHover(play)) {
-            if (pressState == 1) {
-                drawcanvas.draw(playHover, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
-                        playX - playButton.getWidth() / 5, playY-playButton.getHeight()/3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
-            } else {
-                drawcanvas.draw(playButton, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
-                        playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
-            }
+                if (pressState == 1) {
+                    drawcanvas.draw(playHover, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
+                            playX - playButton.getWidth() / 5, playY - playButton.getHeight() / 3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                } else {
+                    drawcanvas.draw(playButton, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
+                            playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                }
 //            if (hoverlevel) {
-            if (levelState == 1) {
-                drawcanvas.draw(levelHover, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
-                        levelX-levelButton.getWidth()/6, levelY-levelButton.getHeight()/2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
-            } else {
-                drawcanvas.draw(levelButton, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
-                        levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
-            } //        Color tint2 = (levelState == 1 ? Color.GRAY: Color.WHITE);
+                if (levelState == 1) {
+                    drawcanvas.draw(levelHover, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
+                            levelX - levelButton.getWidth() / 6, levelY - levelButton.getHeight() / 2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                } else {
+                    drawcanvas.draw(levelButton, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
+                            levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                } //        Color tint2 = (levelState == 1 ? Color.GRAY: Color.WHITE);
 //            if (hoversetting) {
-            if (helpState == 1) {
-                drawcanvas.draw(helpHover, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
-                        helpX - helpButton.getWidth()/2, helpY - helpButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
-            } else {
-                drawcanvas.draw(helpButton, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
-                        helpX, helpY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
-            }
+                if (helpState == 1) {
+                    drawcanvas.draw(helpHover, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
+                            helpX - helpButton.getWidth() / 2, helpY - helpButton.getHeight() / 4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                } else {
+                    drawcanvas.draw(helpButton, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
+                            helpX, helpY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                }
 //            if (hoverquit) {
-            if (quitState == 1) {
-                drawcanvas.draw(quitHover, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
-                        quitX-quitButton.getWidth(), quitY-quitButton.getHeight()/4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
-            } else {
-                drawcanvas.draw(quitButton, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
-                        quitX, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                if (quitState == 1) {
+                    drawcanvas.draw(quitHover, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
+                            quitX - quitButton.getWidth(), quitY - quitButton.getHeight() / 4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                } else {
+                    drawcanvas.draw(quitButton, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
+                            quitX, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                }
+                drawcanvas.end();
             }
-            drawcanvas.end();
+            if (!drawHelper.get_general_transition_hasAnimated()) {
+                drawHelper.drawGeneralTransition(drawcanvas, transition_strip);
+            }
         }
     }
 

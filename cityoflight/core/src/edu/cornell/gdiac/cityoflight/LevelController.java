@@ -19,6 +19,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
+import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.ScreenListener;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.ApplicationListener;
@@ -49,6 +50,10 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private int startY = 35;
     private int startState;
 
+//    private DrawHelper drawHelper;
+//    private static final String TRANSITION_FILE = "pip/transitions/general_transition_medium.png";
+//    public FilmStrip transition_strip;
+
     public LevelController(ObstacleCanvas drawcanvas) {
         canvas = drawcanvas;
         background = new Texture(LEVEL_BACKGROUND_FILE);
@@ -57,6 +62,9 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         pressState = 0;
         startState = 0;
 
+//        drawHelper = new DrawHelper();
+//        transition_strip = new FilmStrip((new Texture(TRANSITION_FILE)), 1, 36);
+//        System.out.println("transition_strip = " + transition_strip);
     }
 
     public boolean goLevelOne() {
@@ -89,20 +97,25 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     }
     public void draw(){
         if (active) {
-            canvas.begin();
-        if (background != null) {
-            canvas.draw(background, 0, 0);
-        }
-        if (backButton != null) {
-            Color tint = (pressState == 1 ? Color.GRAY : Color.WHITE);
+//            if (drawHelper.get_general_transition_second_part()) {
+                canvas.begin();
+                if (background != null) {
+                    canvas.draw(background, 0, 0);
+                }
+                if (backButton != null) {
+                    Color tint = (pressState == 1 ? Color.GRAY : Color.WHITE);
 //            canvas.draw(backButton, tint, 0, 0, backX, backY, 0, .65f, .6f);
-        }
+                }
 //        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //        if (stage != null) {
 //            stage.act(graphics.getDeltaTime());
 //            stage.draw();
 //        }
-            canvas.end();
+                canvas.end();
+//            }
+//            if (!drawHelper.get_general_transition_hasAnimated()) {
+//                drawHelper.drawGeneralTransition2(canvas, transition_strip);
+//            }
         }
     }
     public void update(float delta) {
