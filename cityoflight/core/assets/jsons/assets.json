@@ -402,6 +402,14 @@
 				"cols": 22,
 				"first": 1
 			}
+		},
+		"achievement01_tip" : {
+			"file" : "pip/achievements/a_stealth_get.png",
+			"wrap" : false
+		},
+		"achievement01_get" : {
+			"file" : "pip/achievements/a_stealth_tip.png",
+			"wrap" : false
 		}
 	},
 	"fonts": {

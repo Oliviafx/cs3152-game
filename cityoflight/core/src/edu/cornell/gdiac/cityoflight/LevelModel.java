@@ -111,6 +111,9 @@ public class LevelModel {
 	/** The indicator for the radius of the "move in place" power */
 	private LightSource radiusOfPower;
 
+	private boolean gotAchievement = true;
+	private int achievementType = 1;
+
 	Affine2 oTran = new Affine2();
 	Affine2 wTran = new Affine2();
 	Matrix4 tempMAT = new Matrix4();
@@ -350,8 +353,17 @@ public class LevelModel {
 	 */
 	public void setAlpha(int value) { alpha = value; }
 
+	public boolean didGetAchievement(){
+		return gotAchievement;
+	}
 
-	public float getTranslation() { return TRANSLATION; }
+	public void setGetAchievement(boolean b){
+		gotAchievement = b;
+	}
+
+	public int getAchievementType(){
+		return achievementType;
+	}
 
 	/**
 	 * Creates a new LevelModel

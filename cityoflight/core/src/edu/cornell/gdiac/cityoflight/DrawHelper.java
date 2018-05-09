@@ -366,6 +366,16 @@ public class DrawHelper {
         canvas.end();
     }
 
+    public void drawAchievement(ObstacleCanvas canvas, boolean hasGottenAchievement, int achievementType){
+        String achievementKey = (hasGottenAchievement) ?
+                ("achievement0" + Integer.toString(achievementType) + "_tip"):
+                ("achievement0" + Integer.toString(achievementType) + "_get");
+        TextureRegion achievement = JsonAssetManager.getInstance().getEntry(achievementKey, TextureRegion.class);
+        canvas.begin();
+        canvas.draw(achievement,550,126);
+        canvas.end();
+    }
+
     /**
      * A helper function to determine what text to show up in a win/lose screen.
      * @param didWin 1 for win, 0 for lose.
