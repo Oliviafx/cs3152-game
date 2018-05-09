@@ -444,8 +444,8 @@
 		"distraction_effect": {
 			"file": "sounds/distraction_effect.wav"
 		},
-		"select_test_effect": {
-			"file": "sounds/select_test_effect.wav"
+		"select_effect": {
+			"file": "sounds/select_effect.wav"
 		},
 		"box_deactivate_effect": {
 			"file": "sounds/box_deactivate_effect.wav"

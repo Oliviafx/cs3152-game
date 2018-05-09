@@ -1711,6 +1711,11 @@ public class LevelModel {
 			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
 			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
 		}
+		else if (bounds.getWidth() == 14.0f && bounds.getHeight() == 9.0f) {
+			System.out.println("14x9");
+			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+			cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
+		}
 		else if (bounds.getWidth() == 24.0f && bounds.getHeight() == 14.0f) {
 			System.out.println("24x14");
 			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;

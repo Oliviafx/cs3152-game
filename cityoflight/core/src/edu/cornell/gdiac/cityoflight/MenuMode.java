@@ -16,6 +16,7 @@ import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.ScreenListener;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import edu.cornell.gdiac.util.SoundController;
 
 public class MenuMode implements Screen, ControllerListener, ContactListener, InputProcessor {
 
@@ -202,6 +203,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     LoadingMode loading;
 
     Stage stage;
+
+    SoundController sound = SoundController.getInstance();
 
     public boolean getHover(MyActor actor) {
         if (actor != null) {
@@ -593,12 +596,14 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
         if (dist < playButton.getWidth()*playButton.getHeight()*.75f && screenY > levelY +levelButton.getHeight()) {
             pressState = 1;
+            sound.play("select_effect", "sounds/select_effect.wav", false, 1.0f, true);
         }
 
         float dist2 = (screenX-levelX)*(screenX-levelX)+(screenY-levelY)*(screenY-levelY);
         if (dist2 < levelButton.getWidth()*levelButton.getHeight()*.75f && screenY < playY - playButton.getHeight() &&
                 screenY >= levelY) {
             levelState = 1;
+            sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true);
         }
 
         float dist3 = (screenX- helpX)*(screenX- helpX)+(screenY- helpY)*(screenY- helpY);
