@@ -287,7 +287,7 @@
                  "y":384
                 }, 
                 {
-                 "height":89,
+                 "height":80,
                  "id":233,
                  "name":"box6",
                  "rotation":0,
@@ -295,10 +295,10 @@
                  "visible":true,
                  "width":64,
                  "x":0,
-                 "y":295
+                 "y":304
                 }, 
                 {
-                 "height":89,
+                 "height":80,
                  "id":234,
                  "name":"box1",
                  "rotation":0,
@@ -306,10 +306,10 @@
                  "visible":true,
                  "width":128,
                  "x":64,
-                 "y":295
+                 "y":304
                 }, 
                 {
-                 "height":89,
+                 "height":80,
                  "id":235,
                  "name":"box2",
                  "rotation":0,
@@ -317,10 +317,10 @@
                  "visible":true,
                  "width":128,
                  "x":192,
-                 "y":295
+                 "y":304
                 }, 
                 {
-                 "height":89,
+                 "height":80,
                  "id":236,
                  "name":"box3",
                  "rotation":0,
@@ -328,10 +328,10 @@
                  "visible":true,
                  "width":128,
                  "x":320,
-                 "y":295
+                 "y":304
                 }, 
                 {
-                 "height":89,
+                 "height":80,
                  "id":237,
                  "name":"box4",
                  "rotation":0,
@@ -339,10 +339,10 @@
                  "visible":true,
                  "width":128,
                  "x":448,
-                 "y":295
+                 "y":304
                 }, 
                 {
-                 "height":89,
+                 "height":80,
                  "id":238,
                  "name":"box5",
                  "rotation":0,
@@ -350,7 +350,7 @@
                  "visible":true,
                  "width":64,
                  "x":576,
-                 "y":295
+                 "y":304
                 }],
          "opacity":1,
          "properties":
@@ -362,7 +362,7 @@
              "texture":"string"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
