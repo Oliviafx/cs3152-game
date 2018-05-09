@@ -392,6 +392,16 @@
 				"cols": 36,
 				"first": 1
 			}
+		},
+		"win_transition" : {
+			"file" : "pip/transitions/transition_purify_small.png",
+			"wrap" : false,
+			"strip": {
+				"size": 22,
+				"rows": 1,
+				"cols": 22,
+				"first": 1
+			}
 		}
 	},
 	"fonts": {
