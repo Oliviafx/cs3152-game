@@ -51,7 +51,7 @@ public class DrawHelper {
     /** cooldown counter */
     private int nextframeCooldown = 0;
     /** a white with transparency 80% */
-    private Color LITTLE_TRANSPARENT_COLOR = new Color(1.0f,1.0f,1.0f,0.8f);
+    private Color LITTLE_TRANSPARENT_COLOR = new Color(1.0f,1.0f,1.0f,0.92f);
 
     /** The screen to show on a winning/losing screen */
     private String chosenScreenKey;
