@@ -205,7 +205,7 @@
                      "texture2":"blanche_down",
                      "texture3":"blanche_up",
                      "turn":1,
-                     "type":2,
+                     "type":3,
                      "xinput":0,
                      "yinput":180
                     },
@@ -297,7 +297,7 @@
                      "texture2":"blanche_down",
                      "texture3":"blanche_up",
                      "turn":1,
-                     "type":2,
+                     "type":3,
                      "xinput":0,
                      "yinput":180
                     },

@@ -147,7 +147,7 @@
     <property name="texture2" value="blanche_down"/>
     <property name="texture3" value="blanche_up"/>
     <property name="turn" type="int" value="1"/>
-    <property name="type" type="int" value="2"/>
+    <property name="type" type="int" value="3"/>
     <property name="xinput" type="float" value="0"/>
     <property name="yinput" type="float" value="180"/>
    </properties>
@@ -179,7 +179,7 @@
     <property name="texture2" value="blanche_down"/>
     <property name="texture3" value="blanche_up"/>
     <property name="turn" type="int" value="1"/>
-    <property name="type" type="int" value="2"/>
+    <property name="type" type="int" value="3"/>
     <property name="xinput" type="float" value="0"/>
     <property name="yinput" type="float" value="180"/>
    </properties>
