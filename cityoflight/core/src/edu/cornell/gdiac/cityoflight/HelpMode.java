@@ -386,7 +386,6 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
         draw();
 //            stage.draw();
 //            stage.act();
-//        System.out.println(quitState+ " quit state");
         if (toControls() && listener != null) {
             showHelp = false;
             showExit = false;
@@ -411,6 +410,9 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
             showCreatureSelect=false;
             showHelp = true;
             showExit = true;
+            showSnail = false;
+            showTarasque = false;
+            showLady = false;
         }
         if (backToMenu() && listener != null) {
             listener.exitScreen(this, GameController.EXIT_MENU);
