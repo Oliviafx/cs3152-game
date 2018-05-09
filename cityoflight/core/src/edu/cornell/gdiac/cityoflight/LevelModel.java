@@ -75,10 +75,6 @@ public class LevelModel {
 	private Array<BackgroundModel> outlineTiles = new Array<BackgroundModel>();
 	private Array<BackgroundModel> tutorialTiles = new Array<BackgroundModel>();
 
-
-
-	private IndicatorModel indicator;
-
 	/** The interior models */
 	private ArrayList<Obstacle> mazes = new ArrayList<Obstacle>();
 	/** The exterior models */
@@ -1256,8 +1252,6 @@ public class LevelModel {
 //            distraction.setAlive(false);
 //        }
 //
-//        // Creater indicator
-//        indicator = new IndicatorModel();
 //
 //    }
 
@@ -1631,17 +1625,10 @@ public class LevelModel {
 					creature.getVision().setDirection(90);
 					creature.getVision().setPosition(creature.getX()+creature.getWidth()/4,creature.getY()+creature.getHeight()/2);
 				}
-//				System.out.println(creature.getPosition());
 			}
 			goalDoor.update(dt);
 			box.update(dt);
-			if (indicator != null){
-			    indicator.update(dt);
-            }
             if (distraction!=null) {
-//				System.out.println(distraction.getX());
-//				System.out.println(distraction.getY());
-
 				distraction.update(dt);
 				if (!distraction.getAlive()) {
 					objects.remove(distraction);
