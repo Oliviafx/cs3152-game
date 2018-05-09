@@ -41,13 +41,17 @@ public class DrawHelper {
     /** Filmstrip for the win transition */
     private FilmStrip win_transition;
     /** number of frames in the transition */
-    int WIN_TRANSITION_FRAME_NUM = 36;
+    int WIN_TRANSITION_FRAME_NUM = 22;
     /** the start frame of the second part of the transition */
-    private int WIN_TRANSITION_SECOND_PART = 15;
+    private int WIN_TRANSITION_SECOND_PART = 16;
     /** did the transition reach the second part yet? */
     private boolean win_transition_second_part;
     /** did the transition go through yet? */
     private boolean win_transition_hasAnimated = false;
+    /** cooldown counter */
+    private int nextframeCooldown = 0;
+    /** a white with transparency 80% */
+    private Color LITTLE_TRANSPARENT_COLOR = new Color(1.0f,1.0f,1.0f,0.8f);
 
     /** Filmstrip for the lose transition */
     private FilmStrip lose_transition;
@@ -77,6 +81,10 @@ public class DrawHelper {
     public boolean get_general_transition_second_part() {
         return general_transition_second_part;
     }
+
+    public boolean get_win_transition_second_part() {
+        return win_transition_second_part;
+    }
     /** getters and setters end here */
 
     public DrawHelper(){
@@ -88,8 +96,9 @@ public class DrawHelper {
     public void reset(){
         general_transition_hasAnimated = false;
         general_transition_second_part = false;
-        hasChosenScreenandText = false;
+        win_transition_hasAnimated = false;
         win_transition_second_part = false;
+        hasChosenScreenandText = false;
         lose_transition_second_part = false;
     }
 
@@ -210,7 +219,7 @@ public class DrawHelper {
     /**
      * draw the win transition.
      */
-    public void drawWinTransition(ObstacleCanvas canvas, LevelModel level){
+    public void drawLevelTransition(ObstacleCanvas canvas, LevelModel level, int didWin){
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("win_transition", TextureRegion.class);
         try {
             win_transition = (FilmStrip) texture;
@@ -218,19 +227,23 @@ public class DrawHelper {
             win_transition = null;
         }
 
-        //System.out.println("general_transition = " + win_transition);
 
         if (win_transition != null) {
-            //System.out.println("winhasAnimated = " + win_transition_hasAnimated);
             int current_frame;
 
             if (win_transition_hasAnimated){
                 current_frame = 0;
                 win_transition.setFrame(current_frame);
             } else {
-                current_frame = (win_transition.getFrame() + 1);
+                if (nextframeCooldown == 1) {
+                    current_frame = (win_transition.getFrame() + 1);
+                    nextframeCooldown = 0;
+                }else{
+                    current_frame = (win_transition.getFrame());
+                    nextframeCooldown = 1;
+                }
                 if (current_frame >= WIN_TRANSITION_SECOND_PART){win_transition_second_part = true;}
-                if (current_frame < 34) {
+                if (current_frame < WIN_TRANSITION_FRAME_NUM - 1) {
                     win_transition.setFrame(current_frame);
                 } else {
                     win_transition_hasAnimated = true;
@@ -238,10 +251,18 @@ public class DrawHelper {
             }
 
             win_transition.setFrame(current_frame);
-            canvas.begin(level.oTran);
-            canvas.draw(win_transition, Color.WHITE, 179, 179,
-                    level.getExit().getX() * 64, level.getExit().getY() * 64, 0f, 5f, 5f);
-            canvas.end();
+
+            if (didWin == 1) {
+                canvas.begin(level.oTran);
+                canvas.draw(win_transition, LITTLE_TRANSPARENT_COLOR, 112, 64,
+                        level.getExit().getX() * 64, level.getExit().getY() * 64, 0f, 8f, 8f);
+                canvas.end();
+            }else{
+                canvas.begin(level.oTran);
+                canvas.draw(win_transition, Color.BLACK, 112, 64,
+                        level.getAnnette().getX() * 64, level.getAnnette().getY() * 64, 0f, 8f, 8f);
+                canvas.end();
+            }
         }
     }
 

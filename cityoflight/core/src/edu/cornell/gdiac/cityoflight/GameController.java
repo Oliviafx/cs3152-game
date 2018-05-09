@@ -729,15 +729,17 @@ public class GameController implements Screen, ContactListener {
 
 		// Final message
 		if (complete && !failed) {
-			if (drawHelper.get_general_transition_second_part()) {
+			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas, textFont,1);
 			}
-			drawHelper.drawGeneralTransition(canvas);
+			//drawHelper.drawGeneralTransition(canvas);
+			drawHelper.drawLevelTransition(canvas,level,1);
 		} else if (failed) {
-			if (drawHelper.get_general_transition_second_part()) {
+			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas,textFont,0);
 			}
-			drawHelper.drawGeneralTransition(canvas);
+			drawHelper.drawLevelTransition(canvas,level,0);
+			//drawHelper.drawGeneralTransition(canvas);
 		}
 	}
 
