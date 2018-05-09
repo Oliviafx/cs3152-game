@@ -56,7 +56,7 @@ public class AIController{
      * Constants for creatures' specific characteristics and/or behavior
      */
     private float LouSenseDistance = 5.0f;
-    private float TarasqueSpeedGain = 3.5f;
+    private float TarasqueSpeedGain = 7.0f;
     private float BlancheMaxSpeedGain = 3.0f;
     private float BlancheCurrentSpeedGain = BlancheMaxSpeedGain;
 

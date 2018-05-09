@@ -453,7 +453,7 @@
          "name":"Buildings",
          "objects":[
                 {
-                 "gid":114,
+                 "gid":115,
                  "height":64,
                  "id":116,
                  "name":"building1",
@@ -513,7 +513,7 @@
                  "y":256.067
                 }, 
                 {
-                 "gid":115,
+                 "gid":116,
                  "height":64,
                  "id":118,
                  "name":"building4",
@@ -533,7 +533,7 @@
                  "y":256.067
                 }, 
                 {
-                 "gid":117,
+                 "gid":118,
                  "height":64,
                  "id":119,
                  "name":"building5",
@@ -573,7 +573,7 @@
                  "y":320
                 }, 
                 {
-                 "gid":115,
+                 "gid":116,
                  "height":64,
                  "id":130,
                  "name":"building7",
@@ -673,7 +673,7 @@
                  "y":139
                 }, 
                 {
-                 "height":90.707,
+                 "height":80.707,
                  "id":134,
                  "name":"box4",
                  "rotation":0,
@@ -681,10 +681,10 @@
                  "visible":true,
                  "width":125.298,
                  "x":128.708,
-                 "y":166
+                 "y":176
                 }, 
                 {
-                 "height":86,
+                 "height":79,
                  "id":135,
                  "name":"box5",
                  "rotation":0,
@@ -692,10 +692,10 @@
                  "visible":true,
                  "width":125.298,
                  "x":0,
-                 "y":169
+                 "y":176
                 }, 
                 {
-                 "height":87.38,
+                 "height":80.38,
                  "id":155,
                  "name":"box6",
                  "rotation":0,
@@ -703,10 +703,10 @@
                  "visible":true,
                  "width":126,
                  "x":769,
-                 "y":233
+                 "y":240
                 }, 
                 {
-                 "height":87.38,
+                 "height":80.38,
                  "id":156,
                  "name":"box7",
                  "rotation":0,
@@ -714,10 +714,10 @@
                  "visible":true,
                  "width":126,
                  "x":706,
-                 "y":41
+                 "y":48
                 }, 
                 {
-                 "height":87.38,
+                 "height":80.38,
                  "id":157,
                  "name":"box8",
                  "rotation":0,
@@ -725,10 +725,10 @@
                  "visible":true,
                  "width":64,
                  "x":831,
-                 "y":41
+                 "y":48
                 }, 
                 {
-                 "height":89.447,
+                 "height":80.447,
                  "id":159,
                  "name":"box3",
                  "rotation":0,
@@ -736,10 +736,10 @@
                  "visible":true,
                  "width":65,
                  "x":255,
-                 "y":167
+                 "y":176
                 }, 
                 {
-                 "height":87.38,
+                 "height":80.38,
                  "id":165,
                  "name":"box2",
                  "rotation":0,
@@ -747,10 +747,10 @@
                  "visible":true,
                  "width":129,
                  "x":320,
-                 "y":169
+                 "y":176
                 }, 
                 {
-                 "height":87.38,
+                 "height":80.38,
                  "id":166,
                  "name":"box1",
                  "rotation":0,
@@ -758,10 +758,10 @@
                  "visible":true,
                  "width":128,
                  "x":448,
-                 "y":169
+                 "y":176
                 }, 
                 {
-                 "height":39,
+                 "height":80,
                  "id":187,
                  "name":"box9",
                  "rotation":0,
@@ -769,10 +769,10 @@
                  "visible":true,
                  "width":64,
                  "x":256,
-                 "y":96
+                 "y":112
                 }, 
                 {
-                 "height":39,
+                 "height":80,
                  "id":188,
                  "name":"box10",
                  "rotation":0,
@@ -780,21 +780,21 @@
                  "visible":true,
                  "width":64,
                  "x":256,
-                 "y":58
+                 "y":32
                 }, 
                 {
-                 "height":58,
+                 "height":46,
                  "id":189,
                  "name":"box11",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":64,
                  "x":256,
-                 "y":36
+                 "y":48
                 }, 
                 {
-                 "gid":115,
+                 "gid":116,
                  "height":64,
                  "id":192,
                  "name":"building12",
@@ -814,7 +814,7 @@
                  "y":215.067
                 }, 
                 {
-                 "height":112.707,
+                 "height":80,
                  "id":193,
                  "name":"box12",
                  "rotation":0,
@@ -822,7 +822,7 @@
                  "visible":true,
                  "width":125.298,
                  "x":129.708,
-                 "y":103
+                 "y":112
                 }],
          "opacity":1,
          "properties":
@@ -839,7 +839,7 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 114, 0, 0, 120, 118, 0, 0, 0, 0, 113, 0, 118, 0, 0, 114, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 122, 0, 114, 0, 0, 120, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 115, 0, 0, 120, 118, 0, 0, 0, 0, 113, 0, 118, 0, 0, 115, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 122, 0, 115, 0, 0, 120, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
          "name":"Roofs",
          "opacity":1,
@@ -1027,7 +1027,7 @@
  "nextobjectid":194,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.1.5",
+ "tiledversion":"1.1.3",
  "tileheight":64,
  "tilesets":[
         {
@@ -1164,18 +1164,18 @@
          "columns":1,
          "firstgid":113,
          "image":"..\/textures\/128_cafe_red.png",
-         "imageheight":127,
+         "imageheight":128,
          "imagewidth":128,
          "margin":0,
          "name":"128_cafe_red",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":2,
          "tileheight":64,
          "tilewidth":128
         }, 
         {
          "columns":1,
-         "firstgid":114,
+         "firstgid":115,
          "image":"..\/textures\/128_cafe_purple.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1188,14 +1188,14 @@
         }, 
         {
          "columns":1,
-         "firstgid":116,
+         "firstgid":117,
          "image":"..\/textures\/128_flowershop.png",
-         "imageheight":128,
+         "imageheight":127,
          "imagewidth":128,
          "margin":0,
          "name":"128_flowershop",
          "spacing":0,
-         "tilecount":2,
+         "tilecount":1,
          "tileheight":64,
          "tilewidth":128
         }, 
