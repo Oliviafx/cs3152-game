@@ -46,7 +46,7 @@ public class GDXRoot extends Game implements ScreenListener {
 	private PauseMode pause;
 	/** Player mode for the help screen (CONTROLLER CLASS) */
 	private HelpMode help;
-
+	/** DrawHelper for drawing transitions */
 	private DrawHelper drawHelper;
 
 	/** List of all WorldControllers */
