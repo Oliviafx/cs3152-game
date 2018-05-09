@@ -151,8 +151,10 @@ public class GDXRoot extends Game implements ScreenListener {
 
 		}
 		if (exitCode == GameController.EXIT_LEVEL) {
-			menu.dispose();
-			menu = null;
+            if (menu != null) {
+                menu.dispose();
+                menu = null;
+            }
 			levels = new LevelController(canvas);
 			levels.setScreenListener(this);
 			levels.setCanvas(canvas);
