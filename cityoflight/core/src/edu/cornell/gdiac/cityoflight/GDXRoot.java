@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.obstacle.*;
 
@@ -45,6 +46,8 @@ public class GDXRoot extends Game implements ScreenListener {
 	private PauseMode pause;
 	/** Player mode for the help screen (CONTROLLER CLASS) */
 	private HelpMode help;
+	/** DrawHelper for drawing transitions */
+	private DrawHelper drawHelper;
 
 	/** List of all WorldControllers */
 //	private WorldController[] controllers;
@@ -62,6 +65,8 @@ public class GDXRoot extends Game implements ScreenListener {
 	 */
 	public void create() {
 		canvas  = new ObstacleCanvas();
+		drawHelper = new DrawHelper();
+
 		loading = new LoadingMode(canvas,1);
 //		menu = new MenuMode(canvas, this);
 //		levels = new LevelController(canvas);
@@ -145,10 +150,6 @@ public class GDXRoot extends Game implements ScreenListener {
 			menu.setScreenListener(this);
 			menu.setCanvas(canvas);
 			menu.reset();
-
-
-
-
 		}
 		if (exitCode == GameController.EXIT_LEVEL) {
             if (menu != null) {
@@ -198,47 +199,39 @@ public class GDXRoot extends Game implements ScreenListener {
 //				menu.dispose();
 //				menu = null;
 //			}
-			if (getScreen().equals(levels)) {
-				if (levels.goLevelOne()) {
+				if (getScreen().equals(levels)) {
+					if (levels.goLevelOne()) {
+						controller.setWhichLevel(1);
+					} else if (levels.goLevelTwo()) {
+						controller.setWhichLevel(2);
+					} else if (levels.goLevelThree()) {
+						controller.setWhichLevel(3);
+					} else if (levels.goLevelFour()) {
+						controller.setWhichLevel(4);
+					} else if (levels.goLevelFive()) {
+						controller.setWhichLevel(5);
+					} else if (levels.goLevelSix()) {
+						controller.setWhichLevel(6);
+					} else if (levels.goLevelSeven()) {
+						controller.setWhichLevel(7);
+					}
+				} else if (controller.whichlevel == 0) {
 					controller.setWhichLevel(1);
 				}
-				else if (levels.goLevelTwo()) {
-					controller.setWhichLevel(2);
+				controller.loadContent();
+				controller.setScreenListener(this);
+				controller.setCanvas(canvas);
+				if (!getScreen().equals(pause)) {
+					controller.reset();
+				} else {
+					pause.reset();
 				}
-				else if (levels.goLevelThree()) {
-					controller.setWhichLevel(3);
+				setScreen(controller);
+				if (loading != null) {
+					loading.dispose();
+					loading = null;
 				}
-				else if (levels.goLevelFour()) {
-					controller.setWhichLevel(4);
-				}
-				else if (levels.goLevelFive()) {
-					controller.setWhichLevel(5);
-				}
-				else if (levels.goLevelSix()) {
-					controller.setWhichLevel(6);
-				}
-				else if (levels.goLevelSeven()) {
-					controller.setWhichLevel(7);
-				}
-			}
-			else if (controller.whichlevel == 0) {
-				controller.setWhichLevel(1);
-			}
-			controller.loadContent();
-			controller.setScreenListener(this);
-			controller.setCanvas(canvas);
-			if (!getScreen().equals(pause)) {
-				controller.reset();
-			}
-			else {
-				pause.reset();
-			}
-			setScreen(controller);
-			if (loading !=null) {
-				loading.dispose();
-				loading = null;
-			}
-			controller.setMenu(menu);
+				controller.setMenu(menu);
 		}
 
 		else if (exitCode == GameController.EXIT_QUIT) {

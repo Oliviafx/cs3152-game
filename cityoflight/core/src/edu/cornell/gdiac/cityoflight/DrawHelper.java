@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.JsonAssetManager;
+import com.badlogic.gdx.graphics.*;
 
 import java.util.logging.Level;
 
@@ -34,9 +35,11 @@ public class DrawHelper {
     /** the start frame of the second part of the transition */
     private int GENERAL_TRANSITION_SECOND_PART = 21;
     /** did the transition reach the second part yet? */
-    private boolean general_transition_second_part;
+    private boolean general_transition_second_part = false;
     /** did the transition go through yet? */
     private boolean general_transition_hasAnimated = false;
+    /** if the asset has not been loaded yet, jump out */
+    private boolean jumpOut = false;
 
     /** Filmstrip for the win transition */
     private FilmStrip win_transition;
@@ -68,6 +71,14 @@ public class DrawHelper {
 
     public boolean get_general_transition_second_part() {
         return general_transition_second_part;
+    }
+
+    public boolean get_general_transition_hasAnimated(){
+        return general_transition_hasAnimated;
+    }
+
+    public boolean getJumpOut(){
+        return jumpOut;
     }
 
     public boolean get_win_transition_second_part() {
@@ -182,11 +193,55 @@ public class DrawHelper {
         if (general_transition != null) {
             int next;
 
-            if (general_transition_hasAnimated){
+            if (general_transition_hasAnimated) {
                 next = 0; // if hasAnimated, stay at frame 0;
+                general_transition_second_part = false;
                 general_transition.setFrame(next);
             } else {
-                next = (general_transition.getFrame() + 1);
+                if (nextframeCooldown == 1) {
+                    next = (general_transition.getFrame() + 1);
+                    nextframeCooldown = 0;
+                } else {
+                    next = (general_transition.getFrame());
+                    nextframeCooldown = 1;
+                }
+                if (next >= GENERAL_TRANSITION_SECOND_PART) {
+                    general_transition_second_part = true;
+                }
+                if (next < GENERAL_TRANSITION_FRAME_NUM - 1) {
+                    general_transition.setFrame(next);
+                } else {
+                    general_transition_hasAnimated = true;
+                }
+            }
+
+            System.out.println("next = " + next);
+
+            general_transition.setFrame(next);
+            canvas.begin();
+            canvas.draw(general_transition, Color.WHITE, 224, 128f,
+                    canvas.getWidth() / 2, canvas.getHeight() / 2, 0f, 2f, 2f);
+            canvas.end();
+        }
+    }
+
+    public void drawGeneralTransition(ObstacleCanvas canvas, FilmStrip general_transition){
+
+        if (general_transition != null) {
+            int next;
+
+            if (general_transition_hasAnimated){
+                next = 0; // if hasAnimated, stay at frame 0;
+                general_transition_second_part = false;
+                general_transition.setFrame(next);
+            } else {
+                if (nextframeCooldown == 1) {
+                    next = (general_transition.getFrame() + 1);
+                    nextframeCooldown = 0;
+                }else{
+                    next = (general_transition.getFrame());
+                    nextframeCooldown = 1;
+                }
                 if (next >= GENERAL_TRANSITION_SECOND_PART){general_transition_second_part = true;}
                 if (next < GENERAL_TRANSITION_FRAME_NUM - 1) {
                     general_transition.setFrame(next);
@@ -194,6 +249,41 @@ public class DrawHelper {
                     general_transition_hasAnimated = true;
                 }
             }
+
+            general_transition.setFrame(next);
+            canvas.begin();
+            canvas.draw(general_transition, Color.WHITE, 224, 128f,
+                    canvas.getWidth()/2, canvas.getHeight()/2, 0f, 2f, 2f);
+            canvas.end();
+        }
+    }
+
+    public void drawGeneralTransition2(ObstacleCanvas canvas, FilmStrip general_transition){
+
+        if (general_transition != null) {
+            int next;
+
+            if (general_transition_hasAnimated){
+                next = GENERAL_TRANSITION_FRAME_NUM - 1; // if hasAnimated, stay at frame 0;
+                general_transition_second_part = false;
+                general_transition.setFrame(next);
+            } else {
+                if (nextframeCooldown == 1) {
+                    next = (general_transition.getFrame() - 1);
+                    nextframeCooldown = 0;
+                }else{
+                    next = (general_transition.getFrame());
+                    nextframeCooldown = 1;
+                }
+                if (next < GENERAL_TRANSITION_SECOND_PART){general_transition_second_part = true;}
+                if (next > 1) {
+                    general_transition.setFrame(next);
+                } else {
+                    general_transition_hasAnimated = true;
+                }
+            }
+
+            System.out.println("next = " + next);
 
             general_transition.setFrame(next);
             canvas.begin();
