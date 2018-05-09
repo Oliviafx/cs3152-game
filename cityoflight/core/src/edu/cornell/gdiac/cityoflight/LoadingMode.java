@@ -53,6 +53,7 @@ public class LoadingMode implements Screen {
 	// Textures necessary to support the loading screen
 	private static final String BACKGROUND_FILE = "textures/loading assets/UI_small.png";
 	private static final String PROGRESS_FILE = "textures/progressbar.png";
+	private static final String TRANSITION_FILE = "pip/transitions/general_transition_medium.png";
 //	private static final String PLAY_BTN_FILE = "textures/play.png";
 
 	/** Background texture for start-up */
@@ -201,6 +202,8 @@ public class LoadingMode implements Screen {
 //		playButton = null;
 		background = new Texture(BACKGROUND_FILE);
 		statusBar  = new Texture(PROGRESS_FILE);
+		//transition = new Texture(TRANSITION_FILE);
+		//transition_strip = new FilmStrip(transition, 1, 36);
 
 		// No progress so far.
 		progress   = 0;
