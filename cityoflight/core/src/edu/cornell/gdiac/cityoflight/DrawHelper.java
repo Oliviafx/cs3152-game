@@ -366,13 +366,23 @@ public class DrawHelper {
         canvas.end();
     }
 
-    public void drawAchievement(ObstacleCanvas canvas, boolean hasGottenAchievement, int achievementType){
+    public void drawTopAchievement(ObstacleCanvas canvas, boolean hasGottenAchievement, int achievementType){
         String achievementKey = (hasGottenAchievement) ?
                 ("achievement0" + Integer.toString(achievementType) + "_tip"):
                 ("achievement0" + Integer.toString(achievementType) + "_get");
         TextureRegion achievement = JsonAssetManager.getInstance().getEntry(achievementKey, TextureRegion.class);
         canvas.begin();
-        canvas.draw(achievement,550,126);
+        canvas.draw(achievement,620,233);
+        canvas.end();
+    }
+
+    public void drawBottomAchievement(ObstacleCanvas canvas, boolean hasGottenAchievement, int achievementType){
+        String achievementKey = (hasGottenAchievement) ?
+                ("achievement0" + Integer.toString(achievementType) + "_tip"):
+                ("achievement0" + Integer.toString(achievementType) + "_get");
+        TextureRegion achievement = JsonAssetManager.getInstance().getEntry(achievementKey, TextureRegion.class);
+        canvas.begin();
+        canvas.draw(achievement,620,33);
         canvas.end();
     }
 

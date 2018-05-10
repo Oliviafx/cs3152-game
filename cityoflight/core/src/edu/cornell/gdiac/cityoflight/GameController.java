@@ -75,6 +75,8 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
+	private int LEVEL_TIME_LIMIT = 500;
+
 	private PauseMode pause;
 	private MenuMode menu;
 
@@ -137,7 +139,7 @@ public class GameController implements Screen, ContactListener {
 	/** Exit code for quitting the game */
 	public static final int EXIT_QUIT = 0;
 	/** How many frames after winning/losing do we continue? */
-	public static final int EXIT_COUNT = 120;
+	public static final int EXIT_COUNT = 200;
 	/** Exit code for going to the main menu screen */
 	public static final int EXIT_MENU = 1;
 	/** Exit code for going to the game screen */
@@ -375,7 +377,10 @@ public class GameController implements Screen, ContactListener {
 		level.getWorld().setContactListener(this);
 
 		drawHelper.reset();
-		level.setGetAchievement(true);
+
+
+		level.resetAchievements();
+		LEVEL_TIME_LIMIT = 1200;
 	}
 
 	/**
@@ -469,6 +474,7 @@ public class GameController implements Screen, ContactListener {
 	 * @param dt Number of seconds since last animation frame
 	 */
 	public void update(float dt) {
+		LEVEL_TIME_LIMIT--;
 		// Process actions in object model
 		AnnetteModel annette = level.getAnnette();
 
@@ -730,9 +736,14 @@ public class GameController implements Screen, ContactListener {
 
 		// Final message
 		if (complete && !failed) {
+			if (LEVEL_TIME_LIMIT <= 0){
+				if (level.getAchievementType1() == 3){ level.setGetAchievement1(false);}
+				if (level.getAchievementType2() == 3){ level.setGetAchievement2(false);}
+			}
 			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas, textFont,1);
-				drawHelper.drawAchievement(canvas,level.didGetAchievement(),level.getAchievementType());
+				drawHelper.drawTopAchievement(canvas,level.didGetAchievement1(),level.getAchievementType1());
+				drawHelper.drawBottomAchievement(canvas,level.didGetAchievement2(),level.getAchievementType2());
 			}
 			//drawHelper.drawGeneralTransition(canvas);
 			drawHelper.drawLevelTransition(canvas,level,1);
@@ -750,7 +761,12 @@ public class GameController implements Screen, ContactListener {
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
 				isbeingseen = true;
-				level.setGetAchievement(false);
+				if (level.getAchievementType1() == 1){
+					level.setGetAchievement1(false);
+				}
+				if (level.getAchievementType2() == 1){
+					level.setGetAchievement2(false);
+				}
 			}
 		}
 		return !isbeingseen;
