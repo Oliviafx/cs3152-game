@@ -45,6 +45,9 @@ public class AIController{
     /** Stores original speed */
     private float speedCache;
 
+    public boolean creatureAffectedByWalk = false;
+    public boolean creatureAffectedByDistraction = false;
+
     /** Walk in place effective range */
     public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
@@ -102,6 +105,7 @@ public class AIController{
 
         creature.setTurnCool(creature.getTurnCool() - 1);
         creature.setAggroCool(creature.getAggroCool() - 1);
+        creature.setDistractCool(creature.getDistractCool() - 1);
         //System.out.println("aggro left: " + creature.getAggroCool());
 
         if (ticks % 10 == 0) {
@@ -250,6 +254,7 @@ public class AIController{
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
 
+            creatureAffectedByWalk = true;
             creature.setMovement(cAngleCache.x , cAngleCache.y );
 //          creature.setMovement(0, 0);
 
@@ -286,6 +291,8 @@ public class AIController{
                 } else if (isDistracted()) {
                     System.out.println("is distracted");
                     turnVisionGreen();
+                    creature.setDistractCool(creature.getDistractLimit());
+                    updateDistractionPosition();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("patrol -> distract");
                     creature.setMovement(-1, -1);
@@ -310,6 +317,8 @@ public class AIController{
                     state = FSMState.CHASE;
                 } else if (isDistracted()){
                     turnVisionGreen();
+                    creature.setDistractCool(creature.getDistractLimit());
+                    updateDistractionPosition();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("sense -> distract");
                     state = FSMState.DISTRACT;
@@ -325,18 +334,23 @@ public class AIController{
             case DISTRACT: // Do not pre-empt with FSMState in a case
                 //#region PUT YOUR CODE HERE
 
-                if (canSeeAnnette()) {
+                if (isDistracted()){
+                    creature.setDistractCool(creature.getDistractLimit());
+                }
+
+                if (canSeeAnnette() && creature.getDistractCool() <= 0) {
                     recordLastSeen();
                     turnVisionRed();
                     creature.setAggroCool(creature.getAggroLimit());
                     System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> chase");
                     state = FSMState.CHASE;
-                } else if (!isDistracted() && canSenseAnnette()){
+                } else if (!isDistracted() && canSenseAnnette() && creature.getDistractCool() <= 0){
+                    updateDistractionPosition();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> sense");
                     state = FSMState.SENSE;
-                } else if (!isDistracted()) {
+                } else if (!isDistracted() && creature.getDistractCool() <= 0) {
                     turnVisionNormal();
                     System.out.print(creature.getName() + ": ");
                     System.out.println("distract -> patrol");
@@ -614,6 +628,7 @@ public class AIController{
 //                    System.out.println("distracted = true");
                     lastseendistraction = distraction.getPosition();
                     //System.out.println("distractionposition = " + lastseendistraction);
+                    creatureAffectedByDistraction = true;
                     creature.setDistracted(true);
                 } else {
                     creature.setDistracted(false);
@@ -623,6 +638,10 @@ public class AIController{
             //System.out.println("distraction is null");
             creature.setDistracted(false);
         }
+    }
+
+    public void updateDistractionPosition(){
+        lastseendistraction = level.getDistraction().getPosition();
     }
 
     public boolean isDistracted(){

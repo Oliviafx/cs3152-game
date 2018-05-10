@@ -404,13 +404,53 @@
 			}
 		},
 		"achievement01_tip" : {
-			"file" : "pip/achievements/a_stealth_get.png",
+			"file" : "pip/achievements/yellow_get.png",
 			"wrap" : false
 		},
 		"achievement01_get" : {
-			"file" : "pip/achievements/a_stealth_tip.png",
+			"file" : "pip/achievements/yellow_tip.png",
 			"wrap" : false
-		}
+		},
+		"achievement02_tip" : {
+			"file" : "pip/achievements/orange_get.png",
+			"wrap" : false
+		},
+		"achievement02_get" : {
+			"file" : "pip/achievements/orange_tip.png",
+			"wrap" : false
+		},
+		"achievement03_tip" : {
+			"file" : "pip/achievements/blue_get.png",
+			"wrap" : false
+		},
+		"achievement03_get" : {
+			"file" : "pip/achievements/blue_tip.png",
+			"wrap" : false
+		},
+		"achievement04_tip" : {
+			"file" : "pip/achievements/green_get.png",
+			"wrap" : false
+		},
+		"achievement04_get" : {
+			"file" : "pip/achievements/green_tip.png",
+			"wrap" : false
+		},
+		"achievement05_tip" : {
+			"file" : "pip/achievements/purple_get.png",
+			"wrap" : false
+		},
+		"achievement05_get" : {
+			"file" : "pip/achievements/purple_tip.png",
+			"wrap" : false
+		},
+		"achievement06_tip" : {
+			"file" : "pip/achievements/grey_get.png",
+			"wrap" : false
+		},
+		"achievement06_get" : {
+			"file" : "pip/achievements/grey_tip.png",
+			"wrap" : false
+		},
 	},
 	"fonts": {
 		"display": {
@@ -444,8 +484,8 @@
 		"distraction_effect": {
 			"file": "sounds/distraction_effect.wav"
 		},
-		"select_test_effect": {
-			"file": "sounds/select_test_effect.wav"
+		"select_effect": {
+			"file": "sounds/select_effect.wav"
 		},
 		"box_deactivate_effect": {
 			"file": "sounds/box_deactivate_effect.wav"

@@ -2,6 +2,7 @@ package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.controllers.*;
 import com.badlogic.gdx.controllers.Controller;
@@ -16,6 +17,7 @@ import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.ScreenListener;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import edu.cornell.gdiac.util.SoundController;
 
 public class MenuMode implements Screen, ControllerListener, ContactListener, InputProcessor {
 
@@ -127,6 +129,9 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private static final String HELP_HOVER ="textures/menu assets/help_hover.png";
     private static final String QUIT_HOVER ="textures/menu assets/quit_hover.png";
 
+    private static final String START_SOUND = "sounds/select_effect.wav";
+    private static final String LEVEL_SOUND = "sounds/seen_effect.wav";
+
 
 
     private Texture title;
@@ -137,6 +142,9 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private Texture levelHover;
     private Texture helpHover;
     private Texture quitHover;
+
+    private Sound startSound;
+    private Sound levelSound;
 
     private MyActor play;
     private boolean hoverplay;
@@ -203,6 +211,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
     Stage stage;
 
+    SoundController sound = SoundController.getInstance();
+
     public boolean getHover(MyActor actor) {
         if (actor != null) {
             return actor.getHover();
@@ -226,6 +236,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         active = false;
         this.parent = parent;
 
+        startSound = null;
+        levelSound = null;
 
         playX = 600;
         playY = 300;
@@ -500,7 +512,6 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //            create();
         }
 
-
     }
 
 
@@ -593,12 +604,16 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
         if (dist < playButton.getWidth()*playButton.getHeight()*.75f && screenY > levelY +levelButton.getHeight()) {
             pressState = 1;
+            sound.stop("select_effect");
+            System.out.println(sound.play("select_effect", "sounds/select_effect.wav", false, 1.0f, true));;
         }
 
         float dist2 = (screenX-levelX)*(screenX-levelX)+(screenY-levelY)*(screenY-levelY);
         if (dist2 < levelButton.getWidth()*levelButton.getHeight()*.75f && screenY < playY - playButton.getHeight() &&
                 screenY >= levelY) {
             levelState = 1;
+            sound.stop("seen_effect");
+            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
         }
 
         float dist3 = (screenX- helpX)*(screenX- helpX)+(screenY- helpY)*(screenY- helpY);

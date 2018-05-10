@@ -111,12 +111,21 @@ public class LevelModel {
 	/** The indicator for the radius of the "move in place" power */
 	private LightSource radiusOfPower;
 
-	private boolean gotAchievement = true;
-	private int achievementType = 1;
+	boolean ACHIEVEMENT_YELLOW_DEFAULT = true;  // type 1 : don't get seen
+	boolean ACHIEVEMENT_ORANGE_DEFAULT = false; // type 2 : get chased while winning
+	boolean ACHIEVEMENT_BLUE_DEFAULT = true;    // type 3 : finish fast
+	boolean ACHIEVEMENT_GREEN_DEFAULT = false;  // type 4 : box disappears
+	boolean ACHIEVEMENT_PURPLE_DEFAULT = false; // type 5 : use all powers
+	boolean ACHIEVEMENT_GREY_DEFAULT = true;    // type 6 : use (less than) one power
+
+	private boolean gotAchievement1;
+	private boolean gotAchievement2;
+	// randomly coded for now.
+	private int achievementType1 = (int)(Math.random() * 3 + 1);
+	private int achievementType2 = (int)(Math.random() * 3 + 1) + 3;
 
 	Affine2 oTran = new Affine2();
 	Affine2 wTran = new Affine2();
-	Matrix4 tempMAT = new Matrix4();
 
 	private float normal_r, normal_g, normal_b, normal_alp;
 
@@ -353,17 +362,14 @@ public class LevelModel {
 	 */
 	public void setAlpha(int value) { alpha = value; }
 
-	public boolean didGetAchievement(){
-		return gotAchievement;
-	}
+	public boolean didGetAchievement1(){ return gotAchievement1;}
+	public boolean didGetAchievement2(){ return gotAchievement2;}
 
-	public void setGetAchievement(boolean b){
-		gotAchievement = b;
-	}
+	public void setGetAchievement1(boolean b){ gotAchievement1 = b; }
+	public void setGetAchievement2(boolean b){ gotAchievement2 = b; }
 
-	public int getAchievementType(){
-		return achievementType;
-	}
+	public int getAchievementType1(){ return achievementType1; }
+	public int getAchievementType2(){ return achievementType2; }
 
 	/**
 	 * Creates a new LevelModel
@@ -377,6 +383,8 @@ public class LevelModel {
 		scale = new Vector2(1,1);
 		debug  = false;
 		background = null;
+
+		resetAchievements();
 	}
 
 	public void populate(JsonValue levelFormat) {
@@ -1711,6 +1719,11 @@ public class LevelModel {
 			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
 			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
 		}
+		else if (bounds.getWidth() == 14.0f && bounds.getHeight() == 9.0f) {
+			System.out.println("14x9");
+			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+			cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
+		}
 		else if (bounds.getWidth() == 24.0f && bounds.getHeight() == 14.0f) {
 			System.out.println("24x14");
 			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
@@ -1838,6 +1851,20 @@ public class LevelModel {
 	}
 
 	public Affine2 getoTran(){return oTran;}
+
+	public void resetAchievements(){
+		if (achievementType1 == 1 || achievementType1 == 3 || achievementType1 == 6){
+			setGetAchievement1(true);
+		}else{
+			setGetAchievement1(false);
+		}
+
+		if (achievementType2 == 1 || achievementType2 == 3 || achievementType2 == 6){
+			setGetAchievement2(true);
+		}else{
+			setGetAchievement2(false);
+		}
+	}
 
 	/**
 	 * Returns a string equivalent to the sequence of bits in s
