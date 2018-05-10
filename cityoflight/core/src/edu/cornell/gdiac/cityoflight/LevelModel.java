@@ -116,12 +116,13 @@ public class LevelModel {
 	boolean ACHIEVEMENT_BLUE_DEFAULT = true;    // type 3 : finish fast
 	boolean ACHIEVEMENT_GREEN_DEFAULT = false;  // type 4 : box disappears
 	boolean ACHIEVEMENT_PURPLE_DEFAULT = false; // type 5 : use all powers
-	boolean ACHIEVEMENT_GREY_DEFAULT = true;    // type 6 : use one power
+	boolean ACHIEVEMENT_GREY_DEFAULT = true;    // type 6 : use (less than) one power
 
-	private boolean gotAchievement1 = true;
-	private boolean gotAchievement2 = true;
+	private boolean gotAchievement1;
+	private boolean gotAchievement2;
+	// hard coded for now.
 	private int achievementType1 = 1;
-	private int achievementType2 = 3;
+	private int achievementType2 = 2;
 
 	Affine2 oTran = new Affine2();
 	Affine2 wTran = new Affine2();

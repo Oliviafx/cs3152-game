@@ -428,19 +428,19 @@
 			"wrap" : false
 		},
 		"achievement04_tip" : {
-			"file" : "pip/achievements/purple_get.png",
-			"wrap" : false
-		},
-		"achievement04_get" : {
-			"file" : "pip/achievements/purple_tip.png",
-			"wrap" : false
-		},
-		"achievement05_tip" : {
 			"file" : "pip/achievements/green_get.png",
 			"wrap" : false
 		},
-		"achievement05_get" : {
+		"achievement04_get" : {
 			"file" : "pip/achievements/green_tip.png",
+			"wrap" : false
+		},
+		"achievement05_tip" : {
+			"file" : "pip/achievements/purple_get.png",
+			"wrap" : false
+		},
+		"achievement05_get" : {
+			"file" : "pip/achievements/purple_tip.png",
 			"wrap" : false
 		},
 		"achievement06_tip" : {
