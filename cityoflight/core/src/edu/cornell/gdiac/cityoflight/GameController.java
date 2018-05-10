@@ -76,6 +76,7 @@ public class GameController implements Screen, ContactListener {
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
 	private int LEVEL_TIME_LIMIT = 500;
+	private boolean daredevil;
 	private boolean hasUsedBox = false;
 	private boolean hasUsedDistraction = false;
 	private boolean hasUsedDistractionEffectively = false;
@@ -750,8 +751,9 @@ public class GameController implements Screen, ContactListener {
 				if (level.getAchievementType1() == 3){ level.setGetAchievement1(false);}
 				if (level.getAchievementType2() == 3){ level.setGetAchievement2(false);}
 			}
-			if(level.getAchievementType1() == 2 ){level.setGetAchievement1(detectedPlay);}
-			if(level.getAchievementType2() == 2 ){level.setGetAchievement2(detectedPlay);}
+			detectedPlay = daredevil;
+			if(level.getAchievementType1() == 2 ){level.setGetAchievement1(daredevil);}
+			if(level.getAchievementType2() == 2 ){level.setGetAchievement2(daredevil);}
 
 			effectiveUsageofBird();
 			effectiveUsageofWalk();
