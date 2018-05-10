@@ -337,7 +337,7 @@
   <object id="52" name="exit_box" x="128" y="383" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="box_Boundaries">
-  <object id="82" name="boundary1" x="-1" y="-2" width="897.332" height="21"/>
+  <object id="82" name="boundary1" x="-1" y="-2" width="897.332" height="60"/>
   <object id="85" name="boundary2" x="896" y="18" width="53.5791" height="556.359"/>
   <object id="174" name="boundary3" x="-2" y="576" width="897.332" height="21"/>
   <object id="173" name="boundary4" x="-55" y="19" width="53.5791" height="556.359"/>

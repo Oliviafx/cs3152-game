@@ -1082,7 +1082,7 @@
          "name":"box_Boundaries",
          "objects":[
                 {
-                 "height":21,
+                 "height":60,
                  "id":82,
                  "name":"boundary1",
                  "rotation":0,
