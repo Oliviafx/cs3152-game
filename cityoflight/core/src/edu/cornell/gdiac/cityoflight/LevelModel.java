@@ -120,9 +120,9 @@ public class LevelModel {
 
 	private boolean gotAchievement1;
 	private boolean gotAchievement2;
-	// hard coded for now.
-	private int achievementType1 = 1;
-	private int achievementType2 = 2;
+	// randomly coded for now.
+	private int achievementType1 = (int)(Math.random() * 3 + 1);
+	private int achievementType2 = (int)(Math.random() * 3 + 1) + 3;
 
 	Affine2 oTran = new Affine2();
 	Affine2 wTran = new Affine2();
