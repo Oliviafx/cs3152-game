@@ -383,6 +383,10 @@
 			"file" : "pip/screens/lose03.png",
 			"wrap" : false
 		},
+		"restart_tip" : {
+			"file" : "pip/screens/restart_tip.png",
+			"wrap" : false
+		},
 		"general_transition" : {
 			"file" : "pip/transitions/general_transition_medium.png",
 			"wrap" : false,
