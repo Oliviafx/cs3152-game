@@ -378,7 +378,6 @@ public class GameController implements Screen, ContactListener {
 
 		drawHelper.reset();
 
-
 		level.resetAchievements();
 		LEVEL_TIME_LIMIT = 1200;
 	}
@@ -664,6 +663,8 @@ public class GameController implements Screen, ContactListener {
 			box.deactivatePhysics(level.getWorld());
 			box.dispose();
 			level.objects.remove(box);
+			if (level.getAchievementType1() == 4){level.setGetAchievement1(true);}
+			if (level.getAchievementType2() == 4){level.setGetAchievement2(true);}
 			sound.stop("box_gone_effect");
 			sound.play("box_gone_effect", "sounds/box_gone_effect.wav", false, 0.5f, soundPlay);
 		}
@@ -735,11 +736,17 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// Final message
-		if (complete && !failed) {
+		if (complete) {
+
+			//calcaulating achievements
 			if (LEVEL_TIME_LIMIT <= 0){
 				if (level.getAchievementType1() == 3){ level.setGetAchievement1(false);}
 				if (level.getAchievementType2() == 3){ level.setGetAchievement2(false);}
 			}
+			if(level.getAchievementType1() == 2 ){level.setGetAchievement1(detectedPlay);}
+			if(level.getAchievementType2() == 2 ){level.setGetAchievement2(detectedPlay);}
+
+
 			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas, textFont,1);
 				drawHelper.drawTopAchievement(canvas,level.didGetAchievement1(),level.getAchievementType1());
