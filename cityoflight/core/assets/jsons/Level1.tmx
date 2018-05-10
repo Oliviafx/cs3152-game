@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="14" height="8" tilewidth="64" tileheight="64" infinite="0" nextobjectid="164">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="14" height="8" tilewidth="64" tileheight="64" infinite="0" nextobjectid="167">
  <tileset firstgid="1" name="floor_tiles" tilewidth="64" tileheight="64" tilecount="12" columns="3">
   <image source="../textures/floor_tiles.png" width="192" height="256"/>
  </tileset>
@@ -77,7 +77,7 @@
  </layer>
  <objectgroup name="vision_properties"/>
  <objectgroup name="Tarasque">
-  <object id="68" name="tarasque1" gid="32" x="439" y="302" width="64" height="160">
+  <object id="68" name="tarasque1" gid="32" x="439" y="304" width="64" height="160">
    <properties>
     <property name="bodytype" value="dynamic"/>
     <property name="collideBits" value="0001"/>
@@ -94,8 +94,40 @@
     <property name="yinput" type="float" value="-300"/>
    </properties>
   </object>
-  <object id="74" name="tarasque_box1" x="467" y="188" width="40" height="86"/>
-  <object id="108" name="dragon_vision1" x="101.091" y="162.067">
+  <object id="74" name="tarasque_box1" x="467" y="188" width="40" height="81"/>
+  <object id="108" name="dragon_vision1" x="101.091" y="164.067">
+   <properties>
+    <property name="a" type="float" value="0.3"/>
+    <property name="angle" type="int" value="4"/>
+    <property name="b" type="float" value="0.5"/>
+    <property name="distance" type="int" value="25"/>
+    <property name="excludeBits" value="0010"/>
+    <property name="facing" type="int" value="90"/>
+    <property name="g" type="float" value="0.2"/>
+    <property name="r" type="float" value="0.2"/>
+    <property name="rays" type="int" value="512"/>
+    <property name="soft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="164" name="tarasque2" gid="32" x="508.909" y="410.933" width="64" height="160">
+   <properties>
+    <property name="bodytype" value="dynamic"/>
+    <property name="collideBits" value="0001"/>
+    <property name="debugcolor" value="white"/>
+    <property name="debugopacity" type="int" value="192"/>
+    <property name="excludeBits" value="0000"/>
+    <property name="startframe" type="int" value="0"/>
+    <property name="texture" value="tarasque"/>
+    <property name="texture2" value="tarasque_down"/>
+    <property name="texture3" value="tarasque_up"/>
+    <property name="turn" type="int" value="1"/>
+    <property name="type" type="int" value="2"/>
+    <property name="xinput" type="float" value="0"/>
+    <property name="yinput" type="float" value="-300"/>
+   </properties>
+  </object>
+  <object id="165" name="tarasque_box2" x="536.909" y="294.933" width="40" height="81"/>
+  <object id="166" name="dragon_vision2" x="171" y="271">
    <properties>
     <property name="a" type="float" value="0.3"/>
     <property name="angle" type="int" value="4"/>
@@ -146,7 +178,7 @@
   <object id="66" name="annette_box" x="124.124" y="240.349" width="39.1176" height="30.2355"/>
  </objectgroup>
  <objectgroup name="Crate">
-  <object id="59" name="crate" x="128" y="63" width="64" height="59">
+  <object id="59" name="crate" x="127" y="63" width="64" height="59">
    <properties>
     <property name="bodytype" value="dynamic"/>
     <property name="collideBits" value="0001"/>
@@ -166,121 +198,121 @@
     <property name="texture3" value=""/>
    </properties>
   </object>
-  <object id="60" name="crate_box" x="192" y="128" width="64" height="59" rotation="180"/>
+  <object id="60" name="crate_box" x="191" y="128" width="64" height="59" rotation="180"/>
  </objectgroup>
  <objectgroup name="Buildings">
   <properties>
    <property name="texture" value=""/>
   </properties>
-  <object id="116" name="building1" gid="114" x="450" y="510" width="128" height="64">
+  <object id="116" name="building1" gid="114" x="450" y="482" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_red"/>
    </properties>
   </object>
-  <object id="114" name="building2" gid="14" x="322" y="510" width="125" height="64">
+  <object id="114" name="building2" gid="14" x="322" y="482" width="125" height="64">
    <properties>
     <property name="texture" value="128_bookstore"/>
    </properties>
   </object>
-  <object id="117" name="building3" gid="15" x="258" y="510" width="64" height="128">
+  <object id="117" name="building3" gid="15" x="258" y="482" width="64" height="128">
    <properties>
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="118" name="building4" gid="115" x="130" y="510" width="128" height="64">
+  <object id="118" name="building4" gid="115" x="130" y="482" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
   </object>
-  <object id="119" name="building5" gid="117" x="2" y="510" width="128" height="64">
+  <object id="119" name="building5" gid="117" x="2" y="482" width="128" height="64">
    <properties>
     <property name="texture" value="128_flowershop"/>
    </properties>
   </object>
-  <object id="120" name="building6" gid="117" x="448" y="128" width="128" height="64">
+  <object id="120" name="building6" gid="117" x="447" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_flowershop"/>
    </properties>
   </object>
-  <object id="121" name="building7" gid="15" x="578" y="510" width="64" height="128">
+  <object id="121" name="building7" gid="15" x="578" y="482" width="64" height="128">
    <properties>
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="122" name="building8" gid="15" x="642" y="510" width="64" height="128">
+  <object id="122" name="building8" gid="15" x="642" y="482" width="64" height="128">
    <properties>
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="123" name="building9" gid="119" x="706" y="510" width="64" height="64">
+  <object id="123" name="building9" gid="119" x="706" y="482" width="64" height="64">
    <properties>
     <property name="texture" value="64_building_short_side"/>
    </properties>
   </object>
-  <object id="124" name="building10" gid="119" x="384" y="128" width="64" height="64">
+  <object id="124" name="building10" gid="119" x="383" y="128" width="64" height="64">
    <properties>
     <property name="texture" value="64_building_short_side"/>
    </properties>
   </object>
-  <object id="125" name="building11" gid="119" x="320" y="128" width="64" height="64">
+  <object id="125" name="building11" gid="119" x="319" y="128" width="64" height="64">
    <properties>
     <property name="texture" value="64_building_short_side"/>
    </properties>
   </object>
-  <object id="126" name="building12" gid="15" x="256" y="128" width="64" height="128">
+  <object id="126" name="building12" gid="15" x="255" y="128" width="64" height="128">
    <properties>
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="127" name="building13" gid="121" x="770" y="510" width="128" height="64">
+  <object id="127" name="building13" gid="121" x="770" y="482" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_blue"/>
    </properties>
   </object>
-  <object id="128" name="building14" gid="121" x="0" y="128" width="128" height="64">
+  <object id="128" name="building14" gid="121" x="-1" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_blue"/>
    </properties>
   </object>
-  <object id="129" name="building15" gid="123" x="576" y="128" width="128" height="64">
+  <object id="129" name="building15" gid="123" x="575" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_green"/>
    </properties>
   </object>
-  <object id="130" name="building16" gid="115" x="704" y="128" width="128" height="64">
+  <object id="130" name="building16" gid="115" x="703" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
   </object>
-  <object id="131" name="building17" gid="119" x="832" y="128" width="64" height="64">
+  <object id="131" name="building17" gid="119" x="831" y="128" width="64" height="64">
    <properties>
     <property name="texture" value="64_building_short_side"/>
    </properties>
   </object>
-  <object id="132" name="building18" gid="123" x="128" y="128" width="128" height="64">
+  <object id="132" name="building18" gid="123" x="127" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_green"/>
    </properties>
   </object>
-  <object id="134" name="box4" x="130.708" y="423.26" width="125.298" height="87.38"/>
-  <object id="135" name="box5" x="2" y="423" width="125.298" height="87.38"/>
-  <object id="138" name="box2" x="323" y="423" width="125.298" height="87.38"/>
-  <object id="139" name="box1" x="450" y="423" width="128.298" height="87.38"/>
-  <object id="141" name="box7" x="579" y="423" width="63" height="87.38"/>
-  <object id="142" name="box8" x="643" y="423" width="63" height="87.38"/>
-  <object id="143" name="box9" x="707" y="423" width="63" height="87.38"/>
-  <object id="144" name="box13" x="772" y="424" width="126" height="87.38"/>
-  <object id="148" name="box14" x="2" y="41" width="126" height="87.38"/>
-  <object id="149" name="box15" x="130" y="41" width="126" height="87.38"/>
-  <object id="150" name="box12" x="257" y="32" width="64" height="97"/>
-  <object id="151" name="box11" x="320" y="31" width="65" height="97"/>
-  <object id="152" name="box10" x="384" y="31" width="64" height="97"/>
-  <object id="154" name="box6" x="448" y="41" width="126" height="87.38"/>
-  <object id="155" name="box15" x="578" y="41" width="126" height="87.38"/>
-  <object id="156" name="box16" x="706" y="41" width="126" height="87.38"/>
-  <object id="157" name="box17" x="819" y="41" width="126" height="87.38"/>
-  <object id="158" name="box18" x="129" y="41" width="126" height="87.38"/>
-  <object id="159" name="box3" x="257" y="423" width="65" height="87.38"/>
+  <object id="134" name="box4" x="130.708" y="395.26" width="125.298" height="87.38"/>
+  <object id="135" name="box5" x="2" y="395" width="125.298" height="87.38"/>
+  <object id="138" name="box2" x="323" y="395" width="125.298" height="87.38"/>
+  <object id="139" name="box1" x="450" y="395" width="128.298" height="87.38"/>
+  <object id="141" name="box7" x="579" y="395" width="63" height="87.38"/>
+  <object id="142" name="box8" x="643" y="395" width="63" height="87.38"/>
+  <object id="143" name="box9" x="707" y="395" width="63" height="87.38"/>
+  <object id="144" name="box13" x="772" y="396" width="126" height="87.38"/>
+  <object id="148" name="box14" x="1" y="41" width="126" height="87.38"/>
+  <object id="149" name="box15" x="129" y="41" width="126" height="87.38"/>
+  <object id="150" name="box12" x="256" y="32" width="64" height="97"/>
+  <object id="151" name="box11" x="319" y="31" width="65" height="97"/>
+  <object id="152" name="box10" x="383" y="31" width="64" height="97"/>
+  <object id="154" name="box6" x="447" y="41" width="126" height="87.38"/>
+  <object id="155" name="box15" x="577" y="41" width="126" height="87.38"/>
+  <object id="156" name="box16" x="705" y="41" width="126" height="87.38"/>
+  <object id="157" name="box17" x="818" y="41" width="126" height="87.38"/>
+  <object id="158" name="box18" x="128" y="41" width="126" height="87.38"/>
+  <object id="159" name="box3" x="257" y="395" width="65" height="87.38"/>
  </objectgroup>
  <layer name="Roofs" width="14" height="8">
   <data encoding="csv">
