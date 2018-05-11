@@ -45,6 +45,9 @@ public class AIController{
     /** Stores original speed */
     private float speedCache;
 
+    public boolean creatureAffectedByWalk = false;
+    public boolean creatureAffectedByDistraction = false;
+
     /** Walk in place effective range */
     public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
@@ -251,6 +254,7 @@ public class AIController{
             creature.setX(creature.getX() + InputController.getInstance().getcHoriz());
             creature.setY(creature.getY() + InputController.getInstance().getcVert());
 
+            creatureAffectedByWalk = true;
             creature.setMovement(cAngleCache.x , cAngleCache.y );
 //          creature.setMovement(0, 0);
 
@@ -624,6 +628,7 @@ public class AIController{
 //                    System.out.println("distracted = true");
                     lastseendistraction = distraction.getPosition();
                     //System.out.println("distractionposition = " + lastseendistraction);
+                    creatureAffectedByDistraction = true;
                     creature.setDistracted(true);
                 } else {
                     creature.setDistracted(false);
