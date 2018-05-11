@@ -1707,7 +1707,7 @@ public class LevelModel {
 //		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
 
 		float cameraXStart = canvas.getWidth() * 2.52f/(5.0f * scale.x);
-		float cameraYStart = canvas.getHeight() * 3.15f/(5.0f * scale.y);
+		float cameraYStart = canvas.getHeight() * 3.10f/(5.0f * scale.y);
 //		float cameraXEnd = 0;
 //		float cameraYEnd = 0;
 		float cameraXEnd = canvas.getWidth() * 2f / scale.x;
@@ -1720,7 +1720,7 @@ public class LevelModel {
 			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
 		}
 		else if (bounds.getWidth() == 14.0f && bounds.getHeight() == 9.0f) {
-			System.out.println("14x9");
+//			System.out.println("14x9");
 			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
 			cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
 		}
