@@ -364,6 +364,13 @@ public class DrawHelper {
         canvas.draw(end_screen,0,0);
         canvas.drawText(chosenText, textFont, 110 ,200);
         canvas.end();
+
+        if (didWin != 1){
+            TextureRegion restart_tip = JsonAssetManager.getInstance().getEntry("restart_tip", TextureRegion.class);
+            canvas.begin();
+            canvas.draw(restart_tip, 750,30);
+            canvas.end();
+        }
     }
 
     public void drawTopAchievement(ObstacleCanvas canvas, boolean hasGottenAchievement, int achievementType){

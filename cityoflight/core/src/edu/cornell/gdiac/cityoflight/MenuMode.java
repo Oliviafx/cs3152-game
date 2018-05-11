@@ -604,16 +604,12 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
         if (dist < playButton.getWidth()*playButton.getHeight()*.75f && screenY > levelY +levelButton.getHeight()) {
             pressState = 1;
-            sound.stop("select_effect");
-            System.out.println(sound.play("select_effect", "sounds/select_effect.wav", false, 1.0f, true));;
         }
 
         float dist2 = (screenX-levelX)*(screenX-levelX)+(screenY-levelY)*(screenY-levelY);
         if (dist2 < levelButton.getWidth()*levelButton.getHeight()*.75f && screenY < playY - playButton.getHeight() &&
                 screenY >= levelY) {
             levelState = 1;
-            sound.stop("seen_effect");
-            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
         }
 
         float dist3 = (screenX- helpX)*(screenX- helpX)+(screenY- helpY)*(screenY- helpY);
@@ -643,18 +639,26 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         if (pressState == 1) {
             pressState = 2;
+            sound.stop("select_effect");
+            System.out.println(sound.play("select_effect", "sounds/select_effect.wav", false, 1.0f, true));;
             return false;
         }
         if (levelState == 1) {
             levelState = 2;
+            sound.stop("seen_effect");
+            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
             return false;
         }
         if (helpState == 1) {
             helpState = 2;
+            sound.stop("seen_effect");
+            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
             return false;
         }
         if (quitState == 1) {
             quitState = 2;
+            sound.stop("seen_effect");
+            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
             return false;
         }
         return true;

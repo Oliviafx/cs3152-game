@@ -76,6 +76,12 @@ public class GameController implements Screen, ContactListener {
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
 	private int LEVEL_TIME_LIMIT = 500;
+	private boolean daredevil;
+	private boolean hasUsedBox = false;
+	private boolean hasUsedDistraction = false;
+	private boolean hasUsedDistractionEffectively = false;
+	private boolean hasUsedWalking = false;
+	private boolean hasUsedWalkingEffectively = false;
 
 	private PauseMode pause;
 	private MenuMode menu;
@@ -378,7 +384,6 @@ public class GameController implements Screen, ContactListener {
 
 		drawHelper.reset();
 
-
 		level.resetAchievements();
 		LEVEL_TIME_LIMIT = 1200;
 	}
@@ -528,6 +533,7 @@ public class GameController implements Screen, ContactListener {
 		//set walking in place
 		annette.setWalkingInPlace(InputController.getInstance().didHoldShift());
 		if (annette.isWalkingInPlace()) {
+			hasUsedWalking = true;
 			sound.play("ambient_effect", "sounds/ambient_effect.wav", true, 0.1f, soundPlay);
 		}
 		else { sound.stop("ambient_effect"); }
@@ -542,6 +548,7 @@ public class GameController implements Screen, ContactListener {
 		if (annette.getBird()&&!level.isDistraction() ) {
 			System.out.println("init bird");
 			level.createDistraction(levelFormat);
+			hasUsedDistraction = true;
 			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f, soundPlay);
 			level.getDistraction().setAlive(true);
 			dAngleCache.set(input.getaHoriz(),input.getaVert());
@@ -608,7 +615,6 @@ public class GameController implements Screen, ContactListener {
 			canBox = true;
 			if (canBox) {
 				try {
-
 					box.initialize(levelFormat, annette.getPosition(), xoff, yoff);
 				}
 				catch (Exception e) {
@@ -622,6 +628,7 @@ public class GameController implements Screen, ContactListener {
 				box.setDoesExist(true);
 				box.setDeactivated(false);
 				box.setDeactivating(false);
+				hasUsedBox = true;
 				sound.play("box_effect", "sounds/box_effect.wav", false, 0.8f, soundPlay);
 			}
 			else {
@@ -667,6 +674,8 @@ public class GameController implements Screen, ContactListener {
 			box.deactivatePhysics(level.getWorld());
 			box.dispose();
 			level.objects.remove(box);
+			if (level.getAchievementType1() == 4){level.setGetAchievement1(true);}
+			if (level.getAchievementType2() == 4){level.setGetAchievement2(true);}
 			sound.stop("box_gone_effect");
 			sound.play("box_gone_effect", "sounds/box_gone_effect.wav", false, 0.5f, soundPlay);
 		}
@@ -738,11 +747,31 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// Final message
-		if (complete && !failed) {
+		if (complete) {
+
+			//calcaulating achievements
 			if (LEVEL_TIME_LIMIT <= 0){
 				if (level.getAchievementType1() == 3){ level.setGetAchievement1(false);}
 				if (level.getAchievementType2() == 3){ level.setGetAchievement2(false);}
 			}
+			detectedPlay = daredevil;
+			if(level.getAchievementType1() == 2 ){level.setGetAchievement1(daredevil);}
+			if(level.getAchievementType2() == 2 ){level.setGetAchievement2(daredevil);}
+
+			effectiveUsageofBird();
+			effectiveUsageofWalk();
+
+			if (hasUsedBox && hasUsedWalkingEffectively && hasUsedDistractionEffectively){
+				if (level.getAchievementType1() == 5){level.setGetAchievement1(true);}
+				if (level.getAchievementType2() == 5){level.setGetAchievement2(true);}
+			}
+
+			if (!((!hasUsedBox && !hasUsedDistraction) || (!hasUsedBox && !hasUsedWalking) || (!hasUsedDistraction && !hasUsedWalking))){
+				if (level.getAchievementType1() == 6){level.setGetAchievement1(false);}
+				if (level.getAchievementType2() == 6){level.setGetAchievement2(false);}
+			}
+
+
 			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas, textFont,1);
 				drawHelper.drawTopAchievement(canvas,level.didGetAchievement1(),level.getAchievementType1());
@@ -1041,6 +1070,22 @@ public class GameController implements Screen, ContactListener {
 				System.out.println("creating 1 AI controller.");
 				AIController controller = new AIController(c, level);
 				AIcontrollers.add(controller);
+			}
+		}
+	}
+
+	public void effectiveUsageofBird(){
+		for (AIController ai : AIcontrollers){
+			if (ai.creatureAffectedByDistraction == true){
+				hasUsedDistractionEffectively = true;
+			}
+		}
+	}
+
+	public void effectiveUsageofWalk(){
+		for (AIController ai : AIcontrollers){
+			if (ai.creatureAffectedByWalk == true){
+				hasUsedWalkingEffectively = true;
 			}
 		}
 	}

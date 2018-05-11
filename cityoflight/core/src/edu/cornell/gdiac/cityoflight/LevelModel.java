@@ -116,12 +116,13 @@ public class LevelModel {
 	boolean ACHIEVEMENT_BLUE_DEFAULT = true;    // type 3 : finish fast
 	boolean ACHIEVEMENT_GREEN_DEFAULT = false;  // type 4 : box disappears
 	boolean ACHIEVEMENT_PURPLE_DEFAULT = false; // type 5 : use all powers
-	boolean ACHIEVEMENT_GREY_DEFAULT = true;    // type 6 : use one power
+	boolean ACHIEVEMENT_GREY_DEFAULT = true;    // type 6 : use (less than) one power
 
-	private boolean gotAchievement1 = true;
-	private boolean gotAchievement2 = true;
-	private int achievementType1 = 1;
-	private int achievementType2 = 3;
+	private boolean gotAchievement1;
+	private boolean gotAchievement2;
+	// randomly coded for now.
+	private int achievementType1 = (int)(Math.random() * 3 + 1);
+	private int achievementType2 = (int)(Math.random() * 3 + 1) + 3;
 
 	Affine2 oTran = new Affine2();
 	Affine2 wTran = new Affine2();
@@ -1706,7 +1707,7 @@ public class LevelModel {
 //		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
 
 		float cameraXStart = canvas.getWidth() * 2.52f/(5.0f * scale.x);
-		float cameraYStart = canvas.getHeight() * 3.15f/(5.0f * scale.y);
+		float cameraYStart = canvas.getHeight() * 3.10f/(5.0f * scale.y);
 //		float cameraXEnd = 0;
 //		float cameraYEnd = 0;
 		float cameraXEnd = canvas.getWidth() * 2f / scale.x;
@@ -1719,7 +1720,7 @@ public class LevelModel {
 			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
 		}
 		else if (bounds.getWidth() == 14.0f && bounds.getHeight() == 9.0f) {
-			System.out.println("14x9");
+//			System.out.println("14x9");
 			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
 			cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
 		}

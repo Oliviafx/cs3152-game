@@ -626,98 +626,10 @@
          "name":"Tarasque",
          "objects":[
                 {
-                 "gid":32,
-                 "height":160,
-                 "id":68,
-                 "name":"tarasque1",
-                 "properties":
-                    {
-                     "bodytype":"dynamic",
-                     "collideBits":"0001",
-                     "debugcolor":"white",
-                     "debugopacity":192,
-                     "excludeBits":"0000",
-                     "startframe":0,
-                     "texture":"tarasque",
-                     "texture2":"tarasque_down",
-                     "texture3":"tarasque_up",
-                     "turn":1,
-                     "type":2,
-                     "xinput":0,
-                     "yinput":-300
-                    },
-                 "propertytypes":
-                    {
-                     "bodytype":"string",
-                     "collideBits":"string",
-                     "debugcolor":"string",
-                     "debugopacity":"int",
-                     "excludeBits":"string",
-                     "startframe":"int",
-                     "texture":"string",
-                     "texture2":"string",
-                     "texture3":"string",
-                     "turn":"int",
-                     "type":"int",
-                     "xinput":"float",
-                     "yinput":"float"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":568.423828584883,
-                 "y":289.559689192371
-                }, 
-                {
-                 "gid":32,
-                 "height":160,
-                 "id":72,
-                 "name":"tarasque2",
-                 "properties":
-                    {
-                     "bodytype":"dynamic",
-                     "collideBits":"0001",
-                     "debugcolor":"white",
-                     "debugopacity":192,
-                     "excludeBits":"0000",
-                     "startframe":0,
-                     "texture":"tarasque",
-                     "texture2":"tarasque_down",
-                     "texture3":"tarasque_up",
-                     "turn":1,
-                     "type":2,
-                     "xinput":0,
-                     "yinput":-300
-                    },
-                 "propertytypes":
-                    {
-                     "bodytype":"string",
-                     "collideBits":"string",
-                     "debugcolor":"string",
-                     "debugopacity":"int",
-                     "excludeBits":"string",
-                     "startframe":"int",
-                     "texture":"string",
-                     "texture2":"string",
-                     "texture3":"string",
-                     "turn":"int",
-                     "type":"int",
-                     "xinput":"float",
-                     "yinput":"float"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":759.00145137881,
-                 "y":285.469575954007
-                }, 
-                {
                  "gid":85,
                  "height":128,
                  "id":79,
-                 "name":"tarasque3",
+                 "name":"tarasque1",
                  "properties":
                     {
                      "bodytype":"dynamic",
@@ -758,31 +670,9 @@
                  "y":376.830189027379
                 }, 
                 {
-                 "height":102.963703170212,
-                 "id":74,
-                 "name":"tarasque_box1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":40,
-                 "x":788.38,
-                 "y":178.706440305176
-                }, 
-                {
-                 "height":100.68410496807,
-                 "id":75,
-                 "name":"tarasque_box2",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":40,
-                 "x":600.29,
-                 "y":178.571723142484
-                }, 
-                {
                  "height":77.99,
                  "id":86,
-                 "name":"tarasque_box3",
+                 "name":"tarasque_box1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -792,7 +682,7 @@
                 }, 
                 {
                  "height":0,
-                 "id":108,
+                 "id":110,
                  "name":"dragon_vision1",
                  "properties":
                     {
@@ -824,19 +714,84 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":101.091142490372,
-                 "y":162.06675224647
+                 "x":111.71032357473,
+                 "y":173.343605546995
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"Blanche",
+         "objects":[
+                {
+                 "gid":32,
+                 "height":160,
+                 "id":116,
+                 "name":"blanche1",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"blanche",
+                     "texture2":"blanche_down",
+                     "texture3":"blanche_up",
+                     "turn":1,
+                     "type":3,
+                     "xinput":0,
+                     "yinput":180
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":765,
+                 "y":325
                 }, 
                 {
-                 "height":0,
-                 "id":109,
-                 "name":"dragon_vision2",
+                 "height":50,
+                 "id":117,
+                 "name":"blanche_box1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":24,
+                 "x":787,
+                 "y":213
+                }, 
+                {
+                 "height":38,
+                 "id":118,
+                 "name":"lady_vision1",
                  "properties":
                     {
                      "a":0.3,
-                     "angle":4,
+                     "angle":20,
                      "b":0.5,
-                     "distance":25,
+                     "distance":10,
                      "excludeBits":"0010",
                      "facing":90,
                      "g":0.2,
@@ -860,20 +815,75 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":0,
-                 "x":111.71032357473,
-                 "y":173.343605546995
+                 "width":45,
+                 "x":689,
+                 "y":197
                 }, 
                 {
-                 "height":0,
-                 "id":110,
-                 "name":"dragon_vision3",
+                 "gid":32,
+                 "height":160,
+                 "id":119,
+                 "name":"blanche2",
+                 "properties":
+                    {
+                     "bodytype":"dynamic",
+                     "collideBits":"0001",
+                     "debugcolor":"white",
+                     "debugopacity":192,
+                     "excludeBits":"0000",
+                     "startframe":0,
+                     "texture":"blanche",
+                     "texture2":"blanche_down",
+                     "texture3":"blanche_up",
+                     "turn":1,
+                     "type":3,
+                     "xinput":0,
+                     "yinput":180
+                    },
+                 "propertytypes":
+                    {
+                     "bodytype":"string",
+                     "collideBits":"string",
+                     "debugcolor":"string",
+                     "debugopacity":"int",
+                     "excludeBits":"string",
+                     "startframe":"int",
+                     "texture":"string",
+                     "texture2":"string",
+                     "texture3":"string",
+                     "turn":"int",
+                     "type":"int",
+                     "xinput":"float",
+                     "yinput":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":584,
+                 "y":332
+                }, 
+                {
+                 "height":50,
+                 "id":120,
+                 "name":"blanche_box2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":24,
+                 "x":584,
+                 "y":220
+                }, 
+                {
+                 "height":38,
+                 "id":121,
+                 "name":"lady_vision2",
                  "properties":
                     {
                      "a":0.3,
-                     "angle":4,
+                     "angle":20,
                      "b":0.5,
-                     "distance":25,
+                     "distance":10,
                      "excludeBits":"0010",
                      "facing":90,
                      "g":0.2,
@@ -897,9 +907,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":0,
-                 "x":111.71032357473,
-                 "y":173.343605546995
+                 "width":45,
+                 "x":584,
+                 "y":204
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1222,7 +1232,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":113,
+ "nextobjectid":122,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.5",
