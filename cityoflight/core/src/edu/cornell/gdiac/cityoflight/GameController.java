@@ -546,6 +546,7 @@ public class GameController implements Screen, ContactListener {
 
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
+			System.out.println("init bird");
 			level.createDistraction(levelFormat);
 			hasUsedDistraction = true;
 			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f, soundPlay);
@@ -558,17 +559,19 @@ public class GameController implements Screen, ContactListener {
 				angle = (float)Math.PI*(angle-90.0f)/180.0f;
 
 			}
-			if (distraction != null && !distraction.isSeen()) {
-
+			if (distraction != null) {// && !distraction.isSeen()) {
 				dAngleCache.scl(distraction.getForce());
 				distraction.setMovement(dAngleCache.x,dAngleCache.y);
 			}
 		}
 
 		if (distraction != null) {
+//			System.out.println(level.objects.contains(distraction));
 			if (!distraction.getAlive() && distraction.isActive()) {
 				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f, soundPlay);
-//				level.objects.remove(distraction);
+				distraction.deactivatePhysics(level.getWorld());
+				distraction.dispose();
+				level.objects.remove(distraction);
 			}
 		}
 
@@ -956,8 +959,8 @@ public class GameController implements Screen, ContactListener {
 			if ((bd1 == distraction && bd2 == box) || (bd1==box && bd2==distraction)) {
 				annette.setBird(false);
 				distraction.setAlive(false);
-				distraction.deactivatePhysics(level.getWorld());
-				distraction.dispose();
+//				distraction.deactivatePhysics(level.getWorld());
+//				distraction.dispose();
 				level.objects.remove(distraction);
 			}
 
@@ -966,6 +969,8 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == b && bd2 == distraction) || (bd1 == distraction && bd2 == b )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
+//					distraction.deactivatePhysics(level.getWorld());
+//					distraction.dispose();
 					level.objects.remove(distraction);
 				}
 			}
@@ -975,6 +980,8 @@ public class GameController implements Screen, ContactListener {
 				if ((bd1 == w && bd2 == distraction) || (bd1 == distraction && bd2== w )) {
 					annette.setBird(false);
 					distraction.setAlive(false);
+//					distraction.deactivatePhysics(level.getWorld());
+//					distraction.dispose();
 					level.objects.remove(distraction);
 				}
 			}
