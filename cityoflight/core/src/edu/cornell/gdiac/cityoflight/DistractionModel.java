@@ -27,7 +27,7 @@ public class DistractionModel extends WheelObstacle {
     private static final float VOFFSET = .25f;
 
     private static final int BIRD_LIFE = 200;
-    private static final float BIRD_RADIUS = .25f;
+    private static final float BIRD_RADIUS = .20f;
 
 
     private static final float STOPPING_DISTANCE = 3f;
@@ -316,7 +316,7 @@ public class DistractionModel extends WheelObstacle {
 
     public void draw(ObstacleCanvas canvas) {
         if ((birdsprite != null) && alive) {
-            Color color = Color.BLUE;
+            Color color = Color.WHITE.cpy();
             alpha = (int)((1-((float)life/BIRD_LIFE))*255);
             color.a = alpha;
 //            canvas.draw(birdsprite, color, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
