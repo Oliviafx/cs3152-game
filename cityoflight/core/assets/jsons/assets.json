@@ -28,8 +28,29 @@
 			"file":		"tutorial/tar_outline.png",
 			"wrap":		false
 		},
+		"walk_in_place_tip": {
+			"file":		"tutorial/walk_in_place_tip.png",
+			"wrap":		false
+		},
+		"walk_place_arrow": {
+			"file":		"tutorial/walk_place_arrow.png",
+			"wrap":		false
+		},
+		"bird_text": {
+			"file":		"tutorial/bird_text.png",
+			"wrap":		false
+		},
+		"box_text": {
+			"file":		"tutorial/box_text.png",
+			"wrap":		false
+		},
+
 		"outline_annette_left": {
 			"file":		"tutorial/outline_annette_left.png",
+			"wrap":		false
+		},
+		"goal_arrow": {
+			"file":		"tutorial/goal_arrow.png",
 			"wrap":		false
 		},
 		"blanche_outline": {

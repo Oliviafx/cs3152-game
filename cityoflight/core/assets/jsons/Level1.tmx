@@ -27,14 +27,14 @@
  <tileset firstgid="85" name="tarasque_side" tilewidth="215" tileheight="128" tilecount="28" columns="28">
   <image source="../textures/tarasque_side.png" width="6030" height="128"/>
  </tileset>
- <tileset firstgid="113" name="128_cafe_red" tilewidth="128" tileheight="64" tilecount="1" columns="1">
-  <image source="../textures/128_cafe_red.png" width="128" height="127"/>
+ <tileset firstgid="113" name="128_cafe_red" tilewidth="128" tileheight="64" tilecount="2" columns="1">
+  <image source="../textures/128_cafe_red.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="114" name="128_cafe_purple" tilewidth="128" tileheight="64" tilecount="2" columns="1">
+ <tileset firstgid="115" name="128_cafe_purple" tilewidth="128" tileheight="64" tilecount="2" columns="1">
   <image source="../textures/128_cafe_purple.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="116" name="128_flowershop" tilewidth="128" tileheight="64" tilecount="2" columns="1">
-  <image source="../textures/128_flowershop.png" width="128" height="128"/>
+ <tileset firstgid="117" name="128_flowershop" tilewidth="128" tileheight="64" tilecount="1" columns="1">
+  <image source="../textures/128_flowershop.png" width="128" height="127"/>
  </tileset>
  <tileset firstgid="118" name="64_building_short_side" tilewidth="64" tileheight="64" tilecount="2" columns="1">
   <image source="../textures/64_building_short_side.png" width="64" height="128"/>
@@ -62,6 +62,18 @@
  </tileset>
  <tileset firstgid="129" name="outline_annette" tilewidth="49" tileheight="80" tilecount="1" columns="1">
   <image source="../tutorial/outline_annette.png" width="49" height="80"/>
+ </tileset>
+ <tileset firstgid="130" name="goal_arrow" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="../tutorial/goal_arrow.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="131" name="goal_arrow" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="../tutorial/goal_arrow.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="132" name="box_text" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+  <image source="../tutorial/box_text.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="133" name="walk_place_arrow" tilewidth="192" tileheight="64" tilecount="1" columns="1">
+  <image source="../tutorial/walk_place_arrow.png" width="192" height="64"/>
  </tileset>
  <layer name="Base" width="14" height="8">
   <data encoding="csv">
@@ -148,7 +160,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,129,127,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,132,0,0,0,0,130,0,0,0,0,
 0,0,0,0,0,0,0,128,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -204,7 +216,7 @@
   <properties>
    <property name="texture" value=""/>
   </properties>
-  <object id="116" name="building1" gid="114" x="450" y="482" width="128" height="64">
+  <object id="116" name="building1" gid="115" x="450" y="482" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_red"/>
    </properties>
@@ -219,17 +231,17 @@
     <property name="texture" value="64_building_short"/>
    </properties>
   </object>
-  <object id="118" name="building4" gid="115" x="130" y="482" width="128" height="64">
+  <object id="118" name="building4" gid="116" x="130" y="482" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
   </object>
-  <object id="119" name="building5" gid="117" x="2" y="482" width="128" height="64">
+  <object id="119" name="building5" gid="118" x="2" y="482" width="128" height="64">
    <properties>
     <property name="texture" value="128_flowershop"/>
    </properties>
   </object>
-  <object id="120" name="building6" gid="117" x="447" y="128" width="128" height="64">
+  <object id="120" name="building6" gid="118" x="447" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_flowershop"/>
    </properties>
@@ -279,7 +291,7 @@
     <property name="texture" value="128_cafe_green"/>
    </properties>
   </object>
-  <object id="130" name="building16" gid="115" x="703" y="128" width="128" height="64">
+  <object id="130" name="building16" gid="116" x="703" y="128" width="128" height="64">
    <properties>
     <property name="texture" value="128_cafe_purple"/>
    </properties>
@@ -316,12 +328,12 @@
  </objectgroup>
  <layer name="Roofs" width="14" height="8">
   <data encoding="csv">
-113,0,122,0,0,13,0,116,0,113,0,13,0,118,
+113,0,122,0,0,13,0,117,0,113,0,13,0,118,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-116,0,114,0,0,13,13,113,0,122,0,118,118,118,
+117,0,115,0,0,13,13,113,0,122,0,118,118,118,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
