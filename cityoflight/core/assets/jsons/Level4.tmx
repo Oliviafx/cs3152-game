@@ -54,23 +54,23 @@
  <tileset firstgid="126" name="tutorial_spacebar" tilewidth="50" tileheight="16" tilecount="1" columns="1">
   <image source="../tutorial/tutorial_spacebar.png" width="50" height="16"/>
  </tileset>
- <tileset firstgid="127" name="birdoutline" tilewidth="64" tileheight="45" tilecount="1" columns="1">
-  <image source="../tutorial/birdoutline.png" width="64" height="45"/>
- </tileset>
- <tileset firstgid="128" name="tar_outline" tilewidth="70" tileheight="136" tilecount="1" columns="1">
+ <tileset firstgid="127" name="tar_outline" tilewidth="70" tileheight="136" tilecount="1" columns="1">
   <image source="../tutorial/tar_outline.png" width="70" height="136"/>
  </tileset>
- <tileset firstgid="129" name="outline_annette_left" tilewidth="49" tileheight="80" tilecount="1" columns="1">
+ <tileset firstgid="128" name="outline_annette_left" tilewidth="49" tileheight="80" tilecount="1" columns="1">
   <image source="../tutorial/outline_annette_left.png" width="49" height="80"/>
  </tileset>
- <tileset firstgid="130" name="blanche_outline" tilewidth="113" tileheight="162" tilecount="1" columns="1">
+ <tileset firstgid="129" name="blanche_outline" tilewidth="113" tileheight="162" tilecount="1" columns="1">
   <image source="../tutorial/blanche_outline.png" width="113" height="162"/>
  </tileset>
- <tileset firstgid="131" name="bird_text" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+ <tileset firstgid="130" name="bird_text" tilewidth="128" tileheight="128" tilecount="1" columns="1">
   <image source="../tutorial/bird_text.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="132" name="box_text" tilewidth="128" tileheight="128" tilecount="1" columns="1">
+ <tileset firstgid="131" name="box_text" tilewidth="128" tileheight="128" tilecount="1" columns="1">
   <image source="../tutorial/box_text.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="132" name="birdoutline" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <image source="../tutorial/birdoutline.png" width="64" height="64"/>
  </tileset>
  <layer name="Base" width="14" height="8">
   <data encoding="csv">
@@ -325,9 +325,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,127,129,0,0,0,
+0,0,0,0,0,0,0,0,0,132,128,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,130,0,0,131,0,0,0,0
+0,0,0,0,0,0,129,0,0,130,0,0,0,0
 </data>
  </layer>
  <objectgroup name="Exit">

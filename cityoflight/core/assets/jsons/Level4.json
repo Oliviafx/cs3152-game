@@ -850,7 +850,7 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 130, 0, 0, 131, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 132, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 129, 0, 0, 130, 0, 0, 0, 0],
          "height":8,
          "name":"Tutorial",
          "opacity":1,
@@ -1280,19 +1280,6 @@
         {
          "columns":1,
          "firstgid":127,
-         "image":"..\/tutorial\/birdoutline.png",
-         "imageheight":45,
-         "imagewidth":64,
-         "margin":0,
-         "name":"birdoutline",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":45,
-         "tilewidth":64
-        }, 
-        {
-         "columns":1,
-         "firstgid":128,
          "image":"..\/tutorial\/tar_outline.png",
          "imageheight":136,
          "imagewidth":70,
@@ -1305,7 +1292,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":129,
+         "firstgid":128,
          "image":"..\/tutorial\/outline_annette_left.png",
          "imageheight":80,
          "imagewidth":49,
@@ -1318,7 +1305,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":130,
+         "firstgid":129,
          "image":"..\/tutorial\/blanche_outline.png",
          "imageheight":162,
          "imagewidth":113,
@@ -1331,7 +1318,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":131,
+         "firstgid":130,
          "image":"..\/tutorial\/bird_text.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1344,7 +1331,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":132,
+         "firstgid":131,
          "image":"..\/tutorial\/box_text.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1354,6 +1341,19 @@
          "tilecount":1,
          "tileheight":128,
          "tilewidth":128
+        }, 
+        {
+         "columns":1,
+         "firstgid":132,
+         "image":"..\/tutorial\/birdoutline.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"birdoutline",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64
         }],
  "tilewidth":64,
  "type":"map",

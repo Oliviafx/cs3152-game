@@ -446,10 +446,10 @@ public class DrawHelper {
                     encouragement = "Cheer up, mime over matter!";
                     break;
                 case 2:
-                    encouragement = "C'mon, you can do it!";
+                    encouragement = "Tip: The Lady in White phases through boxes once you're seen.";
                     break;
                 case 3:
-                    encouragement = "Even my grandma beat this level.";
+                    encouragement = "Tip: Shift + Arrow Key to walk in place!";
                     break;
                 case 4:
                     encouragement = "The City of Light needs your help.";
@@ -458,13 +458,13 @@ public class DrawHelper {
                     encouragement = "The streets grow a little bit darker.";
                     break;
                 case 6:
-                    encouragement = "Shadows seep onto the streets... ";
+                    encouragement = "Tip: Touch your box and press SPACE to remove it!";
                     break;
                 case 7:
                     encouragement = "May the light guide you.";
                     break;
                 case 8:
-                    encouragement = "Perhaps I overestimated you.";
+                    encouragement = "Tip: Press X to mime a distraction!";
                     break;
                 case 9:
                     encouragement = "Failure is the best teacher.";
