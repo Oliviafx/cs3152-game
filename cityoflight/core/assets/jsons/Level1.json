@@ -217,7 +217,7 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 129, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 129, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 132, 0, 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
          "name":"Tutorial",
          "opacity":1,
@@ -372,7 +372,7 @@
          "name":"Buildings",
          "objects":[
                 {
-                 "gid":114,
+                 "gid":115,
                  "height":64,
                  "id":116,
                  "name":"building1",
@@ -432,7 +432,7 @@
                  "y":482
                 }, 
                 {
-                 "gid":115,
+                 "gid":116,
                  "height":64,
                  "id":118,
                  "name":"building4",
@@ -452,7 +452,7 @@
                  "y":482
                 }, 
                 {
-                 "gid":117,
+                 "gid":118,
                  "height":64,
                  "id":119,
                  "name":"building5",
@@ -472,7 +472,7 @@
                  "y":482
                 }, 
                 {
-                 "gid":117,
+                 "gid":118,
                  "height":64,
                  "id":120,
                  "name":"building6",
@@ -672,7 +672,7 @@
                  "y":128
                 }, 
                 {
-                 "gid":115,
+                 "gid":116,
                  "height":64,
                  "id":130,
                  "name":"building16",
@@ -955,7 +955,7 @@
          "y":0
         }, 
         {
-         "data":[113, 0, 122, 0, 0, 13, 0, 116, 0, 113, 0, 13, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 116, 0, 114, 0, 0, 13, 13, 113, 0, 122, 0, 118, 118, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[113, 0, 122, 0, 0, 13, 0, 117, 0, 113, 0, 13, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 115, 0, 0, 13, 13, 113, 0, 122, 0, 118, 118, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
          "name":"Roofs",
          "opacity":1,
@@ -1269,18 +1269,18 @@
          "columns":1,
          "firstgid":113,
          "image":"..\/textures\/128_cafe_red.png",
-         "imageheight":127,
+         "imageheight":128,
          "imagewidth":128,
          "margin":0,
          "name":"128_cafe_red",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":2,
          "tileheight":64,
          "tilewidth":128
         }, 
         {
          "columns":1,
-         "firstgid":114,
+         "firstgid":115,
          "image":"..\/textures\/128_cafe_purple.png",
          "imageheight":128,
          "imagewidth":128,
@@ -1293,14 +1293,14 @@
         }, 
         {
          "columns":1,
-         "firstgid":116,
+         "firstgid":117,
          "image":"..\/textures\/128_flowershop.png",
-         "imageheight":128,
+         "imageheight":127,
          "imagewidth":128,
          "margin":0,
          "name":"128_flowershop",
          "spacing":0,
-         "tilecount":2,
+         "tilecount":1,
          "tileheight":64,
          "tilewidth":128
         }, 
@@ -1420,6 +1420,58 @@
          "tilecount":1,
          "tileheight":80,
          "tilewidth":49
+        }, 
+        {
+         "columns":1,
+         "firstgid":130,
+         "image":"..\/tutorial\/goal_arrow.png",
+         "imageheight":128,
+         "imagewidth":128,
+         "margin":0,
+         "name":"goal_arrow",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":128,
+         "tilewidth":128
+        }, 
+        {
+         "columns":1,
+         "firstgid":131,
+         "image":"..\/tutorial\/goal_arrow.png",
+         "imageheight":128,
+         "imagewidth":128,
+         "margin":0,
+         "name":"goal_arrow",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":128,
+         "tilewidth":128
+        }, 
+        {
+         "columns":1,
+         "firstgid":132,
+         "image":"..\/tutorial\/box_text.png",
+         "imageheight":128,
+         "imagewidth":128,
+         "margin":0,
+         "name":"box_text",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":128,
+         "tilewidth":128
+        }, 
+        {
+         "columns":1,
+         "firstgid":133,
+         "image":"..\/tutorial\/walk_place_arrow.png",
+         "imageheight":64,
+         "imagewidth":192,
+         "margin":0,
+         "name":"walk_place_arrow",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":192
         }],
  "tilewidth":64,
  "type":"map",

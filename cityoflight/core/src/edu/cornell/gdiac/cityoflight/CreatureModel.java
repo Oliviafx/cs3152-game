@@ -97,6 +97,8 @@ public class CreatureModel extends BoxObstacle {
     /** refers to how to creature behaves upon colliding. See AIController for more details. */
     private int turnBehavior = 1;
 
+    private float dragon_y_offset = -20;
+
     /** constants for creature characteristics */
 
     private int LOU_TURN_LIMIT = 30; // as a snail, Lou turns pretty slowly.
@@ -447,6 +449,9 @@ public class CreatureModel extends BoxObstacle {
         // A JSON field might accidentally be missing
         setType(json.get("type").asInt());
 
+        if(type != 2)
+            dragon_y_offset = 0f;
+
         setXInput(json.get("xinput").asFloat());
         setYInput(json.get("yinput").asFloat());
 
@@ -599,7 +604,7 @@ public class CreatureModel extends BoxObstacle {
         }
         else {
             if (texture != null) {
-                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y+texture.getRegionHeight()/6,
+                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y+texture.getRegionHeight()/6 + dragon_y_offset,
                         0, 0.75f * isReflected, 0.75f );
             }
         }
@@ -607,7 +612,7 @@ public class CreatureModel extends BoxObstacle {
         if (texture != null && dirTexture != null) {
 //          System.out.println("creature position " + getX() + " " + getY());
             if (type != 3) {
-                canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6,
+                canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset,
                         0, 0.75f * isReflected, 0.75f);
             }else{
                 if (DRESS_COOLDOWN <= 0) {
