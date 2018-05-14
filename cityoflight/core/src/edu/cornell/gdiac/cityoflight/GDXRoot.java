@@ -151,6 +151,7 @@ public class GDXRoot extends Game implements ScreenListener {
 			if (controller != null) {
 				if (controller.getBGM() != null) {
 					controller.getBGM().stop();
+					controller.getDet_bgm().stop();
 				}
 			}
 			menu.setScreenListener(this);
@@ -185,11 +186,29 @@ public class GDXRoot extends Game implements ScreenListener {
 
 		if (exitCode == GameController.EXIT_PAUSE) {
 			System.out.println("exit pause");
+			controller.getBGM().pause();
+			controller.getDet_bgm().pause();
+
+			if (pause.isMusic()) {
+				controller.setMusicPlay(true);
+				System.out.println("setmusicplay true");
+			}
+			else {
+				controller.setMusicPlay(false);
+				System.out.println("setmusicplay false");
+			}
+			if (pause.isSound()) {
+				controller.setSoundPlay(true);
+			}
+			else {
+				controller.setSoundPlay(false);
+			}
 
 			pause.setScreenListener(this);
 			pause.setCanvas(canvas);
 			pause.reset();
 			setScreen(pause);
+
 		}
 //		else if (screen == loading) {
 //			System.out.println("here");
