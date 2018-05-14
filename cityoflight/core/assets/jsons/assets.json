@@ -527,5 +527,8 @@
 		"120bpm_music": {
 			"file": "sounds/120bpm_music.wav"
 		}
+		"click_effect": {
+			"file": "sounds/click_effect.wav"
+		}
 	}
 }

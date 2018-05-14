@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -48,6 +49,9 @@ public class GDXRoot extends Game implements ScreenListener {
 	private HelpMode help;
 	/** DrawHelper for drawing transitions */
 	private DrawHelper drawHelper;
+
+	private Music bgm;
+	private Music menuMusic;
 
 	/** List of all WorldControllers */
 //	private WorldController[] controllers;
@@ -125,8 +129,10 @@ public class GDXRoot extends Game implements ScreenListener {
 	 */
 	public void exitScreen(Screen screen, int exitCode) {
 		if (exitCode == GameController.EXIT_MENU) {
+//			System.out.println("exit menu");
 //			loading.dispose();
 //			loading = null;
+//			System.out.println("stop music");
 		    menu = new MenuMode(canvas, this);
 			setScreen(menu);
 			//			setScreen(menu);
@@ -145,6 +151,7 @@ public class GDXRoot extends Game implements ScreenListener {
 			if (controller != null) {
 				if (controller.getBGM() != null) {
 					controller.getBGM().stop();
+					controller.getDet_bgm().stop();
 				}
 			}
 			menu.setScreenListener(this);
@@ -152,10 +159,11 @@ public class GDXRoot extends Game implements ScreenListener {
 			menu.reset();
 		}
 		if (exitCode == GameController.EXIT_LEVEL) {
-            if (menu != null) {
-                menu.dispose();
-                menu = null;
-            }
+			System.out.println("exit level");
+//            if (menu != null) {
+//                menu.dispose();
+//                menu = null;
+//            }
 			levels = new LevelController(canvas);
 			levels.setScreenListener(this);
 			levels.setCanvas(canvas);
@@ -165,7 +173,7 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 
 		if (exitCode == GameController.EXIT_HELP) {
-			System.out.println("here");
+//			System.out.println("exit help");
 			menu.dispose();
 			menu = null;
 			help = new HelpMode(canvas);
@@ -177,11 +185,31 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 
 		if (exitCode == GameController.EXIT_PAUSE) {
+//			System.out.println("exit pause");
+			controller.getBGM().pause();
+			controller.getDet_bgm().pause();
+//			if (pause.isMusic()) {
+//				controller.setMusicPlay(true);
+////				System.out.println("setmusicplay true");
+//			}
+//			else {
+//				controller.setMusicPlay(false);
+//				System.out.println("setmusicplay false");
+//			}
+//			if (pause.isSound()) {
+//				controller.setSoundPlay(true);
+//			}
+//			else {
+//				controller.setSoundPlay(false);
+//			}
 
 			pause.setScreenListener(this);
 			pause.setCanvas(canvas);
 			pause.reset();
 			setScreen(pause);
+
+
+
 		}
 //		else if (screen == loading) {
 //			System.out.println("here");
@@ -195,6 +223,23 @@ public class GDXRoot extends Game implements ScreenListener {
 //			loading = null;
 //		}
 		else if (exitCode == GameController.EXIT_PLAY) {
+//			System.out.println("EXIT PLAY");
+
+			if (pause.isMusic()) {
+				controller.setMusicPlay(true);
+//				System.out.println("setmusicplay true");
+			}
+			else {
+				controller.setMusicPlay(false);
+//				System.out.println("setmusicplay false");
+			}
+			if (pause.isSound()) {
+				controller.setSoundPlay(true);
+			}
+			else {
+				controller.setSoundPlay(false);
+			}
+
 //			if (menu!=null) {
 //				menu.dispose();
 //				menu = null;
@@ -232,6 +277,15 @@ public class GDXRoot extends Game implements ScreenListener {
 					loading = null;
 				}
 				controller.setMenu(menu);
+
+			if (menu != null) {
+//				System.out.println("stop music");
+				menuMusic = menu.getMenuMusic();
+				menuMusic.stop();
+			}
+			else {
+//				System.out.println("was null");
+			}
 		}
 
 		else if (exitCode == GameController.EXIT_QUIT) {

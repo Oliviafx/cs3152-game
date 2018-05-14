@@ -174,13 +174,19 @@ public class InputController {
 	 *
 	 * @return true if the exit button was pressed.
 	 */
+//	public boolean didExit() {
+//		return exitPressed && !exitPrevious;
+//	}
+
 	public boolean didExit() {
 		return exitPressed && !exitPrevious;
 	}
 
-	public boolean didPause() {
-		return pausePressed && !pausePrevious;
-	}
+//	public boolean didPause() {
+//		return pausePressed && !pausePrevious;
+//	}
+
+	public boolean didPause() { return pausePressed && !pausePrevious; }
 
 	public boolean didMute() { return mPressed && !mPrevious; }
 	

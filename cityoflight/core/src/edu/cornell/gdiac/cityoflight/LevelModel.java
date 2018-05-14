@@ -1034,7 +1034,7 @@ public class LevelModel {
 			}
 			else if (layerName.equals("Tutorial")){
 
-				System.out.println("loading tutorial data");
+//				System.out.println("loading tutorial data");
 
 
 				int[] data = layer.get("data").asIntArray();
@@ -1057,7 +1057,7 @@ public class LevelModel {
 					}
 					//System.out.println(data[j] + " : "+ (data[j] - f));
 					String texName = idToTexture.get(data[j] - f);
-					System.out.println(texName);
+//					System.out.println(texName);
 					TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
 
 					// IMPORTANT PROBLEM: TEXTURE IS NULL
@@ -1136,7 +1136,7 @@ public class LevelModel {
 				//check ids equal to specific objects
 				goalDoor = new ExitModel();
 				float x = boundValues.get("x").asFloat();
-				System.out.println();
+//				System.out.println();
 				float y = (boundValues.get("y").asFloat());
 				float[] pos = {x,y};
 				float width = boundValues.get("width").asFloat();
@@ -1725,22 +1725,22 @@ public class LevelModel {
 			cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
 		}
 		else if (bounds.getWidth() == 24.0f && bounds.getHeight() == 14.0f) {
-			System.out.println("24x14");
+//			System.out.println("24x14");
 			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
 			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
 		}
 		else if (bounds.getWidth() == 36.0f && bounds.getHeight() == 18.0f) {
-			System.out.println("36x18");
+//			System.out.println("36x18");
 			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
 			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
 		}
 		else if (bounds.getWidth() == 21.0f && bounds.getHeight() == 12.0f) {
-			System.out.println("21x12");
+//			System.out.println("21x12");
 			cameraXEnd = canvas.getWidth() * 1.0f / scale.x;
 			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
 		}
 		else if (bounds.getWidth() == 28.0f && bounds.getHeight() == 16.0f) {
-			System.out.println("28x16");
+//			System.out.println("28x16");
 			cameraXEnd = canvas.getWidth() * 1.20f / scale.x;
 			cameraYEnd = canvas.getHeight() * 1.6f / scale.y;
 		}
