@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
+import edu.cornell.gdiac.util.SoundController;
 
 public class PauseMode implements Screen, ControllerListener, ContactListener, InputProcessor, ApplicationListener {
 
@@ -61,6 +62,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     private ObstacleCanvas canvas;
 
     private ScreenListener listener;
+
+    private SoundController sound = SoundController.getInstance();
 
     public PauseMode(ObstacleCanvas drawcanvas) {
         canvas = drawcanvas;
@@ -190,6 +193,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.log("my app", "Released");
+
             }
         });
         quitbutton = new TextButton("", style);
@@ -324,6 +328,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 //        if (dist < radius*radius) {
         if ((screenX > playX && screenX < playX+playButton.getWidth()) && (screenY > playY && screenY < playY+playButton.getHeight())) {
             pressState = 1;
+            sound.stop("select_effect");
+            sound.play("select_effect", "sounds/select_effect.wav", false, 0.7f, true);
 
         }
 
@@ -332,6 +338,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         if ((screenX > quitX && screenX < quitX+quitButton.getWidth()) && (screenY > quitY && screenY < quitY+quitButton.getHeight())) {
 
             quitState = 1;
+            sound.stop("seen_effect");
+            sound.play("seen_effect", "sounds/seen_effect.wav", false, 0.7f, true);
         }
         return false;
     }

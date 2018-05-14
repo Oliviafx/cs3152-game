@@ -2,6 +2,7 @@ package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.controllers.*;
@@ -129,10 +130,11 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private static final String HELP_HOVER ="textures/menu assets/help_hover.png";
     private static final String QUIT_HOVER ="textures/menu assets/quit_hover.png";
 
-    private static final String START_SOUND = "sounds/select_effect.wav";
-    private static final String LEVEL_SOUND = "sounds/seen_effect.wav";
-
-
+//    private static final String START_SOUND = "sounds/select_effect.wav";
+//    private static final String LEVEL_SOUND = "sounds/seen_effect.wav";
+    Sound startSound = Gdx.audio.newSound(Gdx.files.internal("sounds/select_effect.wav"));
+    Sound menuSound = Gdx.audio.newSound(Gdx.files.internal("sounds/seen_effect.wav"));
+    Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("music/menu_music.wav"));
 
     private Texture title;
     private Texture helpButton;
@@ -143,8 +145,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private Texture helpHover;
     private Texture quitHover;
 
-    private Sound startSound;
-    private Sound levelSound;
+//    private Sound startSound;
+//    private Sound levelSound;
 
     private MyActor play;
     private boolean hoverplay;
@@ -189,6 +191,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private static int STANDARD_WIDTH  = 800;
     /** Standard window height (for scaling) */
     private static int STANDARD_HEIGHT = 700;
+
+    private boolean menuPlay = true;
 
     ObstacleCanvas drawcanvas;
 
@@ -236,8 +240,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         active = false;
         this.parent = parent;
 
-        startSound = null;
-        levelSound = null;
+//        startSound = null;
+//        levelSound = null;
 
         playX = 600;
         playY = 300;
@@ -512,6 +516,13 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //            create();
         }
 
+        if (!menuMusic.isPlaying() && menuPlay) {
+            menuMusic.play();
+        }
+        else if (menuMusic.isPlaying() && !menuPlay) {
+            menuMusic.stop();
+        }
+
     }
 
 
@@ -639,26 +650,35 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         if (pressState == 1) {
             pressState = 2;
-            sound.stop("select_effect");
-            System.out.println(sound.play("select_effect", "sounds/select_effect.wav", false, 1.0f, true));;
+//            sound.stop("select_effect");
+//            System.out.println("stop");
+            menuMusic.stop();
+            System.out.println("stop???");
+            menuPlay = false;
+            startSound.play();
+//            System.out.println(sound.play("select_effect", "sounds/select_effect.wav", false, 1.0f, true));;
             return false;
         }
         if (levelState == 1) {
             levelState = 2;
-            sound.stop("seen_effect");
-            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
+//            sound.stop("seen_effect");
+//            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
+            menuSound.play();
             return false;
         }
         if (helpState == 1) {
             helpState = 2;
-            sound.stop("seen_effect");
-            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
+//            sound.stop("seen_effect");
+//            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
+            menuSound.play();
             return false;
         }
         if (quitState == 1) {
             quitState = 2;
-            sound.stop("seen_effect");
-            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
+//            sound.stop("seen_effect");
+//            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
+            menuMusic.stop();
+            menuPlay = false;
             return false;
         }
         return true;
