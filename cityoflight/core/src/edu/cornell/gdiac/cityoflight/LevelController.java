@@ -1,5 +1,6 @@
 package edu.cornell.gdiac.cityoflight;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -37,6 +38,9 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private ObstacleCanvas canvas;
     private static final String LEVEL_BACKGROUND_FILE = "textures/level select assets/level_select.png";
     private static final String BACK_FILE = "textures/level select assets/menu_button.png";
+
+    Sound startSound = Gdx.audio.newSound(Gdx.files.internal("sounds/select_effect.wav"));
+    Sound menuSound = Gdx.audio.newSound(Gdx.files.internal("sounds/seen_effect.wav"));
 
     private ScreenListener listener;
     private boolean active;
@@ -171,11 +175,15 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         level1.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+
+//                System.out.println("startSound play");
                 return true;
             }
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+
+                startSound.play();
             }
         });
         level2 = new TextButton("", style);
@@ -190,6 +198,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                startSound.play();
             }
         });
         level3 = new TextButton("", style);
@@ -204,6 +213,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                startSound.play();
             }
         });
         level4 = new TextButton("", style);
@@ -218,6 +228,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                startSound.play();
             }
         });
         level5 = new TextButton("", style);
@@ -232,6 +243,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                startSound.play();
             }
         });
 
@@ -247,6 +259,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                startSound.play();
             }
         });
 
@@ -262,6 +275,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                startSound.play();
             }
         });
         menubutton = new TextButton("", style);
@@ -276,6 +290,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                menuSound.play();
             }
         });
         startbutton = new TextButton("", style);
@@ -290,6 +305,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Released");
+                startSound.play();
             }
         });
 
