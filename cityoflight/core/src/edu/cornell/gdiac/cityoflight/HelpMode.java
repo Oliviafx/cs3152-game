@@ -2,6 +2,7 @@ package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -86,6 +87,9 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private ScreenListener listener;
 
     private SoundController sound = SoundController.getInstance();
+
+//    Sound startSound = Gdx.audio.newSound(Gdx.files.internal("sounds/select_effect.wav"));
+    Sound menuSound = Gdx.audio.newSound(Gdx.files.internal("sounds/seen_effect.wav"));
 
     public HelpMode(ObstacleCanvas drawcanvas) {
         canvas = drawcanvas;
@@ -416,6 +420,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
             showLady = false;
         }
         if (backToMenu() && listener != null) {
+//            System.out.println("help mode back to menu");
             listener.exitScreen(this, GameController.EXIT_MENU);
         }
         if (toSnail() && listener != null) {
@@ -562,28 +567,39 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
         if (controlState == 1) {
+            System.out.println("control state");
+            menuSound.play();
             controlState = 2;
             return false;
         }
         if (creatureState == 1) {
+            System.out.println("creature state");
+            menuSound.play();
             creatureState = 2;
             return false;
         }
         if (quitState == 1) {
+            System.out.println("quit state");
+            menuSound.play();
             quitState = 2;
         }
 
         if (exitState == 1) {
+            System.out.println("exit state");
+            menuSound.play();
             exitState = 2;
         }
 
         if (snailState == 1) {
+            menuSound.play();
             snailState = 2;
         }
         if (tarasqueState == 1) {
+            menuSound.play();
             tarasqueState = 2;
         }
         if (ladyState == 1) {
+            menuSound.play();
             ladyState = 2;
         }
         return true;
