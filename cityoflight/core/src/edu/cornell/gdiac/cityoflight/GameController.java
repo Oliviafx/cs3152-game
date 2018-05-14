@@ -165,6 +165,7 @@ public class GameController implements Screen, ContactListener {
 	public void setWhichLevel(int val) {
 		whichlevel = val;
 	}
+	private int numLevels;
 
 	/** Reference to the game canvas */
 	protected ObstacleCanvas canvas;
@@ -379,6 +380,10 @@ public class GameController implements Screen, ContactListener {
 		if (whichlevel == 7) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Emmalevel.json"));
 		}
+
+		// CHANGE THIS IF YOU ADD LEVELS
+		numLevels = 7;
+
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 
@@ -444,7 +449,7 @@ public class GameController implements Screen, ContactListener {
 			countdown--;
 		} else if (countdown == 0) {
 			if (complete) {
-				if (whichlevel < 7) {
+				if (whichlevel < numLevels) {
 					whichlevel++;
 				}
 				else {
@@ -488,6 +493,21 @@ public class GameController implements Screen, ContactListener {
 
 		InputController input = InputController.getInstance();
 
+//		pause = PauseMode.getInstance();
+//
+//		if (pause.muteMusic()) {
+//			musicPlay = false;
+//		}
+//		else {
+//			musicPlay = true;
+//		}
+//		if (pause.muteSound()) {
+//			soundPlay = false;
+//		}
+//		else {
+//			soundPlay = true;
+//		}
+
 		float xoff = 0;
 		float yoff = 0;
 
@@ -500,7 +520,7 @@ public class GameController implements Screen, ContactListener {
 			if (!bgm.isPlaying()) {
 				bgm.play();
 				det_bgm.play();
-				System.out.println("wasn't playing, is now playing");
+//				System.out.println("wasn't playing, is now playing");
 			}
 			if (detectedPlay) {
 //				System.out.println("detected music");

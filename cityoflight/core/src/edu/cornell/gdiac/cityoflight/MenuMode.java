@@ -224,6 +224,10 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         return false;
     }
 
+    public Music getMenuMusic() {
+        return menuMusic;
+    }
+
     public MenuMode(ObstacleCanvas canvas, Game parent) {
         drawcanvas = canvas;
         background = new Texture(BACKGROUND_FILE);
@@ -442,10 +446,11 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         if (stage != null) { stage.act(); }
 
         if (isReady() && listener != null) {
+            menuMusic.stop();
+            System.out.println("is ready?");
             listener.exitScreen(this, 2);
         }
         if (toLevelSelect() && listener != null) {
-
             listener.exitScreen(this, 3);
         }
 
@@ -454,6 +459,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         }
 
         if (didQuit()) {
+            menuMusic.stop();
             listener.exitScreen(this, 0);
         }
 

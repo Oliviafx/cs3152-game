@@ -1,6 +1,7 @@
 package edu.cornell.gdiac.cityoflight;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
+import edu.cornell.gdiac.util.SoundController;
 
 import javax.xml.soap.Text;
 
@@ -35,9 +37,6 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private static final String TARASQUE_FILE = "help/help_ui_tarasque.png";
     private static final String DAME_BLANCHE_FILE = "help/help_ui_dame blanche.png";
     private static final String MENU_FILE = "textures/level select assets/menu_button.png";
-
-
-
 
 //    private static final String PLAY_BTN_FILE = "textures/resume.png";
 //    private static final String QUIT_BTN_FILE = "textures/quit.png";
@@ -85,6 +84,8 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private ObstacleCanvas canvas;
 
     private ScreenListener listener;
+
+    private SoundController sound = SoundController.getInstance();
 
     public HelpMode(ObstacleCanvas drawcanvas) {
         canvas = drawcanvas;
