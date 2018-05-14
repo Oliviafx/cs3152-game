@@ -436,9 +436,9 @@ public class GameController implements Screen, ContactListener {
 
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
-			bgm.stop();
-			det_bgm.stop();
-			listener.exitScreen(this, EXIT_MENU);
+//			bgm.stop();
+//			det_bgm.stop();
+			listener.exitScreen(this, EXIT_PAUSE);
 			return false;
 		}
 		else if (input.didPause()) {
