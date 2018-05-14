@@ -683,7 +683,6 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             quitState = 2;
 //            sound.stop("seen_effect");
 //            System.out.println(sound.play("seen_effect", "sounds/seen_effect.wav", false, 1.0f, true));
-
             menuMusic.stop();
             menuPlay = false;
             return false;
