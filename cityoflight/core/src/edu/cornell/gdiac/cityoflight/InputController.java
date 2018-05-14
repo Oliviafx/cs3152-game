@@ -179,14 +179,14 @@ public class InputController {
 //	}
 
 	public boolean didExit() {
-		return pausePressed && !pausePrevious;
+		return exitPressed && !exitPrevious;
 	}
 
 //	public boolean didPause() {
 //		return pausePressed && !pausePrevious;
 //	}
 
-	public boolean didPause() { return exitPressed && !exitPrevious; }
+	public boolean didPause() { return pausePressed && !pausePrevious; }
 
 	public boolean didMute() { return mPressed && !mPrevious; }
 	
