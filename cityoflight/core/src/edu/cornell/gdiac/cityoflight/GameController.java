@@ -215,6 +215,9 @@ public class GameController implements Screen, ContactListener {
 		return det_bgm;
 	}
 
+	public void setMusicPlay(boolean val) { musicPlay = val; }
+	public void setSoundPlay(boolean val) { soundPlay = val; }
+
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
 

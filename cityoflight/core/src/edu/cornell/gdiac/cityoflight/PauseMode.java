@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
 import edu.cornell.gdiac.util.SoundController;
@@ -57,8 +58,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     private int soundState;
 
     // sorry these are Amanda's variables because i don't understand the buttons
-    private boolean isMusic = true;
-    private boolean isSound = true;
+    private boolean isMusic;
+    private boolean isSound;
 
     /** Scaling factor for when the student changes the resolution. */
     private float scale;
@@ -177,13 +178,13 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         return quitState == 2;// || val;
     }
 
-    public boolean muteMusic() {
-        System.out.println("mute music");
+    public boolean isMusic() {
+//        System.out.println("mute music");
         return isMusic;
     }
 
-    public boolean muteSound() {
-        System.out.println("mute sound");
+    public boolean isSound() {
+//        System.out.println("mute sound");
         return isSound;
     }
 
@@ -337,10 +338,10 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
                 quitX+quitButton.getWidth(), quitY+quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 
-        Color tint3 = (!isMusic ? Color.GRAY: Color.WHITE);
+        Color tint3 = (isMusic ? Color.GRAY: Color.WHITE);
         canvas.draw(musicButton, tint3, musicButton.getWidth(), musicButton.getHeight(),
                 musicX+musicButton.getWidth(), musicY+musicButton.getHeight(), 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-        Color tint4 = (!isSound ? Color.GRAY: Color.WHITE);
+        Color tint4 = (isSound ? Color.GRAY: Color.WHITE);
         canvas.draw(soundButton, tint4, soundButton.getWidth(), soundButton.getHeight(),
                 soundX+soundButton.getWidth(), soundY+soundButton.getHeight(), 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 
@@ -488,9 +489,11 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
             System.out.println("toggle music");
             if (isMusic) {
                 isMusic = false;
+                System.out.println("ISMUSIC FALSE");
             }
             else {
                 isMusic = true;
+                System.out.println("ISMUSIC TRUE");
                 sound.stop("click_effect");
                 sound.play("click_effect", "sounds/click_effect.wav", false, 0.7f, isSound);
             }
