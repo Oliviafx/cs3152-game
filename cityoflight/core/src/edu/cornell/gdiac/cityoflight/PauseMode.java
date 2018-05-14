@@ -56,6 +56,10 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     private int musicState;
     private int soundState;
 
+    // sorry these are Amanda's variables because i don't understand the buttons
+    private boolean isMusic = true;
+    private boolean isSound = true;
+
     /** Scaling factor for when the student changes the resolution. */
     private float scale;
 
@@ -175,13 +179,23 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
     public boolean muteMusic() {
         System.out.println("mute music");
-        return musicState == 2;
+        return isMusic;
     }
 
     public boolean muteSound() {
         System.out.println("mute sound");
-        return soundState == 2;
+        return isSound;
     }
+
+//    private static PauseMode pauseController = null;
+//
+//    public static PauseMode getInstance() {
+//        if (pauseController == null) {
+//            pauseController = PauseMode.this;
+//            System.out.println("null lol");
+//        }
+//        return pauseController;
+//    }
 
 
     private Stage stage;
@@ -242,9 +256,9 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         });
 
         musicbutton = new TextButton("", style);
-        musicbutton.setPosition(600, 350);
-        musicbutton.setHeight(146);
-        musicbutton.setWidth(123);
+        musicbutton.setPosition(725, 300);
+        musicbutton.setHeight(74);
+        musicbutton.setWidth(61);
         musicbutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
@@ -257,9 +271,9 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
             }
         });
         soundbutton = new TextButton("", style);
-        soundbutton.setPosition(600, 250);
-        soundbutton.setHeight(106);
-        soundbutton.setWidth(127);
+        soundbutton.setPosition(730, 250);
+        soundbutton.setHeight(54);
+        soundbutton.setWidth(63);
         soundbutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
@@ -301,17 +315,15 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         if (musicButton == null) {
             musicButton = new Texture(MUSIC_BTN_FILE);
             musicButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-            musicY =  350;//+playButton.getHeight();//(int)(.25f*height) - 50;
-            musicX = 600;//+playButton.getWidth();//width/2 - 200;
-//            System.out.println("play not null");
+            musicY =  300;//+playButton.getHeight();//(int)(.25f*height) - 50;
+            musicX = 725;//+playButton.getWidth();//width/2 - 200;
+
         }
         if (soundButton == null) {
             soundButton = new Texture(SOUND_BTN_FILE);
             soundButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             soundY =  250;//+quitButton.getHeight();//(int)(.25f*height) - 50;
-            soundX = 600;//+quitButton.getWidth();//width/2+200;
-//            System.out.println("quit not null");
-//            create();
+            soundX = 730;//+quitButton.getWidth();//width/2+200;
         }
     }
 
@@ -325,12 +337,12 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
                 quitX+quitButton.getWidth(), quitY+quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 
-        Color tint3 = (musicState == 1 ? Color.GRAY: Color.WHITE);
+        Color tint3 = (!isMusic ? Color.GRAY: Color.WHITE);
         canvas.draw(musicButton, tint3, musicButton.getWidth(), musicButton.getHeight(),
-                musicX+musicButton.getWidth(), musicY+musicButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-        Color tint4 = (soundState == 1 ? Color.GRAY: Color.WHITE);
+                musicX+musicButton.getWidth(), musicY+musicButton.getHeight(), 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        Color tint4 = (!isSound ? Color.GRAY: Color.WHITE);
         canvas.draw(soundButton, tint4, soundButton.getWidth(), soundButton.getHeight(),
-                soundX+soundButton.getWidth(), soundY+soundButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                soundX+soundButton.getWidth(), soundY+soundButton.getHeight(), 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 
         canvas.end();
     }
@@ -424,7 +436,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         if ((screenX > playX && screenX < playX+playButton.getWidth()) && (screenY > playY && screenY < playY+playButton.getHeight())) {
             pressState = 1;
             sound.stop("select_effect");
-            sound.play("select_effect", "sounds/select_effect.wav", false, 0.7f, true);
+            sound.play("select_effect", "sounds/select_effect.wav", false, 0.7f, isSound);
 
         }
 
@@ -434,7 +446,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
             quitState = 1;
             sound.stop("seen_effect");
-            sound.play("seen_effect", "sounds/seen_effect.wav", false, 0.7f, true);
+            sound.play("seen_effect", "sounds/seen_effect.wav", false, 0.7f, isSound);
         }
 
         if ((screenX > musicX && screenX < musicX+musicButton.getWidth()) && (screenY > musicY && screenY < musicY+musicButton.getHeight())) {
@@ -472,11 +484,29 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         }
 
         if (musicState == 1) {
-            musicState = 2;
+//            musicState = 2;
+            System.out.println("toggle music");
+            if (isMusic) {
+                isMusic = false;
+            }
+            else {
+                isMusic = true;
+                sound.stop("click_effect");
+                sound.play("click_effect", "sounds/click_effect.wav", false, 0.7f, isSound);
+            }
             return false;
         }
         if (soundState == 1) {
-            soundState = 2;
+//            soundState = 2;
+            System.out.println("toggle sound");
+            if (isSound) {
+                isSound = false;
+            }
+            else {
+                isSound = true;
+                sound.stop("click_effect");
+                sound.play("click_effect", "sounds/click_effect.wav", false, 0.7f, isSound);
+            }
             return false;
         }
         return true;
