@@ -326,8 +326,8 @@ public class GameController implements Screen, ContactListener {
 		active = false;
 		countdown = -1;
 		sound = SoundController.getInstance();
-		bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_music.wav"));
-		det_bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_detected_music.wav"));
+		bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_music.mp3"));
+		det_bgm = Gdx.audio.newMusic(Gdx.files.internal("music/120bpm_detected_music.mp3"));
 		bgm.setLooping(true);
 		bgm.setVolume(0.6f);
 		det_bgm.setLooping(true);
@@ -456,7 +456,12 @@ public class GameController implements Screen, ContactListener {
 					whichlevel++;
 				}
 				else {
-					whichlevel = 1;
+//					whichlevel = 1;
+					bgm.stop();
+					det_bgm.stop();
+					listener.exitScreen(this, EXIT_MENU);
+					return true;
+//					return false;
 				}
 			}
 			reset();
@@ -496,44 +501,28 @@ public class GameController implements Screen, ContactListener {
 
 		InputController input = InputController.getInstance();
 
-//		pause = PauseMode.getInstance();
-//
-//		if (pause.muteMusic()) {
-//			musicPlay = false;
-//		}
-//		else {
-//			musicPlay = true;
-//		}
-//		if (pause.muteSound()) {
-//			soundPlay = false;
-//		}
-//		else {
-//			soundPlay = true;
-//		}
-
 		float xoff = 0;
 		float yoff = 0;
 
 		if (!musicPlay) {
 			bgm.pause();
 			det_bgm.pause();
-//			System.out.println("pause music");
 		}
 		else {
 			if (!bgm.isPlaying()) {
 				bgm.play();
 				det_bgm.play();
-//				System.out.println("wasn't playing, is now playing");
 			}
 			if (detectedPlay) {
-//				System.out.println("detected music");
+				det_bgm.setVolume(0.3f);
 				bgm.setVolume(0.0f);
 				det_bgm.setVolume(0.6f);
 			}
 			else {
 //				System.out.println("normal music");
-				bgm.setVolume(0.6f);
+				bgm.setVolume(0.3f);
 				det_bgm.setVolume(0.0f);
+				bgm.setVolume(0.6f);
 			}
 		}
 

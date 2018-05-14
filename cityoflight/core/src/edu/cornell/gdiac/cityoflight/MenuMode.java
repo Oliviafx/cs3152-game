@@ -20,6 +20,9 @@ import edu.cornell.gdiac.util.ScreenListener;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import edu.cornell.gdiac.util.SoundController;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+
 public class MenuMode implements Screen, ControllerListener, ContactListener, InputProcessor {
 
     public class MyActor extends Actor {
@@ -134,7 +137,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //    private static final String LEVEL_SOUND = "sounds/seen_effect.wav";
     Sound startSound = Gdx.audio.newSound(Gdx.files.internal("sounds/select_effect.wav"));
     Sound menuSound = Gdx.audio.newSound(Gdx.files.internal("sounds/seen_effect.wav"));
-    Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("music/menu_music.wav"));
+    Music menuMusic = Gdx.audio.newMusic(Gdx.files.internal("music/menu_music.mp3"));
 
     private Texture title;
     private Texture helpButton;
@@ -255,6 +258,8 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         helpY = 200;
         quitX = 600;
         quitY = 150;
+
+        System.out.println(menuMusic);
 
         drawHelper = new DrawHelper();
         transition_strip = new FilmStrip((new Texture(TRANSITION_FILE)), 1, 36);
