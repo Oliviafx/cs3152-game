@@ -263,7 +263,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         drawHelper = new DrawHelper();
         transition_strip = new FilmStrip((new Texture(TRANSITION_FILE)), 1, 36);
-        System.out.println("transition_strip = " + transition_strip);
+//        System.out.println("transition_strip = " + transition_strip);
 
 //        level = new MyActor(levelX, levelY, new MyListener());
 //        setting = new MyActor(helpX,helpY,new MyListener());
@@ -374,6 +374,11 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
             quitButton.dispose();
             quitButton = null;
         }
+        if (menuMusic != null) {
+            menuMusic.stop();
+            menuMusic.dispose();
+            menuMusic = null;
+        }
         //        stage.dispose();
     }
 
@@ -452,6 +457,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         if (isReady() && listener != null) {
             menuMusic.stop();
+            System.out.println("music playing in MenuMode "+menuMusic.isPlaying());
             System.out.println("is ready?");
             listener.exitScreen(this, 2);
         }
@@ -532,6 +538,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         }
         else if (menuMusic.isPlaying() && !menuPlay) {
             menuMusic.stop();
+            System.out.println(menuMusic.isPlaying());
         }
 
     }

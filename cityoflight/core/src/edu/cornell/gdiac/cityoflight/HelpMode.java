@@ -530,7 +530,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //        System.out.println("creatureX "+creatureX);
 //        System.out.println("creature Y "+creatureY);
 
-        if ((screenX > creatureX && screenX < creatureX +quitButton.getWidth()) && (screenY > creatureY-270 && screenY < creatureY +quitButton.getHeight()-170)) {
+        if ((screenX > creatureX && screenX < creatureX +quitButton.getWidth()*2) && (screenY > creatureY-270 && screenY < creatureY +quitButton.getHeight()-170)) {
             if (!showExit) {
                 quitState = 1;
             }

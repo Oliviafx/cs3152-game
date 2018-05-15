@@ -73,6 +73,8 @@ public class GDXRoot extends Game implements ScreenListener {
 
 		loading = new LoadingMode(canvas,1);
 //		menu = new MenuMode(canvas, this);
+		menu = new MenuMode(canvas, this);
+
 //		levels = new LevelController(canvas);
 		pause = new PauseMode(canvas);
 		help = new HelpMode(canvas);
@@ -133,7 +135,9 @@ public class GDXRoot extends Game implements ScreenListener {
 //			loading.dispose();
 //			loading = null;
 //			System.out.println("stop music");
-		    menu = new MenuMode(canvas, this);
+			menu = new MenuMode(canvas, this);
+
+
 			setScreen(menu);
 			//			setScreen(menu);
 //			System.out.println(getScreen().equals(levels));
@@ -159,11 +163,12 @@ public class GDXRoot extends Game implements ScreenListener {
 			menu.reset();
 		}
 		if (exitCode == GameController.EXIT_LEVEL) {
-			System.out.println("exit level");
-//            if (menu != null) {
-//                menu.dispose();
-//                menu = null;
-//            }
+//			System.out.println("exit level");
+            if (menu != null) {
+                menu.dispose();
+                menu = null;
+            }
+
 			levels = new LevelController(canvas);
 			levels.setScreenListener(this);
 			levels.setCanvas(canvas);
@@ -174,6 +179,7 @@ public class GDXRoot extends Game implements ScreenListener {
 
 		if (exitCode == GameController.EXIT_HELP) {
 //			System.out.println("exit help");
+
 			menu.dispose();
 			menu = null;
 			help = new HelpMode(canvas);
@@ -225,6 +231,19 @@ public class GDXRoot extends Game implements ScreenListener {
 		else if (exitCode == GameController.EXIT_PLAY) {
 //			System.out.println("EXIT PLAY");
 
+//			if (menu!=null) {
+//				menu.dispose();
+//				menu = null;
+//			}
+			if (menu != null) {
+//				System.out.println("stop music");
+				menuMusic = menu.getMenuMusic();
+				menuMusic.stop();
+				menu.dispose();
+				menu = null;
+//				System.out.println("in GDXRoot music playing "+menuMusic.isPlaying());
+
+			}
 			if (pause.isMusic()) {
 				controller.setMusicPlay(true);
 //				System.out.println("setmusicplay true");
@@ -240,10 +259,6 @@ public class GDXRoot extends Game implements ScreenListener {
 				controller.setSoundPlay(false);
 			}
 
-//			if (menu!=null) {
-//				menu.dispose();
-//				menu = null;
-//			}
 				if (getScreen().equals(levels)) {
 					if (levels.goLevelOne()) {
 						controller.setWhichLevel(1);
@@ -278,14 +293,11 @@ public class GDXRoot extends Game implements ScreenListener {
 				}
 				controller.setMenu(menu);
 
-			if (menu != null) {
-//				System.out.println("stop music");
-				menuMusic = menu.getMenuMusic();
-				menuMusic.stop();
-			}
-			else {
+
+
+//			else {
 //				System.out.println("was null");
-			}
+//			}
 		}
 
 		else if (exitCode == GameController.EXIT_QUIT) {

@@ -1142,7 +1142,7 @@ public class LevelModel {
 				float width = boundValues.get("width").asFloat();
 				float height = boundValues.get("height").asFloat();
 				String debugC = "yellow";
-				System.out.println("psize" +pSize[0] + "  " + pSize[1]);
+//				System.out.println("psize" +pSize[0] + "  " + pSize[1]);
 				String tex = exitValues.get("texture").asString();
 				goalDoor.initialize(pos,width,height,debugC, tex, pSize);
 				goalDoor.setDrawScale(scale);

@@ -410,6 +410,9 @@ public class GameController implements Screen, ContactListener {
 	public boolean preUpdate(float dt) {
 		InputController input = InputController.getInstance();
 		input.readInput();
+//		if (menu.menuMusic!=null) {
+//			menu.menuMusic.stop();
+//		}
 		if (listener == null) {
 			return true;
 		}
