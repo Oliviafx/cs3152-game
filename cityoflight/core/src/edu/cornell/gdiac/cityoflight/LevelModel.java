@@ -894,7 +894,86 @@ public class LevelModel {
 			}
 
 
+            else if(layerName.equals("Flowers")){
 
+                HashMap<String, JsonValue> numToFlower = new HashMap<String, JsonValue>();
+                HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
+
+                // default offset is 0
+                float offsetx = 0;
+                float offsety = 0;
+
+                //assign building and box values to indexes in hashmaps
+                for(int j = 0; j< objects.size; j++){
+
+                    JsonValue obj = objects.get(j);
+                    String objName = obj.get("name").asString();
+
+                    // if offsets are being defined
+                    if (layer.has("offsetx") || layer.has("offsety")) {
+                        // offsets are defined in the physics scale
+                        offsetx = layer.get("offsetx").asInt()/scale.x;
+                        offsety = layer.get("offsety").asInt()/scale.y;
+                    }
+
+                    String[] bSplit = objName.split("flower");
+
+                    if(objName.contains("box")){
+                        numToBox.put(objName.substring(3),obj);
+                        //add to building list
+
+                    }
+                    else{
+                        //add to box list
+                        numToFlower.put(bSplit[1],obj);
+                    }
+                }
+
+                //initialize flowers
+                for(int j = 0; j<numToFlower.size(); j++){
+
+                    TextureRegion film = null;
+                    JsonValue flowerJSON = numToFlower.get((j+1) + "").get("properties");
+                    JsonValue boxJSON = numToBox.get((j+1) +"");
+
+                    String textName = flowerJSON.get("texture").asString();
+
+
+                    TextureRegion texture = JsonAssetManager.getInstance().getEntry(textName.trim(), TextureRegion.class);
+                    film = texture;
+
+
+                    // FLOWERS
+                    InteriorModel obj2 = new InteriorModel();
+                    float[] pos = {numToFlower.get((j+1) + "").get("x").asFloat()/64,numToFlower.get((j+1) + "").get("y").asFloat()/64+ 1.75f};
+                    float[] size = {1f,1f};
+                    float[] pad = { 0.1f, 0.1f};
+                    String debugColor = "blue";
+
+                    if(boxJSON != null){
+                        pos[0] = boxJSON.get("x").asFloat()/64;
+                        pos[1] = boxJSON.get("y").asFloat()/64 + 1.75f;
+                        if(textName.contains("128") || textName.contains("64"))
+                        {
+                            pos[1] = boxJSON.get("y").asFloat()/64 + 0.3f;
+                        }
+                        size[0 ] = boxJSON.get("width").asFloat()/64;
+                        size[1] = boxJSON.get("height").asFloat()/64;
+
+                    }
+
+
+                    if(film!= null) {
+
+                        obj2.initialize(pos, size, pad, debugColor, film, pSize[1], offsetx, offsety);
+                        obj2.setDrawScale(scale);
+                        activate(obj2);
+                        mazes.add(obj2);
+                    }
+                }
+
+
+            }
 
 			else if(layerName.equals("Buildings")){
 //				System.out.println("loading buildings");
