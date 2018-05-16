@@ -381,11 +381,15 @@ public class GameController implements Screen, ContactListener {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/lvl_num.json"));
 		}
 		if (whichlevel == 7) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level10.json"));
+		}
+		if (whichlevel == 8) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Emmalevel.json"));
+
 		}
 
 		// CHANGE THIS IF YOU ADD LEVELS
-		numLevels = 7;
+		numLevels = 8;
 
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
@@ -463,8 +467,7 @@ public class GameController implements Screen, ContactListener {
 					bgm.stop();
 					det_bgm.stop();
 					listener.exitScreen(this, EXIT_MENU);
-					return true;
-//					return false;
+					return false;
 				}
 			}
 			reset();
