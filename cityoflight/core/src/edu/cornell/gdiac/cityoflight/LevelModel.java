@@ -73,6 +73,7 @@ public class LevelModel {
 	/**Reference to background tiles*/
 	private Array<BackgroundModel> tiles = new Array<BackgroundModel>();
 	private Array<BackgroundModel> outlineTiles = new Array<BackgroundModel>();
+    private Array<BackgroundModel> shadowTiles = new Array<BackgroundModel>();
 	private Array<BackgroundModel> tutorialTiles = new Array<BackgroundModel>();
 
 	/** The interior models */
@@ -449,6 +450,7 @@ public class LevelModel {
 		JsonValue idMap = levelFormat.get("tilesets");
 		tiles = new Array<BackgroundModel>();
 		outlineTiles = new Array<BackgroundModel>();
+		shadowTiles = new Array<BackgroundModel>();
 		tutorialTiles = new Array<BackgroundModel>();
 
 		//loop through layers to find specified objects and initialize
@@ -995,6 +997,43 @@ public class LevelModel {
 
 
 			}
+            else if(layerName.equals("Shadow")){
+                int[] data = layer.get("data").asIntArray();
+                int height = layer.get("height").asInt();
+                int width = layer.get("width").asInt();
+
+                for(int j = 0; j < height*width; j++){
+                    //dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
+//                    System.out.println("width: " + width + ", height: " + height);
+                    int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
+                    int newy = height - (j / width);//(j%width);
+//					System.out.println("newx "+ newx + " new y " + newy);
+
+
+                    int f = 0;
+                    while(f<data[j] && !idToTexture.containsKey(data[j] - f)){
+
+                        f++;
+                    }
+                    //System.out.println(data[j] + " : "+ (data[j] - f));
+                    String texName = idToTexture.get(data[j] - f);
+//					System.out.println(texName);
+                    TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
+
+                    // IMPORTANT PROBLEM: TEXTURE IS NULL
+                    if(texture != null) {
+
+//						System.out.println(texture.getRegionHeight());
+                        TextureRegion[][] textures = texture.split(64, 64);
+//						System.out.println(f % textures.length + " " + f / textures.length);
+                        TextureRegion texNew = textures[f / textures[0].length][f % textures[0].length];
+                        shadowTiles.add(new BackgroundModel(newx, newy, texNew));
+                    }
+
+
+
+                }
+            }
 			else if(layerName.equals("Outline")){
 				int[] data = layer.get("data").asIntArray();
 				int height = layer.get("height").asInt();
@@ -1573,6 +1612,7 @@ public class LevelModel {
 		background = null;
 
 		tiles.clear();
+		shadowTiles.clear();
 		outlineTiles.clear();
 		tutorialTiles.clear();
 
@@ -1776,6 +1816,9 @@ public class LevelModel {
 		for(int i=0; i< outlineTiles.size; i++) {
 			outlineTiles.get(i).draw(canvas);
 		}
+        for(int i=0; i< shadowTiles.size; i++) {
+            shadowTiles.get(i).draw(canvas);
+        }
 
 
 
