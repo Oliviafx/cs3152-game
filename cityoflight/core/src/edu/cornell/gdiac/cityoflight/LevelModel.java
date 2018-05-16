@@ -73,6 +73,7 @@ public class LevelModel {
 	/**Reference to background tiles*/
 	private Array<BackgroundModel> tiles = new Array<BackgroundModel>();
 	private Array<BackgroundModel> outlineTiles = new Array<BackgroundModel>();
+    private Array<BackgroundModel> shadowTiles = new Array<BackgroundModel>();
 	private Array<BackgroundModel> tutorialTiles = new Array<BackgroundModel>();
 
 	/** The interior models */
@@ -449,6 +450,7 @@ public class LevelModel {
 		JsonValue idMap = levelFormat.get("tilesets");
 		tiles = new Array<BackgroundModel>();
 		outlineTiles = new Array<BackgroundModel>();
+		shadowTiles = new Array<BackgroundModel>();
 		tutorialTiles = new Array<BackgroundModel>();
 
 		//loop through layers to find specified objects and initialize
@@ -892,7 +894,86 @@ public class LevelModel {
 			}
 
 
+            else if(layerName.equals("Flowers")){
 
+                HashMap<String, JsonValue> numToFlower = new HashMap<String, JsonValue>();
+                HashMap<String, JsonValue> numToBox = new HashMap<String, JsonValue>();
+
+                // default offset is 0
+                float offsetx = 0;
+                float offsety = 0;
+
+                //assign building and box values to indexes in hashmaps
+                for(int j = 0; j< objects.size; j++){
+
+                    JsonValue obj = objects.get(j);
+                    String objName = obj.get("name").asString();
+
+                    // if offsets are being defined
+                    if (layer.has("offsetx") || layer.has("offsety")) {
+                        // offsets are defined in the physics scale
+                        offsetx = layer.get("offsetx").asInt()/scale.x;
+                        offsety = layer.get("offsety").asInt()/scale.y;
+                    }
+
+                    String[] bSplit = objName.split("flower");
+
+                    if(objName.contains("box")){
+                        numToBox.put(objName.substring(3),obj);
+                        //add to building list
+
+                    }
+                    else{
+                        //add to box list
+                        numToFlower.put(bSplit[1],obj);
+                    }
+                }
+
+                //initialize flowers
+                for(int j = 0; j<numToFlower.size(); j++){
+
+                    TextureRegion film = null;
+                    JsonValue flowerJSON = numToFlower.get((j+1) + "").get("properties");
+                    JsonValue boxJSON = numToBox.get((j+1) +"");
+
+                    String textName = flowerJSON.get("texture").asString();
+
+
+                    TextureRegion texture = JsonAssetManager.getInstance().getEntry(textName.trim(), TextureRegion.class);
+                    film = texture;
+
+
+                    // FLOWERS
+                    InteriorModel obj2 = new InteriorModel();
+                    float[] pos = {numToFlower.get((j+1) + "").get("x").asFloat()/64,numToFlower.get((j+1) + "").get("y").asFloat()/64+ 1.75f};
+                    float[] size = {1f,1f};
+                    float[] pad = { 0.1f, 0.1f};
+                    String debugColor = "blue";
+
+                    if(boxJSON != null){
+                        pos[0] = boxJSON.get("x").asFloat()/64;
+                        pos[1] = boxJSON.get("y").asFloat()/64 + 1.75f;
+                        if(textName.contains("128") || textName.contains("64"))
+                        {
+                            pos[1] = boxJSON.get("y").asFloat()/64 + 0.3f;
+                        }
+                        size[0 ] = boxJSON.get("width").asFloat()/64;
+                        size[1] = boxJSON.get("height").asFloat()/64;
+
+                    }
+
+
+                    if(film!= null) {
+
+                        obj2.initialize(pos, size, pad, debugColor, film, pSize[1], offsetx, offsety);
+                        obj2.setDrawScale(scale);
+                        activate(obj2);
+                        mazes.add(obj2);
+                    }
+                }
+
+
+            }
 
 			else if(layerName.equals("Buildings")){
 //				System.out.println("loading buildings");
@@ -995,6 +1076,43 @@ public class LevelModel {
 
 
 			}
+            else if(layerName.equals("Shadow")){
+                int[] data = layer.get("data").asIntArray();
+                int height = layer.get("height").asInt();
+                int width = layer.get("width").asInt();
+
+                for(int j = 0; j < height*width; j++){
+                    //dataMatrix[j%width][height - 1 - ((j - (6%width))/height)] = data[j];
+//                    System.out.println("width: " + width + ", height: " + height);
+                    int newx = j % width ; //(height - 1 - ((j - (6%width))/height));
+                    int newy = height - (j / width);//(j%width);
+//					System.out.println("newx "+ newx + " new y " + newy);
+
+
+                    int f = 0;
+                    while(f<data[j] && !idToTexture.containsKey(data[j] - f)){
+
+                        f++;
+                    }
+                    //System.out.println(data[j] + " : "+ (data[j] - f));
+                    String texName = idToTexture.get(data[j] - f);
+//					System.out.println(texName);
+                    TextureRegion texture = JsonAssetManager.getInstance().getEntry(texName, TextureRegion.class);
+
+                    // IMPORTANT PROBLEM: TEXTURE IS NULL
+                    if(texture != null) {
+
+//						System.out.println(texture.getRegionHeight());
+                        TextureRegion[][] textures = texture.split(64, 64);
+//						System.out.println(f % textures.length + " " + f / textures.length);
+                        TextureRegion texNew = textures[f / textures[0].length][f % textures[0].length];
+                        shadowTiles.add(new BackgroundModel(newx, newy, texNew));
+                    }
+
+
+
+                }
+            }
 			else if(layerName.equals("Outline")){
 				int[] data = layer.get("data").asIntArray();
 				int height = layer.get("height").asInt();
@@ -1573,6 +1691,7 @@ public class LevelModel {
 		background = null;
 
 		tiles.clear();
+		shadowTiles.clear();
 		outlineTiles.clear();
 		tutorialTiles.clear();
 
@@ -1710,43 +1829,90 @@ public class LevelModel {
 		float cameraYStart = canvas.getHeight() * 3.10f/(5.0f * scale.y);
 //		float cameraXEnd = 0;
 //		float cameraYEnd = 0;
-		float cameraXEnd = canvas.getWidth() * 2f / scale.x;
-		float cameraYEnd = canvas.getHeight() * 2f / scale.y;
+		float cameraXEnd;
+		float cameraYEnd;
 //		System.out.println(ratio);
 
-		if (bounds.getWidth() == 14.0f && bounds.getHeight() == 8.0f) {
-//			System.out.println("14x8");
-			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
-			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
+		switch ((int)bounds.getWidth()) {
+			case 14: cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+//				System.out.println("14");
+				break;
+			case 21: cameraXEnd = canvas.getWidth() * 1.0f / scale.x;
+//				System.out.println("21");
+				break;
+			case 24: cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
+//				System.out.println("24");
+				break;
+			case 36: cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
+//				System.out.println("36");
+				break;
+			case 28: cameraXEnd = canvas.getWidth() * 1.20f / scale.x;
+//				System.out.println("28");
+				break;
+			default: {
+				cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
+				break;
+			}
 		}
-		else if (bounds.getWidth() == 14.0f && bounds.getHeight() == 9.0f) {
-//			System.out.println("14x9");
-			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
-			cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
+
+		switch ((int)bounds.getHeight()) {
+			case 8: cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
+//				System.out.println("8");
+				break;
+			case 9: cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
+//				System.out.println("9");
+				break;
+			case 12: cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+//				System.out.println("12");
+				break;
+			case 14: cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
+//				System.out.println("14");
+				break;
+			case 16: cameraYEnd = canvas.getHeight() * 1.6f / scale.y;
+//				System.out.println("16");
+				break;
+			case 18: cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
+//				System.out.println("18");
+				break;
+			default: {
+				cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
+				break;
+			}
 		}
-		else if (bounds.getWidth() == 24.0f && bounds.getHeight() == 14.0f) {
-//			System.out.println("24x14");
-			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
-		}
-		else if (bounds.getWidth() == 36.0f && bounds.getHeight() == 18.0f) {
-//			System.out.println("36x18");
-			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
-		}
-		else if (bounds.getWidth() == 21.0f && bounds.getHeight() == 12.0f) {
-//			System.out.println("21x12");
-			cameraXEnd = canvas.getWidth() * 1.0f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
-		}
-		else if (bounds.getWidth() == 28.0f && bounds.getHeight() == 16.0f) {
-//			System.out.println("28x16");
-			cameraXEnd = canvas.getWidth() * 1.20f / scale.x;
-			cameraYEnd = canvas.getHeight() * 1.6f / scale.y;
-		}
-		else {
-//			System.out.println("Not a valid window ratio.");
-		}
+//
+//		if (bounds.getWidth() == 14.0f && bounds.getHeight() == 8.0f) {
+////			System.out.println("14x8");
+//			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 0.62f / scale.y;
+//		}
+//		else if (bounds.getWidth() == 14.0f && bounds.getHeight() == 9.0f) {
+////			System.out.println("14x9");
+//			cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 0.7f / scale.y;
+//		}
+//		else if (bounds.getWidth() == 24.0f && bounds.getHeight() == 14.0f) {
+////			System.out.println("24x14");
+//			cameraXEnd = canvas.getWidth() * 1.21f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 1.37f / scale.y;
+//		}
+//		else if (bounds.getWidth() == 36.0f && bounds.getHeight() == 18.0f) {
+////			System.out.println("36x18");
+//			cameraXEnd = canvas.getWidth() * 2.06f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 1.87f / scale.y;
+//		}
+//		else if (bounds.getWidth() == 21.0f && bounds.getHeight() == 12.0f) {
+////			System.out.println("21x12");
+//			cameraXEnd = canvas.getWidth() * 1.0f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 1.1f / scale.y;
+//		}
+//		else if (bounds.getWidth() == 28.0f && bounds.getHeight() == 16.0f) {
+////			System.out.println("28x16");
+//			cameraXEnd = canvas.getWidth() * 1.20f / scale.x;
+//			cameraYEnd = canvas.getHeight() * 1.6f / scale.y;
+//		}
+//		else {
+////			System.out.println("Not a valid window ratio.");
+//		}
 		float tx = pos.x <= cameraXStart ? cameraXStart : (pos.x >= cameraXEnd ? cameraXEnd : pos.x);
 		float ty = pos.y <= cameraYStart ? cameraYStart : (pos.y >= cameraYEnd ? cameraYEnd : pos.y);
 //
@@ -1776,6 +1942,9 @@ public class LevelModel {
 		for(int i=0; i< outlineTiles.size; i++) {
 			outlineTiles.get(i).draw(canvas);
 		}
+        for(int i=0; i< shadowTiles.size; i++) {
+            shadowTiles.get(i).draw(canvas);
+        }
 
 
 

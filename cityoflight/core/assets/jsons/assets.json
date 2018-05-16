@@ -171,18 +171,31 @@
 			"file": 	"textures/tiles2.png",
 			"wrap":  	true
 		},
-		"bluetile": {
-			"file": 	"textures/bluetile.png",
+		"64_shadow": {
+			"file": 	"textures/64_shadow.png",
 			"wrap":  	true
 		},
-		"blacktile": {
-			"file": 	"textures/blacktile.png",
+		"128_shadow": {
+			"file": 	"textures/128_shadow.png",
 			"wrap":  	true
 		},
-		"sidewalk": {
-			"file": 	"textures/sidewalk.png",
+		"flowerbed_pink": {
+			"file": 	"textures/flowerbed_pink.png",
 			"wrap":  	true
 		},
+		"flowerbed_purple": {
+			"file": 	"textures/flowerbed_purple.png",
+			"wrap":  	true
+		},
+		"shadow_pink": {
+			"file": 	"textures/shadow_pink.png",
+			"wrap":  	true
+		},
+		"shadow_purple": {
+			"file": 	"textures/shadow_purple.png",
+			"wrap":  	true
+		},
+
 		"box_outline": {
 			"file": 	"tutorial/box_outline.png",
 			"wrap":  	true
