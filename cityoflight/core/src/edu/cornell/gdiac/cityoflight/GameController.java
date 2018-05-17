@@ -77,6 +77,7 @@ public class GameController implements Screen, ContactListener {
 
 	private int LEVEL_TIME_LIMIT = 3000;
 	private boolean daredevil;
+	private boolean daredevilSet = false;
 	private boolean hasUsedBox = false;
 	private boolean hasUsedDistraction = false;
 	private boolean hasUsedDistractionEffectively = false;
@@ -406,6 +407,7 @@ public class GameController implements Screen, ContactListener {
 		level.resetAchievements();
 		LEVEL_TIME_LIMIT = 1200;
 		endSoundhasPlayed = false;
+		daredevilSet = false;
 	}
 
 	/**
@@ -775,9 +777,7 @@ public class GameController implements Screen, ContactListener {
 
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
-				if (!complete && !failed) {
 					detectedPlay = true;
-				}
 				drawHelper.drawisSeen(canvas,level);
 			}
 		}
@@ -801,7 +801,11 @@ public class GameController implements Screen, ContactListener {
 				if (level.getAchievementType1() == 3){ level.setGetAchievement1(false);}
 				if (level.getAchievementType2() == 3){ level.setGetAchievement2(false);}
 			}
-			detectedPlay = daredevil;
+
+			if (!daredevilSet) {
+				daredevil = detectedPlay;
+				daredevilSet = true;
+			}
 			if(level.getAchievementType1() == 2 ){level.setGetAchievement1(daredevil);}
 			if(level.getAchievementType2() == 2 ){level.setGetAchievement2(daredevil);}
 
@@ -847,11 +851,13 @@ public class GameController implements Screen, ContactListener {
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
 				isbeingseen = true;
-				if (level.getAchievementType1() == 1){
-					level.setGetAchievement1(false);
-				}
-				if (level.getAchievementType2() == 1){
-					level.setGetAchievement2(false);
+				if (! complete) {
+					if (level.getAchievementType1() == 1) {
+						level.setGetAchievement1(false);
+					}
+					if (level.getAchievementType2() == 1) {
+						level.setGetAchievement2(false);
+					}
 				}
 			}
 		}
