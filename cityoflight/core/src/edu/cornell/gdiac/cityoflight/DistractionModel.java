@@ -27,7 +27,7 @@ public class DistractionModel extends WheelObstacle {
     private static final float VOFFSET = .25f;
 
     private static final int BIRD_LIFE = 200;
-    private static final float BIRD_RADIUS = .20f;
+    private static final float BIRD_RADIUS = .10f;
 
 
     private static final float STOPPING_DISTANCE = 3f;
@@ -87,7 +87,7 @@ public class DistractionModel extends WheelObstacle {
 
     /** Returns if the bird is currently on the screen */
     public boolean getAlive() {
-        return life > 0;
+        return alive;
     }
 
     public void setAlive(boolean value) {
@@ -342,7 +342,7 @@ public class DistractionModel extends WheelObstacle {
 
     public void update(float dt) {
         if (life > 0) {
-            if (!seen) {
+//            if (!seen) {
                 if (alive && direction != null) {
                     switch (direction) {
                         case RIGHT:
@@ -364,10 +364,13 @@ public class DistractionModel extends WheelObstacle {
                         filmStrip.setFrame(next);
                     }
 
-                }
+//                }
                 life -= 1;
                 super.update(dt);
             }
+        } else {
+            setAlive(false);
+        }
 //            else {
 //                if (alive && direction != null) {
 //                    switch (direction) {
@@ -391,11 +394,9 @@ public class DistractionModel extends WheelObstacle {
 //                    }
 //
 //                }
-                life -= 1;
-                super.update(dt);
+//                life -= 1;
+//                super.update(dt);
 //            }
-        } else {
-            setAlive(false);
-        }
+
     }
 }

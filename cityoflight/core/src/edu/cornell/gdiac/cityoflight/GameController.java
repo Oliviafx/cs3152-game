@@ -393,6 +393,12 @@ public class GameController implements Screen, ContactListener {
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 
+		if (level.getDistraction() != null) {
+			level.getDistraction().setAlive(false);
+			level.getDistraction().deactivatePhysics(level.getWorld());
+			level.getDistraction().dispose();
+			level.objects.remove(level.getDistraction());
+		}
 		drawHelper.reset();
 
 		level.resetAchievements();
@@ -503,7 +509,6 @@ public class GameController implements Screen, ContactListener {
 
 		BoxModel box = level.getBox();
 		DistractionModel distraction = level.getDistraction();
-
 		InputController input = InputController.getInstance();
 
 		float xoff = 0;
@@ -536,10 +541,8 @@ public class GameController implements Screen, ContactListener {
 		    if (distraction != null) {
 		        if (distraction.getX() > c.getX() && distraction.getX() < c.getX()+c.getWidth() &&
                         distraction.getY() > c.getY() && distraction.getY() < c.getY()+c.getHeight()) {
-                    System.out.println("collides");
 		            c.setDistracted(true);
 		            distraction.setSeen(true);
-                    System.out.println(c.getDistracted());
                 }
             }
         }
@@ -575,7 +578,6 @@ public class GameController implements Screen, ContactListener {
 
 		//Check if distraction was called
 		if (annette.getBird()&&!level.isDistraction() ) {
-			System.out.println("init bird");
 			level.createDistraction(levelFormat);
 			hasUsedDistraction = true;
 			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f, soundPlay);
@@ -1041,7 +1043,6 @@ public class GameController implements Screen, ContactListener {
 			// check if creature is distracted
 			for (CreatureModel c : level.getCreature()) {
 				if ((bd1 == c && bd2 == distraction) || (bd1 == distraction && bd2 == c )) {
-                    System.out.println("here");
 					c.setDistracted(true);
 				}
 			}
