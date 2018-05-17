@@ -364,6 +364,10 @@
 			"file" : "pip/screens/restart_tip.png",
 			"wrap" : false
 		},
+		"continue_tip" : {
+			"file" : "pip/screens/continue_tip.png",
+			"wrap" : false
+		},
 		"general_transition" : {
 			"file" : "pip/transitions/general_transition_medium.png",
 			"wrap" : false,

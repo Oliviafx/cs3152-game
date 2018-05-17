@@ -512,7 +512,9 @@ public class GameController implements Screen, ContactListener {
 	 * @param dt Number of seconds since last animation frame
 	 */
 	public void update(float dt) {
-		LEVEL_TIME_LIMIT--;
+		if (!complete) {
+			LEVEL_TIME_LIMIT--;
+		}
 		// Process actions in object model
 		AnnetteModel annette = level.getAnnette();
 

@@ -500,6 +500,11 @@ public class DrawHelper {
             canvas.begin();
             canvas.draw(restart_tip, 750,30);
             canvas.end();
+        }else{
+            TextureRegion continue_tip = JsonAssetManager.getInstance().getEntry("continue_tip", TextureRegion.class);
+            canvas.begin();
+            canvas.draw(continue_tip, 100,35);
+            canvas.end();
         }
     }
 
@@ -570,7 +575,7 @@ public class DrawHelper {
         } else {
             switch(end_text_num){
                 case 0:
-                    encouragement = "Try to think outside the box...";
+                    encouragement = "Try to think outside the box ;)";
                     break;
                 case 1:
                     encouragement = "Cheer up, mime over matter!";
@@ -588,7 +593,7 @@ public class DrawHelper {
                     encouragement = "The streets grow a little bit darker.";
                     break;
                 case 6:
-                    encouragement = "Tip: Touch your box and press SPACE to remove it!";
+                    encouragement = "Tip: Press SPACE to mime or un-mime a box.";
                     break;
                 case 7:
                     encouragement = "May the light guide you.";
