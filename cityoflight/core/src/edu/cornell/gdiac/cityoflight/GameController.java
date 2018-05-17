@@ -532,6 +532,18 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// creature AI.
+        for (CreatureModel c : level.getCreature()) {
+		    if (distraction != null) {
+		        if (distraction.getX() > c.getX() && distraction.getX() < c.getX()+c.getWidth() &&
+                        distraction.getY() > c.getY() && distraction.getY() < c.getY()+c.getHeight()) {
+                    System.out.println("collides");
+		            c.setDistracted(true);
+		            distraction.setSeen(true);
+                    System.out.println(c.getDistracted());
+                }
+            }
+        }
+
 		createAIControllers();
 
 		for (AIController controller : AIcontrollers){
@@ -1027,6 +1039,7 @@ public class GameController implements Screen, ContactListener {
 			// check if creature is distracted
 			for (CreatureModel c : level.getCreature()) {
 				if ((bd1 == c && bd2 == distraction) || (bd1 == distraction && bd2 == c )) {
+                    System.out.println("here");
 					c.setDistracted(true);
 				}
 			}

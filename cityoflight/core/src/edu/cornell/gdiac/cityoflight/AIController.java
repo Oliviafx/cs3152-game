@@ -289,6 +289,7 @@ public class AIController{
                     System.out.println("patrol -> chase");
                     state = FSMState.CHASE;
                 } else if (isDistracted()) {
+
                     System.out.println("is distracted");
                     turnVisionGreen();
                     creature.setDistractCool(creature.getDistractLimit());
@@ -630,7 +631,12 @@ public class AIController{
                     //System.out.println("distractionposition = " + lastseendistraction);
                     creatureAffectedByDistraction = true;
                     creature.setDistracted(true);
-                } else {
+                } else if (distraction.getX() > creature.getX() && distraction.getX() < creature.getX()+creature.getWidth() &&
+                            distraction.getY() > creature.getY() && distraction.getY() < creature.getY()+creature.getHeight()) {
+                    System.out.println("collides");
+                    creature.setDistracted(true);
+                }
+                else {
                     creature.setDistracted(false);
                 }
             }

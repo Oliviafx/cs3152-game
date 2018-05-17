@@ -317,7 +317,12 @@ public class DistractionModel extends WheelObstacle {
     public void draw(ObstacleCanvas canvas) {
         if ((birdsprite != null) && alive) {
             Color color = Color.WHITE.cpy();
-            alpha = (int)((1-((float)life/BIRD_LIFE))*255);
+            if (life < 100) {
+                alpha = (int) ((1 - ((float) life / BIRD_LIFE)) * 255);
+            }
+            else {
+                alpha = 1;
+            }
             color.a = alpha;
 //            canvas.draw(birdsprite, color, origin.x, origin.y, this.body.getPosition().x * drawScale.x,
 //                    this.body.getPosition().y * drawScale.y, getAngle(), .25f * GameController.TEMP_SCALE, .25f * GameController.TEMP_SCALE);
