@@ -212,6 +212,7 @@ public class DrawHelper {
         if (whichlevel == 3){
             TextureRegion level_three_bird = JsonAssetManager.getInstance().getEntry("level_three_bird", TextureRegion.class);
             TextureRegion level_three_center = JsonAssetManager.getInstance().getEntry("level_three_center", TextureRegion.class);
+            TextureRegion level_three_chasing = JsonAssetManager.getInstance().getEntry("level_three_chasing", TextureRegion.class);
             TextureRegion level_three_safe = JsonAssetManager.getInstance().getEntry("level_three_safe", TextureRegion.class);
 
             if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 3.5){
@@ -231,6 +232,12 @@ public class DrawHelper {
             if (level.getAnnette().getPosition().x > 11 && level.getAnnette().getPosition().x < 13.5){
                 canvas.begin(level.oTran);
                 canvas.draw(level_three_center,800,400);
+                canvas.end();
+            }
+
+            if (isSeen){
+                canvas.begin(level.oTran);
+                canvas.draw(level_three_chasing,300,100);
                 canvas.end();
             }
         }

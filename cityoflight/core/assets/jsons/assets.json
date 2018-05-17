@@ -520,6 +520,10 @@
 			"file" : "pip/tutorial/level_three_center.png",
 			"wrap" : false
 		},
+		"level_three_chasing" : {
+			"file" : "pip/tutorial/level_three_chasing.png",
+			"wrap" : false
+		},
 		"level_three_safe" : {
 			"file" : "pip/tutorial/level_three_safe.png",
 			"wrap" : false

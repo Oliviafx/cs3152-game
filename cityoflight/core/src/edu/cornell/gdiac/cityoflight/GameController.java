@@ -75,7 +75,7 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
-	private int LEVEL_TIME_LIMIT = 2000;
+	private int LEVEL_TIME_LIMIT = 3000;
 	private boolean daredevil;
 	private boolean hasUsedBox = false;
 	private boolean hasUsedDistraction = false;
