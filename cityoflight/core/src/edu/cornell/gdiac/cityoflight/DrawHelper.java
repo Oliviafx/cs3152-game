@@ -137,7 +137,7 @@ public class DrawHelper {
                 canvas.draw(level_one_sigil,500,120);
                 canvas.end();
             }
-            if (level.getAnnette().getPosition().y < 2.5 || level.getAnnette().getPosition().y > 6) {
+            if (level.getAnnette().getPosition().y < 2.5 || level.getAnnette().getPosition().y > 7.3) {
                 if (!isSeen) {
                     canvas.begin(level.oTran);
                     canvas.draw(level_one_tremor, 300, 300);
