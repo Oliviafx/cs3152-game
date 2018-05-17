@@ -775,7 +775,9 @@ public class GameController implements Screen, ContactListener {
 
 		for (AIController controller : AIcontrollers){
 			if(controller.isChasing()) {
-				detectedPlay = true;
+				if (!complete && !failed) {
+					detectedPlay = true;
+				}
 				drawHelper.drawisSeen(canvas,level);
 			}
 		}
