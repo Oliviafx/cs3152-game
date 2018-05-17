@@ -637,7 +637,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         float dist2 = (screenX-levelX)*(screenX-levelX)+(screenY-levelY)*(screenY-levelY);
         if (dist2 < levelButton.getWidth()*levelButton.getHeight()*.75f && screenY < playY - playButton.getHeight() &&
-                screenY >= levelY) {
+                screenY >= levelY-20) {
             levelState = 1;
         }
 
