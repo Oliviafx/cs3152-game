@@ -397,8 +397,8 @@ public class GameController implements Screen, ContactListener {
 
 		if (level.getDistraction() != null) {
 			level.getDistraction().setAlive(false);
-			level.getDistraction().deactivatePhysics(level.getWorld());
-			level.getDistraction().dispose();
+//			level.getDistraction().deactivatePhysics(level.getWorld());
+//			level.getDistraction().dispose();
 			level.objects.remove(level.getDistraction());
 		}
 		drawHelper.reset();
@@ -609,7 +609,7 @@ public class GameController implements Screen, ContactListener {
 //			System.out.println(level.objects.contains(distraction));
 			if (!distraction.getAlive() && distraction.isActive()) {
 				sound.play("distraction_gone_effect", "sounds/distraction_gone_effect.wav", false, 1.0f, soundPlay);
-				distraction.deactivatePhysics(level.getWorld());
+//				distraction.deactivatePhysics(level.getWorld());
 				distraction.dispose();
 				level.objects.remove(distraction);
 			}
