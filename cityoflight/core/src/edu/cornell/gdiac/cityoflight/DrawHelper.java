@@ -111,13 +111,13 @@ public class DrawHelper {
             TextureRegion level_one_sigil = JsonAssetManager.getInstance().getEntry("level_one_sigil", TextureRegion.class);
             TextureRegion level_one_tremor = JsonAssetManager.getInstance().getEntry("level_one_tremor", TextureRegion.class);
             //System.out.println("LEVEL ONE");
-            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 4){
+            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 2.5){
                 //System.out.println("drawing movement");
                 canvas.begin(level.oTran);
                 canvas.draw(level_one_movement,10,380);
                 canvas.end();
             }
-            if (level.getAnnette().getPosition().x >= 4 && level.getAnnette().getPosition().x < 7){
+            if (level.getAnnette().getPosition().x >= 2.5 && level.getAnnette().getPosition().x < 7){
                 canvas.begin(level.oTran);
 
                 if (isSeen && level.getBox().getDoesExist() == false) {
@@ -144,6 +144,44 @@ public class DrawHelper {
                     canvas.end();
                 }
             }
+        }
+
+        if (whichlevel == 2){
+            TextureRegion level_two_deactivate = JsonAssetManager.getInstance().getEntry("level_two_deactivate", TextureRegion.class);
+            TextureRegion level_two_deactivate2 = JsonAssetManager.getInstance().getEntry("level_two_deactivate2", TextureRegion.class);
+            TextureRegion level_two_stand = JsonAssetManager.getInstance().getEntry("level_two_stand", TextureRegion.class);
+            TextureRegion level_two_try = JsonAssetManager.getInstance().getEntry("level_two_try", TextureRegion.class);
+            TextureRegion level_two_walk = JsonAssetManager.getInstance().getEntry("level_two_walk", TextureRegion.class);
+            TextureRegion level_two_here = JsonAssetManager.getInstance().getEntry("level_two_here", TextureRegion.class);
+            TextureRegion level_two_disappear = JsonAssetManager.getInstance().getEntry("level_two_disappear", TextureRegion.class);
+
+            if (level.getBox().getDoesExist() && level.getBox().getDeactivated()){
+                canvas.begin(level.oTran);
+                canvas.draw(level_two_deactivate, 220, 400);
+                canvas.draw(level_two_deactivate2, 220, 100);
+                canvas.draw(level_two_disappear, 500, 100);
+                canvas.draw(level_two_here, 500, 400);
+                canvas.end();
+            }
+            if (!level.getBox().getDoesExist()){
+                if (level.getAnnette().getPosition().x >= 8 && level.getAnnette().getPosition().x < 9) {
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_two_walk, 500, 400);
+                    canvas.end();
+                }
+
+                if (level.getAnnette().getPosition().x >= 9 && level.getAnnette().getPosition().x < 14) {
+                    canvas.begin(level.oTran);
+                    if (level.getCreature(1).getPosition().x > 12.5) {
+                        canvas.draw(level_two_stand, 600, 100);
+                        canvas.draw(level_two_try, 350, 100);
+                    }else{
+                        canvas.draw(level_two_walk, 300 ,300);
+                    }
+                    canvas.end();
+                }
+            }
+
         }
 
 
