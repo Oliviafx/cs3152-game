@@ -24,7 +24,7 @@
       "y":0
     },
     {
-      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 174, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 168, 168, 168, 188, 189, 168, 188, 189, 188, 189, 168, 168, 0, 0, 175, 174, 175, 175, 174, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 174, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 168, 168, 168, 188, 189, 168, 188, 189, 188, 189, 168, 168, 0, 0, 175, 174, 175, 175, 174, 0, 0, 175, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       "height":9,
       "name":"Shadow",
       "opacity":1,
@@ -440,6 +440,68 @@
           "width":64,
           "x":0,
           "y":304
+        },
+        {
+          "gid":171,
+          "height":64,
+          "id":790,
+          "name":"building14",
+          "properties":
+          {
+            "texture":"128_cafe_blue"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":128,
+          "x":192,
+          "y":320
+        },
+        {
+          "gid":8,
+          "height":64,
+          "id":791,
+          "name":"building15",
+          "properties":
+          {
+            "texture":"64_building_short"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":320,
+          "y":320
+        },
+        {
+          "height":80,
+          "id":792,
+          "name":"box14",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":128,
+          "x":192,
+          "y":240
+        },
+        {
+          "height":80,
+          "id":793,
+          "name":"box15",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":320,
+          "y":240
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1039,6 +1101,502 @@
           "width":64,
           "x":64,
           "y":132
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":765,
+          "name":"flower20",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":512,
+          "y":84
+        },
+        {
+          "height":40,
+          "id":767,
+          "name":"box20",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":512,
+          "y":40
+        },
+        {
+          "gid":172,
+          "height":64,
+          "id":761,
+          "name":"flower21",
+          "properties":
+          {
+            "texture":"flowerbed_purple"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":448,
+          "y":448
+        },
+        {
+          "height":40,
+          "id":768,
+          "name":"box21",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":448,
+          "y":404
+        },
+        {
+          "gid":172,
+          "height":64,
+          "id":762,
+          "name":"flower22",
+          "properties":
+          {
+            "texture":"flowerbed_purple"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":512,
+          "y":448
+        },
+        {
+          "height":40,
+          "id":769,
+          "name":"box22",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":512,
+          "y":404
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":763,
+          "name":"flower23",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":576,
+          "y":432
+        },
+        {
+          "height":40,
+          "id":770,
+          "name":"box23",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":576,
+          "y":388
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":764,
+          "name":"flower24",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":432
+        },
+        {
+          "height":40,
+          "id":771,
+          "name":"box24",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":388
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":772,
+          "name":"flower25",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":64,
+          "y":304
+        },
+        {
+          "height":40,
+          "id":779,
+          "name":"box25",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":64,
+          "y":260
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":773,
+          "name":"flower26",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":128,
+          "y":304
+        },
+        {
+          "height":40,
+          "id":780,
+          "name":"box26",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":128,
+          "y":260
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":777,
+          "name":"flower27",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":304
+        },
+        {
+          "height":40,
+          "id":784,
+          "name":"box27",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":260
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":778,
+          "name":"flower28",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":448,
+          "y":304
+        },
+        {
+          "height":40,
+          "id":785,
+          "name":"box28",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":448,
+          "y":260
+        },
+        {
+          "gid":172,
+          "height":64,
+          "id":787,
+          "name":"flower29",
+          "properties":
+          {
+            "texture":"flowerbed_purple"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":264
+        },
+        {
+          "height":40,
+          "id":788,
+          "name":"box29",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":222
+        },
+        {
+          "gid":172,
+          "height":64,
+          "id":795,
+          "name":"flower30",
+          "properties":
+          {
+            "texture":"flowerbed_purple"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":224
+        },
+        {
+          "height":40,
+          "id":796,
+          "name":"box30",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":180
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":797,
+          "name":"flower31",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":100
+        },
+        {
+          "height":40,
+          "id":798,
+          "name":"box31",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":384,
+          "y":56
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":799,
+          "name":"flower32",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":128,
+          "y":492
+        },
+        {
+          "height":40,
+          "id":800,
+          "name":"box32",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":128,
+          "y":448
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":803,
+          "name":"flower33",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":128,
+          "y":532
+        },
+        {
+          "height":40,
+          "id":804,
+          "name":"box33",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":128,
+          "y":488
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":805,
+          "name":"flower34",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":320,
+          "y":224
+        },
+        {
+          "height":40,
+          "id":806,
+          "name":"box34",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":320,
+          "y":180
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":807,
+          "name":"flower35",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":704,
+          "y":476
+        },
+        {
+          "height":40,
+          "id":808,
+          "name":"box35",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":704,
+          "y":432
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1184,7 +1742,7 @@
           "visible":true,
           "width":88.5,
           "x":416,
-          "y":526
+          "y":486
         },
         {
           "height":50,
@@ -1195,7 +1753,7 @@
           "visible":true,
           "width":24,
           "x":455,
-          "y":464
+          "y":424
         },
         {
           "height":0,
@@ -1232,7 +1790,7 @@
           "visible":true,
           "width":0,
           "x":447,
-          "y":504
+          "y":464
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1286,7 +1844,7 @@
           "visible":true,
           "width":146.5,
           "x":122,
-          "y":285
+          "y":277
         },
         {
           "height":75,
@@ -1297,7 +1855,7 @@
           "visible":true,
           "width":59,
           "x":161,
-          "y":208
+          "y":200
         },
         {
           "height":0,
@@ -1334,7 +1892,7 @@
           "visible":true,
           "width":0,
           "x":174,
-          "y":241
+          "y":233
         },
         {
           "gid":80,
@@ -1377,8 +1935,8 @@
           "type":"",
           "visible":true,
           "width":146.5,
-          "x":202,
-          "y":237
+          "x":186,
+          "y":181
         },
         {
           "height":75,
@@ -1388,8 +1946,8 @@
           "type":"",
           "visible":true,
           "width":59,
-          "x":241,
-          "y":160
+          "x":225,
+          "y":104
         },
         {
           "height":0,
@@ -1425,8 +1983,8 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":254,
-          "y":193
+          "x":238,
+          "y":137
         },
         {
           "gid":80,
@@ -1469,8 +2027,8 @@
           "type":"",
           "visible":true,
           "width":146.5,
-          "x":282,
-          "y":189
+          "x":250,
+          "y":221
         },
         {
           "height":75,
@@ -1480,8 +2038,8 @@
           "type":"",
           "visible":true,
           "width":59,
-          "x":321,
-          "y":112
+          "x":289,
+          "y":144
         },
         {
           "height":0,
@@ -1517,13 +2075,13 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":334,
-          "y":145
+          "x":302,
+          "y":177
         },
         {
           "gid":80,
           "height":94,
-          "id":713,
+          "id":716,
           "name":"snail4",
           "properties":
           {
@@ -1561,23 +2119,23 @@
           "type":"",
           "visible":true,
           "width":146.5,
-          "x":362,
-          "y":237
+          "x":442,
+          "y":293
         },
         {
           "height":75,
-          "id":714,
+          "id":717,
           "name":"snail_box4",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":59,
-          "x":401,
-          "y":160
+          "x":481,
+          "y":216
         },
         {
           "height":0,
-          "id":715,
+          "id":718,
           "name":"snail_vision4",
           "properties":
           {
@@ -1609,100 +2167,8 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":414,
-          "y":193
-        },
-        {
-          "gid":80,
-          "height":94,
-          "id":716,
-          "name":"snail5",
-          "properties":
-          {
-            "bodytype":"dynamic",
-            "collideBits":"0001",
-            "debugcolor":"white",
-            "debugopacity":192,
-            "excludeBits":"0000",
-            "startframe":0,
-            "texture":"snail",
-            "texture2":"snail_down",
-            "texture3":"snail_up",
-            "turn":1,
-            "type":1,
-            "xinput":0,
-            "yinput":-125
-          },
-          "propertytypes":
-          {
-            "bodytype":"string",
-            "collideBits":"string",
-            "debugcolor":"string",
-            "debugopacity":"int",
-            "excludeBits":"string",
-            "startframe":"int",
-            "texture":"string",
-            "texture2":"string",
-            "texture3":"string",
-            "turn":"int",
-            "type":"int",
-            "xinput":"float",
-            "yinput":"float"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":146.5,
-          "x":442,
-          "y":301
-        },
-        {
-          "height":75,
-          "id":717,
-          "name":"snail_box5",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":59,
-          "x":481,
-          "y":224
-        },
-        {
-          "height":0,
-          "id":718,
-          "name":"snail_vision5",
-          "properties":
-          {
-            "a":0.3,
-            "angle":85,
-            "b":0.5,
-            "distance":4,
-            "excludeBits":"0010",
-            "facing":90,
-            "g":0.2,
-            "r":0.2,
-            "rays":512,
-            "soft":false
-          },
-          "propertytypes":
-          {
-            "a":"float",
-            "angle":"int",
-            "b":"float",
-            "distance":"int",
-            "excludeBits":"string",
-            "facing":"int",
-            "g":"float",
-            "r":"float",
-            "rays":"int",
-            "soft":"bool"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":0,
           "x":494,
-          "y":257
+          "y":249
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1853,7 +2319,7 @@
       "y":0
     },
     {
-      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 1, 142, 0, 1, 11, 0, 144, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 170, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 1, 142, 0, 1, 11, 0, 144, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       "height":9,
       "name":"Roofs",
       "opacity":1,
@@ -2029,7 +2495,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":761,
+  "nextobjectid":809,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
