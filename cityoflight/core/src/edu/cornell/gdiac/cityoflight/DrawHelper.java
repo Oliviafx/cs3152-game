@@ -176,6 +176,7 @@ public class DrawHelper {
                         canvas.draw(level_two_stand, 600, 100);
                         canvas.draw(level_two_try, 350, 100);
                     }else{
+                        if (level.getAnnette().getPosition().x < 12.5)
                         canvas.draw(level_two_walk, 300 ,300);
                     }
                     canvas.end();
