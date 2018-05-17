@@ -613,7 +613,7 @@ public class CreatureModel extends BoxObstacle {
 //          System.out.println("creature position " + getX() + " " + getY());
             if (type != 3) {
                 if (type == 2 && dirTexture == upAnim) {
-                    System.out.println("here");
+//                    System.out.println("here");
                     canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 40,
                             0, 0.75f * isReflected, 0.75f);
                 }
