@@ -582,8 +582,9 @@ public class GameController implements Screen, ContactListener {
 		else { sound.stop("ambient_effect"); }
 		aAngleCache.scl(annette.getForce());
 		annette.setDirection(input.getDirection());
-
-		annette.setSummoning(InputController.getInstance().didSpace());
+		if (!complete && !failed) {
+			annette.setSummoning(InputController.getInstance().didSpace());
+		}
 		annette.setBird(input.didX());
 		annette.applyForce();
 
