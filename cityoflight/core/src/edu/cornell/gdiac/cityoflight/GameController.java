@@ -68,8 +68,8 @@ public class GameController implements Screen, ContactListener {
 	private AssetState assetState = AssetState.EMPTY;
 
 	/** Offset for box when summoning */
-	private static final float  BOX_HOFFSET = 1.0f;
-	private static final float  BOX_VOFFSET = 0.8f;
+	private static final float  BOX_HOFFSET = 0.65f;
+	private static final float  BOX_VOFFSET = 0.5f;
 	public static final float	TEMP_SCALE	= 0.5f;
 
 	/** Walk in place effective range */
