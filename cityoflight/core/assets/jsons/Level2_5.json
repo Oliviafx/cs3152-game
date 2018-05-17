@@ -24,7 +24,7 @@
       "y":0
     },
     {
-      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 184, 185, 164, 164, 164, 164, 184, 185, 184, 185, 171, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 170, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 164, 184, 185, 164, 170, 171, 164, 170, 164, 164, 184, 185, 164, 164, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162],
+      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 188, 189, 168, 168, 168, 168, 188, 189, 188, 189, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 174, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 188, 189, 168, 174, 175, 168, 174, 168, 168, 188, 189, 168, 168, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162, 162],
       "height":8,
       "name":"Shadow",
       "opacity":1,
@@ -349,7 +349,7 @@
           "y":304
         },
         {
-          "gid":167,
+          "gid":171,
           "height":64,
           "id":395,
           "name":"building11",
@@ -545,7 +545,7 @@
       "name":"Flowers",
       "objects":[
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":384,
           "name":"flower1",
@@ -576,7 +576,7 @@
           "y":340
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":386,
           "name":"flower2",
@@ -607,7 +607,7 @@
           "y":340
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":389,
           "name":"flower3",
@@ -638,7 +638,7 @@
           "y":340
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":391,
           "name":"flower4",
@@ -669,7 +669,7 @@
           "y":148
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":394,
           "name":"flower5",
@@ -700,7 +700,7 @@
           "y":84
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":397,
           "name":"flower6",
@@ -731,7 +731,7 @@
           "y":218
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":398,
           "name":"flower7",
@@ -762,7 +762,7 @@
           "y":256
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":399,
           "name":"flower8",
@@ -793,7 +793,7 @@
           "y":180
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":402,
           "name":"flower9",
@@ -824,7 +824,7 @@
           "y":240
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":403,
           "name":"flower10",
@@ -855,7 +855,7 @@
           "y":192
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":411,
           "name":"flower11",
@@ -886,7 +886,7 @@
           "y":52
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":412,
           "name":"flower12",
@@ -917,7 +917,7 @@
           "y":52
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":413,
           "name":"flower13",
@@ -948,7 +948,7 @@
           "y":52
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":414,
           "name":"flower14",
@@ -979,7 +979,7 @@
           "y":52
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":415,
           "name":"flower15",
@@ -1020,7 +1020,7 @@
       "name":"Tarasque",
       "objects":[
         {
-          "gid":172,
+          "gid":176,
           "height":128,
           "id":288,
           "name":"tarasque1",
@@ -1060,7 +1060,7 @@
           "type":"",
           "visible":true,
           "width":64,
-          "x":288,
+          "x":272,
           "y":315
         },
         {
@@ -1071,7 +1071,7 @@
           "type":"",
           "visible":true,
           "width":40,
-          "x":300,
+          "x":284,
           "y":224
         },
         {
@@ -1108,11 +1108,11 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":321,
+          "x":305,
           "y":280
         },
         {
-          "gid":188,
+          "gid":192,
           "height":86,
           "id":465,
           "name":"tarasque2",
@@ -1202,6 +1202,98 @@
           "width":0,
           "x":814,
           "y":207
+        },
+        {
+          "gid":176,
+          "height":128,
+          "id":466,
+          "name":"tarasque3",
+          "properties":
+          {
+            "bodytype":"dynamic",
+            "collideBits":"0001",
+            "debugcolor":"white",
+            "debugopacity":192,
+            "excludeBits":"0000",
+            "startframe":0,
+            "texture":"tarasque",
+            "texture2":"tarasque_down",
+            "texture3":"tarasque_up",
+            "turn":1,
+            "type":2,
+            "xinput":0,
+            "yinput":300
+          },
+          "propertytypes":
+          {
+            "bodytype":"string",
+            "collideBits":"string",
+            "debugcolor":"string",
+            "debugopacity":"int",
+            "excludeBits":"string",
+            "startframe":"int",
+            "texture":"string",
+            "texture2":"string",
+            "texture3":"string",
+            "turn":"int",
+            "type":"int",
+            "xinput":"float",
+            "yinput":"float"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":347,
+          "y":315
+        },
+        {
+          "height":81,
+          "id":467,
+          "name":"tarasque_box3",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":40,
+          "x":359,
+          "y":224
+        },
+        {
+          "height":0,
+          "id":468,
+          "name":"dragon_vision3",
+          "properties":
+          {
+            "a":0.3,
+            "angle":4,
+            "b":0.5,
+            "distance":25,
+            "excludeBits":"0010",
+            "facing":90,
+            "g":0.2,
+            "r":0.2,
+            "rays":512,
+            "soft":false
+          },
+          "propertytypes":
+          {
+            "a":"float",
+            "angle":"int",
+            "b":"float",
+            "distance":"int",
+            "excludeBits":"string",
+            "facing":"int",
+            "g":"float",
+            "r":"float",
+            "rays":"int",
+            "soft":"bool"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":0,
+          "x":380,
+          "y":280
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1352,7 +1444,7 @@
       "y":0
     },
     {
-      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 166, 0, 5, 7, 7, 7, 9, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 144, 0, 5, 0, 0, 5, 0, 5, 5, 142, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 170, 0, 5, 7, 7, 7, 9, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 144, 0, 5, 0, 0, 5, 0, 5, 5, 142, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       "height":8,
       "name":"Roofs",
       "opacity":1,
@@ -1528,7 +1620,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":466,
+  "nextobjectid":469,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
@@ -1790,19 +1882,19 @@
       "columns":4,
       "firstgid":148,
       "image":"..\/Art assets\/tiles\/tiles2.png",
-      "imageheight":256,
+      "imageheight":320,
       "imagewidth":256,
       "margin":0,
       "name":"tiles2",
       "spacing":0,
-      "tilecount":16,
+      "tilecount":20,
       "tileheight":64,
       "tilewidth":64,
       "transparentcolor":"#ff00ff"
     },
     {
       "columns":1,
-      "firstgid":164,
+      "firstgid":168,
       "image":"..\/Art assets\/building assets\/64_shadow.png",
       "imageheight":128,
       "imagewidth":64,
@@ -1816,7 +1908,7 @@
     },
     {
       "columns":1,
-      "firstgid":166,
+      "firstgid":170,
       "image":"..\/Art assets\/building assets\/128_cafe_blue.png",
       "imageheight":128,
       "imagewidth":128,
@@ -1830,7 +1922,7 @@
     },
     {
       "columns":1,
-      "firstgid":168,
+      "firstgid":172,
       "image":"..\/Art assets\/flowerbeds\/flowerbed_purple.png",
       "imageheight":64,
       "imagewidth":64,
@@ -1844,7 +1936,7 @@
     },
     {
       "columns":1,
-      "firstgid":169,
+      "firstgid":173,
       "image":"..\/Art assets\/flowerbeds\/flowerbed_pink.png",
       "imageheight":64,
       "imagewidth":64,
@@ -1858,7 +1950,7 @@
     },
     {
       "columns":1,
-      "firstgid":170,
+      "firstgid":174,
       "image":"..\/Art assets\/flowerbeds\/shadow_pink.png",
       "imageheight":64,
       "imagewidth":64,
@@ -1872,7 +1964,7 @@
     },
     {
       "columns":1,
-      "firstgid":171,
+      "firstgid":175,
       "image":"..\/Art assets\/flowerbeds\/shadow_purple.png",
       "imageheight":64,
       "imagewidth":64,
@@ -1886,7 +1978,7 @@
     },
     {
       "columns":12,
-      "firstgid":172,
+      "firstgid":176,
       "image":"..\/Art assets\/characters\/tarasque_down.png",
       "imageheight":229,
       "imagewidth":1080,
@@ -1900,7 +1992,7 @@
     },
     {
       "columns":2,
-      "firstgid":184,
+      "firstgid":188,
       "image":"..\/Art assets\/building assets\/128_shadow.png",
       "imageheight":128,
       "imagewidth":128,
@@ -1914,7 +2006,7 @@
     },
     {
       "columns":30,
-      "firstgid":188,
+      "firstgid":192,
       "image":"..\/Art assets\/characters\/tarasque_side.png",
       "imageheight":128,
       "imagewidth":6030,
