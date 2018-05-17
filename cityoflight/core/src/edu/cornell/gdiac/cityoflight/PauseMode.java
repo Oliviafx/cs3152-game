@@ -301,6 +301,11 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     }
 
     public void update() {
+        InputController input = InputController.getInstance();
+        input.readInput();
+        if (input.didPause() || input.didExit()) {
+            listener.exitScreen(this, 2);
+        }
 //        if (stage == null) {
 //            create();
 //        }
