@@ -589,7 +589,7 @@ public class GameController implements Screen, ContactListener {
 		annette.applyForce();
 
 		//Check if distraction was called
-		if (annette.getBird()&&!level.isDistraction() ) {
+		if (annette.getBird()&&!level.isDistraction() && !isFailure()) {
 			level.createDistraction(levelFormat);
 			hasUsedDistraction = true;
 			sound.play("distraction_effect", "sounds/distraction_effect.wav", false, 0.2f, soundPlay);
