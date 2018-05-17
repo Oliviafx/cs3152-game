@@ -295,7 +295,10 @@ public class GDXRoot extends Game implements ScreenListener {
 				}
 				controller.setMenu(menu);
 
-
+				if (levels != null) {
+					levels.dispose();
+					levels = null;
+				}
 
 //			else {
 //				System.out.println("was null");
