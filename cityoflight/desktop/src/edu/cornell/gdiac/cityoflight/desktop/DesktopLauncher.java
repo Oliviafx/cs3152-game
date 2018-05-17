@@ -38,7 +38,7 @@ public class DesktopLauncher {
 		config.height = 512;
 //		config.width  = 1344;
 //		config.height = 768;
-		config.resizable = true;
+		config.resizable = false;
 		new LwjglApplication(new GDXRoot(), config);
 	}
 }
