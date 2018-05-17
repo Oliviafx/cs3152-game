@@ -476,6 +476,10 @@
 			"file" : "pip/tutorial/level_two_deactivate2.png",
 			"wrap" : false
 		},
+		"level_two_push" : {
+			"file" : "pip/tutorial/level_two_push.png",
+			"wrap" : false
+		},
 		"level_two_stand" : {
 			"file" : "pip/tutorial/level_two_stand2.png",
 			"wrap" : false
