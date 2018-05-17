@@ -448,6 +448,10 @@
 			"file" : "pip/tutorial/level_one_unbox.png",
 			"wrap" : false
 		},
+		"level_one_block" : {
+			"file" : "pip/tutorial/level_one_block.png",
+			"wrap" : false
+		},
 		"level_one_creature" : {
 			"file" : "pip/tutorial/level_one_creature.png",
 			"wrap" : false
@@ -480,8 +484,16 @@
 			"file" : "pip/tutorial/level_two_crate.png",
 			"wrap" : false
 		},
+		"level_two_single" : {
+			"file" : "pip/tutorial/level_two_single.png",
+			"wrap" : false
+		},
 		"level_two_try" : {
 			"file" : "pip/tutorial/level_two_try.png",
+			"wrap" : false
+		},
+		"level_two_tail" : {
+			"file" : "pip/tutorial/level_two_tail.png",
 			"wrap" : false
 		},
 		"level_two_walk" : {
@@ -490,6 +502,10 @@
 		},
 		"level_two_here" : {
 			"file" : "pip/tutorial/level_two_here.png",
+			"wrap" : false
+		},
+		"level_two_boxhere" : {
+			"file" : "pip/tutorial/level_two_boxhere.png",
 			"wrap" : false
 		},
 		"level_two_disappear" : {

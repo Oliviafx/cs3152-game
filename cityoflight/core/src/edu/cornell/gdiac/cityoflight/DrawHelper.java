@@ -105,6 +105,7 @@ public class DrawHelper {
         if (whichlevel == 1){
             TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
             TextureRegion level_one_box = JsonAssetManager.getInstance().getEntry("level_one_box", TextureRegion.class);
+            TextureRegion level_one_block = JsonAssetManager.getInstance().getEntry("level_one_block", TextureRegion.class);
             TextureRegion level_one_unbox = JsonAssetManager.getInstance().getEntry("level_one_unbox", TextureRegion.class);
             TextureRegion level_one_creature = JsonAssetManager.getInstance().getEntry("level_one_creature", TextureRegion.class);
             TextureRegion level_one_aggro = JsonAssetManager.getInstance().getEntry("level_one_aggro", TextureRegion.class);
@@ -122,13 +123,16 @@ public class DrawHelper {
 
                 if (isSeen && level.getBox().getDoesExist() == false) {
                     canvas.draw(level_one_box, 200, 380);
-                    canvas.draw(level_one_creature,200,120);
+                    canvas.draw(level_one_block,200,120);
                 }
                 if (isSeen && level.getBox().getDoesExist() ){
                     canvas.draw(level_one_aggro, 200, 120);
                 }
                 if (level.getBox().getDoesExist() == true && !isSeen){
                     canvas.draw(level_one_unbox, 200, 380);
+                }
+                if (!level.getBox().getDoesExist() && !isSeen){
+                    canvas.draw(level_one_creature, 200, 380);
                 }
                 canvas.end();
             }
@@ -150,41 +154,54 @@ public class DrawHelper {
             TextureRegion level_two_deactivate = JsonAssetManager.getInstance().getEntry("level_two_deactivate", TextureRegion.class);
             TextureRegion level_two_deactivate2 = JsonAssetManager.getInstance().getEntry("level_two_deactivate2", TextureRegion.class);
             TextureRegion level_two_crate = JsonAssetManager.getInstance().getEntry("level_two_crate", TextureRegion.class);
+            TextureRegion level_two_single = JsonAssetManager.getInstance().getEntry("level_two_single", TextureRegion.class);
+            TextureRegion level_two_tail = JsonAssetManager.getInstance().getEntry("level_two_tail", TextureRegion.class);
             TextureRegion level_two_stand = JsonAssetManager.getInstance().getEntry("level_two_stand", TextureRegion.class);
             TextureRegion level_two_try = JsonAssetManager.getInstance().getEntry("level_two_try", TextureRegion.class);
             TextureRegion level_two_walk = JsonAssetManager.getInstance().getEntry("level_two_walk", TextureRegion.class);
             TextureRegion level_two_here = JsonAssetManager.getInstance().getEntry("level_two_here", TextureRegion.class);
             TextureRegion level_two_disappear = JsonAssetManager.getInstance().getEntry("level_two_disappear", TextureRegion.class);
+            TextureRegion level_two_boxhere = JsonAssetManager.getInstance().getEntry("level_two_boxhere", TextureRegion.class);
 
-            if (level.getBox().getDoesExist() && level.getBox().getDeactivated()){
-                canvas.begin(level.oTran);
-                canvas.draw(level_two_deactivate, 220, 400);
-                canvas.draw(level_two_deactivate2, 220, 100);
-                canvas.draw(level_two_disappear, 500, 100);
-                canvas.draw(level_two_here, 500, 400);
-                canvas.end();
+            if (level.getBox().getDoesExist()){
+                if (level.getBox().getDeactivated()){
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_two_deactivate, 220, 400);
+                    canvas.draw(level_two_deactivate2, 220, 100);
+                    canvas.draw(level_two_disappear, 500, 100);
+                    canvas.draw(level_two_here, 500, 400);
+                    canvas.end();
+                }
+                if (level.getAnnette().getPosition().x > 4 && level.getAnnette().getPosition().x < 5){
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_two_single, 150, 425);
+                    canvas.draw(level_two_tail, 150, 100);
+                    canvas.end();
+                }
+                if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y > 5.5) {
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_two_stand, 600, 100);
+                    canvas.draw(level_two_try, 350, 100);
+                    canvas.end();
+                }
+                if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y <= 5.5 && level.getAnnette().getPosition().x < 11){
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_two_walk, 300, 300);
+                    canvas.end();
+                }
             }
+
             if (!level.getBox().getDoesExist()){
                 if (level.getAnnette().getPosition().x > 2 && level.getAnnette().getPosition().x < 3.5){
                     canvas.begin(level.oTran);
                     canvas.draw(level_two_crate, 100, 425);
                     canvas.end();
                 }
-
-                if (level.getAnnette().getPosition().x >= 8 && level.getAnnette().getPosition().x < 9) {
-                    canvas.begin(level.oTran);
-                    canvas.draw(level_two_walk, 500, 400);
-                    canvas.end();
-                }
-
                 if (level.getAnnette().getPosition().x >= 9 && level.getAnnette().getPosition().x < 14) {
                     canvas.begin(level.oTran);
-                    if (level.getCreature(1).getPosition().x > 12.5) {
-                        canvas.draw(level_two_stand, 600, 100);
-                        canvas.draw(level_two_try, 350, 100);
-                    }else{
-                        if (level.getAnnette().getPosition().x < 12.5)
-                        canvas.draw(level_two_walk, 300 ,300);
+
+                    if (!level.getBox().getDoesExist()){
+                        canvas.draw(level_two_boxhere, 650, 350);
                     }
                     canvas.end();
                 }
