@@ -2713,6 +2713,37 @@
           "width":64,
           "x":704,
           "y":896
+        },
+        {
+          "gid":173,
+          "height":64,
+          "id":334,
+          "name":"flower34",
+          "properties":
+          {
+            "texture":"flowerbed_pink"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":0,
+          "y":560
+        },
+        {
+          "height":40,
+          "id":335,
+          "name":"box34",
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":64,
+          "x":0,
+          "y":516
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -2832,9 +2863,9 @@
             "texture":"blanche",
             "texture2":"blanche_down",
             "texture3":"blanche_up",
-            "turn":1,
+            "turn":3,
             "type":3,
-            "xinput":-180,
+            "xinput":180,
             "yinput":0
           },
           "propertytypes":
@@ -2924,7 +2955,7 @@
             "texture":"blanche",
             "texture2":"blanche_down",
             "texture3":"blanche_up",
-            "turn":1,
+            "turn":3,
             "type":2,
             "xinput":-180,
             "yinput":0
@@ -3714,7 +3745,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":333,
+  "nextobjectid":336,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
