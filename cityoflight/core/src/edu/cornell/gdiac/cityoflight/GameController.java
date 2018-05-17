@@ -763,6 +763,8 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 
+		drawHelper.drawTutorial(canvas,level,whichlevel,detectedPlay);
+
 		// Final message
 		if (complete) {
 

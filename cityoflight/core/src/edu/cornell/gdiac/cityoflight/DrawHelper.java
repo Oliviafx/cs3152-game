@@ -100,6 +100,55 @@ public class DrawHelper {
         hasChosenScreenandText = false;
     }
 
+    public void drawTutorial(ObstacleCanvas canvas, LevelModel level, int whichlevel, boolean isSeen){
+
+        if (whichlevel == 1){
+            TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
+            TextureRegion level_one_box = JsonAssetManager.getInstance().getEntry("level_one_box", TextureRegion.class);
+            TextureRegion level_one_unbox = JsonAssetManager.getInstance().getEntry("level_one_unbox", TextureRegion.class);
+            TextureRegion level_one_creature = JsonAssetManager.getInstance().getEntry("level_one_creature", TextureRegion.class);
+            TextureRegion level_one_aggro = JsonAssetManager.getInstance().getEntry("level_one_aggro", TextureRegion.class);
+            TextureRegion level_one_sigil = JsonAssetManager.getInstance().getEntry("level_one_sigil", TextureRegion.class);
+            TextureRegion level_one_tremor = JsonAssetManager.getInstance().getEntry("level_one_tremor", TextureRegion.class);
+            //System.out.println("LEVEL ONE");
+            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 4){
+                //System.out.println("drawing movement");
+                canvas.begin(level.oTran);
+                canvas.draw(level_one_movement,10,380);
+                canvas.end();
+            }
+            if (level.getAnnette().getPosition().x >= 4 && level.getAnnette().getPosition().x < 7){
+                canvas.begin(level.oTran);
+
+                if (isSeen && level.getBox().getDoesExist() == false) {
+                    canvas.draw(level_one_box, 200, 380);
+                    canvas.draw(level_one_creature,200,120);
+                }
+                if (isSeen && level.getBox().getDoesExist() ){
+                    canvas.draw(level_one_aggro, 200, 120);
+                }
+                if (level.getBox().getDoesExist() == true && !isSeen){
+                    canvas.draw(level_one_unbox, 200, 380);
+                }
+                canvas.end();
+            }
+            if (level.getAnnette().getPosition().x >= 8 && level.getAnnette().getPosition().x < 9) {
+                canvas.begin(level.oTran);
+                canvas.draw(level_one_sigil,500,120);
+                canvas.end();
+            }
+            if (level.getAnnette().getPosition().y < 2.5 || level.getAnnette().getPosition().y > 6) {
+                if (!isSeen) {
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_one_tremor, 300, 300);
+                    canvas.end();
+                }
+            }
+        }
+
+
+    }
+
     /**
      * draw the walk in place indicators.
      * @param canvas

@@ -432,6 +432,34 @@
 			"file" : "pip/achievements/grey_tip.png",
 			"wrap" : false
 		},
+		"level_one_movement" : {
+			"file" : "pip/tutorial/level_one_movement.png",
+			"wrap" : false
+		},
+		"level_one_box" : {
+			"file" : "pip/tutorial/level_one_box.png",
+			"wrap" : false
+		},
+		"level_one_unbox" : {
+			"file" : "pip/tutorial/level_one_unbox.png",
+			"wrap" : false
+		},
+		"level_one_creature" : {
+			"file" : "pip/tutorial/level_one_creature.png",
+			"wrap" : false
+		},
+		"level_one_aggro" : {
+			"file" : "pip/tutorial/level_one_aggro.png",
+			"wrap" : false
+		},
+		"level_one_sigil" : {
+			"file" : "pip/tutorial/level_one_sigil.png",
+			"wrap" : false
+		},
+		"level_one_tremor" : {
+			"file" : "pip/tutorial/level_one_tremor.png",
+			"wrap" : false
+		},
 	},
 	"fonts": {
 		"display": {
