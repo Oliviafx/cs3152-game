@@ -945,19 +945,15 @@ public class LevelModel {
 
                     // FLOWERS
                     InteriorModel obj2 = new InteriorModel();
-                    float[] pos = {numToFlower.get((j+1) + "").get("x").asFloat()/64,numToFlower.get((j+1) + "").get("y").asFloat()/64+ 1.75f};
+                    float[] pos = {numToFlower.get((j+1) + "").get("x").asFloat()/64,numToFlower.get((j+1) + "").get("y").asFloat()/64};
                     float[] size = {1f,1f};
                     float[] pad = { 0.1f, 0.1f};
                     String debugColor = "blue";
 
                     if(boxJSON != null){
                         pos[0] = boxJSON.get("x").asFloat()/64;
-                        pos[1] = boxJSON.get("y").asFloat()/64 + 1.75f;
-                        if(textName.contains("128") || textName.contains("64"))
-                        {
-                            pos[1] = boxJSON.get("y").asFloat()/64 + 0.3f;
-                        }
-                        size[0 ] = boxJSON.get("width").asFloat()/64;
+                        pos[1] = boxJSON.get("y").asFloat()/64 - 0.27f;
+                        size[0] = boxJSON.get("width").asFloat()/64;
                         size[1] = boxJSON.get("height").asFloat()/64;
 
                     }
