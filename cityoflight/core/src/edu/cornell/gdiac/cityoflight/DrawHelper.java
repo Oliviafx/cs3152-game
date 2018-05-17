@@ -204,7 +204,7 @@ public class DrawHelper {
                 }
             }
 
-            if (level.getAnnette().getPosition().x > 12 && level.getAnnette().getPosition().x < 13.5){
+            if (level.getAnnette().getPosition().x > 11 && level.getAnnette().getPosition().x < 13.5){
                 //System.out.println("drawing movement");
                 canvas.begin(level.oTran);
                 canvas.draw(level_three_center,800,400);
