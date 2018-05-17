@@ -100,6 +100,136 @@ public class DrawHelper {
         hasChosenScreenandText = false;
     }
 
+    public void drawTutorial(ObstacleCanvas canvas, LevelModel level, int whichlevel, boolean isSeen){
+
+        if (whichlevel == 1){
+            TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
+            TextureRegion level_one_box = JsonAssetManager.getInstance().getEntry("level_one_box", TextureRegion.class);
+            TextureRegion level_one_unbox = JsonAssetManager.getInstance().getEntry("level_one_unbox", TextureRegion.class);
+            TextureRegion level_one_creature = JsonAssetManager.getInstance().getEntry("level_one_creature", TextureRegion.class);
+            TextureRegion level_one_aggro = JsonAssetManager.getInstance().getEntry("level_one_aggro", TextureRegion.class);
+            TextureRegion level_one_sigil = JsonAssetManager.getInstance().getEntry("level_one_sigil", TextureRegion.class);
+            TextureRegion level_one_tremor = JsonAssetManager.getInstance().getEntry("level_one_tremor", TextureRegion.class);
+            //System.out.println("LEVEL ONE");
+            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 2.5){
+                //System.out.println("drawing movement");
+                canvas.begin(level.oTran);
+                canvas.draw(level_one_movement,10,380);
+                canvas.end();
+            }
+            if (level.getAnnette().getPosition().x >= 2.5 && level.getAnnette().getPosition().x < 7){
+                canvas.begin(level.oTran);
+
+                if (isSeen && level.getBox().getDoesExist() == false) {
+                    canvas.draw(level_one_box, 200, 380);
+                    canvas.draw(level_one_creature,200,120);
+                }
+                if (isSeen && level.getBox().getDoesExist() ){
+                    canvas.draw(level_one_aggro, 200, 120);
+                }
+                if (level.getBox().getDoesExist() == true && !isSeen){
+                    canvas.draw(level_one_unbox, 200, 380);
+                }
+                canvas.end();
+            }
+            if (level.getAnnette().getPosition().x >= 8 && level.getAnnette().getPosition().x < 9) {
+                canvas.begin(level.oTran);
+                canvas.draw(level_one_sigil,500,120);
+                canvas.end();
+            }
+            if (level.getAnnette().getPosition().y < 2.5 || level.getAnnette().getPosition().y > 7.3) {
+                if (!isSeen) {
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_one_tremor, 300, 300);
+                    canvas.end();
+                }
+            }
+        }
+
+        if (whichlevel == 2){
+            TextureRegion level_two_deactivate = JsonAssetManager.getInstance().getEntry("level_two_deactivate", TextureRegion.class);
+            TextureRegion level_two_deactivate2 = JsonAssetManager.getInstance().getEntry("level_two_deactivate2", TextureRegion.class);
+            TextureRegion level_two_stand = JsonAssetManager.getInstance().getEntry("level_two_stand", TextureRegion.class);
+            TextureRegion level_two_try = JsonAssetManager.getInstance().getEntry("level_two_try", TextureRegion.class);
+            TextureRegion level_two_walk = JsonAssetManager.getInstance().getEntry("level_two_walk", TextureRegion.class);
+            TextureRegion level_two_here = JsonAssetManager.getInstance().getEntry("level_two_here", TextureRegion.class);
+            TextureRegion level_two_disappear = JsonAssetManager.getInstance().getEntry("level_two_disappear", TextureRegion.class);
+
+            if (level.getBox().getDoesExist() && level.getBox().getDeactivated()){
+                canvas.begin(level.oTran);
+                canvas.draw(level_two_deactivate, 220, 400);
+                canvas.draw(level_two_deactivate2, 220, 100);
+                canvas.draw(level_two_disappear, 500, 100);
+                canvas.draw(level_two_here, 500, 400);
+                canvas.end();
+            }
+            if (!level.getBox().getDoesExist()){
+                if (level.getAnnette().getPosition().x >= 8 && level.getAnnette().getPosition().x < 9) {
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_two_walk, 500, 400);
+                    canvas.end();
+                }
+
+                if (level.getAnnette().getPosition().x >= 9 && level.getAnnette().getPosition().x < 14) {
+                    canvas.begin(level.oTran);
+                    if (level.getCreature(1).getPosition().x > 12.5) {
+                        canvas.draw(level_two_stand, 600, 100);
+                        canvas.draw(level_two_try, 350, 100);
+                    }else{
+                        if (level.getAnnette().getPosition().x < 12.5)
+                        canvas.draw(level_two_walk, 300 ,300);
+                    }
+                    canvas.end();
+                }
+            }
+        }
+
+        if (whichlevel == 3){
+            TextureRegion level_three_bird = JsonAssetManager.getInstance().getEntry("level_three_bird", TextureRegion.class);
+            TextureRegion level_three_center = JsonAssetManager.getInstance().getEntry("level_three_center", TextureRegion.class);
+            TextureRegion level_three_safe = JsonAssetManager.getInstance().getEntry("level_three_safe", TextureRegion.class);
+
+            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 3.5){
+                canvas.begin(level.oTran);
+                canvas.draw(level_three_bird,10,380);
+                canvas.end();
+            }
+
+            if (level.getDistraction() != null) {
+                if (level.getDistraction().isSeen()) {
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_three_safe, 300, 380);
+                    canvas.end();
+                }
+            }
+
+            if (level.getAnnette().getPosition().x > 11 && level.getAnnette().getPosition().x < 13.5){
+                canvas.begin(level.oTran);
+                canvas.draw(level_three_center,800,400);
+                canvas.end();
+            }
+        }
+
+        if (whichlevel == 4) {
+            TextureRegion level_four_phase = JsonAssetManager.getInstance().getEntry("level_four_phase", TextureRegion.class);
+            TextureRegion level_four_dame = JsonAssetManager.getInstance().getEntry("level_four_dame", TextureRegion.class);
+
+            if (isSeen && level.getAnnette().getPosition().y < 5 && level.getAnnette().getPosition().x < 5){
+                canvas.begin(level.oTran);
+                canvas.draw(level_four_dame,450,380);
+                canvas.end();
+            }
+
+            if (level.getAnnette().getPosition().y > 11 && level.getAnnette().getPosition().x < 5){
+                canvas.begin(level.oTran);
+                canvas.draw(level_four_phase,450,700);
+                canvas.end();
+            }
+        }
+
+
+    }
+
     /**
      * draw the walk in place indicators.
      * @param canvas

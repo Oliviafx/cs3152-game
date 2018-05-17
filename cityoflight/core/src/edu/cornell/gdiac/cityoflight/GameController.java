@@ -68,14 +68,14 @@ public class GameController implements Screen, ContactListener {
 	private AssetState assetState = AssetState.EMPTY;
 
 	/** Offset for box when summoning */
-	private static final float  BOX_HOFFSET = 1.0f;
-	private static final float  BOX_VOFFSET = 0.8f;
+	private static final float  BOX_HOFFSET = 0.65f;
+	private static final float  BOX_VOFFSET = 0.5f;
 	public static final float	TEMP_SCALE	= 0.5f;
 
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
-	private int LEVEL_TIME_LIMIT = 500;
+	private int LEVEL_TIME_LIMIT = 2000;
 	private boolean daredevil;
 	private boolean hasUsedBox = false;
 	private boolean hasUsedDistraction = false;
@@ -363,19 +363,19 @@ public class GameController implements Screen, ContactListener {
 		countdown = -1;
 		// Reload the json each time
 		if (whichlevel == 1) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1_5.json"));
 		}
 		if (whichlevel == 2) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2_5.json"));
 		}
 		if (whichlevel == 3) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level3.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level3_5.json"));
 		}
 		if (whichlevel == 4) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level4.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level4_5.json"));
 		}
 		if (whichlevel == 5) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level5.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level5_5.json"));
 		}
 		if (whichlevel == 6) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/lvl_num.json"));
@@ -774,6 +774,8 @@ public class GameController implements Screen, ContactListener {
 				drawHelper.getIndicator_seen().setFrame(0);
 			}
 		}
+
+		drawHelper.drawTutorial(canvas,level,whichlevel,detectedPlay);
 
 		// Final message
 		if (complete) {

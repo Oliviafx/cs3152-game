@@ -24,7 +24,7 @@
       "y":0
     },
     {
-      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 184, 185, 184, 185, 164, 164, 164, 184, 185, 164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 184, 185, 164, 164, 171, 171, 164, 164, 184, 185, 164, 164, 0, 0, 0, 0, 0, 0, 170, 0, 0, 0, 0, 171, 0, 0, 0, 0, 164, 164, 184, 185, 170, 184, 185, 184, 185, 171, 164, 164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 170, 171, 170, 0, 0, 0, 164, 0, 164, 0, 0, 0, 0, 170, 171, 170, 171, 0, 0, 164, 170, 164, 171, 0, 0, 164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 164, 164, 184, 185, 164, 0, 0, 184, 185, 164, 164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 0, 0, 0, 0, 0, 164, 0, 0, 0, 0, 0, 0, 164, 171, 0, 164, 164, 0, 0, 0, 0, 171, 171, 0, 0, 0, 170, 171, 0, 0, 0, 0, 184, 185, 0, 0, 0, 0],
+      "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 188, 189, 188, 189, 168, 168, 168, 188, 189, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 188, 189, 168, 168, 175, 175, 168, 168, 188, 189, 168, 168, 0, 0, 0, 0, 0, 0, 174, 0, 0, 0, 0, 175, 0, 0, 0, 0, 168, 168, 188, 189, 174, 188, 189, 188, 189, 175, 168, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 174, 175, 174, 0, 0, 0, 168, 0, 168, 0, 0, 0, 0, 174, 175, 174, 175, 0, 0, 168, 174, 168, 175, 0, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 168, 188, 189, 168, 0, 0, 188, 189, 168, 168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 175, 0, 0, 0, 0, 0, 168, 0, 0, 0, 0, 0, 0, 168, 0, 0, 168, 168, 0, 0, 0, 0, 175, 175, 0, 0, 0, 174, 168, 0, 0, 0, 0, 188, 189, 0, 0, 0, 0],
       "height":18,
       "name":"Shadow",
       "opacity":1,
@@ -845,7 +845,7 @@
           "y":624
         },
         {
-          "gid":167,
+          "gid":171,
           "height":64,
           "id":145,
           "name":"building27",
@@ -1155,13 +1155,13 @@
           "y":816
         },
         {
-          "gid":8,
+          "gid":2,
           "height":64,
-          "id":158,
+          "id":328,
           "name":"building37",
           "properties":
           {
-            "texture":"64_building_short"
+            "texture":"64_building_short_left"
           },
           "propertytypes":
           {
@@ -1169,21 +1169,21 @@
           },
           "rotation":0,
           "type":"",
-          "visible":false,
+          "visible":true,
           "width":64,
-          "x":704,
-          "y":960
+          "x":192,
+          "y":1088
         },
         {
           "height":80,
-          "id":235,
+          "id":331,
           "name":"box37",
           "rotation":0,
           "type":"",
-          "visible":false,
+          "visible":true,
           "width":64,
-          "x":704,
-          "y":880
+          "x":192,
+          "y":1008
         },
         {
           "gid":12,
@@ -1465,41 +1465,10 @@
           "y":944
         },
         {
-          "gid":6,
-          "height":64,
-          "id":183,
-          "name":"building47",
-          "properties":
-          {
-            "texture":"64_building_short_right"
-          },
-          "propertytypes":
-          {
-            "texture":"string"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":false,
-          "width":64,
-          "x":768,
-          "y":960
-        },
-        {
-          "height":80,
-          "id":245,
-          "name":"box47",
-          "rotation":0,
-          "type":"",
-          "visible":false,
-          "width":64,
-          "x":768,
-          "y":880
-        },
-        {
           "gid":4,
           "height":64,
           "id":191,
-          "name":"building48",
+          "name":"building47",
           "properties":
           {
             "texture":"64_building_short_nolight"
@@ -1518,7 +1487,7 @@
         {
           "height":80,
           "id":246,
-          "name":"box48",
+          "name":"box47",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1527,10 +1496,10 @@
           "y":432
         },
         {
-          "gid":167,
+          "gid":171,
           "height":64,
           "id":197,
-          "name":"building49",
+          "name":"building48",
           "properties":
           {
             "texture":"128_cafe_blue"
@@ -1549,7 +1518,7 @@
         {
           "height":80,
           "id":247,
-          "name":"box49",
+          "name":"box48",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1561,7 +1530,7 @@
           "gid":2,
           "height":64,
           "id":249,
-          "name":"building50",
+          "name":"building49",
           "properties":
           {
             "texture":"64_building_short_left"
@@ -1580,7 +1549,7 @@
         {
           "height":80,
           "id":251,
-          "name":"box50",
+          "name":"box49",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1592,7 +1561,7 @@
           "gid":4,
           "height":64,
           "id":250,
-          "name":"building51",
+          "name":"building50",
           "properties":
           {
             "texture":"64_building_short_nolight"
@@ -1611,7 +1580,7 @@
         {
           "height":80,
           "id":252,
-          "name":"box51",
+          "name":"box50",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1623,7 +1592,7 @@
           "gid":2,
           "height":64,
           "id":284,
-          "name":"building52",
+          "name":"building51",
           "properties":
           {
             "texture":"64_building_short_left"
@@ -1642,7 +1611,7 @@
         {
           "height":80,
           "id":285,
-          "name":"box52",
+          "name":"box51",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1654,7 +1623,7 @@
           "gid":2,
           "height":64,
           "id":286,
-          "name":"building53",
+          "name":"building52",
           "properties":
           {
             "texture":"64_building_short_left"
@@ -1673,7 +1642,7 @@
         {
           "height":80,
           "id":287,
-          "name":"box53",
+          "name":"box52",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1685,7 +1654,7 @@
           "gid":8,
           "height":64,
           "id":292,
-          "name":"building54",
+          "name":"building53",
           "properties":
           {
             "texture":"64_building_short_left"
@@ -1704,7 +1673,7 @@
         {
           "height":80,
           "id":310,
-          "name":"box54",
+          "name":"box53",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -1723,7 +1692,7 @@
       "name":"Flowers",
       "objects":[
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":110,
           "name":"flower1",
@@ -1754,7 +1723,7 @@
           "y":468
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":111,
           "name":"flower2",
@@ -1785,7 +1754,7 @@
           "y":596
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":112,
           "name":"flower3",
@@ -1816,7 +1785,7 @@
           "y":596
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":113,
           "name":"flower4",
@@ -1847,7 +1816,7 @@
           "y":660
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":114,
           "name":"flower5",
@@ -1878,7 +1847,7 @@
           "y":660
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":115,
           "name":"flower6",
@@ -1909,7 +1878,7 @@
           "y":596
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":116,
           "name":"flower7",
@@ -1940,7 +1909,7 @@
           "y":596
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":117,
           "name":"flower8",
@@ -1971,7 +1940,7 @@
           "y":660
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":118,
           "name":"flower9",
@@ -2002,7 +1971,7 @@
           "y":660
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":119,
           "name":"flower10",
@@ -2033,7 +2002,7 @@
           "y":596
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":120,
           "name":"flower11",
@@ -2064,7 +2033,7 @@
           "y":660
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":127,
           "name":"flower12",
@@ -2095,7 +2064,7 @@
           "y":660
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":128,
           "name":"flower13",
@@ -2126,7 +2095,7 @@
           "y":596
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":134,
           "name":"flower14",
@@ -2157,7 +2126,7 @@
           "y":340
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":136,
           "name":"flower15",
@@ -2188,7 +2157,7 @@
           "y":340
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":137,
           "name":"flower16",
@@ -2219,7 +2188,7 @@
           "y":404
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":151,
           "name":"flower17",
@@ -2250,7 +2219,7 @@
           "y":788
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":153,
           "name":"flower18",
@@ -2281,7 +2250,7 @@
           "y":788
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":162,
           "name":"flower19",
@@ -2312,7 +2281,7 @@
           "y":980
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":163,
           "name":"flower20",
@@ -2343,7 +2312,7 @@
           "y":980
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":169,
           "name":"flower21",
@@ -2374,7 +2343,7 @@
           "y":884
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":171,
           "name":"flower22",
@@ -2405,7 +2374,7 @@
           "y":964
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":179,
           "name":"flower23",
@@ -2436,7 +2405,7 @@
           "y":180
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":180,
           "name":"flower24",
@@ -2467,9 +2436,9 @@
           "y":1044
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
-          "id":181,
+          "id":324,
           "name":"flower25",
           "properties":
           {
@@ -2483,22 +2452,22 @@
           "type":"",
           "visible":true,
           "width":64,
-          "x":192,
-          "y":1088
+          "x":128,
+          "y":1136
         },
         {
           "height":40,
-          "id":278,
+          "id":330,
           "name":"box25",
           "rotation":0,
           "type":"",
           "visible":true,
           "width":64,
-          "x":192,
-          "y":1044
+          "x":128,
+          "y":1092
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":185,
           "name":"flower26",
@@ -2529,7 +2498,7 @@
           "y":980
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":186,
           "name":"flower27",
@@ -2560,7 +2529,7 @@
           "y":916
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":192,
           "name":"flower28",
@@ -2591,7 +2560,7 @@
           "y":468
         },
         {
-          "gid":168,
+          "gid":172,
           "height":64,
           "id":194,
           "name":"flower29",
@@ -2622,7 +2591,7 @@
           "y":404
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":290,
           "name":"flower30",
@@ -2653,7 +2622,7 @@
           "y":228
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":293,
           "name":"flower31",
@@ -2684,7 +2653,7 @@
           "y":276
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":316,
           "name":"flower32",
@@ -2715,7 +2684,7 @@
           "y":896
         },
         {
-          "gid":169,
+          "gid":173,
           "height":64,
           "id":317,
           "name":"flower33",
@@ -2731,8 +2700,8 @@
           "type":"",
           "visible":true,
           "width":64,
-          "x":736,
-          "y":925
+          "x":704,
+          "y":941
         },
         {
           "height":40,
@@ -2742,8 +2711,8 @@
           "type":"",
           "visible":true,
           "width":64,
-          "x":736,
-          "y":880
+          "x":704,
+          "y":896
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -2797,7 +2766,7 @@
           "visible":true,
           "width":88.5,
           "x":449,
-          "y":110
+          "y":99
         },
         {
           "height":50,
@@ -2808,7 +2777,7 @@
           "visible":true,
           "width":24,
           "x":488,
-          "y":48
+          "y":37
         },
         {
           "height":0,
@@ -2845,7 +2814,7 @@
           "visible":true,
           "width":0,
           "x":480,
-          "y":88
+          "y":77
         },
         {
           "gid":114,
@@ -3144,7 +3113,7 @@
       "name":"Tarasque",
       "objects":[
         {
-          "gid":172,
+          "gid":176,
           "height":128,
           "id":288,
           "name":"tarasque1",
@@ -3236,7 +3205,7 @@
           "y":256
         },
         {
-          "gid":172,
+          "gid":176,
           "height":128,
           "id":296,
           "name":"tarasque2",
@@ -3328,7 +3297,7 @@
           "y":921
         },
         {
-          "gid":172,
+          "gid":176,
           "height":128,
           "id":304,
           "name":"tarasque3",
@@ -3476,8 +3445,8 @@
           "type":"",
           "visible":true,
           "width":46,
-          "x":17,
-          "y":81
+          "x":32,
+          "y":48
         },
         {
           "height":16,
@@ -3487,8 +3456,8 @@
           "type":"",
           "visible":true,
           "width":39,
-          "x":24,
-          "y":65
+          "x":39,
+          "y":32
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -3547,8 +3516,8 @@
           "type":"",
           "visible":true,
           "width":42.67,
-          "x":65,
-          "y":88
+          "x":80,
+          "y":55
         },
         {
           "height":39,
@@ -3558,8 +3527,8 @@
           "type":"",
           "visible":true,
           "width":42,
-          "x":65,
-          "y":49
+          "x":80,
+          "y":16
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -3568,7 +3537,7 @@
       "y":0
     },
     {
-      "data":[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 142, 0, 146, 0, 5, 5, 5, 144, 0, 5, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 9, 0, 7, 7, 0, 0, 7, 7, 11, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 146, 0, 0, 142, 0, 166, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 166, 0, 7, 0, 0, 9, 0, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 144, 0, 0, 0, 0, 0, 0, 0, 146, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "data":[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 142, 0, 146, 0, 5, 5, 5, 144, 0, 5, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 9, 0, 7, 7, 0, 0, 7, 7, 11, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 146, 0, 0, 142, 0, 170, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 170, 0, 7, 0, 0, 9, 0, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 144, 0, 0, 0, 0, 0, 0, 0, 146, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       "height":18,
       "name":"Roofs",
       "opacity":1,
@@ -3671,8 +3640,8 @@
           "type":"",
           "visible":true,
           "width":43.5,
-          "x":65,
-          "y":57
+          "x":80,
+          "y":24
         },
         {
           "height":24,
@@ -3682,8 +3651,8 @@
           "type":"",
           "visible":true,
           "width":40,
-          "x":66,
-          "y":33
+          "x":81,
+          "y":0
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -3745,7 +3714,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":322,
+  "nextobjectid":333,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
@@ -4007,19 +3976,19 @@
       "columns":4,
       "firstgid":148,
       "image":"..\/Art assets\/tiles\/tiles2.png",
-      "imageheight":256,
+      "imageheight":320,
       "imagewidth":256,
       "margin":0,
       "name":"tiles2",
       "spacing":0,
-      "tilecount":16,
+      "tilecount":20,
       "tileheight":64,
       "tilewidth":64,
       "transparentcolor":"#ff00ff"
     },
     {
       "columns":1,
-      "firstgid":164,
+      "firstgid":168,
       "image":"..\/Art assets\/building assets\/64_shadow.png",
       "imageheight":128,
       "imagewidth":64,
@@ -4033,7 +4002,7 @@
     },
     {
       "columns":1,
-      "firstgid":166,
+      "firstgid":170,
       "image":"..\/Art assets\/building assets\/128_cafe_blue.png",
       "imageheight":128,
       "imagewidth":128,
@@ -4047,7 +4016,7 @@
     },
     {
       "columns":1,
-      "firstgid":168,
+      "firstgid":172,
       "image":"..\/Art assets\/flowerbeds\/flowerbed_purple.png",
       "imageheight":64,
       "imagewidth":64,
@@ -4061,7 +4030,7 @@
     },
     {
       "columns":1,
-      "firstgid":169,
+      "firstgid":173,
       "image":"..\/Art assets\/flowerbeds\/flowerbed_pink.png",
       "imageheight":64,
       "imagewidth":64,
@@ -4075,7 +4044,7 @@
     },
     {
       "columns":1,
-      "firstgid":170,
+      "firstgid":174,
       "image":"..\/Art assets\/flowerbeds\/shadow_pink.png",
       "imageheight":64,
       "imagewidth":64,
@@ -4089,7 +4058,7 @@
     },
     {
       "columns":1,
-      "firstgid":171,
+      "firstgid":175,
       "image":"..\/Art assets\/flowerbeds\/shadow_purple.png",
       "imageheight":64,
       "imagewidth":64,
@@ -4103,7 +4072,7 @@
     },
     {
       "columns":12,
-      "firstgid":172,
+      "firstgid":176,
       "image":"..\/Art assets\/characters\/tarasque_down.png",
       "imageheight":229,
       "imagewidth":1080,
@@ -4117,7 +4086,7 @@
     },
     {
       "columns":2,
-      "firstgid":184,
+      "firstgid":188,
       "image":"..\/Art assets\/building assets\/128_shadow.png",
       "imageheight":128,
       "imagewidth":128,
@@ -4131,7 +4100,7 @@
     },
     {
       "columns":2,
-      "firstgid":188,
+      "firstgid":192,
       "image":"..\/Art assets\/building assets\/128_shadow.png",
       "imageheight":128,
       "imagewidth":128,

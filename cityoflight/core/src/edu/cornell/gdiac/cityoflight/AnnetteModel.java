@@ -585,7 +585,6 @@ public class AnnetteModel extends BoxObstacle {
             canvas.drawPhysics(sensorShapeR,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
             canvas.drawPhysics(sensorShapeL,debugColor,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
             canvas.drawPhysics(annetteShape,Color.ORANGE,getX(),getY(),getAngle(),drawScale.x,drawScale.y);
-//            canvas.drawPhysics(annetteShape, Color.WHITE, 400, 300, getAngle(), GameController.TEMP_SCALE, Math.abs(flipped) * GameController.TEMP_SCALE);
         }
     }
 

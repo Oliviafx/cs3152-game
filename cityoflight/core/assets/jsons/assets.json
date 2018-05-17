@@ -432,6 +432,82 @@
 			"file" : "pip/achievements/grey_tip.png",
 			"wrap" : false
 		},
+		"level_one_movement" : {
+			"file" : "pip/tutorial/level_one_movement.png",
+			"wrap" : false
+		},
+		"level_one_box" : {
+			"file" : "pip/tutorial/level_one_box.png",
+			"wrap" : false
+		},
+		"level_one_unbox" : {
+			"file" : "pip/tutorial/level_one_unbox.png",
+			"wrap" : false
+		},
+		"level_one_creature" : {
+			"file" : "pip/tutorial/level_one_creature.png",
+			"wrap" : false
+		},
+		"level_one_aggro" : {
+			"file" : "pip/tutorial/level_one_aggro.png",
+			"wrap" : false
+		},
+		"level_one_sigil" : {
+			"file" : "pip/tutorial/level_one_sigil.png",
+			"wrap" : false
+		},
+		"level_one_tremor" : {
+			"file" : "pip/tutorial/level_one_tremor.png",
+			"wrap" : false
+		},
+		"level_two_deactivate" : {
+			"file" : "pip/tutorial/level_two_deactivate.png",
+			"wrap" : false
+		},
+		"level_two_deactivate2" : {
+			"file" : "pip/tutorial/level_two_deactivate2.png",
+			"wrap" : false
+		},
+		"level_two_stand" : {
+			"file" : "pip/tutorial/level_two_stand2.png",
+			"wrap" : false
+		},
+		"level_two_try" : {
+			"file" : "pip/tutorial/level_two_try.png",
+			"wrap" : false
+		},
+		"level_two_walk" : {
+			"file" : "pip/tutorial/level_two_walk.png",
+			"wrap" : false
+		},
+		"level_two_here" : {
+			"file" : "pip/tutorial/level_two_here.png",
+			"wrap" : false
+		},
+		"level_two_disappear" : {
+			"file" : "pip/tutorial/level_two_disappear.png",
+			"wrap" : false
+		},
+		"level_three_bird" : {
+			"file" : "pip/tutorial/level_three_bird.png",
+			"wrap" : false
+		},
+		"level_three_center" : {
+			"file" : "pip/tutorial/level_three_center.png",
+			"wrap" : false
+		},
+		"level_three_safe" : {
+			"file" : "pip/tutorial/level_three_safe.png",
+			"wrap" : false
+		},
+		"level_four_phase" : {
+			"file" : "pip/tutorial/level_four_phase.png",
+			"wrap" : false
+		},
+		"level_four_dame" : {
+			"file" : "pip/tutorial/level_four_dame.png",
+			"wrap" : false
+		},
 	},
 	"fonts": {
 		"display": {
