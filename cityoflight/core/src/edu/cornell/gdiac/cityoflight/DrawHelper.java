@@ -111,13 +111,13 @@ public class DrawHelper {
             TextureRegion level_one_sigil = JsonAssetManager.getInstance().getEntry("level_one_sigil", TextureRegion.class);
             TextureRegion level_one_tremor = JsonAssetManager.getInstance().getEntry("level_one_tremor", TextureRegion.class);
             //System.out.println("LEVEL ONE");
-            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 2.5){
+            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 1.5){
                 //System.out.println("drawing movement");
                 canvas.begin(level.oTran);
                 canvas.draw(level_one_movement,10,380);
                 canvas.end();
             }
-            if (level.getAnnette().getPosition().x >= 2.5 && level.getAnnette().getPosition().x < 7){
+            if (level.getAnnette().getPosition().x >= 1.5 && level.getAnnette().getPosition().x < 7){
                 canvas.begin(level.oTran);
 
                 if (isSeen && level.getBox().getDoesExist() == false) {
@@ -132,7 +132,7 @@ public class DrawHelper {
                 }
                 canvas.end();
             }
-            if (level.getAnnette().getPosition().x >= 8 && level.getAnnette().getPosition().x < 9) {
+            if (level.getAnnette().getPosition().x >= 7 && level.getAnnette().getPosition().x < 9) {
                 canvas.begin(level.oTran);
                 canvas.draw(level_one_sigil,500,120);
                 canvas.end();
@@ -227,9 +227,9 @@ public class DrawHelper {
                 canvas.end();
             }
 
-            if (level.getAnnette().getPosition().y > 11 && level.getAnnette().getPosition().x < 5){
+            if (level.getAnnette().getPosition().y > 11){
                 canvas.begin(level.oTran);
-                canvas.draw(level_four_phase,450,700);
+                canvas.draw(level_four_phase,300,700);
                 canvas.end();
             }
         }
