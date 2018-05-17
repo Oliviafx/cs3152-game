@@ -1831,6 +1831,8 @@ public class LevelModel {
 		switch ((int)bounds.getWidth()) {
 			case 14: cameraXEnd = canvas.getWidth() * 0.5f / scale.x;
 				break;
+            case 15: cameraXEnd = canvas.getWidth() * 0.575f / scale.x;
+                break;
             case 18: cameraXEnd = canvas.getWidth() * 0.79f / scale.x;
                 break;
 			case 21: cameraXEnd = canvas.getWidth() * 1.0f / scale.x;
