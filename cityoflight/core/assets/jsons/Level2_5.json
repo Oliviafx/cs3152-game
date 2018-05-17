@@ -717,7 +717,7 @@
           "visible":true,
           "width":64,
           "x":704,
-          "y":256
+          "y":262
         },
         {
           "height":40,
@@ -728,7 +728,7 @@
           "visible":true,
           "width":64,
           "x":704,
-          "y":212
+          "y":218
         },
         {
           "gid":169,
@@ -748,7 +748,7 @@
           "visible":true,
           "width":64,
           "x":704,
-          "y":304
+          "y":300
         },
         {
           "height":40,
@@ -759,7 +759,7 @@
           "visible":true,
           "width":64,
           "x":704,
-          "y":260
+          "y":256
         },
         {
           "gid":169,
@@ -779,7 +779,7 @@
           "visible":true,
           "width":64,
           "x":704,
-          "y":208
+          "y":224
         },
         {
           "height":40,
@@ -790,7 +790,7 @@
           "visible":true,
           "width":64,
           "x":704,
-          "y":164
+          "y":180
         },
         {
           "gid":168,
@@ -810,7 +810,7 @@
           "visible":true,
           "width":64,
           "x":640,
-          "y":288
+          "y":284
         },
         {
           "height":40,
@@ -821,7 +821,7 @@
           "visible":true,
           "width":64,
           "x":640,
-          "y":244
+          "y":240
         },
         {
           "gid":168,
@@ -841,7 +841,7 @@
           "visible":true,
           "width":64,
           "x":640,
-          "y":240
+          "y":236
         },
         {
           "height":40,
@@ -852,7 +852,7 @@
           "visible":true,
           "width":64,
           "x":640,
-          "y":196
+          "y":192
         },
         {
           "gid":168,
@@ -1110,22 +1110,12 @@
           "width":0,
           "x":321,
           "y":280
-        }],
-      "opacity":1,
-      "type":"objectgroup",
-      "visible":true,
-      "x":0,
-      "y":0
-    },
-    {
-      "draworder":"topdown",
-      "name":"Snail",
-      "objects":[
+        },
         {
-          "gid":80,
-          "height":64,
-          "id":458,
-          "name":"snail1",
+          "gid":188,
+          "height":86,
+          "id":465,
+          "name":"tarasque2",
           "properties":
           {
             "bodytype":"dynamic",
@@ -1134,12 +1124,12 @@
             "debugopacity":192,
             "excludeBits":"0000",
             "startframe":0,
-            "texture":"snail",
-            "texture2":"snail_down",
-            "texture3":"snail_up",
+            "texture":"tarasque",
+            "texture2":"tarasque_down",
+            "texture3":"tarasque_up",
             "turn":1,
-            "type":1,
-            "xinput":-125,
+            "type":2,
+            "xinput":300,
             "yinput":0
           },
           "propertytypes":
@@ -1161,31 +1151,31 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":117,
-          "x":768,
-          "y":238
+          "width":129,
+          "x":752,
+          "y":217
         },
         {
-          "height":75,
-          "id":459,
-          "name":"snail_box1",
+          "height":81,
+          "id":463,
+          "name":"tarasque_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":59,
-          "x":789,
-          "y":176
+          "width":40,
+          "x":793,
+          "y":151
         },
         {
           "height":0,
-          "id":460,
-          "name":"snail_vision1",
+          "id":464,
+          "name":"dragon_vision2",
           "properties":
           {
             "a":0.3,
-            "angle":85,
+            "angle":4,
             "b":0.5,
-            "distance":4,
+            "distance":25,
             "excludeBits":"0010",
             "facing":90,
             "g":0.2,
@@ -1210,8 +1200,8 @@
           "type":"",
           "visible":true,
           "width":0,
-          "x":821,
-          "y":222
+          "x":814,
+          "y":207
         }],
       "opacity":1,
       "type":"objectgroup",
@@ -1409,7 +1399,7 @@
         }],
       "opacity":1,
       "type":"objectgroup",
-      "visible":true,
+      "visible":false,
       "x":0,
       "y":0
     },
@@ -1538,7 +1528,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":462,
+  "nextobjectid":466,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
