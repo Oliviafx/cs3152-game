@@ -164,7 +164,7 @@ public class DrawHelper {
             TextureRegion level_two_boxhere = JsonAssetManager.getInstance().getEntry("level_two_boxhere", TextureRegion.class);
 
             if (level.getBox().getDoesExist()){
-                if (level.getBox().getDeactivated()){
+                if (level.getBox().getDeactivated() && level.getBox().getPosition().x < 10){
                     canvas.begin(level.oTran);
                     canvas.draw(level_two_deactivate, 220, 400);
                     canvas.draw(level_two_deactivate2, 220, 100);
@@ -178,13 +178,14 @@ public class DrawHelper {
                     canvas.draw(level_two_tail, 150, 100);
                     canvas.end();
                 }
-                if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y > 5.5) {
+                if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y > 5.2) {
                     canvas.begin(level.oTran);
                     canvas.draw(level_two_stand, 600, 100);
                     canvas.draw(level_two_try, 350, 100);
                     canvas.end();
                 }
-                if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y <= 5.5 && level.getAnnette().getPosition().x < 11){
+                if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y <= 5.5
+                        && level.getAnnette().getPosition().x < 11 && level.getAnnette().getY() > 5){
                     canvas.begin(level.oTran);
                     canvas.draw(level_two_walk, 300, 300);
                     canvas.end();
