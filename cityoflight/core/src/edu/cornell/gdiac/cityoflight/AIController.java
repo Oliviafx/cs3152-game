@@ -477,11 +477,17 @@ public class AIController{
      */
     public boolean canSeeAnnette(){
         AnnetteModel annette = level.getAnnette();
-        return (light.contains(annette.getX(), annette.getY())||
-                light.contains(annette.getX()-annette.getWidth()/2, annette.getY()-annette.getHeight()/2)||
-                light.contains(annette.getX()-annette.getWidth()/2, annette.getY()+annette.getHeight()/2)||
-                light.contains(annette.getX()+annette.getWidth()/2, annette.getY()-annette.getHeight()/2)||
-                light.contains(annette.getX()+annette.getWidth()/2, annette.getY()+annette.getHeight()/2));
+//        return (light.contains(annette.getX(), annette.getY() + annette.getHeight()));
+//        return (light.contains(annette.getX(), annette.getY())||
+//                light.contains(annette.getX()-annette.getWidth()/2, annette.getY()-annette.getHeight()/2)||
+//                light.contains(annette.getX()-annette.getWidth()/2, annette.getY()+annette.getHeight()/2)||
+//                light.contains(annette.getX()+annette.getWidth()/2, annette.getY()-annette.getHeight()/2)||
+//                light.contains(annette.getX()+annette.getWidth()/2, annette.getY()+annette.getHeight()/2));
+        return (light.contains(annette.getX(), annette.getY() + annette.getHeight())||
+                light.contains(annette.getX()-annette.getWidth()/2, annette.getY()-annette.getHeight()/2 + annette.getHeight())||
+                light.contains(annette.getX()-annette.getWidth()/2, annette.getY()+annette.getHeight()/2 + annette.getHeight())||
+                light.contains(annette.getX()+annette.getWidth()/2, annette.getY()-annette.getHeight()/2 + annette.getHeight())||
+                light.contains(annette.getX()+annette.getWidth()/2, annette.getY()+annette.getHeight()/2 + annette.getHeight()));
     }
 
     public void turnVisionRed(){
