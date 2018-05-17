@@ -1,6 +1,5 @@
 # CS3152: City of Light
 
-**TECHNICAL PROTOTYPE RELEASE IS ON THE BRANCH LABELED 'amanda'**
 
 ## Fire Works (Group 9)
 * Amanda Trang (at668)
