@@ -190,7 +190,6 @@ public class DrawHelper {
             TextureRegion level_three_safe = JsonAssetManager.getInstance().getEntry("level_three_safe", TextureRegion.class);
 
             if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 3.5){
-                //System.out.println("drawing movement");
                 canvas.begin(level.oTran);
                 canvas.draw(level_three_bird,10,380);
                 canvas.end();
@@ -205,9 +204,25 @@ public class DrawHelper {
             }
 
             if (level.getAnnette().getPosition().x > 11 && level.getAnnette().getPosition().x < 13.5){
-                //System.out.println("drawing movement");
                 canvas.begin(level.oTran);
                 canvas.draw(level_three_center,800,400);
+                canvas.end();
+            }
+        }
+
+        if (whichlevel == 4) {
+            TextureRegion level_four_phase = JsonAssetManager.getInstance().getEntry("level_four_phase", TextureRegion.class);
+            TextureRegion level_four_dame = JsonAssetManager.getInstance().getEntry("level_four_dame", TextureRegion.class);
+
+            if (isSeen && level.getAnnette().getPosition().y < 5 && level.getAnnette().getPosition().x < 5){
+                canvas.begin(level.oTran);
+                canvas.draw(level_four_dame,450,380);
+                canvas.end();
+            }
+
+            if (level.getAnnette().getPosition().y > 11 && level.getAnnette().getPosition().x < 5){
+                canvas.begin(level.oTran);
+                canvas.draw(level_four_phase,450,700);
                 canvas.end();
             }
         }

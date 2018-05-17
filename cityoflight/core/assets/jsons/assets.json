@@ -500,6 +500,14 @@
 			"file" : "pip/tutorial/level_three_safe.png",
 			"wrap" : false
 		},
+		"level_four_phase" : {
+			"file" : "pip/tutorial/level_four_phase.png",
+			"wrap" : false
+		},
+		"level_four_dame" : {
+			"file" : "pip/tutorial/level_four_dame.png",
+			"wrap" : false
+		},
 	},
 	"fonts": {
 		"display": {
