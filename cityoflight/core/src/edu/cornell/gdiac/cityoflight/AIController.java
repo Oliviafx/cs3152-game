@@ -543,7 +543,18 @@ public class AIController{
 
             int dir = (Math.abs(x_diff) > Math.abs(y_diff)) ? 0 : 1; // 0: move horizontally; 1: vertical: move horizontally
 
+            if (rand()) {
+                if (dir == 0 && creature.getStuck()) {
+                    dir = 1;
+                }
+                if (dir == 0 && creature.getStuck()) {
+                    dir = 10;
+                }
+            }
+
             if (dir == 0) {
+
+
                 nextMove.y = 0;
 
                 if (x_diff >= 0) {
@@ -555,6 +566,7 @@ public class AIController{
                 }
 
             } else if (dir == 1) {
+
                 nextMove.x = 0;
 
                 if (y_diff >= 0) {
@@ -656,9 +668,8 @@ public class AIController{
         return creature.getDistracted();
     }
 
-    public boolean turnRight(){
-//        return (Math.random() > 0.5);
-        return (true);
+    public boolean rand(){
+      return (Math.random() > 0.7);
     }
 
 }
