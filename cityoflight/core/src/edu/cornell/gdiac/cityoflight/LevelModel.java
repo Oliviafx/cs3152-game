@@ -1437,7 +1437,7 @@ public class LevelModel {
                 distraction.setDrawScale(scale);
                 activate(distraction);
                 distraction.setActive(true);
-                distraction.setAlive(true);
+                distraction.setAlive(false);
             }
         }
 
@@ -1458,7 +1458,7 @@ public class LevelModel {
 				distraction.setDrawScale(scale);
 				activate(distraction);
 				distraction.setActive(true);
-				distraction.setAlive(true);
+				distraction.setAlive(false);
 			}
 		}
 
