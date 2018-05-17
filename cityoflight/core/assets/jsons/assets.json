@@ -488,6 +488,18 @@
 			"file" : "pip/tutorial/level_two_disappear.png",
 			"wrap" : false
 		},
+		"level_three_bird" : {
+			"file" : "pip/tutorial/level_three_bird.png",
+			"wrap" : false
+		},
+		"level_three_center" : {
+			"file" : "pip/tutorial/level_three_center.png",
+			"wrap" : false
+		},
+		"level_three_safe" : {
+			"file" : "pip/tutorial/level_three_safe.png",
+			"wrap" : false
+		},
 	},
 	"fonts": {
 		"display": {
