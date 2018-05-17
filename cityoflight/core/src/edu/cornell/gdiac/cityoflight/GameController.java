@@ -83,6 +83,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean hasUsedWalking = false;
 	private boolean hasUsedWalkingEffectively = false;
 
+	private boolean endSoundhasPlayed = false;
+
 	private PauseMode pause;
 	private MenuMode menu;
 
@@ -241,7 +243,7 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void setComplete(boolean value) {
 		if (value) {
-			countdown = EXIT_COUNT;
+			countdown = EXIT_COUNT + 200;
 		}
 		complete = value;
 	}
@@ -265,7 +267,7 @@ public class GameController implements Screen, ContactListener {
 	 * @param value whether the level is failed.
 	 */
 	public void setFailure(boolean value) {
-		if (value) {
+		if (value && !failed) {
 			countdown = EXIT_COUNT;
 		}
 		failed = value;
@@ -403,6 +405,7 @@ public class GameController implements Screen, ContactListener {
 
 		level.resetAchievements();
 		LEVEL_TIME_LIMIT = 1200;
+		endSoundhasPlayed = false;
 	}
 
 	/**
@@ -434,6 +437,12 @@ public class GameController implements Screen, ContactListener {
 		// Handle resets
 		if (input.didReset()) {
 			reset();
+		}
+
+		if (complete){
+			if (input.didSpace()){
+				countdown = 20;
+			}
 		}
 
 		if (input.didMute()) {
@@ -803,16 +812,23 @@ public class GameController implements Screen, ContactListener {
 				if (level.getAchievementType1() == 6){level.setGetAchievement1(false);}
 				if (level.getAchievementType2() == 6){level.setGetAchievement2(false);}
 			}
-
-
+			if (!endSoundhasPlayed) {
+				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f, soundPlay);
+				endSoundhasPlayed = true;
+			}
 			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas, textFont,1);
 				drawHelper.drawTopAchievement(canvas,level.didGetAchievement1(),level.getAchievementType1());
 				drawHelper.drawBottomAchievement(canvas,level.didGetAchievement2(),level.getAchievementType2());
 			}
 			//drawHelper.drawGeneralTransition(canvas);
+
 			drawHelper.drawLevelTransition(canvas,level,1);
 		} else if (failed) {
+			if (!endSoundhasPlayed) {
+				sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f, soundPlay);
+				endSoundhasPlayed = true;
+			}
 			if (drawHelper.get_win_transition_second_part()) {
 				drawHelper.drawEndScreen(canvas,textFont,0);
 			}
@@ -956,11 +972,12 @@ public class GameController implements Screen, ContactListener {
 
 			// win state
 			if ((sf1.contains("center") && bd2 == door) || (sf2.contains("center") && bd1 == door)) {
-				setComplete(true);
+				if (!failed) {
+					setComplete(true);
+				}
 //				if (soundPlay) {
 //					sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f);
 //				}
-				sound.play("win_effect", "sounds/win_effect.wav", false, 0.5f, soundPlay);
 			}
 
 			//collision with creature lose state
@@ -970,9 +987,10 @@ public class GameController implements Screen, ContactListener {
 //						if (soundPlay) {
 //							sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f);
 //						}
-						sound.play("lose_effect", "sounds/lose_effect.wav", false, 0.5f, soundPlay);
 					}
-					setFailure(true);
+					if (!complete) {
+						setFailure(true);
+					}
 				}
 			}
 
