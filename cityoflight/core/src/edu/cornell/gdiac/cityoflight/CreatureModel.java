@@ -98,6 +98,7 @@ public class CreatureModel extends BoxObstacle {
     private int turnBehavior = 1;
 
     private float dragon_y_offset = -20;
+    private float snail_y_offset = -10;
 
     /** constants for creature characteristics */
 
@@ -452,6 +453,7 @@ public class CreatureModel extends BoxObstacle {
         if(type != 2)
             dragon_y_offset = 0f;
 
+
         setXInput(json.get("xinput").asFloat());
         setYInput(json.get("yinput").asFloat());
 
@@ -632,7 +634,7 @@ public class CreatureModel extends BoxObstacle {
                 }
                 else if (type == 1 && (dirTexture == upAnim || dirTexture == downAnim)) {
 //                    System.out.println("here");
-                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 20,
+                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset-20,
                             0, 0.75f * isReflected, 0.75f);
                 }
                 else if (type == 1 && (dirTexture == sideAnim)) {
