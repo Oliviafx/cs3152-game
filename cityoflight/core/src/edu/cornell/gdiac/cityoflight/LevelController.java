@@ -326,11 +326,19 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                     canvas.draw(level9tex, Color.WHITE, level9.getWidth(), level9.getHeight(),
                             542 + level9.getWidth()/2 - buttonOffX, 512-306 + level9.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
+                if (hover10) {
+                    canvas.draw(level10hover, Color.WHITE, level10hover.getWidth(), level10hover.getHeight(),
+                            695 + level10hover.getWidth()/2 - hoverOffX, 512-306 + level10hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                }
+                else {
+                    canvas.draw(level10tex, Color.WHITE, level10.getWidth(), level10.getHeight(),
+                            695 + level10.getWidth()/2 - buttonOffX, 512-306 + level10.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                }
                 if (locktex != null) {
 //                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
 //                            542 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            695 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
+//                            695 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 //                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
 //                            98 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 //                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
@@ -473,6 +481,14 @@ public class LevelController implements Screen, ControllerListener, ContactListe
             level9hover = new Texture(LEVEL_9_HOVER);
             level9hover.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
+        if (level10tex == null) {
+            level10tex = new Texture(LEVEL_10);
+            level10tex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
+        if (level10hover == null) {
+            level10hover = new Texture(LEVEL_10_HOVER);
+            level10hover.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
         if (locktex == null) {
             locktex = new Texture(LOCK_FILE);
             locktex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -511,6 +527,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private TextButton level7;
     private TextButton level8;
     private TextButton level9;
+    private TextButton level10;
     private TextButton menubutton;
     private TextButton startbutton;
     public void create () {
@@ -757,6 +774,29 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 hover9 = false;
             }
         });
+        level10 = new TextButton("", style);
+        level10.setPosition(695, 512-306 - offset);
+        level10.setHeight(100);
+        level10.setWidth(100);
+        level10.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                startSound.play();
+            }
+        });
+        level10.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter??");
+                hover10 = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit??");
+                hover10 = false;
+            }
+        });
 
         menubutton = new TextButton("", style);
         menubutton.setPosition(312, 28);
@@ -818,6 +858,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         stage.addActor(level7);
         stage.addActor(level8);
         stage.addActor(level9);
+        stage.addActor(level10);
         stage.addActor(menubutton);
         stage.addActor(startbutton);
     }
