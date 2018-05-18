@@ -856,7 +856,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 listener.exitScreen(this, 1);
             }
             if ((goLevelOne() || goLevelTwo() || goLevelThree() || goLevelFour() || goLevelFive() || goLevelSix() ||
-                    goLevelSeven() || goLevelEight() || goLevelNine())
+                    goLevelSeven() || goLevelEight()) //|| goLevelNine())
                     && listener != null) {
                 listener.exitScreen(this, 2);
             }
