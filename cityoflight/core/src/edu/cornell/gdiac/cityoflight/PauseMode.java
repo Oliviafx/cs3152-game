@@ -174,6 +174,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         if (stage != null) {
             playbutton = null;
             quitbutton = null;
+            musicbutton = null;
+            soundbutton = null;
 //            stage.dispose();
         }
     }
@@ -351,52 +353,80 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
 //                System.out.println("quit state 2");
-                quitState = 2;
-                sound.stop("");
+                sound.stop("seen_effect");
                 sound.play("seen_effect", "sounds/seen_effect.wav", false, 0.7f, isSound);
+                quitState = 2;
                 return false;
             }
 
         });
         quitbutton.addListener(new ClickListener() {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                System.out.println("enter quit");
+//                System.out.println("enter quit");
                 hoverquit = true;
             }
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                System.out.println("exit quit");
+//                System.out.println("exit quit");
                 hoverquit = false;
             }
         });
 
         musicbutton = new TextButton("", style);
         musicbutton.setPosition(725, 300);
-        musicbutton.setHeight(148 / 2);
-        musicbutton.setWidth(123 / 2);
+        musicbutton.setHeight(148);
+        musicbutton.setWidth(123);
         musicbutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                System.out.println("music touchdown");
+                if (isMusic) {
+                    isMusic = false;
+//                System.out.println("ISMUSIC FALSE");
+                }
+                else {
+                    isMusic = true;
+//                System.out.println("ISMUSIC TRUE");
+                    sound.stop("click_effect");
+                    sound.play("click_effect", "sounds/click_effect.wav", false, 0.7f, true);
+                }
                 return true;
             }
-
+//            return true;
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+//                Gdx.app.log("my app", "Released");
 
             }
         });
-//        isMusic = true;
+        musicbutton.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter??");
+//                hoverplay = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit??");
+//                hoverplay = false;
+            }
+        });
         soundbutton = new TextButton("", style);
         soundbutton.setPosition(730, 250);
-        soundbutton.setHeight(108 / 2);
-        soundbutton.setWidth(127 / 2);
+        soundbutton.setHeight(108);
+        soundbutton.setWidth(127);
         soundbutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+//                return true;
+                if (isSound) {
+                    isSound = false;
+                }
+                else {
+                    isSound = true;
+                    sound.stop("click_effect");
+                    sound.play("click_effect", "sounds/click_effect.wav", false, 0.7f, true);
+                }
                 return true;
             }
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+//                Gdx.app.log("my app", "Released");
             }
         });
 //        isSound = true;

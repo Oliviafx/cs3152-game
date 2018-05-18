@@ -75,7 +75,7 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
-	private int LEVEL_TIME_LIMIT = 3000;
+	private int LEVEL_TIME_LIMIT = 5000;
 	private boolean daredevil;
 	private boolean daredevilSet = false;
 	private boolean hasUsedBox = false;
@@ -365,34 +365,34 @@ public class GameController implements Screen, ContactListener {
 		setFailure(false);
 		countdown = -1;
 		// Reload the json each time
-		if (whichlevel == 1) {
+		if (whichlevel == 2) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1_5.json"));
 		}
-		if (whichlevel == 2) {
+		if (whichlevel == 3) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2_5.json"));
 		}
-		if (whichlevel == 3) {
+		if (whichlevel == 4) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level3_5.json"));
 		}
-		if (whichlevel == 4) {
+		if (whichlevel == 5) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level4_5.json"));
 		}
-		if (whichlevel == 5) {
+		if (whichlevel == 6) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level5_5.json"));
 		}
-		if (whichlevel == 6) {
+		if (whichlevel == 7) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/lvl_num.json"));
 		}
-		if (whichlevel == 7) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Emmalevel.json"));
-		}
 		if (whichlevel == 8) {
-			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level11.json"));
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Emmalevel.json"));
 		}
 		if (whichlevel == 9) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level10.json"));
 		}
-		if (whichlevel == 0) {
+		if (whichlevel == 10) {
+			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level11.json"));
+		}
+		if (whichlevel == 1) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level0.json"));
 		}
 		// CHANGE THIS IF YOU ADD LEVELS
@@ -541,7 +541,7 @@ public class GameController implements Screen, ContactListener {
 				bgm.play();
 				det_bgm.play();
 			}
-			if (detectedPlay) {
+			if (detectedPlay && !complete) {
 				det_bgm.setVolume(0.3f);
 				bgm.setVolume(0.0f);
 				det_bgm.setVolume(0.6f);
