@@ -274,7 +274,85 @@ public class DrawHelper {
             }
         }
 
+        if (whichlevel == 9){
+            TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
+            TextureRegion story01 = JsonAssetManager.getInstance().getEntry("story01", TextureRegion.class);
+            TextureRegion story02 = JsonAssetManager.getInstance().getEntry("story02", TextureRegion.class);
+            TextureRegion story03 = JsonAssetManager.getInstance().getEntry("story03", TextureRegion.class);
+            TextureRegion story04 = JsonAssetManager.getInstance().getEntry("story04", TextureRegion.class);
+            TextureRegion story05 = JsonAssetManager.getInstance().getEntry("story05", TextureRegion.class);
+            TextureRegion story06 = JsonAssetManager.getInstance().getEntry("story06", TextureRegion.class);
+            TextureRegion story07 = JsonAssetManager.getInstance().getEntry("story07", TextureRegion.class);
+            TextureRegion story08 = JsonAssetManager.getInstance().getEntry("story08", TextureRegion.class);
+            TextureRegion story09 = JsonAssetManager.getInstance().getEntry("story09", TextureRegion.class);
+            TextureRegion story10 = JsonAssetManager.getInstance().getEntry("story10", TextureRegion.class);
+            TextureRegion story11 = JsonAssetManager.getInstance().getEntry("story11", TextureRegion.class);
+            TextureRegion story12 = JsonAssetManager.getInstance().getEntry("story12", TextureRegion.class);
+            TextureRegion story13 = JsonAssetManager.getInstance().getEntry("story13", TextureRegion.class);
+            TextureRegion story14 = JsonAssetManager.getInstance().getEntry("story14", TextureRegion.class);
+            TextureRegion story15 = JsonAssetManager.getInstance().getEntry("story15", TextureRegion.class);
+            TextureRegion shade = JsonAssetManager.getInstance().getEntry("shade", TextureRegion.class);
+            System.out.println (level.getAnnette().getPosition().x +", " +level.getAnnette().getPosition().y);
 
+            canvas.begin(level.oTran);
+            if (level.getAnnette().getPosition().x < 5 && level.getAnnette().getPosition().y > 23){
+                canvas.draw(level_one_movement,150, 1350);
+            }
+            if (level.getAnnette().getPosition().x >= 6 && level.getAnnette().getPosition().y > 22.8){
+                canvas.draw(story01,150, 1500);
+            }
+            if (level.getAnnette().getPosition().y <= 22.8  && level.getAnnette().getPosition().y > 21.5){
+                canvas.draw(story02,150, 1400);
+            }
+            if (level.getAnnette().getPosition().y <= 21.5  && level.getAnnette().getPosition().y > 20.2){
+                canvas.draw(story03,550, 1300);
+            }
+            if (level.getAnnette().getPosition().y <= 20.2  && level.getAnnette().getPosition().y > 18.5){
+                canvas.draw(story04,50, 1220);
+            }
+
+            if (level.getAnnette().getPosition().y <= 18.5){
+                canvas.draw(shade, Color.WHITE,896f,512.5f,
+                        (level.getAnnette().getX() * level.scale.x),
+                        (level.getAnnette().getY() * level.scale.y), 0f, 1.0f, 1.0f);
+            }
+
+            if (level.getAnnette().getPosition().y <= 18.5  && level.getAnnette().getPosition().y > 17){
+                canvas.draw(story05,200, 1120);
+            }
+            if (level.getAnnette().getPosition().y <= 17  && level.getAnnette().getPosition().x > 5.5 && level.getAnnette().getPosition().y > 16){
+                canvas.draw(story06,200, 1120);
+            }
+            if (level.getAnnette().getPosition().x <= 5.5  && level.getAnnette().getPosition().y > 15.5 && level.getAnnette().getPosition().y < 17){
+                canvas.draw(story07,450, 1020);
+            }
+            if (level.getAnnette().getPosition().y <= 15.5  && level.getAnnette().getPosition().y > 14){
+                canvas.draw(story08,0, 900);
+            }
+            if (level.getAnnette().getPosition().y <= 14  && level.getAnnette().getPosition().y > 13){
+                canvas.draw(story09,600, 800);
+            }
+            if (level.getAnnette().getPosition().y <= 13  && level.getAnnette().getPosition().y > 11){
+                canvas.draw(story10,550, 700);
+            }
+            if (level.getAnnette().getPosition().y <= 11  && level.getAnnette().getPosition().y > 9.5 && level.getAnnette().getPosition().x <= 10){
+                canvas.draw(story11,100, 600);
+            }
+            if ((level.getAnnette().getPosition().y <= 11  && level.getAnnette().getPosition().y > 9 && level.getAnnette().getPosition().x > 10) ||
+               (level.getAnnette().getPosition().y <= 9  && level.getAnnette().getPosition().y > 8.5 && level.getAnnette().getPosition().x < 6.25)){
+                canvas.draw(story12,150, 600);
+            }
+            if (level.getAnnette().getPosition().y <= 8.5  && level.getAnnette().getPosition().y > 7){
+                canvas.draw(story13,250, 450);
+            }
+            if (level.getAnnette().getPosition().y <= 7  && level.getAnnette().getPosition().y > 5){
+                canvas.draw(story14,250, 300);
+            }
+            if (level.getAnnette().getPosition().y <= 5  && level.getAnnette().getPosition().y > 2.8){
+                canvas.draw(story15,275, 140);
+            }
+            canvas.end();
+        }
     }
 
     /**
