@@ -33,11 +33,11 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
     private static final String BACKGROUND_FILE = "help/help_ui_top_menu.png";
     private static final String CONTROLS_FILE = "help/help_ui_controls.png";
     private static final String CREATURE_SELECTION_FILE = "help/help_ui_top menu (hover).png";
-    private static final String BACK_FILE = "textures/menu assets/help.png";
+    private static final String BACK_FILE = "pip/help/back.png";
     private static final String LOU_CARCOLH_FILE = "help/help_ui_lou carcolh.png";
     private static final String TARASQUE_FILE = "help/help_ui_tarasque.png";
     private static final String DAME_BLANCHE_FILE = "help/help_ui_dame blanche.png";
-    private static final String MENU_FILE = "textures/level select assets/menu_button.png";
+    private static final String MENU_FILE = "pip/help/back.png";
 
 //    private static final String PLAY_BTN_FILE = "textures/resume.png";
 //    private static final String QUIT_BTN_FILE = "textures/quit.png";
@@ -308,7 +308,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //                System.out.println("here");
                 Color tint2 = (exitState == 1 ? Color.WHITE : Color.BLACK);
                 canvas.draw(exitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                        creatureX + exitButton.getWidth(), creatureY + exitButton.getHeight()-270, 0, 1f, 1f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                        creatureX + exitButton.getWidth() - 80, creatureY + exitButton.getHeight()-270, 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
             }
         }
         else if (showControls) {
@@ -318,7 +318,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //                System.out.println("here");
                 Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
                 canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                        creatureX + quitButton.getWidth() - 80, creatureY + quitButton.getHeight()-270, 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
             }
         }
         else if (showCreatureSelect) {
@@ -327,7 +327,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //                System.out.println("here");
                 Color tint2 = (exitState == 1 ? Color.WHITE : Color.BLACK);
                 canvas.draw(exitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                        creatureX + exitButton.getWidth(), creatureY + exitButton.getHeight()-270, 0, 1f, 1f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                        creatureX + exitButton.getWidth() - 80, creatureY + exitButton.getHeight()-270, 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
             }
         }
         else if (showSnail) {
@@ -336,7 +336,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //                System.out.println("here");
                 Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
                 canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                        creatureX + quitButton.getWidth() - 80, creatureY + quitButton.getHeight()-270, 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
             }
         }
         else if (showTarasque) {
@@ -345,7 +345,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //                System.out.println("here");
                 Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
                 canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                        creatureX + quitButton.getWidth() - 80, creatureY + quitButton.getHeight()-270, 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
             }
         }
         else if (showLady) {
@@ -354,7 +354,7 @@ public class HelpMode implements Screen, ControllerListener, ContactListener, In
 //                System.out.println("here");
                 Color tint2 = (creatureState == 1 ? Color.GRAY : Color.WHITE);
                 canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                        creatureX + quitButton.getWidth(), creatureY + quitButton.getHeight()-270, 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                        creatureX + quitButton.getWidth() -80, creatureY + quitButton.getHeight()-270, 0, 0.5f, 0.5f);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
             }
         }
         Color tint = (controlState == 1 ? Color.GRAY: Color.WHITE);

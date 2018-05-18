@@ -185,6 +185,36 @@
 				"first": 1
 			}
 		},
+		"annetteBoxUp": {
+			"file": "textures/annette_box_back.png",
+			"wrap": false,
+			"strip": {
+				"size": 4,
+				"rows": 1,
+				"cols": 4,
+				"first": 1
+			}
+		},
+		"annetteBoxDown": {
+			"file": "textures/annette_box_front.png",
+			"wrap": false,
+			"strip": {
+				"size": 4,
+				"rows": 1,
+				"cols": 4,
+				"first": 1
+			}
+		},
+		"annetteBoxSide": {
+			"file": "textures/annette_box_side.png",
+			"wrap": false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 1
+			}
+		},
 		"snail": {
 			"file": 	"textures/SnailSide.png",
 			"wrap":  	false,
@@ -468,6 +498,10 @@
 			"file" : "pip/tutorial/level_one_tremor.png",
 			"wrap" : false
 		},
+		"level_one_stand" : {
+			"file" : "pip/tutorial/level_one_stand.png",
+			"wrap" : false
+		},
 		"level_two_deactivate" : {
 			"file" : "pip/tutorial/level_two_deactivate.png",
 			"wrap" : false
@@ -478,6 +512,10 @@
 		},
 		"level_two_push" : {
 			"file" : "pip/tutorial/level_two_push.png",
+			"wrap" : false
+		},
+		"level_two_boxplace" : {
+			"file" : "pip/tutorial/level_two_boxplace.png",
 			"wrap" : false
 		},
 		"level_two_stand" : {
@@ -604,6 +642,10 @@
 			"file" : "pip/story/shade.png",
 			"wrap" : false
 		},
+		"creature_shade" : {
+			"file" : "pip/story/creature_shade.png",
+			"wrap" : false
+		},
 	},
 	"fonts": {
 		"display": {
@@ -618,9 +660,6 @@
 	"sounds": {
 		"box_effect": {
 			"file": "sounds/box_effect.wav"
-		},
-		"bg_test2_music": {
-			"file": "sounds/bg_test2_music.wav"
 		},
 		"win_effect": {
 			"file": "sounds/win_effect.wav"
@@ -652,9 +691,6 @@
 		"box_gone_effect": {
 			"file": "sounds/box_gone_effect.wav"
 		},
-		"120bpm_music": {
-			"file": "sounds/120bpm_music.wav"
-		}
 		"click_effect": {
 			"file": "sounds/click_effect.wav"
 		}

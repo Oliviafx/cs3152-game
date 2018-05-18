@@ -694,7 +694,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //                    drawcanvas.draw(playHover, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
 //                            playX - playButton.getWidth() / 5, playY - playButton.getHeight() / 3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                     drawcanvas.draw(playHover, Color.WHITE, playHover.getWidth() / 2, playHover.getHeight() / 2,
-                            playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                            playX, playY + 5, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 } else {
                     drawcanvas.draw(playButton, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
                             playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
@@ -704,7 +704,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //                    drawcanvas.draw(levelHover, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
 //                            levelX - levelButton.getWidth() / 6, levelY - levelButton.getHeight() / 2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                     drawcanvas.draw(levelHover, Color.WHITE, levelHover.getWidth() / 2, levelHover.getHeight() / 2,
-                            levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                            levelX, levelY + 5, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 } else {
                     drawcanvas.draw(levelButton, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
                             levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
@@ -724,7 +724,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 //                    drawcanvas.draw(quitHover, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
 //                            quitX - quitButton.getWidth(), quitY - quitButton.getHeight() / 4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                     drawcanvas.draw(quitHover, Color.WHITE, quitHover.getWidth() / 2, quitHover.getHeight() / 2,
-                            quitX, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                            quitX, quitY + 10, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
 
                 } else {
                     drawcanvas.draw(quitButton, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
