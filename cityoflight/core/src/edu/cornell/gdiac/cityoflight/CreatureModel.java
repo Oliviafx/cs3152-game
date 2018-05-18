@@ -617,6 +617,16 @@ public class CreatureModel extends BoxObstacle {
                     canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 40,
                             0, 0.75f * isReflected, 0.75f);
                 }
+                if (type == 1 && (dirTexture == upAnim || dirTexture == downAnim)) {
+//                    System.out.println("here");
+                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 20,
+                            0, 0.75f * isReflected, 0.75f);
+                }
+//                else if (type == 1 && dirTexture == downAnim) {
+////                    System.out.println("here");
+//                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset + 20,
+//                            0, 0.75f * isReflected, 0.75f);
+//                }
                 else {
                     canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset,
                             0, 0.75f * isReflected, 0.75f);
