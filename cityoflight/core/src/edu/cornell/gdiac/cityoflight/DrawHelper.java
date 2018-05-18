@@ -178,10 +178,14 @@ public class DrawHelper {
             if (level.getBox().getDoesExist()){
                 if (level.getBox().getDeactivated() && level.getBox().getPosition().x < 10){
                     canvas.begin(level.oTran);
-                    canvas.draw(level_two_deactivate, 220, 400);
-                    canvas.draw(level_two_deactivate2, 220, 100);
-                    canvas.draw(level_two_disappear, 500, 100);
-                    canvas.draw(level_two_here, 500, 400);
+                    if (level.getAnnette().getPosition().x > 8 && level.getAnnette().getPosition().x < 10) {
+                        canvas.draw(level_two_deactivate, 220, 400);
+                        canvas.draw(level_two_deactivate2, 220, 100);
+                    }
+                    if (level.getAnnette().getPosition().x >= 10) {
+                        canvas.draw(level_two_disappear, 500, 100);
+                        canvas.draw(level_two_here, 500, 400);
+                    }
                     canvas.end();
                 }
                 if (level.getAnnette().getPosition().x > 3 && level.getAnnette().getPosition().x < 4){
@@ -210,12 +214,12 @@ public class DrawHelper {
             }
 
             if (!level.getBox().getDoesExist()){
-                if (level.getAnnette().getPosition().x > 2 && level.getAnnette().getPosition().x < 3.5){
+                if (level.getAnnette().getPosition().x > 1.5 && level.getAnnette().getPosition().x < 3){
                     canvas.begin(level.oTran);
                     canvas.draw(level_two_crate, 100, 425);
                     canvas.end();
                 }
-                if (level.getAnnette().getPosition().x >=3.5 && level.getAnnette().getPosition().x < 4){
+                if (level.getAnnette().getPosition().x >=3 && level.getAnnette().getPosition().x < 4){
                     canvas.begin(level.oTran);
                     canvas.draw(level_two_boxplace, 10, 200);
                     canvas.end();
@@ -299,7 +303,7 @@ public class DrawHelper {
             TextureRegion story14 = JsonAssetManager.getInstance().getEntry("story14", TextureRegion.class);
             TextureRegion story15 = JsonAssetManager.getInstance().getEntry("story15", TextureRegion.class);
             TextureRegion shade = JsonAssetManager.getInstance().getEntry("shade", TextureRegion.class);
-            System.out.println (level.getAnnette().getPosition().x +", " +level.getAnnette().getPosition().y);
+            //System.out.println (level.getAnnette().getPosition().x +", " +level.getAnnette().getPosition().y);
 
             canvas.begin(level.oTran);
             if (level.getAnnette().getPosition().x < 5 && level.getAnnette().getPosition().y > 23){
