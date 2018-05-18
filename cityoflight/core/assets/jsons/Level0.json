@@ -1345,6 +1345,14 @@
           "height":64,
           "id":644,
           "name":"building43",
+          "properties":
+          {
+            "texture":"64_building_short_left"
+          },
+          "propertytypes":
+          {
+            "texture":"string"
+          },
           "rotation":0,
           "type":"",
           "visible":true,
