@@ -168,6 +168,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     public void reset() {
         pressState = 0;
         quitState = 0;
+        hoverplay = false;
+        hoverquit = false;
 //        dispose();
         if (stage != null) {
             playbutton = null;
