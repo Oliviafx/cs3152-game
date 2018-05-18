@@ -172,6 +172,8 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private boolean hover9;
     private boolean hover10;
 
+    int offset = 50;
+
 //    private DrawHelper drawHelper;
 //    private static final String TRANSITION_FILE = "pip/transitions/general_transition_medium.png";
 //    public FilmStrip transition_strip;
@@ -224,7 +226,6 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
     public void draw(){
         float scaling = 0.5f;
-        int offset = 50;
         if (active) {
 //            if (drawHelper.get_general_transition_second_part()) {
                 canvas.begin();
@@ -317,9 +318,17 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                     canvas.draw(level8tex, Color.WHITE, level8.getWidth(), level8.getHeight(),
                             395 + level8.getWidth()/2 - buttonOffX, 512-306 + level8.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
+                if (hover9) {
+                    canvas.draw(level9hover, Color.WHITE, level9hover.getWidth(), level9hover.getHeight(),
+                            542 + level9hover.getWidth()/2 - hoverOffX, 512-306 + level9hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                }
+                else {
+                    canvas.draw(level9tex, Color.WHITE, level9.getWidth(), level9.getHeight(),
+                            542 + level9.getWidth()/2 - buttonOffX, 512-306 + level9.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                }
                 if (locktex != null) {
-                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            542 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
+//                            542 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                     canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
                             695 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 //                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
@@ -522,7 +531,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         style.font = font;
 
         level1 = new TextButton("", style);
-        level1.setPosition(98, 512-196);
+        level1.setPosition(98, 512-196 - offset);
         level1.setHeight(100);
         level1.setWidth(100);
         level1.addListener(new InputListener() {
@@ -549,7 +558,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
             }
         });
         level2 = new TextButton("", style);
-        level2.setPosition(244, 512-196);
+        level2.setPosition(244, 512-196 - offset);
         level2.setHeight(100);
         level2.setWidth(100);
         level2.addListener(new InputListener() {
@@ -574,7 +583,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
             }
         });
         level3 = new TextButton("", style);
-        level3.setPosition(395, 512-196);
+        level3.setPosition(395, 512-196 - offset);
         level3.setHeight(100);
         level3.setWidth(100);
         level3.addListener(new InputListener() {
@@ -600,7 +609,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
             }
         });
         level4 = new TextButton("", style);
-        level4.setPosition(542, 512-196);
+        level4.setPosition(542, 512-196 - offset);
         level4.setHeight(100);
         level4.setWidth(100);
         level4.addListener(new InputListener() {
@@ -625,7 +634,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
             }
         });
         level5 = new TextButton("", style);
-        level5.setPosition(695, 512-196);
+        level5.setPosition(695, 512-196 - offset);
         level5.setHeight(100);
         level5.setWidth(100);
         level5.addListener(new InputListener() {
@@ -651,7 +660,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         });
 
         level6 = new TextButton("", style);
-        level6.setPosition(98, 512-306);
+        level6.setPosition(98, 512-306 - offset);
         level6.setHeight(100);
         level6.setWidth(100);
         level6.addListener(new InputListener() {
@@ -677,7 +686,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         });
 
         level7 = new TextButton("", style);
-        level7.setPosition(244, 512-306);
+        level7.setPosition(244, 512-306 - offset);
         level7.setHeight(100);
         level7.setWidth(100);
         level7.addListener(new InputListener() {
@@ -703,7 +712,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         });
 
         level8 = new TextButton("", style);
-        level8.setPosition(395, 512-306);
+        level8.setPosition(395, 512-306 - offset);
         level8.setHeight(100);
         level8.setWidth(100);
         level8.addListener(new InputListener() {
@@ -726,7 +735,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
             }
         });
         level9 = new TextButton("", style);
-        level9.setPosition(542, 512-306);
+        level9.setPosition(542, 512-306 - offset);
         level9.setHeight(100);
         level9.setWidth(100);
         level9.addListener(new InputListener() {
@@ -857,7 +866,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 listener.exitScreen(this, 1);
             }
             if ((goLevelOne() || goLevelTwo() || goLevelThree() || goLevelFour() || goLevelFive() || goLevelSix() ||
-                    goLevelSeven() || goLevelEight()) || goLevelNine()
+                    goLevelSeven() || goLevelEight() || goLevelNine())
                     && listener != null) {
                 listener.exitScreen(this, 2);
             }
