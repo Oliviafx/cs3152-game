@@ -75,7 +75,7 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
-	private int LEVEL_TIME_LIMIT = 3000;
+	private int LEVEL_TIME_LIMIT = 5000;
 	private boolean daredevil;
 	private boolean daredevilSet = false;
 	private boolean hasUsedBox = false;
@@ -538,7 +538,7 @@ public class GameController implements Screen, ContactListener {
 				bgm.play();
 				det_bgm.play();
 			}
-			if (detectedPlay) {
+			if (detectedPlay && !complete) {
 				det_bgm.setVolume(0.3f);
 				bgm.setVolume(0.0f);
 				det_bgm.setVolume(0.6f);
