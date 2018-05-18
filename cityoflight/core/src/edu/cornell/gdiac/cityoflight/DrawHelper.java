@@ -102,7 +102,7 @@ public class DrawHelper {
 
     public void drawTutorial(ObstacleCanvas canvas, LevelModel level, int whichlevel, boolean isSeen){
 
-        if (whichlevel == 1){
+        if (whichlevel == 2){
             TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
             TextureRegion level_one_box = JsonAssetManager.getInstance().getEntry("level_one_box", TextureRegion.class);
             TextureRegion level_one_block = JsonAssetManager.getInstance().getEntry("level_one_block", TextureRegion.class);
@@ -159,7 +159,7 @@ public class DrawHelper {
             }
         }
 
-        if (whichlevel == 2){
+        if (whichlevel == 3){
             TextureRegion level_two_deactivate = JsonAssetManager.getInstance().getEntry("level_two_deactivate", TextureRegion.class);
             TextureRegion level_two_deactivate2 = JsonAssetManager.getInstance().getEntry("level_two_deactivate2", TextureRegion.class);
             TextureRegion level_two_crate = JsonAssetManager.getInstance().getEntry("level_two_crate", TextureRegion.class);
@@ -224,7 +224,7 @@ public class DrawHelper {
             }
         }
 
-        if (whichlevel == 3){
+        if (whichlevel == 4){
             TextureRegion level_three_bird = JsonAssetManager.getInstance().getEntry("level_three_bird", TextureRegion.class);
             TextureRegion level_three_center = JsonAssetManager.getInstance().getEntry("level_three_center", TextureRegion.class);
             TextureRegion level_three_chasing = JsonAssetManager.getInstance().getEntry("level_three_chasing", TextureRegion.class);
@@ -257,7 +257,7 @@ public class DrawHelper {
             }
         }
 
-        if (whichlevel == 4) {
+        if (whichlevel == 5) {
             TextureRegion level_four_phase = JsonAssetManager.getInstance().getEntry("level_four_phase", TextureRegion.class);
             TextureRegion level_four_dame = JsonAssetManager.getInstance().getEntry("level_four_dame", TextureRegion.class);
 
@@ -274,7 +274,7 @@ public class DrawHelper {
             }
         }
 
-        if (whichlevel == 0){
+        if (whichlevel == 1){
             TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
             TextureRegion story01 = JsonAssetManager.getInstance().getEntry("story01", TextureRegion.class);
             TextureRegion story02 = JsonAssetManager.getInstance().getEntry("story02", TextureRegion.class);

@@ -270,7 +270,7 @@ public class GDXRoot extends Game implements ScreenListener {
 				}
 
 			else if (controller.whichlevel == 0) {
-					controller.setWhichLevel(0);
+					controller.setWhichLevel(1);
 				}
 				controller.loadContent();
 				controller.setScreenListener(this);
