@@ -303,6 +303,7 @@ public class DrawHelper {
             TextureRegion story14 = JsonAssetManager.getInstance().getEntry("story14", TextureRegion.class);
             TextureRegion story15 = JsonAssetManager.getInstance().getEntry("story15", TextureRegion.class);
             TextureRegion shade = JsonAssetManager.getInstance().getEntry("shade", TextureRegion.class);
+            TextureRegion creature_shade = JsonAssetManager.getInstance().getEntry("creature_shade", TextureRegion.class);
             //System.out.println (level.getAnnette().getPosition().x +", " +level.getAnnette().getPosition().y);
 
             canvas.begin(level.oTran);
@@ -326,6 +327,12 @@ public class DrawHelper {
                 canvas.draw(shade, Color.WHITE,896f,512.5f,
                         (level.getAnnette().getX() * level.scale.x),
                         (level.getAnnette().getY() * level.scale.y), 0f, 1.0f, 1.0f);
+            }
+
+            if (level.getAnnette().getPosition().y <= 17  && level.getAnnette().getPosition().x > 5.5 && level.getAnnette().getPosition().y > 16){
+                for (CreatureModel c :level.getCreature()) {
+                    canvas.draw(creature_shade, Color.WHITE, 128f, 128f, (c.getX() * level.scale.x), (c.getY() * level.scale.y), 0f, 1.0f, 1.0f);
+                }
             }
 
             if (level.getAnnette().getPosition().y <= 18.5  && level.getAnnette().getPosition().y > 17){

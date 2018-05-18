@@ -612,6 +612,10 @@
 			"file" : "pip/story/shade.png",
 			"wrap" : false
 		},
+		"creature_shade" : {
+			"file" : "pip/story/creature_shade.png",
+			"wrap" : false
+		},
 	},
 	"fonts": {
 		"display": {
