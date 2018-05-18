@@ -118,19 +118,28 @@ public class DrawHelper {
                 canvas.draw(level_one_movement,10,380);
                 canvas.end();
             }
-            if (level.getAnnette().getPosition().x >= 1.5 && level.getAnnette().getPosition().x < 7){
-                canvas.begin(level.oTran);
 
+            if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 7){
+                if (level.getBox().getDoesExist() == true && !isSeen) {
+                    canvas.begin(level.oTran);
+                    canvas.draw(level_one_unbox, 200, 380);
+                    canvas.end();
+                }
                 if (isSeen && level.getBox().getDoesExist() == false) {
+                    canvas.begin(level.oTran);
                     canvas.draw(level_one_box, 200, 380);
                     canvas.draw(level_one_block,200,120);
+                    canvas.end();
                 }
                 if (isSeen && level.getBox().getDoesExist() ){
+                    canvas.begin(level.oTran);
                     canvas.draw(level_one_aggro, 200, 120);
+                    canvas.end();
                 }
-                if (level.getBox().getDoesExist() == true && !isSeen){
-                    canvas.draw(level_one_unbox, 200, 380);
-                }
+            }
+
+            if (level.getAnnette().getPosition().x >= 1.5 && level.getAnnette().getPosition().x < 7){
+                canvas.begin(level.oTran);
                 if (!level.getBox().getDoesExist() && !isSeen){
                     canvas.draw(level_one_creature, 200, 380);
                 }
