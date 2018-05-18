@@ -4,6 +4,9 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.controllers.*;
 import com.badlogic.gdx.controllers.Controller;
@@ -13,6 +16,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.FilmStrip;
@@ -51,12 +57,14 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         public boolean getHover() { return hover; }
         @Override
         public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-//            System.out.println("enter");
+            System.out.println("enter");
             hover = true;
 //            if (fromActor == play) {
+////                System.out.println("play");
 //                hoverplay = true;
 //            }
 //            else if (fromActor == level) {
+////                System.out.println("level");
 //                hoverlevel = true;
 //            }
 //            else if (fromActor == setting) {
@@ -156,7 +164,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private MyActor level;
     private boolean hoverlevel;
     private MyActor setting;
-    private boolean hoversetting;
+    private boolean hoverhelp;
     private MyActor quit;
     private boolean hoverquit;
     /** Play button to display when done */
@@ -214,9 +222,21 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     private float quitX;
     private float quitY;
 
+    private int buttonWidth;
+    private int buttonHeight;
+    private float hoverOffX;
+    private float hoverOffY;
+
     LoadingMode loading;
 
-    Stage stage;
+    private Stage stage;
+    private Table table;
+    private SpriteBatch batch;
+    private BitmapFont font; //** same as that used in Tut 7 **//
+    private TextButton start; //** the level1 - the only actor in program **//
+    private TextButton levels;
+    private TextButton help;
+    private TextButton quitTest;
 
     SoundController sound = SoundController.getInstance();
 
@@ -259,6 +279,11 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
         quitX = 600;
         quitY = 150;
 
+        buttonWidth = 180;
+        buttonHeight = 45;
+        hoverOffX = 80;
+        hoverOffY = 20;
+
 //        System.out.println(menuMusic);
 
         drawHelper = new DrawHelper();
@@ -286,6 +311,120 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
     }
 
     public void create() {
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        table = new Table();
+        table.setFillParent(true);
+        font = new BitmapFont(false);
+        font.setColor(Color.CLEAR);
+        batch = new SpriteBatch();
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = font;
+
+        start = new TextButton("", style);
+        start.setPosition(playX - hoverOffX, playY - hoverOffY);
+        start.setHeight(buttonHeight);
+        start.setWidth(buttonWidth);
+        start.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("touchdown");
+                pressState = 2;
+                menuMusic.stop();
+                menuPlay = false;
+                startSound.play();
+                return false;
+            }
+        });
+        start.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter??");
+                hoverplay = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit??");
+                hoverplay = false;
+            }
+        });
+
+        levels = new TextButton("", style);
+        levels.setPosition(levelX - hoverOffX, levelY - hoverOffY);
+        levels.setHeight(buttonHeight);
+        levels.setWidth(buttonWidth);
+        levels.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("touchdown");
+                levelState = 2;
+//                menuMusic.stop();
+//                menuPlay = false;
+                menuSound.play();
+                return false;
+            }
+        });
+        levels.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter??");
+                hoverlevel = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit??");
+                hoverlevel = false;
+            }
+        });
+
+        help = new TextButton("", style);
+        help.setPosition(helpX - hoverOffX, helpY - hoverOffY);
+        help.setHeight(buttonHeight);
+        help.setWidth(buttonWidth);
+        help.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("touchdown");
+                helpState = 2;
+//                menuMusic.stop();
+//                menuPlay = false;
+                menuSound.play();
+                return false;
+            }
+        });
+        help.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter??");
+                hoverhelp = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit??");
+                hoverhelp = false;
+            }
+        });
+
+        quitTest = new TextButton("", style);
+        quitTest.setPosition(quitX - hoverOffX, quitY - hoverOffY);
+        quitTest.setHeight(buttonHeight);
+        quitTest.setWidth(buttonWidth);
+        quitTest.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("touchdown");
+                quitState = 2;
+//                menuMusic.stop();
+//                menuPlay = false;
+//                menuSound.play();
+                return false;
+            }
+        });
+        quitTest.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter??");
+                hoverquit = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit??");
+                hoverquit = false;
+            }
+        });
+
+        stage.addActor(start);
+        stage.addActor(levels);
+        stage.addActor(help);
+        stage.addActor(quitTest);
 //        stage = new Stage();
 //        if (play == null) {
 //            play = new MyActor(playX,playY, new MyListener());
@@ -457,8 +596,7 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
 
         if (isReady() && listener != null) {
             menuMusic.stop();
-//            System.out.println("music playing in MenuMode "+menuMusic.isPlaying());
-//            System.out.println("is ready?");
+            System.out.println("is ready?");
             listener.exitScreen(this, 2);
         }
         if (toLevelSelect() && listener != null) {
@@ -552,33 +690,42 @@ public class MenuMode implements Screen, ControllerListener, ContactListener, In
                 drawcanvas.draw(title, 480, 350);
 //        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
 //            if (getHover(play)) {
-                if (pressState == 1) {
-                    drawcanvas.draw(playHover, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
-                            playX - playButton.getWidth() / 5, playY - playButton.getHeight() / 3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                if (hoverplay == true) {
+//                    drawcanvas.draw(playHover, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
+//                            playX - playButton.getWidth() / 5, playY - playButton.getHeight() / 3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                    drawcanvas.draw(playHover, Color.WHITE, playHover.getWidth() / 2, playHover.getHeight() / 2,
+                            playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 } else {
                     drawcanvas.draw(playButton, Color.WHITE, playButton.getWidth() / 2, playButton.getHeight() / 2,
                             playX, playY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 }
 //            if (hoverlevel) {
-                if (levelState == 1) {
-                    drawcanvas.draw(levelHover, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
-                            levelX - levelButton.getWidth() / 6, levelY - levelButton.getHeight() / 2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                if (hoverlevel == true) {
+//                    drawcanvas.draw(levelHover, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
+//                            levelX - levelButton.getWidth() / 6, levelY - levelButton.getHeight() / 2, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                    drawcanvas.draw(levelHover, Color.WHITE, levelHover.getWidth() / 2, levelHover.getHeight() / 2,
+                            levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 } else {
                     drawcanvas.draw(levelButton, Color.WHITE, levelButton.getWidth() / 2, levelButton.getHeight() / 2,
                             levelX, levelY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 } //        Color tint2 = (levelState == 1 ? Color.GRAY: Color.WHITE);
 //            if (hoversetting) {
-                if (helpState == 1) {
-                    drawcanvas.draw(helpHover, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
-                            helpX - helpButton.getWidth() / 2, helpY - helpButton.getHeight() / 4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                if (hoverhelp == true) {
+                    drawcanvas.draw(helpHover, Color.WHITE, helpHover.getWidth() / 2, helpHover.getHeight() / 2,
+                            helpX, helpY + 15, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+//                    drawcanvas.draw(helpHover, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
+//                            helpX - helpButton.getWidth() + 25, helpY - helpButton.getHeight() / 3, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 } else {
                     drawcanvas.draw(helpButton, Color.WHITE, helpButton.getWidth() / 2, helpButton.getHeight() / 2,
                             helpX, helpY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
                 }
 //            if (hoverquit) {
-                if (quitState == 1) {
-                    drawcanvas.draw(quitHover, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
-                            quitX - quitButton.getWidth(), quitY - quitButton.getHeight() / 4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                if (hoverquit == true) {
+//                    drawcanvas.draw(quitHover, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
+//                            quitX - quitButton.getWidth(), quitY - quitButton.getHeight() / 4, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+                    drawcanvas.draw(quitHover, Color.WHITE, quitHover.getWidth() / 2, quitHover.getHeight() / 2,
+                            quitX, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
+
                 } else {
                     drawcanvas.draw(quitButton, Color.WHITE, quitButton.getWidth() / 2, quitButton.getHeight() / 2,
                             quitX, quitY, 0, BUTTON_SCALE * scale, BUTTON_SCALE * scale);
