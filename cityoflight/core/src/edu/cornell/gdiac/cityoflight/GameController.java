@@ -365,31 +365,32 @@ public class GameController implements Screen, ContactListener {
 		setFailure(false);
 		countdown = -1;
 		// Reload the json each time
-		if (whichlevel == 1) {
+		if (whichlevel == 2) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level1_5.json"));
 		}
-		if (whichlevel == 2) {
+		if (whichlevel == 3) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level2_5.json"));
 		}
-		if (whichlevel == 3) {
+		if (whichlevel == 4) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level3_5.json"));
 		}
-		if (whichlevel == 4) {
+		if (whichlevel == 5) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level4_5.json"));
 		}
-		if (whichlevel == 5) {
+		if (whichlevel == 6) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level5_5.json"));
 		}
-		if (whichlevel == 6) {
+		if (whichlevel == 7) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/lvl_num.json"));
 		}
-		if (whichlevel == 7) {
+		if (whichlevel == 8) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Emmalevel.json"));
 		}
-		if (whichlevel == 8) {
+		if (whichlevel == 9) {
+			System.out.println("here");
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level10.json"));
 		}
-		if (whichlevel == 0) {
+		if (whichlevel == 1) {
 			levelFormat = jsonReader.parse(Gdx.files.internal("jsons/Level0.json"));
 		}
 		// CHANGE THIS IF YOU ADD LEVELS
