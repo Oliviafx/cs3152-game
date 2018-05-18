@@ -4669,13 +4669,13 @@
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":96,
+          "width":80,
           "x":0,
           "y":64
         }],
       "opacity":1,
       "type":"objectgroup",
-      "visible":false,
+      "visible":true,
       "x":0,
       "y":0
     }],
