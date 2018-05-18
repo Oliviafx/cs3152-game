@@ -86,7 +86,6 @@ public class InteriorModel extends BoxObstacle {
 	protected void resize(float width, float height) {
 		super.resize(width,height);
 		initRegion();
-//		System.out.println("resize interior");
 
 	}
 	

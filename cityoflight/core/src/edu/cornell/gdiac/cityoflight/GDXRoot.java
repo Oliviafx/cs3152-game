@@ -131,19 +131,15 @@ public class GDXRoot extends Game implements ScreenListener {
 	 */
 	public void exitScreen(Screen screen, int exitCode) {
 		if (exitCode == GameController.EXIT_MENU) {
-//			System.out.println("exit menu");
 //			loading.dispose();
 //			loading = null;
-//			System.out.println("stop music");
 			menu = new MenuMode(canvas, this);
 
 
 			setScreen(menu);
 			//			setScreen(menu);
-//			System.out.println(getScreen().equals(levels));
 
 //			if (getScreen().equals(levels)) {
-//				System.out.println("hiding");
 //				levels.hide();
 //			}
 			if (levels != null) {
@@ -163,7 +159,6 @@ public class GDXRoot extends Game implements ScreenListener {
 			menu.reset();
 		}
 		if (exitCode == GameController.EXIT_LEVEL) {
-//			System.out.println("exit level");
             if (menu != null) {
                 menu.dispose();
                 menu = null;
@@ -178,7 +173,6 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 
 		if (exitCode == GameController.EXIT_HELP) {
-//			System.out.println("exit help");
 
 			menu.dispose();
 			menu = null;
@@ -191,16 +185,13 @@ public class GDXRoot extends Game implements ScreenListener {
 		}
 
 		if (exitCode == GameController.EXIT_PAUSE) {
-//			System.out.println("exit pause");
 			controller.getBGM().pause();
 			controller.getDet_bgm().pause();
 //			if (pause.isMusic()) {
 //				controller.setMusicPlay(true);
-////				System.out.println("setmusicplay true");
 //			}
 //			else {
 //				controller.setMusicPlay(false);
-//				System.out.println("setmusicplay false");
 //			}
 //			if (pause.isSound()) {
 //				controller.setSoundPlay(true);
@@ -218,7 +209,6 @@ public class GDXRoot extends Game implements ScreenListener {
 
 		}
 //		else if (screen == loading) {
-//			System.out.println("here");
 //			controller.loadContent();
 //			controller.setScreenListener(this);
 //			controller.setCanvas(canvas);
@@ -229,32 +219,26 @@ public class GDXRoot extends Game implements ScreenListener {
 //			loading = null;
 //		}
 		else if (exitCode == GameController.EXIT_PLAY) {
-//			System.out.println("EXIT PLAY");
 
 //			if (menu!=null) {
 //				menu.dispose();
 //				menu = null;
 //			}
 			if (getScreen().equals(menu)) {
-				System.out.println("start game");
 				controller.setWhichLevel(0);
 			}
 			if (menu != null) {
-//				System.out.println("stop music");
 				menuMusic = menu.getMenuMusic();
 				menuMusic.stop();
 				menu.dispose();
 				menu = null;
-//				System.out.println("in GDXRoot music playing "+menuMusic.isPlaying());
 
 			}
 			if (pause.isMusic()) {
 				controller.setMusicPlay(true);
-//				System.out.println("setmusicplay true");
 			}
 			else {
 				controller.setMusicPlay(false);
-//				System.out.println("setmusicplay false");
 			}
 			if (pause.isSound()) {
 				controller.setSoundPlay(true);
@@ -282,11 +266,12 @@ public class GDXRoot extends Game implements ScreenListener {
 						controller.setWhichLevel(8);
 					} else if (levels.goLevelNine()) {
                         controller.setWhichLevel(9);
+						System.out.println("here");
                     }
 				}
 
 			else if (controller.whichlevel == 0) {
-					controller.setWhichLevel(0);
+					controller.setWhichLevel(1);
 				}
 				controller.loadContent();
 				controller.setScreenListener(this);
@@ -309,7 +294,6 @@ public class GDXRoot extends Game implements ScreenListener {
 				}
 
 //			else {
-//				System.out.println("was null");
 //			}
 		}
 
