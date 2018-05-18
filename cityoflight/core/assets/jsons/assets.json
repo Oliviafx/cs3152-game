@@ -1,9 +1,5 @@
 {
     "textures": {
-    	"earth": {
-    		"file":		"textures/tile.png",
-    		"wrap":		false
-    	},
 		"transparent": {
 			"file":		"textures/transparent.png",
 			"wrap":		false
