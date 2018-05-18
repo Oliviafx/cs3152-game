@@ -216,6 +216,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         return level8.isPressed();
     }
     public boolean goLevelNine() { return level9.isPressed(); }
+    public boolean goLevelTen() { return level10.isPressed(); }
     public boolean isReady() {
         return menubutton.isPressed();
     }
@@ -907,7 +908,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 listener.exitScreen(this, 1);
             }
             if ((goLevelOne() || goLevelTwo() || goLevelThree() || goLevelFour() || goLevelFive() || goLevelSix() ||
-                    goLevelSeven() || goLevelEight() || goLevelNine())
+                    goLevelSeven() || goLevelEight() || goLevelNine() || goLevelTen())
                     && listener != null) {
                 listener.exitScreen(this, 2);
             }
