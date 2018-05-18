@@ -224,6 +224,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
     public void draw(){
         float scaling = 0.5f;
+        int offset = 50;
         if (active) {
 //            if (drawHelper.get_general_transition_second_part()) {
                 canvas.begin();
@@ -254,83 +255,83 @@ public class LevelController implements Screen, ControllerListener, ContactListe
 
                 if (hover1) {
                     canvas.draw(level1hover, Color.WHITE, level1hover.getWidth(), level1hover.getHeight(),
-                            98 + level1hover.getWidth()/2 - hoverOffX, 512-196 + level1hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            98 + level1hover.getWidth()/2 - hoverOffX, 512-196 + level1hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level1tex, Color.WHITE, level1.getWidth(), level1.getHeight(),
-                            98 + level1.getWidth()/2 - buttonOffX, 512-196 + level1.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            98 + level1.getWidth()/2 - buttonOffX, 512-196 + level1.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover2) {
                     canvas.draw(level2hover, Color.WHITE, level2hover.getWidth(), level2hover.getHeight(),
-                            244 + level2hover.getWidth()/2 - hoverOffX, 512-196 + level2hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            244 + level2hover.getWidth()/2 - hoverOffX, 512-196 + level2hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level2tex, Color.WHITE, level2.getWidth(), level2.getHeight(),
-                            244 + level2.getWidth()/2 - buttonOffX, 512-196 + level2.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            244 + level2.getWidth()/2 - buttonOffX, 512-196 + level2.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover3) {
                     canvas.draw(level3hover, Color.WHITE, level3hover.getWidth(), level3hover.getHeight(),
-                            395 + level3hover.getWidth()/2 - hoverOffX, 512-196 + level3hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            395 + level3hover.getWidth()/2 - hoverOffX, 512-196 + level3hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level3tex, Color.WHITE, level3.getWidth(), level3.getHeight(),
-                            395 + level3.getWidth()/2 - buttonOffX, 512-196 + level2.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            395 + level3.getWidth()/2 - buttonOffX, 512-196 + level2.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover4) {
                     canvas.draw(level4hover, Color.WHITE, level4hover.getWidth(), level4hover.getHeight(),
-                            542 + level4hover.getWidth()/2 - hoverOffX + 2, 512-196 + level4hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            542 + level4hover.getWidth()/2 - hoverOffX + 2, 512-196 + level4hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level4tex, Color.WHITE, level4.getWidth(), level4.getHeight(),
-                            542 + level4.getWidth()/2 - buttonOffX + 2, 512-196 + level4.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            542 + level4.getWidth()/2 - buttonOffX + 2, 512-196 + level4.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover5) {
                     canvas.draw(level5hover, Color.WHITE, level5hover.getWidth(), level5hover.getHeight(),
-                            695 + level5hover.getWidth()/2 - hoverOffX, 512-196 + level5hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            695 + level5hover.getWidth()/2 - hoverOffX, 512-196 + level5hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level5tex, Color.WHITE, level5.getWidth(), level5.getHeight(),
-                            695 + level5.getWidth()/2 - buttonOffX, 512-196 + level5.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            695 + level5.getWidth()/2 - buttonOffX, 512-196 + level5.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover6) {
                     canvas.draw(level6hover, Color.WHITE, level6hover.getWidth(), level6hover.getHeight(),
-                            98 + level6hover.getWidth()/2 - hoverOffX, 512-306 + level6hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            98 + level6hover.getWidth()/2 - hoverOffX, 512-306 + level6hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level6tex, Color.WHITE, level6.getWidth(), level6.getHeight(),
-                            98 + level6.getWidth()/2 - buttonOffX, 512-306 + level6.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            98 + level6.getWidth()/2 - buttonOffX, 512-306 + level6.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover7) {
                     canvas.draw(level7hover, Color.WHITE, level7hover.getWidth(), level7hover.getHeight(),
-                            244 + level7hover.getWidth()/2 - hoverOffX, 512-306 + level7hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            244 + level7hover.getWidth()/2 - hoverOffX, 512-306 + level7hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level7tex, Color.WHITE, level7.getWidth(), level7.getHeight(),
-                            244 + level7.getWidth()/2 - buttonOffX, 512-306 + level7.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            244 + level7.getWidth()/2 - buttonOffX, 512-306 + level7.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover8) {
                     canvas.draw(level8hover, Color.WHITE, level8hover.getWidth(), level8hover.getHeight(),
-                            395 + level8hover.getWidth()/2 - hoverOffX, 512-306 + level8hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            395 + level8hover.getWidth()/2 - hoverOffX, 512-306 + level8hover.getHeight()/2 - hoverOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level8tex, Color.WHITE, level8.getWidth(), level8.getHeight(),
-                            395 + level8.getWidth()/2 - buttonOffX, 512-306 + level8.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            395 + level8.getWidth()/2 - buttonOffX, 512-306 + level8.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (locktex != null) {
                     canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            542 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            542 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                     canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            695 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            98 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            244 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            395 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            542 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
-                            695 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            695 + locktex.getWidth()/2 - buttonOffX, 512-306 + locktex.getHeight()/2 - buttonOffY - offset, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
+//                            98 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
+//                            244 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
+//                            395 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
+//                            542 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//                    canvas.draw(locktex, Color.WHITE, locktex.getWidth(), locktex.getHeight(),
+//                            695 + locktex.getWidth()/2 - buttonOffX, 512-416 + locktex.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 
                 }
 //                if (hover9) {
