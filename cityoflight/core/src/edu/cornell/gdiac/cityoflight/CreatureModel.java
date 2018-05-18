@@ -107,10 +107,10 @@ public class CreatureModel extends BoxObstacle {
 
     private int LOU_AGGRO_COUNTDOWN = 150;
     private int DRAGON_AGGRO_COUNTDOWN = 50;
-    private int BLANCHE_AGGRO_COUNTDOWN = 200;
+    private int BLANCHE_AGGRO_COUNTDOWN = 400;
 
-    private int LOU_DISTRACT_COUNTDOWN = 300;
-    private int BLANCHE_DISTRACT_COUNTDOWN = 100;
+    private int LOU_DISTRACT_COUNTDOWN = 450;
+    private int BLANCHE_DISTRACT_COUNTDOWN = 250;
 
     private float LOU_MAX_SPEED = 15.0f;
     private float DRAGON_MAX_SPEED = 30.0f;
@@ -581,12 +581,14 @@ public class CreatureModel extends BoxObstacle {
 //        System.out.println(origin.x + " "+ origin.y);
         int isReflected = movement.x < 0 ? -1 : 1;
         int xOffset = 0;
+        boolean isRight = false;
         FilmStrip dirTexture = null;
         if(movement.x != 0)
         {
             setTexture(sideAnim);
             dirTexture = sideAnim;
             filmstrip = sideAnim;
+            if (movement.x > 0) { isRight = true; }
         }
         else if(movement.y > 0)
         {
@@ -613,10 +615,36 @@ public class CreatureModel extends BoxObstacle {
 //          System.out.println("creature position " + getX() + " " + getY());
             if (type != 3) {
                 if (type == 2 && dirTexture == upAnim) {
-                    System.out.println("here");
+//                    System.out.println("here");
                     canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 40,
                             0, 0.75f * isReflected, 0.75f);
                 }
+                else if (type == 2 && dirTexture == sideAnim) {
+//                    System.out.println("here");
+                    if (isRight) {
+                        canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x - 20, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset +10,
+                                0, 0.75f * isReflected, 0.75f);
+                    }
+                    else {
+                        canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x + 20, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset + 10,
+                                0, 0.75f * isReflected, 0.75f);
+                    }
+                }
+                else if (type == 1 && (dirTexture == upAnim || dirTexture == downAnim)) {
+//                    System.out.println("here");
+                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 20,
+                            0, 0.75f * isReflected, 0.75f);
+                }
+                else if (type == 1 && (dirTexture == sideAnim)) {
+//                    System.out.println("here");
+                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 10,
+                            0, 0.75f * isReflected, 0.75f);
+                }
+//                else if (type == 1 && dirTexture == downAnim) {
+////                    System.out.println("here");
+//                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset + 20,
+//                            0, 0.75f * isReflected, 0.75f);
+//                }
                 else {
                     canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset,
                             0, 0.75f * isReflected, 0.75f);

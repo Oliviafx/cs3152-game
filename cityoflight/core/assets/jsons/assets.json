@@ -448,6 +448,10 @@
 			"file" : "pip/tutorial/level_one_unbox.png",
 			"wrap" : false
 		},
+		"level_one_block" : {
+			"file" : "pip/tutorial/level_one_block.png",
+			"wrap" : false
+		},
 		"level_one_creature" : {
 			"file" : "pip/tutorial/level_one_creature.png",
 			"wrap" : false
@@ -472,6 +476,10 @@
 			"file" : "pip/tutorial/level_two_deactivate2.png",
 			"wrap" : false
 		},
+		"level_two_push" : {
+			"file" : "pip/tutorial/level_two_push.png",
+			"wrap" : false
+		},
 		"level_two_stand" : {
 			"file" : "pip/tutorial/level_two_stand2.png",
 			"wrap" : false
@@ -480,8 +488,16 @@
 			"file" : "pip/tutorial/level_two_crate.png",
 			"wrap" : false
 		},
+		"level_two_single" : {
+			"file" : "pip/tutorial/level_two_single.png",
+			"wrap" : false
+		},
 		"level_two_try" : {
 			"file" : "pip/tutorial/level_two_try.png",
+			"wrap" : false
+		},
+		"level_two_tail" : {
+			"file" : "pip/tutorial/level_two_tail.png",
 			"wrap" : false
 		},
 		"level_two_walk" : {
@@ -490,6 +506,10 @@
 		},
 		"level_two_here" : {
 			"file" : "pip/tutorial/level_two_here.png",
+			"wrap" : false
+		},
+		"level_two_boxhere" : {
+			"file" : "pip/tutorial/level_two_boxhere.png",
 			"wrap" : false
 		},
 		"level_two_disappear" : {
@@ -504,6 +524,10 @@
 			"file" : "pip/tutorial/level_three_center.png",
 			"wrap" : false
 		},
+		"level_three_chasing" : {
+			"file" : "pip/tutorial/level_three_chasing.png",
+			"wrap" : false
+		},
 		"level_three_safe" : {
 			"file" : "pip/tutorial/level_three_safe.png",
 			"wrap" : false
@@ -514,6 +538,70 @@
 		},
 		"level_four_dame" : {
 			"file" : "pip/tutorial/level_four_dame.png",
+			"wrap" : false
+		},
+		"story01" : {
+			"file" : "pip/story/01.png",
+			"wrap" : false
+		},
+		"story02" : {
+			"file" : "pip/story/02.png",
+			"wrap" : false
+		},
+		"story03" : {
+			"file" : "pip/story/03.png",
+			"wrap" : false
+		},
+		"story04" : {
+			"file" : "pip/story/04.png",
+			"wrap" : false
+		},
+		"story05" : {
+			"file" : "pip/story/05.png",
+			"wrap" : false
+		},
+		"story06" : {
+			"file" : "pip/story/06.png",
+			"wrap" : false
+		},
+		"story07" : {
+			"file" : "pip/story/07.png",
+			"wrap" : false
+		},
+		"story08" : {
+			"file" : "pip/story/08.png",
+			"wrap" : false
+		},
+		"story09" : {
+			"file" : "pip/story/09.png",
+			"wrap" : false
+		},
+		"story10" : {
+			"file" : "pip/story/10.png",
+			"wrap" : false
+		},
+		"story11" : {
+			"file" : "pip/story/11.png",
+			"wrap" : false
+		},
+		"story12" : {
+			"file" : "pip/story/12.png",
+			"wrap" : false
+		},
+		"story13" : {
+			"file" : "pip/story/13.png",
+			"wrap" : false
+		},
+		"story14" : {
+			"file" : "pip/story/14.png",
+			"wrap" : false
+		},
+		"story15" : {
+			"file" : "pip/story/15.png",
+			"wrap" : false
+		},
+		"shade" : {
+			"file" : "pip/story/shade.png",
 			"wrap" : false
 		},
 	},

@@ -1823,7 +1823,7 @@ public class LevelModel {
 		// Accounts for edges of screen
 //		float ratio = (float)(getBounds().getWidth() / getBounds().getHeight());
 
-		float cameraXStart = canvas.getWidth() * 2.52f/(5.0f * scale.x);
+		float cameraXStart = canvas.getWidth() * 2.515f/(5.0f * scale.x);
 		float cameraYStart = canvas.getHeight() * 3.10f/(5.0f * scale.y);
 		float cameraXEnd;
 		float cameraYEnd;
@@ -1862,8 +1862,12 @@ public class LevelModel {
 				break;
 			case 18: cameraYEnd = canvas.getHeight() * 1.88f / scale.y;
 				break;
+			case 20: cameraYEnd = canvas.getHeight() * 2.1f / scale.y;
+				break;
+			case 25: cameraYEnd = canvas.getHeight() * 2.75f / scale.y;
+				break;
 			default: {
-				cameraYEnd = canvas.getHeight() * 2f / scale.y;
+				cameraYEnd = canvas.getHeight() * 2.75f / scale.y;
 				break;
 			}
 		}

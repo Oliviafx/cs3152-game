@@ -235,6 +235,10 @@ public class GDXRoot extends Game implements ScreenListener {
 //				menu.dispose();
 //				menu = null;
 //			}
+			if (getScreen().equals(menu)) {
+				System.out.println("start game");
+				controller.setWhichLevel(1);
+			}
 			if (menu != null) {
 //				System.out.println("stop music");
 				menuMusic = menu.getMenuMusic();
@@ -276,8 +280,12 @@ public class GDXRoot extends Game implements ScreenListener {
 						controller.setWhichLevel(7);
 					} else if (levels.goLevelEight()) {
 						controller.setWhichLevel(8);
-					}
-				} else if (controller.whichlevel == 0) {
+					} else if (levels.goLevelNine()) {
+                        controller.setWhichLevel(9);
+                    }
+				}
+
+			else if (controller.whichlevel == 0) {
 					controller.setWhichLevel(1);
 				}
 				controller.loadContent();
