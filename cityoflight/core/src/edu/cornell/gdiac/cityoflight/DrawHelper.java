@@ -103,7 +103,7 @@ public class DrawHelper {
     public void drawTutorial(ObstacleCanvas canvas, LevelModel level, int whichlevel, boolean isSeen){
 
         if (whichlevel == 1){
-            TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
+//            TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
             TextureRegion level_one_box = JsonAssetManager.getInstance().getEntry("level_one_box", TextureRegion.class);
             TextureRegion level_one_block = JsonAssetManager.getInstance().getEntry("level_one_block", TextureRegion.class);
             TextureRegion level_one_unbox = JsonAssetManager.getInstance().getEntry("level_one_unbox", TextureRegion.class);
@@ -115,7 +115,7 @@ public class DrawHelper {
             if (level.getAnnette().getPosition().x > 0 && level.getAnnette().getPosition().x < 1.5){
                 //System.out.println("drawing movement");
                 canvas.begin(level.oTran);
-                canvas.draw(level_one_movement,10,380);
+//                canvas.draw(level_one_movement,10,380);
                 canvas.end();
             }
 
@@ -274,7 +274,7 @@ public class DrawHelper {
             }
         }
 
-        if (whichlevel == 9){
+        if (whichlevel == 0){
             TextureRegion level_one_movement = JsonAssetManager.getInstance().getEntry("level_one_movement", TextureRegion.class);
             TextureRegion story01 = JsonAssetManager.getInstance().getEntry("story01", TextureRegion.class);
             TextureRegion story02 = JsonAssetManager.getInstance().getEntry("story02", TextureRegion.class);
