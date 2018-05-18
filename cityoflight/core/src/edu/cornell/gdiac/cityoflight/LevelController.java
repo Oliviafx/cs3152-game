@@ -95,6 +95,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     public boolean goLevelEight() {
         return level8.isPressed();
     }
+    public boolean goLevelNine() { return level9.isPressed(); }
     public boolean isReady() {
         return menubutton.isPressed();
     }
@@ -153,6 +154,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
     private TextButton level6;
     private TextButton level7;
     private TextButton level8;
+    private TextButton level9;
     private TextButton menubutton;
     private TextButton startbutton;
     public void create () {
@@ -296,6 +298,19 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 startSound.play();
             }
         });
+        level9 = new TextButton("", style);
+        level9.setPosition(542, 512-306);
+        level9.setHeight(100);
+        level9.setWidth(100);
+        level9.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                startSound.play();
+            }
+        });
 
         menubutton = new TextButton("", style);
         menubutton.setPosition(312, 28);
@@ -336,6 +351,7 @@ public class LevelController implements Screen, ControllerListener, ContactListe
         stage.addActor(level6);
         stage.addActor(level7);
         stage.addActor(level8);
+        stage.addActor(level9);
         stage.addActor(menubutton);
         stage.addActor(startbutton);
     }
@@ -383,7 +399,8 @@ public class LevelController implements Screen, ControllerListener, ContactListe
             if (isReady() && listener != null) {
                 listener.exitScreen(this, 1);
             }
-            if ((goLevelOne() || goLevelTwo() || goLevelThree() || goLevelFour() || goLevelFive() || goLevelSix() || goLevelSeven() || goLevelEight())
+            if ((goLevelOne() || goLevelTwo() || goLevelThree() || goLevelFour() || goLevelFive() || goLevelSix() ||
+                    goLevelSeven() || goLevelEight() || goLevelNine())
                     && listener != null) {
                 listener.exitScreen(this, 2);
             }
