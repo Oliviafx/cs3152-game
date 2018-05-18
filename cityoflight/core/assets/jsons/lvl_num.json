@@ -1144,24 +1144,24 @@
           "y":294
         },
         {
-          "height":75,
+          "height":70,
           "id":63,
           "name":"snail_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":44,
+          "width":50,
           "x":544,
           "y":91
         },
         {
-          "height":75,
+          "height":70,
           "id":64,
           "name":"snail_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":44,
+          "width":50,
           "x":672,
           "y":233
         },
