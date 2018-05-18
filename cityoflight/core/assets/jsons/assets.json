@@ -661,9 +661,6 @@
 		"box_effect": {
 			"file": "sounds/box_effect.wav"
 		},
-		"bg_test2_music": {
-			"file": "sounds/bg_test2_music.wav"
-		},
 		"win_effect": {
 			"file": "sounds/win_effect.wav"
 		},
@@ -694,9 +691,6 @@
 		"box_gone_effect": {
 			"file": "sounds/box_gone_effect.wav"
 		},
-		"120bpm_music": {
-			"file": "sounds/120bpm_music.wav"
-		}
 		"click_effect": {
 			"file": "sounds/click_effect.wav"
 		}
