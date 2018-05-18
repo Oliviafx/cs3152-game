@@ -307,6 +307,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 //                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
 //                System.out.println("quit state 2");
                 pressState = 2;
+                sound.stop("select_effect");
+                sound.play("select_effect", "sounds/select_effect.wav", false, 0.7f, isSound);
 //                return false;
 //                float screenX = x * scale;
 //                float screenY = y * scale;
@@ -350,6 +352,8 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 //                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
 //                System.out.println("quit state 2");
                 quitState = 2;
+                sound.stop("");
+                sound.play("seen_effect", "sounds/seen_effect.wav", false, 0.7f, isSound);
                 return false;
             }
 
