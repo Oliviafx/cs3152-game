@@ -15,23 +15,68 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.ScreenListener;
 import edu.cornell.gdiac.util.SoundController;
 
 public class PauseMode implements Screen, ControllerListener, ContactListener, InputProcessor, ApplicationListener {
+    public class MyActor extends Actor {
+        public float x;
+        public float y;
+        public float width;
+        public float height;
+        public PauseMode.MyListener listener;
+        public MyActor(float x, float y, PauseMode.MyListener listen) {
+            this.x=x;
+            this.y=y;
+            listener = listen;
+        }
+        public boolean getHover() {
+            return listener.getHover();
+        }
+
+    }
+
+    public class MyListener extends ClickListener {
+
+        public boolean hover;
+
+        public MyListener() {
+            hover = false;
+        }
+
+        public boolean getHover() {
+            return hover;
+        }
+
+        @Override
+        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//            System.out.println("enter");
+            hover = true;
+        }
+
+        @Override
+        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            hover = false;
+        }
+    }
 
 
-    private static final String BACKGROUND_FILE = "textures/pause_screen.png";
-    private static final String PLAY_BTN_FILE = "textures/resume.png";
-    private static final String QUIT_BTN_FILE = "textures/quit.png";
+    private static final String BACKGROUND_FILE = "textures/pause assets/pause_bg.png";
+    private static final String PLAY_BTN_FILE = "textures/pause assets/resume_button.png";
+    private static final String QUIT_BTN_FILE = "textures/pause assets/quit_button.png";
+
+    private static final String PLAY_HOVER = "textures/pause assets/resume_hover.png";
+    private static final String QUIT_HOVER = "textures/pause assets/quit_hover.png";
 
     private static final String MUSIC_BTN_FILE = "textures/pause assets/music_button.png";
     private static final String SOUND_BTN_FILE = "textures/pause assets/sound_button.png";
@@ -50,6 +95,12 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     private Texture playButton;
     private Texture quitButton;
     private Texture exitButton;
+
+    private Texture playHover;
+    private Texture quitHover;
+
+    private boolean hoverplay;
+    private boolean hoverquit;
 
     private Texture musicButton;
     private Texture soundButton;
@@ -88,6 +139,15 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 
     private ScreenListener listener;
 
+    private Stage stage;
+    private Table table;
+    private SpriteBatch batch;
+    private BitmapFont font; //** same as that used in Tut 7 **//
+    private TextButton start; //** the level1 - the only actor in program **//
+    private TextButton levels;
+    private TextButton help;
+    private TextButton quitTest;
+
     private SoundController sound = SoundController.getInstance();
 
     public PauseMode(ObstacleCanvas drawcanvas) {
@@ -102,7 +162,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         soundButton = null;
         active = false;
 
-
+        Gdx.input.setInputProcessor(this);
     }
 
     public void reset() {
@@ -127,9 +187,23 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     }
 
     public void dispose() {
-        if (background != null) {
-            background.dispose();
-            background = null;
+        background.dispose();
+        background = null;
+        if (playButton != null) {
+            playButton.dispose();
+            playButton = null;
+        }
+        if (quitButton != null) {
+            quitButton.dispose();
+            quitButton = null;
+        }
+        if (musicButton != null) {
+            musicButton.dispose();
+            quitButton = null;
+        }
+        if (soundButton != null) {
+            soundButton.dispose();
+            soundButton = null;
         }
     }
 
@@ -203,33 +277,24 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
 //        return pauseController;
 //    }
 
-
-    private Stage stage;
-    private Table table;
-    private SpriteBatch batch;
-    private BitmapFont font; //** same as that used in Tut 7 **//
-    private TextureAtlas buttonsAtlas; //** image of buttons **//
-    private Skin buttonSkin; //** images are used as skins of the level1 **//
     private TextButton playbutton;
     private TextButton quitbutton;
     private TextButton musicbutton;
     private TextButton soundbutton;
+
+
     public void create () {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
-        stage.addActor(table);
-//        buttonsAtlas = new TextureAtlas("buttons.pack"); //** level1 atlas image **//
-        buttonSkin = new Skin();
-//        buttonSkin.addRegions(buttonsAtlas); //** skins for on and off **//
         font = new BitmapFont(false);
         font.setColor(Color.CLEAR);
         batch = new SpriteBatch();
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-//        style.up = buttonSkin.getDrawable("ButtonOff");
-//        style.down = buttonSkin.getDrawable("ButtonOn");
         style.font = font;
+
+//        System.out.println("new play button");
 
         playbutton = new TextButton("", style);
         playbutton.setPosition(147, 62);
@@ -237,15 +302,39 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         playbutton.setWidth(240);
         playbutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
-                return true;
-            }
+                float screenX = x * scale;
+                float screenY = y * scale;
+                if (playButton == null || pressState == 2) {
+                    return true;
+                }
+                // Flip to match graphics coordinates
+                screenY = heightY- screenY;
 
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+                // TODO: Fix scaling
+                // Play button is a circle.
+                float radius = BUTTON_SCALE*scale*playButton.getWidth();
+                float dist = (screenX-playX)*(screenX-playX)+(screenY-playY)*(screenY-playY);
+//        if (dist < radius*radius) {
+                if ((screenX > playX && screenX < playX+playButton.getWidth()) && (screenY > playY && screenY < playY+playButton.getHeight())) {
+                    pressState = 1;
+                    sound.stop("select_effect");
+                    sound.play("select_effect", "sounds/select_effect.wav", false, 0.7f, isSound);
 
+                }
+                return false;
             }
         });
+        playbutton.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter??");
+                hoverplay = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit??");
+                hoverplay = false;
+            }
+        });
+
         quitbutton = new TextButton("", style);
         quitbutton.setPosition(502, 62);
         quitbutton.setHeight(60);
@@ -253,11 +342,20 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         quitbutton.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
-                return true;
+                System.out.println("quit state 2");
+                quitState = 2;
+                return false;
             }
 
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.log("my app", "Released");
+        });
+        quitbutton.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//                System.out.println("enter quit");
+                hoverquit = true;
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                System.out.println("exit quit");
+                hoverquit = false;
             }
         });
 
@@ -301,15 +399,26 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     }
 
     public void update() {
-//        if (stage == null) {
-//            create();
-//        }
+        InputController input = InputController.getInstance();
+        input.readInput();
+        if (input.didPause() || input.didExit()) {
+            listener.exitScreen(this, 2);
+        }
+        if (stage == null) {
+            create();
+            System.out.println("stage null");
+        }
         if (playButton == null) {
             playButton = new Texture(PLAY_BTN_FILE);
             playButton.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             playY =  62;//+playButton.getHeight();//(int)(.25f*height) - 50;
             playX = 147;//+playButton.getWidth();//width/2 - 200;
+//            create();
 //            System.out.println("play not null");
+        }
+        if (playHover == null) {
+            playHover = new Texture(PLAY_HOVER);
+            playHover.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
         if (quitButton == null) {
             quitButton = new Texture(QUIT_BTN_FILE);
@@ -317,6 +426,11 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
             quitY =  60;//+quitButton.getHeight();//(int)(.25f*height) - 50;
             quitX = 500;//+quitButton.getWidth();//width/2+200;
 //            System.out.println("quit not null");
+//            create();
+        }
+        if (quitHover == null) {
+            quitHover = new Texture(QUIT_HOVER);
+            quitHover.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 //            create();
         }
 
@@ -350,14 +464,33 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
     }
 
     public void draw() {
+        float scaling = 0.5f;
+
         canvas.begin();
         canvas.draw(background, Color.WHITE, 0, 0, 0 ,0, 0, 1f, 1f);
-        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
-        canvas.draw(playButton, tint, playButton.getWidth(), playButton.getHeight(),
-                playX+playButton.getWidth(), playY+playButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
-        Color tint2 = (quitState == 1 ? Color.GRAY: Color.WHITE);
-        canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
-                quitX+quitButton.getWidth(), quitY+quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+//        Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
+//        canvas.draw(playButton, tint, playButton.getWidth(), playButton.getHeight(),
+//                playX+playButton.getWidth(), playY+playButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        if (hoverplay) {
+//            System.out.println("drawing play hover");
+            canvas.draw(playHover, Color.WHITE, playHover.getWidth(), playHover.getHeight(),
+                    playX + playHover.getWidth()/2, playY + playHover.getHeight()/2, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        }
+        else {
+            canvas.draw(playButton, Color.WHITE, playButton.getWidth(), playButton.getHeight(),
+                    playX + playButton.getWidth()/2, playY + playButton.getHeight()/2, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        }
+//        Color tint2 = (quitState == 1 ? Color.GRAY: Color.WHITE);
+//        canvas.draw(quitButton, tint2, quitButton.getWidth(), quitButton.getHeight(),
+//                quitX+quitButton.getWidth(), quitY+quitButton.getHeight(), 0, 1, 1);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        if (hoverquit) {
+            canvas.draw(quitHover, Color.WHITE, quitHover.getWidth(), quitHover.getHeight(),
+                    quitX+quitButton.getWidth()/2, quitY+quitButton.getHeight()/2, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        }
+        else {
+            canvas.draw(quitButton, Color.WHITE, quitButton.getWidth(), quitButton.getHeight(),
+                    quitX+quitButton.getWidth()/2, quitY+quitButton.getHeight()/2, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+        }
 
 //        Color tint3 = (isMusic ? Color.GRAY: Color.WHITE);
         if (isMusic) {
@@ -407,6 +540,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
         draw();
 //            stage.draw();
 //            stage.act();
+        if (stage != null) { stage.act(); }
 
         if (backToGame() && listener != null) {
 
@@ -509,6 +643,7 @@ public class PauseMode implements Screen, ControllerListener, ContactListener, I
      * @return whether to hand the event to other listeners.
      */
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        System.out.println("touchup");
 
         if (pressState == 1) {
             pressState = 2;
