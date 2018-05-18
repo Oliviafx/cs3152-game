@@ -1862,6 +1862,8 @@ public class LevelModel {
 				break;
 			case 18: cameraYEnd = canvas.getHeight() * 1.88f / scale.y;
 				break;
+			case 20: cameraYEnd = canvas.getHeight() * 2.1f / scale.y;
+				break;
 			default: {
 				cameraYEnd = canvas.getHeight() * 2f / scale.y;
 				break;
