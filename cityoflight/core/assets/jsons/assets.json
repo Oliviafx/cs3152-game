@@ -185,6 +185,36 @@
 				"first": 1
 			}
 		},
+		"annetteBoxUp": {
+			"file": "textures/annette_box_back.png",
+			"wrap": false,
+			"strip": {
+				"size": 4,
+				"rows": 1,
+				"cols": 4,
+				"first": 1
+			}
+		},
+		"annetteBoxDown": {
+			"file": "textures/annette_box_front.png",
+			"wrap": false,
+			"strip": {
+				"size": 4,
+				"rows": 1,
+				"cols": 4,
+				"first": 1
+			}
+		},
+		"annetteBoxSide": {
+			"file": "textures/annette_box_side.png",
+			"wrap": false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 1
+			}
+		},
 		"snail": {
 			"file": 	"textures/SnailSide.png",
 			"wrap":  	false,
