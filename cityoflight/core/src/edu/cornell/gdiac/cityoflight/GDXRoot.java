@@ -280,7 +280,9 @@ public class GDXRoot extends Game implements ScreenListener {
 						controller.setWhichLevel(7);
 					} else if (levels.goLevelEight()) {
 						controller.setWhichLevel(8);
-					}
+					} else if (levels.goLevelNine()) {
+                        controller.setWhichLevel(9);
+                    }
 				}
 
 			else if (controller.whichlevel == 0) {
