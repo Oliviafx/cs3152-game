@@ -468,6 +468,10 @@
 			"file" : "pip/tutorial/level_one_tremor.png",
 			"wrap" : false
 		},
+		"level_one_stand" : {
+			"file" : "pip/tutorial/level_one_stand.png",
+			"wrap" : false
+		},
 		"level_two_deactivate" : {
 			"file" : "pip/tutorial/level_two_deactivate.png",
 			"wrap" : false
@@ -478,6 +482,10 @@
 		},
 		"level_two_push" : {
 			"file" : "pip/tutorial/level_two_push.png",
+			"wrap" : false
+		},
+		"level_two_boxplace" : {
+			"file" : "pip/tutorial/level_two_boxplace.png",
 			"wrap" : false
 		},
 		"level_two_stand" : {
