@@ -236,11 +236,11 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 }
                 if (hover4) {
                     canvas.draw(level4hover, Color.WHITE, level4hover.getWidth(), level4hover.getHeight(),
-                            542 + level4hover.getWidth()/2 - hoverOffX + 1, 512-196 + level4hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            542 + level4hover.getWidth()/2 - hoverOffX + 2, 512-196 + level4hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level4tex, Color.WHITE, level4.getWidth(), level4.getHeight(),
-                            542 + level4.getWidth()/2 - buttonOffX + 1, 512-196 + level4.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            542 + level4.getWidth()/2 - buttonOffX + 2, 512-196 + level4.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 if (hover5) {
                     canvas.draw(level5hover, Color.WHITE, level5hover.getWidth(), level5hover.getHeight(),
@@ -276,11 +276,11 @@ public class LevelController implements Screen, ControllerListener, ContactListe
                 }
                 if (hover9) {
                     canvas.draw(level9hover, Color.WHITE, level9hover.getWidth(), level9hover.getHeight(),
-                            542 + level9hover.getWidth()/2 - hoverOffX, 512-306 + level9hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            542 + level9hover.getWidth()/2 - hoverOffX + 2, 512-306 + level9hover.getHeight()/2 - hoverOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
                 else {
                     canvas.draw(level9tex, Color.WHITE, level9.getWidth(), level9.getHeight(),
-                            542 + level9.getWidth()/2 - buttonOffX, 512-306 + level9.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+                            542 + level9.getWidth()/2 - buttonOffX + 2, 512-306 + level9.getHeight()/2 - buttonOffY, 0, scaling, scaling);//BUTTON_SCALE*scale, BUTTON_SCALE*scale);
                 }
 //            if (hover10) {
 //                canvas.draw(level4hover, Color.WHITE, level4hover.getWidth(), level4hover.getHeight(),
