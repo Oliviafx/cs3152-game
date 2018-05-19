@@ -2715,99 +2715,6 @@
           "y":1492
         },
         {
-          "gid":173,
-          "height":64,
-          "id":435,
-          "name":"flower45",
-          "properties":
-          {
-            "texture":"flowerbed_pink"
-          },
-          "propertytypes":
-          {
-            "texture":"string"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":64,
-          "x":320,
-          "y":1408
-        },
-        {
-          "height":40,
-          "id":523,
-          "name":"box45",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":64,
-          "x":320,
-          "y":1364
-        },
-        {
-          "gid":173,
-          "height":64,
-          "id":436,
-          "name":"flower46",
-          "properties":
-          {
-            "texture":"flowerbed_pink"
-          },
-          "propertytypes":
-          {
-            "texture":"string"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":64,
-          "x":416,
-          "y":1408
-        },
-        {
-          "height":40,
-          "id":524,
-          "name":"box46",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":64,
-          "x":416,
-          "y":1364
-        },
-        {
-          "gid":173,
-          "height":64,
-          "id":437,
-          "name":"flower47",
-          "properties":
-          {
-            "texture":"flowerbed_pink"
-          },
-          "propertytypes":
-          {
-            "texture":"string"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":64,
-          "x":512,
-          "y":1408
-        },
-        {
-          "height":40,
-          "id":525,
-          "name":"box47",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":64,
-          "x":512,
-          "y":1364
-        },
-        {
           "gid":172,
           "height":64,
           "id":442,
@@ -3865,7 +3772,7 @@
           "gid":172,
           "height":64,
           "id":620,
-          "name":"flower82",
+          "name":"flower47",
           "properties":
           {
             "texture":"flowerbed_purple"
@@ -3884,7 +3791,7 @@
         {
           "height":40,
           "id":636,
-          "name":"box82",
+          "name":"box47",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -3896,7 +3803,7 @@
           "gid":172,
           "height":64,
           "id":621,
-          "name":"flower83",
+          "name":"flower46",
           "properties":
           {
             "texture":"flowerbed_purple"
@@ -3915,7 +3822,7 @@
         {
           "height":40,
           "id":637,
-          "name":"box83",
+          "name":"box46",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -3927,7 +3834,7 @@
           "gid":172,
           "height":64,
           "id":626,
-          "name":"flower84",
+          "name":"flower45",
           "properties":
           {
             "texture":"flowerbed_purple"
@@ -3946,7 +3853,7 @@
         {
           "height":40,
           "id":638,
-          "name":"box84",
+          "name":"box45",
           "rotation":0,
           "type":"",
           "visible":true,
@@ -4679,7 +4586,7 @@
       "x":0,
       "y":0
     }],
-  "nextobjectid":650,
+  "nextobjectid":654,
   "orientation":"orthogonal",
   "renderorder":"right-down",
   "tiledversion":"1.1.3",
