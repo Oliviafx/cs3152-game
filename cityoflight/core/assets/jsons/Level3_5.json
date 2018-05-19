@@ -1870,13 +1870,13 @@
           "y":253
         },
         {
-          "height":70,
+          "height":50,
           "id":63,
           "name":"snail_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":50,
+          "width":40,
           "x":279,
           "y":176
         },
@@ -1962,13 +1962,13 @@
           "y":342
         },
         {
-          "height":70,
+          "height":50,
           "id":584,
           "name":"snail_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":50,
+          "width":40,
           "x":407,
           "y":265
         },
@@ -2054,13 +2054,13 @@
           "y":253
         },
         {
-          "height":70,
+          "height":50,
           "id":587,
           "name":"snail_box3",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":50,
+          "width":40,
           "x":535,
           "y":176
         },
@@ -2100,99 +2100,8 @@
           "width":0,
           "x":548,
           "y":209
-        },
-        {
-          "gid":80,
-          "height":94,
-          "id":601,
-          "name":"snail4",
-          "properties":
-          {
-            "bodytype":"dynamic",
-            "collideBits":"0001",
-            "debugcolor":"white",
-            "debugopacity":192,
-            "excludeBits":"0000",
-            "startframe":0,
-            "texture":"snail",
-            "texture2":"snail_down",
-            "texture3":"snail_up",
-            "turn":1,
-            "type":1,
-            "xinput":0,
-            "yinput":-125
-          },
-          "propertytypes":
-          {
-            "bodytype":"string",
-            "collideBits":"string",
-            "debugcolor":"string",
-            "debugopacity":"int",
-            "excludeBits":"string",
-            "startframe":"int",
-            "texture":"string",
-            "texture2":"string",
-            "texture3":"string",
-            "turn":"int",
-            "type":"int",
-            "xinput":"float",
-            "yinput":"float"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":146.5,
-          "x":624,
-          "y":342
-        },
-        {
-          "height":70,
-          "id":602,
-          "name":"snail_box4",
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":50,
-          "x":663,
-          "y":265
-        },
-        {
-          "height":0,
-          "id":603,
-          "name":"snail_vision4",
-          "properties":
-          {
-            "a":0.3,
-            "angle":85,
-            "b":0.5,
-            "distance":4,
-            "excludeBits":"0010",
-            "facing":90,
-            "g":0.2,
-            "r":0.2,
-            "rays":512,
-            "soft":false
-          },
-          "propertytypes":
-          {
-            "a":"float",
-            "angle":"int",
-            "b":"float",
-            "distance":"int",
-            "excludeBits":"string",
-            "facing":"int",
-            "g":"float",
-            "r":"float",
-            "rays":"int",
-            "soft":"bool"
-          },
-          "rotation":0,
-          "type":"",
-          "visible":true,
-          "width":0,
-          "x":676,
-          "y":298
-        }],
+        }
+        ],
       "opacity":1,
       "type":"objectgroup",
       "visible":true,

@@ -634,12 +634,12 @@ public class CreatureModel extends BoxObstacle {
                 }
                 else if (type == 1 && (dirTexture == upAnim || dirTexture == downAnim)) {
 //                    System.out.println("here");
-                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset-20,
+                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset-25,
                             0, 0.75f * isReflected, 0.75f);
                 }
                 else if (type == 1 && (dirTexture == sideAnim)) {
 //                    System.out.println("here");
-                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 10,
+                    canvas.draw(dirTexture, Color.WHITE, origin.x, origin.y, (getX() + xOffset) * drawScale.x - 7, getY() * drawScale.y + texture.getRegionHeight() / 6 + dragon_y_offset - 10,
                             0, 0.75f * isReflected, 0.75f);
                 }
 //                else if (type == 1 && dirTexture == downAnim) {
