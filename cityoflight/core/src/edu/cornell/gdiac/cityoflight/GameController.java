@@ -75,7 +75,7 @@ public class GameController implements Screen, ContactListener {
 	/** Walk in place effective range */
 	public float WALK_IN_PLACE_EFFECTIVE_RANGE = 20.0f;
 
-	private int LEVEL_TIME_LIMIT = 5000;
+	private int LEVEL_TIME_LIMIT = 7000;
 	private boolean daredevil;
 	private boolean daredevilSet = false;
 	private boolean hasUsedBox = false;
@@ -581,6 +581,7 @@ public class GameController implements Screen, ContactListener {
 		aAngleCache.set(input.getaHoriz(),input.getaVert());
 
 		//set walking in place
+		if (whichlevel != 1 && whichlevel != 2)
 		annette.setWalkingInPlace(InputController.getInstance().didHoldShift());
 		if (annette.isWalkingInPlace()) {
 			hasUsedWalking = true;
@@ -589,10 +590,12 @@ public class GameController implements Screen, ContactListener {
 		else { sound.stop("ambient_effect"); }
 		aAngleCache.scl(annette.getForce());
 		annette.setDirection(input.getDirection());
-		if (!complete && !failed) {
+		if (!complete && !failed && whichlevel!= 1) {
 			annette.setSummoning(InputController.getInstance().didSpace());
 		}
-		annette.setBird(input.didX());
+		if (!complete && !failed && whichlevel != 1 && whichlevel != 2 && whichlevel != 3) {
+			annette.setBird(input.didX());
+		}
 		annette.applyForce();
 
 		//Check if distraction was called

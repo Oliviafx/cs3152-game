@@ -201,8 +201,8 @@ public class DrawHelper {
                 }
                 if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y > 5.2) {
                     canvas.begin(level.oTran);
-                    canvas.draw(level_two_stand, 600, 100);
-                    canvas.draw(level_two_try, 350, 100);
+                    canvas.draw(level_two_stand, 550, 100);
+                    canvas.draw(level_two_try, 350, 300);
                     canvas.end();
                 }
                 if (level.getBox().getPosition().x >= 12 && level.getBox().getPosition().y <= 5.5
