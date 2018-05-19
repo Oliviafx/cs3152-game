@@ -1134,7 +1134,6 @@ public class GameController implements Screen, ContactListener {
 	public void createAIControllers(){
 		if (AIcontrollers.size == 0) {
 			for (CreatureModel c : level.getCreature()) {
-				System.out.println("creating 1 AI controller.");
 				AIController controller = new AIController(c, level);
 				AIcontrollers.add(controller);
 			}

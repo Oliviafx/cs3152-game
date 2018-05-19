@@ -399,7 +399,7 @@ public class BoxModel extends BoxObstacle {
 
                     }
                     else{
-                        System.out.println("crate bounds init");
+//                        System.out.println("crate bounds init");
                         boxBound = curLayer2;
                     }
                 }

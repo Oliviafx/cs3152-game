@@ -285,8 +285,6 @@ public class AIController{
                     recordLastSeen();
                     turnVisionRed();
                     creature.setAggroCool(creature.getAggroLimit());
-                    System.out.print(creature.getName() + ": ");
-                    System.out.println("patrol -> chase");
                     state = FSMState.CHASE;
                 } else if (isDistracted()) {
 
@@ -294,13 +292,9 @@ public class AIController{
                     turnVisionGreen();
                     creature.setDistractCool(creature.getDistractLimit());
                     updateDistractionPosition();
-                    System.out.print(creature.getName() + ": ");
-                    System.out.println("patrol -> distract");
                     creature.setMovement(-1, -1);
                     state = FSMState.DISTRACT;
                 } else if (canSenseAnnette()){
-                    System.out.print(creature.getName() + ": ");
-                    System.out.println("patrol -> sense");
                     state = FSMState.SENSE;
                 }
                 //#endregion
