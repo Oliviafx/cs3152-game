@@ -3086,13 +3086,13 @@
                  "y":285
                 }, 
                 {
-                 "height":70,
+                 "height":50,
                  "id":63,
                  "name":"snail_box1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":50,
+                 "width":40,
                  "x":145,
                  "y":208
                 }, 

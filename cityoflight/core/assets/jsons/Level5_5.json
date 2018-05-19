@@ -1847,13 +1847,13 @@
           "y":277
         },
         {
-          "height":70,
+          "height":50,
           "id":705,
           "name":"snail_box1",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":50,
+          "width":40,
           "x":161,
           "y":200
         },
@@ -1939,13 +1939,13 @@
           "y":181
         },
         {
-          "height":70,
+          "height":50,
           "id":708,
           "name":"snail_box2",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":50,
+          "width":40,
           "x":225,
           "y":104
         },
@@ -2031,13 +2031,13 @@
           "y":221
         },
         {
-          "height":70,
+          "height":50,
           "id":711,
           "name":"snail_box3",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":50,
+          "width":40,
           "x":289,
           "y":144
         },
@@ -2123,13 +2123,13 @@
           "y":293
         },
         {
-          "height":70,
+          "height":50,
           "id":717,
           "name":"snail_box4",
           "rotation":0,
           "type":"",
           "visible":true,
-          "width":50,
+          "width":40,
           "x":481,
           "y":216
         },
