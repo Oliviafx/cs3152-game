@@ -5,6 +5,10 @@
 [logo]: https://github.com/Oliviafx/cs3152-game/blob/master/readme-art/logo.jpg "City of Light"
 
 ## Fire Works (Group 9)
+
+![alt text][team]
+
+[team]: https://github.com/Oliviafx/cs3152-game/blob/master/readme-art/fireworks.jpg "Fire Works"
 * Amanda Trang (at668)
 * Catherine Sadoff (cs895) 
 * Emma Cohn (emc284)
