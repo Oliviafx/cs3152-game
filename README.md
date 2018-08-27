@@ -2,7 +2,7 @@
 
 ![alt text][logo]
 
-[logo]: 
+[logo]: https://github.com/Oliviafx/cs3152-game/blob/master/readme-art/logo.jpg "City of Light"
 
 ## Fire Works (Group 9)
 * Amanda Trang (at668)
