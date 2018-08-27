@@ -1,5 +1,8 @@
 # CS3152: City of Light
 
+![alt text][logo]
+
+[logo]: 
 
 ## Fire Works (Group 9)
 * Amanda Trang (at668)
